@@ -1,0 +1,2925 @@
+// (c) Copyright Ascensio System SIA 2026
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package docspace_api_sdk
+
+import (
+	"encoding/json"
+)
+
+// checks if the FileDtoInteger type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FileDtoInteger{}
+
+// FileDtoInteger The file parameters.
+type FileDtoInteger struct {
+	// The file entry title.
+	Title NullableString `json:"title,omitempty"`
+	Access *FileShare `json:"access,omitempty"`
+	SharedBy *EmployeeDto `json:"sharedBy,omitempty"`
+	OwnedBy *EmployeeDto `json:"ownedBy,omitempty"`
+	// Specifies if the file entry is shared via link or not.
+	Shared *bool `json:"shared,omitempty"`
+	// Specifies if the file entry is shared for user or not.
+	SharedForUser *bool `json:"sharedForUser,omitempty"`
+	// Indicates whether the parent entity is shared.
+	ParentShared *bool `json:"parentShared,omitempty"`
+	// The short Web URL.
+	ShortWebUrl NullableString `json:"shortWebUrl,omitempty"`
+	Created *ApiDateTime `json:"created,omitempty"`
+	CreatedBy *EmployeeDto `json:"createdBy,omitempty"`
+	Updated *ApiDateTime `json:"updated,omitempty"`
+	AutoDelete *ApiDateTime `json:"autoDelete,omitempty"`
+	RootFolderType *FolderType `json:"rootFolderType,omitempty"`
+	ParentRoomType *FolderType `json:"parentRoomType,omitempty"`
+	UpdatedBy *EmployeeDto `json:"updatedBy,omitempty"`
+	// Specifies if the file entry provider is specified or not.
+	ProviderItem NullableBool `json:"providerItem,omitempty"`
+	// The provider key of the file entry.
+	ProviderKey NullableString `json:"providerKey,omitempty"`
+	// The provider ID of the file entry.
+	ProviderId NullableInt32 `json:"providerId,omitempty"`
+	// The order of the file entry.
+	Order NullableString `json:"order,omitempty"`
+	// Specifies if the file is a favorite or not.
+	IsFavorite NullableBool `json:"isFavorite,omitempty"`
+	FileEntryType *FileEntryType `json:"fileEntryType,omitempty"`
+	// The file entry ID.
+	Id *int32 `json:"id,omitempty"`
+	// The root folder ID of the file entry.
+	RootFolderId *int32 `json:"rootFolderId,omitempty"`
+	// The origin ID of the file entry.
+	OriginId *int32 `json:"originId,omitempty"`
+	// The origin room ID of the file entry.
+	OriginRoomId *int32 `json:"originRoomId,omitempty"`
+	// The origin title of the file entry.
+	OriginTitle NullableString `json:"originTitle,omitempty"`
+	// The origin room title of the file entry.
+	OriginRoomTitle NullableString `json:"originRoomTitle,omitempty"`
+	// Specifies if the file entry can be shared or not.
+	CanShare *bool `json:"canShare,omitempty"`
+	ShareSettings NullableFileEntryDtoIntegerAllOfShareSettings `json:"shareSettings,omitempty"`
+	Security NullableFileEntryDtoIntegerAllOfSecurity `json:"security,omitempty"`
+	AvailableShareRights NullableFileEntryDtoIntegerAllOfAvailableShareRights `json:"availableShareRights,omitempty"`
+	// The request token of the file entry.
+	RequestToken NullableString `json:"requestToken,omitempty"`
+	// Specifies if the folder can be accessed via an external link or not.
+	External NullableBool `json:"external,omitempty"`
+	ExpirationDate *ApiDateTime `json:"expirationDate,omitempty"`
+	// Indicates whether the shareable link associated with the file or folder has expired.
+	IsLinkExpired NullableBool `json:"isLinkExpired,omitempty"`
+	// The folder ID where the file is located.
+	FolderId *int32 `json:"folderId,omitempty"`
+	// The file version.
+	Version *int32 `json:"version,omitempty"`
+	// The version group of the file.
+	VersionGroup *int32 `json:"versionGroup,omitempty"`
+	// The content length of the file.
+	ContentLength NullableString `json:"contentLength,omitempty"`
+	// The pure content length of the file.
+	PureContentLength NullableInt64 `json:"pureContentLength,omitempty"`
+	FileStatus *FileStatus `json:"fileStatus,omitempty"`
+	// The list of users editing the file.
+	EditingBy map[string]string `json:"editingBy,omitempty"`
+	// Specifies if the file is muted or not.
+	Mute *bool `json:"mute,omitempty"`
+	// The URL link to view the file.
+	ViewUrl NullableString `json:"viewUrl,omitempty"`
+	// The Web URL link to the file.
+	WebUrl NullableString `json:"webUrl,omitempty"`
+	FileType *FileType `json:"fileType,omitempty"`
+	// The file extension.
+	FileExst NullableString `json:"fileExst,omitempty"`
+	// The comment to the file.
+	Comment NullableString `json:"comment,omitempty"`
+	// Specifies if the file is encrypted or not.
+	Encrypted NullableBool `json:"encrypted,omitempty"`
+	// The thumbnail URL of the file.
+	ThumbnailUrl NullableString `json:"thumbnailUrl,omitempty"`
+	ThumbnailStatus *Thumbnail `json:"thumbnailStatus,omitempty"`
+	// Specifies if the file is locked or not.
+	Locked NullableBool `json:"locked,omitempty"`
+	// The user ID of the person who locked the file.
+	LockedBy NullableString `json:"lockedBy,omitempty"`
+	// Specifies if the file has a draft or not.
+	HasDraft NullableBool `json:"hasDraft,omitempty"`
+	FormFillingStatus *FormFillingStatus `json:"formFillingStatus,omitempty"`
+	// Specifies if the file is a form or not.
+	IsForm NullableBool `json:"isForm,omitempty"`
+	// Specifies if the Custom Filter editing mode is enabled for a file or not.
+	CustomFilterEnabled NullableBool `json:"customFilterEnabled,omitempty"`
+	// The name of the user who enabled a Custom Filter editing mode for a file.
+	CustomFilterEnabledBy NullableString `json:"customFilterEnabledBy,omitempty"`
+	// Specifies if the filling has started or not.
+	StartFilling NullableBool `json:"startFilling,omitempty"`
+	// Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed.
+	IsFillingPreparing NullableBool `json:"isFillingPreparing,omitempty"`
+	// The InProcess folder ID of the file.
+	InProcessFolderId NullableInt32 `json:"inProcessFolderId,omitempty"`
+	// The InProcess folder title of the file.
+	InProcessFolderTitle NullableString `json:"inProcessFolderTitle,omitempty"`
+	DraftLocation *DraftLocationInteger `json:"draftLocation,omitempty"`
+	ViewAccessibility NullableFileDtoIntegerAllOfViewAccessibility `json:"viewAccessibility,omitempty"`
+	LastOpened *ApiDateTime `json:"lastOpened,omitempty"`
+	Expired *ApiDateTime `json:"expired,omitempty"`
+	VectorizationStatus *VectorizationStatus `json:"vectorizationStatus,omitempty"`
+	Dimensions *Size `json:"dimensions,omitempty"`
+}
+
+// NewFileDtoInteger instantiates a new FileDtoInteger object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewFileDtoInteger() *FileDtoInteger {
+	this := FileDtoInteger{}
+	return &this
+}
+
+// NewFileDtoIntegerWithDefaults instantiates a new FileDtoInteger object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewFileDtoIntegerWithDefaults() *FileDtoInteger {
+	this := FileDtoInteger{}
+	return &this
+}
+
+// GetTitle returns the Title field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetTitle() string {
+	if o == nil || IsNil(o.Title.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Title.Get()
+}
+
+// GetTitleOk returns a tuple with the Title field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetTitleOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Title.Get(), o.Title.IsSet()
+}
+
+// HasTitle returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsTitleSet() bool {
+	if o != nil && o.Title.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTitle gets a reference to the given NullableString and assigns it to the Title field.
+func (o *FileDtoInteger) SetTitle(v string) {
+	o.Title.Set(&v)
+}
+// SetTitleNil sets the value for Title to be an explicit nil
+func (o *FileDtoInteger) SetTitleNil() {
+	o.Title.Set(nil)
+}
+
+// UnsetTitle ensures that no value is present for Title, not even an explicit nil
+func (o *FileDtoInteger) UnsetTitle() {
+	o.Title.Unset()
+}
+
+// GetAccess returns the Access field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetAccess() FileShare {
+	if o == nil || IsNil(o.Access) {
+		var ret FileShare
+		return ret
+	}
+	return *o.Access
+}
+
+// GetAccessOk returns a tuple with the Access field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetAccessOk() (*FileShare, bool) {
+	if o == nil || IsNil(o.Access) {
+		return nil, false
+	}
+	return o.Access, true
+}
+
+// HasAccess returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsAccessSet() bool {
+	if o != nil && !IsNil(o.Access) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccess gets a reference to the given FileShare and assigns it to the Access field.
+func (o *FileDtoInteger) SetAccess(v FileShare) {
+	o.Access = &v
+}
+
+// GetSharedBy returns the SharedBy field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetSharedBy() EmployeeDto {
+	if o == nil || IsNil(o.SharedBy) {
+		var ret EmployeeDto
+		return ret
+	}
+	return *o.SharedBy
+}
+
+// GetSharedByOk returns a tuple with the SharedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetSharedByOk() (*EmployeeDto, bool) {
+	if o == nil || IsNil(o.SharedBy) {
+		return nil, false
+	}
+	return o.SharedBy, true
+}
+
+// HasSharedBy returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsSharedBySet() bool {
+	if o != nil && !IsNil(o.SharedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetSharedBy gets a reference to the given EmployeeDto and assigns it to the SharedBy field.
+func (o *FileDtoInteger) SetSharedBy(v EmployeeDto) {
+	o.SharedBy = &v
+}
+
+// GetOwnedBy returns the OwnedBy field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetOwnedBy() EmployeeDto {
+	if o == nil || IsNil(o.OwnedBy) {
+		var ret EmployeeDto
+		return ret
+	}
+	return *o.OwnedBy
+}
+
+// GetOwnedByOk returns a tuple with the OwnedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetOwnedByOk() (*EmployeeDto, bool) {
+	if o == nil || IsNil(o.OwnedBy) {
+		return nil, false
+	}
+	return o.OwnedBy, true
+}
+
+// HasOwnedBy returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsOwnedBySet() bool {
+	if o != nil && !IsNil(o.OwnedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwnedBy gets a reference to the given EmployeeDto and assigns it to the OwnedBy field.
+func (o *FileDtoInteger) SetOwnedBy(v EmployeeDto) {
+	o.OwnedBy = &v
+}
+
+// GetShared returns the Shared field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetShared() bool {
+	if o == nil || IsNil(o.Shared) {
+		var ret bool
+		return ret
+	}
+	return *o.Shared
+}
+
+// GetSharedOk returns a tuple with the Shared field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetSharedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Shared) {
+		return nil, false
+	}
+	return o.Shared, true
+}
+
+// HasShared returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsSharedSet() bool {
+	if o != nil && !IsNil(o.Shared) {
+		return true
+	}
+
+	return false
+}
+
+// SetShared gets a reference to the given bool and assigns it to the Shared field.
+func (o *FileDtoInteger) SetShared(v bool) {
+	o.Shared = &v
+}
+
+// GetSharedForUser returns the SharedForUser field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetSharedForUser() bool {
+	if o == nil || IsNil(o.SharedForUser) {
+		var ret bool
+		return ret
+	}
+	return *o.SharedForUser
+}
+
+// GetSharedForUserOk returns a tuple with the SharedForUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetSharedForUserOk() (*bool, bool) {
+	if o == nil || IsNil(o.SharedForUser) {
+		return nil, false
+	}
+	return o.SharedForUser, true
+}
+
+// HasSharedForUser returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsSharedForUserSet() bool {
+	if o != nil && !IsNil(o.SharedForUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetSharedForUser gets a reference to the given bool and assigns it to the SharedForUser field.
+func (o *FileDtoInteger) SetSharedForUser(v bool) {
+	o.SharedForUser = &v
+}
+
+// GetParentShared returns the ParentShared field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetParentShared() bool {
+	if o == nil || IsNil(o.ParentShared) {
+		var ret bool
+		return ret
+	}
+	return *o.ParentShared
+}
+
+// GetParentSharedOk returns a tuple with the ParentShared field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetParentSharedOk() (*bool, bool) {
+	if o == nil || IsNil(o.ParentShared) {
+		return nil, false
+	}
+	return o.ParentShared, true
+}
+
+// HasParentShared returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsParentSharedSet() bool {
+	if o != nil && !IsNil(o.ParentShared) {
+		return true
+	}
+
+	return false
+}
+
+// SetParentShared gets a reference to the given bool and assigns it to the ParentShared field.
+func (o *FileDtoInteger) SetParentShared(v bool) {
+	o.ParentShared = &v
+}
+
+// GetShortWebUrl returns the ShortWebUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetShortWebUrl() string {
+	if o == nil || IsNil(o.ShortWebUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ShortWebUrl.Get()
+}
+
+// GetShortWebUrlOk returns a tuple with the ShortWebUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetShortWebUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ShortWebUrl.Get(), o.ShortWebUrl.IsSet()
+}
+
+// HasShortWebUrl returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsShortWebUrlSet() bool {
+	if o != nil && o.ShortWebUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetShortWebUrl gets a reference to the given NullableString and assigns it to the ShortWebUrl field.
+func (o *FileDtoInteger) SetShortWebUrl(v string) {
+	o.ShortWebUrl.Set(&v)
+}
+// SetShortWebUrlNil sets the value for ShortWebUrl to be an explicit nil
+func (o *FileDtoInteger) SetShortWebUrlNil() {
+	o.ShortWebUrl.Set(nil)
+}
+
+// UnsetShortWebUrl ensures that no value is present for ShortWebUrl, not even an explicit nil
+func (o *FileDtoInteger) UnsetShortWebUrl() {
+	o.ShortWebUrl.Unset()
+}
+
+// GetCreated returns the Created field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetCreated() ApiDateTime {
+	if o == nil || IsNil(o.Created) {
+		var ret ApiDateTime
+		return ret
+	}
+	return *o.Created
+}
+
+// GetCreatedOk returns a tuple with the Created field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetCreatedOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Created) {
+		return nil, false
+	}
+	return o.Created, true
+}
+
+// HasCreated returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsCreatedSet() bool {
+	if o != nil && !IsNil(o.Created) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreated gets a reference to the given ApiDateTime and assigns it to the Created field.
+func (o *FileDtoInteger) SetCreated(v ApiDateTime) {
+	o.Created = &v
+}
+
+// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetCreatedBy() EmployeeDto {
+	if o == nil || IsNil(o.CreatedBy) {
+		var ret EmployeeDto
+		return ret
+	}
+	return *o.CreatedBy
+}
+
+// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetCreatedByOk() (*EmployeeDto, bool) {
+	if o == nil || IsNil(o.CreatedBy) {
+		return nil, false
+	}
+	return o.CreatedBy, true
+}
+
+// HasCreatedBy returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsCreatedBySet() bool {
+	if o != nil && !IsNil(o.CreatedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedBy gets a reference to the given EmployeeDto and assigns it to the CreatedBy field.
+func (o *FileDtoInteger) SetCreatedBy(v EmployeeDto) {
+	o.CreatedBy = &v
+}
+
+// GetUpdated returns the Updated field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetUpdated() ApiDateTime {
+	if o == nil || IsNil(o.Updated) {
+		var ret ApiDateTime
+		return ret
+	}
+	return *o.Updated
+}
+
+// GetUpdatedOk returns a tuple with the Updated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetUpdatedOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Updated) {
+		return nil, false
+	}
+	return o.Updated, true
+}
+
+// HasUpdated returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsUpdatedSet() bool {
+	if o != nil && !IsNil(o.Updated) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdated gets a reference to the given ApiDateTime and assigns it to the Updated field.
+func (o *FileDtoInteger) SetUpdated(v ApiDateTime) {
+	o.Updated = &v
+}
+
+// GetAutoDelete returns the AutoDelete field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetAutoDelete() ApiDateTime {
+	if o == nil || IsNil(o.AutoDelete) {
+		var ret ApiDateTime
+		return ret
+	}
+	return *o.AutoDelete
+}
+
+// GetAutoDeleteOk returns a tuple with the AutoDelete field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetAutoDeleteOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.AutoDelete) {
+		return nil, false
+	}
+	return o.AutoDelete, true
+}
+
+// HasAutoDelete returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsAutoDeleteSet() bool {
+	if o != nil && !IsNil(o.AutoDelete) {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoDelete gets a reference to the given ApiDateTime and assigns it to the AutoDelete field.
+func (o *FileDtoInteger) SetAutoDelete(v ApiDateTime) {
+	o.AutoDelete = &v
+}
+
+// GetRootFolderType returns the RootFolderType field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetRootFolderType() FolderType {
+	if o == nil || IsNil(o.RootFolderType) {
+		var ret FolderType
+		return ret
+	}
+	return *o.RootFolderType
+}
+
+// GetRootFolderTypeOk returns a tuple with the RootFolderType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetRootFolderTypeOk() (*FolderType, bool) {
+	if o == nil || IsNil(o.RootFolderType) {
+		return nil, false
+	}
+	return o.RootFolderType, true
+}
+
+// HasRootFolderType returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsRootFolderTypeSet() bool {
+	if o != nil && !IsNil(o.RootFolderType) {
+		return true
+	}
+
+	return false
+}
+
+// SetRootFolderType gets a reference to the given FolderType and assigns it to the RootFolderType field.
+func (o *FileDtoInteger) SetRootFolderType(v FolderType) {
+	o.RootFolderType = &v
+}
+
+// GetParentRoomType returns the ParentRoomType field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetParentRoomType() FolderType {
+	if o == nil || IsNil(o.ParentRoomType) {
+		var ret FolderType
+		return ret
+	}
+	return *o.ParentRoomType
+}
+
+// GetParentRoomTypeOk returns a tuple with the ParentRoomType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetParentRoomTypeOk() (*FolderType, bool) {
+	if o == nil || IsNil(o.ParentRoomType) {
+		return nil, false
+	}
+	return o.ParentRoomType, true
+}
+
+// HasParentRoomType returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsParentRoomTypeSet() bool {
+	if o != nil && !IsNil(o.ParentRoomType) {
+		return true
+	}
+
+	return false
+}
+
+// SetParentRoomType gets a reference to the given FolderType and assigns it to the ParentRoomType field.
+func (o *FileDtoInteger) SetParentRoomType(v FolderType) {
+	o.ParentRoomType = &v
+}
+
+// GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetUpdatedBy() EmployeeDto {
+	if o == nil || IsNil(o.UpdatedBy) {
+		var ret EmployeeDto
+		return ret
+	}
+	return *o.UpdatedBy
+}
+
+// GetUpdatedByOk returns a tuple with the UpdatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetUpdatedByOk() (*EmployeeDto, bool) {
+	if o == nil || IsNil(o.UpdatedBy) {
+		return nil, false
+	}
+	return o.UpdatedBy, true
+}
+
+// HasUpdatedBy returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsUpdatedBySet() bool {
+	if o != nil && !IsNil(o.UpdatedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedBy gets a reference to the given EmployeeDto and assigns it to the UpdatedBy field.
+func (o *FileDtoInteger) SetUpdatedBy(v EmployeeDto) {
+	o.UpdatedBy = &v
+}
+
+// GetProviderItem returns the ProviderItem field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetProviderItem() bool {
+	if o == nil || IsNil(o.ProviderItem.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.ProviderItem.Get()
+}
+
+// GetProviderItemOk returns a tuple with the ProviderItem field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetProviderItemOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProviderItem.Get(), o.ProviderItem.IsSet()
+}
+
+// HasProviderItem returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsProviderItemSet() bool {
+	if o != nil && o.ProviderItem.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderItem gets a reference to the given NullableBool and assigns it to the ProviderItem field.
+func (o *FileDtoInteger) SetProviderItem(v bool) {
+	o.ProviderItem.Set(&v)
+}
+// SetProviderItemNil sets the value for ProviderItem to be an explicit nil
+func (o *FileDtoInteger) SetProviderItemNil() {
+	o.ProviderItem.Set(nil)
+}
+
+// UnsetProviderItem ensures that no value is present for ProviderItem, not even an explicit nil
+func (o *FileDtoInteger) UnsetProviderItem() {
+	o.ProviderItem.Unset()
+}
+
+// GetProviderKey returns the ProviderKey field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetProviderKey() string {
+	if o == nil || IsNil(o.ProviderKey.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ProviderKey.Get()
+}
+
+// GetProviderKeyOk returns a tuple with the ProviderKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetProviderKeyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProviderKey.Get(), o.ProviderKey.IsSet()
+}
+
+// HasProviderKey returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsProviderKeySet() bool {
+	if o != nil && o.ProviderKey.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderKey gets a reference to the given NullableString and assigns it to the ProviderKey field.
+func (o *FileDtoInteger) SetProviderKey(v string) {
+	o.ProviderKey.Set(&v)
+}
+// SetProviderKeyNil sets the value for ProviderKey to be an explicit nil
+func (o *FileDtoInteger) SetProviderKeyNil() {
+	o.ProviderKey.Set(nil)
+}
+
+// UnsetProviderKey ensures that no value is present for ProviderKey, not even an explicit nil
+func (o *FileDtoInteger) UnsetProviderKey() {
+	o.ProviderKey.Unset()
+}
+
+// GetProviderId returns the ProviderId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetProviderId() int32 {
+	if o == nil || IsNil(o.ProviderId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.ProviderId.Get()
+}
+
+// GetProviderIdOk returns a tuple with the ProviderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetProviderIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProviderId.Get(), o.ProviderId.IsSet()
+}
+
+// HasProviderId returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsProviderIdSet() bool {
+	if o != nil && o.ProviderId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderId gets a reference to the given NullableInt32 and assigns it to the ProviderId field.
+func (o *FileDtoInteger) SetProviderId(v int32) {
+	o.ProviderId.Set(&v)
+}
+// SetProviderIdNil sets the value for ProviderId to be an explicit nil
+func (o *FileDtoInteger) SetProviderIdNil() {
+	o.ProviderId.Set(nil)
+}
+
+// UnsetProviderId ensures that no value is present for ProviderId, not even an explicit nil
+func (o *FileDtoInteger) UnsetProviderId() {
+	o.ProviderId.Unset()
+}
+
+// GetOrder returns the Order field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetOrder() string {
+	if o == nil || IsNil(o.Order.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Order.Get()
+}
+
+// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetOrderOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Order.Get(), o.Order.IsSet()
+}
+
+// HasOrder returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsOrderSet() bool {
+	if o != nil && o.Order.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOrder gets a reference to the given NullableString and assigns it to the Order field.
+func (o *FileDtoInteger) SetOrder(v string) {
+	o.Order.Set(&v)
+}
+// SetOrderNil sets the value for Order to be an explicit nil
+func (o *FileDtoInteger) SetOrderNil() {
+	o.Order.Set(nil)
+}
+
+// UnsetOrder ensures that no value is present for Order, not even an explicit nil
+func (o *FileDtoInteger) UnsetOrder() {
+	o.Order.Unset()
+}
+
+// GetIsFavorite returns the IsFavorite field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetIsFavorite() bool {
+	if o == nil || IsNil(o.IsFavorite.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.IsFavorite.Get()
+}
+
+// GetIsFavoriteOk returns a tuple with the IsFavorite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetIsFavoriteOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IsFavorite.Get(), o.IsFavorite.IsSet()
+}
+
+// HasIsFavorite returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsIsFavoriteSet() bool {
+	if o != nil && o.IsFavorite.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIsFavorite gets a reference to the given NullableBool and assigns it to the IsFavorite field.
+func (o *FileDtoInteger) SetIsFavorite(v bool) {
+	o.IsFavorite.Set(&v)
+}
+// SetIsFavoriteNil sets the value for IsFavorite to be an explicit nil
+func (o *FileDtoInteger) SetIsFavoriteNil() {
+	o.IsFavorite.Set(nil)
+}
+
+// UnsetIsFavorite ensures that no value is present for IsFavorite, not even an explicit nil
+func (o *FileDtoInteger) UnsetIsFavorite() {
+	o.IsFavorite.Unset()
+}
+
+// GetFileEntryType returns the FileEntryType field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetFileEntryType() FileEntryType {
+	if o == nil || IsNil(o.FileEntryType) {
+		var ret FileEntryType
+		return ret
+	}
+	return *o.FileEntryType
+}
+
+// GetFileEntryTypeOk returns a tuple with the FileEntryType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetFileEntryTypeOk() (*FileEntryType, bool) {
+	if o == nil || IsNil(o.FileEntryType) {
+		return nil, false
+	}
+	return o.FileEntryType, true
+}
+
+// HasFileEntryType returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsFileEntryTypeSet() bool {
+	if o != nil && !IsNil(o.FileEntryType) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileEntryType gets a reference to the given FileEntryType and assigns it to the FileEntryType field.
+func (o *FileDtoInteger) SetFileEntryType(v FileEntryType) {
+	o.FileEntryType = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetId() int32 {
+	if o == nil || IsNil(o.Id) {
+		var ret int32
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsIdSet() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given int32 and assigns it to the Id field.
+func (o *FileDtoInteger) SetId(v int32) {
+	o.Id = &v
+}
+
+// GetRootFolderId returns the RootFolderId field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetRootFolderId() int32 {
+	if o == nil || IsNil(o.RootFolderId) {
+		var ret int32
+		return ret
+	}
+	return *o.RootFolderId
+}
+
+// GetRootFolderIdOk returns a tuple with the RootFolderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetRootFolderIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.RootFolderId) {
+		return nil, false
+	}
+	return o.RootFolderId, true
+}
+
+// HasRootFolderId returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsRootFolderIdSet() bool {
+	if o != nil && !IsNil(o.RootFolderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetRootFolderId gets a reference to the given int32 and assigns it to the RootFolderId field.
+func (o *FileDtoInteger) SetRootFolderId(v int32) {
+	o.RootFolderId = &v
+}
+
+// GetOriginId returns the OriginId field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetOriginId() int32 {
+	if o == nil || IsNil(o.OriginId) {
+		var ret int32
+		return ret
+	}
+	return *o.OriginId
+}
+
+// GetOriginIdOk returns a tuple with the OriginId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetOriginIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.OriginId) {
+		return nil, false
+	}
+	return o.OriginId, true
+}
+
+// HasOriginId returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsOriginIdSet() bool {
+	if o != nil && !IsNil(o.OriginId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginId gets a reference to the given int32 and assigns it to the OriginId field.
+func (o *FileDtoInteger) SetOriginId(v int32) {
+	o.OriginId = &v
+}
+
+// GetOriginRoomId returns the OriginRoomId field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetOriginRoomId() int32 {
+	if o == nil || IsNil(o.OriginRoomId) {
+		var ret int32
+		return ret
+	}
+	return *o.OriginRoomId
+}
+
+// GetOriginRoomIdOk returns a tuple with the OriginRoomId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetOriginRoomIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.OriginRoomId) {
+		return nil, false
+	}
+	return o.OriginRoomId, true
+}
+
+// HasOriginRoomId returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsOriginRoomIdSet() bool {
+	if o != nil && !IsNil(o.OriginRoomId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginRoomId gets a reference to the given int32 and assigns it to the OriginRoomId field.
+func (o *FileDtoInteger) SetOriginRoomId(v int32) {
+	o.OriginRoomId = &v
+}
+
+// GetOriginTitle returns the OriginTitle field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetOriginTitle() string {
+	if o == nil || IsNil(o.OriginTitle.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OriginTitle.Get()
+}
+
+// GetOriginTitleOk returns a tuple with the OriginTitle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetOriginTitleOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OriginTitle.Get(), o.OriginTitle.IsSet()
+}
+
+// HasOriginTitle returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsOriginTitleSet() bool {
+	if o != nil && o.OriginTitle.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginTitle gets a reference to the given NullableString and assigns it to the OriginTitle field.
+func (o *FileDtoInteger) SetOriginTitle(v string) {
+	o.OriginTitle.Set(&v)
+}
+// SetOriginTitleNil sets the value for OriginTitle to be an explicit nil
+func (o *FileDtoInteger) SetOriginTitleNil() {
+	o.OriginTitle.Set(nil)
+}
+
+// UnsetOriginTitle ensures that no value is present for OriginTitle, not even an explicit nil
+func (o *FileDtoInteger) UnsetOriginTitle() {
+	o.OriginTitle.Unset()
+}
+
+// GetOriginRoomTitle returns the OriginRoomTitle field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetOriginRoomTitle() string {
+	if o == nil || IsNil(o.OriginRoomTitle.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OriginRoomTitle.Get()
+}
+
+// GetOriginRoomTitleOk returns a tuple with the OriginRoomTitle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetOriginRoomTitleOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OriginRoomTitle.Get(), o.OriginRoomTitle.IsSet()
+}
+
+// HasOriginRoomTitle returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsOriginRoomTitleSet() bool {
+	if o != nil && o.OriginRoomTitle.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginRoomTitle gets a reference to the given NullableString and assigns it to the OriginRoomTitle field.
+func (o *FileDtoInteger) SetOriginRoomTitle(v string) {
+	o.OriginRoomTitle.Set(&v)
+}
+// SetOriginRoomTitleNil sets the value for OriginRoomTitle to be an explicit nil
+func (o *FileDtoInteger) SetOriginRoomTitleNil() {
+	o.OriginRoomTitle.Set(nil)
+}
+
+// UnsetOriginRoomTitle ensures that no value is present for OriginRoomTitle, not even an explicit nil
+func (o *FileDtoInteger) UnsetOriginRoomTitle() {
+	o.OriginRoomTitle.Unset()
+}
+
+// GetCanShare returns the CanShare field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetCanShare() bool {
+	if o == nil || IsNil(o.CanShare) {
+		var ret bool
+		return ret
+	}
+	return *o.CanShare
+}
+
+// GetCanShareOk returns a tuple with the CanShare field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetCanShareOk() (*bool, bool) {
+	if o == nil || IsNil(o.CanShare) {
+		return nil, false
+	}
+	return o.CanShare, true
+}
+
+// HasCanShare returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsCanShareSet() bool {
+	if o != nil && !IsNil(o.CanShare) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanShare gets a reference to the given bool and assigns it to the CanShare field.
+func (o *FileDtoInteger) SetCanShare(v bool) {
+	o.CanShare = &v
+}
+
+// GetShareSettings returns the ShareSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetShareSettings() FileEntryDtoIntegerAllOfShareSettings {
+	if o == nil || IsNil(o.ShareSettings.Get()) {
+		var ret FileEntryDtoIntegerAllOfShareSettings
+		return ret
+	}
+	return *o.ShareSettings.Get()
+}
+
+// GetShareSettingsOk returns a tuple with the ShareSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetShareSettingsOk() (*FileEntryDtoIntegerAllOfShareSettings, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ShareSettings.Get(), o.ShareSettings.IsSet()
+}
+
+// HasShareSettings returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsShareSettingsSet() bool {
+	if o != nil && o.ShareSettings.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetShareSettings gets a reference to the given NullableFileEntryDtoIntegerAllOfShareSettings and assigns it to the ShareSettings field.
+func (o *FileDtoInteger) SetShareSettings(v FileEntryDtoIntegerAllOfShareSettings) {
+	o.ShareSettings.Set(&v)
+}
+// SetShareSettingsNil sets the value for ShareSettings to be an explicit nil
+func (o *FileDtoInteger) SetShareSettingsNil() {
+	o.ShareSettings.Set(nil)
+}
+
+// UnsetShareSettings ensures that no value is present for ShareSettings, not even an explicit nil
+func (o *FileDtoInteger) UnsetShareSettings() {
+	o.ShareSettings.Unset()
+}
+
+// GetSecurity returns the Security field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetSecurity() FileEntryDtoIntegerAllOfSecurity {
+	if o == nil || IsNil(o.Security.Get()) {
+		var ret FileEntryDtoIntegerAllOfSecurity
+		return ret
+	}
+	return *o.Security.Get()
+}
+
+// GetSecurityOk returns a tuple with the Security field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetSecurityOk() (*FileEntryDtoIntegerAllOfSecurity, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Security.Get(), o.Security.IsSet()
+}
+
+// HasSecurity returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsSecuritySet() bool {
+	if o != nil && o.Security.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurity gets a reference to the given NullableFileEntryDtoIntegerAllOfSecurity and assigns it to the Security field.
+func (o *FileDtoInteger) SetSecurity(v FileEntryDtoIntegerAllOfSecurity) {
+	o.Security.Set(&v)
+}
+// SetSecurityNil sets the value for Security to be an explicit nil
+func (o *FileDtoInteger) SetSecurityNil() {
+	o.Security.Set(nil)
+}
+
+// UnsetSecurity ensures that no value is present for Security, not even an explicit nil
+func (o *FileDtoInteger) UnsetSecurity() {
+	o.Security.Unset()
+}
+
+// GetAvailableShareRights returns the AvailableShareRights field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetAvailableShareRights() FileEntryDtoIntegerAllOfAvailableShareRights {
+	if o == nil || IsNil(o.AvailableShareRights.Get()) {
+		var ret FileEntryDtoIntegerAllOfAvailableShareRights
+		return ret
+	}
+	return *o.AvailableShareRights.Get()
+}
+
+// GetAvailableShareRightsOk returns a tuple with the AvailableShareRights field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetAvailableShareRightsOk() (*FileEntryDtoIntegerAllOfAvailableShareRights, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AvailableShareRights.Get(), o.AvailableShareRights.IsSet()
+}
+
+// HasAvailableShareRights returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsAvailableShareRightsSet() bool {
+	if o != nil && o.AvailableShareRights.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailableShareRights gets a reference to the given NullableFileEntryDtoIntegerAllOfAvailableShareRights and assigns it to the AvailableShareRights field.
+func (o *FileDtoInteger) SetAvailableShareRights(v FileEntryDtoIntegerAllOfAvailableShareRights) {
+	o.AvailableShareRights.Set(&v)
+}
+// SetAvailableShareRightsNil sets the value for AvailableShareRights to be an explicit nil
+func (o *FileDtoInteger) SetAvailableShareRightsNil() {
+	o.AvailableShareRights.Set(nil)
+}
+
+// UnsetAvailableShareRights ensures that no value is present for AvailableShareRights, not even an explicit nil
+func (o *FileDtoInteger) UnsetAvailableShareRights() {
+	o.AvailableShareRights.Unset()
+}
+
+// GetRequestToken returns the RequestToken field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetRequestToken() string {
+	if o == nil || IsNil(o.RequestToken.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RequestToken.Get()
+}
+
+// GetRequestTokenOk returns a tuple with the RequestToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetRequestTokenOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RequestToken.Get(), o.RequestToken.IsSet()
+}
+
+// HasRequestToken returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsRequestTokenSet() bool {
+	if o != nil && o.RequestToken.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestToken gets a reference to the given NullableString and assigns it to the RequestToken field.
+func (o *FileDtoInteger) SetRequestToken(v string) {
+	o.RequestToken.Set(&v)
+}
+// SetRequestTokenNil sets the value for RequestToken to be an explicit nil
+func (o *FileDtoInteger) SetRequestTokenNil() {
+	o.RequestToken.Set(nil)
+}
+
+// UnsetRequestToken ensures that no value is present for RequestToken, not even an explicit nil
+func (o *FileDtoInteger) UnsetRequestToken() {
+	o.RequestToken.Unset()
+}
+
+// GetExternal returns the External field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetExternal() bool {
+	if o == nil || IsNil(o.External.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.External.Get()
+}
+
+// GetExternalOk returns a tuple with the External field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetExternalOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.External.Get(), o.External.IsSet()
+}
+
+// HasExternal returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsExternalSet() bool {
+	if o != nil && o.External.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExternal gets a reference to the given NullableBool and assigns it to the External field.
+func (o *FileDtoInteger) SetExternal(v bool) {
+	o.External.Set(&v)
+}
+// SetExternalNil sets the value for External to be an explicit nil
+func (o *FileDtoInteger) SetExternalNil() {
+	o.External.Set(nil)
+}
+
+// UnsetExternal ensures that no value is present for External, not even an explicit nil
+func (o *FileDtoInteger) UnsetExternal() {
+	o.External.Unset()
+}
+
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetExpirationDate() ApiDateTime {
+	if o == nil || IsNil(o.ExpirationDate) {
+		var ret ApiDateTime
+		return ret
+	}
+	return *o.ExpirationDate
+}
+
+// GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetExpirationDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.ExpirationDate) {
+		return nil, false
+	}
+	return o.ExpirationDate, true
+}
+
+// HasExpirationDate returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsExpirationDateSet() bool {
+	if o != nil && !IsNil(o.ExpirationDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpirationDate gets a reference to the given ApiDateTime and assigns it to the ExpirationDate field.
+func (o *FileDtoInteger) SetExpirationDate(v ApiDateTime) {
+	o.ExpirationDate = &v
+}
+
+// GetIsLinkExpired returns the IsLinkExpired field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetIsLinkExpired() bool {
+	if o == nil || IsNil(o.IsLinkExpired.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.IsLinkExpired.Get()
+}
+
+// GetIsLinkExpiredOk returns a tuple with the IsLinkExpired field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetIsLinkExpiredOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IsLinkExpired.Get(), o.IsLinkExpired.IsSet()
+}
+
+// HasIsLinkExpired returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsIsLinkExpiredSet() bool {
+	if o != nil && o.IsLinkExpired.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIsLinkExpired gets a reference to the given NullableBool and assigns it to the IsLinkExpired field.
+func (o *FileDtoInteger) SetIsLinkExpired(v bool) {
+	o.IsLinkExpired.Set(&v)
+}
+// SetIsLinkExpiredNil sets the value for IsLinkExpired to be an explicit nil
+func (o *FileDtoInteger) SetIsLinkExpiredNil() {
+	o.IsLinkExpired.Set(nil)
+}
+
+// UnsetIsLinkExpired ensures that no value is present for IsLinkExpired, not even an explicit nil
+func (o *FileDtoInteger) UnsetIsLinkExpired() {
+	o.IsLinkExpired.Unset()
+}
+
+// GetFolderId returns the FolderId field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetFolderId() int32 {
+	if o == nil || IsNil(o.FolderId) {
+		var ret int32
+		return ret
+	}
+	return *o.FolderId
+}
+
+// GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetFolderIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.FolderId) {
+		return nil, false
+	}
+	return o.FolderId, true
+}
+
+// HasFolderId returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsFolderIdSet() bool {
+	if o != nil && !IsNil(o.FolderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetFolderId gets a reference to the given int32 and assigns it to the FolderId field.
+func (o *FileDtoInteger) SetFolderId(v int32) {
+	o.FolderId = &v
+}
+
+// GetVersion returns the Version field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetVersion() int32 {
+	if o == nil || IsNil(o.Version) {
+		var ret int32
+		return ret
+	}
+	return *o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetVersionOk() (*int32, bool) {
+	if o == nil || IsNil(o.Version) {
+		return nil, false
+	}
+	return o.Version, true
+}
+
+// HasVersion returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsVersionSet() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given int32 and assigns it to the Version field.
+func (o *FileDtoInteger) SetVersion(v int32) {
+	o.Version = &v
+}
+
+// GetVersionGroup returns the VersionGroup field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetVersionGroup() int32 {
+	if o == nil || IsNil(o.VersionGroup) {
+		var ret int32
+		return ret
+	}
+	return *o.VersionGroup
+}
+
+// GetVersionGroupOk returns a tuple with the VersionGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetVersionGroupOk() (*int32, bool) {
+	if o == nil || IsNil(o.VersionGroup) {
+		return nil, false
+	}
+	return o.VersionGroup, true
+}
+
+// HasVersionGroup returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsVersionGroupSet() bool {
+	if o != nil && !IsNil(o.VersionGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersionGroup gets a reference to the given int32 and assigns it to the VersionGroup field.
+func (o *FileDtoInteger) SetVersionGroup(v int32) {
+	o.VersionGroup = &v
+}
+
+// GetContentLength returns the ContentLength field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetContentLength() string {
+	if o == nil || IsNil(o.ContentLength.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ContentLength.Get()
+}
+
+// GetContentLengthOk returns a tuple with the ContentLength field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetContentLengthOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ContentLength.Get(), o.ContentLength.IsSet()
+}
+
+// HasContentLength returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsContentLengthSet() bool {
+	if o != nil && o.ContentLength.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetContentLength gets a reference to the given NullableString and assigns it to the ContentLength field.
+func (o *FileDtoInteger) SetContentLength(v string) {
+	o.ContentLength.Set(&v)
+}
+// SetContentLengthNil sets the value for ContentLength to be an explicit nil
+func (o *FileDtoInteger) SetContentLengthNil() {
+	o.ContentLength.Set(nil)
+}
+
+// UnsetContentLength ensures that no value is present for ContentLength, not even an explicit nil
+func (o *FileDtoInteger) UnsetContentLength() {
+	o.ContentLength.Unset()
+}
+
+// GetPureContentLength returns the PureContentLength field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetPureContentLength() int64 {
+	if o == nil || IsNil(o.PureContentLength.Get()) {
+		var ret int64
+		return ret
+	}
+	return *o.PureContentLength.Get()
+}
+
+// GetPureContentLengthOk returns a tuple with the PureContentLength field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetPureContentLengthOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PureContentLength.Get(), o.PureContentLength.IsSet()
+}
+
+// HasPureContentLength returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsPureContentLengthSet() bool {
+	if o != nil && o.PureContentLength.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPureContentLength gets a reference to the given NullableInt64 and assigns it to the PureContentLength field.
+func (o *FileDtoInteger) SetPureContentLength(v int64) {
+	o.PureContentLength.Set(&v)
+}
+// SetPureContentLengthNil sets the value for PureContentLength to be an explicit nil
+func (o *FileDtoInteger) SetPureContentLengthNil() {
+	o.PureContentLength.Set(nil)
+}
+
+// UnsetPureContentLength ensures that no value is present for PureContentLength, not even an explicit nil
+func (o *FileDtoInteger) UnsetPureContentLength() {
+	o.PureContentLength.Unset()
+}
+
+// GetFileStatus returns the FileStatus field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetFileStatus() FileStatus {
+	if o == nil || IsNil(o.FileStatus) {
+		var ret FileStatus
+		return ret
+	}
+	return *o.FileStatus
+}
+
+// GetFileStatusOk returns a tuple with the FileStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetFileStatusOk() (*FileStatus, bool) {
+	if o == nil || IsNil(o.FileStatus) {
+		return nil, false
+	}
+	return o.FileStatus, true
+}
+
+// HasFileStatus returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsFileStatusSet() bool {
+	if o != nil && !IsNil(o.FileStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileStatus gets a reference to the given FileStatus and assigns it to the FileStatus field.
+func (o *FileDtoInteger) SetFileStatus(v FileStatus) {
+	o.FileStatus = &v
+}
+
+// GetEditingBy returns the EditingBy field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetEditingBy() map[string]string {
+	if o == nil {
+		var ret map[string]string
+		return ret
+	}
+	return o.EditingBy
+}
+
+// GetEditingByOk returns a tuple with the EditingBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetEditingByOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.EditingBy) {
+		return nil, false
+	}
+	return &o.EditingBy, true
+}
+
+// HasEditingBy returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsEditingBySet() bool {
+	if o != nil && !IsNil(o.EditingBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetEditingBy gets a reference to the given map[string]string and assigns it to the EditingBy field.
+func (o *FileDtoInteger) SetEditingBy(v map[string]string) {
+	o.EditingBy = v
+}
+
+// GetMute returns the Mute field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetMute() bool {
+	if o == nil || IsNil(o.Mute) {
+		var ret bool
+		return ret
+	}
+	return *o.Mute
+}
+
+// GetMuteOk returns a tuple with the Mute field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetMuteOk() (*bool, bool) {
+	if o == nil || IsNil(o.Mute) {
+		return nil, false
+	}
+	return o.Mute, true
+}
+
+// HasMute returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsMuteSet() bool {
+	if o != nil && !IsNil(o.Mute) {
+		return true
+	}
+
+	return false
+}
+
+// SetMute gets a reference to the given bool and assigns it to the Mute field.
+func (o *FileDtoInteger) SetMute(v bool) {
+	o.Mute = &v
+}
+
+// GetViewUrl returns the ViewUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetViewUrl() string {
+	if o == nil || IsNil(o.ViewUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ViewUrl.Get()
+}
+
+// GetViewUrlOk returns a tuple with the ViewUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetViewUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ViewUrl.Get(), o.ViewUrl.IsSet()
+}
+
+// HasViewUrl returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsViewUrlSet() bool {
+	if o != nil && o.ViewUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetViewUrl gets a reference to the given NullableString and assigns it to the ViewUrl field.
+func (o *FileDtoInteger) SetViewUrl(v string) {
+	o.ViewUrl.Set(&v)
+}
+// SetViewUrlNil sets the value for ViewUrl to be an explicit nil
+func (o *FileDtoInteger) SetViewUrlNil() {
+	o.ViewUrl.Set(nil)
+}
+
+// UnsetViewUrl ensures that no value is present for ViewUrl, not even an explicit nil
+func (o *FileDtoInteger) UnsetViewUrl() {
+	o.ViewUrl.Unset()
+}
+
+// GetWebUrl returns the WebUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetWebUrl() string {
+	if o == nil || IsNil(o.WebUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.WebUrl.Get()
+}
+
+// GetWebUrlOk returns a tuple with the WebUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetWebUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.WebUrl.Get(), o.WebUrl.IsSet()
+}
+
+// HasWebUrl returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsWebUrlSet() bool {
+	if o != nil && o.WebUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetWebUrl gets a reference to the given NullableString and assigns it to the WebUrl field.
+func (o *FileDtoInteger) SetWebUrl(v string) {
+	o.WebUrl.Set(&v)
+}
+// SetWebUrlNil sets the value for WebUrl to be an explicit nil
+func (o *FileDtoInteger) SetWebUrlNil() {
+	o.WebUrl.Set(nil)
+}
+
+// UnsetWebUrl ensures that no value is present for WebUrl, not even an explicit nil
+func (o *FileDtoInteger) UnsetWebUrl() {
+	o.WebUrl.Unset()
+}
+
+// GetFileType returns the FileType field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetFileType() FileType {
+	if o == nil || IsNil(o.FileType) {
+		var ret FileType
+		return ret
+	}
+	return *o.FileType
+}
+
+// GetFileTypeOk returns a tuple with the FileType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetFileTypeOk() (*FileType, bool) {
+	if o == nil || IsNil(o.FileType) {
+		return nil, false
+	}
+	return o.FileType, true
+}
+
+// HasFileType returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsFileTypeSet() bool {
+	if o != nil && !IsNil(o.FileType) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileType gets a reference to the given FileType and assigns it to the FileType field.
+func (o *FileDtoInteger) SetFileType(v FileType) {
+	o.FileType = &v
+}
+
+// GetFileExst returns the FileExst field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetFileExst() string {
+	if o == nil || IsNil(o.FileExst.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FileExst.Get()
+}
+
+// GetFileExstOk returns a tuple with the FileExst field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetFileExstOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FileExst.Get(), o.FileExst.IsSet()
+}
+
+// HasFileExst returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsFileExstSet() bool {
+	if o != nil && o.FileExst.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFileExst gets a reference to the given NullableString and assigns it to the FileExst field.
+func (o *FileDtoInteger) SetFileExst(v string) {
+	o.FileExst.Set(&v)
+}
+// SetFileExstNil sets the value for FileExst to be an explicit nil
+func (o *FileDtoInteger) SetFileExstNil() {
+	o.FileExst.Set(nil)
+}
+
+// UnsetFileExst ensures that no value is present for FileExst, not even an explicit nil
+func (o *FileDtoInteger) UnsetFileExst() {
+	o.FileExst.Unset()
+}
+
+// GetComment returns the Comment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetComment() string {
+	if o == nil || IsNil(o.Comment.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Comment.Get()
+}
+
+// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetCommentOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Comment.Get(), o.Comment.IsSet()
+}
+
+// HasComment returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsCommentSet() bool {
+	if o != nil && o.Comment.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetComment gets a reference to the given NullableString and assigns it to the Comment field.
+func (o *FileDtoInteger) SetComment(v string) {
+	o.Comment.Set(&v)
+}
+// SetCommentNil sets the value for Comment to be an explicit nil
+func (o *FileDtoInteger) SetCommentNil() {
+	o.Comment.Set(nil)
+}
+
+// UnsetComment ensures that no value is present for Comment, not even an explicit nil
+func (o *FileDtoInteger) UnsetComment() {
+	o.Comment.Unset()
+}
+
+// GetEncrypted returns the Encrypted field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetEncrypted() bool {
+	if o == nil || IsNil(o.Encrypted.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.Encrypted.Get()
+}
+
+// GetEncryptedOk returns a tuple with the Encrypted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetEncryptedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Encrypted.Get(), o.Encrypted.IsSet()
+}
+
+// HasEncrypted returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsEncryptedSet() bool {
+	if o != nil && o.Encrypted.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEncrypted gets a reference to the given NullableBool and assigns it to the Encrypted field.
+func (o *FileDtoInteger) SetEncrypted(v bool) {
+	o.Encrypted.Set(&v)
+}
+// SetEncryptedNil sets the value for Encrypted to be an explicit nil
+func (o *FileDtoInteger) SetEncryptedNil() {
+	o.Encrypted.Set(nil)
+}
+
+// UnsetEncrypted ensures that no value is present for Encrypted, not even an explicit nil
+func (o *FileDtoInteger) UnsetEncrypted() {
+	o.Encrypted.Unset()
+}
+
+// GetThumbnailUrl returns the ThumbnailUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetThumbnailUrl() string {
+	if o == nil || IsNil(o.ThumbnailUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ThumbnailUrl.Get()
+}
+
+// GetThumbnailUrlOk returns a tuple with the ThumbnailUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetThumbnailUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ThumbnailUrl.Get(), o.ThumbnailUrl.IsSet()
+}
+
+// HasThumbnailUrl returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsThumbnailUrlSet() bool {
+	if o != nil && o.ThumbnailUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetThumbnailUrl gets a reference to the given NullableString and assigns it to the ThumbnailUrl field.
+func (o *FileDtoInteger) SetThumbnailUrl(v string) {
+	o.ThumbnailUrl.Set(&v)
+}
+// SetThumbnailUrlNil sets the value for ThumbnailUrl to be an explicit nil
+func (o *FileDtoInteger) SetThumbnailUrlNil() {
+	o.ThumbnailUrl.Set(nil)
+}
+
+// UnsetThumbnailUrl ensures that no value is present for ThumbnailUrl, not even an explicit nil
+func (o *FileDtoInteger) UnsetThumbnailUrl() {
+	o.ThumbnailUrl.Unset()
+}
+
+// GetThumbnailStatus returns the ThumbnailStatus field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetThumbnailStatus() Thumbnail {
+	if o == nil || IsNil(o.ThumbnailStatus) {
+		var ret Thumbnail
+		return ret
+	}
+	return *o.ThumbnailStatus
+}
+
+// GetThumbnailStatusOk returns a tuple with the ThumbnailStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetThumbnailStatusOk() (*Thumbnail, bool) {
+	if o == nil || IsNil(o.ThumbnailStatus) {
+		return nil, false
+	}
+	return o.ThumbnailStatus, true
+}
+
+// HasThumbnailStatus returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsThumbnailStatusSet() bool {
+	if o != nil && !IsNil(o.ThumbnailStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetThumbnailStatus gets a reference to the given Thumbnail and assigns it to the ThumbnailStatus field.
+func (o *FileDtoInteger) SetThumbnailStatus(v Thumbnail) {
+	o.ThumbnailStatus = &v
+}
+
+// GetLocked returns the Locked field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetLocked() bool {
+	if o == nil || IsNil(o.Locked.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.Locked.Get()
+}
+
+// GetLockedOk returns a tuple with the Locked field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetLockedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Locked.Get(), o.Locked.IsSet()
+}
+
+// HasLocked returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsLockedSet() bool {
+	if o != nil && o.Locked.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLocked gets a reference to the given NullableBool and assigns it to the Locked field.
+func (o *FileDtoInteger) SetLocked(v bool) {
+	o.Locked.Set(&v)
+}
+// SetLockedNil sets the value for Locked to be an explicit nil
+func (o *FileDtoInteger) SetLockedNil() {
+	o.Locked.Set(nil)
+}
+
+// UnsetLocked ensures that no value is present for Locked, not even an explicit nil
+func (o *FileDtoInteger) UnsetLocked() {
+	o.Locked.Unset()
+}
+
+// GetLockedBy returns the LockedBy field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetLockedBy() string {
+	if o == nil || IsNil(o.LockedBy.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LockedBy.Get()
+}
+
+// GetLockedByOk returns a tuple with the LockedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetLockedByOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LockedBy.Get(), o.LockedBy.IsSet()
+}
+
+// HasLockedBy returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsLockedBySet() bool {
+	if o != nil && o.LockedBy.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLockedBy gets a reference to the given NullableString and assigns it to the LockedBy field.
+func (o *FileDtoInteger) SetLockedBy(v string) {
+	o.LockedBy.Set(&v)
+}
+// SetLockedByNil sets the value for LockedBy to be an explicit nil
+func (o *FileDtoInteger) SetLockedByNil() {
+	o.LockedBy.Set(nil)
+}
+
+// UnsetLockedBy ensures that no value is present for LockedBy, not even an explicit nil
+func (o *FileDtoInteger) UnsetLockedBy() {
+	o.LockedBy.Unset()
+}
+
+// GetHasDraft returns the HasDraft field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetHasDraft() bool {
+	if o == nil || IsNil(o.HasDraft.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.HasDraft.Get()
+}
+
+// GetHasDraftOk returns a tuple with the HasDraft field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetHasDraftOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HasDraft.Get(), o.HasDraft.IsSet()
+}
+
+// HasHasDraft returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsHasDraftSet() bool {
+	if o != nil && o.HasDraft.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetHasDraft gets a reference to the given NullableBool and assigns it to the HasDraft field.
+func (o *FileDtoInteger) SetHasDraft(v bool) {
+	o.HasDraft.Set(&v)
+}
+// SetHasDraftNil sets the value for HasDraft to be an explicit nil
+func (o *FileDtoInteger) SetHasDraftNil() {
+	o.HasDraft.Set(nil)
+}
+
+// UnsetHasDraft ensures that no value is present for HasDraft, not even an explicit nil
+func (o *FileDtoInteger) UnsetHasDraft() {
+	o.HasDraft.Unset()
+}
+
+// GetFormFillingStatus returns the FormFillingStatus field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetFormFillingStatus() FormFillingStatus {
+	if o == nil || IsNil(o.FormFillingStatus) {
+		var ret FormFillingStatus
+		return ret
+	}
+	return *o.FormFillingStatus
+}
+
+// GetFormFillingStatusOk returns a tuple with the FormFillingStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetFormFillingStatusOk() (*FormFillingStatus, bool) {
+	if o == nil || IsNil(o.FormFillingStatus) {
+		return nil, false
+	}
+	return o.FormFillingStatus, true
+}
+
+// HasFormFillingStatus returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsFormFillingStatusSet() bool {
+	if o != nil && !IsNil(o.FormFillingStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetFormFillingStatus gets a reference to the given FormFillingStatus and assigns it to the FormFillingStatus field.
+func (o *FileDtoInteger) SetFormFillingStatus(v FormFillingStatus) {
+	o.FormFillingStatus = &v
+}
+
+// GetIsForm returns the IsForm field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetIsForm() bool {
+	if o == nil || IsNil(o.IsForm.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.IsForm.Get()
+}
+
+// GetIsFormOk returns a tuple with the IsForm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetIsFormOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IsForm.Get(), o.IsForm.IsSet()
+}
+
+// HasIsForm returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsIsFormSet() bool {
+	if o != nil && o.IsForm.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIsForm gets a reference to the given NullableBool and assigns it to the IsForm field.
+func (o *FileDtoInteger) SetIsForm(v bool) {
+	o.IsForm.Set(&v)
+}
+// SetIsFormNil sets the value for IsForm to be an explicit nil
+func (o *FileDtoInteger) SetIsFormNil() {
+	o.IsForm.Set(nil)
+}
+
+// UnsetIsForm ensures that no value is present for IsForm, not even an explicit nil
+func (o *FileDtoInteger) UnsetIsForm() {
+	o.IsForm.Unset()
+}
+
+// GetCustomFilterEnabled returns the CustomFilterEnabled field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetCustomFilterEnabled() bool {
+	if o == nil || IsNil(o.CustomFilterEnabled.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.CustomFilterEnabled.Get()
+}
+
+// GetCustomFilterEnabledOk returns a tuple with the CustomFilterEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetCustomFilterEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CustomFilterEnabled.Get(), o.CustomFilterEnabled.IsSet()
+}
+
+// HasCustomFilterEnabled returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsCustomFilterEnabledSet() bool {
+	if o != nil && o.CustomFilterEnabled.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomFilterEnabled gets a reference to the given NullableBool and assigns it to the CustomFilterEnabled field.
+func (o *FileDtoInteger) SetCustomFilterEnabled(v bool) {
+	o.CustomFilterEnabled.Set(&v)
+}
+// SetCustomFilterEnabledNil sets the value for CustomFilterEnabled to be an explicit nil
+func (o *FileDtoInteger) SetCustomFilterEnabledNil() {
+	o.CustomFilterEnabled.Set(nil)
+}
+
+// UnsetCustomFilterEnabled ensures that no value is present for CustomFilterEnabled, not even an explicit nil
+func (o *FileDtoInteger) UnsetCustomFilterEnabled() {
+	o.CustomFilterEnabled.Unset()
+}
+
+// GetCustomFilterEnabledBy returns the CustomFilterEnabledBy field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetCustomFilterEnabledBy() string {
+	if o == nil || IsNil(o.CustomFilterEnabledBy.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.CustomFilterEnabledBy.Get()
+}
+
+// GetCustomFilterEnabledByOk returns a tuple with the CustomFilterEnabledBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetCustomFilterEnabledByOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CustomFilterEnabledBy.Get(), o.CustomFilterEnabledBy.IsSet()
+}
+
+// HasCustomFilterEnabledBy returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsCustomFilterEnabledBySet() bool {
+	if o != nil && o.CustomFilterEnabledBy.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomFilterEnabledBy gets a reference to the given NullableString and assigns it to the CustomFilterEnabledBy field.
+func (o *FileDtoInteger) SetCustomFilterEnabledBy(v string) {
+	o.CustomFilterEnabledBy.Set(&v)
+}
+// SetCustomFilterEnabledByNil sets the value for CustomFilterEnabledBy to be an explicit nil
+func (o *FileDtoInteger) SetCustomFilterEnabledByNil() {
+	o.CustomFilterEnabledBy.Set(nil)
+}
+
+// UnsetCustomFilterEnabledBy ensures that no value is present for CustomFilterEnabledBy, not even an explicit nil
+func (o *FileDtoInteger) UnsetCustomFilterEnabledBy() {
+	o.CustomFilterEnabledBy.Unset()
+}
+
+// GetStartFilling returns the StartFilling field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetStartFilling() bool {
+	if o == nil || IsNil(o.StartFilling.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.StartFilling.Get()
+}
+
+// GetStartFillingOk returns a tuple with the StartFilling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetStartFillingOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StartFilling.Get(), o.StartFilling.IsSet()
+}
+
+// HasStartFilling returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsStartFillingSet() bool {
+	if o != nil && o.StartFilling.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStartFilling gets a reference to the given NullableBool and assigns it to the StartFilling field.
+func (o *FileDtoInteger) SetStartFilling(v bool) {
+	o.StartFilling.Set(&v)
+}
+// SetStartFillingNil sets the value for StartFilling to be an explicit nil
+func (o *FileDtoInteger) SetStartFillingNil() {
+	o.StartFilling.Set(nil)
+}
+
+// UnsetStartFilling ensures that no value is present for StartFilling, not even an explicit nil
+func (o *FileDtoInteger) UnsetStartFilling() {
+	o.StartFilling.Unset()
+}
+
+// GetIsFillingPreparing returns the IsFillingPreparing field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetIsFillingPreparing() bool {
+	if o == nil || IsNil(o.IsFillingPreparing.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.IsFillingPreparing.Get()
+}
+
+// GetIsFillingPreparingOk returns a tuple with the IsFillingPreparing field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetIsFillingPreparingOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IsFillingPreparing.Get(), o.IsFillingPreparing.IsSet()
+}
+
+// HasIsFillingPreparing returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsIsFillingPreparingSet() bool {
+	if o != nil && o.IsFillingPreparing.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIsFillingPreparing gets a reference to the given NullableBool and assigns it to the IsFillingPreparing field.
+func (o *FileDtoInteger) SetIsFillingPreparing(v bool) {
+	o.IsFillingPreparing.Set(&v)
+}
+// SetIsFillingPreparingNil sets the value for IsFillingPreparing to be an explicit nil
+func (o *FileDtoInteger) SetIsFillingPreparingNil() {
+	o.IsFillingPreparing.Set(nil)
+}
+
+// UnsetIsFillingPreparing ensures that no value is present for IsFillingPreparing, not even an explicit nil
+func (o *FileDtoInteger) UnsetIsFillingPreparing() {
+	o.IsFillingPreparing.Unset()
+}
+
+// GetInProcessFolderId returns the InProcessFolderId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetInProcessFolderId() int32 {
+	if o == nil || IsNil(o.InProcessFolderId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.InProcessFolderId.Get()
+}
+
+// GetInProcessFolderIdOk returns a tuple with the InProcessFolderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetInProcessFolderIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InProcessFolderId.Get(), o.InProcessFolderId.IsSet()
+}
+
+// HasInProcessFolderId returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsInProcessFolderIdSet() bool {
+	if o != nil && o.InProcessFolderId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInProcessFolderId gets a reference to the given NullableInt32 and assigns it to the InProcessFolderId field.
+func (o *FileDtoInteger) SetInProcessFolderId(v int32) {
+	o.InProcessFolderId.Set(&v)
+}
+// SetInProcessFolderIdNil sets the value for InProcessFolderId to be an explicit nil
+func (o *FileDtoInteger) SetInProcessFolderIdNil() {
+	o.InProcessFolderId.Set(nil)
+}
+
+// UnsetInProcessFolderId ensures that no value is present for InProcessFolderId, not even an explicit nil
+func (o *FileDtoInteger) UnsetInProcessFolderId() {
+	o.InProcessFolderId.Unset()
+}
+
+// GetInProcessFolderTitle returns the InProcessFolderTitle field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetInProcessFolderTitle() string {
+	if o == nil || IsNil(o.InProcessFolderTitle.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.InProcessFolderTitle.Get()
+}
+
+// GetInProcessFolderTitleOk returns a tuple with the InProcessFolderTitle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetInProcessFolderTitleOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InProcessFolderTitle.Get(), o.InProcessFolderTitle.IsSet()
+}
+
+// HasInProcessFolderTitle returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsInProcessFolderTitleSet() bool {
+	if o != nil && o.InProcessFolderTitle.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInProcessFolderTitle gets a reference to the given NullableString and assigns it to the InProcessFolderTitle field.
+func (o *FileDtoInteger) SetInProcessFolderTitle(v string) {
+	o.InProcessFolderTitle.Set(&v)
+}
+// SetInProcessFolderTitleNil sets the value for InProcessFolderTitle to be an explicit nil
+func (o *FileDtoInteger) SetInProcessFolderTitleNil() {
+	o.InProcessFolderTitle.Set(nil)
+}
+
+// UnsetInProcessFolderTitle ensures that no value is present for InProcessFolderTitle, not even an explicit nil
+func (o *FileDtoInteger) UnsetInProcessFolderTitle() {
+	o.InProcessFolderTitle.Unset()
+}
+
+// GetDraftLocation returns the DraftLocation field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetDraftLocation() DraftLocationInteger {
+	if o == nil || IsNil(o.DraftLocation) {
+		var ret DraftLocationInteger
+		return ret
+	}
+	return *o.DraftLocation
+}
+
+// GetDraftLocationOk returns a tuple with the DraftLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetDraftLocationOk() (*DraftLocationInteger, bool) {
+	if o == nil || IsNil(o.DraftLocation) {
+		return nil, false
+	}
+	return o.DraftLocation, true
+}
+
+// HasDraftLocation returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsDraftLocationSet() bool {
+	if o != nil && !IsNil(o.DraftLocation) {
+		return true
+	}
+
+	return false
+}
+
+// SetDraftLocation gets a reference to the given DraftLocationInteger and assigns it to the DraftLocation field.
+func (o *FileDtoInteger) SetDraftLocation(v DraftLocationInteger) {
+	o.DraftLocation = &v
+}
+
+// GetViewAccessibility returns the ViewAccessibility field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetViewAccessibility() FileDtoIntegerAllOfViewAccessibility {
+	if o == nil || IsNil(o.ViewAccessibility.Get()) {
+		var ret FileDtoIntegerAllOfViewAccessibility
+		return ret
+	}
+	return *o.ViewAccessibility.Get()
+}
+
+// GetViewAccessibilityOk returns a tuple with the ViewAccessibility field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetViewAccessibilityOk() (*FileDtoIntegerAllOfViewAccessibility, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ViewAccessibility.Get(), o.ViewAccessibility.IsSet()
+}
+
+// HasViewAccessibility returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsViewAccessibilitySet() bool {
+	if o != nil && o.ViewAccessibility.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetViewAccessibility gets a reference to the given NullableFileDtoIntegerAllOfViewAccessibility and assigns it to the ViewAccessibility field.
+func (o *FileDtoInteger) SetViewAccessibility(v FileDtoIntegerAllOfViewAccessibility) {
+	o.ViewAccessibility.Set(&v)
+}
+// SetViewAccessibilityNil sets the value for ViewAccessibility to be an explicit nil
+func (o *FileDtoInteger) SetViewAccessibilityNil() {
+	o.ViewAccessibility.Set(nil)
+}
+
+// UnsetViewAccessibility ensures that no value is present for ViewAccessibility, not even an explicit nil
+func (o *FileDtoInteger) UnsetViewAccessibility() {
+	o.ViewAccessibility.Unset()
+}
+
+// GetLastOpened returns the LastOpened field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetLastOpened() ApiDateTime {
+	if o == nil || IsNil(o.LastOpened) {
+		var ret ApiDateTime
+		return ret
+	}
+	return *o.LastOpened
+}
+
+// GetLastOpenedOk returns a tuple with the LastOpened field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetLastOpenedOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.LastOpened) {
+		return nil, false
+	}
+	return o.LastOpened, true
+}
+
+// HasLastOpened returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsLastOpenedSet() bool {
+	if o != nil && !IsNil(o.LastOpened) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastOpened gets a reference to the given ApiDateTime and assigns it to the LastOpened field.
+func (o *FileDtoInteger) SetLastOpened(v ApiDateTime) {
+	o.LastOpened = &v
+}
+
+// GetExpired returns the Expired field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetExpired() ApiDateTime {
+	if o == nil || IsNil(o.Expired) {
+		var ret ApiDateTime
+		return ret
+	}
+	return *o.Expired
+}
+
+// GetExpiredOk returns a tuple with the Expired field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetExpiredOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Expired) {
+		return nil, false
+	}
+	return o.Expired, true
+}
+
+// HasExpired returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsExpiredSet() bool {
+	if o != nil && !IsNil(o.Expired) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpired gets a reference to the given ApiDateTime and assigns it to the Expired field.
+func (o *FileDtoInteger) SetExpired(v ApiDateTime) {
+	o.Expired = &v
+}
+
+// GetVectorizationStatus returns the VectorizationStatus field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetVectorizationStatus() VectorizationStatus {
+	if o == nil || IsNil(o.VectorizationStatus) {
+		var ret VectorizationStatus
+		return ret
+	}
+	return *o.VectorizationStatus
+}
+
+// GetVectorizationStatusOk returns a tuple with the VectorizationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetVectorizationStatusOk() (*VectorizationStatus, bool) {
+	if o == nil || IsNil(o.VectorizationStatus) {
+		return nil, false
+	}
+	return o.VectorizationStatus, true
+}
+
+// HasVectorizationStatus returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsVectorizationStatusSet() bool {
+	if o != nil && !IsNil(o.VectorizationStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetVectorizationStatus gets a reference to the given VectorizationStatus and assigns it to the VectorizationStatus field.
+func (o *FileDtoInteger) SetVectorizationStatus(v VectorizationStatus) {
+	o.VectorizationStatus = &v
+}
+
+// GetDimensions returns the Dimensions field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetDimensions() Size {
+	if o == nil || IsNil(o.Dimensions) {
+		var ret Size
+		return ret
+	}
+	return *o.Dimensions
+}
+
+// GetDimensionsOk returns a tuple with the Dimensions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetDimensionsOk() (*Size, bool) {
+	if o == nil || IsNil(o.Dimensions) {
+		return nil, false
+	}
+	return o.Dimensions, true
+}
+
+// HasDimensions returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsDimensionsSet() bool {
+	if o != nil && !IsNil(o.Dimensions) {
+		return true
+	}
+
+	return false
+}
+
+// SetDimensions gets a reference to the given Size and assigns it to the Dimensions field.
+func (o *FileDtoInteger) SetDimensions(v Size) {
+	o.Dimensions = &v
+}
+
+func (o FileDtoInteger) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FileDtoInteger) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if o.Title.IsSet() {
+		toSerialize["title"] = o.Title.Get()
+	}
+	if !IsNil(o.Access) {
+		toSerialize["access"] = o.Access
+	}
+	if !IsNil(o.SharedBy) {
+		toSerialize["sharedBy"] = o.SharedBy
+	}
+	if !IsNil(o.OwnedBy) {
+		toSerialize["ownedBy"] = o.OwnedBy
+	}
+	if !IsNil(o.Shared) {
+		toSerialize["shared"] = o.Shared
+	}
+	if !IsNil(o.SharedForUser) {
+		toSerialize["sharedForUser"] = o.SharedForUser
+	}
+	if !IsNil(o.ParentShared) {
+		toSerialize["parentShared"] = o.ParentShared
+	}
+	if o.ShortWebUrl.IsSet() {
+		toSerialize["shortWebUrl"] = o.ShortWebUrl.Get()
+	}
+	if !IsNil(o.Created) {
+		toSerialize["created"] = o.Created
+	}
+	if !IsNil(o.CreatedBy) {
+		toSerialize["createdBy"] = o.CreatedBy
+	}
+	if !IsNil(o.Updated) {
+		toSerialize["updated"] = o.Updated
+	}
+	if !IsNil(o.AutoDelete) {
+		toSerialize["autoDelete"] = o.AutoDelete
+	}
+	if !IsNil(o.RootFolderType) {
+		toSerialize["rootFolderType"] = o.RootFolderType
+	}
+	if !IsNil(o.ParentRoomType) {
+		toSerialize["parentRoomType"] = o.ParentRoomType
+	}
+	if !IsNil(o.UpdatedBy) {
+		toSerialize["updatedBy"] = o.UpdatedBy
+	}
+	if o.ProviderItem.IsSet() {
+		toSerialize["providerItem"] = o.ProviderItem.Get()
+	}
+	if o.ProviderKey.IsSet() {
+		toSerialize["providerKey"] = o.ProviderKey.Get()
+	}
+	if o.ProviderId.IsSet() {
+		toSerialize["providerId"] = o.ProviderId.Get()
+	}
+	if o.Order.IsSet() {
+		toSerialize["order"] = o.Order.Get()
+	}
+	if o.IsFavorite.IsSet() {
+		toSerialize["isFavorite"] = o.IsFavorite.Get()
+	}
+	if !IsNil(o.FileEntryType) {
+		toSerialize["fileEntryType"] = o.FileEntryType
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.RootFolderId) {
+		toSerialize["rootFolderId"] = o.RootFolderId
+	}
+	if !IsNil(o.OriginId) {
+		toSerialize["originId"] = o.OriginId
+	}
+	if !IsNil(o.OriginRoomId) {
+		toSerialize["originRoomId"] = o.OriginRoomId
+	}
+	if o.OriginTitle.IsSet() {
+		toSerialize["originTitle"] = o.OriginTitle.Get()
+	}
+	if o.OriginRoomTitle.IsSet() {
+		toSerialize["originRoomTitle"] = o.OriginRoomTitle.Get()
+	}
+	if !IsNil(o.CanShare) {
+		toSerialize["canShare"] = o.CanShare
+	}
+	if o.ShareSettings.IsSet() {
+		toSerialize["shareSettings"] = o.ShareSettings.Get()
+	}
+	if o.Security.IsSet() {
+		toSerialize["security"] = o.Security.Get()
+	}
+	if o.AvailableShareRights.IsSet() {
+		toSerialize["availableShareRights"] = o.AvailableShareRights.Get()
+	}
+	if o.RequestToken.IsSet() {
+		toSerialize["requestToken"] = o.RequestToken.Get()
+	}
+	if o.External.IsSet() {
+		toSerialize["external"] = o.External.Get()
+	}
+	if !IsNil(o.ExpirationDate) {
+		toSerialize["expirationDate"] = o.ExpirationDate
+	}
+	if o.IsLinkExpired.IsSet() {
+		toSerialize["isLinkExpired"] = o.IsLinkExpired.Get()
+	}
+	if !IsNil(o.FolderId) {
+		toSerialize["folderId"] = o.FolderId
+	}
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
+	if !IsNil(o.VersionGroup) {
+		toSerialize["versionGroup"] = o.VersionGroup
+	}
+	if o.ContentLength.IsSet() {
+		toSerialize["contentLength"] = o.ContentLength.Get()
+	}
+	if o.PureContentLength.IsSet() {
+		toSerialize["pureContentLength"] = o.PureContentLength.Get()
+	}
+	if !IsNil(o.FileStatus) {
+		toSerialize["fileStatus"] = o.FileStatus
+	}
+	if o.EditingBy != nil {
+		toSerialize["editingBy"] = o.EditingBy
+	}
+	if !IsNil(o.Mute) {
+		toSerialize["mute"] = o.Mute
+	}
+	if o.ViewUrl.IsSet() {
+		toSerialize["viewUrl"] = o.ViewUrl.Get()
+	}
+	if o.WebUrl.IsSet() {
+		toSerialize["webUrl"] = o.WebUrl.Get()
+	}
+	if !IsNil(o.FileType) {
+		toSerialize["fileType"] = o.FileType
+	}
+	if o.FileExst.IsSet() {
+		toSerialize["fileExst"] = o.FileExst.Get()
+	}
+	if o.Comment.IsSet() {
+		toSerialize["comment"] = o.Comment.Get()
+	}
+	if o.Encrypted.IsSet() {
+		toSerialize["encrypted"] = o.Encrypted.Get()
+	}
+	if o.ThumbnailUrl.IsSet() {
+		toSerialize["thumbnailUrl"] = o.ThumbnailUrl.Get()
+	}
+	if !IsNil(o.ThumbnailStatus) {
+		toSerialize["thumbnailStatus"] = o.ThumbnailStatus
+	}
+	if o.Locked.IsSet() {
+		toSerialize["locked"] = o.Locked.Get()
+	}
+	if o.LockedBy.IsSet() {
+		toSerialize["lockedBy"] = o.LockedBy.Get()
+	}
+	if o.HasDraft.IsSet() {
+		toSerialize["hasDraft"] = o.HasDraft.Get()
+	}
+	if !IsNil(o.FormFillingStatus) {
+		toSerialize["formFillingStatus"] = o.FormFillingStatus
+	}
+	if o.IsForm.IsSet() {
+		toSerialize["isForm"] = o.IsForm.Get()
+	}
+	if o.CustomFilterEnabled.IsSet() {
+		toSerialize["customFilterEnabled"] = o.CustomFilterEnabled.Get()
+	}
+	if o.CustomFilterEnabledBy.IsSet() {
+		toSerialize["customFilterEnabledBy"] = o.CustomFilterEnabledBy.Get()
+	}
+	if o.StartFilling.IsSet() {
+		toSerialize["startFilling"] = o.StartFilling.Get()
+	}
+	if o.IsFillingPreparing.IsSet() {
+		toSerialize["isFillingPreparing"] = o.IsFillingPreparing.Get()
+	}
+	if o.InProcessFolderId.IsSet() {
+		toSerialize["inProcessFolderId"] = o.InProcessFolderId.Get()
+	}
+	if o.InProcessFolderTitle.IsSet() {
+		toSerialize["inProcessFolderTitle"] = o.InProcessFolderTitle.Get()
+	}
+	if !IsNil(o.DraftLocation) {
+		toSerialize["draftLocation"] = o.DraftLocation
+	}
+	if o.ViewAccessibility.IsSet() {
+		toSerialize["viewAccessibility"] = o.ViewAccessibility.Get()
+	}
+	if !IsNil(o.LastOpened) {
+		toSerialize["lastOpened"] = o.LastOpened
+	}
+	if !IsNil(o.Expired) {
+		toSerialize["expired"] = o.Expired
+	}
+	if !IsNil(o.VectorizationStatus) {
+		toSerialize["vectorizationStatus"] = o.VectorizationStatus
+	}
+	if !IsNil(o.Dimensions) {
+		toSerialize["dimensions"] = o.Dimensions
+	}
+	return toSerialize, nil
+}
+
+type NullableFileDtoInteger struct {
+	value *FileDtoInteger
+	isSet bool
+}
+
+func (v NullableFileDtoInteger) Get() *FileDtoInteger {
+	return v.value
+}
+
+func (v *NullableFileDtoInteger) Set(val *FileDtoInteger) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableFileDtoInteger) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableFileDtoInteger) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableFileDtoInteger(val *FileDtoInteger) *NullableFileDtoInteger {
+	return &NullableFileDtoInteger{value: val, isSet: true}
+}
+
+func (v NullableFileDtoInteger) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableFileDtoInteger) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+
