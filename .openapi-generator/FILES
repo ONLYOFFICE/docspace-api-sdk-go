@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 AUTHORS.md
 CHANGELOG.md
@@ -116,6 +115,7 @@ docs/AiChatModelPricing.md
 docs/AiChatPrice.md
 docs/AiEmbeddingModelPricing.md
 docs/AiEmbeddingPrice.md
+docs/AiModelCapabilities.md
 docs/AiPricesResponse.md
 docs/AiPricesResponseWrapper.md
 docs/AiProviderArrayWrapper.md
@@ -123,6 +123,8 @@ docs/AiProviderDto.md
 docs/AiProviderWrapper.md
 docs/AiSettingsDto.md
 docs/AiSettingsWrapper.md
+docs/AiUserSettingsDto.md
+docs/AiUserSettingsWrapper.md
 docs/AiWebSearchPricing.md
 docs/AnonymousConfigDto.md
 docs/ApiDateTime.md
@@ -174,7 +176,6 @@ docs/BatchRequestDtoAllOfFileIds.md
 docs/BatchRequestDtoAllOfFolderIds.md
 docs/BatchTagsRequestDto.md
 docs/BooleanWrapper.md
-docs/BuyWalletServiceRequestDto.md
 docs/CapabilitiesAPI.md
 docs/CapabilitiesDto.md
 docs/CapabilitiesWrapper.md
@@ -224,8 +225,6 @@ docs/ConnectServerRequestBody.md
 docs/ConnectionTestResult.md
 docs/ConnectionTestResultWrapper.md
 docs/Contact.md
-docs/ContentDisposition.md
-docs/ContentType.md
 docs/ContinueChatBody.md
 docs/ContinueChatBodyFilesInner.md
 docs/ConversationResultArrayWrapper.md
@@ -251,6 +250,7 @@ docs/CreateTagRequestDto.md
 docs/CreateTextOrHtmlFile.md
 docs/CreateThirdPartyRoom.md
 docs/CreateWebhooksConfigRequestsDto.md
+docs/CreditAiBalanceRequestDto.md
 docs/Cron.md
 docs/CronParams.md
 docs/CspDto.md
@@ -330,6 +330,7 @@ docs/EditHistoryDto.md
 docs/EditHistoryUrl.md
 docs/EditorConfigurationDto.md
 docs/EditorToolCallStateDto.md
+docs/EditorToolDecisionRequestBody.md
 docs/EditorType.md
 docs/EmailActivationSettings.md
 docs/EmailActivationSettingsWrapper.md
@@ -354,13 +355,20 @@ docs/EncryptionSettingsWrapper.md
 docs/EngineType.md
 docs/EntryType.md
 docs/ExchangeToken200Response.md
-docs/ExportChatRequestBodyInteger.md
-docs/ExportMessageRequestBodyInteger.md
+docs/ExportChatRequestBody.md
+docs/ExportChatRequestBodyFolderId.md
+docs/ExportMessageRequestBody.md
 docs/ExternalDatabaseSettings.md
 docs/ExternalDatabaseType.md
+docs/ExternalDbSyncFormResultDto.md
+docs/ExternalDbSyncTaskDto.md
+docs/ExternalDbSyncTaskWrapper.md
 docs/ExternalShareDto.md
 docs/ExternalShareRequestParam.md
 docs/ExternalShareWrapper.md
+docs/ExternalSharingSettingsDto.md
+docs/ExternalSharingSettingsRequestDto.md
+docs/ExternalSharingSettingsWrapper.md
 docs/FeatureUsedDto.md
 docs/FeedbackConfig.md
 docs/FileConflictResolveType.md
@@ -444,10 +452,11 @@ docs/FormSubmissionsWrapper.md
 docs/FormsItemArrayWrapper.md
 docs/FormsItemData.md
 docs/FormsItemDto.md
+docs/GeneratedFileDto.md
+docs/GeneratedFileWrapper.md
 docs/GetPortalPrices200Response.md
 docs/GetPortalPrices200ResponseLinksInner.md
 docs/GetReferenceDataDtoInteger.md
-docs/GetWebhookTriggers200Response.md
 docs/GobackConfig.md
 docs/GreetingSettingsRequestsDto.md
 docs/GroupAPI.md
@@ -545,6 +554,9 @@ docs/MobilePhoneActivationStatus.md
 docs/MobileRequestsDto.md
 docs/ModelArrayWrapper.md
 docs/ModelDto.md
+docs/ModelSettingsArrayWrapper.md
+docs/ModelSettingsDto.md
+docs/ModelSettingsItemDto.md
 docs/Module.md
 docs/ModuleWrapper.md
 docs/MultiSizeLogoCover.md
@@ -618,6 +630,7 @@ docs/PortalPaymentAPI.md
 docs/PortalQuotaAPI.md
 docs/PortalSettingsAPI.md
 docs/PortalUsersAPI.md
+docs/PreviewProviderModelsRequestDto.md
 docs/PriceDto.md
 docs/ProblemDetail.md
 docs/ProductAdministratorDto.md
@@ -702,6 +715,7 @@ docs/ServerType.md
 docs/ServicePayment.md
 docs/ServicePaymentWrapper.md
 docs/SessionRequest.md
+docs/SetAiUserSettingsRequestDto.md
 docs/SetDefaultProviderRequestDto.md
 docs/SetEmbeddingConfigRequestBody.md
 docs/SetManagerRequest.md
@@ -739,7 +753,6 @@ docs/SettingsWebpluginsAPI.md
 docs/SettingsWrapper.md
 docs/SetupCode.md
 docs/SetupCodeWrapper.md
-docs/SexEnum.md
 docs/ShareFilterType.md
 docs/SignupAccountRequestDto.md
 docs/Size.md
@@ -829,6 +842,10 @@ docs/TenantWalletSettings.md
 docs/TenantWalletSettingsWrapper.md
 docs/TenantWrapper.md
 docs/TerminateRequestDto.md
+docs/TfaAppCodeArrayWrapper.md
+docs/TfaAppCodeDto.md
+docs/TfaConfirmDataDto.md
+docs/TfaConfirmDataWrapper.md
 docs/TfaRequestsDto.md
 docs/TfaRequestsDtoType.md
 docs/TfaSettingsArrayWrapper.md
@@ -868,7 +885,6 @@ docs/UpdateRoomsRoomIdsRequestDtoInteger.md
 docs/UpdateServerRequestBody.md
 docs/UpdateTagRequestDto.md
 docs/UpdateWebhooksConfigRequestsDto.md
-docs/UploadRequestDto.md
 docs/UploadResultDto.md
 docs/UploadResultWrapper.md
 docs/UploadSessionResponseDtoInteger.md
@@ -878,6 +894,8 @@ docs/UsageSpaceStatItemDto.md
 docs/UserChatSettingsDto.md
 docs/UserChatSettingsWrapper.md
 docs/UserConfig.md
+docs/UserExistsResponseDto.md
+docs/UserExistsResponseWrapper.md
 docs/UserInfo.md
 docs/UserInfoWrapper.md
 docs/UserInvitation.md
@@ -906,6 +924,8 @@ docs/WebSearchSettingsWrapper.md
 docs/WebhookGroupStatus.md
 docs/WebhookRetryRequestsDto.md
 docs/WebhookTrigger.md
+docs/WebhookTriggerArrayWrapper.md
+docs/WebhookTriggerDto.md
 docs/WebhooksConfigDto.md
 docs/WebhooksConfigWithStatusArrayWrapper.md
 docs/WebhooksConfigWithStatusDto.md
@@ -921,6 +941,8 @@ docs/WhiteLabelRequestsDto.md
 docs/WizardRequestsDto.md
 docs/WizardSettings.md
 docs/WizardSettingsWrapper.md
+docs/XlsxReportResponseDto.md
+docs/XlsxReportResponseWrapper.md
 go.mod
 go.sum
 model-account-info-array-wrapper.go
@@ -946,6 +968,7 @@ model-ai-chat-model-pricing.go
 model-ai-chat-price.go
 model-ai-embedding-model-pricing.go
 model-ai-embedding-price.go
+model-ai-model-capabilities.go
 model-ai-prices-response-wrapper.go
 model-ai-prices-response.go
 model-ai-provider-array-wrapper.go
@@ -953,6 +976,8 @@ model-ai-provider-dto.go
 model-ai-provider-wrapper.go
 model-ai-settings-dto.go
 model-ai-settings-wrapper.go
+model-ai-user-settings-dto.go
+model-ai-user-settings-wrapper.go
 model-ai-web-search-pricing.go
 model-anonymous-config-dto.go
 model-api-date-time.go
@@ -1001,7 +1026,6 @@ model-batch-request-dto-all-of-folder-ids.go
 model-batch-request-dto.go
 model-batch-tags-request-dto.go
 model-boolean-wrapper.go
-model-buy-wallet-service-request-dto.go
 model-capabilities-dto.go
 model-capabilities-wrapper.go
 model-cdn-storage-settings-wrapper.go
@@ -1050,8 +1074,6 @@ model-connect-server-request-body.go
 model-connection-test-result-wrapper.go
 model-connection-test-result.go
 model-contact.go
-model-content-disposition.go
-model-content-type.go
 model-continue-chat-body-files-inner.go
 model-continue-chat-body.go
 model-conversation-result-array-wrapper.go
@@ -1077,6 +1099,7 @@ model-create-tag-request-dto.go
 model-create-text-or-html-file.go
 model-create-third-party-room.go
 model-create-webhooks-config-requests-dto.go
+model-credit-ai-balance-request-dto.go
 model-cron-params.go
 model-cron.go
 model-csp-dto.go
@@ -1156,6 +1179,7 @@ model-edit-history-dto.go
 model-edit-history-url.go
 model-editor-configuration-dto.go
 model-editor-tool-call-state-dto.go
+model-editor-tool-decision-request-body.go
 model-editor-type.go
 model-email-activation-settings-wrapper.go
 model-email-activation-settings.go
@@ -1180,13 +1204,20 @@ model-encryption-settings.go
 model-engine-type.go
 model-entry-type.go
 model-exchange-token-200-response.go
-model-export-chat-request-body-integer.go
-model-export-message-request-body-integer.go
+model-export-chat-request-body-folder-id.go
+model-export-chat-request-body.go
+model-export-message-request-body.go
 model-external-database-settings.go
 model-external-database-type.go
+model-external-db-sync-form-result-dto.go
+model-external-db-sync-task-dto.go
+model-external-db-sync-task-wrapper.go
 model-external-share-dto.go
 model-external-share-request-param.go
 model-external-share-wrapper.go
+model-external-sharing-settings-dto.go
+model-external-sharing-settings-request-dto.go
+model-external-sharing-settings-wrapper.go
 model-feature-used-dto.go
 model-feedback-config.go
 model-file-conflict-resolve-type.go
@@ -1263,10 +1294,11 @@ model-form-submissions-wrapper.go
 model-forms-item-array-wrapper.go
 model-forms-item-data.go
 model-forms-item-dto.go
+model-generated-file-dto.go
+model-generated-file-wrapper.go
 model-get-portal-prices-200-response-links-inner.go
 model-get-portal-prices-200-response.go
 model-get-reference-data-dto-integer.go
-model-get-webhook-triggers-200-response.go
 model-goback-config.go
 model-greeting-settings-requests-dto.go
 model-group-array-wrapper.go
@@ -1361,6 +1393,9 @@ model-mobile-phone-activation-status.go
 model-mobile-requests-dto.go
 model-model-array-wrapper.go
 model-model-dto.go
+model-model-settings-array-wrapper.go
+model-model-settings-dto.go
+model-model-settings-item-dto.go
 model-module-wrapper.go
 model-module.go
 model-multi-size-logo-cover.go
@@ -1412,6 +1447,7 @@ model-payments.go
 model-permissions-config.go
 model-plugins-config.go
 model-plugins-dto.go
+model-preview-provider-models-request-dto.go
 model-price-dto.go
 model-problem-detail.go
 model-product-administrator-dto.go
@@ -1484,6 +1520,7 @@ model-server-type.go
 model-service-payment-wrapper.go
 model-service-payment.go
 model-session-request.go
+model-set-ai-user-settings-request-dto.go
 model-set-default-provider-request-dto.go
 model-set-embedding-config-request-body.go
 model-set-manager-request.go
@@ -1498,7 +1535,6 @@ model-settings-request-dto.go
 model-settings-wrapper.go
 model-setup-code-wrapper.go
 model-setup-code.go
-model-sex-enum.go
 model-share-filter-type.go
 model-signup-account-request-dto.go
 model-size.go
@@ -1589,6 +1625,10 @@ model-tenant-wallet-settings-wrapper.go
 model-tenant-wallet-settings.go
 model-tenant-wrapper.go
 model-terminate-request-dto.go
+model-tfa-app-code-array-wrapper.go
+model-tfa-app-code-dto.go
+model-tfa-confirm-data-dto.go
+model-tfa-confirm-data-wrapper.go
 model-tfa-requests-dto-type.go
 model-tfa-requests-dto.go
 model-tfa-settings-array-wrapper.go
@@ -1627,7 +1667,6 @@ model-update-rooms-room-ids-request-dto-integer.go
 model-update-server-request-body.go
 model-update-tag-request-dto.go
 model-update-webhooks-config-requests-dto.go
-model-upload-request-dto.go
 model-upload-result-dto.go
 model-upload-result-wrapper.go
 model-upload-session-response-dto-integer.go
@@ -1637,6 +1676,8 @@ model-usage-space-stat-item-dto.go
 model-user-chat-settings-dto.go
 model-user-chat-settings-wrapper.go
 model-user-config.go
+model-user-exists-response-dto.go
+model-user-exists-response-wrapper.go
 model-user-info-wrapper.go
 model-user-info.go
 model-user-invitation-request-dto.go
@@ -1664,6 +1705,8 @@ model-web-search-settings-dto.go
 model-web-search-settings-wrapper.go
 model-webhook-group-status.go
 model-webhook-retry-requests-dto.go
+model-webhook-trigger-array-wrapper.go
+model-webhook-trigger-dto.go
 model-webhook-trigger.go
 model-webhooks-config-dto.go
 model-webhooks-config-with-status-array-wrapper.go
@@ -1680,6 +1723,8 @@ model-white-label-requests-dto.go
 model-wizard-requests-dto.go
 model-wizard-settings-wrapper.go
 model-wizard-settings.go
+model-xlsx-report-response-dto.go
+model-xlsx-report-response-wrapper.go
 response.go
 samples/docspace-api-sdk-go-sample/go.mod
 samples/docspace-api-sdk-go-sample/main.go

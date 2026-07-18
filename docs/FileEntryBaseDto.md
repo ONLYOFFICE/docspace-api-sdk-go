@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **OwnedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **Shared** | Pointer to **bool** | Specifies if the file entry is shared via link or not. | [optional] 
 **SharedForUser** | Pointer to **bool** | Specifies if the file entry is shared for user or not. | [optional] 
+**SharedExternal** | Pointer to **bool** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] 
 **ParentShared** | Pointer to **bool** | Indicates whether the parent entity is shared. | [optional] 
 **ShortWebUrl** | Pointer to **NullableString** | The short Web URL. | [optional] 
 **Created** | Pointer to [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
@@ -204,6 +205,31 @@ SetSharedForUser sets SharedForUser field to given value.
 `func (o *FileEntryBaseDto) HasSharedForUser() bool`
 
 HasSharedForUser returns a boolean if a field has been set.
+
+### GetSharedExternal
+
+`func (o *FileEntryBaseDto) GetSharedExternal() bool`
+
+GetSharedExternal returns the SharedExternal field if non-nil, zero value otherwise.
+
+### GetSharedExternalOk
+
+`func (o *FileEntryBaseDto) GetSharedExternalOk() (*bool, bool)`
+
+GetSharedExternalOk returns a tuple with the SharedExternal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSharedExternal
+
+`func (o *FileEntryBaseDto) SetSharedExternal(v bool)`
+
+SetSharedExternal sets SharedExternal field to given value.
+
+### HasSharedExternal
+
+`func (o *FileEntryBaseDto) HasSharedExternal() bool`
+
+HasSharedExternal returns a boolean if a field has been set.
 
 ### GetParentShared
 

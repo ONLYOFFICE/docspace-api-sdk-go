@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## CheckUserExistsByEmail
 
-> BooleanWrapper CheckUserExistsByEmail(ctx).Email(email).Encemail(encemail).Culture(culture).Execute()
+> UserExistsResponseWrapper CheckUserExistsByEmail(ctx).Email(email).Encemail(encemail).Culture(culture).Execute()
 
 Check if a user exists by email
 
@@ -123,7 +123,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleProfilesAPI.CheckUserExistsByEmail``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CheckUserExistsByEmail`: BooleanWrapper
+	// response from `CheckUserExistsByEmail`: UserExistsResponseWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PeopleProfilesAPI.CheckUserExistsByEmail`: %v\n", resp)
 }
 ```
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BooleanWrapper**](BooleanWrapper.md)
+[**UserExistsResponseWrapper**](UserExistsResponseWrapper.md)
 
 ### Authorization
 

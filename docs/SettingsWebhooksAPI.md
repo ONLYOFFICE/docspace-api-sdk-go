@@ -217,7 +217,7 @@ Other parameters are passed through a pointer to a apiGetTenantWebhooksRequest s
 
 ## GetWebhookTriggers
 
-> GetWebhookTriggers200Response GetWebhookTriggers(ctx).Execute()
+> WebhookTriggerArrayWrapper GetWebhookTriggers(ctx).Execute()
 
 Get webhook triggers
 
@@ -246,7 +246,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsWebhooksAPI.GetWebhookTriggers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetWebhookTriggers`: GetWebhookTriggers200Response
+	// response from `GetWebhookTriggers`: WebhookTriggerArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsWebhooksAPI.GetWebhookTriggers`: %v\n", resp)
 }
 ```
@@ -262,7 +262,7 @@ Other parameters are passed through a pointer to a apiGetWebhookTriggersRequest 
 
 ### Return type
 
-[**GetWebhookTriggers200Response**](GetWebhookTriggers200Response.md)
+[**WebhookTriggerArrayWrapper**](WebhookTriggerArrayWrapper.md)
 
 ### Authorization
 

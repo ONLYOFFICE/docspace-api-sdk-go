@@ -5,8 +5,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetAiSettings**](AISettingsAPI.md#GetAiSettings) | **Get** /api/2.0/ai/config | Get AI settings
+[**GetAiUserSettings**](AISettingsAPI.md#GetAiUserSettings) | **Get** /api/2.0/ai/config/user | Get per-user AI settings
 [**GetVectorizationSettings**](AISettingsAPI.md#GetVectorizationSettings) | **Get** /api/2.0/ai/config/vectorization | Get vectorization settings
 [**GetWebSearchSettings**](AISettingsAPI.md#GetWebSearchSettings) | **Get** /api/2.0/ai/config/web-search | Get web search settings
+[**SetAiUserSettings**](AISettingsAPI.md#SetAiUserSettings) | **Put** /api/2.0/ai/config/user | Update per-user AI settings
 [**SetVectorizationSettings**](AISettingsAPI.md#SetVectorizationSettings) | **Put** /api/2.0/ai/config/vectorization | Update vectorization settings
 [**SetWebSearchSettings**](AISettingsAPI.md#SetWebSearchSettings) | **Put** /api/2.0/ai/config/web-search | Update web search settings
 
@@ -60,6 +62,69 @@ Other parameters are passed through a pointer to a apiGetAiSettingsRequest struc
 ### Return type
 
 [**AiSettingsWrapper**](AiSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAiUserSettings
+
+> AiUserSettingsWrapper GetAiUserSettings(ctx).Execute()
+
+Get per-user AI settings
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ai-user-settings/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AISettingsAPI.GetAiUserSettings(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AISettingsAPI.GetAiUserSettings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAiUserSettings`: AiUserSettingsWrapper
+	fmt.Fprintf(os.Stdout, "Response from `AISettingsAPI.GetAiUserSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAiUserSettingsRequest struct via the builder pattern
+
+
+### Return type
+
+[**AiUserSettingsWrapper**](AiUserSettingsWrapper.md)
 
 ### Authorization
 
@@ -194,6 +259,74 @@ Other parameters are passed through a pointer to a apiGetWebSearchSettingsReques
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetAiUserSettings
+
+> AiUserSettingsWrapper SetAiUserSettings(ctx).SetAiUserSettingsRequestDto(setAiUserSettingsRequestDto).Execute()
+
+Update per-user AI settings
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-ai-user-settings/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	setAiUserSettingsRequestDto := *openapiclient.NewSetAiUserSettingsRequestDto() // SetAiUserSettingsRequestDto |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AISettingsAPI.SetAiUserSettings(context.Background()).SetAiUserSettingsRequestDto(setAiUserSettingsRequestDto).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AISettingsAPI.SetAiUserSettings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetAiUserSettings`: AiUserSettingsWrapper
+	fmt.Fprintf(os.Stdout, "Response from `AISettingsAPI.SetAiUserSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetAiUserSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **setAiUserSettingsRequestDto** | [**SetAiUserSettingsRequestDto**](SetAiUserSettingsRequestDto.md) |  | 
+
+### Return type
+
+[**AiUserSettingsWrapper**](AiUserSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

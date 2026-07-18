@@ -31,11 +31,11 @@ type ApiExportMessageRequest struct {
 	ctx context.Context
 	ApiService *AIMessagesAPIService
 	messageId int32
-	exportMessageRequestBodyInteger *ExportMessageRequestBodyInteger
+	exportMessageRequestBody *ExportMessageRequestBody
 }
 
 // The export parameters including destination folder and file title.
-func (r ApiExportMessageRequest) ExportMessageRequestBodyInteger(exportMessageRequestBodyInteger ExportMessageRequestBodyInteger) ApiExportMessageRequest {	r.exportMessageRequestBodyInteger = &exportMessageRequestBodyInteger
+func (r ApiExportMessageRequest) ExportMessageRequestBody(exportMessageRequestBody ExportMessageRequestBody) ApiExportMessageRequest {	r.exportMessageRequestBody = &exportMessageRequestBody
 	return r
 }
 
@@ -85,8 +85,8 @@ func (a *AIMessagesAPIService) ExportMessageExecute(r ApiExportMessageRequest) (
 	if r.messageId > 2147483647 {
 		return nil, reportError("messageId must be less than 2147483647")
 	}
-	if r.exportMessageRequestBodyInteger == nil {
-		return nil, reportError("exportMessageRequestBodyInteger is required and must be specified")
+	if r.exportMessageRequestBody == nil {
+		return nil, reportError("exportMessageRequestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -107,7 +107,7 @@ func (a *AIMessagesAPIService) ExportMessageExecute(r ApiExportMessageRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.exportMessageRequestBodyInteger
+	localVarPostBody = r.exportMessageRequestBody
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

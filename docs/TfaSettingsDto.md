@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | **NullableString** | The ID of the TFA configuration. | 
 **Title** | **NullableString** | The display name or description of the TFA configuration. | 
 **Enabled** | **bool** | Indicates whether the TFA configuration is currently active. | 
-**Avaliable** | **bool** | Indicates whether the TFA configuration can be used. | 
+**Available** | **bool** | Indicates whether the TFA configuration can be used. | 
 **TrustedIps** | Pointer to **[]string** | The list of IP addresses that are exempt from TFA requirements. | [optional] 
 **MandatoryUsers** | Pointer to **[]string** | The list of user IDs that are required to use TFA. | [optional] 
 **MandatoryGroups** | Pointer to **[]string** | The list of group IDs whose members are required to use TFA. | [optional] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewTfaSettingsDto
 
-`func NewTfaSettingsDto(id NullableString, title NullableString, enabled bool, avaliable bool, ) *TfaSettingsDto`
+`func NewTfaSettingsDto(id NullableString, title NullableString, enabled bool, available bool, ) *TfaSettingsDto`
 
 NewTfaSettingsDto instantiates a new TfaSettingsDto object
 This constructor will assign default values to properties that have it defined,
@@ -111,24 +111,24 @@ and a boolean to check if the value has been set.
 SetEnabled sets Enabled field to given value.
 
 
-### GetAvaliable
+### GetAvailable
 
-`func (o *TfaSettingsDto) GetAvaliable() bool`
+`func (o *TfaSettingsDto) GetAvailable() bool`
 
-GetAvaliable returns the Avaliable field if non-nil, zero value otherwise.
+GetAvailable returns the Available field if non-nil, zero value otherwise.
 
-### GetAvaliableOk
+### GetAvailableOk
 
-`func (o *TfaSettingsDto) GetAvaliableOk() (*bool, bool)`
+`func (o *TfaSettingsDto) GetAvailableOk() (*bool, bool)`
 
-GetAvaliableOk returns a tuple with the Avaliable field if it's non-nil, zero value otherwise
+GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAvaliable
+### SetAvailable
 
-`func (o *TfaSettingsDto) SetAvaliable(v bool)`
+`func (o *TfaSettingsDto) SetAvailable(v bool)`
 
-SetAvaliable sets Avaliable field to given value.
+SetAvailable sets Available field to given value.
 
 
 ### GetTrustedIps

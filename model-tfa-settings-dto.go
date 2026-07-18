@@ -32,7 +32,7 @@ type TfaSettingsDto struct {
 	// Indicates whether the TFA configuration is currently active.
 	Enabled bool `json:"enabled"`
 	// Indicates whether the TFA configuration can be used.
-	Avaliable bool `json:"avaliable"`
+	Available bool `json:"available"`
 	// The list of IP addresses that are exempt from TFA requirements.
 	TrustedIps []string `json:"trustedIps,omitempty"`
 	// The list of user IDs that are required to use TFA.
@@ -47,12 +47,12 @@ type _TfaSettingsDto TfaSettingsDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTfaSettingsDto(id NullableString, title NullableString, enabled bool, avaliable bool) *TfaSettingsDto {
+func NewTfaSettingsDto(id NullableString, title NullableString, enabled bool, available bool) *TfaSettingsDto {
 	this := TfaSettingsDto{}
 	this.Id = id
 	this.Title = title
 	this.Enabled = enabled
-	this.Avaliable = avaliable
+	this.Available = available
 	return &this
 }
 
@@ -140,28 +140,28 @@ func (o *TfaSettingsDto) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
-// GetAvaliable returns the Avaliable field value
-func (o *TfaSettingsDto) GetAvaliable() bool {
+// GetAvailable returns the Available field value
+func (o *TfaSettingsDto) GetAvailable() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.Avaliable
+	return o.Available
 }
 
-// GetAvaliableOk returns a tuple with the Avaliable field value
+// GetAvailableOk returns a tuple with the Available field value
 // and a boolean to check if the value has been set.
-func (o *TfaSettingsDto) GetAvaliableOk() (*bool, bool) {
+func (o *TfaSettingsDto) GetAvailableOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Avaliable, true
+	return &o.Available, true
 }
 
-// SetAvaliable sets field value
-func (o *TfaSettingsDto) SetAvaliable(v bool) {
-	o.Avaliable = v
+// SetAvailable sets field value
+func (o *TfaSettingsDto) SetAvailable(v bool) {
+	o.Available = v
 }
 
 // GetTrustedIps returns the TrustedIps field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -276,7 +276,7 @@ func (o TfaSettingsDto) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id.Get()
 	toSerialize["title"] = o.Title.Get()
 	toSerialize["enabled"] = o.Enabled
-	toSerialize["avaliable"] = o.Avaliable
+	toSerialize["available"] = o.Available
 	if o.TrustedIps != nil {
 		toSerialize["trustedIps"] = o.TrustedIps
 	}
@@ -297,7 +297,7 @@ func (o *TfaSettingsDto) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"title",
 		"enabled",
-		"avaliable",
+		"available",
 	}
 
 	allProperties := make(map[string]interface{})

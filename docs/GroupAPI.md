@@ -41,7 +41,7 @@ import (
 )
 
 func main() {
-	groupRequestDto := *openapiclient.NewGroupRequestDto("00000000-0000-0000-0000-000000000000") // GroupRequestDto |  (optional)
+	groupRequestDto := *openapiclient.NewGroupRequestDto("Marketing Team") // GroupRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

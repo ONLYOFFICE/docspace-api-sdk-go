@@ -17,6 +17,7 @@ Method | HTTP request | Description
 [**DeleteRoom**](RoomsAPI.md#DeleteRoom) | **Delete** /api/2.0/files/rooms/{id} | Remove a room
 [**DeleteRoomLogo**](RoomsAPI.md#DeleteRoomLogo) | **Delete** /api/2.0/files/rooms/{id}/logo | Remove a room logo
 [**DeleteRoomTags**](RoomsAPI.md#DeleteRoomTags) | **Delete** /api/2.0/files/rooms/{id}/tags | Remove the room tags
+[**GetExternalDbSyncStatus**](RoomsAPI.md#GetExternalDbSyncStatus) | **Get** /api/2.0/files/rooms/{id}/externaldbsync | Get external DB sync status
 [**GetNewRoomItems**](RoomsAPI.md#GetNewRoomItems) | **Get** /api/2.0/files/rooms/{id}/news | Get the new room items
 [**GetPublicSettings**](RoomsAPI.md#GetPublicSettings) | **Get** /api/2.0/files/roomtemplate/{id}/public | Get public settings
 [**GetRoomCovers**](RoomsAPI.md#GetRoomCovers) | **Get** /api/2.0/files/rooms/covers | Get covers
@@ -37,6 +38,7 @@ Method | HTTP request | Description
 [**SetPublicSettings**](RoomsAPI.md#SetPublicSettings) | **Put** /api/2.0/files/roomtemplate/public | Set public settings
 [**SetRoomLink**](RoomsAPI.md#SetRoomLink) | **Put** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link
 [**SetRoomSecurity**](RoomsAPI.md#SetRoomSecurity) | **Put** /api/2.0/files/rooms/{id}/share | Set the room access rights
+[**StartExternalDbSync**](RoomsAPI.md#StartExternalDbSync) | **Post** /api/2.0/files/rooms/{id}/externaldbsync | Start external DB sync
 [**StartRoomIndexExport**](RoomsAPI.md#StartRoomIndexExport) | **Post** /api/2.0/files/rooms/{id}/indexexport | Start the room index export
 [**TerminateRoomIndexExport**](RoomsAPI.md#TerminateRoomIndexExport) | **Delete** /api/2.0/files/rooms/indexexport | Terminate the room index export
 [**UnarchiveRoom**](RoomsAPI.md#UnarchiveRoom) | **Put** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room
@@ -429,7 +431,7 @@ import (
 
 func main() {
 	id := int32(1) // int32 | The room ID.
-	logoRequest := *openapiclient.NewLogoRequest() // LogoRequest | The logo request parameters.
+	logoRequest := *openapiclient.NewLogoRequest("/tmp/logo.png") // LogoRequest | The logo request parameters.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -968,6 +970,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetExternalDbSyncStatus
+
+> ExternalDbSyncTaskWrapper GetExternalDbSyncStatus(ctx, id).Execute()
+
+Get external DB sync status
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-db-sync-status/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	id := int32(1) // int32 | The room ID.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RoomsAPI.GetExternalDbSyncStatus(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.GetExternalDbSyncStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetExternalDbSyncStatus`: ExternalDbSyncTaskWrapper
+	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.GetExternalDbSyncStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | The room ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetExternalDbSyncStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ExternalDbSyncTaskWrapper**](ExternalDbSyncTaskWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -2401,6 +2475,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## StartExternalDbSync
+
+> ExternalDbSyncTaskWrapper StartExternalDbSync(ctx, id).Execute()
+
+Start external DB sync
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-external-db-sync/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	id := int32(1) // int32 | The room ID.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RoomsAPI.StartExternalDbSync(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.StartExternalDbSync``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `StartExternalDbSync`: ExternalDbSyncTaskWrapper
+	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.StartExternalDbSync`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | The room ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiStartExternalDbSyncRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ExternalDbSyncTaskWrapper**](ExternalDbSyncTaskWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

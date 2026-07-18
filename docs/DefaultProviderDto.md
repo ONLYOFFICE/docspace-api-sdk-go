@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **ProviderId** | Pointer to **int32** | AI provider identifier. | [optional] 
 **DefaultModel** | **NullableString** | Default model identifier used with this provider. | 
 **ProviderTitle** | Pointer to **NullableString** | AI provider title. | [optional] 
+**ProviderType** | Pointer to [**ProviderType**](ProviderType.md) |  | [optional] 
+**DefaultModelAlias** | Pointer to **NullableString** | Display alias of the default model. | [optional] 
 
 ## Methods
 
@@ -117,6 +119,66 @@ HasProviderTitle returns a boolean if a field has been set.
 `func (o *DefaultProviderDto) UnsetProviderTitle()`
 
 UnsetProviderTitle ensures that no value is present for ProviderTitle, not even an explicit nil
+### GetProviderType
+
+`func (o *DefaultProviderDto) GetProviderType() ProviderType`
+
+GetProviderType returns the ProviderType field if non-nil, zero value otherwise.
+
+### GetProviderTypeOk
+
+`func (o *DefaultProviderDto) GetProviderTypeOk() (*ProviderType, bool)`
+
+GetProviderTypeOk returns a tuple with the ProviderType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderType
+
+`func (o *DefaultProviderDto) SetProviderType(v ProviderType)`
+
+SetProviderType sets ProviderType field to given value.
+
+### HasProviderType
+
+`func (o *DefaultProviderDto) HasProviderType() bool`
+
+HasProviderType returns a boolean if a field has been set.
+
+### GetDefaultModelAlias
+
+`func (o *DefaultProviderDto) GetDefaultModelAlias() string`
+
+GetDefaultModelAlias returns the DefaultModelAlias field if non-nil, zero value otherwise.
+
+### GetDefaultModelAliasOk
+
+`func (o *DefaultProviderDto) GetDefaultModelAliasOk() (*string, bool)`
+
+GetDefaultModelAliasOk returns a tuple with the DefaultModelAlias field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultModelAlias
+
+`func (o *DefaultProviderDto) SetDefaultModelAlias(v string)`
+
+SetDefaultModelAlias sets DefaultModelAlias field to given value.
+
+### HasDefaultModelAlias
+
+`func (o *DefaultProviderDto) HasDefaultModelAlias() bool`
+
+HasDefaultModelAlias returns a boolean if a field has been set.
+
+### SetDefaultModelAliasNil
+
+`func (o *DefaultProviderDto) SetDefaultModelAliasNil(b bool)`
+
+ SetDefaultModelAliasNil sets the value for DefaultModelAlias to be an explicit nil
+
+### UnsetDefaultModelAlias
+`func (o *DefaultProviderDto) UnsetDefaultModelAlias()`
+
+UnsetDefaultModelAlias ensures that no value is present for DefaultModelAlias, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

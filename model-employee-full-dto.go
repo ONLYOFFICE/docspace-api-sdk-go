@@ -27,8 +27,6 @@ type EmployeeFullDto struct {
 	Id *string `json:"id,omitempty"`
 	// The HTML-encoded user's display name formatted according to the default format for the current culture.
 	DisplayName NullableString `json:"displayName,omitempty"`
-	// The user title.
-	Title NullableString `json:"title,omitempty"`
 	// The user avatar.
 	Avatar NullableString `json:"avatar,omitempty"`
 	// The user original size avatar.
@@ -55,15 +53,11 @@ type EmployeeFullDto struct {
 	Email NullableString `json:"email,omitempty"`
 	// The list of user contacts.
 	Contacts []Contact `json:"contacts,omitempty"`
-	Birthday *ApiDateTime `json:"birthday,omitempty"`
-	// The user sex.
-	Sex NullableString `json:"sex,omitempty"`
 	Status *EmployeeStatus `json:"status,omitempty"`
 	ActivationStatus *EmployeeActivationStatus `json:"activationStatus,omitempty"`
 	Terminated *ApiDateTime `json:"terminated,omitempty"`
 	// The user department.
 	Department NullableString `json:"department,omitempty"`
-	WorkFrom *ApiDateTime `json:"workFrom,omitempty"`
 	// The list of user groups.
 	Groups []GroupSummaryDto `json:"groups,omitempty"`
 	// The user location.
@@ -201,48 +195,6 @@ func (o *EmployeeFullDto) SetDisplayNameNil() {
 // UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
 func (o *EmployeeFullDto) UnsetDisplayName() {
 	o.DisplayName.Unset()
-}
-
-// GetTitle returns the Title field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EmployeeFullDto) GetTitle() string {
-	if o == nil || IsNil(o.Title.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Title.Get()
-}
-
-// GetTitleOk returns a tuple with the Title field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EmployeeFullDto) GetTitleOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Title.Get(), o.Title.IsSet()
-}
-
-// HasTitle returns a boolean if a field has been set.
-func (o *EmployeeFullDto) IsTitleSet() bool {
-	if o != nil && o.Title.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTitle gets a reference to the given NullableString and assigns it to the Title field.
-func (o *EmployeeFullDto) SetTitle(v string) {
-	o.Title.Set(&v)
-}
-// SetTitleNil sets the value for Title to be an explicit nil
-func (o *EmployeeFullDto) SetTitleNil() {
-	o.Title.Set(nil)
-}
-
-// UnsetTitle ensures that no value is present for Title, not even an explicit nil
-func (o *EmployeeFullDto) UnsetTitle() {
-	o.Title.Unset()
 }
 
 // GetAvatar returns the Avatar field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -762,80 +714,6 @@ func (o *EmployeeFullDto) SetContacts(v []Contact) {
 	o.Contacts = v
 }
 
-// GetBirthday returns the Birthday field value if set, zero value otherwise.
-func (o *EmployeeFullDto) GetBirthday() ApiDateTime {
-	if o == nil || IsNil(o.Birthday) {
-		var ret ApiDateTime
-		return ret
-	}
-	return *o.Birthday
-}
-
-// GetBirthdayOk returns a tuple with the Birthday field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EmployeeFullDto) GetBirthdayOk() (*ApiDateTime, bool) {
-	if o == nil || IsNil(o.Birthday) {
-		return nil, false
-	}
-	return o.Birthday, true
-}
-
-// HasBirthday returns a boolean if a field has been set.
-func (o *EmployeeFullDto) IsBirthdaySet() bool {
-	if o != nil && !IsNil(o.Birthday) {
-		return true
-	}
-
-	return false
-}
-
-// SetBirthday gets a reference to the given ApiDateTime and assigns it to the Birthday field.
-func (o *EmployeeFullDto) SetBirthday(v ApiDateTime) {
-	o.Birthday = &v
-}
-
-// GetSex returns the Sex field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EmployeeFullDto) GetSex() string {
-	if o == nil || IsNil(o.Sex.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Sex.Get()
-}
-
-// GetSexOk returns a tuple with the Sex field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EmployeeFullDto) GetSexOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Sex.Get(), o.Sex.IsSet()
-}
-
-// HasSex returns a boolean if a field has been set.
-func (o *EmployeeFullDto) IsSexSet() bool {
-	if o != nil && o.Sex.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSex gets a reference to the given NullableString and assigns it to the Sex field.
-func (o *EmployeeFullDto) SetSex(v string) {
-	o.Sex.Set(&v)
-}
-// SetSexNil sets the value for Sex to be an explicit nil
-func (o *EmployeeFullDto) SetSexNil() {
-	o.Sex.Set(nil)
-}
-
-// UnsetSex ensures that no value is present for Sex, not even an explicit nil
-func (o *EmployeeFullDto) UnsetSex() {
-	o.Sex.Unset()
-}
-
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *EmployeeFullDto) GetStatus() EmployeeStatus {
 	if o == nil || IsNil(o.Status) {
@@ -972,38 +850,6 @@ func (o *EmployeeFullDto) SetDepartmentNil() {
 // UnsetDepartment ensures that no value is present for Department, not even an explicit nil
 func (o *EmployeeFullDto) UnsetDepartment() {
 	o.Department.Unset()
-}
-
-// GetWorkFrom returns the WorkFrom field value if set, zero value otherwise.
-func (o *EmployeeFullDto) GetWorkFrom() ApiDateTime {
-	if o == nil || IsNil(o.WorkFrom) {
-		var ret ApiDateTime
-		return ret
-	}
-	return *o.WorkFrom
-}
-
-// GetWorkFromOk returns a tuple with the WorkFrom field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EmployeeFullDto) GetWorkFromOk() (*ApiDateTime, bool) {
-	if o == nil || IsNil(o.WorkFrom) {
-		return nil, false
-	}
-	return o.WorkFrom, true
-}
-
-// HasWorkFrom returns a boolean if a field has been set.
-func (o *EmployeeFullDto) IsWorkFromSet() bool {
-	if o != nil && !IsNil(o.WorkFrom) {
-		return true
-	}
-
-	return false
-}
-
-// SetWorkFrom gets a reference to the given ApiDateTime and assigns it to the WorkFrom field.
-func (o *EmployeeFullDto) SetWorkFrom(v ApiDateTime) {
-	o.WorkFrom = &v
 }
 
 // GetGroups returns the Groups field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1944,9 +1790,6 @@ func (o EmployeeFullDto) ToMap() (map[string]interface{}, error) {
 	if o.DisplayName.IsSet() {
 		toSerialize["displayName"] = o.DisplayName.Get()
 	}
-	if o.Title.IsSet() {
-		toSerialize["title"] = o.Title.Get()
-	}
 	if o.Avatar.IsSet() {
 		toSerialize["avatar"] = o.Avatar.Get()
 	}
@@ -1986,12 +1829,6 @@ func (o EmployeeFullDto) ToMap() (map[string]interface{}, error) {
 	if o.Contacts != nil {
 		toSerialize["contacts"] = o.Contacts
 	}
-	if !IsNil(o.Birthday) {
-		toSerialize["birthday"] = o.Birthday
-	}
-	if o.Sex.IsSet() {
-		toSerialize["sex"] = o.Sex.Get()
-	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
@@ -2003,9 +1840,6 @@ func (o EmployeeFullDto) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Department.IsSet() {
 		toSerialize["department"] = o.Department.Get()
-	}
-	if !IsNil(o.WorkFrom) {
-		toSerialize["workFrom"] = o.WorkFrom
 	}
 	if o.Groups != nil {
 		toSerialize["groups"] = o.Groups

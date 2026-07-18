@@ -32,6 +32,8 @@ type FileEntryDtoInteger struct {
 	Shared *bool `json:"shared,omitempty"`
 	// Specifies if the file entry is shared for user or not.
 	SharedForUser *bool `json:"sharedForUser,omitempty"`
+	// Specifies if the file entry is shared via a public (non-internal) external link.
+	SharedExternal *bool `json:"sharedExternal,omitempty"`
 	// Indicates whether the parent entity is shared.
 	ParentShared *bool `json:"parentShared,omitempty"`
 	// The short Web URL.
@@ -297,6 +299,38 @@ func (o *FileEntryDtoInteger) IsSharedForUserSet() bool {
 // SetSharedForUser gets a reference to the given bool and assigns it to the SharedForUser field.
 func (o *FileEntryDtoInteger) SetSharedForUser(v bool) {
 	o.SharedForUser = &v
+}
+
+// GetSharedExternal returns the SharedExternal field value if set, zero value otherwise.
+func (o *FileEntryDtoInteger) GetSharedExternal() bool {
+	if o == nil || IsNil(o.SharedExternal) {
+		var ret bool
+		return ret
+	}
+	return *o.SharedExternal
+}
+
+// GetSharedExternalOk returns a tuple with the SharedExternal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileEntryDtoInteger) GetSharedExternalOk() (*bool, bool) {
+	if o == nil || IsNil(o.SharedExternal) {
+		return nil, false
+	}
+	return o.SharedExternal, true
+}
+
+// HasSharedExternal returns a boolean if a field has been set.
+func (o *FileEntryDtoInteger) IsSharedExternalSet() bool {
+	if o != nil && !IsNil(o.SharedExternal) {
+		return true
+	}
+
+	return false
+}
+
+// SetSharedExternal gets a reference to the given bool and assigns it to the SharedExternal field.
+func (o *FileEntryDtoInteger) SetSharedExternal(v bool) {
+	o.SharedExternal = &v
 }
 
 // GetParentShared returns the ParentShared field value if set, zero value otherwise.
@@ -1394,6 +1428,9 @@ func (o FileEntryDtoInteger) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SharedForUser) {
 		toSerialize["sharedForUser"] = o.SharedForUser
+	}
+	if !IsNil(o.SharedExternal) {
+		toSerialize["sharedExternal"] = o.SharedExternal
 	}
 	if !IsNil(o.ParentShared) {
 		toSerialize["parentShared"] = o.ParentShared

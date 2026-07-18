@@ -27,126 +27,6 @@ import (
 // PortalPaymentAPIService PortalPaymentAPI service
 type PortalPaymentAPIService service
 
-type ApiBuyWalletServiceRequest struct {
-	ctx context.Context
-	ApiService *PortalPaymentAPIService
-	buyWalletServiceRequestDto *BuyWalletServiceRequestDto
-}
-
-func (r ApiBuyWalletServiceRequest) BuyWalletServiceRequestDto(buyWalletServiceRequestDto BuyWalletServiceRequestDto) ApiBuyWalletServiceRequest {	r.buyWalletServiceRequestDto = &buyWalletServiceRequestDto
-	return r
-}
-
-func (r ApiBuyWalletServiceRequest) Execute() (*ServicePaymentWrapper, *http.Response, error) {
-	return r.ApiService.BuyWalletServiceExecute(r)
-}
-
-// BuyWalletService Purchases a wallet service with the specified quantity.
-//
-// This method processes a payment for a wallet service using the configured payment method.  Requires the tariff service to be configured and a valid payment method to be set for the customer.  Rate limiting is applied according to the payments API policy.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/buy-wallet-service/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiBuyWalletServiceRequest
-func (a *PortalPaymentAPIService) BuyWalletService(ctx context.Context) ApiBuyWalletServiceRequest {
-	return ApiBuyWalletServiceRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return ServicePaymentWrapper
-func (a *PortalPaymentAPIService) BuyWalletServiceExecute(r ApiBuyWalletServiceRequest) (*ServicePaymentWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ServicePaymentWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortalPaymentAPIService.BuyWalletService")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/portal/payment/buywalletservice"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.buyWalletServiceRequestDto
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiCalculateWalletPaymentRequest struct {
 	ctx context.Context
 	ApiService *PortalPaymentAPIService
@@ -507,6 +387,126 @@ func (a *PortalPaymentAPIService) CreateCustomerOperationsReportExecute(r ApiCre
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreditAiBalanceRequest struct {
+	ctx context.Context
+	ApiService *PortalPaymentAPIService
+	creditAiBalanceRequestDto *CreditAiBalanceRequestDto
+}
+
+func (r ApiCreditAiBalanceRequest) CreditAiBalanceRequestDto(creditAiBalanceRequestDto CreditAiBalanceRequestDto) ApiCreditAiBalanceRequest {	r.creditAiBalanceRequestDto = &creditAiBalanceRequestDto
+	return r
+}
+
+func (r ApiCreditAiBalanceRequest) Execute() (*ServicePaymentWrapper, *http.Response, error) {
+	return r.ApiService.CreditAiBalanceExecute(r)
+}
+
+// CreditAiBalance Credit AI balance
+//
+// Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
+//
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/credit-ai-balance/
+//
+// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+// @return ApiCreditAiBalanceRequest
+func (a *PortalPaymentAPIService) CreditAiBalance(ctx context.Context) ApiCreditAiBalanceRequest {
+	return ApiCreditAiBalanceRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ServicePaymentWrapper
+func (a *PortalPaymentAPIService) CreditAiBalanceExecute(r ApiCreditAiBalanceRequest) (*ServicePaymentWrapper, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ServicePaymentWrapper
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortalPaymentAPIService.CreditAiBalance")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/2.0/portal/payment/creditaibalance"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.creditAiBalanceRequestDto
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyBearer"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["ApiKeyBearer"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetAiPricesRequest struct {
 	ctx context.Context
 	ApiService *PortalPaymentAPIService
@@ -624,10 +624,16 @@ type ApiGetCheckoutSetupUrlRequest struct {
 	ctx context.Context
 	ApiService *PortalPaymentAPIService
 	backUrl *string
+	successUrl *string
 }
 
-// The URL where the user will be redirected after completing the setup.
+// The URL where the user will be redirected after setup cancellation.
 func (r ApiGetCheckoutSetupUrlRequest) BackUrl(backUrl string) ApiGetCheckoutSetupUrlRequest {	r.backUrl = &backUrl
+	return r
+}
+
+// The URL where the user will be redirected after successful payment.
+func (r ApiGetCheckoutSetupUrlRequest) SuccessUrl(successUrl string) ApiGetCheckoutSetupUrlRequest {	r.successUrl = &successUrl
 	return r
 }
 
@@ -670,9 +676,148 @@ func (a *PortalPaymentAPIService) GetCheckoutSetupUrlExecute(r ApiGetCheckoutSet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.backUrl == nil {
+		return localVarReturnValue, nil, reportError("backUrl is required and must be specified")
+	}
+	if strlen(*r.backUrl) < 0 {
+		return localVarReturnValue, nil, reportError("backUrl must have at least 0 elements")
+	}
+	if strlen(*r.backUrl) > 255 {
+		return localVarReturnValue, nil, reportError("backUrl must have less than 255 elements")
+	}
+	if r.successUrl == nil {
+		return localVarReturnValue, nil, reportError("successUrl is required and must be specified")
+	}
+	if strlen(*r.successUrl) < 0 {
+		return localVarReturnValue, nil, reportError("successUrl must have at least 0 elements")
+	}
+	if strlen(*r.successUrl) > 255 {
+		return localVarReturnValue, nil, reportError("successUrl must have less than 255 elements")
+	}
 
-	if r.backUrl != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "BackUrl", r.backUrl, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "BackUrl", r.backUrl, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "SuccessUrl", r.successUrl, "form", "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyBearer"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["ApiKeyBearer"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetCustomerAiBalanceRequest struct {
+	ctx context.Context
+	ApiService *PortalPaymentAPIService
+	refresh *bool
+}
+
+// Specifies whether to refresh the payment information cache or not.
+func (r ApiGetCustomerAiBalanceRequest) Refresh(refresh bool) ApiGetCustomerAiBalanceRequest {	r.refresh = &refresh
+	return r
+}
+
+func (r ApiGetCustomerAiBalanceRequest) Execute() (*BalanceWrapper, *http.Response, error) {
+	return r.ApiService.GetCustomerAiBalanceExecute(r)
+}
+
+// GetCustomerAiBalance Get the customer AI balance
+//
+// Returns the AI quota balance of a customer from the accounting service.
+//
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-ai-balance/
+//
+// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+// @return ApiGetCustomerAiBalanceRequest
+func (a *PortalPaymentAPIService) GetCustomerAiBalance(ctx context.Context) ApiGetCustomerAiBalanceRequest {
+	return ApiGetCustomerAiBalanceRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BalanceWrapper
+func (a *PortalPaymentAPIService) GetCustomerAiBalanceExecute(r ApiGetCustomerAiBalanceRequest) (*BalanceWrapper, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BalanceWrapper
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortalPaymentAPIService.GetCustomerAiBalance")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/2.0/portal/payment/customer/aibalance"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.refresh != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "refresh", r.refresh, "form", "")
 			}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -992,13 +1137,12 @@ type ApiGetCustomerOperationsRequest struct {
 	offset *int32
 	limit *int32
 	serviceName *string
-	writeOffServiceQuota *bool
 	startDate *time.Time
 	endDate *time.Time
 	participantName *string
 	credit *bool
 	debit *bool
-	types *OperationType
+	type_ *OperationType
 	status *OperationStatus
 	orderBy *string
 	orderType *OperationOrderType
@@ -1016,11 +1160,6 @@ func (r ApiGetCustomerOperationsRequest) Limit(limit int32) ApiGetCustomerOperat
 
 // The service name.
 func (r ApiGetCustomerOperationsRequest) ServiceName(serviceName string) ApiGetCustomerOperationsRequest {	r.serviceName = &serviceName
-	return r
-}
-
-// Write-off of the quota for the service
-func (r ApiGetCustomerOperationsRequest) WriteOffServiceQuota(writeOffServiceQuota bool) ApiGetCustomerOperationsRequest {	r.writeOffServiceQuota = &writeOffServiceQuota
 	return r
 }
 
@@ -1049,12 +1188,12 @@ func (r ApiGetCustomerOperationsRequest) Debit(debit bool) ApiGetCustomerOperati
 	return r
 }
 
-// List of operation types to filter by.
-func (r ApiGetCustomerOperationsRequest) Types(types OperationType) ApiGetCustomerOperationsRequest {	r.types = &types
+// The operation type to filter by.
+func (r ApiGetCustomerOperationsRequest) Type_(type_ OperationType) ApiGetCustomerOperationsRequest {	r.type_ = &type_
 	return r
 }
 
-// List of operation status to filter by.
+// The operation status to filter by.
 func (r ApiGetCustomerOperationsRequest) Status(status OperationStatus) ApiGetCustomerOperationsRequest {	r.status = &status
 	return r
 }
@@ -1118,9 +1257,6 @@ func (a *PortalPaymentAPIService) GetCustomerOperationsExecute(r ApiGetCustomerO
 	if r.serviceName != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ServiceName", r.serviceName, "form", "")
 			}
-	if r.writeOffServiceQuota != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "WriteOffServiceQuota", r.writeOffServiceQuota, "form", "")
-			}
 	if r.startDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "StartDate", r.startDate, "form", "")
 			}
@@ -1136,8 +1272,8 @@ func (a *PortalPaymentAPIService) GetCustomerOperationsExecute(r ApiGetCustomerO
 	if r.debit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "Debit", r.debit, "form", "")
 			}
-	if r.types != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Types", r.types, "form", "")
+	if r.type_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "Type", r.type_, "form", "")
 			}
 	if r.status != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "Status", r.status, "form", "")
@@ -1261,137 +1397,6 @@ func (a *PortalPaymentAPIService) GetCustomerOperationsReportExecute(r ApiGetCus
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetCustomerServiceQuotaRequest struct {
-	ctx context.Context
-	ApiService *PortalPaymentAPIService
-	serviceName *string
-	refresh *bool
-}
-
-// The service name.
-func (r ApiGetCustomerServiceQuotaRequest) ServiceName(serviceName string) ApiGetCustomerServiceQuotaRequest {	r.serviceName = &serviceName
-	return r
-}
-
-// Specifies whether to refresh the payment information cache or not.
-func (r ApiGetCustomerServiceQuotaRequest) Refresh(refresh bool) ApiGetCustomerServiceQuotaRequest {	r.refresh = &refresh
-	return r
-}
-
-func (r ApiGetCustomerServiceQuotaRequest) Execute() (*BalanceWrapper, *http.Response, error) {
-	return r.ApiService.GetCustomerServiceQuotaExecute(r)
-}
-
-// GetCustomerServiceQuota Get the service quota
-//
-// Returns the service quota from the accounting service.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-quota/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiGetCustomerServiceQuotaRequest
-func (a *PortalPaymentAPIService) GetCustomerServiceQuota(ctx context.Context) ApiGetCustomerServiceQuotaRequest {
-	return ApiGetCustomerServiceQuotaRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return BalanceWrapper
-func (a *PortalPaymentAPIService) GetCustomerServiceQuotaExecute(r ApiGetCustomerServiceQuotaRequest) (*BalanceWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BalanceWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortalPaymentAPIService.GetCustomerServiceQuota")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/portal/payment/customer/servicequota"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.serviceName != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "serviceName", r.serviceName, "form", "")
-			}
-	if r.refresh != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "refresh", r.refresh, "form", "")
-			}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

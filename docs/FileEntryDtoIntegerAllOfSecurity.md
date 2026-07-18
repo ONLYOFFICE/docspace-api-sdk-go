@@ -48,6 +48,7 @@ Name | Type | Description | Notes
 **AskAi** | Pointer to **bool** |  | [optional] 
 **UseChat** | Pointer to **bool** |  | [optional] 
 **UpdateXlsx** | Pointer to **bool** |  | [optional] 
+**AnalyzeResponses** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -1167,6 +1168,31 @@ SetUpdateXlsx sets UpdateXlsx field to given value.
 `func (o *FileEntryDtoIntegerAllOfSecurity) HasUpdateXlsx() bool`
 
 HasUpdateXlsx returns a boolean if a field has been set.
+
+### GetAnalyzeResponses
+
+`func (o *FileEntryDtoIntegerAllOfSecurity) GetAnalyzeResponses() bool`
+
+GetAnalyzeResponses returns the AnalyzeResponses field if non-nil, zero value otherwise.
+
+### GetAnalyzeResponsesOk
+
+`func (o *FileEntryDtoIntegerAllOfSecurity) GetAnalyzeResponsesOk() (*bool, bool)`
+
+GetAnalyzeResponsesOk returns a tuple with the AnalyzeResponses field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnalyzeResponses
+
+`func (o *FileEntryDtoIntegerAllOfSecurity) SetAnalyzeResponses(v bool)`
+
+SetAnalyzeResponses sets AnalyzeResponses field to given value.
+
+### HasAnalyzeResponses
+
+`func (o *FileEntryDtoIntegerAllOfSecurity) HasAnalyzeResponses() bool`
+
+HasAnalyzeResponses returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

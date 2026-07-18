@@ -4,14 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BackUrl** | Pointer to **NullableString** | The URL where the user will be redirected after payment processing. | [optional] 
+**BackUrl** | **string** | The URL where the user will be redirected after payment cancellation. | 
+**SuccessUrl** | **string** | The URL where the user will be redirected after successful payment. | 
 **Quantity** | Pointer to **map[string]int32** | The payment quantity. | [optional] 
 
 ## Methods
 
 ### NewPaymentUrlRequestDto
 
-`func NewPaymentUrlRequestDto() *PaymentUrlRequestDto`
+`func NewPaymentUrlRequestDto(backUrl string, successUrl string, ) *PaymentUrlRequestDto`
 
 NewPaymentUrlRequestDto instantiates a new PaymentUrlRequestDto object
 This constructor will assign default values to properties that have it defined,
@@ -45,22 +46,27 @@ and a boolean to check if the value has been set.
 
 SetBackUrl sets BackUrl field to given value.
 
-### HasBackUrl
 
-`func (o *PaymentUrlRequestDto) HasBackUrl() bool`
+### GetSuccessUrl
 
-HasBackUrl returns a boolean if a field has been set.
+`func (o *PaymentUrlRequestDto) GetSuccessUrl() string`
 
-### SetBackUrlNil
+GetSuccessUrl returns the SuccessUrl field if non-nil, zero value otherwise.
 
-`func (o *PaymentUrlRequestDto) SetBackUrlNil(b bool)`
+### GetSuccessUrlOk
 
- SetBackUrlNil sets the value for BackUrl to be an explicit nil
+`func (o *PaymentUrlRequestDto) GetSuccessUrlOk() (*string, bool)`
 
-### UnsetBackUrl
-`func (o *PaymentUrlRequestDto) UnsetBackUrl()`
+GetSuccessUrlOk returns a tuple with the SuccessUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
 
-UnsetBackUrl ensures that no value is present for BackUrl, not even an explicit nil
+### SetSuccessUrl
+
+`func (o *PaymentUrlRequestDto) SetSuccessUrl(v string)`
+
+SetSuccessUrl sets SuccessUrl field to given value.
+
+
 ### GetQuantity
 
 `func (o *PaymentUrlRequestDto) GetQuantity() map[string]int32`

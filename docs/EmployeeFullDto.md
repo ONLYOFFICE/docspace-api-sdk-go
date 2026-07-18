@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | The user ID. | [optional] 
 **DisplayName** | Pointer to **NullableString** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] 
-**Title** | Pointer to **NullableString** | The user title. | [optional] 
 **Avatar** | Pointer to **NullableString** | The user avatar. | [optional] 
 **AvatarOriginal** | Pointer to **NullableString** | The user original size avatar. | [optional] 
 **AvatarMax** | Pointer to **NullableString** | The user maximum size avatar. | [optional] 
@@ -20,13 +19,10 @@ Name | Type | Description | Notes
 **UserName** | Pointer to **NullableString** | The user username. | [optional] 
 **Email** | Pointer to **NullableString** | The user email. | [optional] 
 **Contacts** | Pointer to [**[]Contact**](Contact.md) | The list of user contacts. | [optional] 
-**Birthday** | Pointer to [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**Sex** | Pointer to **NullableString** | The user sex. | [optional] 
 **Status** | Pointer to [**EmployeeStatus**](EmployeeStatus.md) |  | [optional] 
 **ActivationStatus** | Pointer to [**EmployeeActivationStatus**](EmployeeActivationStatus.md) |  | [optional] 
 **Terminated** | Pointer to [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **Department** | Pointer to **NullableString** | The user department. | [optional] 
-**WorkFrom** | Pointer to [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **Groups** | Pointer to [**[]GroupSummaryDto**](GroupSummaryDto.md) | The list of user groups. | [optional] 
 **Location** | Pointer to **NullableString** | The user location. | [optional] 
 **Notes** | Pointer to **NullableString** | The user notes. | [optional] 
@@ -132,41 +128,6 @@ HasDisplayName returns a boolean if a field has been set.
 `func (o *EmployeeFullDto) UnsetDisplayName()`
 
 UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
-### GetTitle
-
-`func (o *EmployeeFullDto) GetTitle() string`
-
-GetTitle returns the Title field if non-nil, zero value otherwise.
-
-### GetTitleOk
-
-`func (o *EmployeeFullDto) GetTitleOk() (*string, bool)`
-
-GetTitleOk returns a tuple with the Title field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTitle
-
-`func (o *EmployeeFullDto) SetTitle(v string)`
-
-SetTitle sets Title field to given value.
-
-### HasTitle
-
-`func (o *EmployeeFullDto) HasTitle() bool`
-
-HasTitle returns a boolean if a field has been set.
-
-### SetTitleNil
-
-`func (o *EmployeeFullDto) SetTitleNil(b bool)`
-
- SetTitleNil sets the value for Title to be an explicit nil
-
-### UnsetTitle
-`func (o *EmployeeFullDto) UnsetTitle()`
-
-UnsetTitle ensures that no value is present for Title, not even an explicit nil
 ### GetAvatar
 
 `func (o *EmployeeFullDto) GetAvatar() string`
@@ -602,66 +563,6 @@ HasContacts returns a boolean if a field has been set.
 `func (o *EmployeeFullDto) UnsetContacts()`
 
 UnsetContacts ensures that no value is present for Contacts, not even an explicit nil
-### GetBirthday
-
-`func (o *EmployeeFullDto) GetBirthday() ApiDateTime`
-
-GetBirthday returns the Birthday field if non-nil, zero value otherwise.
-
-### GetBirthdayOk
-
-`func (o *EmployeeFullDto) GetBirthdayOk() (*ApiDateTime, bool)`
-
-GetBirthdayOk returns a tuple with the Birthday field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBirthday
-
-`func (o *EmployeeFullDto) SetBirthday(v ApiDateTime)`
-
-SetBirthday sets Birthday field to given value.
-
-### HasBirthday
-
-`func (o *EmployeeFullDto) HasBirthday() bool`
-
-HasBirthday returns a boolean if a field has been set.
-
-### GetSex
-
-`func (o *EmployeeFullDto) GetSex() string`
-
-GetSex returns the Sex field if non-nil, zero value otherwise.
-
-### GetSexOk
-
-`func (o *EmployeeFullDto) GetSexOk() (*string, bool)`
-
-GetSexOk returns a tuple with the Sex field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSex
-
-`func (o *EmployeeFullDto) SetSex(v string)`
-
-SetSex sets Sex field to given value.
-
-### HasSex
-
-`func (o *EmployeeFullDto) HasSex() bool`
-
-HasSex returns a boolean if a field has been set.
-
-### SetSexNil
-
-`func (o *EmployeeFullDto) SetSexNil(b bool)`
-
- SetSexNil sets the value for Sex to be an explicit nil
-
-### UnsetSex
-`func (o *EmployeeFullDto) UnsetSex()`
-
-UnsetSex ensures that no value is present for Sex, not even an explicit nil
 ### GetStatus
 
 `func (o *EmployeeFullDto) GetStatus() EmployeeStatus`
@@ -772,31 +673,6 @@ HasDepartment returns a boolean if a field has been set.
 `func (o *EmployeeFullDto) UnsetDepartment()`
 
 UnsetDepartment ensures that no value is present for Department, not even an explicit nil
-### GetWorkFrom
-
-`func (o *EmployeeFullDto) GetWorkFrom() ApiDateTime`
-
-GetWorkFrom returns the WorkFrom field if non-nil, zero value otherwise.
-
-### GetWorkFromOk
-
-`func (o *EmployeeFullDto) GetWorkFromOk() (*ApiDateTime, bool)`
-
-GetWorkFromOk returns a tuple with the WorkFrom field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWorkFrom
-
-`func (o *EmployeeFullDto) SetWorkFrom(v ApiDateTime)`
-
-SetWorkFrom sets WorkFrom field to given value.
-
-### HasWorkFrom
-
-`func (o *EmployeeFullDto) HasWorkFrom() bool`
-
-HasWorkFrom returns a boolean if a field has been set.
-
 ### GetGroups
 
 `func (o *EmployeeFullDto) GetGroups() []GroupSummaryDto`

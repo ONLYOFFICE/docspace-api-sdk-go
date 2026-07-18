@@ -26,8 +26,6 @@ var _ MappedNullable = &CustomerOperationsReportRequestDto{}
 type CustomerOperationsReportRequestDto struct {
 	// The service name.
 	ServiceName NullableString `json:"serviceName,omitempty"`
-	// Write-off of the quota for the service
-	WriteOffServiceQuota *bool `json:"writeOffServiceQuota,omitempty"`
 	// The report start date.
 	StartDate NullableTime `json:"startDate,omitempty"`
 	// The report end date.
@@ -38,7 +36,7 @@ type CustomerOperationsReportRequestDto struct {
 	Credit NullableBool `json:"credit,omitempty"`
 	// Specifies whether to include debit operations in the report.
 	Debit NullableBool `json:"debit,omitempty"`
-	Types *OperationType `json:"types,omitempty"`
+	Type *OperationType `json:"type,omitempty"`
 	Status *OperationStatus `json:"status,omitempty"`
 	// The field to order by.
 	OrderBy NullableString `json:"orderBy,omitempty"`
@@ -102,38 +100,6 @@ func (o *CustomerOperationsReportRequestDto) SetServiceNameNil() {
 // UnsetServiceName ensures that no value is present for ServiceName, not even an explicit nil
 func (o *CustomerOperationsReportRequestDto) UnsetServiceName() {
 	o.ServiceName.Unset()
-}
-
-// GetWriteOffServiceQuota returns the WriteOffServiceQuota field value if set, zero value otherwise.
-func (o *CustomerOperationsReportRequestDto) GetWriteOffServiceQuota() bool {
-	if o == nil || IsNil(o.WriteOffServiceQuota) {
-		var ret bool
-		return ret
-	}
-	return *o.WriteOffServiceQuota
-}
-
-// GetWriteOffServiceQuotaOk returns a tuple with the WriteOffServiceQuota field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomerOperationsReportRequestDto) GetWriteOffServiceQuotaOk() (*bool, bool) {
-	if o == nil || IsNil(o.WriteOffServiceQuota) {
-		return nil, false
-	}
-	return o.WriteOffServiceQuota, true
-}
-
-// HasWriteOffServiceQuota returns a boolean if a field has been set.
-func (o *CustomerOperationsReportRequestDto) IsWriteOffServiceQuotaSet() bool {
-	if o != nil && !IsNil(o.WriteOffServiceQuota) {
-		return true
-	}
-
-	return false
-}
-
-// SetWriteOffServiceQuota gets a reference to the given bool and assigns it to the WriteOffServiceQuota field.
-func (o *CustomerOperationsReportRequestDto) SetWriteOffServiceQuota(v bool) {
-	o.WriteOffServiceQuota = &v
 }
 
 // GetStartDate returns the StartDate field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -346,36 +312,36 @@ func (o *CustomerOperationsReportRequestDto) UnsetDebit() {
 	o.Debit.Unset()
 }
 
-// GetTypes returns the Types field value if set, zero value otherwise.
-func (o *CustomerOperationsReportRequestDto) GetTypes() OperationType {
-	if o == nil || IsNil(o.Types) {
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *CustomerOperationsReportRequestDto) GetType() OperationType {
+	if o == nil || IsNil(o.Type) {
 		var ret OperationType
 		return ret
 	}
-	return *o.Types
+	return *o.Type
 }
 
-// GetTypesOk returns a tuple with the Types field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomerOperationsReportRequestDto) GetTypesOk() (*OperationType, bool) {
-	if o == nil || IsNil(o.Types) {
+func (o *CustomerOperationsReportRequestDto) GetTypeOk() (*OperationType, bool) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return o.Types, true
+	return o.Type, true
 }
 
-// HasTypes returns a boolean if a field has been set.
-func (o *CustomerOperationsReportRequestDto) IsTypesSet() bool {
-	if o != nil && !IsNil(o.Types) {
+// HasType returns a boolean if a field has been set.
+func (o *CustomerOperationsReportRequestDto) IsTypeSet() bool {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
 	return false
 }
 
-// SetTypes gets a reference to the given OperationType and assigns it to the Types field.
-func (o *CustomerOperationsReportRequestDto) SetTypes(v OperationType) {
-	o.Types = &v
+// SetType gets a reference to the given OperationType and assigns it to the Type field.
+func (o *CustomerOperationsReportRequestDto) SetType(v OperationType) {
+	o.Type = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -497,9 +463,6 @@ func (o CustomerOperationsReportRequestDto) ToMap() (map[string]interface{}, err
 	if o.ServiceName.IsSet() {
 		toSerialize["serviceName"] = o.ServiceName.Get()
 	}
-	if !IsNil(o.WriteOffServiceQuota) {
-		toSerialize["writeOffServiceQuota"] = o.WriteOffServiceQuota
-	}
 	if o.StartDate.IsSet() {
 		toSerialize["startDate"] = o.StartDate.Get()
 	}
@@ -515,8 +478,8 @@ func (o CustomerOperationsReportRequestDto) ToMap() (map[string]interface{}, err
 	if o.Debit.IsSet() {
 		toSerialize["debit"] = o.Debit.Get()
 	}
-	if !IsNil(o.Types) {
-		toSerialize["types"] = o.Types
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status

@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Members** | Pointer to **[]string** | The list of group member IDs. | [optional] 
-**GroupManager** | **string** | The group manager ID. | 
-**GroupName** | Pointer to **NullableString** | The group name. | [optional] 
+**GroupManager** | Pointer to **string** | The group manager ID. | [optional] 
+**GroupName** | **NullableString** | The group name. | 
 
 ## Methods
 
 ### NewGroupRequestDto
 
-`func NewGroupRequestDto(groupManager string, ) *GroupRequestDto`
+`func NewGroupRequestDto(groupName NullableString, ) *GroupRequestDto`
 
 NewGroupRequestDto instantiates a new GroupRequestDto object
 This constructor will assign default values to properties that have it defined,
@@ -81,6 +81,11 @@ and a boolean to check if the value has been set.
 
 SetGroupManager sets GroupManager field to given value.
 
+### HasGroupManager
+
+`func (o *GroupRequestDto) HasGroupManager() bool`
+
+HasGroupManager returns a boolean if a field has been set.
 
 ### GetGroupName
 
@@ -101,11 +106,6 @@ and a boolean to check if the value has been set.
 
 SetGroupName sets GroupName field to given value.
 
-### HasGroupName
-
-`func (o *GroupRequestDto) HasGroupName() bool`
-
-HasGroupName returns a boolean if a field has been set.
 
 ### SetGroupNameNil
 

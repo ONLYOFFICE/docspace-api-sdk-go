@@ -170,13 +170,13 @@ func (r ApiCheckUserExistsByEmailRequest) Culture(culture string) ApiCheckUserEx
 	return r
 }
 
-func (r ApiCheckUserExistsByEmailRequest) Execute() (*BooleanWrapper, *http.Response, error) {
+func (r ApiCheckUserExistsByEmailRequest) Execute() (*UserExistsResponseWrapper, *http.Response, error) {
 	return r.ApiService.CheckUserExistsByEmailExecute(r)
 }
 
 // CheckUserExistsByEmail Check if a user exists by email
 //
-// Returns a boolean indicating whether a user with the specified email exists on the portal.
+// Returns data indicating whether a user with the specified email exists on the portal.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
 //
@@ -190,13 +190,13 @@ func (a *PeopleProfilesAPIService) CheckUserExistsByEmail(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return BooleanWrapper
-func (a *PeopleProfilesAPIService) CheckUserExistsByEmailExecute(r ApiCheckUserExistsByEmailRequest) (*BooleanWrapper, *http.Response, error) {
+//  @return UserExistsResponseWrapper
+func (a *PeopleProfilesAPIService) CheckUserExistsByEmailExecute(r ApiCheckUserExistsByEmailRequest) (*UserExistsResponseWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *BooleanWrapper
+		localVarReturnValue  *UserExistsResponseWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PeopleProfilesAPIService.CheckUserExistsByEmail")

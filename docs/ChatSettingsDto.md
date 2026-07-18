@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Prompt** | Pointer to **NullableString** | The system prompt for the chat. | [optional] 
 **Multimodal** | Pointer to [**ChatMultimodalSettingsDto**](ChatMultimodalSettingsDto.md) |  | [optional] 
 **Thinking** | Pointer to **bool** | Indicates whether the model supports extended thinking mode. | [optional] 
+**Capabilities** | Pointer to [**AiModelCapabilities**](AiModelCapabilities.md) |  | [optional] 
 **Internal** | Pointer to **bool** | Indicates whether this is an internal AI gateway provider. | [optional] [readonly] 
 
 ## Methods
@@ -210,6 +211,31 @@ SetThinking sets Thinking field to given value.
 `func (o *ChatSettingsDto) HasThinking() bool`
 
 HasThinking returns a boolean if a field has been set.
+
+### GetCapabilities
+
+`func (o *ChatSettingsDto) GetCapabilities() AiModelCapabilities`
+
+GetCapabilities returns the Capabilities field if non-nil, zero value otherwise.
+
+### GetCapabilitiesOk
+
+`func (o *ChatSettingsDto) GetCapabilitiesOk() (*AiModelCapabilities, bool)`
+
+GetCapabilitiesOk returns a tuple with the Capabilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapabilities
+
+`func (o *ChatSettingsDto) SetCapabilities(v AiModelCapabilities)`
+
+SetCapabilities sets Capabilities field to given value.
+
+### HasCapabilities
+
+`func (o *ChatSettingsDto) HasCapabilities() bool`
+
+HasCapabilities returns a boolean if a field has been set.
 
 ### GetInternal
 

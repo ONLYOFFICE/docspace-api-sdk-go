@@ -406,7 +406,7 @@ Name | Type | Description  | Notes
 
 ## GenerateXlsxByFolder
 
-> FileIntegerWrapper GenerateXlsxByFolder(ctx, folderId).Execute()
+> XlsxReportResponseWrapper GenerateXlsxByFolder(ctx, folderId).Execute()
 
 Generate XLSX report by folder
 
@@ -436,7 +436,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.GenerateXlsxByFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GenerateXlsxByFolder`: FileIntegerWrapper
+	// response from `GenerateXlsxByFolder`: XlsxReportResponseWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFoldersAPI.GenerateXlsxByFolder`: %v\n", resp)
 }
 ```
@@ -460,7 +460,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**XlsxReportResponseWrapper**](XlsxReportResponseWrapper.md)
 
 ### Authorization
 
@@ -693,7 +693,7 @@ No authorization required
 
 ## GetFolderByFolderId
 
-> FolderContentIntegerWrapper GetFolderByFolderId(ctx, folderId).UserIdOrGroupId(userIdOrGroupId).SharedBy(sharedBy).FilterType(filterType).RoomId(roomId).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).Extension(extension).SearchArea(searchArea).FormsItemKey(formsItemKey).FormsItemType(formsItemType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Location(location).Execute()
+> FolderContentIntegerWrapper GetFolderByFolderId(ctx, folderId).UserIdOrGroupId(userIdOrGroupId).SharedBy(sharedBy).FilterType(filterType).RoomId(roomId).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).WithSubFolders(withSubFolders).Extension(extension).SearchArea(searchArea).FormsItemKey(formsItemKey).FormsItemType(formsItemType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Location(location).Execute()
 
 Get a folder by ID
 
@@ -721,6 +721,7 @@ func main() {
 	roomId := int32(1) // int32 | The room ID. (optional)
 	excludeSubject := false // bool | Specifies whether to exclude search by user or group ID. (optional)
 	applyFilterOption := openapiclient.ApplyFilterOption(0) // ApplyFilterOption | Specifies whether to return only files, only folders, or all elements from the specified folder. (optional)
+	withSubFolders := true // bool | Specifies whether to include files from subfolders in the results. (optional)
 	extension := ".docx" // string | Specifies whether to search for the specific file extension. (optional)
 	searchArea := openapiclient.SearchArea(0) // SearchArea | The search area. (optional)
 	formsItemKey := "doc_key_123" // string | The forms item key. (optional)
@@ -734,7 +735,7 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.GetFolderByFolderId(context.Background(), folderId).UserIdOrGroupId(userIdOrGroupId).SharedBy(sharedBy).FilterType(filterType).RoomId(roomId).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).Extension(extension).SearchArea(searchArea).FormsItemKey(formsItemKey).FormsItemType(formsItemType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Location(location).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.GetFolderByFolderId(context.Background(), folderId).UserIdOrGroupId(userIdOrGroupId).SharedBy(sharedBy).FilterType(filterType).RoomId(roomId).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).WithSubFolders(withSubFolders).Extension(extension).SearchArea(searchArea).FormsItemKey(formsItemKey).FormsItemType(formsItemType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Location(location).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.GetFolderByFolderId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -766,6 +767,7 @@ Name | Type | Description  | Notes
  **roomId** | **int32** | The room ID. | 
  **excludeSubject** | **bool** | Specifies whether to exclude search by user or group ID. | 
  **applyFilterOption** | [**ApplyFilterOption**](ApplyFilterOption.md) | Specifies whether to return only files, only folders, or all elements from the specified folder. | 
+ **withSubFolders** | **bool** | Specifies whether to include files from subfolders in the results. | 
  **extension** | **string** | Specifies whether to search for the specific file extension. | 
  **searchArea** | [**SearchArea**](SearchArea.md) | The search area. | 
  **formsItemKey** | **string** | The forms item key. | 
@@ -2135,7 +2137,7 @@ Name | Type | Description  | Notes
 
 ## UploadFile
 
-> ObjectWrapper UploadFile(ctx, folderId).UploadRequestDto(uploadRequestDto).Execute()
+> FileIntegerArrayWrapper UploadFile(ctx, folderId).CreateNewIfExist(createNewIfExist).StoreOriginalFile(storeOriginalFile).KeepConvertStatus(keepConvertStatus).File(file).Execute()
 
 Upload a file
 
@@ -2157,16 +2159,19 @@ import (
 
 func main() {
 	folderId := int32(1) // int32 | The folder ID to upload a file.
-	uploadRequestDto := *openapiclient.NewUploadRequestDto() // UploadRequestDto | The request parameters for uploading a file. (optional)
+	createNewIfExist := true // bool | Specifies whether to create the new file if it already exists or not. (optional)
+	storeOriginalFile := true // bool | Specifies whether to upload documents in the original formats as well or not. (optional)
+	keepConvertStatus := false // bool | Specifies whether to keep the file converting status or not. (optional)
+	file := os.NewFile(1234, "some_file") // *os.File | The file to be uploaded. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.UploadFile(context.Background(), folderId).UploadRequestDto(uploadRequestDto).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.UploadFile(context.Background(), folderId).CreateNewIfExist(createNewIfExist).StoreOriginalFile(storeOriginalFile).KeepConvertStatus(keepConvertStatus).File(file).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.UploadFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UploadFile`: ObjectWrapper
+	// response from `UploadFile`: FileIntegerArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFoldersAPI.UploadFile`: %v\n", resp)
 }
 ```
@@ -2187,11 +2192,14 @@ Other parameters are passed through a pointer to a apiUploadFileRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **uploadRequestDto** | [**UploadRequestDto**](UploadRequestDto.md) | The request parameters for uploading a file. | 
+ **createNewIfExist** | **bool** | Specifies whether to create the new file if it already exists or not. | 
+ **storeOriginalFile** | **bool** | Specifies whether to upload documents in the original formats as well or not. | 
+ **keepConvertStatus** | **bool** | Specifies whether to keep the file converting status or not. | 
+ **file** | ***os.File** | The file to be uploaded. | 
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**FileIntegerArrayWrapper**](FileIntegerArrayWrapper.md)
 
 ### Authorization
 
@@ -2199,7 +2207,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -2209,7 +2217,7 @@ Name | Type | Description  | Notes
 
 ## UploadFileToMy
 
-> ObjectWrapper UploadFileToMy(ctx).InDto(inDto).Execute()
+> FileIntegerArrayWrapper UploadFileToMy(ctx).CreateNewIfExist(createNewIfExist).StoreOriginalFile(storeOriginalFile).KeepConvertStatus(keepConvertStatus).File(file).Execute()
 
 Upload a file to the My documents section
 
@@ -2230,16 +2238,19 @@ import (
 )
 
 func main() {
-	inDto := *openapiclient.NewUploadRequestDto() // UploadRequestDto | The request parameters for uploading a file. (optional)
+	createNewIfExist := true // bool | Specifies whether to create the new file if it already exists or not. (optional)
+	storeOriginalFile := true // bool | Specifies whether to upload documents in the original formats as well or not. (optional)
+	keepConvertStatus := false // bool | Specifies whether to keep the file converting status or not. (optional)
+	file := os.NewFile(1234, "some_file") // *os.File | The file to be uploaded. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.UploadFileToMy(context.Background()).InDto(inDto).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.UploadFileToMy(context.Background()).CreateNewIfExist(createNewIfExist).StoreOriginalFile(storeOriginalFile).KeepConvertStatus(keepConvertStatus).File(file).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.UploadFileToMy``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UploadFileToMy`: ObjectWrapper
+	// response from `UploadFileToMy`: FileIntegerArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFoldersAPI.UploadFileToMy`: %v\n", resp)
 }
 ```
@@ -2255,11 +2266,14 @@ Other parameters are passed through a pointer to a apiUploadFileToMyRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **inDto** | [**UploadRequestDto**](UploadRequestDto.md) | The request parameters for uploading a file. | 
+ **createNewIfExist** | **bool** | Specifies whether to create the new file if it already exists or not. | 
+ **storeOriginalFile** | **bool** | Specifies whether to upload documents in the original formats as well or not. | 
+ **keepConvertStatus** | **bool** | Specifies whether to keep the file converting status or not. | 
+ **file** | ***os.File** | The file to be uploaded. | 
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**FileIntegerArrayWrapper**](FileIntegerArrayWrapper.md)
 
 ### Authorization
 
@@ -2267,7 +2281,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -11,11 +11,7 @@ Name | Type | Description | Notes
 **FirstName** | Pointer to **NullableString** | The user first name. | [optional] 
 **LastName** | Pointer to **NullableString** | The user last name. | [optional] 
 **Department** | Pointer to **[]string** | The list of the user departments. | [optional] 
-**Title** | Pointer to **NullableString** | The user title. | [optional] 
 **Location** | Pointer to **NullableString** | The user location. | [optional] 
-**Sex** | Pointer to [**SexEnum**](SexEnum.md) |  | [optional] 
-**Birthday** | Pointer to [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**Worksfrom** | Pointer to [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **Comment** | Pointer to **NullableString** | The user comment. | [optional] 
 **Contacts** | Pointer to [**[]Contact**](Contact.md) | The list of the user contacts. | [optional] 
 **Files** | Pointer to **NullableString** | The user avatar photo URL. | [optional] 
@@ -285,41 +281,6 @@ HasDepartment returns a boolean if a field has been set.
 `func (o *UpdateMemberRequestDto) UnsetDepartment()`
 
 UnsetDepartment ensures that no value is present for Department, not even an explicit nil
-### GetTitle
-
-`func (o *UpdateMemberRequestDto) GetTitle() string`
-
-GetTitle returns the Title field if non-nil, zero value otherwise.
-
-### GetTitleOk
-
-`func (o *UpdateMemberRequestDto) GetTitleOk() (*string, bool)`
-
-GetTitleOk returns a tuple with the Title field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTitle
-
-`func (o *UpdateMemberRequestDto) SetTitle(v string)`
-
-SetTitle sets Title field to given value.
-
-### HasTitle
-
-`func (o *UpdateMemberRequestDto) HasTitle() bool`
-
-HasTitle returns a boolean if a field has been set.
-
-### SetTitleNil
-
-`func (o *UpdateMemberRequestDto) SetTitleNil(b bool)`
-
- SetTitleNil sets the value for Title to be an explicit nil
-
-### UnsetTitle
-`func (o *UpdateMemberRequestDto) UnsetTitle()`
-
-UnsetTitle ensures that no value is present for Title, not even an explicit nil
 ### GetLocation
 
 `func (o *UpdateMemberRequestDto) GetLocation() string`
@@ -355,81 +316,6 @@ HasLocation returns a boolean if a field has been set.
 `func (o *UpdateMemberRequestDto) UnsetLocation()`
 
 UnsetLocation ensures that no value is present for Location, not even an explicit nil
-### GetSex
-
-`func (o *UpdateMemberRequestDto) GetSex() SexEnum`
-
-GetSex returns the Sex field if non-nil, zero value otherwise.
-
-### GetSexOk
-
-`func (o *UpdateMemberRequestDto) GetSexOk() (*SexEnum, bool)`
-
-GetSexOk returns a tuple with the Sex field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSex
-
-`func (o *UpdateMemberRequestDto) SetSex(v SexEnum)`
-
-SetSex sets Sex field to given value.
-
-### HasSex
-
-`func (o *UpdateMemberRequestDto) HasSex() bool`
-
-HasSex returns a boolean if a field has been set.
-
-### GetBirthday
-
-`func (o *UpdateMemberRequestDto) GetBirthday() ApiDateTime`
-
-GetBirthday returns the Birthday field if non-nil, zero value otherwise.
-
-### GetBirthdayOk
-
-`func (o *UpdateMemberRequestDto) GetBirthdayOk() (*ApiDateTime, bool)`
-
-GetBirthdayOk returns a tuple with the Birthday field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBirthday
-
-`func (o *UpdateMemberRequestDto) SetBirthday(v ApiDateTime)`
-
-SetBirthday sets Birthday field to given value.
-
-### HasBirthday
-
-`func (o *UpdateMemberRequestDto) HasBirthday() bool`
-
-HasBirthday returns a boolean if a field has been set.
-
-### GetWorksfrom
-
-`func (o *UpdateMemberRequestDto) GetWorksfrom() ApiDateTime`
-
-GetWorksfrom returns the Worksfrom field if non-nil, zero value otherwise.
-
-### GetWorksfromOk
-
-`func (o *UpdateMemberRequestDto) GetWorksfromOk() (*ApiDateTime, bool)`
-
-GetWorksfromOk returns a tuple with the Worksfrom field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWorksfrom
-
-`func (o *UpdateMemberRequestDto) SetWorksfrom(v ApiDateTime)`
-
-SetWorksfrom sets Worksfrom field to given value.
-
-### HasWorksfrom
-
-`func (o *UpdateMemberRequestDto) HasWorksfrom() bool`
-
-HasWorksfrom returns a boolean if a field has been set.
-
 ### GetComment
 
 `func (o *UpdateMemberRequestDto) GetComment() string`

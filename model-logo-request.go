@@ -16,6 +16,8 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the LogoRequest type satisfies the MappedNullable interface at compile time
@@ -24,7 +26,7 @@ var _ MappedNullable = &LogoRequest{}
 // LogoRequest The logo request parameters.
 type LogoRequest struct {
 	// The path to the temporary image file.
-	TmpFile NullableString `json:"tmpFile,omitempty"`
+	TmpFile string `json:"tmpFile"`
 	// The X coordinate of the rectangle starting point.
 	X *int32 `json:"x,omitempty"`
 	// The Y coordinate of the rectangle starting point.
@@ -35,12 +37,15 @@ type LogoRequest struct {
 	Height *int32 `json:"height,omitempty"`
 }
 
+type _LogoRequest LogoRequest
+
 // NewLogoRequest instantiates a new LogoRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogoRequest() *LogoRequest {
+func NewLogoRequest(tmpFile string) *LogoRequest {
 	this := LogoRequest{}
+	this.TmpFile = tmpFile
 	return &this
 }
 
@@ -52,46 +57,28 @@ func NewLogoRequestWithDefaults() *LogoRequest {
 	return &this
 }
 
-// GetTmpFile returns the TmpFile field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetTmpFile returns the TmpFile field value
 func (o *LogoRequest) GetTmpFile() string {
-	if o == nil || IsNil(o.TmpFile.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TmpFile.Get()
+
+	return o.TmpFile
 }
 
-// GetTmpFileOk returns a tuple with the TmpFile field value if set, nil otherwise
+// GetTmpFileOk returns a tuple with the TmpFile field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *LogoRequest) GetTmpFileOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.TmpFile.Get(), o.TmpFile.IsSet()
+	return &o.TmpFile, true
 }
 
-// HasTmpFile returns a boolean if a field has been set.
-func (o *LogoRequest) IsTmpFileSet() bool {
-	if o != nil && o.TmpFile.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTmpFile gets a reference to the given NullableString and assigns it to the TmpFile field.
+// SetTmpFile sets field value
 func (o *LogoRequest) SetTmpFile(v string) {
-	o.TmpFile.Set(&v)
-}
-// SetTmpFileNil sets the value for TmpFile to be an explicit nil
-func (o *LogoRequest) SetTmpFileNil() {
-	o.TmpFile.Set(nil)
-}
-
-// UnsetTmpFile ensures that no value is present for TmpFile, not even an explicit nil
-func (o *LogoRequest) UnsetTmpFile() {
-	o.TmpFile.Unset()
+	o.TmpFile = v
 }
 
 // GetX returns the X field value if set, zero value otherwise.
@@ -232,9 +219,7 @@ func (o LogoRequest) MarshalJSON() ([]byte, error) {
 
 func (o LogoRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TmpFile.IsSet() {
-		toSerialize["tmpFile"] = o.TmpFile.Get()
-	}
+	toSerialize["tmpFile"] = o.TmpFile
 	if !IsNil(o.X) {
 		toSerialize["x"] = o.X
 	}
@@ -248,6 +233,42 @@ func (o LogoRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["height"] = o.Height
 	}
 	return toSerialize, nil
+}
+
+func (o *LogoRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"tmpFile",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLogoRequest := _LogoRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogoRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogoRequest(varLogoRequest)
+
+	return err
 }
 
 type NullableLogoRequest struct {

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **OwnedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **Shared** | Pointer to **bool** | Specifies if the file entry is shared via link or not. | [optional] 
 **SharedForUser** | Pointer to **bool** | Specifies if the file entry is shared for user or not. | [optional] 
+**SharedExternal** | Pointer to **bool** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] 
 **ParentShared** | Pointer to **bool** | Indicates whether the parent entity is shared. | [optional] 
 **ShortWebUrl** | Pointer to **NullableString** | The short Web URL. | [optional] 
 **Created** | Pointer to [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
@@ -65,6 +66,7 @@ Name | Type | Description | Notes
 **RootRoomType** | Pointer to [**RoomType**](RoomType.md) |  | [optional] 
 **SaveFormAsXLSX** | Pointer to **NullableBool** | Specifies whether to save form data as XLSX file. | [optional] 
 **SendFormToExternalDB** | Pointer to **NullableBool** | Specifies whether to send form data to external database. | [optional] 
+**OriginalFormId** | Pointer to **NullableInt32** | The original form ID that corresponds to this FormFillingFolderDone folder. | [optional] 
 
 ## Methods
 
@@ -244,6 +246,31 @@ SetSharedForUser sets SharedForUser field to given value.
 `func (o *FolderDtoString) HasSharedForUser() bool`
 
 HasSharedForUser returns a boolean if a field has been set.
+
+### GetSharedExternal
+
+`func (o *FolderDtoString) GetSharedExternal() bool`
+
+GetSharedExternal returns the SharedExternal field if non-nil, zero value otherwise.
+
+### GetSharedExternalOk
+
+`func (o *FolderDtoString) GetSharedExternalOk() (*bool, bool)`
+
+GetSharedExternalOk returns a tuple with the SharedExternal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSharedExternal
+
+`func (o *FolderDtoString) SetSharedExternal(v bool)`
+
+SetSharedExternal sets SharedExternal field to given value.
+
+### HasSharedExternal
+
+`func (o *FolderDtoString) HasSharedExternal() bool`
+
+HasSharedExternal returns a boolean if a field has been set.
 
 ### GetParentShared
 
@@ -1910,6 +1937,41 @@ HasSendFormToExternalDB returns a boolean if a field has been set.
 `func (o *FolderDtoString) UnsetSendFormToExternalDB()`
 
 UnsetSendFormToExternalDB ensures that no value is present for SendFormToExternalDB, not even an explicit nil
+### GetOriginalFormId
+
+`func (o *FolderDtoString) GetOriginalFormId() int32`
+
+GetOriginalFormId returns the OriginalFormId field if non-nil, zero value otherwise.
+
+### GetOriginalFormIdOk
+
+`func (o *FolderDtoString) GetOriginalFormIdOk() (*int32, bool)`
+
+GetOriginalFormIdOk returns a tuple with the OriginalFormId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalFormId
+
+`func (o *FolderDtoString) SetOriginalFormId(v int32)`
+
+SetOriginalFormId sets OriginalFormId field to given value.
+
+### HasOriginalFormId
+
+`func (o *FolderDtoString) HasOriginalFormId() bool`
+
+HasOriginalFormId returns a boolean if a field has been set.
+
+### SetOriginalFormIdNil
+
+`func (o *FolderDtoString) SetOriginalFormIdNil(b bool)`
+
+ SetOriginalFormIdNil sets the value for OriginalFormId to be an explicit nil
+
+### UnsetOriginalFormId
+`func (o *FolderDtoString) UnsetOriginalFormId()`
+
+UnsetOriginalFormId ensures that no value is present for OriginalFormId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

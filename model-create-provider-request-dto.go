@@ -32,6 +32,8 @@ type CreateProviderRequestDto struct {
 	Url NullableString `json:"url,omitempty"`
 	// The authentication API key for the AI provider.
 	Key NullableString `json:"key"`
+	// Optional list of model settings to configure atomically with the provider creation.
+	ModelSettings []ModelSettingsItemDto `json:"modelSettings,omitempty"`
 }
 
 type _CreateProviderRequestDto CreateProviderRequestDto
@@ -181,6 +183,39 @@ func (o *CreateProviderRequestDto) SetKey(v string) {
 	o.Key.Set(&v)
 }
 
+// GetModelSettings returns the ModelSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateProviderRequestDto) GetModelSettings() []ModelSettingsItemDto {
+	if o == nil {
+		var ret []ModelSettingsItemDto
+		return ret
+	}
+	return o.ModelSettings
+}
+
+// GetModelSettingsOk returns a tuple with the ModelSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateProviderRequestDto) GetModelSettingsOk() ([]ModelSettingsItemDto, bool) {
+	if o == nil || IsNil(o.ModelSettings) {
+		return nil, false
+	}
+	return o.ModelSettings, true
+}
+
+// HasModelSettings returns a boolean if a field has been set.
+func (o *CreateProviderRequestDto) IsModelSettingsSet() bool {
+	if o != nil && !IsNil(o.ModelSettings) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelSettings gets a reference to the given []ModelSettingsItemDto and assigns it to the ModelSettings field.
+func (o *CreateProviderRequestDto) SetModelSettings(v []ModelSettingsItemDto) {
+	o.ModelSettings = v
+}
+
 func (o CreateProviderRequestDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -199,6 +234,9 @@ func (o CreateProviderRequestDto) ToMap() (map[string]interface{}, error) {
 		toSerialize["url"] = o.Url.Get()
 	}
 	toSerialize["key"] = o.Key.Get()
+	if o.ModelSettings != nil {
+		toSerialize["modelSettings"] = o.ModelSettings
+	}
 	return toSerialize, nil
 }
 

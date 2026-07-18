@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## ExportMessage
 
-> ExportMessage(ctx, messageId).ExportMessageRequestBodyInteger(exportMessageRequestBodyInteger).Execute()
+> ExportMessage(ctx, messageId).ExportMessageRequestBody(exportMessageRequestBody).Execute()
 
 Export a single AI message to a document
 
@@ -32,11 +32,11 @@ import (
 
 func main() {
 	messageId := int32(1) // int32 | The unique identifier of the AI chat message to export.
-	exportMessageRequestBodyInteger := *openapiclient.NewExportMessageRequestBodyInteger(int32(123), "Message Export") // ExportMessageRequestBodyInteger | The export parameters including destination folder and file title.
+	exportMessageRequestBody := *openapiclient.NewExportMessageRequestBody(openapiclient.ExportChatRequestBody_folderId{Int32: new(int32)}, "Message Export") // ExportMessageRequestBody | The export parameters including destination folder and file title.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.AIMessagesAPI.ExportMessage(context.Background(), messageId).ExportMessageRequestBodyInteger(exportMessageRequestBodyInteger).Execute()
+	r, err := apiClient.AIMessagesAPI.ExportMessage(context.Background(), messageId).ExportMessageRequestBody(exportMessageRequestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIMessagesAPI.ExportMessage``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,7 +60,7 @@ Other parameters are passed through a pointer to a apiExportMessageRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **exportMessageRequestBodyInteger** | [**ExportMessageRequestBodyInteger**](ExportMessageRequestBodyInteger.md) | The export parameters including destination folder and file title. | 
+ **exportMessageRequestBody** | [**ExportMessageRequestBody**](ExportMessageRequestBody.md) | The export parameters including destination folder and file title. | 
 
 ### Return type
 

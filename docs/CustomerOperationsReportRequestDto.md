@@ -5,13 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ServiceName** | Pointer to **NullableString** | The service name. | [optional] 
-**WriteOffServiceQuota** | Pointer to **bool** | Write-off of the quota for the service | [optional] 
 **StartDate** | Pointer to **NullableTime** | The report start date. | [optional] 
 **EndDate** | Pointer to **NullableTime** | The report end date. | [optional] 
 **ParticipantName** | Pointer to **NullableString** | The participant name. | [optional] 
 **Credit** | Pointer to **NullableBool** | Specifies whether to include credit operations in the report. | [optional] 
 **Debit** | Pointer to **NullableBool** | Specifies whether to include debit operations in the report. | [optional] 
-**Types** | Pointer to [**OperationType**](OperationType.md) |  | [optional] 
+**Type** | Pointer to [**OperationType**](OperationType.md) |  | [optional] 
 **Status** | Pointer to [**OperationStatus**](OperationStatus.md) |  | [optional] 
 **OrderBy** | Pointer to **NullableString** | The field to order by. | [optional] 
 **OrderType** | Pointer to [**OperationOrderType**](OperationOrderType.md) |  | [optional] 
@@ -70,31 +69,6 @@ HasServiceName returns a boolean if a field has been set.
 `func (o *CustomerOperationsReportRequestDto) UnsetServiceName()`
 
 UnsetServiceName ensures that no value is present for ServiceName, not even an explicit nil
-### GetWriteOffServiceQuota
-
-`func (o *CustomerOperationsReportRequestDto) GetWriteOffServiceQuota() bool`
-
-GetWriteOffServiceQuota returns the WriteOffServiceQuota field if non-nil, zero value otherwise.
-
-### GetWriteOffServiceQuotaOk
-
-`func (o *CustomerOperationsReportRequestDto) GetWriteOffServiceQuotaOk() (*bool, bool)`
-
-GetWriteOffServiceQuotaOk returns a tuple with the WriteOffServiceQuota field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWriteOffServiceQuota
-
-`func (o *CustomerOperationsReportRequestDto) SetWriteOffServiceQuota(v bool)`
-
-SetWriteOffServiceQuota sets WriteOffServiceQuota field to given value.
-
-### HasWriteOffServiceQuota
-
-`func (o *CustomerOperationsReportRequestDto) HasWriteOffServiceQuota() bool`
-
-HasWriteOffServiceQuota returns a boolean if a field has been set.
-
 ### GetStartDate
 
 `func (o *CustomerOperationsReportRequestDto) GetStartDate() time.Time`
@@ -270,30 +244,30 @@ HasDebit returns a boolean if a field has been set.
 `func (o *CustomerOperationsReportRequestDto) UnsetDebit()`
 
 UnsetDebit ensures that no value is present for Debit, not even an explicit nil
-### GetTypes
+### GetType
 
-`func (o *CustomerOperationsReportRequestDto) GetTypes() OperationType`
+`func (o *CustomerOperationsReportRequestDto) GetType() OperationType`
 
-GetTypes returns the Types field if non-nil, zero value otherwise.
+GetType returns the Type field if non-nil, zero value otherwise.
 
-### GetTypesOk
+### GetTypeOk
 
-`func (o *CustomerOperationsReportRequestDto) GetTypesOk() (*OperationType, bool)`
+`func (o *CustomerOperationsReportRequestDto) GetTypeOk() (*OperationType, bool)`
 
-GetTypesOk returns a tuple with the Types field if it's non-nil, zero value otherwise
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTypes
+### SetType
 
-`func (o *CustomerOperationsReportRequestDto) SetTypes(v OperationType)`
+`func (o *CustomerOperationsReportRequestDto) SetType(v OperationType)`
 
-SetTypes sets Types field to given value.
+SetType sets Type field to given value.
 
-### HasTypes
+### HasType
 
-`func (o *CustomerOperationsReportRequestDto) HasTypes() bool`
+`func (o *CustomerOperationsReportRequestDto) HasType() bool`
 
-HasTypes returns a boolean if a field has been set.
+HasType returns a boolean if a field has been set.
 
 ### GetStatus
 

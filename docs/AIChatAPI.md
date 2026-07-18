@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**GetUserChatsSettings**](AIChatAPI.md#GetUserChatsSettings) | **Get** /api/2.0/ai/rooms/{roomId}/chats/config | Get user chat settings for a room
 [**ProvidePermission**](AIChatAPI.md#ProvidePermission) | **Post** /api/2.0/ai/chats/tool-permissions/{callId}/decision | Submit a tool execution permission decision
 [**RenameChat**](AIChatAPI.md#RenameChat) | **Put** /api/2.0/ai/chats/{chatId} | Rename an AI chat
+[**ResolveEditorTool**](AIChatAPI.md#ResolveEditorTool) | **Post** /api/2.0/ai/chats/tool-files/{callId}/decision | Resolve a pending editor file-generation tool
 [**SetUserChatsSettings**](AIChatAPI.md#SetUserChatsSettings) | **Put** /api/2.0/ai/rooms/{roomId}/chats/config | Update user chat settings for a room
 [**StartNewChat**](AIChatAPI.md#StartNewChat) | **Post** /api/2.0/ai/rooms/{roomId}/chats | Start a new AI chat
 
@@ -163,7 +164,7 @@ Name | Type | Description  | Notes
 
 ## ExportChat
 
-> ExportChat(ctx, chatId).ExportChatRequestBodyInteger(exportChatRequestBodyInteger).Execute()
+> ExportChat(ctx, chatId).ExportChatRequestBody(exportChatRequestBody).Execute()
 
 Export AI chat messages to a file
 
@@ -185,11 +186,11 @@ import (
 
 func main() {
 	chatId := "00000000-0000-0000-0000-000000000000" // string | The unique identifier of the AI chat session to export.
-	exportChatRequestBodyInteger := *openapiclient.NewExportChatRequestBodyInteger(int32(123), "Chat Export") // ExportChatRequestBodyInteger | The export parameters including destination folder and file title.
+	exportChatRequestBody := *openapiclient.NewExportChatRequestBody(openapiclient.ExportChatRequestBody_folderId{Int32: new(int32)}, "Chat Export") // ExportChatRequestBody | The export parameters including destination folder and file title.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.AIChatAPI.ExportChat(context.Background(), chatId).ExportChatRequestBodyInteger(exportChatRequestBodyInteger).Execute()
+	r, err := apiClient.AIChatAPI.ExportChat(context.Background(), chatId).ExportChatRequestBody(exportChatRequestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIChatAPI.ExportChat``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -213,7 +214,7 @@ Other parameters are passed through a pointer to a apiExportChatRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **exportChatRequestBodyInteger** | [**ExportChatRequestBodyInteger**](ExportChatRequestBodyInteger.md) | The export parameters including destination folder and file title. | 
+ **exportChatRequestBody** | [**ExportChatRequestBody**](ExportChatRequestBody.md) | The export parameters including destination folder and file title. | 
 
 ### Return type
 
@@ -728,6 +729,80 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ChatWrapper**](ChatWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResolveEditorTool
+
+> GeneratedFileWrapper ResolveEditorTool(ctx, callId).EditorToolDecisionRequestBody(editorToolDecisionRequestBody).Execute()
+
+Resolve a pending editor file-generation tool
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/resolve-editor-tool/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	callId := "call_abc123" // string | The unique identifier of the pending tool call awaiting the user's decision.
+	editorToolDecisionRequestBody := *openapiclient.NewEditorToolDecisionRequestBody() // EditorToolDecisionRequestBody | The decision parameters.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AIChatAPI.ResolveEditorTool(context.Background(), callId).EditorToolDecisionRequestBody(editorToolDecisionRequestBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AIChatAPI.ResolveEditorTool``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResolveEditorTool`: GeneratedFileWrapper
+	fmt.Fprintf(os.Stdout, "Response from `AIChatAPI.ResolveEditorTool`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**callId** | **string** | The unique identifier of the pending tool call awaiting the user's decision. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResolveEditorToolRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **editorToolDecisionRequestBody** | [**EditorToolDecisionRequestBody**](EditorToolDecisionRequestBody.md) | The decision parameters. | 
+
+### Return type
+
+[**GeneratedFileWrapper**](GeneratedFileWrapper.md)
 
 ### Authorization
 

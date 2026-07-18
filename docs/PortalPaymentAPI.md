@@ -4,17 +4,17 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**BuyWalletService**](PortalPaymentAPI.md#BuyWalletService) | **Post** /api/2.0/portal/payment/buywalletservice | Purchases a wallet service with the specified quantity.
 [**CalculateWalletPayment**](PortalPaymentAPI.md#CalculateWalletPayment) | **Put** /api/2.0/portal/payment/calculatewallet | Calculate the wallet payment amount
 [**ChangeTenantWalletServiceState**](PortalPaymentAPI.md#ChangeTenantWalletServiceState) | **Post** /api/2.0/portal/payment/servicestate | Change tenant wallet service state
 [**CreateCustomerOperationsReport**](PortalPaymentAPI.md#CreateCustomerOperationsReport) | **Post** /api/2.0/portal/payment/customer/operationsreport | Start the customer operations report generation
+[**CreditAiBalance**](PortalPaymentAPI.md#CreditAiBalance) | **Post** /api/2.0/portal/payment/creditaibalance | Credit AI balance
 [**GetAiPrices**](PortalPaymentAPI.md#GetAiPrices) | **Get** /api/2.0/portal/payment/ai-prices | Get AI model prices
 [**GetCheckoutSetupUrl**](PortalPaymentAPI.md#GetCheckoutSetupUrl) | **Get** /api/2.0/portal/payment/checkoutsetupurl | Get the checkout setup page URL
+[**GetCustomerAiBalance**](PortalPaymentAPI.md#GetCustomerAiBalance) | **Get** /api/2.0/portal/payment/customer/aibalance | Get the customer AI balance
 [**GetCustomerBalance**](PortalPaymentAPI.md#GetCustomerBalance) | **Get** /api/2.0/portal/payment/customer/balance | Get the customer balance
 [**GetCustomerInfo**](PortalPaymentAPI.md#GetCustomerInfo) | **Get** /api/2.0/portal/payment/customerinfo | Get the customer information
 [**GetCustomerOperations**](PortalPaymentAPI.md#GetCustomerOperations) | **Get** /api/2.0/portal/payment/customer/operations | Get the customer operations
 [**GetCustomerOperationsReport**](PortalPaymentAPI.md#GetCustomerOperationsReport) | **Get** /api/2.0/portal/payment/customer/operationsreport | Get the status of the customer operations report generation
-[**GetCustomerServiceQuota**](PortalPaymentAPI.md#GetCustomerServiceQuota) | **Get** /api/2.0/portal/payment/customer/servicequota | Get the service quota
 [**GetPaymentAccount**](PortalPaymentAPI.md#GetPaymentAccount) | **Get** /api/2.0/portal/payment/account | Get the payment account
 [**GetPaymentCurrencies**](PortalPaymentAPI.md#GetPaymentCurrencies) | **Get** /api/2.0/portal/payment/currencies | Get currencies
 [**GetPaymentQuotas**](PortalPaymentAPI.md#GetPaymentQuotas) | **Get** /api/2.0/portal/payment/quotas | Get quotas
@@ -34,74 +34,6 @@ Method | HTTP request | Description
 [**UpdatePayment**](PortalPaymentAPI.md#UpdatePayment) | **Put** /api/2.0/portal/payment/update | Update the payment quantity
 [**UpdateWalletPayment**](PortalPaymentAPI.md#UpdateWalletPayment) | **Put** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity
 
-
-
-## BuyWalletService
-
-> ServicePaymentWrapper BuyWalletService(ctx).BuyWalletServiceRequestDto(buyWalletServiceRequestDto).Execute()
-
-Purchases a wallet service with the specified quantity.
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/buy-wallet-service/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	buyWalletServiceRequestDto := *openapiclient.NewBuyWalletServiceRequestDto() // BuyWalletServiceRequestDto |  (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PortalPaymentAPI.BuyWalletService(context.Background()).BuyWalletServiceRequestDto(buyWalletServiceRequestDto).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.BuyWalletService``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `BuyWalletService`: ServicePaymentWrapper
-	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.BuyWalletService`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiBuyWalletServiceRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **buyWalletServiceRequestDto** | [**BuyWalletServiceRequestDto**](BuyWalletServiceRequestDto.md) |  | 
-
-### Return type
-
-[**ServicePaymentWrapper**](ServicePaymentWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## CalculateWalletPayment
@@ -308,6 +240,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreditAiBalance
+
+> ServicePaymentWrapper CreditAiBalance(ctx).CreditAiBalanceRequestDto(creditAiBalanceRequestDto).Execute()
+
+Credit AI balance
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/credit-ai-balance/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	creditAiBalanceRequestDto := *openapiclient.NewCreditAiBalanceRequestDto() // CreditAiBalanceRequestDto |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.CreditAiBalance(context.Background()).CreditAiBalanceRequestDto(creditAiBalanceRequestDto).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.CreditAiBalance``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreditAiBalance`: ServicePaymentWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.CreditAiBalance`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreditAiBalanceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **creditAiBalanceRequestDto** | [**CreditAiBalanceRequestDto**](CreditAiBalanceRequestDto.md) |  | 
+
+### Return type
+
+[**ServicePaymentWrapper**](ServicePaymentWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetAiPrices
 
 > AiPricesResponseWrapper GetAiPrices(ctx).Execute()
@@ -373,7 +373,7 @@ Other parameters are passed through a pointer to a apiGetAiPricesRequest struct 
 
 ## GetCheckoutSetupUrl
 
-> StringWrapper GetCheckoutSetupUrl(ctx).BackUrl(backUrl).Execute()
+> StringWrapper GetCheckoutSetupUrl(ctx).BackUrl(backUrl).SuccessUrl(successUrl).Execute()
 
 Get the checkout setup page URL
 
@@ -394,11 +394,12 @@ import (
 )
 
 func main() {
-	backUrl := "https://example.com/setup/complete" // string | The URL where the user will be redirected after completing the setup. (optional)
+	backUrl := "https://example.com/payment/back" // string | The URL where the user will be redirected after setup cancellation.
+	successUrl := "https://example.com/payment/success" // string | The URL where the user will be redirected after successful payment.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PortalPaymentAPI.GetCheckoutSetupUrl(context.Background()).BackUrl(backUrl).Execute()
+	resp, r, err := apiClient.PortalPaymentAPI.GetCheckoutSetupUrl(context.Background()).BackUrl(backUrl).SuccessUrl(successUrl).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetCheckoutSetupUrl``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -419,11 +420,80 @@ Other parameters are passed through a pointer to a apiGetCheckoutSetupUrlRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **backUrl** | **string** | The URL where the user will be redirected after completing the setup. | 
+ **backUrl** | **string** | The URL where the user will be redirected after setup cancellation. | 
+ **successUrl** | **string** | The URL where the user will be redirected after successful payment. | 
 
 ### Return type
 
 [**StringWrapper**](StringWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCustomerAiBalance
+
+> BalanceWrapper GetCustomerAiBalance(ctx).Refresh(refresh).Execute()
+
+Get the customer AI balance
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-ai-balance/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	refresh := true // bool | Specifies whether to refresh the payment information cache or not. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.GetCustomerAiBalance(context.Background()).Refresh(refresh).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetCustomerAiBalance``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCustomerAiBalance`: BalanceWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetCustomerAiBalance`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCustomerAiBalanceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **refresh** | **bool** | Specifies whether to refresh the payment information cache or not. | 
+
+### Return type
+
+[**BalanceWrapper**](BalanceWrapper.md)
 
 ### Authorization
 
@@ -577,7 +647,7 @@ Name | Type | Description  | Notes
 
 ## GetCustomerOperations
 
-> ReportWrapper GetCustomerOperations(ctx).Offset(offset).Limit(limit).ServiceName(serviceName).WriteOffServiceQuota(writeOffServiceQuota).StartDate(startDate).EndDate(endDate).ParticipantName(participantName).Credit(credit).Debit(debit).Types(types).Status(status).OrderBy(orderBy).OrderType(orderType).Execute()
+> ReportWrapper GetCustomerOperations(ctx).Offset(offset).Limit(limit).ServiceName(serviceName).StartDate(startDate).EndDate(endDate).ParticipantName(participantName).Credit(credit).Debit(debit).Type_(type_).Status(status).OrderBy(orderBy).OrderType(orderType).Execute()
 
 Get the customer operations
 
@@ -602,20 +672,19 @@ func main() {
 	offset := int32(0) // int32 | The number of items to skip for pagination. The default value is 0. (optional)
 	limit := int32(25) // int32 | The maximum number of items to return for pagination. The default value is 25. (optional)
 	serviceName := "backup" // string | The service name. (optional)
-	writeOffServiceQuota := false // bool | Write-off of the quota for the service (optional)
 	startDate := time.Now() // time.Time | The report start date. (optional)
 	endDate := time.Now() // time.Time | The report end date. (optional)
-	participantName := "ACME Corp" // string | The participant name. (optional)
+	participantName := "My Own Corporation" // string | The participant name. (optional)
 	credit := true // bool | Specifies whether to include credit operations in the report. (optional)
 	debit := false // bool | Specifies whether to include debit operations in the report. (optional)
-	types := openapiclient.OperationType(0) // OperationType | List of operation types to filter by. (optional)
-	status := openapiclient.OperationStatus(0) // OperationStatus | List of operation status to filter by. (optional)
+	type_ := openapiclient.OperationType(0) // OperationType | The operation type to filter by. (optional)
+	status := openapiclient.OperationStatus(0) // OperationStatus | The operation status to filter by. (optional)
 	orderBy := "StartDate" // string | The field to order by. (optional)
 	orderType := openapiclient.OperationOrderType(0) // OperationOrderType | Order direction: Ascending or Descending. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PortalPaymentAPI.GetCustomerOperations(context.Background()).Offset(offset).Limit(limit).ServiceName(serviceName).WriteOffServiceQuota(writeOffServiceQuota).StartDate(startDate).EndDate(endDate).ParticipantName(participantName).Credit(credit).Debit(debit).Types(types).Status(status).OrderBy(orderBy).OrderType(orderType).Execute()
+	resp, r, err := apiClient.PortalPaymentAPI.GetCustomerOperations(context.Background()).Offset(offset).Limit(limit).ServiceName(serviceName).StartDate(startDate).EndDate(endDate).ParticipantName(participantName).Credit(credit).Debit(debit).Type_(type_).Status(status).OrderBy(orderBy).OrderType(orderType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetCustomerOperations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -639,14 +708,13 @@ Name | Type | Description  | Notes
  **offset** | **int32** | The number of items to skip for pagination. The default value is 0. | 
  **limit** | **int32** | The maximum number of items to return for pagination. The default value is 25. | 
  **serviceName** | **string** | The service name. | 
- **writeOffServiceQuota** | **bool** | Write-off of the quota for the service | 
  **startDate** | **time.Time** | The report start date. | 
  **endDate** | **time.Time** | The report end date. | 
  **participantName** | **string** | The participant name. | 
  **credit** | **bool** | Specifies whether to include credit operations in the report. | 
  **debit** | **bool** | Specifies whether to include debit operations in the report. | 
- **types** | [**OperationType**](OperationType.md) | List of operation types to filter by. | 
- **status** | [**OperationStatus**](OperationStatus.md) | List of operation status to filter by. | 
+ **type_** | [**OperationType**](OperationType.md) | The operation type to filter by. | 
+ **status** | [**OperationStatus**](OperationStatus.md) | The operation status to filter by. | 
  **orderBy** | **string** | The field to order by. | 
  **orderType** | [**OperationOrderType**](OperationOrderType.md) | Order direction: Ascending or Descending. | 
 
@@ -716,76 +784,6 @@ Other parameters are passed through a pointer to a apiGetCustomerOperationsRepor
 ### Return type
 
 [**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetCustomerServiceQuota
-
-> BalanceWrapper GetCustomerServiceQuota(ctx).ServiceName(serviceName).Refresh(refresh).Execute()
-
-Get the service quota
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-quota/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	serviceName := "backup" // string | The service name. (optional)
-	refresh := true // bool | Specifies whether to refresh the payment information cache or not. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PortalPaymentAPI.GetCustomerServiceQuota(context.Background()).ServiceName(serviceName).Refresh(refresh).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetCustomerServiceQuota``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetCustomerServiceQuota`: BalanceWrapper
-	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetCustomerServiceQuota`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetCustomerServiceQuotaRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **serviceName** | **string** | The service name. | 
- **refresh** | **bool** | Specifies whether to refresh the payment information cache or not. | 
-
-### Return type
-
-[**BalanceWrapper**](BalanceWrapper.md)
 
 ### Authorization
 
@@ -1023,7 +1021,7 @@ import (
 )
 
 func main() {
-	paymentUrlRequestDto := *openapiclient.NewPaymentUrlRequestDto() // PaymentUrlRequestDto |  (optional)
+	paymentUrlRequestDto := *openapiclient.NewPaymentUrlRequestDto("https://example.com/payment/back", "https://example.com/payment/success") // PaymentUrlRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

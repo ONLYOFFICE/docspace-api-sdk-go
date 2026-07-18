@@ -19,30 +19,31 @@ import (
 	"fmt"
 )
 
-// OperationType [0 - Any, 1 - Unknown, 2 - ServicePayment, 4 - PackagePayment, 8 - ServiceUsage, 16 - Deposit, 32 - ReceiveProviderInvoice, 64 - ProcessProviderInvoice, 128 - WriteOffServiceProfit, 256 - Profit, 512 - PartnerAccrual, 1024 - ProviderPayment, 2048 - PartnerPayment, 4096 - Refund, 8192 - BankDeposit, 16384 - BankWithdrawal, 32768 - GoodwillCredit, 65536 - WriteOffProfit, 131072 - WriteOffDifferenceCurrency]
+// OperationType [0 - Unknown, 1 - ServicePayment, 2 - PackagePayment, 3 - AiServicePayment, 4 - Deposit, 5 - ReceiveProviderInvoice, 6 - ProcessProviderInvoice, 7 - WriteOffServiceProfit, 8 - Profit, 9 - PartnerAccrual, 10 - ProviderPayment, 11 - PartnerPayment, 12 - Refund, 13 - BankDeposit, 14 - BankWithdrawal, 15 - GoodwillCredit, 16 - WriteOffProfit, 17 - WriteOffDifferenceCurrency, 18 - AiDebit, 19 - AiCredit]
 type OperationType int32
 
 // List of OperationType
 const (
-	OPERATIONTYPE_Any OperationType = 0
-	OPERATIONTYPE_Unknown OperationType = 1
-	OPERATIONTYPE_ServicePayment OperationType = 2
-	OPERATIONTYPE_PackagePayment OperationType = 4
-	OPERATIONTYPE_ServiceUsage OperationType = 8
-	OPERATIONTYPE_Deposit OperationType = 16
-	OPERATIONTYPE_ReceiveProviderInvoice OperationType = 32
-	OPERATIONTYPE_ProcessProviderInvoice OperationType = 64
-	OPERATIONTYPE_WriteOffServiceProfit OperationType = 128
-	OPERATIONTYPE_Profit OperationType = 256
-	OPERATIONTYPE_PartnerAccrual OperationType = 512
-	OPERATIONTYPE_ProviderPayment OperationType = 1024
-	OPERATIONTYPE_PartnerPayment OperationType = 2048
-	OPERATIONTYPE_Refund OperationType = 4096
-	OPERATIONTYPE_BankDeposit OperationType = 8192
-	OPERATIONTYPE_BankWithdrawal OperationType = 16384
-	OPERATIONTYPE_GoodwillCredit OperationType = 32768
-	OPERATIONTYPE_WriteOffProfit OperationType = 65536
-	OPERATIONTYPE_WriteOffDifferenceCurrency OperationType = 131072
+	OPERATIONTYPE_Unknown OperationType = 0
+	OPERATIONTYPE_ServicePayment OperationType = 1
+	OPERATIONTYPE_PackagePayment OperationType = 2
+	OPERATIONTYPE_AiServicePayment OperationType = 3
+	OPERATIONTYPE_Deposit OperationType = 4
+	OPERATIONTYPE_ReceiveProviderInvoice OperationType = 5
+	OPERATIONTYPE_ProcessProviderInvoice OperationType = 6
+	OPERATIONTYPE_WriteOffServiceProfit OperationType = 7
+	OPERATIONTYPE_Profit OperationType = 8
+	OPERATIONTYPE_PartnerAccrual OperationType = 9
+	OPERATIONTYPE_ProviderPayment OperationType = 10
+	OPERATIONTYPE_PartnerPayment OperationType = 11
+	OPERATIONTYPE_Refund OperationType = 12
+	OPERATIONTYPE_BankDeposit OperationType = 13
+	OPERATIONTYPE_BankWithdrawal OperationType = 14
+	OPERATIONTYPE_GoodwillCredit OperationType = 15
+	OPERATIONTYPE_WriteOffProfit OperationType = 16
+	OPERATIONTYPE_WriteOffDifferenceCurrency OperationType = 17
+	OPERATIONTYPE_AiDebit OperationType = 18
+	OPERATIONTYPE_AiCredit OperationType = 19
 )
 
 // All allowed values of OperationType enum
@@ -50,22 +51,23 @@ var AllowedOperationTypeEnumValues = []OperationType{
 	0,
 	1,
 	2,
+	3,
 	4,
+	5,
+	6,
+	7,
 	8,
+	9,
+	10,
+	11,
+	12,
+	13,
+	14,
+	15,
 	16,
-	32,
-	64,
-	128,
-	256,
-	512,
-	1024,
-	2048,
-	4096,
-	8192,
-	16384,
-	32768,
-	65536,
-	131072,
+	17,
+	18,
+	19,
 }
 
 func (v *OperationType) UnmarshalJSON(src []byte) error {

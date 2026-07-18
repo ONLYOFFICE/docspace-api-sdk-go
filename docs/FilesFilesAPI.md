@@ -36,6 +36,7 @@ Method | HTTP request | Description
 [**GetPresignedUri**](FilesFilesAPI.md#GetPresignedUri) | **Get** /api/2.0/files/file/{fileId}/presigneduri | Get file download link
 [**GetProtectedFileUsers**](FilesFilesAPI.md#GetProtectedFileUsers) | **Get** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file
 [**GetReferenceData**](FilesFilesAPI.md#GetReferenceData) | **Post** /api/2.0/files/file/referencedata | Get reference data
+[**GetXlsx**](FilesFilesAPI.md#GetXlsx) | **Get** /api/2.0/files/file/{fileId}/xlsx | Get XLSX report generation status
 [**IsFormPDF**](FilesFilesAPI.md#IsFormPDF) | **Get** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file
 [**LockFile**](FilesFilesAPI.md#LockFile) | **Put** /api/2.0/files/file/{fileId}/lock | Lock a file
 [**ManageFormFilling**](FilesFilesAPI.md#ManageFormFilling) | **Put** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action
@@ -1274,7 +1275,7 @@ Name | Type | Description  | Notes
 
 ## GenerateXlsx
 
-> FileIntegerWrapper GenerateXlsx(ctx, fileId).Execute()
+> XlsxReportResponseWrapper GenerateXlsx(ctx, fileId).Execute()
 
 Generate XLSX report
 
@@ -1304,7 +1305,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.GenerateXlsx``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GenerateXlsx`: FileIntegerWrapper
+	// response from `GenerateXlsx`: XlsxReportResponseWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.GenerateXlsx`: %v\n", resp)
 }
 ```
@@ -1328,7 +1329,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**XlsxReportResponseWrapper**](XlsxReportResponseWrapper.md)
 
 ### Authorization
 
@@ -2357,6 +2358,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetXlsx
+
+> DocumentBuilderTaskWrapper GetXlsx(ctx, fileId).Execute()
+
+Get XLSX report generation status
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-xlsx/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	fileId := int32(1) // int32 | The file unique identifier.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FilesFilesAPI.GetXlsx(context.Background(), fileId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.GetXlsx``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetXlsx`: DocumentBuilderTaskWrapper
+	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.GetXlsx`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**fileId** | **int32** | The file unique identifier. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetXlsxRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

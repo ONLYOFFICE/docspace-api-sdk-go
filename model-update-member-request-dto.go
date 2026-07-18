@@ -37,13 +37,8 @@ type UpdateMemberRequestDto struct {
 	LastName NullableString `json:"lastName,omitempty"`
 	// The list of the user departments.
 	Department []string `json:"department,omitempty"`
-	// The user title.
-	Title NullableString `json:"title,omitempty"`
 	// The user location.
 	Location NullableString `json:"location,omitempty"`
-	Sex *SexEnum `json:"sex,omitempty"`
-	Birthday *ApiDateTime `json:"birthday,omitempty"`
-	Worksfrom *ApiDateTime `json:"worksfrom,omitempty"`
 	// The user comment.
 	Comment NullableString `json:"comment,omitempty"`
 	// The list of the user contacts.
@@ -356,48 +351,6 @@ func (o *UpdateMemberRequestDto) SetDepartment(v []string) {
 	o.Department = v
 }
 
-// GetTitle returns the Title field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateMemberRequestDto) GetTitle() string {
-	if o == nil || IsNil(o.Title.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Title.Get()
-}
-
-// GetTitleOk returns a tuple with the Title field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateMemberRequestDto) GetTitleOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Title.Get(), o.Title.IsSet()
-}
-
-// HasTitle returns a boolean if a field has been set.
-func (o *UpdateMemberRequestDto) IsTitleSet() bool {
-	if o != nil && o.Title.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTitle gets a reference to the given NullableString and assigns it to the Title field.
-func (o *UpdateMemberRequestDto) SetTitle(v string) {
-	o.Title.Set(&v)
-}
-// SetTitleNil sets the value for Title to be an explicit nil
-func (o *UpdateMemberRequestDto) SetTitleNil() {
-	o.Title.Set(nil)
-}
-
-// UnsetTitle ensures that no value is present for Title, not even an explicit nil
-func (o *UpdateMemberRequestDto) UnsetTitle() {
-	o.Title.Unset()
-}
-
 // GetLocation returns the Location field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateMemberRequestDto) GetLocation() string {
 	if o == nil || IsNil(o.Location.Get()) {
@@ -438,102 +391,6 @@ func (o *UpdateMemberRequestDto) SetLocationNil() {
 // UnsetLocation ensures that no value is present for Location, not even an explicit nil
 func (o *UpdateMemberRequestDto) UnsetLocation() {
 	o.Location.Unset()
-}
-
-// GetSex returns the Sex field value if set, zero value otherwise.
-func (o *UpdateMemberRequestDto) GetSex() SexEnum {
-	if o == nil || IsNil(o.Sex) {
-		var ret SexEnum
-		return ret
-	}
-	return *o.Sex
-}
-
-// GetSexOk returns a tuple with the Sex field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateMemberRequestDto) GetSexOk() (*SexEnum, bool) {
-	if o == nil || IsNil(o.Sex) {
-		return nil, false
-	}
-	return o.Sex, true
-}
-
-// HasSex returns a boolean if a field has been set.
-func (o *UpdateMemberRequestDto) IsSexSet() bool {
-	if o != nil && !IsNil(o.Sex) {
-		return true
-	}
-
-	return false
-}
-
-// SetSex gets a reference to the given SexEnum and assigns it to the Sex field.
-func (o *UpdateMemberRequestDto) SetSex(v SexEnum) {
-	o.Sex = &v
-}
-
-// GetBirthday returns the Birthday field value if set, zero value otherwise.
-func (o *UpdateMemberRequestDto) GetBirthday() ApiDateTime {
-	if o == nil || IsNil(o.Birthday) {
-		var ret ApiDateTime
-		return ret
-	}
-	return *o.Birthday
-}
-
-// GetBirthdayOk returns a tuple with the Birthday field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateMemberRequestDto) GetBirthdayOk() (*ApiDateTime, bool) {
-	if o == nil || IsNil(o.Birthday) {
-		return nil, false
-	}
-	return o.Birthday, true
-}
-
-// HasBirthday returns a boolean if a field has been set.
-func (o *UpdateMemberRequestDto) IsBirthdaySet() bool {
-	if o != nil && !IsNil(o.Birthday) {
-		return true
-	}
-
-	return false
-}
-
-// SetBirthday gets a reference to the given ApiDateTime and assigns it to the Birthday field.
-func (o *UpdateMemberRequestDto) SetBirthday(v ApiDateTime) {
-	o.Birthday = &v
-}
-
-// GetWorksfrom returns the Worksfrom field value if set, zero value otherwise.
-func (o *UpdateMemberRequestDto) GetWorksfrom() ApiDateTime {
-	if o == nil || IsNil(o.Worksfrom) {
-		var ret ApiDateTime
-		return ret
-	}
-	return *o.Worksfrom
-}
-
-// GetWorksfromOk returns a tuple with the Worksfrom field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateMemberRequestDto) GetWorksfromOk() (*ApiDateTime, bool) {
-	if o == nil || IsNil(o.Worksfrom) {
-		return nil, false
-	}
-	return o.Worksfrom, true
-}
-
-// HasWorksfrom returns a boolean if a field has been set.
-func (o *UpdateMemberRequestDto) IsWorksfromSet() bool {
-	if o != nil && !IsNil(o.Worksfrom) {
-		return true
-	}
-
-	return false
-}
-
-// SetWorksfrom gets a reference to the given ApiDateTime and assigns it to the Worksfrom field.
-func (o *UpdateMemberRequestDto) SetWorksfrom(v ApiDateTime) {
-	o.Worksfrom = &v
 }
 
 // GetComment returns the Comment field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -726,20 +583,8 @@ func (o UpdateMemberRequestDto) ToMap() (map[string]interface{}, error) {
 	if o.Department != nil {
 		toSerialize["department"] = o.Department
 	}
-	if o.Title.IsSet() {
-		toSerialize["title"] = o.Title.Get()
-	}
 	if o.Location.IsSet() {
 		toSerialize["location"] = o.Location.Get()
-	}
-	if !IsNil(o.Sex) {
-		toSerialize["sex"] = o.Sex
-	}
-	if !IsNil(o.Birthday) {
-		toSerialize["birthday"] = o.Birthday
-	}
-	if !IsNil(o.Worksfrom) {
-		toSerialize["worksfrom"] = o.Worksfrom
 	}
 	if o.Comment.IsSet() {
 		toSerialize["comment"] = o.Comment.Get()

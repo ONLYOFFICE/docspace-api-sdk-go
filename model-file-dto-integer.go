@@ -32,6 +32,8 @@ type FileDtoInteger struct {
 	Shared *bool `json:"shared,omitempty"`
 	// Specifies if the file entry is shared for user or not.
 	SharedForUser *bool `json:"sharedForUser,omitempty"`
+	// Specifies if the file entry is shared via a public (non-internal) external link.
+	SharedExternal *bool `json:"sharedExternal,omitempty"`
 	// Indicates whether the parent entity is shared.
 	ParentShared *bool `json:"parentShared,omitempty"`
 	// The short Web URL.
@@ -128,11 +130,15 @@ type FileDtoInteger struct {
 	InProcessFolderId NullableInt32 `json:"inProcessFolderId,omitempty"`
 	// The InProcess folder title of the file.
 	InProcessFolderTitle NullableString `json:"inProcessFolderTitle,omitempty"`
+	// The ID of the FormFillingFolderDone folder that corresponds to this original form.
+	ResultsFolderId NullableInt32 `json:"resultsFolderId,omitempty"`
 	DraftLocation *DraftLocationInteger `json:"draftLocation,omitempty"`
 	ViewAccessibility NullableFileDtoIntegerAllOfViewAccessibility `json:"viewAccessibility,omitempty"`
 	LastOpened *ApiDateTime `json:"lastOpened,omitempty"`
 	Expired *ApiDateTime `json:"expired,omitempty"`
 	VectorizationStatus *VectorizationStatus `json:"vectorizationStatus,omitempty"`
+	// The name of the table in the external database that corresponds to this form.
+	ExternalDbTableName NullableString `json:"externalDbTableName,omitempty"`
 	Dimensions *Size `json:"dimensions,omitempty"`
 }
 
@@ -353,6 +359,38 @@ func (o *FileDtoInteger) IsSharedForUserSet() bool {
 // SetSharedForUser gets a reference to the given bool and assigns it to the SharedForUser field.
 func (o *FileDtoInteger) SetSharedForUser(v bool) {
 	o.SharedForUser = &v
+}
+
+// GetSharedExternal returns the SharedExternal field value if set, zero value otherwise.
+func (o *FileDtoInteger) GetSharedExternal() bool {
+	if o == nil || IsNil(o.SharedExternal) {
+		var ret bool
+		return ret
+	}
+	return *o.SharedExternal
+}
+
+// GetSharedExternalOk returns a tuple with the SharedExternal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDtoInteger) GetSharedExternalOk() (*bool, bool) {
+	if o == nil || IsNil(o.SharedExternal) {
+		return nil, false
+	}
+	return o.SharedExternal, true
+}
+
+// HasSharedExternal returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsSharedExternalSet() bool {
+	if o != nil && !IsNil(o.SharedExternal) {
+		return true
+	}
+
+	return false
+}
+
+// SetSharedExternal gets a reference to the given bool and assigns it to the SharedExternal field.
+func (o *FileDtoInteger) SetSharedExternal(v bool) {
+	o.SharedExternal = &v
 }
 
 // GetParentShared returns the ParentShared field value if set, zero value otherwise.
@@ -2468,6 +2506,48 @@ func (o *FileDtoInteger) UnsetInProcessFolderTitle() {
 	o.InProcessFolderTitle.Unset()
 }
 
+// GetResultsFolderId returns the ResultsFolderId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetResultsFolderId() int32 {
+	if o == nil || IsNil(o.ResultsFolderId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.ResultsFolderId.Get()
+}
+
+// GetResultsFolderIdOk returns a tuple with the ResultsFolderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetResultsFolderIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ResultsFolderId.Get(), o.ResultsFolderId.IsSet()
+}
+
+// HasResultsFolderId returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsResultsFolderIdSet() bool {
+	if o != nil && o.ResultsFolderId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetResultsFolderId gets a reference to the given NullableInt32 and assigns it to the ResultsFolderId field.
+func (o *FileDtoInteger) SetResultsFolderId(v int32) {
+	o.ResultsFolderId.Set(&v)
+}
+// SetResultsFolderIdNil sets the value for ResultsFolderId to be an explicit nil
+func (o *FileDtoInteger) SetResultsFolderIdNil() {
+	o.ResultsFolderId.Set(nil)
+}
+
+// UnsetResultsFolderId ensures that no value is present for ResultsFolderId, not even an explicit nil
+func (o *FileDtoInteger) UnsetResultsFolderId() {
+	o.ResultsFolderId.Unset()
+}
+
 // GetDraftLocation returns the DraftLocation field value if set, zero value otherwise.
 func (o *FileDtoInteger) GetDraftLocation() DraftLocationInteger {
 	if o == nil || IsNil(o.DraftLocation) {
@@ -2638,6 +2718,48 @@ func (o *FileDtoInteger) SetVectorizationStatus(v VectorizationStatus) {
 	o.VectorizationStatus = &v
 }
 
+// GetExternalDbTableName returns the ExternalDbTableName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileDtoInteger) GetExternalDbTableName() string {
+	if o == nil || IsNil(o.ExternalDbTableName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalDbTableName.Get()
+}
+
+// GetExternalDbTableNameOk returns a tuple with the ExternalDbTableName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileDtoInteger) GetExternalDbTableNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ExternalDbTableName.Get(), o.ExternalDbTableName.IsSet()
+}
+
+// HasExternalDbTableName returns a boolean if a field has been set.
+func (o *FileDtoInteger) IsExternalDbTableNameSet() bool {
+	if o != nil && o.ExternalDbTableName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalDbTableName gets a reference to the given NullableString and assigns it to the ExternalDbTableName field.
+func (o *FileDtoInteger) SetExternalDbTableName(v string) {
+	o.ExternalDbTableName.Set(&v)
+}
+// SetExternalDbTableNameNil sets the value for ExternalDbTableName to be an explicit nil
+func (o *FileDtoInteger) SetExternalDbTableNameNil() {
+	o.ExternalDbTableName.Set(nil)
+}
+
+// UnsetExternalDbTableName ensures that no value is present for ExternalDbTableName, not even an explicit nil
+func (o *FileDtoInteger) UnsetExternalDbTableName() {
+	o.ExternalDbTableName.Unset()
+}
+
 // GetDimensions returns the Dimensions field value if set, zero value otherwise.
 func (o *FileDtoInteger) GetDimensions() Size {
 	if o == nil || IsNil(o.Dimensions) {
@@ -2697,6 +2819,9 @@ func (o FileDtoInteger) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SharedForUser) {
 		toSerialize["sharedForUser"] = o.SharedForUser
+	}
+	if !IsNil(o.SharedExternal) {
+		toSerialize["sharedExternal"] = o.SharedExternal
 	}
 	if !IsNil(o.ParentShared) {
 		toSerialize["parentShared"] = o.ParentShared
@@ -2866,6 +2991,9 @@ func (o FileDtoInteger) ToMap() (map[string]interface{}, error) {
 	if o.InProcessFolderTitle.IsSet() {
 		toSerialize["inProcessFolderTitle"] = o.InProcessFolderTitle.Get()
 	}
+	if o.ResultsFolderId.IsSet() {
+		toSerialize["resultsFolderId"] = o.ResultsFolderId.Get()
+	}
 	if !IsNil(o.DraftLocation) {
 		toSerialize["draftLocation"] = o.DraftLocation
 	}
@@ -2880,6 +3008,9 @@ func (o FileDtoInteger) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.VectorizationStatus) {
 		toSerialize["vectorizationStatus"] = o.VectorizationStatus
+	}
+	if o.ExternalDbTableName.IsSet() {
+		toSerialize["externalDbTableName"] = o.ExternalDbTableName.Get()
 	}
 	if !IsNil(o.Dimensions) {
 		toSerialize["dimensions"] = o.Dimensions

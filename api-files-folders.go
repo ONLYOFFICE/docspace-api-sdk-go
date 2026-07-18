@@ -663,7 +663,7 @@ type ApiGenerateXlsxByFolderRequest struct {
 	folderId int32
 }
 
-func (r ApiGenerateXlsxByFolderRequest) Execute() (*FileIntegerWrapper, *http.Response, error) {
+func (r ApiGenerateXlsxByFolderRequest) Execute() (*XlsxReportResponseWrapper, *http.Response, error) {
 	return r.ApiService.GenerateXlsxByFolderExecute(r)
 }
 
@@ -685,13 +685,13 @@ func (a *FilesFoldersAPIService) GenerateXlsxByFolder(ctx context.Context, folde
 }
 
 // Execute executes the request
-//  @return FileIntegerWrapper
-func (a *FilesFoldersAPIService) GenerateXlsxByFolderExecute(r ApiGenerateXlsxByFolderRequest) (*FileIntegerWrapper, *http.Response, error) {
+//  @return XlsxReportResponseWrapper
+func (a *FilesFoldersAPIService) GenerateXlsxByFolderExecute(r ApiGenerateXlsxByFolderRequest) (*XlsxReportResponseWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *FileIntegerWrapper
+		localVarReturnValue  *XlsxReportResponseWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesFoldersAPIService.GenerateXlsxByFolder")
@@ -1176,6 +1176,7 @@ type ApiGetFolderByFolderIdRequest struct {
 	roomId *int32
 	excludeSubject *bool
 	applyFilterOption *ApplyFilterOption
+	withSubFolders *bool
 	extension *string
 	searchArea *SearchArea
 	formsItemKey *string
@@ -1215,6 +1216,11 @@ func (r ApiGetFolderByFolderIdRequest) ExcludeSubject(excludeSubject bool) ApiGe
 
 // Specifies whether to return only files, only folders, or all elements from the specified folder.
 func (r ApiGetFolderByFolderIdRequest) ApplyFilterOption(applyFilterOption ApplyFilterOption) ApiGetFolderByFolderIdRequest {	r.applyFilterOption = &applyFilterOption
+	return r
+}
+
+// Specifies whether to include files from subfolders in the results.
+func (r ApiGetFolderByFolderIdRequest) WithSubFolders(withSubFolders bool) ApiGetFolderByFolderIdRequest {	r.withSubFolders = &withSubFolders
 	return r
 }
 
@@ -1328,6 +1334,9 @@ func (a *FilesFoldersAPIService) GetFolderByFolderIdExecute(r ApiGetFolderByFold
 			}
 	if r.applyFilterOption != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "applyFilterOption", r.applyFilterOption, "form", "")
+			}
+	if r.withSubFolders != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "withSubFolders", r.withSubFolders, "form", "")
 			}
 	if r.extension != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "extension", r.extension, "form", "")
@@ -4040,15 +4049,33 @@ type ApiUploadFileRequest struct {
 	ctx context.Context
 	ApiService *FilesFoldersAPIService
 	folderId int32
-	uploadRequestDto *UploadRequestDto
+	createNewIfExist *bool
+	storeOriginalFile *bool
+	keepConvertStatus *bool
+	file *os.File
 }
 
-// The request parameters for uploading a file.
-func (r ApiUploadFileRequest) UploadRequestDto(uploadRequestDto UploadRequestDto) ApiUploadFileRequest {	r.uploadRequestDto = &uploadRequestDto
+// Specifies whether to create the new file if it already exists or not.
+func (r ApiUploadFileRequest) CreateNewIfExist(createNewIfExist bool) ApiUploadFileRequest {	r.createNewIfExist = &createNewIfExist
 	return r
 }
 
-func (r ApiUploadFileRequest) Execute() (*ObjectWrapper, *http.Response, error) {
+// Specifies whether to upload documents in the original formats as well or not.
+func (r ApiUploadFileRequest) StoreOriginalFile(storeOriginalFile bool) ApiUploadFileRequest {	r.storeOriginalFile = &storeOriginalFile
+	return r
+}
+
+// Specifies whether to keep the file converting status or not.
+func (r ApiUploadFileRequest) KeepConvertStatus(keepConvertStatus bool) ApiUploadFileRequest {	r.keepConvertStatus = &keepConvertStatus
+	return r
+}
+
+// The file to be uploaded.
+func (r ApiUploadFileRequest) File(file *os.File) ApiUploadFileRequest {	r.file = file
+	return r
+}
+
+func (r ApiUploadFileRequest) Execute() (*FileIntegerArrayWrapper, *http.Response, error) {
 	return r.ApiService.UploadFileExecute(r)
 }
 
@@ -4070,13 +4097,13 @@ func (a *FilesFoldersAPIService) UploadFile(ctx context.Context, folderId int32)
 }
 
 // Execute executes the request
-//  @return ObjectWrapper
-func (a *FilesFoldersAPIService) UploadFileExecute(r ApiUploadFileRequest) (*ObjectWrapper, *http.Response, error) {
+//  @return FileIntegerArrayWrapper
+func (a *FilesFoldersAPIService) UploadFileExecute(r ApiUploadFileRequest) (*FileIntegerArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ObjectWrapper
+		localVarReturnValue  *FileIntegerArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesFoldersAPIService.UploadFile")
@@ -4091,8 +4118,17 @@ func (a *FilesFoldersAPIService) UploadFileExecute(r ApiUploadFileRequest) (*Obj
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.createNewIfExist != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "createNewIfExist", r.createNewIfExist, "form", "")
+			}
+	if r.storeOriginalFile != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "storeOriginalFile", r.storeOriginalFile, "form", "")
+			}
+	if r.keepConvertStatus != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "keepConvertStatus", r.keepConvertStatus, "form", "")
+			}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{"multipart/form-data"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -4108,8 +4144,21 @@ func (a *FilesFoldersAPIService) UploadFileExecute(r ApiUploadFileRequest) (*Obj
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.uploadRequestDto
+	var fileLocalVarFormFileName string
+	var fileLocalVarFileName     string
+	var fileLocalVarFileBytes    []byte
+
+	fileLocalVarFormFileName = "File"
+	fileLocalVarFile := r.file
+
+	if fileLocalVarFile != nil {
+		fbs, _ := io.ReadAll(fileLocalVarFile)
+
+		fileLocalVarFileBytes = fbs
+		fileLocalVarFileName = fileLocalVarFile.Name()
+		fileLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
+	}
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -4164,15 +4213,33 @@ func (a *FilesFoldersAPIService) UploadFileExecute(r ApiUploadFileRequest) (*Obj
 type ApiUploadFileToMyRequest struct {
 	ctx context.Context
 	ApiService *FilesFoldersAPIService
-	inDto *UploadRequestDto
+	createNewIfExist *bool
+	storeOriginalFile *bool
+	keepConvertStatus *bool
+	file *os.File
 }
 
-// The request parameters for uploading a file.
-func (r ApiUploadFileToMyRequest) InDto(inDto UploadRequestDto) ApiUploadFileToMyRequest {	r.inDto = &inDto
+// Specifies whether to create the new file if it already exists or not.
+func (r ApiUploadFileToMyRequest) CreateNewIfExist(createNewIfExist bool) ApiUploadFileToMyRequest {	r.createNewIfExist = &createNewIfExist
 	return r
 }
 
-func (r ApiUploadFileToMyRequest) Execute() (*ObjectWrapper, *http.Response, error) {
+// Specifies whether to upload documents in the original formats as well or not.
+func (r ApiUploadFileToMyRequest) StoreOriginalFile(storeOriginalFile bool) ApiUploadFileToMyRequest {	r.storeOriginalFile = &storeOriginalFile
+	return r
+}
+
+// Specifies whether to keep the file converting status or not.
+func (r ApiUploadFileToMyRequest) KeepConvertStatus(keepConvertStatus bool) ApiUploadFileToMyRequest {	r.keepConvertStatus = &keepConvertStatus
+	return r
+}
+
+// The file to be uploaded.
+func (r ApiUploadFileToMyRequest) File(file *os.File) ApiUploadFileToMyRequest {	r.file = file
+	return r
+}
+
+func (r ApiUploadFileToMyRequest) Execute() (*FileIntegerArrayWrapper, *http.Response, error) {
 	return r.ApiService.UploadFileToMyExecute(r)
 }
 
@@ -4192,13 +4259,13 @@ func (a *FilesFoldersAPIService) UploadFileToMy(ctx context.Context) ApiUploadFi
 }
 
 // Execute executes the request
-//  @return ObjectWrapper
-func (a *FilesFoldersAPIService) UploadFileToMyExecute(r ApiUploadFileToMyRequest) (*ObjectWrapper, *http.Response, error) {
+//  @return FileIntegerArrayWrapper
+func (a *FilesFoldersAPIService) UploadFileToMyExecute(r ApiUploadFileToMyRequest) (*FileIntegerArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ObjectWrapper
+		localVarReturnValue  *FileIntegerArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesFoldersAPIService.UploadFileToMy")
@@ -4212,11 +4279,17 @@ func (a *FilesFoldersAPIService) UploadFileToMyExecute(r ApiUploadFileToMyReques
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.inDto != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "inDto", r.inDto, "deepObject", "")
+	if r.createNewIfExist != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "createNewIfExist", r.createNewIfExist, "form", "")
+			}
+	if r.storeOriginalFile != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "storeOriginalFile", r.storeOriginalFile, "form", "")
+			}
+	if r.keepConvertStatus != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "keepConvertStatus", r.keepConvertStatus, "form", "")
 			}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"multipart/form-data"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -4231,6 +4304,21 @@ func (a *FilesFoldersAPIService) UploadFileToMyExecute(r ApiUploadFileToMyReques
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	var fileLocalVarFormFileName string
+	var fileLocalVarFileName     string
+	var fileLocalVarFileBytes    []byte
+
+	fileLocalVarFormFileName = "File"
+	fileLocalVarFile := r.file
+
+	if fileLocalVarFile != nil {
+		fbs, _ := io.ReadAll(fileLocalVarFile)
+
+		fileLocalVarFileBytes = fbs
+		fileLocalVarFileName = fileLocalVarFile.Name()
+		fileLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
 	}
 	if r.ctx != nil {
 		// API Key Authentication

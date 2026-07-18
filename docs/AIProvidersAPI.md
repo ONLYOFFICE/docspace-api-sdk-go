@@ -8,7 +8,9 @@ Method | HTTP request | Description
 [**DeleteProviders**](AIProvidersAPI.md#DeleteProviders) | **Delete** /api/2.0/ai/providers | Delete AI providers
 [**GetAvailableProviders**](AIProvidersAPI.md#GetAvailableProviders) | **Get** /api/2.0/ai/providers/available | Get available AI provider types
 [**GetDefaultProvider**](AIProvidersAPI.md#GetDefaultProvider) | **Get** /api/2.0/ai/providers/default | Get the default AI provider
+[**GetProviderModels**](AIProvidersAPI.md#GetProviderModels) | **Get** /api/2.0/ai/providers/{providerId}/models | Get all models for a provider with their settings
 [**GetProviders**](AIProvidersAPI.md#GetProviders) | **Get** /api/2.0/ai/providers | Get AI providers
+[**PreviewProviderModels**](AIProvidersAPI.md#PreviewProviderModels) | **Post** /api/2.0/ai/providers/models/preview | Preview models for a new AI provider
 [**SetDefaultProvider**](AIProvidersAPI.md#SetDefaultProvider) | **Put** /api/2.0/ai/providers/default | Set the default AI provider
 [**UpdateProvider**](AIProvidersAPI.md#UpdateProvider) | **Put** /api/2.0/ai/providers/{id} | Update an AI provider
 
@@ -274,6 +276,78 @@ Other parameters are passed through a pointer to a apiGetDefaultProviderRequest 
 [[Back to README]](../README.md)
 
 
+## GetProviderModels
+
+> ModelSettingsArrayWrapper GetProviderModels(ctx, providerId).Execute()
+
+Get all models for a provider with their settings
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-provider-models/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	providerId := int32(1) // int32 | The identifier of the AI provider.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AIProvidersAPI.GetProviderModels(context.Background(), providerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AIProvidersAPI.GetProviderModels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetProviderModels`: ModelSettingsArrayWrapper
+	fmt.Fprintf(os.Stdout, "Response from `AIProvidersAPI.GetProviderModels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**providerId** | **int32** | The identifier of the AI provider. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetProviderModelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ModelSettingsArrayWrapper**](ModelSettingsArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetProviders
 
 > AiProviderArrayWrapper GetProviders(ctx).StartIndex(startIndex).Count(count).Execute()
@@ -337,6 +411,74 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PreviewProviderModels
+
+> ModelSettingsArrayWrapper PreviewProviderModels(ctx).PreviewProviderModelsRequestDto(previewProviderModelsRequestDto).Execute()
+
+Preview models for a new AI provider
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/preview-provider-models/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	previewProviderModelsRequestDto := *openapiclient.NewPreviewProviderModelsRequestDto("sk-example-key-123") // PreviewProviderModelsRequestDto |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AIProvidersAPI.PreviewProviderModels(context.Background()).PreviewProviderModelsRequestDto(previewProviderModelsRequestDto).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AIProvidersAPI.PreviewProviderModels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PreviewProviderModels`: ModelSettingsArrayWrapper
+	fmt.Fprintf(os.Stdout, "Response from `AIProvidersAPI.PreviewProviderModels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPreviewProviderModelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **previewProviderModelsRequestDto** | [**PreviewProviderModelsRequestDto**](PreviewProviderModelsRequestDto.md) |  | 
+
+### Return type
+
+[**ModelSettingsArrayWrapper**](ModelSettingsArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

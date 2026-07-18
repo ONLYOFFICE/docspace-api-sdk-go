@@ -32,6 +32,8 @@ type FolderDtoInteger struct {
 	Shared *bool `json:"shared,omitempty"`
 	// Specifies if the file entry is shared for user or not.
 	SharedForUser *bool `json:"sharedForUser,omitempty"`
+	// Specifies if the file entry is shared via a public (non-internal) external link.
+	SharedExternal *bool `json:"sharedExternal,omitempty"`
 	// Indicates whether the parent entity is shared.
 	ParentShared *bool `json:"parentShared,omitempty"`
 	// The short Web URL.
@@ -124,6 +126,8 @@ type FolderDtoInteger struct {
 	SaveFormAsXLSX NullableBool `json:"saveFormAsXLSX,omitempty"`
 	// Specifies whether to send form data to external database.
 	SendFormToExternalDB NullableBool `json:"sendFormToExternalDB,omitempty"`
+	// The original form ID that corresponds to this FormFillingFolderDone folder.
+	OriginalFormId NullableInt32 `json:"originalFormId,omitempty"`
 }
 
 // NewFolderDtoInteger instantiates a new FolderDtoInteger object
@@ -343,6 +347,38 @@ func (o *FolderDtoInteger) IsSharedForUserSet() bool {
 // SetSharedForUser gets a reference to the given bool and assigns it to the SharedForUser field.
 func (o *FolderDtoInteger) SetSharedForUser(v bool) {
 	o.SharedForUser = &v
+}
+
+// GetSharedExternal returns the SharedExternal field value if set, zero value otherwise.
+func (o *FolderDtoInteger) GetSharedExternal() bool {
+	if o == nil || IsNil(o.SharedExternal) {
+		var ret bool
+		return ret
+	}
+	return *o.SharedExternal
+}
+
+// GetSharedExternalOk returns a tuple with the SharedExternal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FolderDtoInteger) GetSharedExternalOk() (*bool, bool) {
+	if o == nil || IsNil(o.SharedExternal) {
+		return nil, false
+	}
+	return o.SharedExternal, true
+}
+
+// HasSharedExternal returns a boolean if a field has been set.
+func (o *FolderDtoInteger) IsSharedExternalSet() bool {
+	if o != nil && !IsNil(o.SharedExternal) {
+		return true
+	}
+
+	return false
+}
+
+// SetSharedExternal gets a reference to the given bool and assigns it to the SharedExternal field.
+func (o *FolderDtoInteger) SetSharedExternal(v bool) {
+	o.SharedExternal = &v
 }
 
 // GetParentShared returns the ParentShared field value if set, zero value otherwise.
@@ -2339,6 +2375,48 @@ func (o *FolderDtoInteger) UnsetSendFormToExternalDB() {
 	o.SendFormToExternalDB.Unset()
 }
 
+// GetOriginalFormId returns the OriginalFormId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FolderDtoInteger) GetOriginalFormId() int32 {
+	if o == nil || IsNil(o.OriginalFormId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.OriginalFormId.Get()
+}
+
+// GetOriginalFormIdOk returns a tuple with the OriginalFormId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FolderDtoInteger) GetOriginalFormIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OriginalFormId.Get(), o.OriginalFormId.IsSet()
+}
+
+// HasOriginalFormId returns a boolean if a field has been set.
+func (o *FolderDtoInteger) IsOriginalFormIdSet() bool {
+	if o != nil && o.OriginalFormId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginalFormId gets a reference to the given NullableInt32 and assigns it to the OriginalFormId field.
+func (o *FolderDtoInteger) SetOriginalFormId(v int32) {
+	o.OriginalFormId.Set(&v)
+}
+// SetOriginalFormIdNil sets the value for OriginalFormId to be an explicit nil
+func (o *FolderDtoInteger) SetOriginalFormIdNil() {
+	o.OriginalFormId.Set(nil)
+}
+
+// UnsetOriginalFormId ensures that no value is present for OriginalFormId, not even an explicit nil
+func (o *FolderDtoInteger) UnsetOriginalFormId() {
+	o.OriginalFormId.Unset()
+}
+
 func (o FolderDtoInteger) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -2366,6 +2444,9 @@ func (o FolderDtoInteger) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SharedForUser) {
 		toSerialize["sharedForUser"] = o.SharedForUser
+	}
+	if !IsNil(o.SharedExternal) {
+		toSerialize["sharedExternal"] = o.SharedExternal
 	}
 	if !IsNil(o.ParentShared) {
 		toSerialize["parentShared"] = o.ParentShared
@@ -2531,6 +2612,9 @@ func (o FolderDtoInteger) ToMap() (map[string]interface{}, error) {
 	}
 	if o.SendFormToExternalDB.IsSet() {
 		toSerialize["sendFormToExternalDB"] = o.SendFormToExternalDB.Get()
+	}
+	if o.OriginalFormId.IsSet() {
+		toSerialize["originalFormId"] = o.OriginalFormId.Get()
 	}
 	return toSerialize, nil
 }

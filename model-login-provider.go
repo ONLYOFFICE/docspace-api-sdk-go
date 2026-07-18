@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// LoginProvider [0 - Facebook, 1 - Google, 2 - Dropbox, 3 - Docusign, 4 - Box, 5 - OneDrive, 6 - GosUslugi, 7 - LinkedIn, 8 - MailRu, 9 - VK, 10 - Wordpress, 11 - Yahoo, 12 - Yandex, 13 - Github]
+// LoginProvider [0 - Facebook, 1 - Google, 2 - Dropbox, 3 - Docusign, 4 - Box, 5 - OneDrive, 6 - GosUslugi, 7 - LinkedIn, 8 - MailRu, 9 - VK, 10 - Wordpress, 11 - Yahoo, 12 - Yandex, 13 - Github, 14 - Nextcloud]
 type LoginProvider int32
 
 // List of LoginProvider
@@ -38,6 +38,7 @@ const (
 	LOGINPROVIDER_Yahoo LoginProvider = 11
 	LOGINPROVIDER_Yandex LoginProvider = 12
 	LOGINPROVIDER_Github LoginProvider = 13
+	LOGINPROVIDER_Nextcloud LoginProvider = 14
 )
 
 // All allowed values of LoginProvider enum
@@ -56,6 +57,7 @@ var AllowedLoginProviderEnumValues = []LoginProvider{
 	11,
 	12,
 	13,
+	14,
 }
 
 func (v *LoginProvider) UnmarshalJSON(src []byte) error {

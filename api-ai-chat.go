@@ -254,11 +254,11 @@ type ApiExportChatRequest struct {
 	ctx context.Context
 	ApiService *AIChatAPIService
 	chatId string
-	exportChatRequestBodyInteger *ExportChatRequestBodyInteger
+	exportChatRequestBody *ExportChatRequestBody
 }
 
 // The export parameters including destination folder and file title.
-func (r ApiExportChatRequest) ExportChatRequestBodyInteger(exportChatRequestBodyInteger ExportChatRequestBodyInteger) ApiExportChatRequest {	r.exportChatRequestBodyInteger = &exportChatRequestBodyInteger
+func (r ApiExportChatRequest) ExportChatRequestBody(exportChatRequestBody ExportChatRequestBody) ApiExportChatRequest {	r.exportChatRequestBody = &exportChatRequestBody
 	return r
 }
 
@@ -302,8 +302,8 @@ func (a *AIChatAPIService) ExportChatExecute(r ApiExportChatRequest) (*http.Resp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.exportChatRequestBodyInteger == nil {
-		return nil, reportError("exportChatRequestBodyInteger is required and must be specified")
+	if r.exportChatRequestBody == nil {
+		return nil, reportError("exportChatRequestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -324,7 +324,7 @@ func (a *AIChatAPIService) ExportChatExecute(r ApiExportChatRequest) (*http.Resp
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.exportChatRequestBodyInteger
+	localVarPostBody = r.exportChatRequestBody
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1187,6 +1187,134 @@ func (a *AIChatAPIService) RenameChatExecute(r ApiRenameChatRequest) (*ChatWrapp
 	}
 	// body params
 	localVarPostBody = r.renameChatBody
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyBearer"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["ApiKeyBearer"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiResolveEditorToolRequest struct {
+	ctx context.Context
+	ApiService *AIChatAPIService
+	callId string
+	editorToolDecisionRequestBody *EditorToolDecisionRequestBody
+}
+
+// The decision parameters.
+func (r ApiResolveEditorToolRequest) EditorToolDecisionRequestBody(editorToolDecisionRequestBody EditorToolDecisionRequestBody) ApiResolveEditorToolRequest {	r.editorToolDecisionRequestBody = &editorToolDecisionRequestBody
+	return r
+}
+
+func (r ApiResolveEditorToolRequest) Execute() (*GeneratedFileWrapper, *http.Response, error) {
+	return r.ApiService.ResolveEditorToolExecute(r)
+}
+
+// ResolveEditorTool Resolve a pending editor file-generation tool
+//
+// Submits the user's approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
+//
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/resolve-editor-tool/
+//
+// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+// @param callId The unique identifier of the pending tool call awaiting the user's decision.
+// @return ApiResolveEditorToolRequest
+func (a *AIChatAPIService) ResolveEditorTool(ctx context.Context, callId string) ApiResolveEditorToolRequest {
+	return ApiResolveEditorToolRequest{
+		ApiService: a,
+		ctx: ctx,
+		callId: callId,
+	}
+}
+
+// Execute executes the request
+//  @return GeneratedFileWrapper
+func (a *AIChatAPIService) ResolveEditorToolExecute(r ApiResolveEditorToolRequest) (*GeneratedFileWrapper, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GeneratedFileWrapper
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIChatAPIService.ResolveEditorTool")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/2.0/ai/chats/tool-files/{callId}/decision"
+	localVarPath = strings.Replace(localVarPath, "{"+"callId"+"}", url.PathEscape(parameterValueToString(r.callId, "callId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.editorToolDecisionRequestBody == nil {
+		return localVarReturnValue, nil, reportError("editorToolDecisionRequestBody is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.editorToolDecisionRequestBody
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

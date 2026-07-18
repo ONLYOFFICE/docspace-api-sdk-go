@@ -57,6 +57,8 @@ type AiSettingsDto struct {
 	GeneratePresentationToolName NullableString `json:"generatePresentationToolName"`
 	// Indicates whether the system-level AI provider is enabled.
 	SystemAiEnabled *bool `json:"systemAiEnabled,omitempty"`
+	// The identifier of the model recommended for form generation.
+	RecommendedModelForForms NullableString `json:"recommendedModelForForms,omitempty"`
 }
 
 type _AiSettingsDto AiSettingsDto
@@ -560,6 +562,48 @@ func (o *AiSettingsDto) SetSystemAiEnabled(v bool) {
 	o.SystemAiEnabled = &v
 }
 
+// GetRecommendedModelForForms returns the RecommendedModelForForms field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AiSettingsDto) GetRecommendedModelForForms() string {
+	if o == nil || IsNil(o.RecommendedModelForForms.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RecommendedModelForForms.Get()
+}
+
+// GetRecommendedModelForFormsOk returns a tuple with the RecommendedModelForForms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AiSettingsDto) GetRecommendedModelForFormsOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RecommendedModelForForms.Get(), o.RecommendedModelForForms.IsSet()
+}
+
+// HasRecommendedModelForForms returns a boolean if a field has been set.
+func (o *AiSettingsDto) IsRecommendedModelForFormsSet() bool {
+	if o != nil && o.RecommendedModelForForms.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRecommendedModelForForms gets a reference to the given NullableString and assigns it to the RecommendedModelForForms field.
+func (o *AiSettingsDto) SetRecommendedModelForForms(v string) {
+	o.RecommendedModelForForms.Set(&v)
+}
+// SetRecommendedModelForFormsNil sets the value for RecommendedModelForForms to be an explicit nil
+func (o *AiSettingsDto) SetRecommendedModelForFormsNil() {
+	o.RecommendedModelForForms.Set(nil)
+}
+
+// UnsetRecommendedModelForForms ensures that no value is present for RecommendedModelForForms, not even an explicit nil
+func (o *AiSettingsDto) UnsetRecommendedModelForForms() {
+	o.RecommendedModelForForms.Unset()
+}
+
 func (o AiSettingsDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -603,6 +647,9 @@ func (o AiSettingsDto) ToMap() (map[string]interface{}, error) {
 	toSerialize["generatePresentationToolName"] = o.GeneratePresentationToolName.Get()
 	if !IsNil(o.SystemAiEnabled) {
 		toSerialize["systemAiEnabled"] = o.SystemAiEnabled
+	}
+	if o.RecommendedModelForForms.IsSet() {
+		toSerialize["recommendedModelForForms"] = o.RecommendedModelForForms.Get()
 	}
 	return toSerialize, nil
 }

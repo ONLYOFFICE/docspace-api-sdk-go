@@ -48,6 +48,10 @@ type CreateRoomRequestDto struct {
 	// The collection of sharing parameters.
 	Share []FileShareParams `json:"share,omitempty"`
 	ChatSettings *ChatSettings `json:"chatSettings,omitempty"`
+	// Specifies whether to send form data to external database.
+	SendFormToExternalDB NullableBool `json:"sendFormToExternalDB,omitempty"`
+	// Specifies whether to save form data as XLSX file.
+	SaveFormAsXLSX NullableBool `json:"saveFormAsXLSX,omitempty"`
 }
 
 type _CreateRoomRequestDto CreateRoomRequestDto
@@ -557,6 +561,90 @@ func (o *CreateRoomRequestDto) SetChatSettings(v ChatSettings) {
 	o.ChatSettings = &v
 }
 
+// GetSendFormToExternalDB returns the SendFormToExternalDB field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateRoomRequestDto) GetSendFormToExternalDB() bool {
+	if o == nil || IsNil(o.SendFormToExternalDB.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.SendFormToExternalDB.Get()
+}
+
+// GetSendFormToExternalDBOk returns a tuple with the SendFormToExternalDB field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateRoomRequestDto) GetSendFormToExternalDBOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SendFormToExternalDB.Get(), o.SendFormToExternalDB.IsSet()
+}
+
+// HasSendFormToExternalDB returns a boolean if a field has been set.
+func (o *CreateRoomRequestDto) IsSendFormToExternalDBSet() bool {
+	if o != nil && o.SendFormToExternalDB.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSendFormToExternalDB gets a reference to the given NullableBool and assigns it to the SendFormToExternalDB field.
+func (o *CreateRoomRequestDto) SetSendFormToExternalDB(v bool) {
+	o.SendFormToExternalDB.Set(&v)
+}
+// SetSendFormToExternalDBNil sets the value for SendFormToExternalDB to be an explicit nil
+func (o *CreateRoomRequestDto) SetSendFormToExternalDBNil() {
+	o.SendFormToExternalDB.Set(nil)
+}
+
+// UnsetSendFormToExternalDB ensures that no value is present for SendFormToExternalDB, not even an explicit nil
+func (o *CreateRoomRequestDto) UnsetSendFormToExternalDB() {
+	o.SendFormToExternalDB.Unset()
+}
+
+// GetSaveFormAsXLSX returns the SaveFormAsXLSX field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateRoomRequestDto) GetSaveFormAsXLSX() bool {
+	if o == nil || IsNil(o.SaveFormAsXLSX.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.SaveFormAsXLSX.Get()
+}
+
+// GetSaveFormAsXLSXOk returns a tuple with the SaveFormAsXLSX field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateRoomRequestDto) GetSaveFormAsXLSXOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SaveFormAsXLSX.Get(), o.SaveFormAsXLSX.IsSet()
+}
+
+// HasSaveFormAsXLSX returns a boolean if a field has been set.
+func (o *CreateRoomRequestDto) IsSaveFormAsXLSXSet() bool {
+	if o != nil && o.SaveFormAsXLSX.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSaveFormAsXLSX gets a reference to the given NullableBool and assigns it to the SaveFormAsXLSX field.
+func (o *CreateRoomRequestDto) SetSaveFormAsXLSX(v bool) {
+	o.SaveFormAsXLSX.Set(&v)
+}
+// SetSaveFormAsXLSXNil sets the value for SaveFormAsXLSX to be an explicit nil
+func (o *CreateRoomRequestDto) SetSaveFormAsXLSXNil() {
+	o.SaveFormAsXLSX.Set(nil)
+}
+
+// UnsetSaveFormAsXLSX ensures that no value is present for SaveFormAsXLSX, not even an explicit nil
+func (o *CreateRoomRequestDto) UnsetSaveFormAsXLSX() {
+	o.SaveFormAsXLSX.Unset()
+}
+
 func (o CreateRoomRequestDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -604,6 +692,12 @@ func (o CreateRoomRequestDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ChatSettings) {
 		toSerialize["chatSettings"] = o.ChatSettings
+	}
+	if o.SendFormToExternalDB.IsSet() {
+		toSerialize["sendFormToExternalDB"] = o.SendFormToExternalDB.Get()
+	}
+	if o.SaveFormAsXLSX.IsSet() {
+		toSerialize["saveFormAsXLSX"] = o.SaveFormAsXLSX.Get()
 	}
 	return toSerialize, nil
 }

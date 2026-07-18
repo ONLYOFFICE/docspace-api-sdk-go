@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **GenerateFormToolName** | **NullableString** | The tool name used by the AI assistant to launch form creation in the editor. | 
 **GeneratePresentationToolName** | **NullableString** | The tool name used by the AI assistant to launch presentation creation in the editor. | 
 **SystemAiEnabled** | Pointer to **bool** | Indicates whether the system-level AI provider is enabled. | [optional] 
+**RecommendedModelForForms** | Pointer to **NullableString** | The identifier of the model recommended for form generation. | [optional] 
 
 ## Methods
 
@@ -490,6 +491,41 @@ SetSystemAiEnabled sets SystemAiEnabled field to given value.
 
 HasSystemAiEnabled returns a boolean if a field has been set.
 
+### GetRecommendedModelForForms
+
+`func (o *AiSettingsDto) GetRecommendedModelForForms() string`
+
+GetRecommendedModelForForms returns the RecommendedModelForForms field if non-nil, zero value otherwise.
+
+### GetRecommendedModelForFormsOk
+
+`func (o *AiSettingsDto) GetRecommendedModelForFormsOk() (*string, bool)`
+
+GetRecommendedModelForFormsOk returns a tuple with the RecommendedModelForForms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecommendedModelForForms
+
+`func (o *AiSettingsDto) SetRecommendedModelForForms(v string)`
+
+SetRecommendedModelForForms sets RecommendedModelForForms field to given value.
+
+### HasRecommendedModelForForms
+
+`func (o *AiSettingsDto) HasRecommendedModelForForms() bool`
+
+HasRecommendedModelForForms returns a boolean if a field has been set.
+
+### SetRecommendedModelForFormsNil
+
+`func (o *AiSettingsDto) SetRecommendedModelForFormsNil(b bool)`
+
+ SetRecommendedModelForFormsNil sets the value for RecommendedModelForForms to be an explicit nil
+
+### UnsetRecommendedModelForForms
+`func (o *AiSettingsDto) UnsetRecommendedModelForForms()`
+
+UnsetRecommendedModelForForms ensures that no value is present for RecommendedModelForForms, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

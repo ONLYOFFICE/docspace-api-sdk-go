@@ -29,6 +29,8 @@ type UpdateProviderBody struct {
 	Url NullableString `json:"url,omitempty"`
 	// The new authentication API key for the AI provider. If null, the key is not changed.
 	Key NullableString `json:"key,omitempty"`
+	// Optional list of model settings changes to apply atomically with the provider update.
+	ModelSettings []ModelSettingsItemDto `json:"modelSettings,omitempty"`
 }
 
 // NewUpdateProviderBody instantiates a new UpdateProviderBody object
@@ -174,6 +176,39 @@ func (o *UpdateProviderBody) UnsetKey() {
 	o.Key.Unset()
 }
 
+// GetModelSettings returns the ModelSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateProviderBody) GetModelSettings() []ModelSettingsItemDto {
+	if o == nil {
+		var ret []ModelSettingsItemDto
+		return ret
+	}
+	return o.ModelSettings
+}
+
+// GetModelSettingsOk returns a tuple with the ModelSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateProviderBody) GetModelSettingsOk() ([]ModelSettingsItemDto, bool) {
+	if o == nil || IsNil(o.ModelSettings) {
+		return nil, false
+	}
+	return o.ModelSettings, true
+}
+
+// HasModelSettings returns a boolean if a field has been set.
+func (o *UpdateProviderBody) IsModelSettingsSet() bool {
+	if o != nil && !IsNil(o.ModelSettings) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelSettings gets a reference to the given []ModelSettingsItemDto and assigns it to the ModelSettings field.
+func (o *UpdateProviderBody) SetModelSettings(v []ModelSettingsItemDto) {
+	o.ModelSettings = v
+}
+
 func (o UpdateProviderBody) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -192,6 +227,9 @@ func (o UpdateProviderBody) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Key.IsSet() {
 		toSerialize["key"] = o.Key.Get()
+	}
+	if o.ModelSettings != nil {
+		toSerialize["modelSettings"] = o.ModelSettings
 	}
 	return toSerialize, nil
 }

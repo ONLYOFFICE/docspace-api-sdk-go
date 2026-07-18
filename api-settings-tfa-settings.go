@@ -31,7 +31,7 @@ type ApiGetTfaAppCodesRequest struct {
 	ApiService *SettingsTFASettingsAPIService
 }
 
-func (r ApiGetTfaAppCodesRequest) Execute() (*ObjectArrayWrapper, *http.Response, error) {
+func (r ApiGetTfaAppCodesRequest) Execute() (*TfaAppCodeArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetTfaAppCodesExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *SettingsTFASettingsAPIService) GetTfaAppCodes(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return ObjectArrayWrapper
-func (a *SettingsTFASettingsAPIService) GetTfaAppCodesExecute(r ApiGetTfaAppCodesRequest) (*ObjectArrayWrapper, *http.Response, error) {
+//  @return TfaAppCodeArrayWrapper
+func (a *SettingsTFASettingsAPIService) GetTfaAppCodesExecute(r ApiGetTfaAppCodesRequest) (*TfaAppCodeArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ObjectArrayWrapper
+		localVarReturnValue  *TfaAppCodeArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsTFASettingsAPIService.GetTfaAppCodes")
@@ -139,41 +139,41 @@ func (a *SettingsTFASettingsAPIService) GetTfaAppCodesExecute(r ApiGetTfaAppCode
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetTfaConfirmUrlRequest struct {
+type ApiGetTfaConfirmDataRequest struct {
 	ctx context.Context
 	ApiService *SettingsTFASettingsAPIService
 }
 
-func (r ApiGetTfaConfirmUrlRequest) Execute() (*StringWrapper, *http.Response, error) {
-	return r.ApiService.GetTfaConfirmUrlExecute(r)
+func (r ApiGetTfaConfirmDataRequest) Execute() (*TfaConfirmDataWrapper, *http.Response, error) {
+	return r.ApiService.GetTfaConfirmDataExecute(r)
 }
 
-// GetTfaConfirmUrl Get confirmation email
+// GetTfaConfirmData Get TFA confirmation data
 //
-// Returns the confirmation email URL for authorization via SMS or TFA application.
+// Returns the confirmation data for authorization via SMS or TFA application.
 //
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-url/
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-data/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiGetTfaConfirmUrlRequest
-func (a *SettingsTFASettingsAPIService) GetTfaConfirmUrl(ctx context.Context) ApiGetTfaConfirmUrlRequest {
-	return ApiGetTfaConfirmUrlRequest{
+// @return ApiGetTfaConfirmDataRequest
+func (a *SettingsTFASettingsAPIService) GetTfaConfirmData(ctx context.Context) ApiGetTfaConfirmDataRequest {
+	return ApiGetTfaConfirmDataRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return StringWrapper
-func (a *SettingsTFASettingsAPIService) GetTfaConfirmUrlExecute(r ApiGetTfaConfirmUrlRequest) (*StringWrapper, *http.Response, error) {
+//  @return TfaConfirmDataWrapper
+func (a *SettingsTFASettingsAPIService) GetTfaConfirmDataExecute(r ApiGetTfaConfirmDataRequest) (*TfaConfirmDataWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StringWrapper
+		localVarReturnValue  *TfaConfirmDataWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsTFASettingsAPIService.GetTfaConfirmUrl")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsTFASettingsAPIService.GetTfaConfirmData")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -723,7 +723,7 @@ type ApiUpdateTfaAppCodesRequest struct {
 	ApiService *SettingsTFASettingsAPIService
 }
 
-func (r ApiUpdateTfaAppCodesRequest) Execute() (*ObjectArrayWrapper, *http.Response, error) {
+func (r ApiUpdateTfaAppCodesRequest) Execute() (*TfaAppCodeArrayWrapper, *http.Response, error) {
 	return r.ApiService.UpdateTfaAppCodesExecute(r)
 }
 
@@ -743,13 +743,13 @@ func (a *SettingsTFASettingsAPIService) UpdateTfaAppCodes(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ObjectArrayWrapper
-func (a *SettingsTFASettingsAPIService) UpdateTfaAppCodesExecute(r ApiUpdateTfaAppCodesRequest) (*ObjectArrayWrapper, *http.Response, error) {
+//  @return TfaAppCodeArrayWrapper
+func (a *SettingsTFASettingsAPIService) UpdateTfaAppCodesExecute(r ApiUpdateTfaAppCodesRequest) (*TfaAppCodeArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ObjectArrayWrapper
+		localVarReturnValue  *TfaAppCodeArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsTFASettingsAPIService.UpdateTfaAppCodes")
@@ -965,9 +965,9 @@ func (r ApiUpdateTfaSettingsLinkRequest) Execute() (*StringWrapper, *http.Respon
 	return r.ApiService.UpdateTfaSettingsLinkExecute(r)
 }
 
-// UpdateTfaSettingsLink Get a confirmation email for updating TFA settings
+// UpdateTfaSettingsLink Updates TFA settings
 //
-// Returns the confirmation email URL for updating TFA settings.
+// Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-settings-link/
 //

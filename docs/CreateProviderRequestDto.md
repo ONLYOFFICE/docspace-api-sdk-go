@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Title** | **NullableString** | The display title for the AI provider. | 
 **Url** | Pointer to **NullableString** | The API endpoint URL for the AI provider. Required for OpenAiCompatible type; optional for other types that have default URLs. | [optional] 
 **Key** | **NullableString** | The authentication API key for the AI provider. | 
+**ModelSettings** | Pointer to [**[]ModelSettingsItemDto**](ModelSettingsItemDto.md) | Optional list of model settings to configure atomically with the provider creation. | [optional] 
 
 ## Methods
 
@@ -148,6 +149,41 @@ SetKey sets Key field to given value.
 `func (o *CreateProviderRequestDto) UnsetKey()`
 
 UnsetKey ensures that no value is present for Key, not even an explicit nil
+### GetModelSettings
+
+`func (o *CreateProviderRequestDto) GetModelSettings() []ModelSettingsItemDto`
+
+GetModelSettings returns the ModelSettings field if non-nil, zero value otherwise.
+
+### GetModelSettingsOk
+
+`func (o *CreateProviderRequestDto) GetModelSettingsOk() (*[]ModelSettingsItemDto, bool)`
+
+GetModelSettingsOk returns a tuple with the ModelSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelSettings
+
+`func (o *CreateProviderRequestDto) SetModelSettings(v []ModelSettingsItemDto)`
+
+SetModelSettings sets ModelSettings field to given value.
+
+### HasModelSettings
+
+`func (o *CreateProviderRequestDto) HasModelSettings() bool`
+
+HasModelSettings returns a boolean if a field has been set.
+
+### SetModelSettingsNil
+
+`func (o *CreateProviderRequestDto) SetModelSettingsNil(b bool)`
+
+ SetModelSettingsNil sets the value for ModelSettings to be an explicit nil
+
+### UnsetModelSettings
+`func (o *CreateProviderRequestDto) UnsetModelSettings()`
+
+UnsetModelSettings ensures that no value is present for ModelSettings, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

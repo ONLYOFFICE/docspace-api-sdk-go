@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **Private** | Pointer to **bool** | Specifies whether the room to be created is private or not. | [optional] 
 **Share** | Pointer to [**[]FileShareParams**](FileShareParams.md) | The collection of sharing parameters. | [optional] 
 **ChatSettings** | Pointer to [**ChatSettings**](ChatSettings.md) |  | [optional] 
+**SendFormToExternalDB** | Pointer to **NullableBool** | Specifies whether to send form data to external database. | [optional] 
+**SaveFormAsXLSX** | Pointer to **NullableBool** | Specifies whether to save form data as XLSX file. | [optional] 
 
 ## Methods
 
@@ -458,6 +460,76 @@ SetChatSettings sets ChatSettings field to given value.
 
 HasChatSettings returns a boolean if a field has been set.
 
+### GetSendFormToExternalDB
+
+`func (o *CreateRoomRequestDto) GetSendFormToExternalDB() bool`
+
+GetSendFormToExternalDB returns the SendFormToExternalDB field if non-nil, zero value otherwise.
+
+### GetSendFormToExternalDBOk
+
+`func (o *CreateRoomRequestDto) GetSendFormToExternalDBOk() (*bool, bool)`
+
+GetSendFormToExternalDBOk returns a tuple with the SendFormToExternalDB field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSendFormToExternalDB
+
+`func (o *CreateRoomRequestDto) SetSendFormToExternalDB(v bool)`
+
+SetSendFormToExternalDB sets SendFormToExternalDB field to given value.
+
+### HasSendFormToExternalDB
+
+`func (o *CreateRoomRequestDto) HasSendFormToExternalDB() bool`
+
+HasSendFormToExternalDB returns a boolean if a field has been set.
+
+### SetSendFormToExternalDBNil
+
+`func (o *CreateRoomRequestDto) SetSendFormToExternalDBNil(b bool)`
+
+ SetSendFormToExternalDBNil sets the value for SendFormToExternalDB to be an explicit nil
+
+### UnsetSendFormToExternalDB
+`func (o *CreateRoomRequestDto) UnsetSendFormToExternalDB()`
+
+UnsetSendFormToExternalDB ensures that no value is present for SendFormToExternalDB, not even an explicit nil
+### GetSaveFormAsXLSX
+
+`func (o *CreateRoomRequestDto) GetSaveFormAsXLSX() bool`
+
+GetSaveFormAsXLSX returns the SaveFormAsXLSX field if non-nil, zero value otherwise.
+
+### GetSaveFormAsXLSXOk
+
+`func (o *CreateRoomRequestDto) GetSaveFormAsXLSXOk() (*bool, bool)`
+
+GetSaveFormAsXLSXOk returns a tuple with the SaveFormAsXLSX field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSaveFormAsXLSX
+
+`func (o *CreateRoomRequestDto) SetSaveFormAsXLSX(v bool)`
+
+SetSaveFormAsXLSX sets SaveFormAsXLSX field to given value.
+
+### HasSaveFormAsXLSX
+
+`func (o *CreateRoomRequestDto) HasSaveFormAsXLSX() bool`
+
+HasSaveFormAsXLSX returns a boolean if a field has been set.
+
+### SetSaveFormAsXLSXNil
+
+`func (o *CreateRoomRequestDto) SetSaveFormAsXLSXNil(b bool)`
+
+ SetSaveFormAsXLSXNil sets the value for SaveFormAsXLSX to be an explicit nil
+
+### UnsetSaveFormAsXLSX
+`func (o *CreateRoomRequestDto) UnsetSaveFormAsXLSX()`
+
+UnsetSaveFormAsXLSX ensures that no value is present for SaveFormAsXLSX, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

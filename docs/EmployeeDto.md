@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | The user ID. | [optional] 
 **DisplayName** | Pointer to **NullableString** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] 
-**Title** | Pointer to **NullableString** | The user title. | [optional] 
 **Avatar** | Pointer to **NullableString** | The user avatar. | [optional] 
 **AvatarOriginal** | Pointer to **NullableString** | The user original size avatar. | [optional] 
 **AvatarMax** | Pointer to **NullableString** | The user maximum size avatar. | [optional] 
@@ -95,41 +94,6 @@ HasDisplayName returns a boolean if a field has been set.
 `func (o *EmployeeDto) UnsetDisplayName()`
 
 UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
-### GetTitle
-
-`func (o *EmployeeDto) GetTitle() string`
-
-GetTitle returns the Title field if non-nil, zero value otherwise.
-
-### GetTitleOk
-
-`func (o *EmployeeDto) GetTitleOk() (*string, bool)`
-
-GetTitleOk returns a tuple with the Title field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTitle
-
-`func (o *EmployeeDto) SetTitle(v string)`
-
-SetTitle sets Title field to given value.
-
-### HasTitle
-
-`func (o *EmployeeDto) HasTitle() bool`
-
-HasTitle returns a boolean if a field has been set.
-
-### SetTitleNil
-
-`func (o *EmployeeDto) SetTitleNil(b bool)`
-
- SetTitleNil sets the value for Title to be an explicit nil
-
-### UnsetTitle
-`func (o *EmployeeDto) UnsetTitle()`
-
-UnsetTitle ensures that no value is present for Title, not even an explicit nil
 ### GetAvatar
 
 `func (o *EmployeeDto) GetAvatar() string`

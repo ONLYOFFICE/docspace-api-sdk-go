@@ -15,6 +15,9 @@ Name | Type | Description | Notes
 **Debit** | Pointer to **float64** | The debit amount of the operation. | [optional] 
 **ParticipantName** | Pointer to **NullableString** | The participant original name. | [optional] 
 **ParticipantDisplayName** | Pointer to **NullableString** | The participant display name. | [optional] 
+**AgentId** | Pointer to **NullableString** | AI Agent id. | [optional] 
+**AgentTitle** | Pointer to **NullableString** | AI Agent name. | [optional] 
+**Type** | Pointer to [**OperationType**](OperationType.md) |  | [optional] 
 
 ## Methods
 
@@ -380,6 +383,101 @@ HasParticipantDisplayName returns a boolean if a field has been set.
 `func (o *OperationDto) UnsetParticipantDisplayName()`
 
 UnsetParticipantDisplayName ensures that no value is present for ParticipantDisplayName, not even an explicit nil
+### GetAgentId
+
+`func (o *OperationDto) GetAgentId() string`
+
+GetAgentId returns the AgentId field if non-nil, zero value otherwise.
+
+### GetAgentIdOk
+
+`func (o *OperationDto) GetAgentIdOk() (*string, bool)`
+
+GetAgentIdOk returns a tuple with the AgentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentId
+
+`func (o *OperationDto) SetAgentId(v string)`
+
+SetAgentId sets AgentId field to given value.
+
+### HasAgentId
+
+`func (o *OperationDto) HasAgentId() bool`
+
+HasAgentId returns a boolean if a field has been set.
+
+### SetAgentIdNil
+
+`func (o *OperationDto) SetAgentIdNil(b bool)`
+
+ SetAgentIdNil sets the value for AgentId to be an explicit nil
+
+### UnsetAgentId
+`func (o *OperationDto) UnsetAgentId()`
+
+UnsetAgentId ensures that no value is present for AgentId, not even an explicit nil
+### GetAgentTitle
+
+`func (o *OperationDto) GetAgentTitle() string`
+
+GetAgentTitle returns the AgentTitle field if non-nil, zero value otherwise.
+
+### GetAgentTitleOk
+
+`func (o *OperationDto) GetAgentTitleOk() (*string, bool)`
+
+GetAgentTitleOk returns a tuple with the AgentTitle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentTitle
+
+`func (o *OperationDto) SetAgentTitle(v string)`
+
+SetAgentTitle sets AgentTitle field to given value.
+
+### HasAgentTitle
+
+`func (o *OperationDto) HasAgentTitle() bool`
+
+HasAgentTitle returns a boolean if a field has been set.
+
+### SetAgentTitleNil
+
+`func (o *OperationDto) SetAgentTitleNil(b bool)`
+
+ SetAgentTitleNil sets the value for AgentTitle to be an explicit nil
+
+### UnsetAgentTitle
+`func (o *OperationDto) UnsetAgentTitle()`
+
+UnsetAgentTitle ensures that no value is present for AgentTitle, not even an explicit nil
+### GetType
+
+`func (o *OperationDto) GetType() OperationType`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *OperationDto) GetTypeOk() (*OperationType, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *OperationDto) SetType(v OperationType)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *OperationDto) HasType() bool`
+
+HasType returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

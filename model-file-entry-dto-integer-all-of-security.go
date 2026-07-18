@@ -67,6 +67,7 @@ type FileEntryDtoIntegerAllOfSecurity struct {
 	AskAi *bool `json:"AskAi,omitempty"`
 	UseChat *bool `json:"UseChat,omitempty"`
 	UpdateXlsx *bool `json:"UpdateXlsx,omitempty"`
+	AnalyzeResponses *bool `json:"AnalyzeResponses,omitempty"`
 }
 
 // NewFileEntryDtoIntegerAllOfSecurity instantiates a new FileEntryDtoIntegerAllOfSecurity object
@@ -1494,6 +1495,38 @@ func (o *FileEntryDtoIntegerAllOfSecurity) SetUpdateXlsx(v bool) {
 	o.UpdateXlsx = &v
 }
 
+// GetAnalyzeResponses returns the AnalyzeResponses field value if set, zero value otherwise.
+func (o *FileEntryDtoIntegerAllOfSecurity) GetAnalyzeResponses() bool {
+	if o == nil || IsNil(o.AnalyzeResponses) {
+		var ret bool
+		return ret
+	}
+	return *o.AnalyzeResponses
+}
+
+// GetAnalyzeResponsesOk returns a tuple with the AnalyzeResponses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileEntryDtoIntegerAllOfSecurity) GetAnalyzeResponsesOk() (*bool, bool) {
+	if o == nil || IsNil(o.AnalyzeResponses) {
+		return nil, false
+	}
+	return o.AnalyzeResponses, true
+}
+
+// HasAnalyzeResponses returns a boolean if a field has been set.
+func (o *FileEntryDtoIntegerAllOfSecurity) IsAnalyzeResponsesSet() bool {
+	if o != nil && !IsNil(o.AnalyzeResponses) {
+		return true
+	}
+
+	return false
+}
+
+// SetAnalyzeResponses gets a reference to the given bool and assigns it to the AnalyzeResponses field.
+func (o *FileEntryDtoIntegerAllOfSecurity) SetAnalyzeResponses(v bool) {
+	o.AnalyzeResponses = &v
+}
+
 func (o FileEntryDtoIntegerAllOfSecurity) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1635,6 +1668,9 @@ func (o FileEntryDtoIntegerAllOfSecurity) ToMap() (map[string]interface{}, error
 	}
 	if !IsNil(o.UpdateXlsx) {
 		toSerialize["UpdateXlsx"] = o.UpdateXlsx
+	}
+	if !IsNil(o.AnalyzeResponses) {
+		toSerialize["AnalyzeResponses"] = o.AnalyzeResponses
 	}
 	return toSerialize, nil
 }

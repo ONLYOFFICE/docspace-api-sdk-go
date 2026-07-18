@@ -19,16 +19,15 @@ import (
 	"fmt"
 )
 
-// OperationStatus [0 - Any, 1 - Pending, 2 - Completed, 4 - Rejected, 8 - Canceled]
+// OperationStatus [0 - Pending, 1 - Completed, 2 - Rejected, 3 - Canceled]
 type OperationStatus int32
 
 // List of OperationStatus
 const (
-	OPERATIONSTATUS_Any OperationStatus = 0
-	OPERATIONSTATUS_Pending OperationStatus = 1
-	OPERATIONSTATUS_Completed OperationStatus = 2
-	OPERATIONSTATUS_Rejected OperationStatus = 4
-	OPERATIONSTATUS_Canceled OperationStatus = 8
+	OPERATIONSTATUS_Pending OperationStatus = 0
+	OPERATIONSTATUS_Completed OperationStatus = 1
+	OPERATIONSTATUS_Rejected OperationStatus = 2
+	OPERATIONSTATUS_Canceled OperationStatus = 3
 )
 
 // All allowed values of OperationStatus enum
@@ -36,8 +35,7 @@ var AllowedOperationStatusEnumValues = []OperationStatus{
 	0,
 	1,
 	2,
-	4,
-	8,
+	3,
 }
 
 func (v *OperationStatus) UnmarshalJSON(src []byte) error {

@@ -33,7 +33,9 @@ type ChatSettingsDto struct {
 	Prompt NullableString `json:"prompt,omitempty"`
 	Multimodal *ChatMultimodalSettingsDto `json:"multimodal,omitempty"`
 	// Indicates whether the model supports extended thinking mode.
+	// Deprecated
 	Thinking *bool `json:"thinking,omitempty"`
+	Capabilities *AiModelCapabilities `json:"capabilities,omitempty"`
 	// Indicates whether this is an internal AI gateway provider.
 	Internal *bool `json:"internal,omitempty"`
 }
@@ -246,6 +248,7 @@ func (o *ChatSettingsDto) SetMultimodal(v ChatMultimodalSettingsDto) {
 }
 
 // GetThinking returns the Thinking field value if set, zero value otherwise.
+// Deprecated
 func (o *ChatSettingsDto) GetThinking() bool {
 	if o == nil || IsNil(o.Thinking) {
 		var ret bool
@@ -256,6 +259,7 @@ func (o *ChatSettingsDto) GetThinking() bool {
 
 // GetThinkingOk returns a tuple with the Thinking field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ChatSettingsDto) GetThinkingOk() (*bool, bool) {
 	if o == nil || IsNil(o.Thinking) {
 		return nil, false
@@ -273,8 +277,41 @@ func (o *ChatSettingsDto) IsThinkingSet() bool {
 }
 
 // SetThinking gets a reference to the given bool and assigns it to the Thinking field.
+// Deprecated
 func (o *ChatSettingsDto) SetThinking(v bool) {
 	o.Thinking = &v
+}
+
+// GetCapabilities returns the Capabilities field value if set, zero value otherwise.
+func (o *ChatSettingsDto) GetCapabilities() AiModelCapabilities {
+	if o == nil || IsNil(o.Capabilities) {
+		var ret AiModelCapabilities
+		return ret
+	}
+	return *o.Capabilities
+}
+
+// GetCapabilitiesOk returns a tuple with the Capabilities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatSettingsDto) GetCapabilitiesOk() (*AiModelCapabilities, bool) {
+	if o == nil || IsNil(o.Capabilities) {
+		return nil, false
+	}
+	return o.Capabilities, true
+}
+
+// HasCapabilities returns a boolean if a field has been set.
+func (o *ChatSettingsDto) IsCapabilitiesSet() bool {
+	if o != nil && !IsNil(o.Capabilities) {
+		return true
+	}
+
+	return false
+}
+
+// SetCapabilities gets a reference to the given AiModelCapabilities and assigns it to the Capabilities field.
+func (o *ChatSettingsDto) SetCapabilities(v AiModelCapabilities) {
+	o.Capabilities = &v
 }
 
 // GetInternal returns the Internal field value if set, zero value otherwise.
@@ -336,6 +373,9 @@ func (o ChatSettingsDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Thinking) {
 		toSerialize["thinking"] = o.Thinking
+	}
+	if !IsNil(o.Capabilities) {
+		toSerialize["capabilities"] = o.Capabilities
 	}
 	if !IsNil(o.Internal) {
 		toSerialize["internal"] = o.Internal

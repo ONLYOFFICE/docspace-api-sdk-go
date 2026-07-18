@@ -28,9 +28,9 @@ type GroupRequestDto struct {
 	// The list of group member IDs.
 	Members []string `json:"members,omitempty"`
 	// The group manager ID.
-	GroupManager string `json:"groupManager"`
+	GroupManager *string `json:"groupManager,omitempty"`
 	// The group name.
-	GroupName NullableString `json:"groupName,omitempty"`
+	GroupName NullableString `json:"groupName"`
 }
 
 type _GroupRequestDto GroupRequestDto
@@ -39,9 +39,9 @@ type _GroupRequestDto GroupRequestDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGroupRequestDto(groupManager string) *GroupRequestDto {
+func NewGroupRequestDto(groupName NullableString) *GroupRequestDto {
 	this := GroupRequestDto{}
-	this.GroupManager = groupManager
+	this.GroupName = groupName
 	return &this
 }
 
@@ -86,40 +86,50 @@ func (o *GroupRequestDto) SetMembers(v []string) {
 	o.Members = v
 }
 
-// GetGroupManager returns the GroupManager field value
+// GetGroupManager returns the GroupManager field value if set, zero value otherwise.
 func (o *GroupRequestDto) GetGroupManager() string {
-	if o == nil {
+	if o == nil || IsNil(o.GroupManager) {
 		var ret string
 		return ret
 	}
-
-	return o.GroupManager
+	return *o.GroupManager
 }
 
-// GetGroupManagerOk returns a tuple with the GroupManager field value
+// GetGroupManagerOk returns a tuple with the GroupManager field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupRequestDto) GetGroupManagerOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.GroupManager) {
 		return nil, false
 	}
-	return &o.GroupManager, true
+	return o.GroupManager, true
 }
 
-// SetGroupManager sets field value
+// HasGroupManager returns a boolean if a field has been set.
+func (o *GroupRequestDto) IsGroupManagerSet() bool {
+	if o != nil && !IsNil(o.GroupManager) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupManager gets a reference to the given string and assigns it to the GroupManager field.
 func (o *GroupRequestDto) SetGroupManager(v string) {
-	o.GroupManager = v
+	o.GroupManager = &v
 }
 
-// GetGroupName returns the GroupName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetGroupName returns the GroupName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *GroupRequestDto) GetGroupName() string {
-	if o == nil || IsNil(o.GroupName.Get()) {
+	if o == nil || o.GroupName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.GroupName.Get()
 }
 
-// GetGroupNameOk returns a tuple with the GroupName field value if set, nil otherwise
+// GetGroupNameOk returns a tuple with the GroupName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GroupRequestDto) GetGroupNameOk() (*string, bool) {
@@ -129,27 +139,9 @@ func (o *GroupRequestDto) GetGroupNameOk() (*string, bool) {
 	return o.GroupName.Get(), o.GroupName.IsSet()
 }
 
-// HasGroupName returns a boolean if a field has been set.
-func (o *GroupRequestDto) IsGroupNameSet() bool {
-	if o != nil && o.GroupName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetGroupName gets a reference to the given NullableString and assigns it to the GroupName field.
+// SetGroupName sets field value
 func (o *GroupRequestDto) SetGroupName(v string) {
 	o.GroupName.Set(&v)
-}
-// SetGroupNameNil sets the value for GroupName to be an explicit nil
-func (o *GroupRequestDto) SetGroupNameNil() {
-	o.GroupName.Set(nil)
-}
-
-// UnsetGroupName ensures that no value is present for GroupName, not even an explicit nil
-func (o *GroupRequestDto) UnsetGroupName() {
-	o.GroupName.Unset()
 }
 
 func (o GroupRequestDto) MarshalJSON() ([]byte, error) {
@@ -165,10 +157,10 @@ func (o GroupRequestDto) ToMap() (map[string]interface{}, error) {
 	if o.Members != nil {
 		toSerialize["members"] = o.Members
 	}
-	toSerialize["groupManager"] = o.GroupManager
-	if o.GroupName.IsSet() {
-		toSerialize["groupName"] = o.GroupName.Get()
+	if !IsNil(o.GroupManager) {
+		toSerialize["groupManager"] = o.GroupManager
 	}
+	toSerialize["groupName"] = o.GroupName.Get()
 	return toSerialize, nil
 }
 
@@ -177,7 +169,7 @@ func (o *GroupRequestDto) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"groupManager",
+		"groupName",
 	}
 
 	allProperties := make(map[string]interface{})

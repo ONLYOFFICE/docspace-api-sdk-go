@@ -31,6 +31,9 @@ type ModelDto struct {
 	ProviderTitle NullableString `json:"providerTitle"`
 	// The model identifier as recognized by the AI provider (e.g., gpt-4o, claude-sonnet-4-20250514).
 	ModelId NullableString `json:"modelId"`
+	// The display name for the model.
+	Alias NullableString `json:"alias,omitempty"`
+	Capabilities *AiModelCapabilities `json:"capabilities,omitempty"`
 	Price *AiChatPrice `json:"price,omitempty"`
 	Currency *CurrencyInfo `json:"currency,omitempty"`
 }
@@ -140,6 +143,80 @@ func (o *ModelDto) SetModelId(v string) {
 	o.ModelId.Set(&v)
 }
 
+// GetAlias returns the Alias field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ModelDto) GetAlias() string {
+	if o == nil || IsNil(o.Alias.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Alias.Get()
+}
+
+// GetAliasOk returns a tuple with the Alias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ModelDto) GetAliasOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Alias.Get(), o.Alias.IsSet()
+}
+
+// HasAlias returns a boolean if a field has been set.
+func (o *ModelDto) IsAliasSet() bool {
+	if o != nil && o.Alias.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAlias gets a reference to the given NullableString and assigns it to the Alias field.
+func (o *ModelDto) SetAlias(v string) {
+	o.Alias.Set(&v)
+}
+// SetAliasNil sets the value for Alias to be an explicit nil
+func (o *ModelDto) SetAliasNil() {
+	o.Alias.Set(nil)
+}
+
+// UnsetAlias ensures that no value is present for Alias, not even an explicit nil
+func (o *ModelDto) UnsetAlias() {
+	o.Alias.Unset()
+}
+
+// GetCapabilities returns the Capabilities field value if set, zero value otherwise.
+func (o *ModelDto) GetCapabilities() AiModelCapabilities {
+	if o == nil || IsNil(o.Capabilities) {
+		var ret AiModelCapabilities
+		return ret
+	}
+	return *o.Capabilities
+}
+
+// GetCapabilitiesOk returns a tuple with the Capabilities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelDto) GetCapabilitiesOk() (*AiModelCapabilities, bool) {
+	if o == nil || IsNil(o.Capabilities) {
+		return nil, false
+	}
+	return o.Capabilities, true
+}
+
+// HasCapabilities returns a boolean if a field has been set.
+func (o *ModelDto) IsCapabilitiesSet() bool {
+	if o != nil && !IsNil(o.Capabilities) {
+		return true
+	}
+
+	return false
+}
+
+// SetCapabilities gets a reference to the given AiModelCapabilities and assigns it to the Capabilities field.
+func (o *ModelDto) SetCapabilities(v AiModelCapabilities) {
+	o.Capabilities = &v
+}
+
 // GetPrice returns the Price field value if set, zero value otherwise.
 func (o *ModelDto) GetPrice() AiChatPrice {
 	if o == nil || IsNil(o.Price) {
@@ -219,6 +296,12 @@ func (o ModelDto) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["providerTitle"] = o.ProviderTitle.Get()
 	toSerialize["modelId"] = o.ModelId.Get()
+	if o.Alias.IsSet() {
+		toSerialize["alias"] = o.Alias.Get()
+	}
+	if !IsNil(o.Capabilities) {
+		toSerialize["capabilities"] = o.Capabilities
+	}
 	if !IsNil(o.Price) {
 		toSerialize["price"] = o.Price
 	}

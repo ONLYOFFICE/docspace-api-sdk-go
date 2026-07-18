@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TmpFile** | Pointer to **NullableString** | The path to the temporary image file. | [optional] 
+**TmpFile** | **string** | The path to the temporary image file. | 
 **X** | Pointer to **int32** | The X coordinate of the rectangle starting point. | [optional] 
 **Y** | Pointer to **int32** | The Y coordinate of the rectangle starting point. | [optional] 
 **Width** | Pointer to **int32** | The rectangle width. | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewLogoRequest
 
-`func NewLogoRequest() *LogoRequest`
+`func NewLogoRequest(tmpFile string, ) *LogoRequest`
 
 NewLogoRequest instantiates a new LogoRequest object
 This constructor will assign default values to properties that have it defined,
@@ -48,22 +48,7 @@ and a boolean to check if the value has been set.
 
 SetTmpFile sets TmpFile field to given value.
 
-### HasTmpFile
 
-`func (o *LogoRequest) HasTmpFile() bool`
-
-HasTmpFile returns a boolean if a field has been set.
-
-### SetTmpFileNil
-
-`func (o *LogoRequest) SetTmpFileNil(b bool)`
-
- SetTmpFileNil sets the value for TmpFile to be an explicit nil
-
-### UnsetTmpFile
-`func (o *LogoRequest) UnsetTmpFile()`
-
-UnsetTmpFile ensures that no value is present for TmpFile, not even an explicit nil
 ### GetX
 
 `func (o *LogoRequest) GetX() int32`

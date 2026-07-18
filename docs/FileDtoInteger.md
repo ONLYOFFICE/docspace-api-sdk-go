@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **OwnedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **Shared** | Pointer to **bool** | Specifies if the file entry is shared via link or not. | [optional] 
 **SharedForUser** | Pointer to **bool** | Specifies if the file entry is shared for user or not. | [optional] 
+**SharedExternal** | Pointer to **bool** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] 
 **ParentShared** | Pointer to **bool** | Indicates whether the parent entity is shared. | [optional] 
 **ShortWebUrl** | Pointer to **NullableString** | The short Web URL. | [optional] 
 **Created** | Pointer to [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
@@ -66,11 +67,13 @@ Name | Type | Description | Notes
 **IsFillingPreparing** | Pointer to **NullableBool** | Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed. | [optional] 
 **InProcessFolderId** | Pointer to **NullableInt32** | The InProcess folder ID of the file. | [optional] 
 **InProcessFolderTitle** | Pointer to **NullableString** | The InProcess folder title of the file. | [optional] 
+**ResultsFolderId** | Pointer to **NullableInt32** | The ID of the FormFillingFolderDone folder that corresponds to this original form. | [optional] 
 **DraftLocation** | Pointer to [**DraftLocationInteger**](DraftLocationInteger.md) |  | [optional] 
 **ViewAccessibility** | Pointer to [**NullableFileDtoIntegerAllOfViewAccessibility**](FileDtoIntegerAllOfViewAccessibility.md) |  | [optional] 
 **LastOpened** | Pointer to [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **Expired** | Pointer to [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **VectorizationStatus** | Pointer to [**VectorizationStatus**](VectorizationStatus.md) |  | [optional] 
+**ExternalDbTableName** | Pointer to **NullableString** | The name of the table in the external database that corresponds to this form. | [optional] 
 **Dimensions** | Pointer to [**Size**](Size.md) |  | [optional] 
 
 ## Methods
@@ -251,6 +254,31 @@ SetSharedForUser sets SharedForUser field to given value.
 `func (o *FileDtoInteger) HasSharedForUser() bool`
 
 HasSharedForUser returns a boolean if a field has been set.
+
+### GetSharedExternal
+
+`func (o *FileDtoInteger) GetSharedExternal() bool`
+
+GetSharedExternal returns the SharedExternal field if non-nil, zero value otherwise.
+
+### GetSharedExternalOk
+
+`func (o *FileDtoInteger) GetSharedExternalOk() (*bool, bool)`
+
+GetSharedExternalOk returns a tuple with the SharedExternal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSharedExternal
+
+`func (o *FileDtoInteger) SetSharedExternal(v bool)`
+
+SetSharedExternal sets SharedExternal field to given value.
+
+### HasSharedExternal
+
+`func (o *FileDtoInteger) HasSharedExternal() bool`
+
+HasSharedExternal returns a boolean if a field has been set.
 
 ### GetParentShared
 
@@ -1982,6 +2010,41 @@ HasInProcessFolderTitle returns a boolean if a field has been set.
 `func (o *FileDtoInteger) UnsetInProcessFolderTitle()`
 
 UnsetInProcessFolderTitle ensures that no value is present for InProcessFolderTitle, not even an explicit nil
+### GetResultsFolderId
+
+`func (o *FileDtoInteger) GetResultsFolderId() int32`
+
+GetResultsFolderId returns the ResultsFolderId field if non-nil, zero value otherwise.
+
+### GetResultsFolderIdOk
+
+`func (o *FileDtoInteger) GetResultsFolderIdOk() (*int32, bool)`
+
+GetResultsFolderIdOk returns a tuple with the ResultsFolderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResultsFolderId
+
+`func (o *FileDtoInteger) SetResultsFolderId(v int32)`
+
+SetResultsFolderId sets ResultsFolderId field to given value.
+
+### HasResultsFolderId
+
+`func (o *FileDtoInteger) HasResultsFolderId() bool`
+
+HasResultsFolderId returns a boolean if a field has been set.
+
+### SetResultsFolderIdNil
+
+`func (o *FileDtoInteger) SetResultsFolderIdNil(b bool)`
+
+ SetResultsFolderIdNil sets the value for ResultsFolderId to be an explicit nil
+
+### UnsetResultsFolderId
+`func (o *FileDtoInteger) UnsetResultsFolderId()`
+
+UnsetResultsFolderId ensures that no value is present for ResultsFolderId, not even an explicit nil
 ### GetDraftLocation
 
 `func (o *FileDtoInteger) GetDraftLocation() DraftLocationInteger`
@@ -2117,6 +2180,41 @@ SetVectorizationStatus sets VectorizationStatus field to given value.
 
 HasVectorizationStatus returns a boolean if a field has been set.
 
+### GetExternalDbTableName
+
+`func (o *FileDtoInteger) GetExternalDbTableName() string`
+
+GetExternalDbTableName returns the ExternalDbTableName field if non-nil, zero value otherwise.
+
+### GetExternalDbTableNameOk
+
+`func (o *FileDtoInteger) GetExternalDbTableNameOk() (*string, bool)`
+
+GetExternalDbTableNameOk returns a tuple with the ExternalDbTableName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalDbTableName
+
+`func (o *FileDtoInteger) SetExternalDbTableName(v string)`
+
+SetExternalDbTableName sets ExternalDbTableName field to given value.
+
+### HasExternalDbTableName
+
+`func (o *FileDtoInteger) HasExternalDbTableName() bool`
+
+HasExternalDbTableName returns a boolean if a field has been set.
+
+### SetExternalDbTableNameNil
+
+`func (o *FileDtoInteger) SetExternalDbTableNameNil(b bool)`
+
+ SetExternalDbTableNameNil sets the value for ExternalDbTableName to be an explicit nil
+
+### UnsetExternalDbTableName
+`func (o *FileDtoInteger) UnsetExternalDbTableName()`
+
+UnsetExternalDbTableName ensures that no value is present for ExternalDbTableName, not even an explicit nil
 ### GetDimensions
 
 `func (o *FileDtoInteger) GetDimensions() Size`

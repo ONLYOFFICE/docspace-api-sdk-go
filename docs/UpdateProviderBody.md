@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Title** | Pointer to **NullableString** | The new display title for the AI provider. If null, the title is not changed. | [optional] 
 **Url** | Pointer to **NullableString** | The new API endpoint URL for the AI provider. If null, the URL is not changed. | [optional] 
 **Key** | Pointer to **NullableString** | The new authentication API key for the AI provider. If null, the key is not changed. | [optional] 
+**ModelSettings** | Pointer to [**[]ModelSettingsItemDto**](ModelSettingsItemDto.md) | Optional list of model settings changes to apply atomically with the provider update. | [optional] 
 
 ## Methods
 
@@ -132,6 +133,41 @@ HasKey returns a boolean if a field has been set.
 `func (o *UpdateProviderBody) UnsetKey()`
 
 UnsetKey ensures that no value is present for Key, not even an explicit nil
+### GetModelSettings
+
+`func (o *UpdateProviderBody) GetModelSettings() []ModelSettingsItemDto`
+
+GetModelSettings returns the ModelSettings field if non-nil, zero value otherwise.
+
+### GetModelSettingsOk
+
+`func (o *UpdateProviderBody) GetModelSettingsOk() (*[]ModelSettingsItemDto, bool)`
+
+GetModelSettingsOk returns a tuple with the ModelSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelSettings
+
+`func (o *UpdateProviderBody) SetModelSettings(v []ModelSettingsItemDto)`
+
+SetModelSettings sets ModelSettings field to given value.
+
+### HasModelSettings
+
+`func (o *UpdateProviderBody) HasModelSettings() bool`
+
+HasModelSettings returns a boolean if a field has been set.
+
+### SetModelSettingsNil
+
+`func (o *UpdateProviderBody) SetModelSettingsNil(b bool)`
+
+ SetModelSettingsNil sets the value for ModelSettings to be an explicit nil
+
+### UnsetModelSettings
+`func (o *UpdateProviderBody) UnsetModelSettings()`
+
+UnsetModelSettings ensures that no value is present for ModelSettings, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

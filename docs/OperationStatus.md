@@ -3,15 +3,13 @@
 ## Enum
 
 
-* `Any` (value: `0`)
+* `Pending` (value: `0`)
 
-* `Pending` (value: `1`)
+* `Completed` (value: `1`)
 
-* `Completed` (value: `2`)
+* `Rejected` (value: `2`)
 
-* `Rejected` (value: `4`)
-
-* `Canceled` (value: `8`)
+* `Canceled` (value: `3`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

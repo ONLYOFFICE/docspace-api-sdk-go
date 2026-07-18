@@ -136,6 +136,14 @@ type FilesSettingsDto struct {
 	OpenEditorInSameTab *bool `json:"openEditorInSameTab,omitempty"`
 	// Specifies whether the grouping of rooms is enabled or not.
 	OrganizeRoomsGrouping *bool `json:"organizeRoomsGrouping,omitempty"`
+	// Specifies the default sharing link type: true = DocSpace users only (internal), false = Anyone with the link.
+	DefaultShareLinkInternal *bool `json:"defaultShareLinkInternal,omitempty"`
+	// When external sharing is restricted, specifies whether the restriction applies to the My Documents section.
+	ExternalShareApplyToDocuments *bool `json:"externalShareApplyToDocuments,omitempty"`
+	// When external sharing is restricted, specifies whether the restriction applies to the Rooms section.
+	ExternalShareApplyToRooms *bool `json:"externalShareApplyToRooms,omitempty"`
+	// When external sharing is restricted, specifies whether existing public links are blocked immediately.
+	BlockExistingLinksOnRestrict *bool `json:"blockExistingLinksOnRestrict,omitempty"`
 	// List of extensions available for vectorization
 	ExtsFilesVectorized []string `json:"extsFilesVectorized,omitempty"`
 	// The maximum file size for vectorization
@@ -2147,6 +2155,134 @@ func (o *FilesSettingsDto) SetOrganizeRoomsGrouping(v bool) {
 	o.OrganizeRoomsGrouping = &v
 }
 
+// GetDefaultShareLinkInternal returns the DefaultShareLinkInternal field value if set, zero value otherwise.
+func (o *FilesSettingsDto) GetDefaultShareLinkInternal() bool {
+	if o == nil || IsNil(o.DefaultShareLinkInternal) {
+		var ret bool
+		return ret
+	}
+	return *o.DefaultShareLinkInternal
+}
+
+// GetDefaultShareLinkInternalOk returns a tuple with the DefaultShareLinkInternal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilesSettingsDto) GetDefaultShareLinkInternalOk() (*bool, bool) {
+	if o == nil || IsNil(o.DefaultShareLinkInternal) {
+		return nil, false
+	}
+	return o.DefaultShareLinkInternal, true
+}
+
+// HasDefaultShareLinkInternal returns a boolean if a field has been set.
+func (o *FilesSettingsDto) IsDefaultShareLinkInternalSet() bool {
+	if o != nil && !IsNil(o.DefaultShareLinkInternal) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultShareLinkInternal gets a reference to the given bool and assigns it to the DefaultShareLinkInternal field.
+func (o *FilesSettingsDto) SetDefaultShareLinkInternal(v bool) {
+	o.DefaultShareLinkInternal = &v
+}
+
+// GetExternalShareApplyToDocuments returns the ExternalShareApplyToDocuments field value if set, zero value otherwise.
+func (o *FilesSettingsDto) GetExternalShareApplyToDocuments() bool {
+	if o == nil || IsNil(o.ExternalShareApplyToDocuments) {
+		var ret bool
+		return ret
+	}
+	return *o.ExternalShareApplyToDocuments
+}
+
+// GetExternalShareApplyToDocumentsOk returns a tuple with the ExternalShareApplyToDocuments field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilesSettingsDto) GetExternalShareApplyToDocumentsOk() (*bool, bool) {
+	if o == nil || IsNil(o.ExternalShareApplyToDocuments) {
+		return nil, false
+	}
+	return o.ExternalShareApplyToDocuments, true
+}
+
+// HasExternalShareApplyToDocuments returns a boolean if a field has been set.
+func (o *FilesSettingsDto) IsExternalShareApplyToDocumentsSet() bool {
+	if o != nil && !IsNil(o.ExternalShareApplyToDocuments) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalShareApplyToDocuments gets a reference to the given bool and assigns it to the ExternalShareApplyToDocuments field.
+func (o *FilesSettingsDto) SetExternalShareApplyToDocuments(v bool) {
+	o.ExternalShareApplyToDocuments = &v
+}
+
+// GetExternalShareApplyToRooms returns the ExternalShareApplyToRooms field value if set, zero value otherwise.
+func (o *FilesSettingsDto) GetExternalShareApplyToRooms() bool {
+	if o == nil || IsNil(o.ExternalShareApplyToRooms) {
+		var ret bool
+		return ret
+	}
+	return *o.ExternalShareApplyToRooms
+}
+
+// GetExternalShareApplyToRoomsOk returns a tuple with the ExternalShareApplyToRooms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilesSettingsDto) GetExternalShareApplyToRoomsOk() (*bool, bool) {
+	if o == nil || IsNil(o.ExternalShareApplyToRooms) {
+		return nil, false
+	}
+	return o.ExternalShareApplyToRooms, true
+}
+
+// HasExternalShareApplyToRooms returns a boolean if a field has been set.
+func (o *FilesSettingsDto) IsExternalShareApplyToRoomsSet() bool {
+	if o != nil && !IsNil(o.ExternalShareApplyToRooms) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalShareApplyToRooms gets a reference to the given bool and assigns it to the ExternalShareApplyToRooms field.
+func (o *FilesSettingsDto) SetExternalShareApplyToRooms(v bool) {
+	o.ExternalShareApplyToRooms = &v
+}
+
+// GetBlockExistingLinksOnRestrict returns the BlockExistingLinksOnRestrict field value if set, zero value otherwise.
+func (o *FilesSettingsDto) GetBlockExistingLinksOnRestrict() bool {
+	if o == nil || IsNil(o.BlockExistingLinksOnRestrict) {
+		var ret bool
+		return ret
+	}
+	return *o.BlockExistingLinksOnRestrict
+}
+
+// GetBlockExistingLinksOnRestrictOk returns a tuple with the BlockExistingLinksOnRestrict field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilesSettingsDto) GetBlockExistingLinksOnRestrictOk() (*bool, bool) {
+	if o == nil || IsNil(o.BlockExistingLinksOnRestrict) {
+		return nil, false
+	}
+	return o.BlockExistingLinksOnRestrict, true
+}
+
+// HasBlockExistingLinksOnRestrict returns a boolean if a field has been set.
+func (o *FilesSettingsDto) IsBlockExistingLinksOnRestrictSet() bool {
+	if o != nil && !IsNil(o.BlockExistingLinksOnRestrict) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlockExistingLinksOnRestrict gets a reference to the given bool and assigns it to the BlockExistingLinksOnRestrict field.
+func (o *FilesSettingsDto) SetBlockExistingLinksOnRestrict(v bool) {
+	o.BlockExistingLinksOnRestrict = &v
+}
+
 // GetExtsFilesVectorized returns the ExtsFilesVectorized field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FilesSettingsDto) GetExtsFilesVectorized() []string {
 	if o == nil {
@@ -2395,6 +2531,18 @@ func (o FilesSettingsDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.OrganizeRoomsGrouping) {
 		toSerialize["organizeRoomsGrouping"] = o.OrganizeRoomsGrouping
+	}
+	if !IsNil(o.DefaultShareLinkInternal) {
+		toSerialize["defaultShareLinkInternal"] = o.DefaultShareLinkInternal
+	}
+	if !IsNil(o.ExternalShareApplyToDocuments) {
+		toSerialize["externalShareApplyToDocuments"] = o.ExternalShareApplyToDocuments
+	}
+	if !IsNil(o.ExternalShareApplyToRooms) {
+		toSerialize["externalShareApplyToRooms"] = o.ExternalShareApplyToRooms
+	}
+	if !IsNil(o.BlockExistingLinksOnRestrict) {
+		toSerialize["blockExistingLinksOnRestrict"] = o.BlockExistingLinksOnRestrict
 	}
 	if o.ExtsFilesVectorized != nil {
 		toSerialize["extsFilesVectorized"] = o.ExtsFilesVectorized

@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **ProviderId** | Pointer to **int32** | The unique identifier of the AI provider that offers this model. | [optional] 
 **ProviderTitle** | **NullableString** | The human-readable display name of the AI provider (e.g., OpenAI, Anthropic). | 
 **ModelId** | **NullableString** | The model identifier as recognized by the AI provider (e.g., gpt-4o, claude-sonnet-4-20250514). | 
+**Alias** | Pointer to **NullableString** | The display name for the model. | [optional] 
+**Capabilities** | Pointer to [**AiModelCapabilities**](AiModelCapabilities.md) |  | [optional] 
 **Price** | Pointer to [**AiChatPrice**](AiChatPrice.md) |  | [optional] 
 **Currency** | Pointer to [**CurrencyInfo**](CurrencyInfo.md) |  | [optional] 
 
@@ -114,6 +116,66 @@ SetModelId sets ModelId field to given value.
 `func (o *ModelDto) UnsetModelId()`
 
 UnsetModelId ensures that no value is present for ModelId, not even an explicit nil
+### GetAlias
+
+`func (o *ModelDto) GetAlias() string`
+
+GetAlias returns the Alias field if non-nil, zero value otherwise.
+
+### GetAliasOk
+
+`func (o *ModelDto) GetAliasOk() (*string, bool)`
+
+GetAliasOk returns a tuple with the Alias field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlias
+
+`func (o *ModelDto) SetAlias(v string)`
+
+SetAlias sets Alias field to given value.
+
+### HasAlias
+
+`func (o *ModelDto) HasAlias() bool`
+
+HasAlias returns a boolean if a field has been set.
+
+### SetAliasNil
+
+`func (o *ModelDto) SetAliasNil(b bool)`
+
+ SetAliasNil sets the value for Alias to be an explicit nil
+
+### UnsetAlias
+`func (o *ModelDto) UnsetAlias()`
+
+UnsetAlias ensures that no value is present for Alias, not even an explicit nil
+### GetCapabilities
+
+`func (o *ModelDto) GetCapabilities() AiModelCapabilities`
+
+GetCapabilities returns the Capabilities field if non-nil, zero value otherwise.
+
+### GetCapabilitiesOk
+
+`func (o *ModelDto) GetCapabilitiesOk() (*AiModelCapabilities, bool)`
+
+GetCapabilitiesOk returns a tuple with the Capabilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapabilities
+
+`func (o *ModelDto) SetCapabilities(v AiModelCapabilities)`
+
+SetCapabilities sets Capabilities field to given value.
+
+### HasCapabilities
+
+`func (o *ModelDto) HasCapabilities() bool`
+
+HasCapabilities returns a boolean if a field has been set.
+
 ### GetPrice
 
 `func (o *ModelDto) GetPrice() AiChatPrice`

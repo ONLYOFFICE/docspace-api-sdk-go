@@ -31,6 +31,9 @@ type DefaultProviderDto struct {
 	DefaultModel NullableString `json:"defaultModel"`
 	// AI provider title.
 	ProviderTitle NullableString `json:"providerTitle,omitempty"`
+	ProviderType *ProviderType `json:"providerType,omitempty"`
+	// Display alias of the default model.
+	DefaultModelAlias NullableString `json:"defaultModelAlias,omitempty"`
 }
 
 type _DefaultProviderDto DefaultProviderDto
@@ -153,6 +156,80 @@ func (o *DefaultProviderDto) UnsetProviderTitle() {
 	o.ProviderTitle.Unset()
 }
 
+// GetProviderType returns the ProviderType field value if set, zero value otherwise.
+func (o *DefaultProviderDto) GetProviderType() ProviderType {
+	if o == nil || IsNil(o.ProviderType) {
+		var ret ProviderType
+		return ret
+	}
+	return *o.ProviderType
+}
+
+// GetProviderTypeOk returns a tuple with the ProviderType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DefaultProviderDto) GetProviderTypeOk() (*ProviderType, bool) {
+	if o == nil || IsNil(o.ProviderType) {
+		return nil, false
+	}
+	return o.ProviderType, true
+}
+
+// HasProviderType returns a boolean if a field has been set.
+func (o *DefaultProviderDto) IsProviderTypeSet() bool {
+	if o != nil && !IsNil(o.ProviderType) {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderType gets a reference to the given ProviderType and assigns it to the ProviderType field.
+func (o *DefaultProviderDto) SetProviderType(v ProviderType) {
+	o.ProviderType = &v
+}
+
+// GetDefaultModelAlias returns the DefaultModelAlias field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DefaultProviderDto) GetDefaultModelAlias() string {
+	if o == nil || IsNil(o.DefaultModelAlias.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DefaultModelAlias.Get()
+}
+
+// GetDefaultModelAliasOk returns a tuple with the DefaultModelAlias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DefaultProviderDto) GetDefaultModelAliasOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DefaultModelAlias.Get(), o.DefaultModelAlias.IsSet()
+}
+
+// HasDefaultModelAlias returns a boolean if a field has been set.
+func (o *DefaultProviderDto) IsDefaultModelAliasSet() bool {
+	if o != nil && o.DefaultModelAlias.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultModelAlias gets a reference to the given NullableString and assigns it to the DefaultModelAlias field.
+func (o *DefaultProviderDto) SetDefaultModelAlias(v string) {
+	o.DefaultModelAlias.Set(&v)
+}
+// SetDefaultModelAliasNil sets the value for DefaultModelAlias to be an explicit nil
+func (o *DefaultProviderDto) SetDefaultModelAliasNil() {
+	o.DefaultModelAlias.Set(nil)
+}
+
+// UnsetDefaultModelAlias ensures that no value is present for DefaultModelAlias, not even an explicit nil
+func (o *DefaultProviderDto) UnsetDefaultModelAlias() {
+	o.DefaultModelAlias.Unset()
+}
+
 func (o DefaultProviderDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -169,6 +246,12 @@ func (o DefaultProviderDto) ToMap() (map[string]interface{}, error) {
 	toSerialize["defaultModel"] = o.DefaultModel.Get()
 	if o.ProviderTitle.IsSet() {
 		toSerialize["providerTitle"] = o.ProviderTitle.Get()
+	}
+	if !IsNil(o.ProviderType) {
+		toSerialize["providerType"] = o.ProviderType
+	}
+	if o.DefaultModelAlias.IsSet() {
+		toSerialize["defaultModelAlias"] = o.DefaultModelAlias.Get()
 	}
 	return toSerialize, nil
 }

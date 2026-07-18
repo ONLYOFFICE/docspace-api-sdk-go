@@ -171,7 +171,7 @@ func (r ApiSendUserPasswordRequest) Execute() (*StringWrapper, *http.Response, e
 
 // SendUserPassword Remind a user password
 //
-// Reminds a password to the user using the email address specified in the request.
+// Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-user-password/
 //

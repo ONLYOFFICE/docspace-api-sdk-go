@@ -386,13 +386,13 @@ type ApiGetWebhookTriggersRequest struct {
 	ApiService *SettingsWebhooksAPIService
 }
 
-func (r ApiGetWebhookTriggersRequest) Execute() (*GetWebhookTriggers200Response, *http.Response, error) {
+func (r ApiGetWebhookTriggersRequest) Execute() (*WebhookTriggerArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetWebhookTriggersExecute(r)
 }
 
 // GetWebhookTriggers Get webhook triggers
 //
-// Returns a list of triggers for a webhook.
+// Returns a list of triggers for a webhook with their availability for the current user.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhook-triggers/
 //
@@ -406,13 +406,13 @@ func (a *SettingsWebhooksAPIService) GetWebhookTriggers(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return GetWebhookTriggers200Response
-func (a *SettingsWebhooksAPIService) GetWebhookTriggersExecute(r ApiGetWebhookTriggersRequest) (*GetWebhookTriggers200Response, *http.Response, error) {
+//  @return WebhookTriggerArrayWrapper
+func (a *SettingsWebhooksAPIService) GetWebhookTriggersExecute(r ApiGetWebhookTriggersRequest) (*WebhookTriggerArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetWebhookTriggers200Response
+		localVarReturnValue  *WebhookTriggerArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsWebhooksAPIService.GetWebhookTriggers")

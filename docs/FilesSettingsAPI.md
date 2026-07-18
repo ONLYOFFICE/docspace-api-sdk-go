@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**ChangeDefaultAccessRights**](FilesSettingsAPI.md#ChangeDefaultAccessRights) | **Put** /api/2.0/files/settings/dafaultaccessrights | Change the default access rights
 [**ChangeDeleteConfirm**](FilesSettingsAPI.md#ChangeDeleteConfirm) | **Put** /api/2.0/files/changedeleteconfrim | Confirm the file deletion
 [**ChangeDownloadZipFromBody**](FilesSettingsAPI.md#ChangeDownloadZipFromBody) | **Put** /api/2.0/files/settings/downloadtargz | Change the archive format (using body parameters)
+[**ChangeExternalSharingSettings**](FilesSettingsAPI.md#ChangeExternalSharingSettings) | **Put** /api/2.0/files/settings/externalsharingsettings | Change the Access Control external sharing settings
 [**CheckDocServiceUrl**](FilesSettingsAPI.md#CheckDocServiceUrl) | **Put** /api/2.0/files/docservice | Check the document service URL
 [**DisplayFileExtension**](FilesSettingsAPI.md#DisplayFileExtension) | **Put** /api/2.0/files/displayfileextension | Display a file extension
 [**DisplayRecent**](FilesSettingsAPI.md#DisplayRecent) | **Put** /api/2.0/files/displayrecent | Display the Recent folder
@@ -361,6 +362,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ICompressWrapper**](ICompressWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ChangeExternalSharingSettings
+
+> ExternalSharingSettingsWrapper ChangeExternalSharingSettings(ctx).ExternalSharingSettingsRequestDto(externalSharingSettingsRequestDto).Execute()
+
+Change the Access Control external sharing settings
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	externalSharingSettingsRequestDto := *openapiclient.NewExternalSharingSettingsRequestDto() // ExternalSharingSettingsRequestDto |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FilesSettingsAPI.ChangeExternalSharingSettings(context.Background()).ExternalSharingSettingsRequestDto(externalSharingSettingsRequestDto).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesSettingsAPI.ChangeExternalSharingSettings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ChangeExternalSharingSettings`: ExternalSharingSettingsWrapper
+	fmt.Fprintf(os.Stdout, "Response from `FilesSettingsAPI.ChangeExternalSharingSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiChangeExternalSharingSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **externalSharingSettingsRequestDto** | [**ExternalSharingSettingsRequestDto**](ExternalSharingSettingsRequestDto.md) |  | 
+
+### Return type
+
+[**ExternalSharingSettingsWrapper**](ExternalSharingSettingsWrapper.md)
 
 ### Authorization
 

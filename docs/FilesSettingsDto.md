@@ -62,6 +62,10 @@ Name | Type | Description | Notes
 **ChunkUploadSize** | Pointer to **int64** | The size of a large file that is uploaded in chunks. | [optional] 
 **OpenEditorInSameTab** | Pointer to **bool** | Specifies whether to open the editor in the same tab or not. | [optional] 
 **OrganizeRoomsGrouping** | Pointer to **bool** | Specifies whether the grouping of rooms is enabled or not. | [optional] 
+**DefaultShareLinkInternal** | Pointer to **bool** | Specifies the default sharing link type: true = DocSpace users only (internal), false = Anyone with the link. | [optional] 
+**ExternalShareApplyToDocuments** | Pointer to **bool** | When external sharing is restricted, specifies whether the restriction applies to the My Documents section. | [optional] 
+**ExternalShareApplyToRooms** | Pointer to **bool** | When external sharing is restricted, specifies whether the restriction applies to the Rooms section. | [optional] 
+**BlockExistingLinksOnRestrict** | Pointer to **bool** | When external sharing is restricted, specifies whether existing public links are blocked immediately. | [optional] 
 **ExtsFilesVectorized** | Pointer to **[]string** | List of extensions available for vectorization | [optional] 
 **MaxVectorizationFileSize** | Pointer to **int64** | The maximum file size for vectorization | [optional] 
 
@@ -1863,6 +1867,106 @@ SetOrganizeRoomsGrouping sets OrganizeRoomsGrouping field to given value.
 `func (o *FilesSettingsDto) HasOrganizeRoomsGrouping() bool`
 
 HasOrganizeRoomsGrouping returns a boolean if a field has been set.
+
+### GetDefaultShareLinkInternal
+
+`func (o *FilesSettingsDto) GetDefaultShareLinkInternal() bool`
+
+GetDefaultShareLinkInternal returns the DefaultShareLinkInternal field if non-nil, zero value otherwise.
+
+### GetDefaultShareLinkInternalOk
+
+`func (o *FilesSettingsDto) GetDefaultShareLinkInternalOk() (*bool, bool)`
+
+GetDefaultShareLinkInternalOk returns a tuple with the DefaultShareLinkInternal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultShareLinkInternal
+
+`func (o *FilesSettingsDto) SetDefaultShareLinkInternal(v bool)`
+
+SetDefaultShareLinkInternal sets DefaultShareLinkInternal field to given value.
+
+### HasDefaultShareLinkInternal
+
+`func (o *FilesSettingsDto) HasDefaultShareLinkInternal() bool`
+
+HasDefaultShareLinkInternal returns a boolean if a field has been set.
+
+### GetExternalShareApplyToDocuments
+
+`func (o *FilesSettingsDto) GetExternalShareApplyToDocuments() bool`
+
+GetExternalShareApplyToDocuments returns the ExternalShareApplyToDocuments field if non-nil, zero value otherwise.
+
+### GetExternalShareApplyToDocumentsOk
+
+`func (o *FilesSettingsDto) GetExternalShareApplyToDocumentsOk() (*bool, bool)`
+
+GetExternalShareApplyToDocumentsOk returns a tuple with the ExternalShareApplyToDocuments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalShareApplyToDocuments
+
+`func (o *FilesSettingsDto) SetExternalShareApplyToDocuments(v bool)`
+
+SetExternalShareApplyToDocuments sets ExternalShareApplyToDocuments field to given value.
+
+### HasExternalShareApplyToDocuments
+
+`func (o *FilesSettingsDto) HasExternalShareApplyToDocuments() bool`
+
+HasExternalShareApplyToDocuments returns a boolean if a field has been set.
+
+### GetExternalShareApplyToRooms
+
+`func (o *FilesSettingsDto) GetExternalShareApplyToRooms() bool`
+
+GetExternalShareApplyToRooms returns the ExternalShareApplyToRooms field if non-nil, zero value otherwise.
+
+### GetExternalShareApplyToRoomsOk
+
+`func (o *FilesSettingsDto) GetExternalShareApplyToRoomsOk() (*bool, bool)`
+
+GetExternalShareApplyToRoomsOk returns a tuple with the ExternalShareApplyToRooms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalShareApplyToRooms
+
+`func (o *FilesSettingsDto) SetExternalShareApplyToRooms(v bool)`
+
+SetExternalShareApplyToRooms sets ExternalShareApplyToRooms field to given value.
+
+### HasExternalShareApplyToRooms
+
+`func (o *FilesSettingsDto) HasExternalShareApplyToRooms() bool`
+
+HasExternalShareApplyToRooms returns a boolean if a field has been set.
+
+### GetBlockExistingLinksOnRestrict
+
+`func (o *FilesSettingsDto) GetBlockExistingLinksOnRestrict() bool`
+
+GetBlockExistingLinksOnRestrict returns the BlockExistingLinksOnRestrict field if non-nil, zero value otherwise.
+
+### GetBlockExistingLinksOnRestrictOk
+
+`func (o *FilesSettingsDto) GetBlockExistingLinksOnRestrictOk() (*bool, bool)`
+
+GetBlockExistingLinksOnRestrictOk returns a tuple with the BlockExistingLinksOnRestrict field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBlockExistingLinksOnRestrict
+
+`func (o *FilesSettingsDto) SetBlockExistingLinksOnRestrict(v bool)`
+
+SetBlockExistingLinksOnRestrict sets BlockExistingLinksOnRestrict field to given value.
+
+### HasBlockExistingLinksOnRestrict
+
+`func (o *FilesSettingsDto) HasBlockExistingLinksOnRestrict() bool`
+
+HasBlockExistingLinksOnRestrict returns a boolean if a field has been set.
 
 ### GetExtsFilesVectorized
 

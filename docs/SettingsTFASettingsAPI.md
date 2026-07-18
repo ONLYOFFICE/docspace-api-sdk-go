@@ -5,20 +5,20 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetTfaAppCodes**](SettingsTFASettingsAPI.md#GetTfaAppCodes) | **Get** /api/2.0/settings/tfaappcodes | Get the TFA codes
-[**GetTfaConfirmUrl**](SettingsTFASettingsAPI.md#GetTfaConfirmUrl) | **Get** /api/2.0/settings/tfaapp/confirm | Get confirmation email
+[**GetTfaConfirmData**](SettingsTFASettingsAPI.md#GetTfaConfirmData) | **Get** /api/2.0/settings/tfaapp/confirm | Get TFA confirmation data
 [**GetTfaSettings**](SettingsTFASettingsAPI.md#GetTfaSettings) | **Get** /api/2.0/settings/tfaapp | Get the TFA settings
 [**TfaAppGenerateSetupCode**](SettingsTFASettingsAPI.md#TfaAppGenerateSetupCode) | **Get** /api/2.0/settings/tfaapp/setup | Generate setup code
 [**TfaValidateAuthCode**](SettingsTFASettingsAPI.md#TfaValidateAuthCode) | **Post** /api/2.0/settings/tfaapp/validate | Validate the TFA code
 [**UnlinkTfaApp**](SettingsTFASettingsAPI.md#UnlinkTfaApp) | **Put** /api/2.0/settings/tfaappnewapp | Unlink the TFA application
 [**UpdateTfaAppCodes**](SettingsTFASettingsAPI.md#UpdateTfaAppCodes) | **Put** /api/2.0/settings/tfaappnewcodes | Update the TFA codes
 [**UpdateTfaSettings**](SettingsTFASettingsAPI.md#UpdateTfaSettings) | **Put** /api/2.0/settings/tfaapp | Update the TFA settings
-[**UpdateTfaSettingsLink**](SettingsTFASettingsAPI.md#UpdateTfaSettingsLink) | **Put** /api/2.0/settings/tfaappwithlink | Get a confirmation email for updating TFA settings
+[**UpdateTfaSettingsLink**](SettingsTFASettingsAPI.md#UpdateTfaSettingsLink) | **Put** /api/2.0/settings/tfaappwithlink | Updates TFA settings
 
 
 
 ## GetTfaAppCodes
 
-> ObjectArrayWrapper GetTfaAppCodes(ctx).Execute()
+> TfaAppCodeArrayWrapper GetTfaAppCodes(ctx).Execute()
 
 Get the TFA codes
 
@@ -47,7 +47,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsTFASettingsAPI.GetTfaAppCodes``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTfaAppCodes`: ObjectArrayWrapper
+	// response from `GetTfaAppCodes`: TfaAppCodeArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsTFASettingsAPI.GetTfaAppCodes`: %v\n", resp)
 }
 ```
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiGetTfaAppCodesRequest stru
 
 ### Return type
 
-[**ObjectArrayWrapper**](ObjectArrayWrapper.md)
+[**TfaAppCodeArrayWrapper**](TfaAppCodeArrayWrapper.md)
 
 ### Authorization
 
@@ -79,15 +79,15 @@ Other parameters are passed through a pointer to a apiGetTfaAppCodesRequest stru
 [[Back to README]](../README.md)
 
 
-## GetTfaConfirmUrl
+## GetTfaConfirmData
 
-> StringWrapper GetTfaConfirmUrl(ctx).Execute()
+> TfaConfirmDataWrapper GetTfaConfirmData(ctx).Execute()
 
-Get confirmation email
+Get TFA confirmation data
 
 
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-url/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-data/).
 
 ### Example
 
@@ -105,13 +105,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsTFASettingsAPI.GetTfaConfirmUrl(context.Background()).Execute()
+	resp, r, err := apiClient.SettingsTFASettingsAPI.GetTfaConfirmData(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SettingsTFASettingsAPI.GetTfaConfirmUrl``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SettingsTFASettingsAPI.GetTfaConfirmData``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTfaConfirmUrl`: StringWrapper
-	fmt.Fprintf(os.Stdout, "Response from `SettingsTFASettingsAPI.GetTfaConfirmUrl`: %v\n", resp)
+	// response from `GetTfaConfirmData`: TfaConfirmDataWrapper
+	fmt.Fprintf(os.Stdout, "Response from `SettingsTFASettingsAPI.GetTfaConfirmData`: %v\n", resp)
 }
 ```
 
@@ -121,12 +121,12 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetTfaConfirmUrlRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetTfaConfirmDataRequest struct via the builder pattern
 
 
 ### Return type
 
-[**StringWrapper**](StringWrapper.md)
+[**TfaConfirmDataWrapper**](TfaConfirmDataWrapper.md)
 
 ### Authorization
 
@@ -406,7 +406,7 @@ Name | Type | Description  | Notes
 
 ## UpdateTfaAppCodes
 
-> ObjectArrayWrapper UpdateTfaAppCodes(ctx).Execute()
+> TfaAppCodeArrayWrapper UpdateTfaAppCodes(ctx).Execute()
 
 Update the TFA codes
 
@@ -435,7 +435,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsTFASettingsAPI.UpdateTfaAppCodes``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateTfaAppCodes`: ObjectArrayWrapper
+	// response from `UpdateTfaAppCodes`: TfaAppCodeArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsTFASettingsAPI.UpdateTfaAppCodes`: %v\n", resp)
 }
 ```
@@ -451,7 +451,7 @@ Other parameters are passed through a pointer to a apiUpdateTfaAppCodesRequest s
 
 ### Return type
 
-[**ObjectArrayWrapper**](ObjectArrayWrapper.md)
+[**TfaAppCodeArrayWrapper**](TfaAppCodeArrayWrapper.md)
 
 ### Authorization
 
@@ -539,7 +539,7 @@ Name | Type | Description  | Notes
 
 > StringWrapper UpdateTfaSettingsLink(ctx).TfaRequestsDto(tfaRequestsDto).Execute()
 
-Get a confirmation email for updating TFA settings
+Updates TFA settings
 
 
 

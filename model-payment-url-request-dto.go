@@ -16,6 +16,8 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PaymentUrlRequestDto type satisfies the MappedNullable interface at compile time
@@ -23,18 +25,24 @@ var _ MappedNullable = &PaymentUrlRequestDto{}
 
 // PaymentUrlRequestDto The request parameters for the payment URL configuration with quantity information.
 type PaymentUrlRequestDto struct {
-	// The URL where the user will be redirected after payment processing.
-	BackUrl NullableString `json:"backUrl,omitempty"`
+	// The URL where the user will be redirected after payment cancellation.
+	BackUrl string `json:"backUrl"`
+	// The URL where the user will be redirected after successful payment.
+	SuccessUrl string `json:"successUrl"`
 	// The payment quantity.
 	Quantity map[string]int32 `json:"quantity,omitempty"`
 }
+
+type _PaymentUrlRequestDto PaymentUrlRequestDto
 
 // NewPaymentUrlRequestDto instantiates a new PaymentUrlRequestDto object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentUrlRequestDto() *PaymentUrlRequestDto {
+func NewPaymentUrlRequestDto(backUrl string, successUrl string) *PaymentUrlRequestDto {
 	this := PaymentUrlRequestDto{}
+	this.BackUrl = backUrl
+	this.SuccessUrl = successUrl
 	return &this
 }
 
@@ -46,46 +54,52 @@ func NewPaymentUrlRequestDtoWithDefaults() *PaymentUrlRequestDto {
 	return &this
 }
 
-// GetBackUrl returns the BackUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetBackUrl returns the BackUrl field value
 func (o *PaymentUrlRequestDto) GetBackUrl() string {
-	if o == nil || IsNil(o.BackUrl.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.BackUrl.Get()
+
+	return o.BackUrl
 }
 
-// GetBackUrlOk returns a tuple with the BackUrl field value if set, nil otherwise
+// GetBackUrlOk returns a tuple with the BackUrl field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentUrlRequestDto) GetBackUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.BackUrl.Get(), o.BackUrl.IsSet()
+	return &o.BackUrl, true
 }
 
-// HasBackUrl returns a boolean if a field has been set.
-func (o *PaymentUrlRequestDto) IsBackUrlSet() bool {
-	if o != nil && o.BackUrl.IsSet() {
-		return true
+// SetBackUrl sets field value
+func (o *PaymentUrlRequestDto) SetBackUrl(v string) {
+	o.BackUrl = v
+}
+
+// GetSuccessUrl returns the SuccessUrl field value
+func (o *PaymentUrlRequestDto) GetSuccessUrl() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.SuccessUrl
 }
 
-// SetBackUrl gets a reference to the given NullableString and assigns it to the BackUrl field.
-func (o *PaymentUrlRequestDto) SetBackUrl(v string) {
-	o.BackUrl.Set(&v)
-}
-// SetBackUrlNil sets the value for BackUrl to be an explicit nil
-func (o *PaymentUrlRequestDto) SetBackUrlNil() {
-	o.BackUrl.Set(nil)
+// GetSuccessUrlOk returns a tuple with the SuccessUrl field value
+// and a boolean to check if the value has been set.
+func (o *PaymentUrlRequestDto) GetSuccessUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SuccessUrl, true
 }
 
-// UnsetBackUrl ensures that no value is present for BackUrl, not even an explicit nil
-func (o *PaymentUrlRequestDto) UnsetBackUrl() {
-	o.BackUrl.Unset()
+// SetSuccessUrl sets field value
+func (o *PaymentUrlRequestDto) SetSuccessUrl(v string) {
+	o.SuccessUrl = v
 }
 
 // GetQuantity returns the Quantity field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -131,13 +145,49 @@ func (o PaymentUrlRequestDto) MarshalJSON() ([]byte, error) {
 
 func (o PaymentUrlRequestDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.BackUrl.IsSet() {
-		toSerialize["backUrl"] = o.BackUrl.Get()
-	}
+	toSerialize["backUrl"] = o.BackUrl
+	toSerialize["successUrl"] = o.SuccessUrl
 	if o.Quantity != nil {
 		toSerialize["quantity"] = o.Quantity
 	}
 	return toSerialize, nil
+}
+
+func (o *PaymentUrlRequestDto) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"backUrl",
+		"successUrl",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPaymentUrlRequestDto := _PaymentUrlRequestDto{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPaymentUrlRequestDto)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PaymentUrlRequestDto(varPaymentUrlRequestDto)
+
+	return err
 }
 
 type NullablePaymentUrlRequestDto struct {
