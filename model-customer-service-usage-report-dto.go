@@ -1,0 +1,316 @@
+// (c) Copyright Ascensio System SIA 2026
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package docspace_api_sdk
+
+import (
+	"encoding/json"
+)
+
+// checks if the CustomerServiceUsageReportDto type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CustomerServiceUsageReportDto{}
+
+// CustomerServiceUsageReportDto Represents a paged report of customer service usage statistics.
+type CustomerServiceUsageReportDto struct {
+	// A collection of service usage statistics.
+	Collection []CustomerServiceUsageDto `json:"collection,omitempty"`
+	// The report data offset.
+	Offset *int32 `json:"offset,omitempty"`
+	// The report data limit.
+	Limit *int32 `json:"limit,omitempty"`
+	// The total quantity of records in the report.
+	TotalQuantity *int64 `json:"totalQuantity,omitempty"`
+	// The total number of pages in the report.
+	TotalPage *int32 `json:"totalPage,omitempty"`
+	// The current page number of the report.
+	CurrentPage *int32 `json:"currentPage,omitempty"`
+}
+
+// NewCustomerServiceUsageReportDto instantiates a new CustomerServiceUsageReportDto object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewCustomerServiceUsageReportDto() *CustomerServiceUsageReportDto {
+	this := CustomerServiceUsageReportDto{}
+	return &this
+}
+
+// NewCustomerServiceUsageReportDtoWithDefaults instantiates a new CustomerServiceUsageReportDto object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewCustomerServiceUsageReportDtoWithDefaults() *CustomerServiceUsageReportDto {
+	this := CustomerServiceUsageReportDto{}
+	return &this
+}
+
+// GetCollection returns the Collection field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CustomerServiceUsageReportDto) GetCollection() []CustomerServiceUsageDto {
+	if o == nil {
+		var ret []CustomerServiceUsageDto
+		return ret
+	}
+	return o.Collection
+}
+
+// GetCollectionOk returns a tuple with the Collection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CustomerServiceUsageReportDto) GetCollectionOk() ([]CustomerServiceUsageDto, bool) {
+	if o == nil || IsNil(o.Collection) {
+		return nil, false
+	}
+	return o.Collection, true
+}
+
+// HasCollection returns a boolean if a field has been set.
+func (o *CustomerServiceUsageReportDto) IsCollectionSet() bool {
+	if o != nil && !IsNil(o.Collection) {
+		return true
+	}
+
+	return false
+}
+
+// SetCollection gets a reference to the given []CustomerServiceUsageDto and assigns it to the Collection field.
+func (o *CustomerServiceUsageReportDto) SetCollection(v []CustomerServiceUsageDto) {
+	o.Collection = v
+}
+
+// GetOffset returns the Offset field value if set, zero value otherwise.
+func (o *CustomerServiceUsageReportDto) GetOffset() int32 {
+	if o == nil || IsNil(o.Offset) {
+		var ret int32
+		return ret
+	}
+	return *o.Offset
+}
+
+// GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerServiceUsageReportDto) GetOffsetOk() (*int32, bool) {
+	if o == nil || IsNil(o.Offset) {
+		return nil, false
+	}
+	return o.Offset, true
+}
+
+// HasOffset returns a boolean if a field has been set.
+func (o *CustomerServiceUsageReportDto) IsOffsetSet() bool {
+	if o != nil && !IsNil(o.Offset) {
+		return true
+	}
+
+	return false
+}
+
+// SetOffset gets a reference to the given int32 and assigns it to the Offset field.
+func (o *CustomerServiceUsageReportDto) SetOffset(v int32) {
+	o.Offset = &v
+}
+
+// GetLimit returns the Limit field value if set, zero value otherwise.
+func (o *CustomerServiceUsageReportDto) GetLimit() int32 {
+	if o == nil || IsNil(o.Limit) {
+		var ret int32
+		return ret
+	}
+	return *o.Limit
+}
+
+// GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerServiceUsageReportDto) GetLimitOk() (*int32, bool) {
+	if o == nil || IsNil(o.Limit) {
+		return nil, false
+	}
+	return o.Limit, true
+}
+
+// HasLimit returns a boolean if a field has been set.
+func (o *CustomerServiceUsageReportDto) IsLimitSet() bool {
+	if o != nil && !IsNil(o.Limit) {
+		return true
+	}
+
+	return false
+}
+
+// SetLimit gets a reference to the given int32 and assigns it to the Limit field.
+func (o *CustomerServiceUsageReportDto) SetLimit(v int32) {
+	o.Limit = &v
+}
+
+// GetTotalQuantity returns the TotalQuantity field value if set, zero value otherwise.
+func (o *CustomerServiceUsageReportDto) GetTotalQuantity() int64 {
+	if o == nil || IsNil(o.TotalQuantity) {
+		var ret int64
+		return ret
+	}
+	return *o.TotalQuantity
+}
+
+// GetTotalQuantityOk returns a tuple with the TotalQuantity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerServiceUsageReportDto) GetTotalQuantityOk() (*int64, bool) {
+	if o == nil || IsNil(o.TotalQuantity) {
+		return nil, false
+	}
+	return o.TotalQuantity, true
+}
+
+// HasTotalQuantity returns a boolean if a field has been set.
+func (o *CustomerServiceUsageReportDto) IsTotalQuantitySet() bool {
+	if o != nil && !IsNil(o.TotalQuantity) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalQuantity gets a reference to the given int64 and assigns it to the TotalQuantity field.
+func (o *CustomerServiceUsageReportDto) SetTotalQuantity(v int64) {
+	o.TotalQuantity = &v
+}
+
+// GetTotalPage returns the TotalPage field value if set, zero value otherwise.
+func (o *CustomerServiceUsageReportDto) GetTotalPage() int32 {
+	if o == nil || IsNil(o.TotalPage) {
+		var ret int32
+		return ret
+	}
+	return *o.TotalPage
+}
+
+// GetTotalPageOk returns a tuple with the TotalPage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerServiceUsageReportDto) GetTotalPageOk() (*int32, bool) {
+	if o == nil || IsNil(o.TotalPage) {
+		return nil, false
+	}
+	return o.TotalPage, true
+}
+
+// HasTotalPage returns a boolean if a field has been set.
+func (o *CustomerServiceUsageReportDto) IsTotalPageSet() bool {
+	if o != nil && !IsNil(o.TotalPage) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalPage gets a reference to the given int32 and assigns it to the TotalPage field.
+func (o *CustomerServiceUsageReportDto) SetTotalPage(v int32) {
+	o.TotalPage = &v
+}
+
+// GetCurrentPage returns the CurrentPage field value if set, zero value otherwise.
+func (o *CustomerServiceUsageReportDto) GetCurrentPage() int32 {
+	if o == nil || IsNil(o.CurrentPage) {
+		var ret int32
+		return ret
+	}
+	return *o.CurrentPage
+}
+
+// GetCurrentPageOk returns a tuple with the CurrentPage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerServiceUsageReportDto) GetCurrentPageOk() (*int32, bool) {
+	if o == nil || IsNil(o.CurrentPage) {
+		return nil, false
+	}
+	return o.CurrentPage, true
+}
+
+// HasCurrentPage returns a boolean if a field has been set.
+func (o *CustomerServiceUsageReportDto) IsCurrentPageSet() bool {
+	if o != nil && !IsNil(o.CurrentPage) {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrentPage gets a reference to the given int32 and assigns it to the CurrentPage field.
+func (o *CustomerServiceUsageReportDto) SetCurrentPage(v int32) {
+	o.CurrentPage = &v
+}
+
+func (o CustomerServiceUsageReportDto) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CustomerServiceUsageReportDto) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if o.Collection != nil {
+		toSerialize["collection"] = o.Collection
+	}
+	if !IsNil(o.Offset) {
+		toSerialize["offset"] = o.Offset
+	}
+	if !IsNil(o.Limit) {
+		toSerialize["limit"] = o.Limit
+	}
+	if !IsNil(o.TotalQuantity) {
+		toSerialize["totalQuantity"] = o.TotalQuantity
+	}
+	if !IsNil(o.TotalPage) {
+		toSerialize["totalPage"] = o.TotalPage
+	}
+	if !IsNil(o.CurrentPage) {
+		toSerialize["currentPage"] = o.CurrentPage
+	}
+	return toSerialize, nil
+}
+
+type NullableCustomerServiceUsageReportDto struct {
+	value *CustomerServiceUsageReportDto
+	isSet bool
+}
+
+func (v NullableCustomerServiceUsageReportDto) Get() *CustomerServiceUsageReportDto {
+	return v.value
+}
+
+func (v *NullableCustomerServiceUsageReportDto) Set(val *CustomerServiceUsageReportDto) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableCustomerServiceUsageReportDto) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableCustomerServiceUsageReportDto) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableCustomerServiceUsageReportDto(val *CustomerServiceUsageReportDto) *NullableCustomerServiceUsageReportDto {
+	return &NullableCustomerServiceUsageReportDto{value: val, isSet: true}
+}
+
+func (v NullableCustomerServiceUsageReportDto) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableCustomerServiceUsageReportDto) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+
