@@ -21,9 +21,9 @@ import (
 // checks if the ClientSecretResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ClientSecretResponse{}
 
-// ClientSecretResponse The response containing the regenerated client secret.
+// ClientSecretResponse The response carrying a regenerated client secret.
 type ClientSecretResponse struct {
-	// The newly generated client secret.
+	// The newly generated client secret. It replaces the previous one immediately, so every deployed copy of the client has to be updated with this value.
 	ClientSecret *string `json:"client_secret,omitempty"`
 }
 

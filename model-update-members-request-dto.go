@@ -23,9 +23,9 @@ var _ MappedNullable = &UpdateMembersRequestDto{}
 
 // UpdateMembersRequestDto The request parameters for updating the user information.
 type UpdateMembersRequestDto struct {
-	// The list of user IDs.
+	// The accounts the operation applies to. System accounts are dropped from the list without an error, and the  remaining ones are processed in the order they are given.
 	UserIds []string `json:"userIds,omitempty"`
-	// Specifies whether to resend invitation letters to all the users or not.
+	// Reaches every pending account of the portal instead of the ones in `userIds`. It is read only by  `PUT api/2.0/people/invite` and is ignored by every other operation that binds this body.
 	ResendAll *bool `json:"resendAll,omitempty"`
 }
 

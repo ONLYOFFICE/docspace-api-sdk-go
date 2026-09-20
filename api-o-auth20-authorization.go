@@ -35,22 +35,22 @@ type ApiAuthorizeOAuthRequest struct {
 	scope *string
 }
 
-// The OAuth 2.0 response type, must be 'code' for authorization code flow.
+// The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint.
 func (r ApiAuthorizeOAuthRequest) ResponseType(responseType string) ApiAuthorizeOAuthRequest {	r.responseType = &responseType
 	return r
 }
 
-// The client identifier issued to the client during registration.
+// The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against.
 func (r ApiAuthorizeOAuthRequest) ClientId(clientId string) ApiAuthorizeOAuthRequest {	r.clientId = &clientId
 	return r
 }
 
-// The URL to redirect to after authorization is complete.
+// Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused.
 func (r ApiAuthorizeOAuthRequest) RedirectUri(redirectUri string) ApiAuthorizeOAuthRequest {	r.redirectUri = &redirectUri
 	return r
 }
 
-// The space-separated list of requested scope permissions.
+// The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these.
 func (r ApiAuthorizeOAuthRequest) Scope(scope string) ApiAuthorizeOAuthRequest {	r.scope = &scope
 	return r
 }
@@ -59,9 +59,9 @@ func (r ApiAuthorizeOAuthRequest) Execute() (*http.Response, error) {
 	return r.ApiService.AuthorizeOAuthExecute(r)
 }
 
-// AuthorizeOAuth OAuth2 Authorization Endpoint
+// AuthorizeOAuth Start the authorization flow
 //
-// Initiates the OAuth2 authorization flow.
+// Starts the OAuth2 authorization code flow for the client named by client_id. The caller has to present the portal signature cookie, and a request without a valid one is not refused with 401 or 403 but redirected to the portal login page, carrying the client ID so the flow can resume after signing in. When the user has not yet consented to the requested scopes the browser is redirected to the consent page; once the consent exists the browser is redirected to the client's redirect URI with the authorization code and, when one was sent, the original state. A caller that cannot follow redirects may send the X-Disable-Redirect header, and then the response is 200 with an empty body and the target URL in the X-Redirect-URI header. The code returned here is exchanged for tokens at the token endpoint.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/authorize-o-auth/
 //
@@ -164,27 +164,27 @@ type ApiExchangeTokenRequest struct {
 	clientSecret *string
 }
 
-// The OAuth2 grant type, must be 'authorization_code' for the authorization code flow.
+// Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token.
 func (r ApiExchangeTokenRequest) GrantType(grantType string) ApiExchangeTokenRequest {	r.grantType = &grantType
 	return r
 }
 
-// A temporary authorization code that is sent to the client to be exchanged for a token.
+// The authorization code returned by the authorization endpoint. It may be redeemed once.
 func (r ApiExchangeTokenRequest) Code(code string) ApiExchangeTokenRequest {	r.code = &code
 	return r
 }
 
-// The URL where the user will be redirected after successful or unsuccessful authentication.
+// The same redirect URI that was used to obtain the code. The exchange fails when it differs.
 func (r ApiExchangeTokenRequest) RedirectUri(redirectUri string) ApiExchangeTokenRequest {	r.redirectUri = &redirectUri
 	return r
 }
 
-// The client identifier issued to the client during registration.
+// The identifier of the client redeeming the code.
 func (r ApiExchangeTokenRequest) ClientId(clientId string) ApiExchangeTokenRequest {	r.clientId = &clientId
 	return r
 }
 
-// The client secret issued to the client during registration.
+// The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead.
 func (r ApiExchangeTokenRequest) ClientSecret(clientSecret string) ApiExchangeTokenRequest {	r.clientSecret = &clientSecret
 	return r
 }
@@ -193,9 +193,9 @@ func (r ApiExchangeTokenRequest) Execute() (*ExchangeToken200Response, *http.Res
 	return r.ApiService.ExchangeTokenExecute(r)
 }
 
-// ExchangeToken OAuth2 Token Endpoint
+// ExchangeToken Exchange the authorization code
 //
-// Exchange authorization code for access token
+// Exchanges an authorization code for an access token. The request is form-encoded and has to carry the grant type, the code, the same redirect URI that was used to obtain the code, and the client credentials: the client authenticates itself here rather than through the portal signature cookie the authorization endpoint uses. The response carries the access token, its type and its lifetime in seconds, plus a refresh token when the client is configured for the refresh token grant. Client authentication that fails is answered with 401, while a malformed, unknown or expired code is answered with 400. The code is single use, so replaying it fails.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/exchange-token/
 //
@@ -306,17 +306,17 @@ type ApiSubmitConsentRequest struct {
 	scope *string
 }
 
-// The client identifier issued to the client during registration.
+// The client the consent is being given to. It has to be the same client the authorization request named.
 func (r ApiSubmitConsentRequest) ClientId(clientId string) ApiSubmitConsentRequest {	r.clientId = &clientId
 	return r
 }
 
-// The random string used to solve the CSRF vulnerability problem.
+// The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request.
 func (r ApiSubmitConsentRequest) State(state string) ApiSubmitConsentRequest {	r.state = &state
 	return r
 }
 
-// The space-separated list of requested scope permissions.
+// The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested.
 func (r ApiSubmitConsentRequest) Scope(scope string) ApiSubmitConsentRequest {	r.scope = &scope
 	return r
 }
@@ -325,9 +325,9 @@ func (r ApiSubmitConsentRequest) Execute() (*http.Response, error) {
 	return r.ApiService.SubmitConsentExecute(r)
 }
 
-// SubmitConsent OAuth2 consent endpoint
+// SubmitConsent Submit the consent decision
 //
-// Sends consent approval
+// Submits the user's consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client's redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/submit-consent/
 //

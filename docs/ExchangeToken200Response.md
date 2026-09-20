@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccessToken** | Pointer to **string** | The access token issued by the authorization server. | [optional] 
-**TokenType** | Pointer to **string** | The type of token issued, typically 'Bearer'. | [optional] 
-**ExpiresIn** | Pointer to **int32** | The number of seconds until the access token expires. | [optional] 
-**RefreshToken** | Pointer to **string** | The token used to obtain a new access token when the current one expires. | [optional] 
+**AccessToken** | Pointer to **string** | The token to send as a Bearer credential when calling the portal on the user behalf. | [optional] 
+**TokenType** | Pointer to **string** | How the access token is to be presented. It is always Bearer. | [optional] 
+**ExpiresIn** | Pointer to **int32** | How many seconds the access token stays valid, counted from the moment it was issued. | [optional] 
+**RefreshToken** | Pointer to **string** | The token that buys a new access token once the current one expires. It is present only when the client is registered for the refresh token grant. | [optional] 
 
 ## Methods
 

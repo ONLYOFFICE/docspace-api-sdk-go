@@ -21,13 +21,13 @@ import (
 // checks if the AccessRequestKeyDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AccessRequestKeyDto{}
 
-// AccessRequestKeyDto The encryption key granting one user access to a file.
+// AccessRequestKeyDto The file key issued to one account.
 type AccessRequestKeyDto struct {
-	// User ID
+	// The account that is to open the file with this key; it has to have read access to the file.
 	UserId *string `json:"userId,omitempty"`
-	// Public key ID
+	// The public key the file key was encrypted with, as reported for that account by  `GET api/2.0/files/file/{fileId}/publickeys`.
 	PublicKeyId *string `json:"publicKeyId,omitempty"`
-	// Encrypted private key
+	// The key of the file itself, encrypted by the client with that public key, so that the plain key never reaches  the portal.
 	PrivateKeyEnc NullableString `json:"privateKeyEnc,omitempty"`
 }
 

@@ -39,12 +39,12 @@ func (r ApiGetGuestSharingLinkRequest) Execute() (*StringWrapper, *http.Response
 
 // GetGuestSharingLink Get a guest sharing link
 //
-// Returns a link to share a guest with another user.
+// Builds a link that lets another member of the portal take over the caller's guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-guest-sharing-link/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param userid The user ID.
+// @param userid The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
 // @return ApiGetGuestSharingLinkRequest
 func (a *PortalGuestsAPIService) GetGuestSharingLink(ctx context.Context, userid string) ApiGetGuestSharingLinkRequest {
 	return ApiGetGuestSharingLinkRequest{
@@ -152,17 +152,6 @@ func (a *PortalGuestsAPIService) GetGuestSharingLinkExecute(r ApiGetGuestSharing
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

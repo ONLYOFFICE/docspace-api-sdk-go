@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **int32** | The quota ID. | [optional] 
-**Name** | Pointer to **NullableString** | The quota name. | [optional] 
-**Title** | Pointer to **NullableString** | The quota title. | [optional] 
-**UnitOfMeasure** | Pointer to **NullableString** | The quota unit of measure. | [optional] 
-**Quantity** | Pointer to **int32** | The quantity that will be charged (the next quantity if set, otherwise the current quantity). | [optional] 
-**Wallet** | Pointer to **bool** | The quota applies to the wallet or not. | [optional] 
-**DueDate** | Pointer to **NullableTime** | The due date of the upcoming payment in the portal time zone. | [optional] 
-**Amount** | Pointer to **float64** | The amount that will be charged (unit price multiplied by the quantity). | [optional] 
-**Currency** | Pointer to **NullableString** | The three-character ISO 4217 currency symbol of the amount. | [optional] 
+**Id** | Pointer to **int32** | The quota that is going to be charged. When a switch to another quota is scheduled, this is the quota  being switched to, so it can differ from what `GET api/2.0/portal/tariff` reports for today. | [optional] 
+**Name** | Pointer to **NullableString** | The quota's stable key, which is the same identifier the wallet operations use for a service. | [optional] 
+**Title** | Pointer to **NullableString** | The quota name in the portal language, meant to be printed on an invoice preview. | [optional] 
+**UnitOfMeasure** | Pointer to **NullableString** | What `quantity` counts, in the portal language - seats, administrators, gigabytes. It is empty for a quota  that is simply on or off. | [optional] 
+**Quantity** | Pointer to **int32** | How much is going to be charged for, which is the quantity scheduled for the next period when one has been  scheduled and today's quantity otherwise. | [optional] 
+**Wallet** | Pointer to **bool** | Whether the charge is paid out of the portal wallet rather than from the subscription. | [optional] 
+**DueDate** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the charge falls due, in the portal time zone. | [optional] 
+**Amount** | Pointer to **float64** | What the charge comes to: the unit price of the quota multiplied by `quantity`. Taxes are not part of it,  and a quota with no price of its own is not listed at all rather than listed with a zero. | [optional] 
+**Currency** | Pointer to **NullableString** | The currency `amount` is expressed in, as a three-letter ISO 4217 code. It follows the portal's billing  account, so every entry of one answer carries the same code. | [optional] 
 
 ## Methods
 
@@ -215,20 +215,20 @@ HasWallet returns a boolean if a field has been set.
 
 ### GetDueDate
 
-`func (o *UpcomingPaymentDto) GetDueDate() time.Time`
+`func (o *UpcomingPaymentDto) GetDueDate() ApiDateTime`
 
 GetDueDate returns the DueDate field if non-nil, zero value otherwise.
 
 ### GetDueDateOk
 
-`func (o *UpcomingPaymentDto) GetDueDateOk() (*time.Time, bool)`
+`func (o *UpcomingPaymentDto) GetDueDateOk() (*ApiDateTime, bool)`
 
 GetDueDateOk returns a tuple with the DueDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDueDate
 
-`func (o *UpcomingPaymentDto) SetDueDate(v time.Time)`
+`func (o *UpcomingPaymentDto) SetDueDate(v ApiDateTime)`
 
 SetDueDate sets DueDate field to given value.
 
@@ -238,16 +238,6 @@ SetDueDate sets DueDate field to given value.
 
 HasDueDate returns a boolean if a field has been set.
 
-### SetDueDateNil
-
-`func (o *UpcomingPaymentDto) SetDueDateNil(b bool)`
-
- SetDueDateNil sets the value for DueDate to be an explicit nil
-
-### UnsetDueDate
-`func (o *UpcomingPaymentDto) UnsetDueDate()`
-
-UnsetDueDate ensures that no value is present for DueDate, not even an explicit nil
 ### GetAmount
 
 `func (o *UpcomingPaymentDto) GetAmount() float64`

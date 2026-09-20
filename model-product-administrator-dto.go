@@ -23,13 +23,13 @@ import (
 // checks if the ProductAdministratorDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ProductAdministratorDto{}
 
-// ProductAdministratorDto The product administrator parameters.
+// ProductAdministratorDto Whether one user administers one portal module, echoing back the pair that was asked about.
 type ProductAdministratorDto struct {
-	// The product ID.
+	// The module the verdict is about, echoed from the request. The all-zero GUID stands for the portal as a  whole rather than for any single module.
 	ProductId string `json:"productId"`
-	// The user unique identifier.
+	// The user the verdict is about, echoed from the request unchanged - it is not checked for existing.
 	UserId string `json:"userId"`
-	// Indicates whether the user has administrator privileges for the product.
+	// Whether that user administers that module. It is `true` for a DocSpace administrator whatever the module,  since the portal-wide role covers every one of them. A `false` can also mean the identifiers name no user  or no module at all, so it is not proof that the user exists, and it says nothing about whether the module  is enabled for the portal - `GET api/2.0/settings/security/{id}` reports that.
 	Administrator bool `json:"administrator"`
 }
 

@@ -21,13 +21,13 @@ import (
 // checks if the XlsxReportResponseDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &XlsxReportResponseDto{}
 
-// XlsxReportResponseDto The XLSX report task response parameters.
+// XlsxReportResponseDto The answer to a report generation request: the queued task, the form whose answers are collected, and whether the  report file is being created or refreshed.
 type XlsxReportResponseDto struct {
-	// The original form file information.
-	Form *FileDtoInteger `json:"form,omitempty"`
-	// The Document Builder task information.
+	// The original form the answers are collected from. It is not the produced spreadsheet - that one arrives with  the task, once the task reports completion.
+	Form *FileDto `json:"form,omitempty"`
+	// The queued generation. Poll it with `GET api/2.0/files/file/{fileId}/xlsx` until it reports completion, and  take the produced file from it then.
 	Task *DocumentBuilderTaskDto `json:"task,omitempty"`
-	// Specifies whether the XLSX report file is newly created or an existing file will be updated.
+	// True when this run creates the report file, false when an existing report is rewritten in place, which means  it keeps its id and the links already shared for it.
 	IsNewFile *bool `json:"isNewFile,omitempty"`
 }
 
@@ -49,9 +49,9 @@ func NewXlsxReportResponseDtoWithDefaults() *XlsxReportResponseDto {
 }
 
 // GetForm returns the Form field value if set, zero value otherwise.
-func (o *XlsxReportResponseDto) GetForm() FileDtoInteger {
+func (o *XlsxReportResponseDto) GetForm() FileDto {
 	if o == nil || IsNil(o.Form) {
-		var ret FileDtoInteger
+		var ret FileDto
 		return ret
 	}
 	return *o.Form
@@ -59,7 +59,7 @@ func (o *XlsxReportResponseDto) GetForm() FileDtoInteger {
 
 // GetFormOk returns a tuple with the Form field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *XlsxReportResponseDto) GetFormOk() (*FileDtoInteger, bool) {
+func (o *XlsxReportResponseDto) GetFormOk() (*FileDto, bool) {
 	if o == nil || IsNil(o.Form) {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *XlsxReportResponseDto) IsFormSet() bool {
 	return false
 }
 
-// SetForm gets a reference to the given FileDtoInteger and assigns it to the Form field.
-func (o *XlsxReportResponseDto) SetForm(v FileDtoInteger) {
+// SetForm gets a reference to the given FileDto and assigns it to the Form field.
+func (o *XlsxReportResponseDto) SetForm(v FileDto) {
 	o.Form = &v
 }
 

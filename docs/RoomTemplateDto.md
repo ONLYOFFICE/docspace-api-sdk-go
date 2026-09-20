@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RoomId** | **int32** | The room template ID. | 
-**Title** | **string** | The room template title. | 
-**Logo** | Pointer to [**LogoRequest**](LogoRequest.md) | The room template logo. | [optional] 
-**CopyLogo** | Pointer to **bool** | Specifies whether to copy room logo or not. | [optional] 
-**Share** | Pointer to **[]string** | The collection of email addresses of users with whom to share a room. | [optional] 
-**Groups** | Pointer to **[]string** | The collection of groups with whom to share a room. | [optional] 
-**Public** | Pointer to **bool** | Specifies whether the room template is public or not. | [optional] 
-**Tags** | Pointer to **[]string** | The collection of tags. | [optional] 
-**Color** | Pointer to **NullableString** | The color of the room template. | [optional] 
-**Cover** | Pointer to **NullableString** | The cover of the room template. | [optional] 
-**Quota** | Pointer to **NullableInt64** | Room quota | [optional] 
+**RoomId** | **int32** | The identifier of the room the template is built from. Take it from the room listing of  `GET api/2.0/files/rooms`; a folder identifier is not accepted. | 
+**Title** | **string** | The title the template is saved under in the Templates section. Characters that a folder name cannot contain  are replaced with an underscore on save, and two templates may share a title. | 
+**Logo** | Pointer to [**LogoRequest**](LogoRequest.md) | A picture of the caller's own for the template, cropped out of an image already placed in the temporary  storage. | [optional] 
+**CopyLogo** | Pointer to **bool** | Whether the template takes over the picture already set on the source room. When false the template gets no  picture from that room. | [optional] 
+**Share** | Pointer to **[]string** | The email addresses of the portal members who are granted read access to the finished template. | [optional] 
+**Groups** | Pointer to **[]string** | The identifiers of the portal groups whose members are granted read access to the finished template. | [optional] 
+**Public** | Pointer to **bool** | Whether the finished template is shared with everyone allowed to create rooms. When false it stays reachable  only for the recipients named for it. | [optional] 
+**Tags** | Pointer to **[]string** | The labels attached to the template and shown next to it in listings. | [optional] 
+**Color** | Pointer to **NullableString** | The accent colour of the generated cover, written as six hexadecimal digits with no leading hash sign. When it  is left empty a colour is picked at random. | [optional] 
+**Cover** | Pointer to **NullableString** | The identifier of a built-in cover picture, as listed by `GET api/2.0/files/rooms/covers`. When it is left  empty the template gets no cover. | [optional] 
+**Quota** | Pointer to **NullableInt64** | The storage limit assigned to the template, in bytes. When it is not set the template keeps the limit of the  source room. | [optional] 
 
 ## Methods
 

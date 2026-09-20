@@ -21,19 +21,19 @@ import (
 // checks if the ActiveServiceDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActiveServiceDto{}
 
-// ActiveServiceDto Represents an active wallet service (quota) of the current portal.
+// ActiveServiceDto One wallet service the portal is running right now, with the allowance it grants where that is counted.
 type ActiveServiceDto struct {
-	// The name of the service.
+	// The stable key of the service, which is what `POST api/2.0/portal/payment/servicestate` takes to switch  it off again.
 	Service NullableString `json:"service,omitempty"`
-	// The unit of measurement for the service.
+	// What `limit` and `used` count, in the portal language - gigabytes, editor seats, credits.
 	ServiceUnit NullableString `json:"serviceUnit,omitempty"`
-	// Indicates whether the service is subscription-based.
+	// Whether the service is billed as a standing subscription rather than per unit consumed. Only a  subscription can carry `limit` and `used`.
 	Subscription *bool `json:"subscription,omitempty"`
-	// The title of the service.
+	// The service name in the portal language, for printing rather than matching.
 	Title NullableString `json:"title,omitempty"`
-	// The service limit. Populated only for the subscription-based services.
+	// How much of the service the portal is entitled to. It is empty for a service whose consumption is not  counted this way, which is not the same as a service without a limit.
 	Limit NullableInt32 `json:"limit,omitempty"`
-	// The current service usage. Populated only for the subscription-based services.
+	// How much of that allowance is in use - the editors currently active for the cloud editors, the units  already consumed for disk storage. Empty under the same conditions as `limit`.
 	Used NullableInt32 `json:"used,omitempty"`
 }
 

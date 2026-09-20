@@ -21,11 +21,11 @@ import (
 // checks if the FilesStatisticsFolder type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilesStatisticsFolder{}
 
-// FilesStatisticsFolder The file statictics folder parameters.
+// FilesStatisticsFolder One section of the portal and the space its documents take.
 type FilesStatisticsFolder struct {
-	// The folder title.
+	// The name of the section as the interface shows it, translated into the language used by the caller, so it  suits display but not matching - which section an entry describes is told by the field that carries it.
 	Title NullableString `json:"title,omitempty"`
-	// The used space in the folder.
+	// The size of the files kept in the section, in bytes, counting every folder and room inside it; 0 means the  section holds nothing. The counter is brought up to date as an operation finishes, so a reading taken right  after an upload or a delete can still show the previous value.
 	UsedSpace *int64 `json:"usedSpace,omitempty"`
 }
 

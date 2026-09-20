@@ -29,8 +29,8 @@ type AiProfilesListProviderModelsRequest struct {
 	ProviderType AiProviderType `json:"providerType"`
 	// Provider API base URL.
 	BaseUrl string `json:"baseUrl"`
-	// Provider API key.
-	ApiKey string `json:"apiKey"`
+	// Provider API key. Omit it for a provider that needs none; the request is then made without one.
+	ApiKey *string `json:"apiKey,omitempty"`
 }
 
 type _AiProfilesListProviderModelsRequest AiProfilesListProviderModelsRequest
@@ -39,11 +39,10 @@ type _AiProfilesListProviderModelsRequest AiProfilesListProviderModelsRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiProfilesListProviderModelsRequest(providerType AiProviderType, baseUrl string, apiKey string) *AiProfilesListProviderModelsRequest {
+func NewAiProfilesListProviderModelsRequest(providerType AiProviderType, baseUrl string) *AiProfilesListProviderModelsRequest {
 	this := AiProfilesListProviderModelsRequest{}
 	this.ProviderType = providerType
 	this.BaseUrl = baseUrl
-	this.ApiKey = apiKey
 	return &this
 }
 
@@ -103,28 +102,36 @@ func (o *AiProfilesListProviderModelsRequest) SetBaseUrl(v string) {
 	o.BaseUrl = v
 }
 
-// GetApiKey returns the ApiKey field value
+// GetApiKey returns the ApiKey field value if set, zero value otherwise.
 func (o *AiProfilesListProviderModelsRequest) GetApiKey() string {
-	if o == nil {
+	if o == nil || IsNil(o.ApiKey) {
 		var ret string
 		return ret
 	}
-
-	return o.ApiKey
+	return *o.ApiKey
 }
 
-// GetApiKeyOk returns a tuple with the ApiKey field value
+// GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AiProfilesListProviderModelsRequest) GetApiKeyOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ApiKey) {
 		return nil, false
 	}
-	return &o.ApiKey, true
+	return o.ApiKey, true
 }
 
-// SetApiKey sets field value
+// HasApiKey returns a boolean if a field has been set.
+func (o *AiProfilesListProviderModelsRequest) IsApiKeySet() bool {
+	if o != nil && !IsNil(o.ApiKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetApiKey gets a reference to the given string and assigns it to the ApiKey field.
 func (o *AiProfilesListProviderModelsRequest) SetApiKey(v string) {
-	o.ApiKey = v
+	o.ApiKey = &v
 }
 
 func (o AiProfilesListProviderModelsRequest) MarshalJSON() ([]byte, error) {
@@ -139,7 +146,9 @@ func (o AiProfilesListProviderModelsRequest) ToMap() (map[string]interface{}, er
 	toSerialize := map[string]interface{}{}
 	toSerialize["providerType"] = o.ProviderType
 	toSerialize["baseUrl"] = o.BaseUrl
-	toSerialize["apiKey"] = o.ApiKey
+	if !IsNil(o.ApiKey) {
+		toSerialize["apiKey"] = o.ApiKey
+	}
 	return toSerialize, nil
 }
 
@@ -150,7 +159,6 @@ func (o *AiProfilesListProviderModelsRequest) UnmarshalJSON(data []byte) (err er
 	requiredProperties := []string{
 		"providerType",
 		"baseUrl",
-		"apiKey",
 	}
 
 	allProperties := make(map[string]interface{})

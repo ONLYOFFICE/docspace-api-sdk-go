@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetUserTypeUpdateProgress**](PeopleUserTypeAPI.md#GetUserTypeUpdateProgress) | **Get** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type
+[**GetUserTypeUpdateProgress**](PeopleUserTypeAPI.md#GetUserTypeUpdateProgress) | **Get** /api/2.0/people/type/progress/{userid} | Get the user type change progress
 [**StartUserTypeUpdate**](PeopleUserTypeAPI.md#StartUserTypeUpdate) | **Post** /api/2.0/people/type | Start updating user type
 [**TerminateUserTypeUpdate**](PeopleUserTypeAPI.md#TerminateUserTypeUpdate) | **Put** /api/2.0/people/type/terminate | Terminate updating user type
 [**UpdateUserType**](PeopleUserTypeAPI.md#UpdateUserType) | **Put** /api/2.0/people/type/{type} | Change a user type
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 > TaskProgressResponseWrapper GetUserTypeUpdateProgress(ctx, userid).Execute()
 
-Get the progress of updating user type
+Get the user type change progress
 
 
 
@@ -34,7 +34,7 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -54,7 +54,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
 
 ### Other Parameters
 
@@ -242,8 +242,8 @@ import (
 )
 
 func main() {
-	type_ := openapiclient.EmployeeType("All") // EmployeeType | The new user type.
-	updateMembersRequestDto := *openapiclient.NewUpdateMembersRequestDto() // UpdateMembersRequestDto | The request parameters for updating the user information.
+	type_ := openapiclient.EmployeeType("All") // EmployeeType | The type to convert the listed accounts to, taken from the route: `User`, `Guest`, `RoomAdmin` or  `DocSpaceAdmin`. `RoomAdmin` and `DocSpaceAdmin` take a paid seat.
+	updateMembersRequestDto := *openapiclient.NewUpdateMembersRequestDto() // UpdateMembersRequestDto | The accounts to convert. Only `userIds` is read by this operation; `resendAll` belongs to the invitation  operations and is ignored here.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -263,7 +263,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**type_** | [**EmployeeType**](.md) | The new user type. | 
+**type_** | [**EmployeeType**](.md) | The type to convert the listed accounts to, taken from the route: `User`, `Guest`, `RoomAdmin` or  `DocSpaceAdmin`. `RoomAdmin` and `DocSpaceAdmin` take a paid seat. | 
 
 ### Other Parameters
 
@@ -273,7 +273,7 @@ Other parameters are passed through a pointer to a apiUpdateUserTypeRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateMembersRequestDto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md) | The request parameters for updating the user information. | 
+ **updateMembersRequestDto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md) | The accounts to convert. Only `userIds` is read by this operation; `resendAll` belongs to the invitation  operations and is ignored here. | 
 
 ### Return type
 

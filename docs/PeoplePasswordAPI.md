@@ -32,8 +32,8 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
-	changePasswordRequest := *openapiclient.NewChangePasswordRequest() // ChangePasswordRequest | The request parameters for updating a user password.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+	changePasswordRequest := *openapiclient.NewChangePasswordRequest() // ChangePasswordRequest | The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -53,7 +53,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | 
 
 ### Other Parameters
 
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiChangeUserPasswordRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **changePasswordRequest** | [**ChangePasswordRequest**](ChangePasswordRequest.md) | The request parameters for updating a user password. | 
+ **changePasswordRequest** | [**ChangePasswordRequest**](ChangePasswordRequest.md) | The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed. | 
 
 ### Return type
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

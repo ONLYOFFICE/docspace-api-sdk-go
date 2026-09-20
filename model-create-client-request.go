@@ -25,31 +25,30 @@ var _ MappedNullable = &CreateClientRequest{}
 
 // CreateClientRequest Client creation request containing client details
 type CreateClientRequest struct {
-	// The client name.
-	Name *string `json:"name,omitempty"`
-	// The description of the client
+	// The display name shown to the user on the consent screen. It has to be between 3 and 256 characters long.
+	Name string `json:"name"`
+	// The free-text description shown next to the name on the consent screen, at most 255 characters.
 	Description *string `json:"description,omitempty"`
-	// The logo of the client in base64 format
-	Logo *string `json:"logo,omitempty" validate:"regexp=^data:image/(?:png|jpeg|jpg|svg\\+xml);base64\\,.*.{1\\,}"`
-	// The scopes for the client
-	Scopes []string `json:"scopes,omitempty"`
-	Public *bool `json:"public,omitempty"`
-	// Indicates whether PKCE is allowed for the client
+	// The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted, the whole string may not exceed 2000000 characters and the decoded image may not exceed 256000 bytes.
+	Logo string `json:"logo" validate:"regexp=^data:image/(?:png|jpeg|jpg|svg\\+xml);base64\\,.*.{1\\,}"`
+	// The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here.
+	Scopes []string `json:"scopes"`
+	// Whether the client may use PKCE. Turning it on lets the client authenticate with the none method and prove itself with a code verifier instead of sending a secret, which is what a client that cannot keep a secret needs.
 	AllowPkce *bool `json:"allow_pkce,omitempty"`
-	// Indicates if the client is public
-	IsPublic *bool `json:"is_public,omitempty"`
-	// The website URL of the client
-	WebsiteUrl *string `json:"website_url,omitempty" validate:"regexp=^(https?://)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2\\,}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$|^https?://(\\d{1\\,3}\\.){3}\\d{1\\,3}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$"`
-	// The terms URL of the client
-	TermsUrl *string `json:"terms_url,omitempty" validate:"regexp=^(https?://)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2\\,}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$|^https?://(\\d{1\\,3}\\.){3}\\d{1\\,3}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$"`
-	// The policy URL of the client
-	PolicyUrl *string `json:"policy_url,omitempty" validate:"regexp=^(https?://)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2\\,}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$|^https?://(\\d{1\\,3}\\.){3}\\d{1\\,3}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$"`
-	// The redirect URIs for the client
+	// The URL of the client home page, offered to the user before they consent. The value has to be an http or https URL.
+	WebsiteUrl string `json:"website_url" validate:"regexp=^(https?://)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2\\,}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$|^https?://(\\d{1\\,3}\\.){3}\\d{1\\,3}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$"`
+	// The URL of the client terms of service, linked from the consent screen. The value has to be an http or https URL.
+	TermsUrl string `json:"terms_url" validate:"regexp=^(https?://)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2\\,}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$|^https?://(\\d{1\\,3}\\.){3}\\d{1\\,3}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$"`
+	// The URL of the client privacy policy, linked from the consent screen. The value has to be an http or https URL.
+	PolicyUrl string `json:"policy_url" validate:"regexp=^(https?://)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2\\,}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$|^https?://(\\d{1\\,3}\\.){3}\\d{1\\,3}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$"`
+	// The URIs an authorization code may be delivered to. An authorization request naming any other URI is refused, and the set holds between 1 and 12 addresses.
 	RedirectUris []string `json:"redirect_uris"`
-	// The allowed origins for the client
+	// The web origins allowed to call the portal on behalf of this client, used for the CORS check. The set holds between 1 and 12 addresses.
 	AllowedOrigins []string `json:"allowed_origins"`
-	// The logout redirect URI for the client
-	LogoutRedirectUri *string `json:"logout_redirect_uri,omitempty" validate:"regexp=^(https?://)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2\\,}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$|^https?://(\\d{1\\,3}\\.){3}\\d{1\\,3}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$"`
+	// The single URI the user may be sent back to once they have logged out. The value has to be an http or https URL.
+	LogoutRedirectUri string `json:"logout_redirect_uri" validate:"regexp=^(https?://)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2\\,}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$|^https?://(\\d{1\\,3}\\.){3}\\d{1\\,3}(:\\d+)?(/[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+\\,;=]*)?$"`
+	// Whether the client is offered to third-party tenants rather than only to the tenant that registers it.
+	IsPublic *bool `json:"is_public,omitempty"`
 }
 
 type _CreateClientRequest CreateClientRequest
@@ -58,10 +57,17 @@ type _CreateClientRequest CreateClientRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateClientRequest(redirectUris []string, allowedOrigins []string) *CreateClientRequest {
+func NewCreateClientRequest(name string, logo string, scopes []string, websiteUrl string, termsUrl string, policyUrl string, redirectUris []string, allowedOrigins []string, logoutRedirectUri string) *CreateClientRequest {
 	this := CreateClientRequest{}
+	this.Name = name
+	this.Logo = logo
+	this.Scopes = scopes
+	this.WebsiteUrl = websiteUrl
+	this.TermsUrl = termsUrl
+	this.PolicyUrl = policyUrl
 	this.RedirectUris = redirectUris
 	this.AllowedOrigins = allowedOrigins
+	this.LogoutRedirectUri = logoutRedirectUri
 	return &this
 }
 
@@ -73,36 +79,28 @@ func NewCreateClientRequestWithDefaults() *CreateClientRequest {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *CreateClientRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *CreateClientRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *CreateClientRequest) IsNameSet() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *CreateClientRequest) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -137,100 +135,52 @@ func (o *CreateClientRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetLogo returns the Logo field value if set, zero value otherwise.
+// GetLogo returns the Logo field value
 func (o *CreateClientRequest) GetLogo() string {
-	if o == nil || IsNil(o.Logo) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Logo
+
+	return o.Logo
 }
 
-// GetLogoOk returns a tuple with the Logo field value if set, nil otherwise
+// GetLogoOk returns a tuple with the Logo field value
 // and a boolean to check if the value has been set.
 func (o *CreateClientRequest) GetLogoOk() (*string, bool) {
-	if o == nil || IsNil(o.Logo) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Logo, true
+	return &o.Logo, true
 }
 
-// HasLogo returns a boolean if a field has been set.
-func (o *CreateClientRequest) IsLogoSet() bool {
-	if o != nil && !IsNil(o.Logo) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogo gets a reference to the given string and assigns it to the Logo field.
+// SetLogo sets field value
 func (o *CreateClientRequest) SetLogo(v string) {
-	o.Logo = &v
+	o.Logo = v
 }
 
-// GetScopes returns the Scopes field value if set, zero value otherwise.
+// GetScopes returns the Scopes field value
 func (o *CreateClientRequest) GetScopes() []string {
-	if o == nil || IsNil(o.Scopes) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Scopes
 }
 
-// GetScopesOk returns a tuple with the Scopes field value if set, nil otherwise
+// GetScopesOk returns a tuple with the Scopes field value
 // and a boolean to check if the value has been set.
 func (o *CreateClientRequest) GetScopesOk() ([]string, bool) {
-	if o == nil || IsNil(o.Scopes) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Scopes, true
 }
 
-// HasScopes returns a boolean if a field has been set.
-func (o *CreateClientRequest) IsScopesSet() bool {
-	if o != nil && !IsNil(o.Scopes) {
-		return true
-	}
-
-	return false
-}
-
-// SetScopes gets a reference to the given []string and assigns it to the Scopes field.
+// SetScopes sets field value
 func (o *CreateClientRequest) SetScopes(v []string) {
 	o.Scopes = v
-}
-
-// GetPublic returns the Public field value if set, zero value otherwise.
-func (o *CreateClientRequest) GetPublic() bool {
-	if o == nil || IsNil(o.Public) {
-		var ret bool
-		return ret
-	}
-	return *o.Public
-}
-
-// GetPublicOk returns a tuple with the Public field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateClientRequest) GetPublicOk() (*bool, bool) {
-	if o == nil || IsNil(o.Public) {
-		return nil, false
-	}
-	return o.Public, true
-}
-
-// HasPublic returns a boolean if a field has been set.
-func (o *CreateClientRequest) IsPublicSet() bool {
-	if o != nil && !IsNil(o.Public) {
-		return true
-	}
-
-	return false
-}
-
-// SetPublic gets a reference to the given bool and assigns it to the Public field.
-func (o *CreateClientRequest) SetPublic(v bool) {
-	o.Public = &v
 }
 
 // GetAllowPkce returns the AllowPkce field value if set, zero value otherwise.
@@ -265,132 +215,76 @@ func (o *CreateClientRequest) SetAllowPkce(v bool) {
 	o.AllowPkce = &v
 }
 
-// GetIsPublic returns the IsPublic field value if set, zero value otherwise.
-func (o *CreateClientRequest) GetIsPublic() bool {
-	if o == nil || IsNil(o.IsPublic) {
-		var ret bool
-		return ret
-	}
-	return *o.IsPublic
-}
-
-// GetIsPublicOk returns a tuple with the IsPublic field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateClientRequest) GetIsPublicOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsPublic) {
-		return nil, false
-	}
-	return o.IsPublic, true
-}
-
-// HasIsPublic returns a boolean if a field has been set.
-func (o *CreateClientRequest) IsIsPublicSet() bool {
-	if o != nil && !IsNil(o.IsPublic) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsPublic gets a reference to the given bool and assigns it to the IsPublic field.
-func (o *CreateClientRequest) SetIsPublic(v bool) {
-	o.IsPublic = &v
-}
-
-// GetWebsiteUrl returns the WebsiteUrl field value if set, zero value otherwise.
+// GetWebsiteUrl returns the WebsiteUrl field value
 func (o *CreateClientRequest) GetWebsiteUrl() string {
-	if o == nil || IsNil(o.WebsiteUrl) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.WebsiteUrl
+
+	return o.WebsiteUrl
 }
 
-// GetWebsiteUrlOk returns a tuple with the WebsiteUrl field value if set, nil otherwise
+// GetWebsiteUrlOk returns a tuple with the WebsiteUrl field value
 // and a boolean to check if the value has been set.
 func (o *CreateClientRequest) GetWebsiteUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.WebsiteUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WebsiteUrl, true
+	return &o.WebsiteUrl, true
 }
 
-// HasWebsiteUrl returns a boolean if a field has been set.
-func (o *CreateClientRequest) IsWebsiteUrlSet() bool {
-	if o != nil && !IsNil(o.WebsiteUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetWebsiteUrl gets a reference to the given string and assigns it to the WebsiteUrl field.
+// SetWebsiteUrl sets field value
 func (o *CreateClientRequest) SetWebsiteUrl(v string) {
-	o.WebsiteUrl = &v
+	o.WebsiteUrl = v
 }
 
-// GetTermsUrl returns the TermsUrl field value if set, zero value otherwise.
+// GetTermsUrl returns the TermsUrl field value
 func (o *CreateClientRequest) GetTermsUrl() string {
-	if o == nil || IsNil(o.TermsUrl) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TermsUrl
+
+	return o.TermsUrl
 }
 
-// GetTermsUrlOk returns a tuple with the TermsUrl field value if set, nil otherwise
+// GetTermsUrlOk returns a tuple with the TermsUrl field value
 // and a boolean to check if the value has been set.
 func (o *CreateClientRequest) GetTermsUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.TermsUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TermsUrl, true
+	return &o.TermsUrl, true
 }
 
-// HasTermsUrl returns a boolean if a field has been set.
-func (o *CreateClientRequest) IsTermsUrlSet() bool {
-	if o != nil && !IsNil(o.TermsUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetTermsUrl gets a reference to the given string and assigns it to the TermsUrl field.
+// SetTermsUrl sets field value
 func (o *CreateClientRequest) SetTermsUrl(v string) {
-	o.TermsUrl = &v
+	o.TermsUrl = v
 }
 
-// GetPolicyUrl returns the PolicyUrl field value if set, zero value otherwise.
+// GetPolicyUrl returns the PolicyUrl field value
 func (o *CreateClientRequest) GetPolicyUrl() string {
-	if o == nil || IsNil(o.PolicyUrl) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PolicyUrl
+
+	return o.PolicyUrl
 }
 
-// GetPolicyUrlOk returns a tuple with the PolicyUrl field value if set, nil otherwise
+// GetPolicyUrlOk returns a tuple with the PolicyUrl field value
 // and a boolean to check if the value has been set.
 func (o *CreateClientRequest) GetPolicyUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.PolicyUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PolicyUrl, true
+	return &o.PolicyUrl, true
 }
 
-// HasPolicyUrl returns a boolean if a field has been set.
-func (o *CreateClientRequest) IsPolicyUrlSet() bool {
-	if o != nil && !IsNil(o.PolicyUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetPolicyUrl gets a reference to the given string and assigns it to the PolicyUrl field.
+// SetPolicyUrl sets field value
 func (o *CreateClientRequest) SetPolicyUrl(v string) {
-	o.PolicyUrl = &v
+	o.PolicyUrl = v
 }
 
 // GetRedirectUris returns the RedirectUris field value
@@ -441,36 +335,60 @@ func (o *CreateClientRequest) SetAllowedOrigins(v []string) {
 	o.AllowedOrigins = v
 }
 
-// GetLogoutRedirectUri returns the LogoutRedirectUri field value if set, zero value otherwise.
+// GetLogoutRedirectUri returns the LogoutRedirectUri field value
 func (o *CreateClientRequest) GetLogoutRedirectUri() string {
-	if o == nil || IsNil(o.LogoutRedirectUri) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.LogoutRedirectUri
+
+	return o.LogoutRedirectUri
 }
 
-// GetLogoutRedirectUriOk returns a tuple with the LogoutRedirectUri field value if set, nil otherwise
+// GetLogoutRedirectUriOk returns a tuple with the LogoutRedirectUri field value
 // and a boolean to check if the value has been set.
 func (o *CreateClientRequest) GetLogoutRedirectUriOk() (*string, bool) {
-	if o == nil || IsNil(o.LogoutRedirectUri) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogoutRedirectUri, true
+	return &o.LogoutRedirectUri, true
 }
 
-// HasLogoutRedirectUri returns a boolean if a field has been set.
-func (o *CreateClientRequest) IsLogoutRedirectUriSet() bool {
-	if o != nil && !IsNil(o.LogoutRedirectUri) {
+// SetLogoutRedirectUri sets field value
+func (o *CreateClientRequest) SetLogoutRedirectUri(v string) {
+	o.LogoutRedirectUri = v
+}
+
+// GetIsPublic returns the IsPublic field value if set, zero value otherwise.
+func (o *CreateClientRequest) GetIsPublic() bool {
+	if o == nil || IsNil(o.IsPublic) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPublic
+}
+
+// GetIsPublicOk returns a tuple with the IsPublic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateClientRequest) GetIsPublicOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsPublic) {
+		return nil, false
+	}
+	return o.IsPublic, true
+}
+
+// HasIsPublic returns a boolean if a field has been set.
+func (o *CreateClientRequest) IsIsPublicSet() bool {
+	if o != nil && !IsNil(o.IsPublic) {
 		return true
 	}
 
 	return false
 }
 
-// SetLogoutRedirectUri gets a reference to the given string and assigns it to the LogoutRedirectUri field.
-func (o *CreateClientRequest) SetLogoutRedirectUri(v string) {
-	o.LogoutRedirectUri = &v
+// SetIsPublic gets a reference to the given bool and assigns it to the IsPublic field.
+func (o *CreateClientRequest) SetIsPublic(v bool) {
+	o.IsPublic = &v
 }
 
 func (o CreateClientRequest) MarshalJSON() ([]byte, error) {
@@ -483,40 +401,23 @@ func (o CreateClientRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateClientRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Logo) {
-		toSerialize["logo"] = o.Logo
-	}
-	if !IsNil(o.Scopes) {
-		toSerialize["scopes"] = o.Scopes
-	}
-	if !IsNil(o.Public) {
-		toSerialize["public"] = o.Public
-	}
+	toSerialize["logo"] = o.Logo
+	toSerialize["scopes"] = o.Scopes
 	if !IsNil(o.AllowPkce) {
 		toSerialize["allow_pkce"] = o.AllowPkce
 	}
-	if !IsNil(o.IsPublic) {
-		toSerialize["is_public"] = o.IsPublic
-	}
-	if !IsNil(o.WebsiteUrl) {
-		toSerialize["website_url"] = o.WebsiteUrl
-	}
-	if !IsNil(o.TermsUrl) {
-		toSerialize["terms_url"] = o.TermsUrl
-	}
-	if !IsNil(o.PolicyUrl) {
-		toSerialize["policy_url"] = o.PolicyUrl
-	}
+	toSerialize["website_url"] = o.WebsiteUrl
+	toSerialize["terms_url"] = o.TermsUrl
+	toSerialize["policy_url"] = o.PolicyUrl
 	toSerialize["redirect_uris"] = o.RedirectUris
 	toSerialize["allowed_origins"] = o.AllowedOrigins
-	if !IsNil(o.LogoutRedirectUri) {
-		toSerialize["logout_redirect_uri"] = o.LogoutRedirectUri
+	toSerialize["logout_redirect_uri"] = o.LogoutRedirectUri
+	if !IsNil(o.IsPublic) {
+		toSerialize["is_public"] = o.IsPublic
 	}
 	return toSerialize, nil
 }
@@ -526,8 +427,15 @@ func (o *CreateClientRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"name",
+		"logo",
+		"scopes",
+		"website_url",
+		"terms_url",
+		"policy_url",
 		"redirect_uris",
 		"allowed_origins",
+		"logout_redirect_uri",
 	}
 
 	allProperties := make(map[string]interface{})

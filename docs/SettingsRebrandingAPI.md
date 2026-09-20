@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**GetAdditionalWhiteLabelSettings**](SettingsRebrandingAPI.md#GetAdditionalWhiteLabelSettings) | **Get** /api/2.0/settings/rebranding/additional | Get the additional white label settings
 [**GetCompanyWhiteLabelSettings**](SettingsRebrandingAPI.md#GetCompanyWhiteLabelSettings) | **Get** /api/2.0/settings/rebranding/company | Get the company white label settings
 [**GetEnableWhitelabel**](SettingsRebrandingAPI.md#GetEnableWhitelabel) | **Get** /api/2.0/settings/enablewhitelabel | Check the white label availability
-[**GetIsDefaultWhiteLabelLogoText**](SettingsRebrandingAPI.md#GetIsDefaultWhiteLabelLogoText) | **Get** /api/2.0/settings/whitelabel/logotext/isdefault | Check the default white label logo text
+[**GetIsDefaultWhiteLabelLogoText**](SettingsRebrandingAPI.md#GetIsDefaultWhiteLabelLogoText) | **Get** /api/2.0/settings/whitelabel/logotext/isdefault | Check the default logo text
 [**GetIsDefaultWhiteLabelLogos**](SettingsRebrandingAPI.md#GetIsDefaultWhiteLabelLogos) | **Get** /api/2.0/settings/whitelabel/logos/isdefault | Check the default white label logos
 [**GetLicensorData**](SettingsRebrandingAPI.md#GetLicensorData) | **Get** /api/2.0/settings/companywhitelabel | Get the licensor data
 [**GetWhiteLabelLogoText**](SettingsRebrandingAPI.md#GetWhiteLabelLogoText) | **Get** /api/2.0/settings/whitelabel/logotext | Get the white label logo text
@@ -18,9 +18,9 @@ Method | HTTP request | Description
 [**RestoreWhiteLabelLogos**](SettingsRebrandingAPI.md#RestoreWhiteLabelLogos) | **Put** /api/2.0/settings/whitelabel/logos/restore | Restore the white label logos
 [**SaveAdditionalWhiteLabelSettings**](SettingsRebrandingAPI.md#SaveAdditionalWhiteLabelSettings) | **Post** /api/2.0/settings/rebranding/additional | Save the additional white label settings
 [**SaveCompanyWhiteLabelSettings**](SettingsRebrandingAPI.md#SaveCompanyWhiteLabelSettings) | **Post** /api/2.0/settings/rebranding/company | Save the company white label settings
-[**SaveWhiteLabelLogoText**](SettingsRebrandingAPI.md#SaveWhiteLabelLogoText) | **Post** /api/2.0/settings/whitelabel/logotext/save | Save the white label logo text settings
+[**SaveWhiteLabelLogoText**](SettingsRebrandingAPI.md#SaveWhiteLabelLogoText) | **Post** /api/2.0/settings/whitelabel/logotext/save | Save the white label logo text
 [**SaveWhiteLabelSettings**](SettingsRebrandingAPI.md#SaveWhiteLabelSettings) | **Post** /api/2.0/settings/whitelabel/logos/save | Save the white label logos
-[**SaveWhiteLabelSettingsFromFiles**](SettingsRebrandingAPI.md#SaveWhiteLabelSettingsFromFiles) | **Post** /api/2.0/settings/whitelabel/logos/savefromfiles | Save the white label logos from files
+[**SaveWhiteLabelSettingsFromFiles**](SettingsRebrandingAPI.md#SaveWhiteLabelSettingsFromFiles) | **Post** /api/2.0/settings/whitelabel/logos/savefromfiles | Save the logos from files
 
 
 
@@ -343,7 +343,7 @@ Other parameters are passed through a pointer to a apiGetEnableWhitelabelRequest
 
 > IsDefaultWhiteLabelLogosWrapper GetIsDefaultWhiteLabelLogoText(ctx).IsDark(isDark).IsDefault(isDefault).Execute()
 
-Check the default white label logo text
+Check the default logo text
 
 
 
@@ -362,8 +362,8 @@ import (
 )
 
 func main() {
-	isDark := true // bool | Specifies if the white label logo is for the dark theme or not. (optional)
-	isDefault := true // bool | Specifies if the logo is for a default tenant or not. (optional)
+	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
+	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -388,8 +388,8 @@ Other parameters are passed through a pointer to a apiGetIsDefaultWhiteLabelLogo
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **isDark** | **bool** | Specifies if the white label logo is for the dark theme or not. | 
- **isDefault** | **bool** | Specifies if the logo is for a default tenant or not. | 
+ **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
+ **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
 
 ### Return type
 
@@ -432,8 +432,8 @@ import (
 )
 
 func main() {
-	isDark := true // bool | Specifies if the white label logo is for the dark theme or not. (optional)
-	isDefault := true // bool | Specifies if the logo is for a default tenant or not. (optional)
+	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
+	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -458,8 +458,8 @@ Other parameters are passed through a pointer to a apiGetIsDefaultWhiteLabelLogo
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **isDark** | **bool** | Specifies if the white label logo is for the dark theme or not. | 
- **isDefault** | **bool** | Specifies if the logo is for a default tenant or not. | 
+ **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
+ **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
 
 ### Return type
 
@@ -565,8 +565,8 @@ import (
 )
 
 func main() {
-	isDark := true // bool | Specifies if the white label logo is for the dark theme or not. (optional)
-	isDefault := true // bool | Specifies if the logo is for a default tenant or not. (optional)
+	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
+	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -591,8 +591,8 @@ Other parameters are passed through a pointer to a apiGetWhiteLabelLogoTextReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **isDark** | **bool** | Specifies if the white label logo is for the dark theme or not. | 
- **isDefault** | **bool** | Specifies if the logo is for a default tenant or not. | 
+ **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
+ **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
 
 ### Return type
 
@@ -635,8 +635,8 @@ import (
 )
 
 func main() {
-	isDark := true // bool | Specifies if the white label logo is for the dark theme or not. (optional)
-	isDefault := true // bool | Specifies if the logo is for a default tenant or not. (optional)
+	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
+	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -661,8 +661,8 @@ Other parameters are passed through a pointer to a apiGetWhiteLabelLogosRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **isDark** | **bool** | Specifies if the white label logo is for the dark theme or not. | 
- **isDefault** | **bool** | Specifies if the logo is for a default tenant or not. | 
+ **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
+ **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
 
 ### Return type
 
@@ -670,7 +670,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -705,8 +705,8 @@ import (
 )
 
 func main() {
-	isDark := true // bool | Specifies if the white label logo is for the dark theme or not. (optional)
-	isDefault := true // bool | Specifies if the logo is for a default tenant or not. (optional)
+	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
+	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -731,8 +731,8 @@ Other parameters are passed through a pointer to a apiRestoreWhiteLabelLogoTextR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **isDark** | **bool** | Specifies if the white label logo is for the dark theme or not. | 
- **isDefault** | **bool** | Specifies if the logo is for a default tenant or not. | 
+ **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
+ **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
 
 ### Return type
 
@@ -775,8 +775,8 @@ import (
 )
 
 func main() {
-	isDark := true // bool | Specifies if the white label logo is for the dark theme or not. (optional)
-	isDefault := true // bool | Specifies if the logo is for a default tenant or not. (optional)
+	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
+	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -801,8 +801,8 @@ Other parameters are passed through a pointer to a apiRestoreWhiteLabelLogosRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **isDark** | **bool** | Specifies if the white label logo is for the dark theme or not. | 
- **isDefault** | **bool** | Specifies if the logo is for a default tenant or not. | 
+ **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
+ **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
 
 ### Return type
 
@@ -962,7 +962,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper SaveWhiteLabelLogoText(ctx).IsDark(isDark).IsDefault(isDefault).WhiteLabelRequestsDto(whiteLabelRequestsDto).Execute()
 
-Save the white label logo text settings
+Save the white label logo text
 
 
 
@@ -981,8 +981,8 @@ import (
 )
 
 func main() {
-	isDark := true // bool | Specifies if the white label logo is for the dark theme or not. (optional)
-	isDefault := true // bool | Specifies if the logo is for a default tenant or not. (optional)
+	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
+	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
 	whiteLabelRequestsDto := *openapiclient.NewWhiteLabelRequestsDto() // WhiteLabelRequestsDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1008,8 +1008,8 @@ Other parameters are passed through a pointer to a apiSaveWhiteLabelLogoTextRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **isDark** | **bool** | Specifies if the white label logo is for the dark theme or not. | 
- **isDefault** | **bool** | Specifies if the logo is for a default tenant or not. | 
+ **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
+ **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
  **whiteLabelRequestsDto** | [**WhiteLabelRequestsDto**](WhiteLabelRequestsDto.md) |  | 
 
 ### Return type
@@ -1053,8 +1053,8 @@ import (
 )
 
 func main() {
-	isDark := true // bool | Specifies if the white label logo is for the dark theme or not. (optional)
-	isDefault := true // bool | Specifies if the logo is for a default tenant or not. (optional)
+	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
+	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
 	whiteLabelRequestsDto := *openapiclient.NewWhiteLabelRequestsDto() // WhiteLabelRequestsDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1080,8 +1080,8 @@ Other parameters are passed through a pointer to a apiSaveWhiteLabelSettingsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **isDark** | **bool** | Specifies if the white label logo is for the dark theme or not. | 
- **isDefault** | **bool** | Specifies if the logo is for a default tenant or not. | 
+ **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
+ **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
  **whiteLabelRequestsDto** | [**WhiteLabelRequestsDto**](WhiteLabelRequestsDto.md) |  | 
 
 ### Return type
@@ -1106,7 +1106,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper SaveWhiteLabelSettingsFromFiles(ctx).IsDark(isDark).IsDefault(isDefault).Execute()
 
-Save the white label logos from files
+Save the logos from files
 
 
 
@@ -1125,8 +1125,8 @@ import (
 )
 
 func main() {
-	isDark := true // bool | Specifies if the white label logo is for the dark theme or not. (optional)
-	isDefault := true // bool | Specifies if the logo is for a default tenant or not. (optional)
+	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
+	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1151,8 +1151,8 @@ Other parameters are passed through a pointer to a apiSaveWhiteLabelSettingsFrom
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **isDark** | **bool** | Specifies if the white label logo is for the dark theme or not. | 
- **isDefault** | **bool** | Specifies if the logo is for a default tenant or not. | 
+ **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
+ **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
 
 ### Return type
 

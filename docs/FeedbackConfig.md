@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Url** | Pointer to **NullableString** | The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button. | [optional] 
-**Visible** | Pointer to **bool** | Shows or hides the Feedback & Support menu button. | [optional] [readonly] 
+**Visible** | Pointer to **bool** | Whether the support button is shown. The portal always asks for it to be shown. | [optional] [readonly] 
 
 ## Methods
 

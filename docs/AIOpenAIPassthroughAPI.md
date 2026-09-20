@@ -4,16 +4,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AiOpenaiChatCompletions**](AIOpenAIPassthroughAPI.md#AiOpenaiChatCompletions) | **Post** /api/2.0/ai/openai/{profileId}/v1/chat/completions | OpenAI-compatible chat completions proxied to the profile's provider
-[**AiOpenaiImagesGenerations**](AIOpenAIPassthroughAPI.md#AiOpenaiImagesGenerations) | **Post** /api/2.0/ai/openai/{profileId}/v1/images/generations | OpenAI-compatible image generation proxied to the profile's provider
+[**AiOpenaiChatCompletions**](AIOpenAIPassthroughAPI.md#AiOpenaiChatCompletions) | **Post** /api/2.0/ai/openai/{profileId}/v1/chat/completions | OpenAI chat completions passthrough
+[**AiOpenaiImagesGenerations**](AIOpenAIPassthroughAPI.md#AiOpenaiImagesGenerations) | **Post** /api/2.0/ai/openai/{profileId}/v1/images/generations | OpenAI image generation passthrough
 
 
 
 ## AiOpenaiChatCompletions
 
-> AiSuccessResponse AiOpenaiChatCompletions(ctx, profileId).RequestBody(requestBody).Execute()
+> map[string]*interface{} AiOpenaiChatCompletions(ctx, profileId).RequestBody(requestBody).Execute()
 
-OpenAI-compatible chat completions proxied to the profile's provider
+OpenAI chat completions passthrough
 
 
 
@@ -32,8 +32,8 @@ import (
 )
 
 func main() {
-	profileId := "profileId_example" // string | The AI provider profile identifier.
-	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
+	profileId := "00000000-0000-0000-0000-000000000000" // string | The AI provider profile identifier.
+	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIOpenAIPassthroughAPI.AiOpenaiChatCompletions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiOpenaiChatCompletions`: AiSuccessResponse
+	// response from `AiOpenaiChatCompletions`: map[string]*interface{}
 	fmt.Fprintf(os.Stdout, "Response from `AIOpenAIPassthroughAPI.AiOpenaiChatCompletions`: %v\n", resp)
 }
 ```
@@ -63,15 +63,15 @@ Other parameters are passed through a pointer to a apiAiOpenaiChatCompletionsReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **requestBody** | **map[string]interface{}** |  | 
+ **requestBody** | **map[string]interface{}** | An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here. | 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+**map[string]*interface{}**
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -85,9 +85,9 @@ No authorization required
 
 ## AiOpenaiImagesGenerations
 
-> AiSuccessResponse AiOpenaiImagesGenerations(ctx, profileId).RequestBody(requestBody).Execute()
+> map[string]*interface{} AiOpenaiImagesGenerations(ctx, profileId).RequestBody(requestBody).Execute()
 
-OpenAI-compatible image generation proxied to the profile's provider
+OpenAI image generation passthrough
 
 
 
@@ -106,8 +106,8 @@ import (
 )
 
 func main() {
-	profileId := "profileId_example" // string | The AI provider profile identifier.
-	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
+	profileId := "00000000-0000-0000-0000-000000000000" // string | The AI provider profile identifier.
+	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -116,7 +116,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIOpenAIPassthroughAPI.AiOpenaiImagesGenerations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiOpenaiImagesGenerations`: AiSuccessResponse
+	// response from `AiOpenaiImagesGenerations`: map[string]*interface{}
 	fmt.Fprintf(os.Stdout, "Response from `AIOpenAIPassthroughAPI.AiOpenaiImagesGenerations`: %v\n", resp)
 }
 ```
@@ -137,15 +137,15 @@ Other parameters are passed through a pointer to a apiAiOpenaiImagesGenerationsR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **requestBody** | **map[string]interface{}** |  | 
+ **requestBody** | **map[string]interface{}** | An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path. | 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+**map[string]*interface{}**
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

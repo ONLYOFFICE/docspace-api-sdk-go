@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MembersToAdd** | Pointer to **[]string** | The list of user IDs to add to the group. | [optional] 
-**MembersToRemove** | Pointer to **[]string** | The list of user IDs to remove from the group. | [optional] 
-**GroupManager** | Pointer to **string** | The group manager ID. | [optional] 
-**GroupName** | Pointer to **NullableString** | The group name. | [optional] 
+**MembersToAdd** | Pointer to **[]string** | The accounts to add to the group. An account that is a guest, is disabled or does not exist is skipped  without an error, so the answer has to be read to see what was applied. | [optional] 
+**MembersToRemove** | Pointer to **[]string** | The accounts to remove from the group. Removals are applied after the additions, so an account named in both  lists ends up removed, and an ID that is not a member is skipped without an error. | [optional] 
+**GroupManager** | Pointer to **string** | The account to make the manager of the group, which also adds it to the group. Omit it to keep the current  manager - it cannot be cleared through this operation. | [optional] 
+**GroupName** | Pointer to **NullableString** | The new name of the group, up to 128 characters. Omit it to keep the current name. | [optional] 
 
 ## Methods
 

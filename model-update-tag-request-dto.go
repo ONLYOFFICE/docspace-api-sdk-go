@@ -23,11 +23,11 @@ import (
 // checks if the UpdateTagRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateTagRequestDto{}
 
-// UpdateTagRequestDto The request parameters for creating a tag.
+// UpdateTagRequestDto The parameters for renaming a custom room tag in the portal catalog.
 type UpdateTagRequestDto struct {
-	// The old tag name.
+	// The name of the tag to rename, matched against the catalog exactly as it is stored rather than searched for.  Read the stored spelling from `GET api/2.0/files/tags`.
 	OldName NullableString `json:"oldName"`
-	// The new tag name.
+	// The name to store instead. It has to be free: names are unique across the portal, so a name another tag  already carries is refused, and merging two tags this way is not possible.
 	NewName NullableString `json:"newName"`
 }
 

@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FileKey** | Pointer to **NullableString** | The unique document identifier used by the service to get a link to the file. | [optional] 
-**InstanceId** | Pointer to **NullableString** | The unique system identifier. | [optional] 
-**RoomId** | Pointer to **NullableString** | Room ID | [optional] 
-**CanEditRoom** | Pointer to **bool** | Specifies if the room can be edited out or not. | [optional] 
+**FileKey** | Pointer to **NullableString** | The id of the document inside the portal named below. | [optional] 
+**InstanceId** | Pointer to **NullableString** | The portal the document lives in. A reference whose value is not this portal cannot be resolved by the file  key and falls back to the path or the link. | [optional] 
+**RoomId** | Pointer to **NullableString** | The room the document lies in. It is filled in only for a document opened in a virtual data room, and stays  empty everywhere else. | [optional] 
+**CanEditRoom** | Pointer to **bool** | Whether the caller may manage the room named above; it is only meaningful together with it. | [optional] 
 
 ## Methods
 

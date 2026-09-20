@@ -23,10 +23,10 @@ import (
 // checks if the DefaultTemplateSettingsRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DefaultTemplateSettingsRequestDto{}
 
-// DefaultTemplateSettingsRequestDto Default templates settings request parameters.
+// DefaultTemplateSettingsRequestDto The document to use as the blank the portal creates for one extension.
 type DefaultTemplateSettingsRequestDto struct {
 	SelectedFile DefaultTemplateSettingsRequestDtoSelectedFile `json:"selectedFile"`
-	// File extension of a template to replace
+	// The extension the blank is set for, written in lower case with the leading dot. Only the extensions the  portal's built-in template set covers are accepted, and `GET api/2.0/files/settings/defaulttemplate` returns  exactly that list; an extension outside it leaves the settings unchanged instead of failing.
 	FileExtension NullableString `json:"fileExtension"`
 }
 

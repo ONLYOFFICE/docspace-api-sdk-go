@@ -21,15 +21,19 @@ import (
 // checks if the CustomerInfoDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomerInfoDto{}
 
-// CustomerInfoDto The customer information.
+// CustomerInfoDto The billing customer behind the portal, and which portal member pays for it.
 type CustomerInfoDto struct {
-	// The portal ID.
+	// The portal's identifier in the billing system, which is what support and invoices refer to. It is not the  portal alias.
 	PortalId NullableString `json:"portalId,omitempty"`
-	// The customer's payment method.
+	// Whether a payment method is stored for the account and usable. Without one the portal can hold a wallet  balance but cannot be charged automatically.
 	PaymentMethodStatus *PaymentMethodStatus `json:"paymentMethodStatus,omitempty"`
-	// The customer email address.
+	// The customer's payment method type.
+	PaymentMethodType NullableString `json:"paymentMethodType,omitempty"`
+	// Indicates whether the customer's payment method is delayed, i.e. the money reaches the wallet only after  the transfer settles rather than immediately.
+	IsDelayedPaymentMethod *bool `json:"isDelayedPaymentMethod,omitempty"`
+	// The address the billing account is registered to, lower-cased. It need not belong to a portal member,  which is exactly when `payer` stays empty.
 	Email NullableString `json:"email,omitempty"`
-	// The paying user.
+	// The portal member whose account is behind the billing address. It is empty when `email` matches no member  of this portal, and while it is empty every operation of this group that only the payer may call is out  of reach for everybody.
 	Payer *EmployeeDto `json:"payer,omitempty"`
 }
 
@@ -124,6 +128,80 @@ func (o *CustomerInfoDto) SetPaymentMethodStatus(v PaymentMethodStatus) {
 	o.PaymentMethodStatus = &v
 }
 
+// GetPaymentMethodType returns the PaymentMethodType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CustomerInfoDto) GetPaymentMethodType() string {
+	if o == nil || IsNil(o.PaymentMethodType.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PaymentMethodType.Get()
+}
+
+// GetPaymentMethodTypeOk returns a tuple with the PaymentMethodType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CustomerInfoDto) GetPaymentMethodTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PaymentMethodType.Get(), o.PaymentMethodType.IsSet()
+}
+
+// HasPaymentMethodType returns a boolean if a field has been set.
+func (o *CustomerInfoDto) IsPaymentMethodTypeSet() bool {
+	if o != nil && o.PaymentMethodType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMethodType gets a reference to the given NullableString and assigns it to the PaymentMethodType field.
+func (o *CustomerInfoDto) SetPaymentMethodType(v string) {
+	o.PaymentMethodType.Set(&v)
+}
+// SetPaymentMethodTypeNil sets the value for PaymentMethodType to be an explicit nil
+func (o *CustomerInfoDto) SetPaymentMethodTypeNil() {
+	o.PaymentMethodType.Set(nil)
+}
+
+// UnsetPaymentMethodType ensures that no value is present for PaymentMethodType, not even an explicit nil
+func (o *CustomerInfoDto) UnsetPaymentMethodType() {
+	o.PaymentMethodType.Unset()
+}
+
+// GetIsDelayedPaymentMethod returns the IsDelayedPaymentMethod field value if set, zero value otherwise.
+func (o *CustomerInfoDto) GetIsDelayedPaymentMethod() bool {
+	if o == nil || IsNil(o.IsDelayedPaymentMethod) {
+		var ret bool
+		return ret
+	}
+	return *o.IsDelayedPaymentMethod
+}
+
+// GetIsDelayedPaymentMethodOk returns a tuple with the IsDelayedPaymentMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerInfoDto) GetIsDelayedPaymentMethodOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsDelayedPaymentMethod) {
+		return nil, false
+	}
+	return o.IsDelayedPaymentMethod, true
+}
+
+// HasIsDelayedPaymentMethod returns a boolean if a field has been set.
+func (o *CustomerInfoDto) IsIsDelayedPaymentMethodSet() bool {
+	if o != nil && !IsNil(o.IsDelayedPaymentMethod) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsDelayedPaymentMethod gets a reference to the given bool and assigns it to the IsDelayedPaymentMethod field.
+func (o *CustomerInfoDto) SetIsDelayedPaymentMethod(v bool) {
+	o.IsDelayedPaymentMethod = &v
+}
+
 // GetEmail returns the Email field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CustomerInfoDto) GetEmail() string {
 	if o == nil || IsNil(o.Email.Get()) {
@@ -213,6 +291,12 @@ func (o CustomerInfoDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PaymentMethodStatus) {
 		toSerialize["paymentMethodStatus"] = o.PaymentMethodStatus
+	}
+	if o.PaymentMethodType.IsSet() {
+		toSerialize["paymentMethodType"] = o.PaymentMethodType.Get()
+	}
+	if !IsNil(o.IsDelayedPaymentMethod) {
+		toSerialize["isDelayedPaymentMethod"] = o.IsDelayedPaymentMethod
 	}
 	if o.Email.IsSet() {
 		toSerialize["email"] = o.Email.Get()

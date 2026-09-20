@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-	system := false // bool | Specifies whether to load the system plugins or not. (optional)
+	system := false // bool | Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -60,7 +60,7 @@ Other parameters are passed through a pointer to a apiAddWebPluginFromFileReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system** | **bool** | Specifies whether to load the system plugins or not. | 
+ **system** | **bool** | Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name. | 
 
 ### Return type
 
@@ -103,7 +103,7 @@ import (
 )
 
 func main() {
-	name := "example-plugin" // string | The web plugin name.
+	name := "example-plugin" // string | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -121,7 +121,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**name** | **string** | The web plugin name. | 
+**name** | **string** | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. | 
 
 ### Other Parameters
 
@@ -173,7 +173,7 @@ import (
 )
 
 func main() {
-	name := "example-plugin" // string | The web plugin name.
+	name := "example-plugin" // string | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -193,7 +193,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**name** | **string** | The web plugin name. | 
+**name** | **string** | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. | 
 
 ### Other Parameters
 
@@ -245,7 +245,7 @@ import (
 )
 
 func main() {
-	enabled := true // bool | The optional filter for the plugin enabled state. (optional)
+	enabled := true // bool | Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -270,7 +270,7 @@ Other parameters are passed through a pointer to a apiGetWebPluginsRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **enabled** | **bool** | The optional filter for the plugin enabled state. | 
+ **enabled** | **bool** | Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state. | 
 
 ### Return type
 
@@ -313,8 +313,8 @@ import (
 )
 
 func main() {
-	name := "example-plugin" // string | The web plugin name.
-	webPluginRequests := *openapiclient.NewWebPluginRequests("{\"theme\":\"dark\",\"autoSave\":true}") // WebPluginRequests | The configuration settings for the web plugin instance.
+	name := "example-plugin" // string | The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404.
+	webPluginRequests := *openapiclient.NewWebPluginRequests("{\"theme\":\"dark\",\"autoSave\":true}") // WebPluginRequests | The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -332,7 +332,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**name** | **string** | The web plugin name. | 
+**name** | **string** | The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404. | 
 
 ### Other Parameters
 
@@ -342,7 +342,7 @@ Other parameters are passed through a pointer to a apiUpdateWebPluginRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **webPluginRequests** | [**WebPluginRequests**](WebPluginRequests.md) | The configuration settings for the web plugin instance. | 
+ **webPluginRequests** | [**WebPluginRequests**](WebPluginRequests.md) | The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time. | 
 
 ### Return type
 

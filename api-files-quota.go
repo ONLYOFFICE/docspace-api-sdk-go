@@ -29,20 +29,20 @@ type FilesQuotaAPIService service
 type ApiResetRoomQuotaRequest struct {
 	ctx context.Context
 	ApiService *FilesQuotaAPIService
-	updateRoomsRoomIdsRequestDtoInteger *UpdateRoomsRoomIdsRequestDtoInteger
+	updateRoomsRoomIdsRequestDto *UpdateRoomsRoomIdsRequestDto
 }
 
-func (r ApiResetRoomQuotaRequest) UpdateRoomsRoomIdsRequestDtoInteger(updateRoomsRoomIdsRequestDtoInteger UpdateRoomsRoomIdsRequestDtoInteger) ApiResetRoomQuotaRequest {	r.updateRoomsRoomIdsRequestDtoInteger = &updateRoomsRoomIdsRequestDtoInteger
+func (r ApiResetRoomQuotaRequest) UpdateRoomsRoomIdsRequestDto(updateRoomsRoomIdsRequestDto UpdateRoomsRoomIdsRequestDto) ApiResetRoomQuotaRequest {	r.updateRoomsRoomIdsRequestDto = &updateRoomsRoomIdsRequestDto
 	return r
 }
 
-func (r ApiResetRoomQuotaRequest) Execute() (*FolderIntegerArrayWrapper, *http.Response, error) {
+func (r ApiResetRoomQuotaRequest) Execute() (*FolderArrayWrapper, *http.Response, error) {
 	return r.ApiService.ResetRoomQuotaExecute(r)
 }
 
 // ResetRoomQuota Reset the room quota limit
 //
-// Resets the quota limit for the rooms with the IDs specified in the request.
+// Returns every listed room to the default room quota of the portal and streams the updated rooms back in the  order they were given. This is not the same as removing the limit: the room stops carrying its own value and  starts following the portal default, which a portal administrator can change at any time. The per-room quota  feature has to be on, the caller must be a manager of each listed room, and an archived room or a room in the  trash is refused. The list is not transactional, so rooms processed before a failing one keep the default and  the rest keep what they had. Only numeric room ids are processed, which means ids of rooms stored in a  connected third-party account are silently skipped. Use `PUT api/2.0/files/rooms/roomquota` to set an explicit  value, and a quota of -1 in `PUT api/2.0/files/rooms/{id}` to leave the room with no custom limit at all.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-room-quota/
 //
@@ -56,13 +56,13 @@ func (a *FilesQuotaAPIService) ResetRoomQuota(ctx context.Context) ApiResetRoomQ
 }
 
 // Execute executes the request
-//  @return FolderIntegerArrayWrapper
-func (a *FilesQuotaAPIService) ResetRoomQuotaExecute(r ApiResetRoomQuotaRequest) (*FolderIntegerArrayWrapper, *http.Response, error) {
+//  @return FolderArrayWrapper
+func (a *FilesQuotaAPIService) ResetRoomQuotaExecute(r ApiResetRoomQuotaRequest) (*FolderArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *FolderIntegerArrayWrapper
+		localVarReturnValue  *FolderArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesQuotaAPIService.ResetRoomQuota")
@@ -94,7 +94,7 @@ func (a *FilesQuotaAPIService) ResetRoomQuotaExecute(r ApiResetRoomQuotaRequest)
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateRoomsRoomIdsRequestDtoInteger
+	localVarPostBody = r.updateRoomsRoomIdsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -193,20 +193,20 @@ func (a *FilesQuotaAPIService) ResetRoomQuotaExecute(r ApiResetRoomQuotaRequest)
 type ApiUpdateRoomsQuotaRequest struct {
 	ctx context.Context
 	ApiService *FilesQuotaAPIService
-	updateRoomsQuotaRequestDtoInteger *UpdateRoomsQuotaRequestDtoInteger
+	updateRoomsQuotaRequestDto *UpdateRoomsQuotaRequestDto
 }
 
-func (r ApiUpdateRoomsQuotaRequest) UpdateRoomsQuotaRequestDtoInteger(updateRoomsQuotaRequestDtoInteger UpdateRoomsQuotaRequestDtoInteger) ApiUpdateRoomsQuotaRequest {	r.updateRoomsQuotaRequestDtoInteger = &updateRoomsQuotaRequestDtoInteger
+func (r ApiUpdateRoomsQuotaRequest) UpdateRoomsQuotaRequestDto(updateRoomsQuotaRequestDto UpdateRoomsQuotaRequestDto) ApiUpdateRoomsQuotaRequest {	r.updateRoomsQuotaRequestDto = &updateRoomsQuotaRequestDto
 	return r
 }
 
-func (r ApiUpdateRoomsQuotaRequest) Execute() (*FolderIntegerArrayWrapper, *http.Response, error) {
+func (r ApiUpdateRoomsQuotaRequest) Execute() (*FolderArrayWrapper, *http.Response, error) {
 	return r.ApiService.UpdateRoomsQuotaExecute(r)
 }
 
 // UpdateRoomsQuota Change the room quota limit
 //
-// Changes the quota limit for the rooms with the IDs specified in the request.
+// Sets the same custom storage limit, in bytes, on every listed room and streams the updated rooms back in the  order they were given. The per-room quota feature has to be on for the portal, and the value must stay within  the portal own limit, otherwise the call is refused before anything is written. The caller must be a manager  of each listed room, and an archived room or a room in the trash is refused. The list is not transactional:  rooms processed before the offending one keep their new limit, so a failed call has to be checked room by  room. Only numeric room ids are processed, which means ids of rooms stored in a connected third-party account  are silently skipped. A room whose limit already equals the requested value is left untouched and still  returned. To go back to the portal default use `PUT api/2.0/files/rooms/resetquota`, and to drop the custom  limit entirely send a quota of -1 to `PUT api/2.0/files/rooms/{id}`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-rooms-quota/
 //
@@ -220,13 +220,13 @@ func (a *FilesQuotaAPIService) UpdateRoomsQuota(ctx context.Context) ApiUpdateRo
 }
 
 // Execute executes the request
-//  @return FolderIntegerArrayWrapper
-func (a *FilesQuotaAPIService) UpdateRoomsQuotaExecute(r ApiUpdateRoomsQuotaRequest) (*FolderIntegerArrayWrapper, *http.Response, error) {
+//  @return FolderArrayWrapper
+func (a *FilesQuotaAPIService) UpdateRoomsQuotaExecute(r ApiUpdateRoomsQuotaRequest) (*FolderArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *FolderIntegerArrayWrapper
+		localVarReturnValue  *FolderArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesQuotaAPIService.UpdateRoomsQuota")
@@ -258,7 +258,7 @@ func (a *FilesQuotaAPIService) UpdateRoomsQuotaExecute(r ApiUpdateRoomsQuotaRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateRoomsQuotaRequestDtoInteger
+	localVarPostBody = r.updateRoomsQuotaRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

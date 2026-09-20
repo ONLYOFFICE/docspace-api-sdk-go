@@ -16,33 +16,32 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the RoomLinkRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoomLinkRequest{}
 
-// RoomLinkRequest The room link parameters.
+// RoomLinkRequest The link of a room to create, change or revoke.
 type RoomLinkRequest struct {
-	// The room link ID.
+	// Which link to change, taken from `GET api/2.0/files/rooms/{id}/links`. Leaving it out creates a link, and an  identifier the room does not know creates a link carrying that identifier.
 	LinkId *string `json:"linkId,omitempty"`
-	// The link sharing rights.
+	// What whoever opens the link may do in the room. The value 0 revokes the link instead of changing it, and the  levels a room accepts depend on its kind.
 	Access *FileShare `json:"access,omitempty"`
-	// The link expiration date.
-	ExpirationDate NullableTime `json:"expirationDate,omitempty"`
-	// The link scope, whether it is internal or not.
+	// When the link stops working, written with the offset of the portal time zone. A date already past is dropped  silently for an external link and refused for an invitation link, and a date further ahead than the portal  allows is refused as well; leaving it out means the link does not expire.
+	ExpirationDate *ApiDateTime `json:"expirationDate,omitempty"`
+	// Whether the external link works only for people already signed in to the portal. With it off the link opens  the room for anyone who has the address, subject to the password.
 	Internal *bool `json:"internal,omitempty"`
-	// The link name.
+	// The name the link is shown under in the room. An empty value is accepted and the portal names the link itself,  so the answer is what tells the caller the name in use.
 	Title NullableString `json:"title,omitempty"`
-	// The link type.
+	// Which kind of link to create: an invitation link makes whoever opens it a member of the room, while an  external link opens the room without an account. It is fixed when the link is created and is ignored on later  changes.
 	LinkType *LinkType `json:"linkType,omitempty"`
-	// The link password.
+	// The password an external link asks for before it opens the room. An empty value leaves the link open to anyone  who has the address, and the password is never returned when links are listed.
 	Password NullableString `json:"password,omitempty"`
-	// Specifies if downloading the file from the link is disabled or not.
+	// Whether people arriving through the link are stopped from downloading and printing what they open. They can  still read the documents in the editor.
 	DenyDownload *bool `json:"denyDownload,omitempty"`
-	// The maximum number of times the invitation link can be used.
+	// How many people an invitation link may still let in before it stops working. A value below the number of  people who already used it is refused, and leaving it out puts no ceiling on the link.
 	MaxUseCount NullableInt32 `json:"maxUseCount,omitempty"`
-	// The current number of times the invitation link has been used.
+	// How many people have already joined through this invitation link. The value is kept by the portal: it is  reported back when links are listed and anything sent here is ignored.
 	CurrentUseCount *int32 `json:"currentUseCount,omitempty"`
 }
 
@@ -127,46 +126,36 @@ func (o *RoomLinkRequest) SetAccess(v FileShare) {
 	o.Access = &v
 }
 
-// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *RoomLinkRequest) GetExpirationDate() time.Time {
-	if o == nil || IsNil(o.ExpirationDate.Get()) {
-		var ret time.Time
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
+func (o *RoomLinkRequest) GetExpirationDate() ApiDateTime {
+	if o == nil || IsNil(o.ExpirationDate) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.ExpirationDate.Get()
+	return *o.ExpirationDate
 }
 
 // GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *RoomLinkRequest) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil {
+func (o *RoomLinkRequest) GetExpirationDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.ExpirationDate) {
 		return nil, false
 	}
-	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
+	return o.ExpirationDate, true
 }
 
 // HasExpirationDate returns a boolean if a field has been set.
 func (o *RoomLinkRequest) IsExpirationDateSet() bool {
-	if o != nil && o.ExpirationDate.IsSet() {
+	if o != nil && !IsNil(o.ExpirationDate) {
 		return true
 	}
 
 	return false
 }
 
-// SetExpirationDate gets a reference to the given NullableTime and assigns it to the ExpirationDate field.
-func (o *RoomLinkRequest) SetExpirationDate(v time.Time) {
-	o.ExpirationDate.Set(&v)
-}
-// SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-func (o *RoomLinkRequest) SetExpirationDateNil() {
-	o.ExpirationDate.Set(nil)
-}
-
-// UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
-func (o *RoomLinkRequest) UnsetExpirationDate() {
-	o.ExpirationDate.Unset()
+// SetExpirationDate gets a reference to the given ApiDateTime and assigns it to the ExpirationDate field.
+func (o *RoomLinkRequest) SetExpirationDate(v ApiDateTime) {
+	o.ExpirationDate = &v
 }
 
 // GetInternal returns the Internal field value if set, zero value otherwise.
@@ -439,8 +428,8 @@ func (o RoomLinkRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Access) {
 		toSerialize["access"] = o.Access
 	}
-	if o.ExpirationDate.IsSet() {
-		toSerialize["expirationDate"] = o.ExpirationDate.Get()
+	if !IsNil(o.ExpirationDate) {
+		toSerialize["expirationDate"] = o.ExpirationDate
 	}
 	if !IsNil(o.Internal) {
 		toSerialize["internal"] = o.Internal

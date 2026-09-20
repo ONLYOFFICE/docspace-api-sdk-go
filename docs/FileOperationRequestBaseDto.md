@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ReturnSingleOperation** | Pointer to **bool** | Specifies whether to return only the current operation | [optional] 
+**ReturnSingleOperation** | Pointer to **bool** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] 
 
 ## Methods
 

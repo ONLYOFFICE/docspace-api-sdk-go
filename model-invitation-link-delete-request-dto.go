@@ -23,9 +23,9 @@ import (
 // checks if the InvitationLinkDeleteRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InvitationLinkDeleteRequestDto{}
 
-// InvitationLinkDeleteRequestDto The request parameters for deleting an invitation link.
+// InvitationLinkDeleteRequestDto Which invitation link is withdrawn.
 type InvitationLinkDeleteRequestDto struct {
-	// The ID of the invitation link.
+	// The link to delete, by the `id` that creating or reading it returned. A link recreated for the same role  afterwards gets a new id, a new URL and a use count starting from zero.
 	Id string `json:"id"`
 }
 

@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Login** | Pointer to **NullableString** | The authentication login. | [optional] 
-**Password** | Pointer to **NullableString** | The authentication password. | [optional] 
-**RawToken** | Pointer to **NullableString** | The authentication raw token. | [optional] 
-**Url** | Pointer to **NullableString** | The authentication URL. | [optional] 
-**Provider** | Pointer to **NullableString** | The authentication provider. | [optional] 
-**Token** | Pointer to [**OAuth20Token**](OAuth20Token.md) | The authentication token. | [optional] 
+**Login** | Pointer to **NullableString** | The account name at the storage service. | [optional] 
+**Password** | Pointer to **NullableString** | The password of the account at the storage service. | [optional] 
+**RawToken** | Pointer to **NullableString** | The token of the account, kept as the raw JSON document the storage service issued it in. | [optional] 
+**Url** | Pointer to **NullableString** | The address of the storage server the account lives on. | [optional] 
+**Provider** | Pointer to **NullableString** | The storage service the credentials belong to, as the provider key the account was connected with. | [optional] 
+**Token** | Pointer to [**OAuth20Token**](OAuth20Token.md) | The same token as in `rawToken`, parsed into its OAuth 2.0 fields. | [optional] 
 
 ## Methods
 

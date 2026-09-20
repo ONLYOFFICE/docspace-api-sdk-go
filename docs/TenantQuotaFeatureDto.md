@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **NullableString** | The ID of the tenant quota feature. | [optional] 
-**Title** | Pointer to **NullableString** | The title of the tenant quota feature. | [optional] 
-**Image** | Pointer to **NullableString** | The image URL of the tenant quota feature. | [optional] 
+**Id** | Pointer to **NullableString** | The stable key of the feature - `total_size`, `manager`, `room`, `backup` and so on. It is the value to  branch on, since `title` is prose in the portal language. | [optional] 
+**Title** | Pointer to **NullableString** | The feature described in the portal language, with its limit already substituted into the sentence, so it  can be printed as it is. It is empty when this build ships no wording for the feature. | [optional] 
+**Image** | Pointer to **NullableString** | The feature's icon as SVG markup to render inline - not a URL to fetch. It is filled in only when the  quota comes from the catalogue, and left empty on the quota the portal is actually on, on a feature that  this quota switches off, and on a feature that ships no icon. | [optional] 
 **Value** | Pointer to **interface{}** |  | [optional] 
-**Type** | Pointer to **NullableString** | The type of the tenant quota feature. | [optional] 
-**Used** | Pointer to [**FeatureUsedDto**](FeatureUsedDto.md) | The used space parameters of the tenant quota feature. | [optional] 
-**PriceTitle** | Pointer to **NullableString** | The price title of the tenant quota feature. | [optional] 
+**Type** | Pointer to **NullableString** | How to read `value` and `used`: `size` for bytes, `count` for a number of things, `flag` for a feature  that is merely on or off. | [optional] 
+**Used** | Pointer to [**FeatureUsedDto**](FeatureUsedDto.md) | How much of the limit is already used. It is present only on the quota the portal is actually on, and  only for a feature whose consumption is counted; a guest is shown none of these figures and a plain member  only the one for total size, so an absent value can mean the caller may not see it rather than that  nothing is used. | [optional] 
+**PriceTitle** | Pointer to **NullableString** | What the feature is charged as, in the portal language - for instance the per-unit price of an add-on. It  is filled in only for a feature that costs money on top of the plan. | [optional] 
 
 ## Methods
 

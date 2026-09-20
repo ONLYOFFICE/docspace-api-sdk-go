@@ -16,29 +16,28 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the FileLinkRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FileLinkRequest{}
 
-// FileLinkRequest The external link request parameters.
+// FileLinkRequest The settings of an external link to a file.
 type FileLinkRequest struct {
-	// The external link ID.
+	// The link to rewrite, as reported by `GET api/2.0/files/file/{id}/links`. An identifier that is not yet in use,  the empty one included, creates a link instead.
 	LinkId *string `json:"linkId,omitempty"`
-	// The link sharing rights.
+	// The rights the link grants to whoever follows it. The value that denies everything revokes the link.
 	Access *FileShare `json:"access,omitempty"`
-	// The link expiration date.
-	ExpirationDate NullableTime `json:"expirationDate,omitempty"`
-	// The link name.
+	// The moment the link stops working, read in the time zone of the portal. A date more than a few years ahead is  rejected as an invalid request; left out, the link does not expire on its own.
+	ExpirationDate *ApiDateTime `json:"expirationDate,omitempty"`
+	// The name the link carries in the sharing list of the file, for the people who manage it; it is not shown to  whoever follows the link.
 	Title NullableString `json:"title,omitempty"`
-	// The link scope, whether it is internal or not.
+	// Who may follow the link: `true` admits only accounts that are signed in to the portal, `false` admits anybody  who has the address.
 	Internal *bool `json:"internal,omitempty"`
-	// Specifies whether the file link is primary or not.
+	// Whether this link becomes the primary link of the file - the one the Copy link action of a client hands out.  A file has one primary link at a time.
 	Primary *bool `json:"primary,omitempty"`
-	// Specifies whether to deny downloading the file or not.
+	// What a visitor may do with the content: `true` leaves them with viewing in the browser, `false` lets them  download and print it as their rights allow.
 	DenyDownload *bool `json:"denyDownload,omitempty"`
-	// Password for access via link.
+	// The secret a visitor has to type before the file opens; left out, the link opens without one.
 	Password NullableString `json:"password,omitempty"`
 }
 
@@ -123,46 +122,36 @@ func (o *FileLinkRequest) SetAccess(v FileShare) {
 	o.Access = &v
 }
 
-// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FileLinkRequest) GetExpirationDate() time.Time {
-	if o == nil || IsNil(o.ExpirationDate.Get()) {
-		var ret time.Time
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
+func (o *FileLinkRequest) GetExpirationDate() ApiDateTime {
+	if o == nil || IsNil(o.ExpirationDate) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.ExpirationDate.Get()
+	return *o.ExpirationDate
 }
 
 // GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FileLinkRequest) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil {
+func (o *FileLinkRequest) GetExpirationDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.ExpirationDate) {
 		return nil, false
 	}
-	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
+	return o.ExpirationDate, true
 }
 
 // HasExpirationDate returns a boolean if a field has been set.
 func (o *FileLinkRequest) IsExpirationDateSet() bool {
-	if o != nil && o.ExpirationDate.IsSet() {
+	if o != nil && !IsNil(o.ExpirationDate) {
 		return true
 	}
 
 	return false
 }
 
-// SetExpirationDate gets a reference to the given NullableTime and assigns it to the ExpirationDate field.
-func (o *FileLinkRequest) SetExpirationDate(v time.Time) {
-	o.ExpirationDate.Set(&v)
-}
-// SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-func (o *FileLinkRequest) SetExpirationDateNil() {
-	o.ExpirationDate.Set(nil)
-}
-
-// UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
-func (o *FileLinkRequest) UnsetExpirationDate() {
-	o.ExpirationDate.Unset()
+// SetExpirationDate gets a reference to the given ApiDateTime and assigns it to the ExpirationDate field.
+func (o *FileLinkRequest) SetExpirationDate(v ApiDateTime) {
+	o.ExpirationDate = &v
 }
 
 // GetTitle returns the Title field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -361,8 +350,8 @@ func (o FileLinkRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Access) {
 		toSerialize["access"] = o.Access
 	}
-	if o.ExpirationDate.IsSet() {
-		toSerialize["expirationDate"] = o.ExpirationDate.Get()
+	if !IsNil(o.ExpirationDate) {
+		toSerialize["expirationDate"] = o.ExpirationDate
 	}
 	if o.Title.IsSet() {
 		toSerialize["title"] = o.Title.Get()

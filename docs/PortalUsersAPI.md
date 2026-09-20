@@ -5,11 +5,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateInvitationLink**](PortalUsersAPI.md#CreateInvitationLink) | **Post** /api/2.0/portal/users/invitationlink | Create an invitation link
-[**DeleteInvitationLink**](PortalUsersAPI.md#DeleteInvitationLink) | **Delete** /api/2.0/portal/users/invitationlink | Deletes an invitation link.
-[**GetInvitationLink**](PortalUsersAPI.md#GetInvitationLink) | **Get** /api/2.0/portal/users/invite/{employeeType} | Get an invitation link
-[**GetInvitationLinkByEmployeeType**](PortalUsersAPI.md#GetInvitationLinkByEmployeeType) | **Get** /api/2.0/portal/users/invitationlink/{employeeType} | Get an invitation link
+[**DeleteInvitationLink**](PortalUsersAPI.md#DeleteInvitationLink) | **Delete** /api/2.0/portal/users/invitationlink | Delete an invitation link
+[**GetInvitationLink**](PortalUsersAPI.md#GetInvitationLink) | **Get** /api/2.0/portal/users/invite/{employeeType} | Get a legacy invitation link
+[**GetInvitationLinkByEmployeeType**](PortalUsersAPI.md#GetInvitationLinkByEmployeeType) | **Get** /api/2.0/portal/users/invitationlink/{employeeType} | Get an invitation link by role
 [**GetPortalUsersCount**](PortalUsersAPI.md#GetPortalUsersCount) | **Get** /api/2.0/portal/userscount | Get a number of portal users
-[**GetUserById**](PortalUsersAPI.md#GetUserById) | **Get** /api/2.0/portal/users/{userID} | Get a user by ID
+[**GetUserById**](PortalUsersAPI.md#GetUserById) | **Get** /api/2.0/portal/users/{userID} | Get a portal user
 [**MarkGiftMessageAsRead**](PortalUsersAPI.md#MarkGiftMessageAsRead) | **Post** /api/2.0/portal/present/mark | Mark a gift message as read
 [**SendCongratulations**](PortalUsersAPI.md#SendCongratulations) | **Post** /api/2.0/portal/sendcongratulations | Send congratulations
 [**UpdateInvitationLink**](PortalUsersAPI.md#UpdateInvitationLink) | **Put** /api/2.0/portal/users/invitationlink | Update an invitation link
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 > StringWrapper DeleteInvitationLink(ctx).InvitationLinkDeleteRequestDto(invitationLinkDeleteRequestDto).Execute()
 
-Deletes an invitation link.
+Delete an invitation link
 
 
 
@@ -107,7 +107,7 @@ import (
 )
 
 func main() {
-	invitationLinkDeleteRequestDto := *openapiclient.NewInvitationLinkDeleteRequestDto("00000000-0000-0000-0000-000000000000") // InvitationLinkDeleteRequestDto | The data transfer object containing the details of the invitation link to be deleted. (optional)
+	invitationLinkDeleteRequestDto := *openapiclient.NewInvitationLinkDeleteRequestDto("00000000-0000-0000-0000-000000000000") // InvitationLinkDeleteRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -132,7 +132,7 @@ Other parameters are passed through a pointer to a apiDeleteInvitationLinkReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **invitationLinkDeleteRequestDto** | [**InvitationLinkDeleteRequestDto**](InvitationLinkDeleteRequestDto.md) | The data transfer object containing the details of the invitation link to be deleted. | 
+ **invitationLinkDeleteRequestDto** | [**InvitationLinkDeleteRequestDto**](InvitationLinkDeleteRequestDto.md) |  | 
 
 ### Return type
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 > StringWrapper GetInvitationLink(ctx, employeeType).Execute()
 
-Get an invitation link
+Get a legacy invitation link
 
 
 
@@ -175,7 +175,7 @@ import (
 )
 
 func main() {
-	employeeType := openapiclient.EmployeeType("All") // EmployeeType | The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).
+	employeeType := openapiclient.EmployeeType("All") // EmployeeType | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -195,7 +195,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**employeeType** | [**EmployeeType**](.md) | The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). | 
+**employeeType** | [**EmployeeType**](.md) | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it. | 
 
 ### Other Parameters
 
@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 > InvitationLinkWrapper GetInvitationLinkByEmployeeType(ctx, employeeType).Execute()
 
-Get an invitation link
+Get an invitation link by role
 
 
 
@@ -247,7 +247,7 @@ import (
 )
 
 func main() {
-	employeeType := openapiclient.EmployeeType("All") // EmployeeType | The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).
+	employeeType := openapiclient.EmployeeType("All") // EmployeeType | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -267,7 +267,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**employeeType** | [**EmployeeType**](.md) | The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). | 
+**employeeType** | [**EmployeeType**](.md) | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it. | 
 
 ### Other Parameters
 
@@ -363,7 +363,7 @@ Other parameters are passed through a pointer to a apiGetPortalUsersCountRequest
 
 > UserInfoWrapper GetUserById(ctx, userID).Execute()
 
-Get a user by ID
+Get a portal user
 
 
 
@@ -382,7 +382,7 @@ import (
 )
 
 func main() {
-	userID := "00000000-0000-0000-0000-000000000000" // string | The user ID extracted from the route parameters.
+	userID := "00000000-0000-0000-0000-000000000000" // string | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -402,7 +402,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userID** | **string** | The user ID extracted from the route parameters. | 
+**userID** | **string** | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. | 
 
 ### Other Parameters
 
@@ -515,8 +515,8 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID to receive the congratulatory message.
-	key := "birthday" // string | The template identifier or email configuration key.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The account the welcome letter is addressed to, by portal user ID. The key in `key` has to have been issued  for this same account, so the pair is what authorises the call.
+	key := "birthday" // string | The confirmation key from the sign-in link the portal issued for that account, which stands in for a token  here. It is accepted for one hour after it was created; a wrong, foreign or expired key answers 403 and sends  nothing.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -539,8 +539,8 @@ Other parameters are passed through a pointer to a apiSendCongratulationsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **string** | The user ID to receive the congratulatory message. | 
- **key** | **string** | The template identifier or email configuration key. | 
+ **userid** | **string** | The account the welcome letter is addressed to, by portal user ID. The key in `key` has to have been issued  for this same account, so the pair is what authorises the call. | 
+ **key** | **string** | The confirmation key from the sign-in link the portal issued for that account, which stands in for a token  here. It is accepted for one hour after it was created; a wrong, foreign or expired key answers 403 and sends  nothing. | 
 
 ### Return type
 
@@ -548,7 +548,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -23,23 +23,23 @@ import (
 // checks if the CompanyWhiteLabelSettingsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CompanyWhiteLabelSettingsDto{}
 
-// CompanyWhiteLabelSettingsDto The company white label settings.
+// CompanyWhiteLabelSettingsDto The vendor details the About page and the notification letters print, shared by the whole installation.
 type CompanyWhiteLabelSettingsDto struct {
-	// The company name.
+	// The vendor name the About page shows and the letters sign off with. Until details are saved it holds  whatever the installation ships as its built-in vendor, and it is empty on an installation that ships none.
 	CompanyName NullableString `json:"companyName"`
-	// The company site.
+	// The address the vendor name links to, as an absolute URL with its scheme. Empty under the same conditions  as `companyName`.
 	Site NullableString `json:"site"`
-	// The company email address.
+	// The mailbox the About page offers for reaching the vendor. It is not the portal's own support address, and  it is empty under the same conditions as `companyName`.
 	Email NullableString `json:"email"`
-	// The company address.
+	// The postal address of the vendor as one free-form line, in the shape it was saved in - no structure is  imposed on it.
 	Address NullableString `json:"address"`
-	// The company phone number.
+	// The telephone number of the vendor in the shape it was saved in, with no dialling format enforced.
 	Phone NullableString `json:"phone"`
-	// Specifies if a company is a licensor or not.
+	// Whether these details are those of the licensor of the product itself rather than of a reseller. Saving  through `POST api/2.0/settings/rebranding/company` always clears it, so only details that came with the  installation can report `true`.
 	IsLicensor bool `json:"isLicensor"`
-	// Specifies if the About page is visible or not.
+	// Whether the About page is hidden from the interface. A plan that does not include branding cannot switch it  on: the value is stored as `false` in that case, so it can come back different from what was saved.
 	HideAbout bool `json:"hideAbout"`
-	// Specifies if these settings are default or not.
+	// Whether every field above still matches the installation's built-in vendor details. It turns `false` as  soon as one of them is saved differently and `true` again after  `DELETE api/2.0/settings/rebranding/company`.
 	IsDefault bool `json:"isDefault"`
 }
 

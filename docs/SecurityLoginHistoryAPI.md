@@ -4,11 +4,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateLoginHistoryReport**](SecurityLoginHistoryAPI.md#CreateLoginHistoryReport) | **Post** /api/2.0/security/audit/login/report | Start the login history report generation
-[**GetLastLoginEvents**](SecurityLoginHistoryAPI.md#GetLastLoginEvents) | **Get** /api/2.0/security/audit/login/last | Get login history
+[**CreateLoginHistoryReport**](SecurityLoginHistoryAPI.md#CreateLoginHistoryReport) | **Post** /api/2.0/security/audit/login/report | Start login history report
+[**GetLastLoginEvents**](SecurityLoginHistoryAPI.md#GetLastLoginEvents) | **Get** /api/2.0/security/audit/login/last | Get recent login events
 [**GetLoginEventsByFilter**](SecurityLoginHistoryAPI.md#GetLoginEventsByFilter) | **Get** /api/2.0/security/audit/login/filter | Get filtered login events
-[**GetLoginHistoryReport**](SecurityLoginHistoryAPI.md#GetLoginHistoryReport) | **Get** /api/2.0/security/audit/login/report | Get the login history report generation status
-[**TerminateLoginHistoryReport**](SecurityLoginHistoryAPI.md#TerminateLoginHistoryReport) | **Delete** /api/2.0/security/audit/login/report | Terminate the login history report generation
+[**GetLoginHistoryReport**](SecurityLoginHistoryAPI.md#GetLoginHistoryReport) | **Get** /api/2.0/security/audit/login/report | Get login history report status
+[**TerminateLoginHistoryReport**](SecurityLoginHistoryAPI.md#TerminateLoginHistoryReport) | **Delete** /api/2.0/security/audit/login/report | Terminate login history report
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > DocumentBuilderTaskWrapper CreateLoginHistoryReport(ctx).Format(format).Execute()
 
-Start the login history report generation
+Start login history report
 
 
 
@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-	format := openapiclient.AuditReportFormat(0) // AuditReportFormat | The output file format of the report. Defaults to XLSX. (optional)
+	format := openapiclient.AuditReportFormat(0) // AuditReportFormat | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -60,7 +60,7 @@ Other parameters are passed through a pointer to a apiCreateLoginHistoryReportRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **format** | [**AuditReportFormat**](AuditReportFormat.md) | The output file format of the report. Defaults to XLSX. | 
+ **format** | [**AuditReportFormat**](AuditReportFormat.md) | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. | 
 
 ### Return type
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 > LoginEventArrayWrapper GetLastLoginEvents(ctx).Execute()
 
-Get login history
+Get recent login events
 
 
 
@@ -167,12 +167,12 @@ import (
 )
 
 func main() {
-	userId := "00000000-0000-0000-0000-000000000000" // string | The ID of the user whose login events are being queried. (optional)
-	action := openapiclient.MessageAction(1000) // MessageAction | The login-related action to filter events by. (optional)
-	from := time.Now() // time.Time | The starting date and time for filtering login events. (optional)
-	to := time.Now() // time.Time | The ending date and time for filtering login events. (optional)
-	count := int32(1) // int32 | The number of login events to retrieve in the query. (optional)
-	startIndex := int32(1) // int32 | The starting index for fetching a subset of login events from the query results. (optional)
+	userId := "00000000-0000-0000-0000-000000000000" // string | The user whose sign-in attempts are kept, given by portal user ID. Leave it at the empty GUID to keep the  events of every user. (optional)
+	action := openapiclient.MessageAction(1000) // MessageAction | The sign-in action recorded, spelled as `GET api/2.0/security/audit/types` lists it under `actions` - a  successful login, a failed one, a logout. The default value keeps every action. (optional)
+	from := time.Now() // time.Time | The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC. (optional)
+	to := time.Now() // time.Time | The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`. (optional)
+	count := int32(1) // int32 | How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them. (optional)
+	startIndex := int32(1) // int32 | How many events to skip before the page begins, counting from the newest. It is applied to the log before  the filters, so a page can hold fewer events than `count` while older matches still exist. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -197,12 +197,12 @@ Other parameters are passed through a pointer to a apiGetLoginEventsByFilterRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **string** | The ID of the user whose login events are being queried. | 
- **action** | [**MessageAction**](MessageAction.md) | The login-related action to filter events by. | 
- **from** | **time.Time** | The starting date and time for filtering login events. | 
- **to** | **time.Time** | The ending date and time for filtering login events. | 
- **count** | **int32** | The number of login events to retrieve in the query. | 
- **startIndex** | **int32** | The starting index for fetching a subset of login events from the query results. | 
+ **userId** | **string** | The user whose sign-in attempts are kept, given by portal user ID. Leave it at the empty GUID to keep the  events of every user. | 
+ **action** | [**MessageAction**](MessageAction.md) | The sign-in action recorded, spelled as `GET api/2.0/security/audit/types` lists it under `actions` - a  successful login, a failed one, a logout. The default value keeps every action. | 
+ **from** | **time.Time** | The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC. | 
+ **to** | **time.Time** | The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`. | 
+ **count** | **int32** | How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them. | 
+ **startIndex** | **int32** | How many events to skip before the page begins, counting from the newest. It is applied to the log before  the filters, so a page can hold fewer events than `count` while older matches still exist. | 
 
 ### Return type
 
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper GetLoginHistoryReport(ctx).Execute()
 
-Get the login history report generation status
+Get login history report status
 
 
 
@@ -289,7 +289,7 @@ Other parameters are passed through a pointer to a apiGetLoginHistoryReportReque
 
 > TerminateLoginHistoryReport(ctx).Execute()
 
-Terminate the login history report generation
+Terminate login history report
 
 
 

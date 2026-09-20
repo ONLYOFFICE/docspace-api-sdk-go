@@ -23,23 +23,23 @@ import (
 // checks if the FirebaseDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FirebaseDto{}
 
-// FirebaseDto The Firebase parameters.
+// FirebaseDto The Firebase project a client initialises its SDK with to receive push notifications from this portal.
 type FirebaseDto struct {
-	// The Firebase API key.
+	// The web API key of the project. Every field of this object is an empty string on an installation that  configures no Firebase project, and an empty `projectId` is the cheapest thing to test for before  initialising an SDK. None of these values is a secret - they are meant to be embedded in a client.
 	ApiKey NullableString `json:"apiKey"`
-	// The Firebase authentication domain.
+	// The host the Firebase SDK performs its own authentication against.
 	AuthDomain NullableString `json:"authDomain"`
-	// The Firebase project ID.
+	// The identifier of the Firebase project itself, which ties all the other fields together.
 	ProjectId NullableString `json:"projectId"`
-	// The Firebase storage bucket.
+	// The Cloud Storage bucket of the project. The portal does not store portal files there; it is part of the  SDK configuration.
 	StorageBucket NullableString `json:"storageBucket"`
-	// The Firebase messaging sender ID.
+	// The sender ID that push messages of this project arrive under, which a client checks an incoming message  against.
 	MessagingSenderId NullableString `json:"messagingSenderId"`
-	// The Firebase application ID.
+	// The identifier of the Firebase application registration this client is to use.
 	AppId NullableString `json:"appId"`
-	// The Firebase measurement ID.
+	// The Google Analytics measurement ID of the project, empty when the project reports no analytics.
 	MeasurementId NullableString `json:"measurementId"`
-	// The Firebase database URL.
+	// The Realtime Database endpoint of the project, empty when the project has no such database.
 	DatabaseURL NullableString `json:"databaseURL"`
 }
 

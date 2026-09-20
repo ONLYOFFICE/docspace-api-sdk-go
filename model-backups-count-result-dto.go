@@ -21,11 +21,11 @@ import (
 // checks if the BackupsCountResultDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupsCountResultDto{}
 
-// BackupsCountResultDto The number of backups.
+// BackupsCountResultDto The backups of a portal, split by who paid for them.
 type BackupsCountResultDto struct {
-	// The number of free backups.
+	// The number of backups covered by the free monthly allowance.
 	Free *int32 `json:"free,omitempty"`
-	// The number of paid backups.
+	// The number of backups charged to the portal wallet.
 	Paid *int32 `json:"paid,omitempty"`
 }
 

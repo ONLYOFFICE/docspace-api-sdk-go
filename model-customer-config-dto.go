@@ -21,19 +21,19 @@ import (
 // checks if the CustomerConfigDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomerConfigDto{}
 
-// CustomerConfigDto The customer config parameters.
+// CustomerConfigDto The branding of the organization running the portal, as the editor About panel shows it. It is reported on a  server installation only.
 type CustomerConfigDto struct {
-	// The address of the customer configuration.
+	// The postal address from the portal branding settings; empty when none was entered.
 	Address NullableString `json:"address,omitempty"`
-	// The logo of the customer configuration.
+	// The About-panel logo of the organization.
 	Logo NullableString `json:"logo,omitempty"`
-	// The dark logo of the customer configuration.
+	// The About-panel logo for a dark interface theme.
 	LogoDark NullableString `json:"logoDark,omitempty"`
-	// The mail address of the customer configuration.
+	// The contact address from the portal branding settings.
 	Mail NullableString `json:"mail,omitempty"`
-	// The name of the customer configuration.
+	// The organization name shown in the editor.
 	Name NullableString `json:"name,omitempty"`
-	// The site web address of the customer configuration.
+	// The website of the organization.
 	Www NullableString `json:"www,omitempty"`
 }
 

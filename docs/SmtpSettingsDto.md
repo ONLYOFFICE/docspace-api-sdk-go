@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Host** | Pointer to **NullableString** | The SMTP host. | [optional] 
-**Port** | Pointer to **NullableInt32** | The SMTP port. | [optional] 
-**SenderAddress** | Pointer to **NullableString** | The sender address. | [optional] 
-**SenderDisplayName** | Pointer to **NullableString** | The sender display name. | [optional] 
-**CredentialsUserName** | Pointer to **NullableString** | The credentials username. | [optional] 
-**CredentialsUserPassword** | Pointer to **NullableString** | The credentials user password. | [optional] 
-**EnableSSL** | Pointer to **bool** | Specifies whether the SSL is enabled or not. | [optional] 
-**EnableAuth** | Pointer to **bool** | Specifies whether the authentication is enabled or not. | [optional] 
-**UseNtlm** | Pointer to **bool** | Specifies whether to use NTLM or not. | [optional] 
-**IsDefaultSettings** | Pointer to **bool** | Specifies if the current settings are default or not. | [optional] 
+**Host** | Pointer to **NullableString** | The host name or address of the mail server. On a cloud portal that has saved no relay of its own every  field of this object comes back empty, because the installation's own server is not disclosed - only  `isDefaultSettings` is set there. | [optional] 
+**Port** | Pointer to **NullableInt32** | The port the mail server is reached on - conventionally 25 or 587 without encryption from the start, 465  with it. It is empty when no port was stored, in which case the portal falls back to its own default. | [optional] 
+**SenderAddress** | Pointer to **NullableString** | The address the letters are sent from, which appears in the From header and is what a reply goes to. | [optional] 
+**SenderDisplayName** | Pointer to **NullableString** | The name shown beside that address in a recipient's mailbox. | [optional] 
+**CredentialsUserName** | Pointer to **NullableString** | The account the portal signs in to the mail server as, meaningful only while `enableAuth` is `true`. | [optional] 
+**CredentialsUserPassword** | Pointer to **NullableString** | Always empty here: the stored password is never returned, so a client that sends these settings back has  to supply it again rather than echoing what it read. | [optional] 
+**EnableSSL** | Pointer to **bool** | Whether the connection to the mail server is encrypted. | [optional] 
+**EnableAuth** | Pointer to **bool** | Whether the portal signs in to the mail server at all. While it is `false` the credentials above are  ignored and the server is expected to accept mail unauthenticated. | [optional] 
+**UseNtlm** | Pointer to **bool** | Always `false` here: the flag is accepted when settings are saved but is not stored, so it never comes  back set and says nothing about how the portal authenticates. | [optional] 
+**IsDefaultSettings** | Pointer to **bool** | Whether the portal is still on the mail configuration of the installation rather than on a relay of its  own. `DELETE api/2.0/smtpsettings/smtp` puts it back to `true`, and while it is `true` on a cloud portal  the fields above are blank rather than showing the installation's server. | [optional] 
 
 ## Methods
 

@@ -5,7 +5,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ApproveGuestShareLink**](PeopleGuestsAPI.md#ApproveGuestShareLink) | **Post** /api/2.0/people/guests/share/approve | Approve a guest sharing link
-[**DeleteGuests**](PeopleGuestsAPI.md#DeleteGuests) | **Delete** /api/2.0/people/guests | Delete guests
+[**DeleteGuests**](PeopleGuestsAPI.md#DeleteGuests) | **Delete** /api/2.0/people/guests | Remove guest relations
 
 
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 > DeleteGuests(ctx).UpdateMembersRequestDto(updateMembersRequestDto).Execute()
 
-Delete guests
+Remove guest relations
 
 
 

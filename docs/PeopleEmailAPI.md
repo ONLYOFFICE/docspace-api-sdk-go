@@ -32,8 +32,8 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
-	changeEmailRequest := *openapiclient.NewChangeEmailRequest() // ChangeEmailRequest | The request parameters for updating a user email.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+	changeEmailRequest := *openapiclient.NewChangeEmailRequest() // ChangeEmailRequest | The new address, in plain text or in the encrypted form the confirmation link carries.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -53,7 +53,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | 
 
 ### Other Parameters
 
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiChangeUserEmailRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **changeEmailRequest** | [**ChangeEmailRequest**](ChangeEmailRequest.md) | The request parameters for updating a user email. | 
+ **changeEmailRequest** | [**ChangeEmailRequest**](ChangeEmailRequest.md) | The new address, in plain text or in the encrypted form the confirmation link carries. | 
 
 ### Return type
 

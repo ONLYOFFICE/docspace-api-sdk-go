@@ -21,11 +21,11 @@ import (
 // checks if the WebhooksConfigWithStatusDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhooksConfigWithStatusDto{}
 
-// WebhooksConfigWithStatusDto The webhook configuration with its status.
+// WebhooksConfigWithStatusDto A webhook subscription together with how its last delivery ended.
 type WebhooksConfigWithStatusDto struct {
-	// The webhook configuration.
+	// The subscription itself. Despite the plural name it is one subscription, not a list.
 	Configs *WebhooksConfigDto `json:"configs,omitempty"`
-	// The webhook status.
+	// The HTTP status code the target answered on the last attempt. `0` means nothing has been delivered yet,  which is not the same as a failure.
 	Status *int32 `json:"status,omitempty"`
 }
 

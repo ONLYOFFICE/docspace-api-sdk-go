@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Key** | [**DownloadRequestItemDtoKey**](DownloadRequestItemDtoKey.md) |  | 
-**Value** | **NullableString** | The target format or conversion type for the file download. | 
-**Password** | Pointer to **NullableString** | The optional password for accessing protected files. | [optional] 
+**Value** | **NullableString** | The format the file is converted to before it is packed, as a file extension without a leading dot. | 
+**Password** | Pointer to **NullableString** | The password that opens the source file, for a file protected with one; a protected file cannot be converted  without it. | [optional] 
 
 ## Methods
 

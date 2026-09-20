@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **NullableString** | The task progress ID. | 
-**Error** | Pointer to **NullableString** | The task progress error message. | [optional] 
-**Percentage** | **int32** | The percentage of the task progress. | 
-**IsCompleted** | **bool** | Specifies if the task peogress is completed or not. | 
-**Status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) | The status of the distributed task. | 
+**Id** | **NullableString** | The ID of the queued job. It identifies this run of the job and changes every time the job is started again. | 
+**Error** | Pointer to **NullableString** | The message of the error that stopped the job. It is empty while the job is running and after a job that  succeeded, and it is the only place where the reason for a failure is reported. | [optional] 
+**Percentage** | **int32** | The share of the job that is already done, from 0 to 100. | 
+**IsCompleted** | **bool** | Specifies whether the job has stopped running. This is the field to poll: true means the job will not change  any more, whether it succeeded, failed or was cancelled, and `status` tells which of the three it is. | 
+**Status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) | The state of the job: `Created` while it waits in the queue, `Running` while it works, `Completed` once it has  finished on its own, `Canceled` after a terminate operation, and `Failted` when it stopped on an error, in  which case `error` carries the reason. | 
 
 ## Methods
 

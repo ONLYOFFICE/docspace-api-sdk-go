@@ -4,20 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Date** | Pointer to **NullableTime** | The date when the operation took place. | [optional] 
-**Service** | Pointer to **NullableString** | The service related to the operation. | [optional] 
-**Description** | Pointer to **NullableString** | The brief operation description. | [optional] 
-**Details** | Pointer to **NullableString** | The detailed information about the operation. | [optional] 
-**ServiceUnit** | Pointer to **NullableString** | The service unit. | [optional] 
-**Quantity** | Pointer to **int32** | The quantity of the service used. | [optional] 
-**Currency** | Pointer to **NullableString** | The three-character ISO 4217 currency symbol of the operation. | [optional] 
-**Credit** | Pointer to **float64** | The credit amount of the operation. | [optional] 
-**Debit** | Pointer to **float64** | The debit amount of the operation. | [optional] 
-**ParticipantName** | Pointer to **NullableString** | The participant original name. | [optional] 
-**ParticipantDisplayName** | Pointer to **NullableString** | The participant display name. | [optional] 
-**AgentId** | Pointer to **NullableString** | AI Agent id. | [optional] 
-**AgentTitle** | Pointer to **NullableString** | AI Agent name. | [optional] 
-**Type** | Pointer to [**OperationType**](OperationType.md) | Type of the operation | [optional] 
+**Date** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the movement was booked, in the portal time zone - the same zone the `startDate` and `endDate`  filters are read in, so the two do line up here. | [optional] 
+**Service** | Pointer to **NullableString** | The wallet service the movement belongs to, by its stable key. It is what the `serviceName` filter  matches on, and it is empty for a movement that belongs to no service, such as a top-up. | [optional] 
+**Description** | Pointer to **NullableString** | A one-line summary of the movement in the portal language, already composed from the service and the  quantity - meant to be printed as it is rather than parsed. | [optional] 
+**Details** | Pointer to **NullableString** | The longer explanation of the same movement, where the service recorded one. It is empty for a movement  that has nothing to add to `description`. | [optional] 
+**ServiceUnit** | Pointer to **NullableString** | What `quantity` counts for this service, in the portal language. AI consumption is reported in tokens  here rather than in the AI credits the service is sold in. | [optional] 
+**Quantity** | Pointer to **int32** | How many units the movement covers, in the unit named by `serviceUnit`. It is `0` for a movement that  moves money without consuming a service. | [optional] 
+**Currency** | Pointer to **NullableString** | The currency `credit` and `debit` are expressed in, as a three-letter ISO 4217 code. It is the accounting  currency of the wallet, which need not be the currency the subscription is priced in. | [optional] 
+**Credit** | Pointer to **float64** | The amount that went into the wallet. It is `0` on a movement that only took money out, so the pair of  `credit` and `debit` is what shows which way the money went; the `credit` and `debit` filters of the  operation select the two directions by exactly this. | [optional] 
+**Debit** | Pointer to **float64** | The amount that was taken out of the wallet, `0` on a movement that put money in. | [optional] 
+**ParticipantName** | Pointer to **NullableString** | Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead. | [optional] 
+**ParticipantDisplayName** | Pointer to **NullableString** | The same person as their portal display name. It falls back to `participantName` when the name belongs to  no portal account, so it is never empty while `participantName` is filled. | [optional] 
+**SourceType** | Pointer to **NullableString** | What kind of thing an AI operation was run on - an agent, a file, a folder, a room or a form. It is empty  on any movement that is not an AI charge. | [optional] 
+**SourceTitle** | Pointer to **NullableString** | The title that thing had when the operation ran, kept as recorded, so it does not follow a later rename.  Empty under the same conditions as `sourceType`. | [optional] 
+**SourceId** | Pointer to **NullableString** | The identifier of that thing, to look it up in the module it belongs to. Empty under the same conditions  as `sourceType`. | [optional] 
+**Type** | Pointer to [**OperationType**](OperationType.md) | What kind of movement this is - a payment, a charge, a refund, a correction. It is what the `type` filter  matches on, and `Unknown` covers a movement the billing service reported under a kind this build does not  recognise. | [optional] 
 
 ## Methods
 
@@ -40,20 +41,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDate
 
-`func (o *OperationDto) GetDate() time.Time`
+`func (o *OperationDto) GetDate() ApiDateTime`
 
 GetDate returns the Date field if non-nil, zero value otherwise.
 
 ### GetDateOk
 
-`func (o *OperationDto) GetDateOk() (*time.Time, bool)`
+`func (o *OperationDto) GetDateOk() (*ApiDateTime, bool)`
 
 GetDateOk returns a tuple with the Date field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDate
 
-`func (o *OperationDto) SetDate(v time.Time)`
+`func (o *OperationDto) SetDate(v ApiDateTime)`
 
 SetDate sets Date field to given value.
 
@@ -63,16 +64,6 @@ SetDate sets Date field to given value.
 
 HasDate returns a boolean if a field has been set.
 
-### SetDateNil
-
-`func (o *OperationDto) SetDateNil(b bool)`
-
- SetDateNil sets the value for Date to be an explicit nil
-
-### UnsetDate
-`func (o *OperationDto) UnsetDate()`
-
-UnsetDate ensures that no value is present for Date, not even an explicit nil
 ### GetService
 
 `func (o *OperationDto) GetService() string`
@@ -393,76 +384,111 @@ HasParticipantDisplayName returns a boolean if a field has been set.
 `func (o *OperationDto) UnsetParticipantDisplayName()`
 
 UnsetParticipantDisplayName ensures that no value is present for ParticipantDisplayName, not even an explicit nil
-### GetAgentId
+### GetSourceType
 
-`func (o *OperationDto) GetAgentId() string`
+`func (o *OperationDto) GetSourceType() string`
 
-GetAgentId returns the AgentId field if non-nil, zero value otherwise.
+GetSourceType returns the SourceType field if non-nil, zero value otherwise.
 
-### GetAgentIdOk
+### GetSourceTypeOk
 
-`func (o *OperationDto) GetAgentIdOk() (*string, bool)`
+`func (o *OperationDto) GetSourceTypeOk() (*string, bool)`
 
-GetAgentIdOk returns a tuple with the AgentId field if it's non-nil, zero value otherwise
+GetSourceTypeOk returns a tuple with the SourceType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAgentId
+### SetSourceType
 
-`func (o *OperationDto) SetAgentId(v string)`
+`func (o *OperationDto) SetSourceType(v string)`
 
-SetAgentId sets AgentId field to given value.
+SetSourceType sets SourceType field to given value.
 
-### HasAgentId
+### HasSourceType
 
-`func (o *OperationDto) HasAgentId() bool`
+`func (o *OperationDto) HasSourceType() bool`
 
-HasAgentId returns a boolean if a field has been set.
+HasSourceType returns a boolean if a field has been set.
 
-### SetAgentIdNil
+### SetSourceTypeNil
 
-`func (o *OperationDto) SetAgentIdNil(b bool)`
+`func (o *OperationDto) SetSourceTypeNil(b bool)`
 
- SetAgentIdNil sets the value for AgentId to be an explicit nil
+ SetSourceTypeNil sets the value for SourceType to be an explicit nil
 
-### UnsetAgentId
-`func (o *OperationDto) UnsetAgentId()`
+### UnsetSourceType
+`func (o *OperationDto) UnsetSourceType()`
 
-UnsetAgentId ensures that no value is present for AgentId, not even an explicit nil
-### GetAgentTitle
+UnsetSourceType ensures that no value is present for SourceType, not even an explicit nil
+### GetSourceTitle
 
-`func (o *OperationDto) GetAgentTitle() string`
+`func (o *OperationDto) GetSourceTitle() string`
 
-GetAgentTitle returns the AgentTitle field if non-nil, zero value otherwise.
+GetSourceTitle returns the SourceTitle field if non-nil, zero value otherwise.
 
-### GetAgentTitleOk
+### GetSourceTitleOk
 
-`func (o *OperationDto) GetAgentTitleOk() (*string, bool)`
+`func (o *OperationDto) GetSourceTitleOk() (*string, bool)`
 
-GetAgentTitleOk returns a tuple with the AgentTitle field if it's non-nil, zero value otherwise
+GetSourceTitleOk returns a tuple with the SourceTitle field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAgentTitle
+### SetSourceTitle
 
-`func (o *OperationDto) SetAgentTitle(v string)`
+`func (o *OperationDto) SetSourceTitle(v string)`
 
-SetAgentTitle sets AgentTitle field to given value.
+SetSourceTitle sets SourceTitle field to given value.
 
-### HasAgentTitle
+### HasSourceTitle
 
-`func (o *OperationDto) HasAgentTitle() bool`
+`func (o *OperationDto) HasSourceTitle() bool`
 
-HasAgentTitle returns a boolean if a field has been set.
+HasSourceTitle returns a boolean if a field has been set.
 
-### SetAgentTitleNil
+### SetSourceTitleNil
 
-`func (o *OperationDto) SetAgentTitleNil(b bool)`
+`func (o *OperationDto) SetSourceTitleNil(b bool)`
 
- SetAgentTitleNil sets the value for AgentTitle to be an explicit nil
+ SetSourceTitleNil sets the value for SourceTitle to be an explicit nil
 
-### UnsetAgentTitle
-`func (o *OperationDto) UnsetAgentTitle()`
+### UnsetSourceTitle
+`func (o *OperationDto) UnsetSourceTitle()`
 
-UnsetAgentTitle ensures that no value is present for AgentTitle, not even an explicit nil
+UnsetSourceTitle ensures that no value is present for SourceTitle, not even an explicit nil
+### GetSourceId
+
+`func (o *OperationDto) GetSourceId() string`
+
+GetSourceId returns the SourceId field if non-nil, zero value otherwise.
+
+### GetSourceIdOk
+
+`func (o *OperationDto) GetSourceIdOk() (*string, bool)`
+
+GetSourceIdOk returns a tuple with the SourceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceId
+
+`func (o *OperationDto) SetSourceId(v string)`
+
+SetSourceId sets SourceId field to given value.
+
+### HasSourceId
+
+`func (o *OperationDto) HasSourceId() bool`
+
+HasSourceId returns a boolean if a field has been set.
+
+### SetSourceIdNil
+
+`func (o *OperationDto) SetSourceIdNil(b bool)`
+
+ SetSourceIdNil sets the value for SourceId to be an explicit nil
+
+### UnsetSourceId
+`func (o *OperationDto) UnsetSourceId()`
+
+UnsetSourceId ensures that no value is present for SourceId, not even an explicit nil
 ### GetType
 
 `func (o *OperationDto) GetType() OperationType`

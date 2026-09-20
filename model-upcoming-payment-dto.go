@@ -16,31 +16,30 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the UpcomingPaymentDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpcomingPaymentDto{}
 
-// UpcomingPaymentDto The upcoming payment parameters.
+// UpcomingPaymentDto One charge the portal is going to be billed for at the start of the next period.
 type UpcomingPaymentDto struct {
-	// The quota ID.
+	// The quota that is going to be charged. When a switch to another quota is scheduled, this is the quota  being switched to, so it can differ from what `GET api/2.0/portal/tariff` reports for today.
 	Id *int32 `json:"id,omitempty"`
-	// The quota name.
+	// The quota's stable key, which is the same identifier the wallet operations use for a service.
 	Name NullableString `json:"name,omitempty"`
-	// The quota title.
+	// The quota name in the portal language, meant to be printed on an invoice preview.
 	Title NullableString `json:"title,omitempty"`
-	// The quota unit of measure.
+	// What `quantity` counts, in the portal language - seats, administrators, gigabytes. It is empty for a quota  that is simply on or off.
 	UnitOfMeasure NullableString `json:"unitOfMeasure,omitempty"`
-	// The quantity that will be charged (the next quantity if set, otherwise the current quantity).
+	// How much is going to be charged for, which is the quantity scheduled for the next period when one has been  scheduled and today's quantity otherwise.
 	Quantity *int32 `json:"quantity,omitempty"`
-	// The quota applies to the wallet or not.
+	// Whether the charge is paid out of the portal wallet rather than from the subscription.
 	Wallet *bool `json:"wallet,omitempty"`
-	// The due date of the upcoming payment in the portal time zone.
-	DueDate NullableTime `json:"dueDate,omitempty"`
-	// The amount that will be charged (unit price multiplied by the quantity).
+	// When the charge falls due, in the portal time zone.
+	DueDate *ApiDateTime `json:"dueDate,omitempty"`
+	// What the charge comes to: the unit price of the quota multiplied by `quantity`. Taxes are not part of it,  and a quota with no price of its own is not listed at all rather than listed with a zero.
 	Amount *float64 `json:"amount,omitempty"`
-	// The three-character ISO 4217 currency symbol of the amount.
+	// The currency `amount` is expressed in, as a three-letter ISO 4217 code. It follows the portal's billing  account, so every entry of one answer carries the same code.
 	Currency NullableString `json:"currency,omitempty"`
 }
 
@@ -283,46 +282,36 @@ func (o *UpcomingPaymentDto) SetWallet(v bool) {
 	o.Wallet = &v
 }
 
-// GetDueDate returns the DueDate field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpcomingPaymentDto) GetDueDate() time.Time {
-	if o == nil || IsNil(o.DueDate.Get()) {
-		var ret time.Time
+// GetDueDate returns the DueDate field value if set, zero value otherwise.
+func (o *UpcomingPaymentDto) GetDueDate() ApiDateTime {
+	if o == nil || IsNil(o.DueDate) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.DueDate.Get()
+	return *o.DueDate
 }
 
 // GetDueDateOk returns a tuple with the DueDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpcomingPaymentDto) GetDueDateOk() (*time.Time, bool) {
-	if o == nil {
+func (o *UpcomingPaymentDto) GetDueDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.DueDate) {
 		return nil, false
 	}
-	return o.DueDate.Get(), o.DueDate.IsSet()
+	return o.DueDate, true
 }
 
 // HasDueDate returns a boolean if a field has been set.
 func (o *UpcomingPaymentDto) IsDueDateSet() bool {
-	if o != nil && o.DueDate.IsSet() {
+	if o != nil && !IsNil(o.DueDate) {
 		return true
 	}
 
 	return false
 }
 
-// SetDueDate gets a reference to the given NullableTime and assigns it to the DueDate field.
-func (o *UpcomingPaymentDto) SetDueDate(v time.Time) {
-	o.DueDate.Set(&v)
-}
-// SetDueDateNil sets the value for DueDate to be an explicit nil
-func (o *UpcomingPaymentDto) SetDueDateNil() {
-	o.DueDate.Set(nil)
-}
-
-// UnsetDueDate ensures that no value is present for DueDate, not even an explicit nil
-func (o *UpcomingPaymentDto) UnsetDueDate() {
-	o.DueDate.Unset()
+// SetDueDate gets a reference to the given ApiDateTime and assigns it to the DueDate field.
+func (o *UpcomingPaymentDto) SetDueDate(v ApiDateTime) {
+	o.DueDate = &v
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
@@ -427,8 +416,8 @@ func (o UpcomingPaymentDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Wallet) {
 		toSerialize["wallet"] = o.Wallet
 	}
-	if o.DueDate.IsSet() {
-		toSerialize["dueDate"] = o.DueDate.Get()
+	if !IsNil(o.DueDate) {
+		toSerialize["dueDate"] = o.DueDate
 	}
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount

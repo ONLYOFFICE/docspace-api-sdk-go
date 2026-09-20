@@ -23,11 +23,11 @@ import (
 // checks if the CoversResultDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CoversResultDto{}
 
-// CoversResultDto The result of the cover request containing the cover image data.
+// CoversResultDto One drawing of the built-in gallery of room covers.
 type CoversResultDto struct {
-	// The cover unique identifier.
+	// The name of the cover, and the value to send as `cover` when a room is created or changed. The names are the  same on every portal and do not change with the language of the request.
 	Id NullableString `json:"id"`
-	// The cover image data.
+	// The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays.
 	Data NullableString `json:"data"`
 }
 

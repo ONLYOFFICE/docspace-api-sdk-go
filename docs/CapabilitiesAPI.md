@@ -59,7 +59,7 @@ Other parameters are passed through a pointer to a apiGetPortalCapabilitiesReque
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

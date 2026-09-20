@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **NullableString** | The item name. | [optional] 
-**Icon** | Pointer to **NullableString** | The item icon path. | [optional] 
-**Disabled** | Pointer to **bool** | Specifies if the item is disabled or not. | [optional] 
-**Size** | Pointer to **NullableString** | The item used space. | [optional] 
-**Url** | Pointer to **NullableString** | The item URL. | [optional] 
+**Name** | Pointer to **NullableString** | The category name in the portal language, HTML-escaped and ready to be rendered as text. What a category  stands for depends on the module asked about - for the Documents module it is a room type. | [optional] 
+**Icon** | Pointer to **NullableString** | The path of the icon to render beside the name, relative to the portal address. It is empty for a category  that ships no icon. | [optional] 
+**Disabled** | Pointer to **bool** | Whether the category is switched off for this portal. A disabled category still reports the space it  occupies, so it is worth showing greyed out rather than dropping. | [optional] 
+**Size** | Pointer to **NullableString** | The occupied space already formatted for display, with its unit and in the portal language - `0 Byte` for  an empty category. It is not a byte count and must not be parsed; the raw numbers live in the quota  reported by `GET api/2.0/portal/quota`. | [optional] 
+**Url** | Pointer to **NullableString** | The portal page that lists the contents of this category, relative to the portal address, so a statistics  page can link through to it. It is empty for a category with no page of its own. | [optional] 
 
 ## Methods
 

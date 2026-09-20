@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AiWebSearchClear**](AIWebSearchAPI.md#AiWebSearchClear) | **Delete** /api/2.0/ai/web-search/clear | Clear
-[**AiWebSearchConfigure**](AIWebSearchAPI.md#AiWebSearchConfigure) | **Put** /api/2.0/ai/web-search/configure | Configure
+[**AiWebSearchClear**](AIWebSearchAPI.md#AiWebSearchClear) | **Delete** /api/2.0/ai/web-search/clear | Clear the web-search configuration
+[**AiWebSearchConfigure**](AIWebSearchAPI.md#AiWebSearchConfigure) | **Put** /api/2.0/ai/web-search/configure | Configure and verify web search
 [**AiWebSearchGetActiveConfig**](AIWebSearchAPI.md#AiWebSearchGetActiveConfig) | **Get** /api/2.0/ai/web-search/get-active-config | Get active config
 [**AiWebSearchIsConfigured**](AIWebSearchAPI.md#AiWebSearchIsConfigured) | **Get** /api/2.0/ai/web-search/is-configured | Is configured
-[**AiWebSearchPassthroughContents**](AIWebSearchAPI.md#AiWebSearchPassthroughContents) | **Post** /api/2.0/ai/websearch/v1/contents | Web page contents proxied to the portal's active web-search provider
-[**AiWebSearchPassthroughSearch**](AIWebSearchAPI.md#AiWebSearchPassthroughSearch) | **Post** /api/2.0/ai/websearch/v1/search | Web search proxied to the portal's active web-search provider
+[**AiWebSearchPassthroughContents**](AIWebSearchAPI.md#AiWebSearchPassthroughContents) | **Post** /api/2.0/ai/websearch/v1/contents | Web page contents passthrough
+[**AiWebSearchPassthroughSearch**](AIWebSearchAPI.md#AiWebSearchPassthroughSearch) | **Post** /api/2.0/ai/websearch/v1/search | Web search passthrough
 [**AiWebSearchSetActiveConfig**](AIWebSearchAPI.md#AiWebSearchSetActiveConfig) | **Put** /api/2.0/ai/web-search/set-active-config | Set active config
-[**AiWebSearchTestConnection**](AIWebSearchAPI.md#AiWebSearchTestConnection) | **Post** /api/2.0/ai/web-search/test-connection | Test connection
+[**AiWebSearchTestConnection**](AIWebSearchAPI.md#AiWebSearchTestConnection) | **Post** /api/2.0/ai/web-search/test-connection | Test a web-search provider
 
 
 
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 > AiSuccessResponse AiWebSearchClear(ctx).Body(body).Execute()
 
-Clear
+Clear the web-search configuration
 
 
 
@@ -38,7 +38,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiAiWebSearchClearRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. | 
 
 ### Return type
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -87,7 +87,7 @@ No authorization required
 
 > AiWebSearchMutationResult AiWebSearchConfigure(ctx).AiWebSearchConfigureRequest(aiWebSearchConfigureRequest).Execute()
 
-Configure
+Configure and verify web search
 
 
 
@@ -106,7 +106,7 @@ import (
 )
 
 func main() {
-	aiWebSearchConfigureRequest := *openapiclient.NewAiWebSearchConfigureRequest(*openapiclient.NewAiWebSearchConfig("Provider_example")) // AiWebSearchConfigureRequest | 
+	aiWebSearchConfigureRequest := *openapiclient.NewAiWebSearchConfigureRequest(*openapiclient.NewAiWebSearchConfig("exa")) // AiWebSearchConfigureRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -174,7 +174,7 @@ import (
 )
 
 func main() {
-	entityId := "entityId_example" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -242,7 +242,7 @@ import (
 )
 
 func main() {
-	entityId := "entityId_example" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -289,9 +289,9 @@ No authorization required
 
 ## AiWebSearchPassthroughContents
 
-> AiSuccessResponse AiWebSearchPassthroughContents(ctx).RequestBody(requestBody).Execute()
+> map[string]interface{} AiWebSearchPassthroughContents(ctx).RequestBody(requestBody).Execute()
 
-Web page contents proxied to the portal's active web-search provider
+Web page contents passthrough
 
 
 
@@ -310,7 +310,7 @@ import (
 )
 
 func main() {
-	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
+	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -319,7 +319,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIWebSearchAPI.AiWebSearchPassthroughContents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiWebSearchPassthroughContents`: AiSuccessResponse
+	// response from `AiWebSearchPassthroughContents`: map[string]interface{}
 	fmt.Fprintf(os.Stdout, "Response from `AIWebSearchAPI.AiWebSearchPassthroughContents`: %v\n", resp)
 }
 ```
@@ -335,15 +335,15 @@ Other parameters are passed through a pointer to a apiAiWebSearchPassthroughCont
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]interface{}** |  | 
+ **requestBody** | **map[string]interface{}** | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration. | 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+**map[string]interface{}**
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -357,9 +357,9 @@ No authorization required
 
 ## AiWebSearchPassthroughSearch
 
-> AiSuccessResponse AiWebSearchPassthroughSearch(ctx).RequestBody(requestBody).Execute()
+> map[string]interface{} AiWebSearchPassthroughSearch(ctx).RequestBody(requestBody).Execute()
 
-Web search proxied to the portal's active web-search provider
+Web search passthrough
 
 
 
@@ -378,7 +378,7 @@ import (
 )
 
 func main() {
-	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
+	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -387,7 +387,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIWebSearchAPI.AiWebSearchPassthroughSearch``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiWebSearchPassthroughSearch`: AiSuccessResponse
+	// response from `AiWebSearchPassthroughSearch`: map[string]interface{}
 	fmt.Fprintf(os.Stdout, "Response from `AIWebSearchAPI.AiWebSearchPassthroughSearch`: %v\n", resp)
 }
 ```
@@ -403,15 +403,15 @@ Other parameters are passed through a pointer to a apiAiWebSearchPassthroughSear
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]interface{}** |  | 
+ **requestBody** | **map[string]interface{}** | A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here. | 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+**map[string]interface{}**
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -446,7 +446,7 @@ import (
 )
 
 func main() {
-	aiWebSearchConfigureRequest := *openapiclient.NewAiWebSearchConfigureRequest(*openapiclient.NewAiWebSearchConfig("Provider_example")) // AiWebSearchConfigureRequest | 
+	aiWebSearchConfigureRequest := *openapiclient.NewAiWebSearchConfigureRequest(*openapiclient.NewAiWebSearchConfig("exa")) // AiWebSearchConfigureRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -479,7 +479,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -495,7 +495,7 @@ No authorization required
 
 > AiProfilesTestConnection200Response AiWebSearchTestConnection(ctx).AiWebSearchConfig(aiWebSearchConfig).Execute()
 
-Test connection
+Test a web-search provider
 
 
 
@@ -514,7 +514,7 @@ import (
 )
 
 func main() {
-	aiWebSearchConfig := *openapiclient.NewAiWebSearchConfig("Provider_example") // AiWebSearchConfig | 
+	aiWebSearchConfig := *openapiclient.NewAiWebSearchConfig("exa") // AiWebSearchConfig | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -547,7 +547,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

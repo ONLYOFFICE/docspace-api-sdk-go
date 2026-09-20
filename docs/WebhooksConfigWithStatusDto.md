@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Configs** | Pointer to [**WebhooksConfigDto**](WebhooksConfigDto.md) | The webhook configuration. | [optional] 
-**Status** | Pointer to **int32** | The webhook status. | [optional] 
+**Configs** | Pointer to [**WebhooksConfigDto**](WebhooksConfigDto.md) | The subscription itself. Despite the plural name it is one subscription, not a list. | [optional] 
+**Status** | Pointer to **int32** | The HTTP status code the target answered on the last attempt. `0` means nothing has been delivered yet,  which is not the same as a failure. | [optional] 
 
 ## Methods
 

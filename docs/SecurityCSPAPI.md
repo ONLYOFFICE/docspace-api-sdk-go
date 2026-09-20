@@ -128,7 +128,7 @@ Other parameters are passed through a pointer to a apiGetCspSettingsRequest stru
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -4,9 +4,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AiAttachmentsDelete**](AIAttachmentsAPI.md#AiAttachmentsDelete) | **Delete** /api/2.0/ai/attachments/delete | Delete
+[**AiAttachmentsDelete**](AIAttachmentsAPI.md#AiAttachmentsDelete) | **Delete** /api/2.0/ai/attachments/delete | Delete one attachment
 [**AiAttachmentsDeleteMany**](AIAttachmentsAPI.md#AiAttachmentsDeleteMany) | **Delete** /api/2.0/ai/attachments/delete-many | Delete many
-[**AiAttachmentsGet**](AIAttachmentsAPI.md#AiAttachmentsGet) | **Post** /api/2.0/ai/attachments/get | Get
+[**AiAttachmentsGet**](AIAttachmentsAPI.md#AiAttachmentsGet) | **Post** /api/2.0/ai/attachments/get | Get one attachment
 [**AiAttachmentsGetMany**](AIAttachmentsAPI.md#AiAttachmentsGetMany) | **Post** /api/2.0/ai/attachments/get-many | Get many
 [**AiAttachmentsLinkToMessage**](AIAttachmentsAPI.md#AiAttachmentsLinkToMessage) | **Post** /api/2.0/ai/attachments/link-to-message | Link to message
 [**AiAttachmentsSaveFile**](AIAttachmentsAPI.md#AiAttachmentsSaveFile) | **Post** /api/2.0/ai/attachments/save-file | Save file
@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 > AiSuccessResponse AiAttachmentsDelete(ctx).Body(body).Execute()
 
-Delete
+Delete one attachment
 
 
 
@@ -37,7 +37,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | The ID of the attachment to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -62,7 +62,7 @@ Other parameters are passed through a pointer to a apiAiAttachmentsDeleteRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | The ID of the attachment to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -105,7 +105,7 @@ import (
 )
 
 func main() {
-	requestBody := []string{"Property_example"} // []string | 
+	requestBody := []string{"Property_example"} // []string | The IDs of the attachments to delete, as a bare JSON array of strings.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -130,7 +130,7 @@ Other parameters are passed through a pointer to a apiAiAttachmentsDeleteManyReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **[]string** |  | 
+ **requestBody** | **[]string** | The IDs of the attachments to delete, as a bare JSON array of strings. | 
 
 ### Return type
 
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -154,7 +154,7 @@ No authorization required
 
 > AiAttachment AiAttachmentsGet(ctx).Body(body).Execute()
 
-Get
+Get one attachment
 
 
 
@@ -173,7 +173,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | The ID of the attachment to read, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -198,7 +198,7 @@ Other parameters are passed through a pointer to a apiAiAttachmentsGetRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | The ID of the attachment to read, as a bare JSON string. | 
 
 ### Return type
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -241,7 +241,7 @@ import (
 )
 
 func main() {
-	requestBody := []string{"Property_example"} // []string | 
+	requestBody := []string{"Property_example"} // []string | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -266,7 +266,7 @@ Other parameters are passed through a pointer to a apiAiAttachmentsGetManyReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **[]string** |  | 
+ **requestBody** | **[]string** | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. | 
 
 ### Return type
 
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -342,7 +342,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -410,7 +410,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -478,7 +478,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

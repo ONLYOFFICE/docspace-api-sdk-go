@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Title** | Pointer to **NullableString** | The file title to update. | [optional] 
-**LastVersion** | Pointer to **int32** | The number of the latest file version. | [optional] 
+**Title** | Pointer to **NullableString** | The new title of the file, without an extension - the stored extension is kept whatever the title says, so a  rename cannot change the format. Left empty, the file keeps its name. | [optional] 
+**LastVersion** | Pointer to **int32** | The version to restore on top of the history, as reported by `GET api/2.0/files/file/{fileId}/history`; 0 or  less leaves the versions untouched. | [optional] 
 
 ## Methods
 

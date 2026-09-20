@@ -41,6 +41,8 @@ type AiCreateProfileInput struct {
 	ModelId string `json:"modelId"`
 	// Whether extended thinking is enabled for this profile's model.
 	Reasoning *bool `json:"reasoning,omitempty"`
+	// Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile.
+	ReasoningSupport *AiReasoningSupport `json:"reasoningSupport,omitempty"`
 	// Bitmask of capabilities supported by the selected model.
 	Capabilities *float32 `json:"capabilities,omitempty"`
 	// Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record).
@@ -300,6 +302,38 @@ func (o *AiCreateProfileInput) SetReasoning(v bool) {
 	o.Reasoning = &v
 }
 
+// GetReasoningSupport returns the ReasoningSupport field value if set, zero value otherwise.
+func (o *AiCreateProfileInput) GetReasoningSupport() AiReasoningSupport {
+	if o == nil || IsNil(o.ReasoningSupport) {
+		var ret AiReasoningSupport
+		return ret
+	}
+	return *o.ReasoningSupport
+}
+
+// GetReasoningSupportOk returns a tuple with the ReasoningSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiCreateProfileInput) GetReasoningSupportOk() (*AiReasoningSupport, bool) {
+	if o == nil || IsNil(o.ReasoningSupport) {
+		return nil, false
+	}
+	return o.ReasoningSupport, true
+}
+
+// HasReasoningSupport returns a boolean if a field has been set.
+func (o *AiCreateProfileInput) IsReasoningSupportSet() bool {
+	if o != nil && !IsNil(o.ReasoningSupport) {
+		return true
+	}
+
+	return false
+}
+
+// SetReasoningSupport gets a reference to the given AiReasoningSupport and assigns it to the ReasoningSupport field.
+func (o *AiCreateProfileInput) SetReasoningSupport(v AiReasoningSupport) {
+	o.ReasoningSupport = &v
+}
+
 // GetCapabilities returns the Capabilities field value if set, zero value otherwise.
 func (o *AiCreateProfileInput) GetCapabilities() float32 {
 	if o == nil || IsNil(o.Capabilities) {
@@ -485,6 +519,9 @@ func (o AiCreateProfileInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["modelId"] = o.ModelId
 	if !IsNil(o.Reasoning) {
 		toSerialize["reasoning"] = o.Reasoning
+	}
+	if !IsNil(o.ReasoningSupport) {
+		toSerialize["reasoningSupport"] = o.ReasoningSupport
 	}
 	if !IsNil(o.Capabilities) {
 		toSerialize["capabilities"] = o.Capabilities

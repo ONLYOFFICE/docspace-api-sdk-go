@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **NullableString** | The cover unique identifier. | 
-**Data** | **NullableString** | The cover image data. | 
+**Id** | **NullableString** | The name of the cover, and the value to send as `cover` when a room is created or changed. The names are the  same on every portal and do not change with the language of the request. | 
+**Data** | **NullableString** | The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays. | 
 
 ## Methods
 

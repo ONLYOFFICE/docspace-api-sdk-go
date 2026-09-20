@@ -23,7 +23,7 @@ var _ MappedNullable = &UpdateMembersQuotaRequestDto{}
 
 // UpdateMembersQuotaRequestDto The request parameters for updating a user quota.
 type UpdateMembersQuotaRequestDto struct {
-	// The list of user IDs.
+	// The accounts the operation applies to. System accounts are dropped from the list without an error.
 	UserIds []string `json:"userIds,omitempty"`
 	Quota *UpdateMembersQuotaRequestDtoQuota `json:"quota,omitempty"`
 }

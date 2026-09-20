@@ -5,7 +5,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetByStatus**](PeopleUserStatusAPI.md#GetByStatus) | **Get** /api/2.0/people/status/{status} | Get profiles by status
-[**UpdateUserActivationStatus**](PeopleUserStatusAPI.md#UpdateUserActivationStatus) | **Put** /api/2.0/people/activationstatus/{activationstatus} | Set an activation status to the users
+[**UpdateUserActivationStatus**](PeopleUserStatusAPI.md#UpdateUserActivationStatus) | **Put** /api/2.0/people/activationstatus/{activationstatus} | Set my activation status
 [**UpdateUserStatus**](PeopleUserStatusAPI.md#UpdateUserStatus) | **Put** /api/2.0/people/status/{status} | Change a user status
 
 
@@ -33,14 +33,14 @@ import (
 )
 
 func main() {
-	status := openapiclient.EmployeeStatus(1) // EmployeeStatus | The user status.
-	filterBy := "displayName" // string | Specifies the criteria used to filter the profiles in the request. (optional)
-	count := int32(25) // int32 | The maximum number of user profiles to retrieve. (optional)
-	startIndex := int32(0) // int32 | The starting index for retrieving data in a paginated request. (optional)
-	sortBy := "displayName" // string | Specifies the property or field name by which the results should be sorted. (optional)
-	sortOrder := openapiclient.SortOrder(0) // SortOrder | The order in which the results are sorted. (optional)
-	filterSeparator := "," // string | Represents the separator used to split multiple filter criteria in a query string. (optional)
-	filterValue := "John" // string | A string value representing additional filter criteria used in query parameters. (optional)
+	status := openapiclient.EmployeeStatus(1) // EmployeeStatus | The account state to list, taken from the route: `Active` for working accounts, `Terminated` for disabled  ones, `Pending` for open invitations, or `All` for every state.
+	filterBy := "group" // string | The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter. (optional)
+	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
+	startIndex := int32(0) // int32 | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional)
+	sortBy := "DisplayName" // string | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. (optional)
+	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction of the ordering: `Ascending`, which is the default, or `Descending`. (optional)
+	filterSeparator := "," // string | The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match. (optional)
+	filterValue := "John" // string | The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -60,7 +60,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**status** | [**EmployeeStatus**](.md) | The user status. | 
+**status** | [**EmployeeStatus**](.md) | The account state to list, taken from the route: `Active` for working accounts, `Terminated` for disabled  ones, `Pending` for open invitations, or `All` for every state. | 
 
 ### Other Parameters
 
@@ -70,13 +70,13 @@ Other parameters are passed through a pointer to a apiGetByStatusRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **filterBy** | **string** | Specifies the criteria used to filter the profiles in the request. | 
- **count** | **int32** | The maximum number of user profiles to retrieve. | 
- **startIndex** | **int32** | The starting index for retrieving data in a paginated request. | 
- **sortBy** | **string** | Specifies the property or field name by which the results should be sorted. | 
- **sortOrder** | [**SortOrder**](SortOrder.md) | The order in which the results are sorted. | 
- **filterSeparator** | **string** | Represents the separator used to split multiple filter criteria in a query string. | 
- **filterValue** | **string** | A string value representing additional filter criteria used in query parameters. | 
+ **filterBy** | **string** | The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter. | 
+ **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
+ **startIndex** | **int32** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | 
+ **sortBy** | **string** | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. | 
+ **sortOrder** | [**SortOrder**](SortOrder.md) | The direction of the ordering: `Ascending`, which is the default, or `Descending`. | 
+ **filterSeparator** | **string** | The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match. | 
+ **filterValue** | **string** | The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter. | 
 
 ### Return type
 
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 > EmployeeFullArrayWrapper UpdateUserActivationStatus(ctx, activationstatus).UpdateMembersRequestDto(updateMembersRequestDto).Execute()
 
-Set an activation status to the users
+Set my activation status
 
 
 
@@ -119,8 +119,8 @@ import (
 )
 
 func main() {
-	activationstatus := openapiclient.EmployeeActivationStatus(0) // EmployeeActivationStatus | The new user activation status.
-	updateMembersRequestDto := *openapiclient.NewUpdateMembersRequestDto() // UpdateMembersRequestDto | The request parameters for updating the user information.
+	activationstatus := openapiclient.EmployeeActivationStatus(0) // EmployeeActivationStatus | The activation state to set on the calling account, taken from the route: `NotActivated`, `Activated`,  `Pending` or `AutoGenerated`.
+	updateMembersRequestDto := *openapiclient.NewUpdateMembersRequestDto() // UpdateMembersRequestDto | The account to change. Only `userIds` is read, it has to hold exactly one entry, and that entry has to be the  calling account; `resendAll` is ignored here.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -140,7 +140,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**activationstatus** | [**EmployeeActivationStatus**](.md) | The new user activation status. | 
+**activationstatus** | [**EmployeeActivationStatus**](.md) | The activation state to set on the calling account, taken from the route: `NotActivated`, `Activated`,  `Pending` or `AutoGenerated`. | 
 
 ### Other Parameters
 
@@ -150,7 +150,7 @@ Other parameters are passed through a pointer to a apiUpdateUserActivationStatus
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateMembersRequestDto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md) | The request parameters for updating the user information. | 
+ **updateMembersRequestDto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md) | The account to change. Only `userIds` is read, it has to hold exactly one entry, and that entry has to be the  calling account; `resendAll` is ignored here. | 
 
 ### Return type
 
@@ -193,8 +193,8 @@ import (
 )
 
 func main() {
-	status := openapiclient.EmployeeStatus(1) // EmployeeStatus | The new user status.
-	updateMembersRequestDto := *openapiclient.NewUpdateMembersRequestDto() // UpdateMembersRequestDto | The request parameters for updating the user information.
+	status := openapiclient.EmployeeStatus(1) // EmployeeStatus | The state to put the listed accounts into, taken from the route. Only `Active`, which enables an account,  and `Terminated`, which disables it, are accepted; any other value is rejected with 400.
+	updateMembersRequestDto := *openapiclient.NewUpdateMembersRequestDto() // UpdateMembersRequestDto | The accounts to enable or disable. Only `userIds` is read by this operation; `resendAll` belongs to the  invitation operations and is ignored here.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -214,7 +214,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**status** | [**EmployeeStatus**](.md) | The new user status. | 
+**status** | [**EmployeeStatus**](.md) | The state to put the listed accounts into, taken from the route. Only `Active`, which enables an account,  and `Terminated`, which disables it, are accepted; any other value is rejected with 400. | 
 
 ### Other Parameters
 
@@ -224,7 +224,7 @@ Other parameters are passed through a pointer to a apiUpdateUserStatusRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateMembersRequestDto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md) | The request parameters for updating the user information. | 
+ **updateMembersRequestDto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md) | The accounts to enable or disable. Only `userIds` is read by this operation; `resendAll` belongs to the  invitation operations and is ignored here. | 
 
 ### Return type
 

@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ServiceName** | Pointer to **[]string** | The service name list. A single string is also accepted for backward compatibility. | [optional] 
-**StartDate** | Pointer to **NullableTime** | The report start date. | [optional] 
-**EndDate** | Pointer to **NullableTime** | The report end date. | [optional] 
-**ParticipantName** | Pointer to **NullableString** | The participant name. | [optional] 
-**Credit** | Pointer to **NullableBool** | Specifies whether to include credit operations in the report. | [optional] 
-**Debit** | Pointer to **NullableBool** | Specifies whether to include debit operations in the report. | [optional] 
-**Type** | Pointer to [**OperationType**](OperationType.md) | The operation type to filter by. | [optional] 
-**Status** | Pointer to [**OperationStatus**](OperationStatus.md) | The operation status to filter by. | [optional] 
-**OrderBy** | Pointer to **NullableString** | The field to order by. | [optional] 
-**OrderType** | Pointer to [**OperationOrderType**](OperationOrderType.md) | Order direction: Ascending or Descending. | [optional] 
+**ServiceName** | Pointer to **[]string** | The wallet services whose movements are kept, named the way the billing catalogue names them - `backup`,  `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field of  `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not sell  fails the call with 404, and an omitted list keeps every service. A bare string is accepted in place of an  array for backward compatibility. | [optional] 
+**StartDate** | Pointer to **NullableTime** | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, so a  movement at the edge of the period falls where the portal sees it; defaults to the portal creation date. | [optional] 
+**EndDate** | Pointer to **NullableTime** | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] 
+**ParticipantName** | Pointer to **NullableString** | The participant whose movements are kept - the account the accounting service records as the cause of a  movement. A movement caused by a portal user carries that user ID here, and one caused by the portal itself  carries the customer name; surrounding whitespace is trimmed, and an omitted value keeps every participant. | [optional] 
+**Credit** | Pointer to **NullableBool** | Whether movements that add money to the wallet - top-ups, refunds and corrections in the portal's favour -  are kept. Both directions are reported when neither this nor `debit` is given. | [optional] 
+**Debit** | Pointer to **NullableBool** | Whether movements that take money out of the wallet - the charges of the wallet services - are kept. Both  directions are reported when neither this nor `credit` is given. | [optional] 
+**Type** | Pointer to [**OperationType**](OperationType.md) | The kind of movement to keep, which says what caused the money to move rather than how it ended. Every kind  is reported when it is omitted. | [optional] 
+**Status** | Pointer to [**OperationStatus**](OperationStatus.md) | The outcome to keep. A movement that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted. | [optional] 
+**OrderBy** | Pointer to **NullableString** | The name of the field the movements are sorted by, spelled as the accounting service names it, such as  `StartDate` or `ServiceName`. Surrounding whitespace is trimmed, and the accounting service applies its own  ordering when this is omitted. | [optional] 
+**OrderType** | Pointer to [**OperationOrderType**](OperationOrderType.md) | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | [optional] 
 
 ## Methods
 

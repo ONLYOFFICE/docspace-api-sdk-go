@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserIds** | Pointer to **[]string** | The list of user IDs. | [optional] 
-**ResendAll** | Pointer to **bool** | Specifies whether to resend invitation letters to all the users or not. | [optional] 
+**UserIds** | Pointer to **[]string** | The accounts the operation applies to. System accounts are dropped from the list without an error, and the  remaining ones are processed in the order they are given. | [optional] 
+**ResendAll** | Pointer to **bool** | Reaches every pending account of the portal instead of the ones in `userIds`. It is read only by  `PUT api/2.0/people/invite` and is ignored by every other operation that binds this body. | [optional] 
 
 ## Methods
 

@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The module ID. | [optional] 
-**AppName** | Pointer to **NullableString** | The module product class name. | [optional] 
-**Title** | Pointer to **NullableString** | The module product class name. | [optional] 
-**Link** | Pointer to **NullableString** | The URL to the module start page. | [optional] 
-**IconUrl** | Pointer to **NullableString** | The module icon URL. | [optional] 
-**ImageUrl** | Pointer to **NullableString** | The module large image URL. | [optional] 
-**HelpUrl** | Pointer to **NullableString** | The module help URL. | [optional] 
-**Description** | Pointer to **NullableString** | The module description. | [optional] 
-**IsPrimary** | Pointer to **bool** | Specifies if the module is primary or not. | [optional] 
+**Id** | Pointer to **string** | The identifier of the module. It is the same in every portal and in every language, so use it rather than the  title to tell modules apart. | [optional] 
+**AppName** | Pointer to **NullableString** | The short system name of the module, the one that appears in its addresses and in the portal configuration.  Unlike the title it is not translated. | [optional] 
+**Title** | Pointer to **NullableString** | The display name of the module, already translated for the calling account, so it changes with the language  and must not be compared against a fixed string. | [optional] 
+**Link** | Pointer to **NullableString** | The address of the start page of the module, to be opened in a browser rather than called as an API. | [optional] 
+**IconUrl** | Pointer to **NullableString** | The address of the small icon of the module, meant for a menu entry. | [optional] 
+**ImageUrl** | Pointer to **NullableString** | The address of the large image of the module, meant for a tile or a start screen. | [optional] 
+**HelpUrl** | Pointer to **NullableString** | The address of the help section of the module. It is empty when the portal publishes no help for it. | [optional] 
+**Description** | Pointer to **NullableString** | The one-line description of the module shown next to its title, translated for the calling account. | [optional] 
+**IsPrimary** | Pointer to **bool** | Whether the portal opens this module first when no other destination is given. | [optional] 
 
 ## Methods
 

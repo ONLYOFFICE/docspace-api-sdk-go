@@ -4,12 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | Pointer to **string** |  | [optional] 
-**Title** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **int32** |  | [optional] 
-**Detail** | Pointer to **string** |  | [optional] 
-**Instance** | Pointer to **string** |  | [optional] 
-**Properties** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
+**Type** | Pointer to **string** | A URI reference that identifies the problem type. This service sets it to the DocSpace API getting-started page. | [optional] 
+**Title** | Pointer to **string** | A short, human-readable summary of the problem type, typically the HTTP status reason phrase. | [optional] 
+**Status** | Pointer to **int32** | The HTTP status code for this occurrence of the problem. | [optional] 
+**Detail** | Pointer to **string** | A human-readable explanation specific to this occurrence of the problem. | [optional] 
+**Instance** | Pointer to **string** | A URI reference that identifies the specific occurrence, set to the request path. | [optional] 
+**Properties** | Pointer to **map[string]interface{}** | Extension members carried on the problem. Usually empty; validation failures also surface as the top-level errors array. | [optional] 
+**Errors** | Pointer to [**[]FieldError**](FieldError.md) | Field-specific validation errors. Present when the request body or parameters failed validation, or when a named scope is not in the tenant catalogue. | [optional] 
 
 ## Methods
 
@@ -157,20 +158,20 @@ HasInstance returns a boolean if a field has been set.
 
 ### GetProperties
 
-`func (o *ProblemDetail) GetProperties() map[string]map[string]interface{}`
+`func (o *ProblemDetail) GetProperties() map[string]*interface{}`
 
 GetProperties returns the Properties field if non-nil, zero value otherwise.
 
 ### GetPropertiesOk
 
-`func (o *ProblemDetail) GetPropertiesOk() (*map[string]map[string]interface{}, bool)`
+`func (o *ProblemDetail) GetPropertiesOk() (*map[string]*interface{}, bool)`
 
 GetPropertiesOk returns a tuple with the Properties field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProperties
 
-`func (o *ProblemDetail) SetProperties(v map[string]map[string]interface{})`
+`func (o *ProblemDetail) SetProperties(v map[string]*interface{})`
 
 SetProperties sets Properties field to given value.
 
@@ -179,6 +180,31 @@ SetProperties sets Properties field to given value.
 `func (o *ProblemDetail) HasProperties() bool`
 
 HasProperties returns a boolean if a field has been set.
+
+### GetErrors
+
+`func (o *ProblemDetail) GetErrors() []FieldError`
+
+GetErrors returns the Errors field if non-nil, zero value otherwise.
+
+### GetErrorsOk
+
+`func (o *ProblemDetail) GetErrorsOk() (*[]FieldError, bool)`
+
+GetErrorsOk returns a tuple with the Errors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrors
+
+`func (o *ProblemDetail) SetErrors(v []FieldError)`
+
+SetErrors sets Errors field to given value.
+
+### HasErrors
+
+`func (o *ProblemDetail) HasErrors() bool`
+
+HasErrors returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

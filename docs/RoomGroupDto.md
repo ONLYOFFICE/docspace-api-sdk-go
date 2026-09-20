@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **int32** | The group ID. | [optional] 
-**Name** | Pointer to **NullableString** | Group name | [optional] 
-**Icon** | Pointer to [**MultiSizeLogoCover**](MultiSizeLogoCover.md) | Group icon | [optional] 
-**UserId** | Pointer to **string** | The user ID. | [optional] 
-**Rooms** | Pointer to [**[]FileEntryBaseDto**](FileEntryBaseDto.md) | The list of rooms in the group. | [optional] 
-**TotalRooms** | Pointer to **int32** | Total number of rooms in the group. | [optional] 
+**Id** | Pointer to **int32** | The identifier of the group, which addresses it in every other group operation and is kept for as long as the  group exists. | [optional] 
+**Name** | Pointer to **NullableString** | The name its owner gave the group, stored trimmed of surrounding spaces. Names are not unique, so two groups  of the same account can be told apart only by their identifier. | [optional] 
+**Icon** | Pointer to [**MultiSizeLogoCover**](MultiSizeLogoCover.md) | The built-in cover chosen for the group, carrying the cover identifier and its rendering in each available  size. Null when the group has no icon, either because it was never given one or because the icon was cleared  by setting it to an empty value. | [optional] 
+**UserId** | Pointer to **string** | The account that created the group and the only one able to read, change or delete it; for any other member of  the portal the group does not exist. | [optional] 
+**Rooms** | Pointer to [**[]FileEntryBaseDto**](FileEntryBaseDto.md) | The rooms the group gathers, those stored in the portal first and those on connected third-party accounts  after them. Null when the group was asked for without its members, and an empty array when the group holds no  room the caller can still see. A room moved to the archive is left out until it is taken out of the archive. | [optional] 
+**TotalRooms** | Pointer to **int32** | How many rooms the group shows: the same rooms `rooms` lists, so archived ones are not counted either. It is  filled even when the rooms themselves were not asked for, which makes it the cheap way to tell an empty group  from a populated one. | [optional] 
 
 ## Methods
 

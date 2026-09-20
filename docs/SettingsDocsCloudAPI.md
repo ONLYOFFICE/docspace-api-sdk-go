@@ -4,17 +4,17 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CalculateDevPack**](SettingsDocsCloudAPI.md#CalculateDevPack) | **Post** /api/2.0/settings/docscloud/calculatedevpack | Calculate the DocsCloud subscription switch cost
-[**CreateTenantQuotaReport**](SettingsDocsCloudAPI.md#CreateTenantQuotaReport) | **Post** /api/2.0/settings/docscloud/tenant/quota/report | Start the DocsCloud tenant quota report generation
+[**CalculateDevPack**](SettingsDocsCloudAPI.md#CalculateDevPack) | **Post** /api/2.0/settings/docscloud/calculatedevpack | Calculate the DocsCloudDevPack switch cost
+[**CreateTenantQuotaReport**](SettingsDocsCloudAPI.md#CreateTenantQuotaReport) | **Post** /api/2.0/settings/docscloud/tenant/quota/report | Start the DocsCloud quota report
 [**GetTenant**](SettingsDocsCloudAPI.md#GetTenant) | **Get** /api/2.0/settings/docscloud/tenant | Get the DocsCloud tenant
 [**GetTenantConfig**](SettingsDocsCloudAPI.md#GetTenantConfig) | **Get** /api/2.0/settings/docscloud/tenant/config | Get the DocsCloud tenant configuration
 [**GetTenantInfo**](SettingsDocsCloudAPI.md#GetTenantInfo) | **Get** /api/2.0/settings/docscloud/tenant/info | Get the DocsCloud tenant information
 [**GetTenantQuota**](SettingsDocsCloudAPI.md#GetTenantQuota) | **Get** /api/2.0/settings/docscloud/tenant/quota | Get the DocsCloud tenant quota
-[**GetTenantQuotaReport**](SettingsDocsCloudAPI.md#GetTenantQuotaReport) | **Get** /api/2.0/settings/docscloud/tenant/quota/report | Get the status of the DocsCloud tenant quota report generation
+[**GetTenantQuotaReport**](SettingsDocsCloudAPI.md#GetTenantQuotaReport) | **Get** /api/2.0/settings/docscloud/tenant/quota/report | Get the DocsCloud quota report status
 [**GetTenantUsage**](SettingsDocsCloudAPI.md#GetTenantUsage) | **Get** /api/2.0/settings/docscloud/tenant/usage | Get the DocsCloud tenant usage
 [**StartDocsCloudTrial**](SettingsDocsCloudAPI.md#StartDocsCloudTrial) | **Post** /api/2.0/settings/docscloud/trial | Start the DocsCloud trial
-[**SwitchToDevPack**](SettingsDocsCloudAPI.md#SwitchToDevPack) | **Post** /api/2.0/settings/docscloud/switchtodevpack | Switch the DocsCloud subscription to DocsCloudDevPack
-[**TerminateTenantQuotaReport**](SettingsDocsCloudAPI.md#TerminateTenantQuotaReport) | **Delete** /api/2.0/settings/docscloud/tenant/quota/report | Terminate the DocsCloud tenant quota report generation
+[**SwitchToDevPack**](SettingsDocsCloudAPI.md#SwitchToDevPack) | **Post** /api/2.0/settings/docscloud/switchtodevpack | Switch DocsCloud to DocsCloudDevPack
+[**TerminateTenantQuotaReport**](SettingsDocsCloudAPI.md#TerminateTenantQuotaReport) | **Delete** /api/2.0/settings/docscloud/tenant/quota/report | Terminate the DocsCloud quota report
 [**UpdateTenantConfig**](SettingsDocsCloudAPI.md#UpdateTenantConfig) | **Put** /api/2.0/settings/docscloud/tenant/config | Update the DocsCloud tenant configuration
 
 
@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 > PaymentCalculationWrapper CalculateDevPack(ctx).DocsCloudDevPackRequestDto(docsCloudDevPackRequestDto).Execute()
 
-Calculate the DocsCloud subscription switch cost
+Calculate the DocsCloudDevPack switch cost
 
 
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper CreateTenantQuotaReport(ctx).Execute()
 
-Start the DocsCloud tenant quota report generation
+Start the DocsCloud quota report
 
 
 
@@ -173,7 +173,7 @@ import (
 )
 
 func main() {
-	refresh := true // bool | Specifies whether to bypass the cache and request the tenant from DocsCloud again. (optional) (default to false)
+	refresh := true // bool | Pass `true` to skip the cached copy and request the tenant from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -198,7 +198,7 @@ Other parameters are passed through a pointer to a apiGetTenantRequest struct vi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh** | **bool** | Specifies whether to bypass the cache and request the tenant from DocsCloud again. | [default to false]
+ **refresh** | **bool** | Pass `true` to skip the cached copy and request the tenant from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant. | [default to false]
 
 ### Return type
 
@@ -241,7 +241,7 @@ import (
 )
 
 func main() {
-	refresh := true // bool | Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again. (optional) (default to false)
+	refresh := true // bool | Pass `true` to skip the cached copy and request the configuration from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -266,7 +266,7 @@ Other parameters are passed through a pointer to a apiGetTenantConfigRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh** | **bool** | Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again. | [default to false]
+ **refresh** | **bool** | Pass `true` to skip the cached copy and request the configuration from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old. | [default to false]
 
 ### Return type
 
@@ -309,7 +309,7 @@ import (
 )
 
 func main() {
-	refresh := true // bool | Specifies whether to bypass the cache and request the tenant information from DocsCloud again. (optional) (default to false)
+	refresh := true // bool | Pass `true` to skip the cached copy and request the license, server and usage information from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -334,7 +334,7 @@ Other parameters are passed through a pointer to a apiGetTenantInfoRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh** | **bool** | Specifies whether to bypass the cache and request the tenant information from DocsCloud again. | [default to false]
+ **refresh** | **bool** | Pass `true` to skip the cached copy and request the license, server and usage information from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [default to false]
 
 ### Return type
 
@@ -377,7 +377,7 @@ import (
 )
 
 func main() {
-	refresh := true // bool | Specifies whether to bypass the cache and request the user quota from DocsCloud again. (optional) (default to false)
+	refresh := true // bool | Pass `true` to skip the cached copy and request the user quota from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -402,7 +402,7 @@ Other parameters are passed through a pointer to a apiGetTenantQuotaRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh** | **bool** | Specifies whether to bypass the cache and request the user quota from DocsCloud again. | [default to false]
+ **refresh** | **bool** | Pass `true` to skip the cached copy and request the user quota from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [default to false]
 
 ### Return type
 
@@ -426,7 +426,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper GetTenantQuotaReport(ctx).Execute()
 
-Get the status of the DocsCloud tenant quota report generation
+Get the DocsCloud quota report status
 
 
 
@@ -508,7 +508,7 @@ import (
 )
 
 func main() {
-	refresh := true // bool | Specifies whether to bypass the cache and request the usage statistics from DocsCloud again. (optional) (default to false)
+	refresh := true // bool | Pass `true` to skip the cached copy and request the usage statistics from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -533,7 +533,7 @@ Other parameters are passed through a pointer to a apiGetTenantUsageRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh** | **bool** | Specifies whether to bypass the cache and request the usage statistics from DocsCloud again. | [default to false]
+ **refresh** | **bool** | Pass `true` to skip the cached copy and request the usage statistics from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [default to false]
 
 ### Return type
 
@@ -620,7 +620,7 @@ Other parameters are passed through a pointer to a apiStartDocsCloudTrialRequest
 
 > BooleanWrapper SwitchToDevPack(ctx).DocsCloudDevPackRequestDto(docsCloudDevPackRequestDto).Execute()
 
-Switch the DocsCloud subscription to DocsCloudDevPack
+Switch DocsCloud to DocsCloudDevPack
 
 
 
@@ -688,7 +688,7 @@ Name | Type | Description  | Notes
 
 > TerminateTenantQuotaReport(ctx).Execute()
 
-Terminate the DocsCloud tenant quota report generation
+Terminate the DocsCloud quota report
 
 
 

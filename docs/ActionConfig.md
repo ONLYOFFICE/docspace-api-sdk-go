@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to **NullableString** | The action data that will be scrolled to. | [optional] 
-**Type** | Pointer to **NullableString** | The action type. | [optional] 
+**Data** | Pointer to **NullableString** | The anchor value produced by the editor, opaque to the portal: it names the comment, the mention or the  place the document is scrolled to. | [optional] 
+**Type** | Pointer to **NullableString** | What the anchor points at, as the editor names it - a comment thread, for instance. | [optional] 
 
 ## Methods
 

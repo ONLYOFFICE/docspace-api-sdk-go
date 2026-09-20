@@ -21,7 +21,7 @@ import (
 // checks if the ItemKeyValuePairObjectObject type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ItemKeyValuePairObjectObject{}
 
-// ItemKeyValuePairObjectObject A key-value pair of a list item.
+// ItemKeyValuePairObjectObject One entry of a keyed collection, carried as an explicit pair of `key` and `value` fields instead of as a member  of a JSON object, so that the key is not restricted to a string and the entries keep the order they are sent in.
 type ItemKeyValuePairObjectObject struct {
 	Key interface{} `json:"key,omitempty"`
 	Value interface{} `json:"value,omitempty"`

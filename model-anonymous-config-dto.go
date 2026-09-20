@@ -23,9 +23,9 @@ import (
 // checks if the AnonymousConfigDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnonymousConfigDto{}
 
-// AnonymousConfigDto The anonymous config parameters.
+// AnonymousConfigDto How the editors treat a participant who opened the document without an account.
 type AnonymousConfigDto struct {
-	// Specifies if the anonymous is a request.
+	// Whether the editors ask an anonymous participant for a display name before letting them in. It follows the  chat permission of the document, since a nameless participant cannot take part in one.
 	Request bool `json:"request"`
 }
 

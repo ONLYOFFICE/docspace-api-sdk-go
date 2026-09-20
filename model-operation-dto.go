@@ -16,41 +16,42 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the OperationDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OperationDto{}
 
-// OperationDto Represents an operation.
+// OperationDto One movement on the portal wallet: what it was for, who caused it, and how much money it moved.
 type OperationDto struct {
-	// The date when the operation took place.
-	Date NullableTime `json:"date,omitempty"`
-	// The service related to the operation.
+	// When the movement was booked, in the portal time zone - the same zone the `startDate` and `endDate`  filters are read in, so the two do line up here.
+	Date *ApiDateTime `json:"date,omitempty"`
+	// The wallet service the movement belongs to, by its stable key. It is what the `serviceName` filter  matches on, and it is empty for a movement that belongs to no service, such as a top-up.
 	Service NullableString `json:"service,omitempty"`
-	// The brief operation description.
+	// A one-line summary of the movement in the portal language, already composed from the service and the  quantity - meant to be printed as it is rather than parsed.
 	Description NullableString `json:"description,omitempty"`
-	// The detailed information about the operation.
+	// The longer explanation of the same movement, where the service recorded one. It is empty for a movement  that has nothing to add to `description`.
 	Details NullableString `json:"details,omitempty"`
-	// The service unit.
+	// What `quantity` counts for this service, in the portal language. AI consumption is reported in tokens  here rather than in the AI credits the service is sold in.
 	ServiceUnit NullableString `json:"serviceUnit,omitempty"`
-	// The quantity of the service used.
+	// How many units the movement covers, in the unit named by `serviceUnit`. It is `0` for a movement that  moves money without consuming a service.
 	Quantity *int32 `json:"quantity,omitempty"`
-	// The three-character ISO 4217 currency symbol of the operation.
+	// The currency `credit` and `debit` are expressed in, as a three-letter ISO 4217 code. It is the accounting  currency of the wallet, which need not be the currency the subscription is priced in.
 	Currency NullableString `json:"currency,omitempty"`
-	// The credit amount of the operation.
+	// The amount that went into the wallet. It is `0` on a movement that only took money out, so the pair of  `credit` and `debit` is what shows which way the money went; the `credit` and `debit` filters of the  operation select the two directions by exactly this.
 	Credit *float64 `json:"credit,omitempty"`
-	// The debit amount of the operation.
+	// The amount that was taken out of the wallet, `0` on a movement that put money in.
 	Debit *float64 `json:"debit,omitempty"`
-	// The participant original name.
+	// Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead.
 	ParticipantName NullableString `json:"participantName,omitempty"`
-	// The participant display name.
+	// The same person as their portal display name. It falls back to `participantName` when the name belongs to  no portal account, so it is never empty while `participantName` is filled.
 	ParticipantDisplayName NullableString `json:"participantDisplayName,omitempty"`
-	// AI Agent id.
-	AgentId NullableString `json:"agentId,omitempty"`
-	// AI Agent name.
-	AgentTitle NullableString `json:"agentTitle,omitempty"`
-	// Type of the operation
+	// What kind of thing an AI operation was run on - an agent, a file, a folder, a room or a form. It is empty  on any movement that is not an AI charge.
+	SourceType NullableString `json:"sourceType,omitempty"`
+	// The title that thing had when the operation ran, kept as recorded, so it does not follow a later rename.  Empty under the same conditions as `sourceType`.
+	SourceTitle NullableString `json:"sourceTitle,omitempty"`
+	// The identifier of that thing, to look it up in the module it belongs to. Empty under the same conditions  as `sourceType`.
+	SourceId NullableString `json:"sourceId,omitempty"`
+	// What kind of movement this is - a payment, a charge, a refund, a correction. It is what the `type` filter  matches on, and `Unknown` covers a movement the billing service reported under a kind this build does not  recognise.
 	Type *OperationType `json:"type,omitempty"`
 }
 
@@ -71,46 +72,36 @@ func NewOperationDtoWithDefaults() *OperationDto {
 	return &this
 }
 
-// GetDate returns the Date field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OperationDto) GetDate() time.Time {
-	if o == nil || IsNil(o.Date.Get()) {
-		var ret time.Time
+// GetDate returns the Date field value if set, zero value otherwise.
+func (o *OperationDto) GetDate() ApiDateTime {
+	if o == nil || IsNil(o.Date) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.Date.Get()
+	return *o.Date
 }
 
 // GetDateOk returns a tuple with the Date field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OperationDto) GetDateOk() (*time.Time, bool) {
-	if o == nil {
+func (o *OperationDto) GetDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Date) {
 		return nil, false
 	}
-	return o.Date.Get(), o.Date.IsSet()
+	return o.Date, true
 }
 
 // HasDate returns a boolean if a field has been set.
 func (o *OperationDto) IsDateSet() bool {
-	if o != nil && o.Date.IsSet() {
+	if o != nil && !IsNil(o.Date) {
 		return true
 	}
 
 	return false
 }
 
-// SetDate gets a reference to the given NullableTime and assigns it to the Date field.
-func (o *OperationDto) SetDate(v time.Time) {
-	o.Date.Set(&v)
-}
-// SetDateNil sets the value for Date to be an explicit nil
-func (o *OperationDto) SetDateNil() {
-	o.Date.Set(nil)
-}
-
-// UnsetDate ensures that no value is present for Date, not even an explicit nil
-func (o *OperationDto) UnsetDate() {
-	o.Date.Unset()
+// SetDate gets a reference to the given ApiDateTime and assigns it to the Date field.
+func (o *OperationDto) SetDate(v ApiDateTime) {
+	o.Date = &v
 }
 
 // GetService returns the Service field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -503,88 +494,130 @@ func (o *OperationDto) UnsetParticipantDisplayName() {
 	o.ParticipantDisplayName.Unset()
 }
 
-// GetAgentId returns the AgentId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OperationDto) GetAgentId() string {
-	if o == nil || IsNil(o.AgentId.Get()) {
+// GetSourceType returns the SourceType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OperationDto) GetSourceType() string {
+	if o == nil || IsNil(o.SourceType.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.AgentId.Get()
+	return *o.SourceType.Get()
 }
 
-// GetAgentIdOk returns a tuple with the AgentId field value if set, nil otherwise
+// GetSourceTypeOk returns a tuple with the SourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OperationDto) GetAgentIdOk() (*string, bool) {
+func (o *OperationDto) GetSourceTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.AgentId.Get(), o.AgentId.IsSet()
+	return o.SourceType.Get(), o.SourceType.IsSet()
 }
 
-// HasAgentId returns a boolean if a field has been set.
-func (o *OperationDto) IsAgentIdSet() bool {
-	if o != nil && o.AgentId.IsSet() {
+// HasSourceType returns a boolean if a field has been set.
+func (o *OperationDto) IsSourceTypeSet() bool {
+	if o != nil && o.SourceType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAgentId gets a reference to the given NullableString and assigns it to the AgentId field.
-func (o *OperationDto) SetAgentId(v string) {
-	o.AgentId.Set(&v)
+// SetSourceType gets a reference to the given NullableString and assigns it to the SourceType field.
+func (o *OperationDto) SetSourceType(v string) {
+	o.SourceType.Set(&v)
 }
-// SetAgentIdNil sets the value for AgentId to be an explicit nil
-func (o *OperationDto) SetAgentIdNil() {
-	o.AgentId.Set(nil)
-}
-
-// UnsetAgentId ensures that no value is present for AgentId, not even an explicit nil
-func (o *OperationDto) UnsetAgentId() {
-	o.AgentId.Unset()
+// SetSourceTypeNil sets the value for SourceType to be an explicit nil
+func (o *OperationDto) SetSourceTypeNil() {
+	o.SourceType.Set(nil)
 }
 
-// GetAgentTitle returns the AgentTitle field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OperationDto) GetAgentTitle() string {
-	if o == nil || IsNil(o.AgentTitle.Get()) {
+// UnsetSourceType ensures that no value is present for SourceType, not even an explicit nil
+func (o *OperationDto) UnsetSourceType() {
+	o.SourceType.Unset()
+}
+
+// GetSourceTitle returns the SourceTitle field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OperationDto) GetSourceTitle() string {
+	if o == nil || IsNil(o.SourceTitle.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.AgentTitle.Get()
+	return *o.SourceTitle.Get()
 }
 
-// GetAgentTitleOk returns a tuple with the AgentTitle field value if set, nil otherwise
+// GetSourceTitleOk returns a tuple with the SourceTitle field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OperationDto) GetAgentTitleOk() (*string, bool) {
+func (o *OperationDto) GetSourceTitleOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.AgentTitle.Get(), o.AgentTitle.IsSet()
+	return o.SourceTitle.Get(), o.SourceTitle.IsSet()
 }
 
-// HasAgentTitle returns a boolean if a field has been set.
-func (o *OperationDto) IsAgentTitleSet() bool {
-	if o != nil && o.AgentTitle.IsSet() {
+// HasSourceTitle returns a boolean if a field has been set.
+func (o *OperationDto) IsSourceTitleSet() bool {
+	if o != nil && o.SourceTitle.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAgentTitle gets a reference to the given NullableString and assigns it to the AgentTitle field.
-func (o *OperationDto) SetAgentTitle(v string) {
-	o.AgentTitle.Set(&v)
+// SetSourceTitle gets a reference to the given NullableString and assigns it to the SourceTitle field.
+func (o *OperationDto) SetSourceTitle(v string) {
+	o.SourceTitle.Set(&v)
 }
-// SetAgentTitleNil sets the value for AgentTitle to be an explicit nil
-func (o *OperationDto) SetAgentTitleNil() {
-	o.AgentTitle.Set(nil)
+// SetSourceTitleNil sets the value for SourceTitle to be an explicit nil
+func (o *OperationDto) SetSourceTitleNil() {
+	o.SourceTitle.Set(nil)
 }
 
-// UnsetAgentTitle ensures that no value is present for AgentTitle, not even an explicit nil
-func (o *OperationDto) UnsetAgentTitle() {
-	o.AgentTitle.Unset()
+// UnsetSourceTitle ensures that no value is present for SourceTitle, not even an explicit nil
+func (o *OperationDto) UnsetSourceTitle() {
+	o.SourceTitle.Unset()
+}
+
+// GetSourceId returns the SourceId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OperationDto) GetSourceId() string {
+	if o == nil || IsNil(o.SourceId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SourceId.Get()
+}
+
+// GetSourceIdOk returns a tuple with the SourceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OperationDto) GetSourceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SourceId.Get(), o.SourceId.IsSet()
+}
+
+// HasSourceId returns a boolean if a field has been set.
+func (o *OperationDto) IsSourceIdSet() bool {
+	if o != nil && o.SourceId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceId gets a reference to the given NullableString and assigns it to the SourceId field.
+func (o *OperationDto) SetSourceId(v string) {
+	o.SourceId.Set(&v)
+}
+// SetSourceIdNil sets the value for SourceId to be an explicit nil
+func (o *OperationDto) SetSourceIdNil() {
+	o.SourceId.Set(nil)
+}
+
+// UnsetSourceId ensures that no value is present for SourceId, not even an explicit nil
+func (o *OperationDto) UnsetSourceId() {
+	o.SourceId.Unset()
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -629,8 +662,8 @@ func (o OperationDto) MarshalJSON() ([]byte, error) {
 
 func (o OperationDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Date.IsSet() {
-		toSerialize["date"] = o.Date.Get()
+	if !IsNil(o.Date) {
+		toSerialize["date"] = o.Date
 	}
 	if o.Service.IsSet() {
 		toSerialize["service"] = o.Service.Get()
@@ -662,11 +695,14 @@ func (o OperationDto) ToMap() (map[string]interface{}, error) {
 	if o.ParticipantDisplayName.IsSet() {
 		toSerialize["participantDisplayName"] = o.ParticipantDisplayName.Get()
 	}
-	if o.AgentId.IsSet() {
-		toSerialize["agentId"] = o.AgentId.Get()
+	if o.SourceType.IsSet() {
+		toSerialize["sourceType"] = o.SourceType.Get()
 	}
-	if o.AgentTitle.IsSet() {
-		toSerialize["agentTitle"] = o.AgentTitle.Get()
+	if o.SourceTitle.IsSet() {
+		toSerialize["sourceTitle"] = o.SourceTitle.Get()
+	}
+	if o.SourceId.IsSet() {
+		toSerialize["sourceId"] = o.SourceId.Get()
 	}
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type

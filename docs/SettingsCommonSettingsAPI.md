@@ -11,21 +11,21 @@ Method | HTTP request | Description
 [**GetDeepLinkSettings**](SettingsCommonSettingsAPI.md#GetDeepLinkSettings) | **Get** /api/2.0/settings/deeplink | Get the deep link settings
 [**GetPaymentSettings**](SettingsCommonSettingsAPI.md#GetPaymentSettings) | **Get** /api/2.0/settings/payment | Get the payment settings
 [**GetPortalColorTheme**](SettingsCommonSettingsAPI.md#GetPortalColorTheme) | **Get** /api/2.0/settings/colortheme | Get a color theme
-[**GetPortalHostname**](SettingsCommonSettingsAPI.md#GetPortalHostname) | **Get** /api/2.0/settings/machine | Get hostname
+[**GetPortalHostname**](SettingsCommonSettingsAPI.md#GetPortalHostname) | **Get** /api/2.0/settings/machine | Get the portal hostname
 [**GetPortalLogo**](SettingsCommonSettingsAPI.md#GetPortalLogo) | **Get** /api/2.0/settings/logo | Get a portal logo
 [**GetPortalSettings**](SettingsCommonSettingsAPI.md#GetPortalSettings) | **Get** /api/2.0/settings | Get the portal settings
 [**GetSocketSettings**](SettingsCommonSettingsAPI.md#GetSocketSettings) | **Get** /api/2.0/settings/socket | Get the socket settings
 [**GetSupportedCultures**](SettingsCommonSettingsAPI.md#GetSupportedCultures) | **Get** /api/2.0/settings/cultures | Get supported languages
-[**GetTenantAiAccessSettings**](SettingsCommonSettingsAPI.md#GetTenantAiAccessSettings) | **Get** /api/2.0/settings/ai-access | Get the AI access settings for the portal
+[**GetTenantAiAccessSettings**](SettingsCommonSettingsAPI.md#GetTenantAiAccessSettings) | **Get** /api/2.0/settings/ai-access | Get the AI access settings
 [**GetTenantUserInvitationSettings**](SettingsCommonSettingsAPI.md#GetTenantUserInvitationSettings) | **Get** /api/2.0/settings/invitationsettings | Get the user invitation settings
 [**GetTimeZones**](SettingsCommonSettingsAPI.md#GetTimeZones) | **Get** /api/2.0/settings/timezones | Get time zones
 [**SaveDefaultFolder**](SettingsCommonSettingsAPI.md#SaveDefaultFolder) | **Put** /api/2.0/settings/defaultfolder | Set the default folder
 [**SaveDnsSettings**](SettingsCommonSettingsAPI.md#SaveDnsSettings) | **Put** /api/2.0/settings/dns | Save the DNS settings
 [**SaveMailDomainSettings**](SettingsCommonSettingsAPI.md#SaveMailDomainSettings) | **Post** /api/2.0/settings/maildomainsettings | Save the mail domain settings
 [**SavePortalColorTheme**](SettingsCommonSettingsAPI.md#SavePortalColorTheme) | **Put** /api/2.0/settings/colortheme | Save a color theme
-[**SetTenantAiAccessSettings**](SettingsCommonSettingsAPI.md#SetTenantAiAccessSettings) | **Post** /api/2.0/settings/ai-access | Set the AI access for the portal
+[**SetTenantAiAccessSettings**](SettingsCommonSettingsAPI.md#SetTenantAiAccessSettings) | **Post** /api/2.0/settings/ai-access | Set the AI access settings
 [**UpdateEmailActivationSettings**](SettingsCommonSettingsAPI.md#UpdateEmailActivationSettings) | **Put** /api/2.0/settings/emailactivation | Update the email activation settings
-[**UpdateInvitationSettings**](SettingsCommonSettingsAPI.md#UpdateInvitationSettings) | **Put** /api/2.0/settings/invitationsettings | Update user invitation settings
+[**UpdateInvitationSettings**](SettingsCommonSettingsAPI.md#UpdateInvitationSettings) | **Put** /api/2.0/settings/invitationsettings | Update the user invitation settings
 
 
 
@@ -249,7 +249,7 @@ import (
 )
 
 func main() {
-	id := int32(1) // int32 | The ID of the portal theme to delete.
+	id := int32(1) // int32 | The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -274,7 +274,7 @@ Other parameters are passed through a pointer to a apiDeletePortalColorThemeRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int32** | The ID of the portal theme to delete. | 
+ **id** | **int32** | The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID. | 
 
 ### Return type
 
@@ -345,7 +345,7 @@ Other parameters are passed through a pointer to a apiGetDeepLinkSettingsRequest
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -471,7 +471,7 @@ Other parameters are passed through a pointer to a apiGetPortalColorThemeRequest
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -485,9 +485,9 @@ No authorization required
 
 ## GetPortalHostname
 
-> ObjectWrapper GetPortalHostname(ctx).Execute()
+> StringWrapper GetPortalHostname(ctx).Execute()
 
-Get hostname
+Get the portal hostname
 
 
 
@@ -514,7 +514,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.GetPortalHostname``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPortalHostname`: ObjectWrapper
+	// response from `GetPortalHostname`: StringWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsCommonSettingsAPI.GetPortalHostname`: %v\n", resp)
 }
 ```
@@ -530,7 +530,7 @@ Other parameters are passed through a pointer to a apiGetPortalHostnameRequest s
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**StringWrapper**](StringWrapper.md)
 
 ### Authorization
 
@@ -632,7 +632,7 @@ import (
 )
 
 func main() {
-	withpassword := true // bool | Specifies whether to include the password hashing configuration in the response. (optional)
+	withpassword := true // bool | Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -657,7 +657,7 @@ Other parameters are passed through a pointer to a apiGetPortalSettingsRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **withpassword** | **bool** | Specifies whether to include the password hashing configuration in the response. | 
+ **withpassword** | **bool** | Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set. | 
 
 ### Return type
 
@@ -665,7 +665,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -679,7 +679,7 @@ No authorization required
 
 ## GetSocketSettings
 
-> ObjectWrapper GetSocketSettings(ctx).Execute()
+> SocketSettingsWrapper GetSocketSettings(ctx).Execute()
 
 Get the socket settings
 
@@ -708,7 +708,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.GetSocketSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSocketSettings`: ObjectWrapper
+	// response from `GetSocketSettings`: SocketSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsCommonSettingsAPI.GetSocketSettings`: %v\n", resp)
 }
 ```
@@ -724,7 +724,7 @@ Other parameters are passed through a pointer to a apiGetSocketSettingsRequest s
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**SocketSettingsWrapper**](SocketSettingsWrapper.md)
 
 ### Authorization
 
@@ -791,7 +791,7 @@ Other parameters are passed through a pointer to a apiGetSupportedCulturesReques
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -807,7 +807,7 @@ No authorization required
 
 > TenantAiAccessSettingsWrapper GetTenantAiAccessSettings(ctx).Execute()
 
-Get the AI access settings for the portal
+Get the AI access settings
 
 
 
@@ -917,7 +917,7 @@ Other parameters are passed through a pointer to a apiGetTenantUserInvitationSet
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1268,7 +1268,7 @@ Name | Type | Description  | Notes
 
 > TenantAiAccessSettingsWrapper SetTenantAiAccessSettings(ctx).TenantAiAccessSettingsDto(tenantAiAccessSettingsDto).Execute()
 
-Set the AI access for the portal
+Set the AI access settings
 
 
 
@@ -1404,7 +1404,7 @@ Name | Type | Description  | Notes
 
 > TenantUserInvitationSettingsWrapper UpdateInvitationSettings(ctx).TenantUserInvitationSettingsRequestDto(tenantUserInvitationSettingsRequestDto).Execute()
 
-Update user invitation settings
+Update the user invitation settings
 
 
 

@@ -4,11 +4,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteKeys**](RoomsPrivacyRoomAPI.md#DeleteKeys) | **Delete** /api/2.0/privacyroom/keys/{id} | Deletes an encryption key and removes it from the system.
-[**GetUserKeys**](RoomsPrivacyRoomAPI.md#GetUserKeys) | **Get** /api/2.0/privacyroom/keys | Retrieves encryption keys associated with the current user.
-[**GetUserKeysForRoom**](RoomsPrivacyRoomAPI.md#GetUserKeysForRoom) | **Get** /api/2.0/privacyroom/{roomId}/access | Retrieves the encryption keys associated with a specific privacy room.
-[**ReplaceKey**](RoomsPrivacyRoomAPI.md#ReplaceKey) | **Put** /api/2.0/privacyroom/keys | Replaces an existing encryption key with a new one for the user.
-[**SetKeys**](RoomsPrivacyRoomAPI.md#SetKeys) | **Post** /api/2.0/privacyroom/keys | Creates and sets encryption keys for the user.
+[**DeleteKeys**](RoomsPrivacyRoomAPI.md#DeleteKeys) | **Delete** /api/2.0/privacyroom/keys/{id} | Delete an encryption key
+[**GetUserKeys**](RoomsPrivacyRoomAPI.md#GetUserKeys) | **Get** /api/2.0/privacyroom/keys | Get own encryption keys
+[**GetUserKeysForRoom**](RoomsPrivacyRoomAPI.md#GetUserKeysForRoom) | **Get** /api/2.0/privacyroom/{roomId}/access | Get private room access keys
+[**ReplaceKey**](RoomsPrivacyRoomAPI.md#ReplaceKey) | **Put** /api/2.0/privacyroom/keys | Rotate an encryption key
+[**SetKeys**](RoomsPrivacyRoomAPI.md#SetKeys) | **Post** /api/2.0/privacyroom/keys | Create an encryption key
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > DeleteKeys(ctx, id).Execute()
 
-Deletes an encryption key and removes it from the system.
+Delete an encryption key
 
 
 
@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-	id := "00000000-0000-0000-0000-000000000000" // string | The unique identifier of the encryption key to be deleted.
+	id := "9924256B-447C-4F19-9dbd-8ad8c39e8ff5" // string | The pair to delete, taken from the `id` of an entry of `GET api/2.0/privacyroom/keys`. Only the caller's own  pairs can be named here.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -53,7 +53,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier of the encryption key to be deleted. | 
+**id** | **string** | The pair to delete, taken from the `id` of an entry of `GET api/2.0/privacyroom/keys`. Only the caller's own  pairs can be named here. | 
 
 ### Other Parameters
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 > EncryptionKeyArrayWrapper GetUserKeys(ctx).Execute()
 
-Retrieves encryption keys associated with the current user.
+Get own encryption keys
 
 
 
@@ -149,7 +149,7 @@ Other parameters are passed through a pointer to a apiGetUserKeysRequest struct 
 
 > EncryptionKeyArrayWrapper GetUserKeysForRoom(ctx, roomId).Execute()
 
-Retrieves the encryption keys associated with a specific privacy room.
+Get private room access keys
 
 
 
@@ -168,7 +168,7 @@ import (
 )
 
 func main() {
-	roomId := int32(56) // int32 | The identifier of the privacy room.
+	roomId := int32(56) // int32 | The private room whose access keys are read. Take it from the `id` of the room returned by  `POST api/2.0/files/rooms` or listed by `GET api/2.0/files/rooms`.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -188,7 +188,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**roomId** | **int32** | The identifier of the privacy room. | 
+**roomId** | **int32** | The private room whose access keys are read. Take it from the `id` of the room returned by  `POST api/2.0/files/rooms` or listed by `GET api/2.0/files/rooms`. | 
 
 ### Other Parameters
 
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 > EncryptionKeyArrayWrapper ReplaceKey(ctx).EncryptionKeyRequestDto(encryptionKeyRequestDto).Execute()
 
-Replaces an existing encryption key with a new one for the user.
+Rotate an encryption key
 
 
 
@@ -240,7 +240,7 @@ import (
 )
 
 func main() {
-	encryptionKeyRequestDto := *openapiclient.NewEncryptionKeyRequestDto() // EncryptionKeyRequestDto | The request object containing the public and private key information to replace the existing key. (optional)
+	encryptionKeyRequestDto := *openapiclient.NewEncryptionKeyRequestDto() // EncryptionKeyRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -265,7 +265,7 @@ Other parameters are passed through a pointer to a apiReplaceKeyRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **encryptionKeyRequestDto** | [**EncryptionKeyRequestDto**](EncryptionKeyRequestDto.md) | The request object containing the public and private key information to replace the existing key. | 
+ **encryptionKeyRequestDto** | [**EncryptionKeyRequestDto**](EncryptionKeyRequestDto.md) |  | 
 
 ### Return type
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 > EncryptionKeyArrayWrapper SetKeys(ctx).EncryptionKeyRequestDto(encryptionKeyRequestDto).Execute()
 
-Creates and sets encryption keys for the user.
+Create an encryption key
 
 
 
@@ -308,7 +308,7 @@ import (
 )
 
 func main() {
-	encryptionKeyRequestDto := *openapiclient.NewEncryptionKeyRequestDto() // EncryptionKeyRequestDto | The request object containing public and private key information. (optional)
+	encryptionKeyRequestDto := *openapiclient.NewEncryptionKeyRequestDto() // EncryptionKeyRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -333,7 +333,7 @@ Other parameters are passed through a pointer to a apiSetKeysRequest struct via 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **encryptionKeyRequestDto** | [**EncryptionKeyRequestDto**](EncryptionKeyRequestDto.md) | The request object containing public and private key information. | 
+ **encryptionKeyRequestDto** | [**EncryptionKeyRequestDto**](EncryptionKeyRequestDto.md) |  | 
 
 ### Return type
 

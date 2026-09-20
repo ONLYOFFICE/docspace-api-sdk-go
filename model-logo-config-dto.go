@@ -21,19 +21,19 @@ import (
 // checks if the LogoConfigDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogoConfigDto{}
 
-// LogoConfigDto The logo config parameters.
+// LogoConfigDto The logo the editor shows, resolved for the file type and the layout of this opening.
 type LogoConfigDto struct {
-	// The image of the logo.
+	// The logo for the current layout and file type, as the portal branding defines it.
 	Image NullableString `json:"image,omitempty"`
-	// The dark image of the logo.
+	// The variant for a dark interface theme.
 	ImageDark NullableString `json:"imageDark,omitempty"`
-	// The light image of the logo.
+	// The variant for a light interface theme.
 	ImageLight NullableString `json:"imageLight,omitempty"`
-	// The embedded image of the logo.
+	// The variant for the framed viewer. It is empty in every layout but the embedded one.
 	ImageEmbedded NullableString `json:"imageEmbedded,omitempty"`
-	// The url link of the logo.
+	// Where clicking the logo takes the user.
 	Url NullableString `json:"url,omitempty"`
-	// Specifies if the logo is visible.
+	// Whether the logo is shown at all; the mobile layout hides it.
 	Visible *bool `json:"visible,omitempty"`
 }
 

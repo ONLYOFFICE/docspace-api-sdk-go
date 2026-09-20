@@ -21,9 +21,9 @@ import (
 // checks if the SetAppEnabledBody type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SetAppEnabledBody{}
 
-// SetAppEnabledBody Request body for toggling an application enabled state.
+// SetAppEnabledBody Whether a portal application is switched on.
 type SetAppEnabledBody struct {
-	// Whether the application should be enabled.
+	// Whether the application is available in this portal. Switching it off leaves its settings document stored, so  switching it back on restores the configuration it had; connected clients are told of the new state without a  reload.
 	Enabled *bool `json:"enabled,omitempty"`
 }
 

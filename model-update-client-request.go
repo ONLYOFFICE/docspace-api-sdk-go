@@ -16,6 +16,8 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UpdateClientRequest type satisfies the MappedNullable interface at compile time
@@ -23,27 +25,37 @@ var _ MappedNullable = &UpdateClientRequest{}
 
 // UpdateClientRequest Client update request containing modified client details
 type UpdateClientRequest struct {
-	// The name of the client
-	Name *string `json:"name,omitempty"`
-	// The description of the client
+	// The display name shown to the user on the consent screen. It has to be between 3 and 256 characters long.
+	Name string `json:"name"`
+	// The free-text description shown next to the name on the consent screen, at most 255 characters.
 	Description *string `json:"description,omitempty"`
-	// The logo of the client in base64 format
-	Logo *string `json:"logo,omitempty" validate:"regexp=^data:image/(?:png|jpeg|jpg|svg\\+xml);base64\\,.*.{1\\,}"`
-	Public *bool `json:"public,omitempty"`
-	// Indicates whether PKCE is allowed for the client
+	// The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted.
+	Logo string `json:"logo" validate:"regexp=^data:image/(?:png|jpeg|jpg|svg\\+xml);base64\\,.*.{1\\,}"`
+	// The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here.
+	Scopes []string `json:"scopes"`
+	// Whether the client may use PKCE. Turning it on lets the client authenticate with the none method and prove itself with a code verifier instead of sending a secret, which is what a client that cannot keep a secret needs.
 	AllowPkce *bool `json:"allow_pkce,omitempty"`
-	// Indicates whether client is accessible by third-party tenants
+	// The web origins allowed to call the portal on behalf of this client, used for the CORS check. The set holds between 1 and 12 addresses.
+	AllowedOrigins []string `json:"allowed_origins"`
+	// The URIs an authorization code may be delivered to. An authorization request naming any other URI is refused, and the set holds between 1 and 12 addresses.
+	RedirectUris []string `json:"redirect_uris"`
+	// Whether the client is offered to third-party tenants rather than only to the tenant that registers it.
 	IsPublic *bool `json:"is_public,omitempty"`
-	// The allowed origins for the client
-	AllowedOrigins []string `json:"allowed_origins,omitempty"`
 }
+
+type _UpdateClientRequest UpdateClientRequest
 
 // NewUpdateClientRequest instantiates a new UpdateClientRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateClientRequest() *UpdateClientRequest {
+func NewUpdateClientRequest(name string, logo string, scopes []string, allowedOrigins []string, redirectUris []string) *UpdateClientRequest {
 	this := UpdateClientRequest{}
+	this.Name = name
+	this.Logo = logo
+	this.Scopes = scopes
+	this.AllowedOrigins = allowedOrigins
+	this.RedirectUris = redirectUris
 	return &this
 }
 
@@ -55,36 +67,28 @@ func NewUpdateClientRequestWithDefaults() *UpdateClientRequest {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *UpdateClientRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *UpdateClientRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *UpdateClientRequest) IsNameSet() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *UpdateClientRequest) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -119,68 +123,52 @@ func (o *UpdateClientRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetLogo returns the Logo field value if set, zero value otherwise.
+// GetLogo returns the Logo field value
 func (o *UpdateClientRequest) GetLogo() string {
-	if o == nil || IsNil(o.Logo) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Logo
+
+	return o.Logo
 }
 
-// GetLogoOk returns a tuple with the Logo field value if set, nil otherwise
+// GetLogoOk returns a tuple with the Logo field value
 // and a boolean to check if the value has been set.
 func (o *UpdateClientRequest) GetLogoOk() (*string, bool) {
-	if o == nil || IsNil(o.Logo) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Logo, true
+	return &o.Logo, true
 }
 
-// HasLogo returns a boolean if a field has been set.
-func (o *UpdateClientRequest) IsLogoSet() bool {
-	if o != nil && !IsNil(o.Logo) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogo gets a reference to the given string and assigns it to the Logo field.
+// SetLogo sets field value
 func (o *UpdateClientRequest) SetLogo(v string) {
-	o.Logo = &v
+	o.Logo = v
 }
 
-// GetPublic returns the Public field value if set, zero value otherwise.
-func (o *UpdateClientRequest) GetPublic() bool {
-	if o == nil || IsNil(o.Public) {
-		var ret bool
+// GetScopes returns the Scopes field value
+func (o *UpdateClientRequest) GetScopes() []string {
+	if o == nil {
+		var ret []string
 		return ret
 	}
-	return *o.Public
+
+	return o.Scopes
 }
 
-// GetPublicOk returns a tuple with the Public field value if set, nil otherwise
+// GetScopesOk returns a tuple with the Scopes field value
 // and a boolean to check if the value has been set.
-func (o *UpdateClientRequest) GetPublicOk() (*bool, bool) {
-	if o == nil || IsNil(o.Public) {
+func (o *UpdateClientRequest) GetScopesOk() ([]string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Public, true
+	return o.Scopes, true
 }
 
-// HasPublic returns a boolean if a field has been set.
-func (o *UpdateClientRequest) IsPublicSet() bool {
-	if o != nil && !IsNil(o.Public) {
-		return true
-	}
-
-	return false
-}
-
-// SetPublic gets a reference to the given bool and assigns it to the Public field.
-func (o *UpdateClientRequest) SetPublic(v bool) {
-	o.Public = &v
+// SetScopes sets field value
+func (o *UpdateClientRequest) SetScopes(v []string) {
+	o.Scopes = v
 }
 
 // GetAllowPkce returns the AllowPkce field value if set, zero value otherwise.
@@ -215,6 +203,54 @@ func (o *UpdateClientRequest) SetAllowPkce(v bool) {
 	o.AllowPkce = &v
 }
 
+// GetAllowedOrigins returns the AllowedOrigins field value
+func (o *UpdateClientRequest) GetAllowedOrigins() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.AllowedOrigins
+}
+
+// GetAllowedOriginsOk returns a tuple with the AllowedOrigins field value
+// and a boolean to check if the value has been set.
+func (o *UpdateClientRequest) GetAllowedOriginsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AllowedOrigins, true
+}
+
+// SetAllowedOrigins sets field value
+func (o *UpdateClientRequest) SetAllowedOrigins(v []string) {
+	o.AllowedOrigins = v
+}
+
+// GetRedirectUris returns the RedirectUris field value
+func (o *UpdateClientRequest) GetRedirectUris() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.RedirectUris
+}
+
+// GetRedirectUrisOk returns a tuple with the RedirectUris field value
+// and a boolean to check if the value has been set.
+func (o *UpdateClientRequest) GetRedirectUrisOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RedirectUris, true
+}
+
+// SetRedirectUris sets field value
+func (o *UpdateClientRequest) SetRedirectUris(v []string) {
+	o.RedirectUris = v
+}
+
 // GetIsPublic returns the IsPublic field value if set, zero value otherwise.
 func (o *UpdateClientRequest) GetIsPublic() bool {
 	if o == nil || IsNil(o.IsPublic) {
@@ -247,38 +283,6 @@ func (o *UpdateClientRequest) SetIsPublic(v bool) {
 	o.IsPublic = &v
 }
 
-// GetAllowedOrigins returns the AllowedOrigins field value if set, zero value otherwise.
-func (o *UpdateClientRequest) GetAllowedOrigins() []string {
-	if o == nil || IsNil(o.AllowedOrigins) {
-		var ret []string
-		return ret
-	}
-	return o.AllowedOrigins
-}
-
-// GetAllowedOriginsOk returns a tuple with the AllowedOrigins field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateClientRequest) GetAllowedOriginsOk() ([]string, bool) {
-	if o == nil || IsNil(o.AllowedOrigins) {
-		return nil, false
-	}
-	return o.AllowedOrigins, true
-}
-
-// HasAllowedOrigins returns a boolean if a field has been set.
-func (o *UpdateClientRequest) IsAllowedOriginsSet() bool {
-	if o != nil && !IsNil(o.AllowedOrigins) {
-		return true
-	}
-
-	return false
-}
-
-// SetAllowedOrigins gets a reference to the given []string and assigns it to the AllowedOrigins field.
-func (o *UpdateClientRequest) SetAllowedOrigins(v []string) {
-	o.AllowedOrigins = v
-}
-
 func (o UpdateClientRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -289,28 +293,61 @@ func (o UpdateClientRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateClientRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Logo) {
-		toSerialize["logo"] = o.Logo
-	}
-	if !IsNil(o.Public) {
-		toSerialize["public"] = o.Public
-	}
+	toSerialize["logo"] = o.Logo
+	toSerialize["scopes"] = o.Scopes
 	if !IsNil(o.AllowPkce) {
 		toSerialize["allow_pkce"] = o.AllowPkce
 	}
+	toSerialize["allowed_origins"] = o.AllowedOrigins
+	toSerialize["redirect_uris"] = o.RedirectUris
 	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
-	if !IsNil(o.AllowedOrigins) {
-		toSerialize["allowed_origins"] = o.AllowedOrigins
-	}
 	return toSerialize, nil
+}
+
+func (o *UpdateClientRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"logo",
+		"scopes",
+		"allowed_origins",
+		"redirect_uris",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUpdateClientRequest := _UpdateClientRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUpdateClientRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateClientRequest(varUpdateClientRequest)
+
+	return err
 }
 
 type NullableUpdateClientRequest struct {

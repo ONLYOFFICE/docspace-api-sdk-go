@@ -21,14 +21,22 @@ import (
 // checks if the ProblemDetail type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ProblemDetail{}
 
-// ProblemDetail struct for ProblemDetail
+// ProblemDetail RFC 7807 problem details returned by the registration API for failed requests.
 type ProblemDetail struct {
+	// A URI reference that identifies the problem type. This service sets it to the DocSpace API getting-started page.
 	Type *string `json:"type,omitempty"`
+	// A short, human-readable summary of the problem type, typically the HTTP status reason phrase.
 	Title *string `json:"title,omitempty"`
+	// The HTTP status code for this occurrence of the problem.
 	Status *int32 `json:"status,omitempty"`
+	// A human-readable explanation specific to this occurrence of the problem.
 	Detail *string `json:"detail,omitempty"`
+	// A URI reference that identifies the specific occurrence, set to the request path.
 	Instance *string `json:"instance,omitempty"`
-	Properties map[string]map[string]interface{} `json:"properties,omitempty"`
+	// Extension members carried on the problem. Usually empty; validation failures also surface as the top-level errors array.
+	Properties map[string]*interface{} `json:"properties,omitempty"`
+	// Field-specific validation errors. Present when the request body or parameters failed validation, or when a named scope is not in the tenant catalogue.
+	Errors []FieldError `json:"errors,omitempty"`
 }
 
 // NewProblemDetail instantiates a new ProblemDetail object
@@ -209,9 +217,9 @@ func (o *ProblemDetail) SetInstance(v string) {
 }
 
 // GetProperties returns the Properties field value if set, zero value otherwise.
-func (o *ProblemDetail) GetProperties() map[string]map[string]interface{} {
+func (o *ProblemDetail) GetProperties() map[string]*interface{} {
 	if o == nil || IsNil(o.Properties) {
-		var ret map[string]map[string]interface{}
+		var ret map[string]*interface{}
 		return ret
 	}
 	return o.Properties
@@ -219,9 +227,9 @@ func (o *ProblemDetail) GetProperties() map[string]map[string]interface{} {
 
 // GetPropertiesOk returns a tuple with the Properties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProblemDetail) GetPropertiesOk() (map[string]map[string]interface{}, bool) {
+func (o *ProblemDetail) GetPropertiesOk() (map[string]*interface{}, bool) {
 	if o == nil || IsNil(o.Properties) {
-		return map[string]map[string]interface{}{}, false
+		return map[string]*interface{}{}, false
 	}
 	return o.Properties, true
 }
@@ -235,9 +243,41 @@ func (o *ProblemDetail) IsPropertiesSet() bool {
 	return false
 }
 
-// SetProperties gets a reference to the given map[string]map[string]interface{} and assigns it to the Properties field.
-func (o *ProblemDetail) SetProperties(v map[string]map[string]interface{}) {
+// SetProperties gets a reference to the given map[string]*interface{} and assigns it to the Properties field.
+func (o *ProblemDetail) SetProperties(v map[string]*interface{}) {
 	o.Properties = v
+}
+
+// GetErrors returns the Errors field value if set, zero value otherwise.
+func (o *ProblemDetail) GetErrors() []FieldError {
+	if o == nil || IsNil(o.Errors) {
+		var ret []FieldError
+		return ret
+	}
+	return o.Errors
+}
+
+// GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProblemDetail) GetErrorsOk() ([]FieldError, bool) {
+	if o == nil || IsNil(o.Errors) {
+		return nil, false
+	}
+	return o.Errors, true
+}
+
+// HasErrors returns a boolean if a field has been set.
+func (o *ProblemDetail) IsErrorsSet() bool {
+	if o != nil && !IsNil(o.Errors) {
+		return true
+	}
+
+	return false
+}
+
+// SetErrors gets a reference to the given []FieldError and assigns it to the Errors field.
+func (o *ProblemDetail) SetErrors(v []FieldError) {
+	o.Errors = v
 }
 
 func (o ProblemDetail) MarshalJSON() ([]byte, error) {
@@ -267,6 +307,9 @@ func (o ProblemDetail) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Properties) {
 		toSerialize["properties"] = o.Properties
+	}
+	if !IsNil(o.Errors) {
+		toSerialize["errors"] = o.Errors
 	}
 	return toSerialize, nil
 }

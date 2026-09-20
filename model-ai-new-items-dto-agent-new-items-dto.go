@@ -16,7 +16,6 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 	"bytes"
 	"fmt"
 )
@@ -24,11 +23,11 @@ import (
 // checks if the AiNewItemsDtoAgentNewItemsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiNewItemsDtoAgentNewItemsDto{}
 
-// AiNewItemsDtoAgentNewItemsDto The new item parameters.
+// AiNewItemsDtoAgentNewItemsDto One day of the entries the caller has not opened yet, the groups running from the most recent day backwards.
 type AiNewItemsDtoAgentNewItemsDto struct {
-	// The date and time when the new item was created.
-	Date NullableTime `json:"date"`
-	// The list of items.
+	// The day the grouped entries were last changed, written with the offset of the portal time zone. The time part  is the moment of the newest entry of the group.
+	Date AiApiDateTime `json:"date"`
+	// What changed on that day, the most recent first. Folders are left out of it, so an entry here is always a file  or a room that holds them.
 	Items []AiAgentNewItemsDto `json:"items"`
 }
 
@@ -38,7 +37,7 @@ type _AiNewItemsDtoAgentNewItemsDto AiNewItemsDtoAgentNewItemsDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiNewItemsDtoAgentNewItemsDto(date NullableTime, items []AiAgentNewItemsDto) *AiNewItemsDtoAgentNewItemsDto {
+func NewAiNewItemsDtoAgentNewItemsDto(date AiApiDateTime, items []AiAgentNewItemsDto) *AiNewItemsDtoAgentNewItemsDto {
 	this := AiNewItemsDtoAgentNewItemsDto{}
 	this.Date = date
 	this.Items = items
@@ -54,29 +53,27 @@ func NewAiNewItemsDtoAgentNewItemsDtoWithDefaults() *AiNewItemsDtoAgentNewItemsD
 }
 
 // GetDate returns the Date field value
-// If the value is explicit nil, the zero value for time.Time will be returned
-func (o *AiNewItemsDtoAgentNewItemsDto) GetDate() time.Time {
-	if o == nil || o.Date.Get() == nil {
-		var ret time.Time
+func (o *AiNewItemsDtoAgentNewItemsDto) GetDate() AiApiDateTime {
+	if o == nil {
+		var ret AiApiDateTime
 		return ret
 	}
 
-	return *o.Date.Get()
+	return o.Date
 }
 
 // GetDateOk returns a tuple with the Date field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AiNewItemsDtoAgentNewItemsDto) GetDateOk() (*time.Time, bool) {
+func (o *AiNewItemsDtoAgentNewItemsDto) GetDateOk() (*AiApiDateTime, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Date.Get(), o.Date.IsSet()
+	return &o.Date, true
 }
 
 // SetDate sets field value
-func (o *AiNewItemsDtoAgentNewItemsDto) SetDate(v time.Time) {
-	o.Date.Set(&v)
+func (o *AiNewItemsDtoAgentNewItemsDto) SetDate(v AiApiDateTime) {
+	o.Date = v
 }
 
 // GetItems returns the Items field value
@@ -115,7 +112,7 @@ func (o AiNewItemsDtoAgentNewItemsDto) MarshalJSON() ([]byte, error) {
 
 func (o AiNewItemsDtoAgentNewItemsDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["date"] = o.Date.Get()
+	toSerialize["date"] = o.Date
 	if o.Items != nil {
 		toSerialize["items"] = o.Items
 	}

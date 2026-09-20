@@ -31,11 +31,13 @@ type ApiHandleOptionsRequest struct {
 	ApiService *OAuth20DiscoveryAPIService
 }
 
-func (r ApiHandleOptionsRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiHandleOptionsRequest) Execute() (*http.Response, error) {
 	return r.ApiService.HandleOptionsExecute(r)
 }
 
-// HandleOptions executes the operation
+// HandleOptions Probe the discovery endpoint
+//
+// Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/handle-options/
 //
@@ -49,18 +51,16 @@ func (a *OAuth20DiscoveryAPIService) HandleOptions(ctx context.Context) ApiHandl
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
-func (a *OAuth20DiscoveryAPIService) HandleOptionsExecute(r ApiHandleOptionsRequest) (map[string]interface{}, *http.Response, error) {
+func (a *OAuth20DiscoveryAPIService) HandleOptionsExecute(r ApiHandleOptionsRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodOptions
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OAuth20DiscoveryAPIService.HandleOptions")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/.well-known/oauth-authorization-server"
@@ -79,7 +79,7 @@ func (a *OAuth20DiscoveryAPIService) HandleOptionsExecute(r ApiHandleOptionsRequ
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -88,19 +88,19 @@ func (a *OAuth20DiscoveryAPIService) HandleOptionsExecute(r ApiHandleOptionsRequ
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -108,17 +108,8 @@ func (a *OAuth20DiscoveryAPIService) HandleOptionsExecute(r ApiHandleOptionsRequ
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }

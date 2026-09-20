@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserIds** | Pointer to **[]string** | The list of user IDs. | [optional] 
+**UserIds** | Pointer to **[]string** | The accounts the operation applies to. System accounts are dropped from the list without an error. | [optional] 
 **Quota** | Pointer to [**UpdateMembersQuotaRequestDtoQuota**](UpdateMembersQuotaRequestDtoQuota.md) |  | [optional] 
 
 ## Methods

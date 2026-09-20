@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LinkId** | Pointer to **string** | The external link ID. | [optional] 
-**Access** | Pointer to [**FileShare**](FileShare.md) | The link sharing rights. | [optional] 
-**ExpirationDate** | Pointer to **NullableTime** | The link expiration date. | [optional] 
-**Title** | Pointer to **NullableString** | The link name. | [optional] 
-**Internal** | Pointer to **bool** | The link scope, whether it is internal or not. | [optional] 
-**Primary** | Pointer to **bool** | Specifies whether the file link is primary or not. | [optional] 
-**DenyDownload** | Pointer to **bool** | Specifies whether to deny downloading the file or not. | [optional] 
-**Password** | Pointer to **NullableString** | Password for access via link. | [optional] 
+**LinkId** | Pointer to **string** | The link to rewrite, as reported by `GET api/2.0/files/file/{id}/links`. An identifier that is not yet in use,  the empty one included, creates a link instead. | [optional] 
+**Access** | Pointer to [**FileShare**](FileShare.md) | The rights the link grants to whoever follows it. The value that denies everything revokes the link. | [optional] 
+**ExpirationDate** | Pointer to [**ApiDateTime**](ApiDateTime.md) | The moment the link stops working, read in the time zone of the portal. A date more than a few years ahead is  rejected as an invalid request; left out, the link does not expire on its own. | [optional] 
+**Title** | Pointer to **NullableString** | The name the link carries in the sharing list of the file, for the people who manage it; it is not shown to  whoever follows the link. | [optional] 
+**Internal** | Pointer to **bool** | Who may follow the link: `true` admits only accounts that are signed in to the portal, `false` admits anybody  who has the address. | [optional] 
+**Primary** | Pointer to **bool** | Whether this link becomes the primary link of the file - the one the Copy link action of a client hands out.  A file has one primary link at a time. | [optional] 
+**DenyDownload** | Pointer to **bool** | What a visitor may do with the content: `true` leaves them with viewing in the browser, `false` lets them  download and print it as their rights allow. | [optional] 
+**Password** | Pointer to **NullableString** | The secret a visitor has to type before the file opens; left out, the link opens without one. | [optional] 
 
 ## Methods
 
@@ -84,20 +84,20 @@ HasAccess returns a boolean if a field has been set.
 
 ### GetExpirationDate
 
-`func (o *FileLinkRequest) GetExpirationDate() time.Time`
+`func (o *FileLinkRequest) GetExpirationDate() ApiDateTime`
 
 GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
 
 ### GetExpirationDateOk
 
-`func (o *FileLinkRequest) GetExpirationDateOk() (*time.Time, bool)`
+`func (o *FileLinkRequest) GetExpirationDateOk() (*ApiDateTime, bool)`
 
 GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpirationDate
 
-`func (o *FileLinkRequest) SetExpirationDate(v time.Time)`
+`func (o *FileLinkRequest) SetExpirationDate(v ApiDateTime)`
 
 SetExpirationDate sets ExpirationDate field to given value.
 
@@ -107,16 +107,6 @@ SetExpirationDate sets ExpirationDate field to given value.
 
 HasExpirationDate returns a boolean if a field has been set.
 
-### SetExpirationDateNil
-
-`func (o *FileLinkRequest) SetExpirationDateNil(b bool)`
-
- SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-
-### UnsetExpirationDate
-`func (o *FileLinkRequest) UnsetExpirationDate()`
-
-UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
 ### GetTitle
 
 `func (o *FileLinkRequest) GetTitle() string`

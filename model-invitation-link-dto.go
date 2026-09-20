@@ -16,7 +16,6 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 	"bytes"
 	"fmt"
 )
@@ -24,21 +23,21 @@ import (
 // checks if the InvitationLinkDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InvitationLinkDto{}
 
-// InvitationLinkDto The invitation link parameters.
+// InvitationLinkDto The portal's standing invitation link for one role: what it grants, how long it lasts, how often it was used.
 type InvitationLinkDto struct {
-	// The ID of the invitation link.
+	// The identifier to address the link by in `PUT api/2.0/portal/users/invitationlink` and  `DELETE api/2.0/portal/users/invitationlink`. It survives a change of deadline or use limit, so it is  worth storing rather than re-reading.
 	Id *string `json:"id,omitempty"`
-	// The type of employee role for the invitation link.
+	// The role an account gets by joining through this link. A portal keeps at most one link per role, and the  role of an existing link cannot be changed - the link has to be deleted and created again.
 	EmployeeType EmployeeType `json:"employeeType"`
-	// The expiration date of the invitation link.
-	Expiration NullableTime `json:"expiration,omitempty"`
-	// Indicates whether the invitation link has expired.
+	// When the link stops working, in the portal time zone. It is empty for a link that never expires, which is  what omitting the deadline on create or update leaves behind.
+	Expiration *ApiDateTime `json:"expiration,omitempty"`
+	// Whether that deadline has already passed. A link without a deadline always reports `false`, and an expired  link is still returned rather than treated as gone - it can be revived by moving `expiration`.
 	IsExpired *bool `json:"isExpired,omitempty"`
-	// The maximum number of times the invitation link can be used.
+	// How many accounts may join through the link in total. It is empty for a link with no use limit, and an  update may not lower it below `currentUseCount`.
 	MaxUseCount NullableInt32 `json:"maxUseCount,omitempty"`
-	// The current number of times the invitation link has been used.
+	// How many accounts have already joined through the link. It only ever grows, and reaching `maxUseCount`  retires the link as surely as a passed deadline.
 	CurrentUseCount *int32 `json:"currentUseCount,omitempty"`
-	// The URL of the invitation link.
+	// The shortened address to hand to the people being invited. It is signed for the account that read it, so  two administrators are given two different URLs for one and the same link and both of them work; the `id`  above, not this string, is what identifies the link.
 	Url NullableString `json:"url,omitempty"`
 }
 
@@ -118,46 +117,36 @@ func (o *InvitationLinkDto) SetEmployeeType(v EmployeeType) {
 	o.EmployeeType = v
 }
 
-// GetExpiration returns the Expiration field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvitationLinkDto) GetExpiration() time.Time {
-	if o == nil || IsNil(o.Expiration.Get()) {
-		var ret time.Time
+// GetExpiration returns the Expiration field value if set, zero value otherwise.
+func (o *InvitationLinkDto) GetExpiration() ApiDateTime {
+	if o == nil || IsNil(o.Expiration) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.Expiration.Get()
+	return *o.Expiration
 }
 
 // GetExpirationOk returns a tuple with the Expiration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvitationLinkDto) GetExpirationOk() (*time.Time, bool) {
-	if o == nil {
+func (o *InvitationLinkDto) GetExpirationOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Expiration) {
 		return nil, false
 	}
-	return o.Expiration.Get(), o.Expiration.IsSet()
+	return o.Expiration, true
 }
 
 // HasExpiration returns a boolean if a field has been set.
 func (o *InvitationLinkDto) IsExpirationSet() bool {
-	if o != nil && o.Expiration.IsSet() {
+	if o != nil && !IsNil(o.Expiration) {
 		return true
 	}
 
 	return false
 }
 
-// SetExpiration gets a reference to the given NullableTime and assigns it to the Expiration field.
-func (o *InvitationLinkDto) SetExpiration(v time.Time) {
-	o.Expiration.Set(&v)
-}
-// SetExpirationNil sets the value for Expiration to be an explicit nil
-func (o *InvitationLinkDto) SetExpirationNil() {
-	o.Expiration.Set(nil)
-}
-
-// UnsetExpiration ensures that no value is present for Expiration, not even an explicit nil
-func (o *InvitationLinkDto) UnsetExpiration() {
-	o.Expiration.Unset()
+// SetExpiration gets a reference to the given ApiDateTime and assigns it to the Expiration field.
+func (o *InvitationLinkDto) SetExpiration(v ApiDateTime) {
+	o.Expiration = &v
 }
 
 // GetIsExpired returns the IsExpired field value if set, zero value otherwise.
@@ -322,8 +311,8 @@ func (o InvitationLinkDto) ToMap() (map[string]interface{}, error) {
 		toSerialize["id"] = o.Id
 	}
 	toSerialize["employeeType"] = o.EmployeeType
-	if o.Expiration.IsSet() {
-		toSerialize["expiration"] = o.Expiration.Get()
+	if !IsNil(o.Expiration) {
+		toSerialize["expiration"] = o.Expiration
 	}
 	if !IsNil(o.IsExpired) {
 		toSerialize["isExpired"] = o.IsExpired

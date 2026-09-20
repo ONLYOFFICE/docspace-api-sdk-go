@@ -21,9 +21,9 @@ import (
 // checks if the ActionLinkConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionLinkConfig{}
 
-// ActionLinkConfig The config parameter which contains the information about the action in the document that will be scrolled to.
+// ActionLinkConfig The place inside a document that a link should open at.
 type ActionLinkConfig struct {
-	// The information about the action in the document that will be scrolled to.
+	// The anchor itself. It is passed on to the editor unchanged, so it has to be the value the editor produced for  the comment or the mention it points at.
 	Action *ActionConfig `json:"action,omitempty"`
 }
 

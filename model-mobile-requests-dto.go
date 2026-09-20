@@ -21,9 +21,9 @@ import (
 // checks if the MobileRequestsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MobileRequestsDto{}
 
-// MobileRequestsDto The parameters required for the mobile phone verification.
+// MobileRequestsDto The phone number a user going through phone activation registers for SMS codes.
 type MobileRequestsDto struct {
-	// The user's mobile phone number.
+	// The number the SMS codes are sent to, in international form with the leading `+` and no spaces. It is stored  as not yet activated and only becomes the confirmed number once a code sent to it is accepted; an already  activated number is not replaced this way and has to be erased first.
 	MobilePhone NullableString `json:"mobilePhone,omitempty"`
 }
 

@@ -23,9 +23,9 @@ import (
 // checks if the QuotaSettingsRequestsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuotaSettingsRequestsDto{}
 
-// QuotaSettingsRequestsDto The request parameters for managing the user storage quota configurations.
+// QuotaSettingsRequestsDto The default storage limit given to newly created users, rooms or AI agents, and whether it is enforced.
 type QuotaSettingsRequestsDto struct {
-	// Specifies whether the storage quota restrictions are enabled.
+	// Whether the limit is enforced at all. While it is false the size is ignored and nothing created afterwards  carries a limit; objects that already have one keep it either way.
 	EnableQuota *bool `json:"enableQuota,omitempty"`
 	DefaultQuota QuotaSettingsRequestsDtoDefaultQuota `json:"defaultQuota"`
 }

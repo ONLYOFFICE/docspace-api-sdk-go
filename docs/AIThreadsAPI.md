@@ -6,24 +6,24 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AiThreadsAppendUserMessage**](AIThreadsAPI.md#AiThreadsAppendUserMessage) | **Post** /api/2.0/ai/threads/append-user-message | Append user message
 [**AiThreadsClearMessages**](AIThreadsAPI.md#AiThreadsClearMessages) | **Delete** /api/2.0/ai/threads/clear-messages | Clear messages
-[**AiThreadsCreate**](AIThreadsAPI.md#AiThreadsCreate) | **Post** /api/2.0/ai/threads/create | Create
-[**AiThreadsDelete**](AIThreadsAPI.md#AiThreadsDelete) | **Delete** /api/2.0/ai/threads/delete | Delete
+[**AiThreadsCreate**](AIThreadsAPI.md#AiThreadsCreate) | **Post** /api/2.0/ai/threads/create | Create a chat thread
+[**AiThreadsDelete**](AIThreadsAPI.md#AiThreadsDelete) | **Delete** /api/2.0/ai/threads/delete | Delete a chat thread
 [**AiThreadsDeleteMessage**](AIThreadsAPI.md#AiThreadsDeleteMessage) | **Delete** /api/2.0/ai/threads/delete-message | Delete message
-[**AiThreadsGetById**](AIThreadsAPI.md#AiThreadsGetById) | **Get** /api/2.0/ai/threads/get-by-id | Get by id
-[**AiThreadsGetMessageById**](AIThreadsAPI.md#AiThreadsGetMessageById) | **Get** /api/2.0/ai/threads/get-message-by-id | Get message by id
-[**AiThreadsList**](AIThreadsAPI.md#AiThreadsList) | **Get** /api/2.0/ai/threads/list | List
+[**AiThreadsGetById**](AIThreadsAPI.md#AiThreadsGetById) | **Get** /api/2.0/ai/threads/get-by-id | Get a chat thread
+[**AiThreadsGetMessageById**](AIThreadsAPI.md#AiThreadsGetMessageById) | **Get** /api/2.0/ai/threads/get-message-by-id | Get one chat message
+[**AiThreadsList**](AIThreadsAPI.md#AiThreadsList) | **Get** /api/2.0/ai/threads/list | List chat threads
 [**AiThreadsOpenOrCreate**](AIThreadsAPI.md#AiThreadsOpenOrCreate) | **Post** /api/2.0/ai/threads/open-or-create | Open or create
 [**AiThreadsReadMessages**](AIThreadsAPI.md#AiThreadsReadMessages) | **Get** /api/2.0/ai/threads/read-messages | Read messages
 [**AiThreadsRegenerateTitle**](AIThreadsAPI.md#AiThreadsRegenerateTitle) | **Post** /api/2.0/ai/threads/regenerate-title | Regenerate title
-[**AiThreadsRename**](AIThreadsAPI.md#AiThreadsRename) | **Put** /api/2.0/ai/threads/rename | Rename
-[**AiThreadsTouch**](AIThreadsAPI.md#AiThreadsTouch) | **Post** /api/2.0/ai/threads/touch | Touch
+[**AiThreadsRename**](AIThreadsAPI.md#AiThreadsRename) | **Put** /api/2.0/ai/threads/rename | Rename a chat thread
+[**AiThreadsTouch**](AIThreadsAPI.md#AiThreadsTouch) | **Post** /api/2.0/ai/threads/touch | Bump a thread's activity
 [**AiThreadsUpdateMessage**](AIThreadsAPI.md#AiThreadsUpdateMessage) | **Put** /api/2.0/ai/threads/update-message | Update message
 
 
 
 ## AiThreadsAppendUserMessage
 
-> AiThreadMessageLike AiThreadsAppendUserMessage(ctx).AiThreadsAppendUserMessageRequest(aiThreadsAppendUserMessageRequest).Execute()
+> AiThreadsAppendUserMessage200Response AiThreadsAppendUserMessage(ctx).AiThreadsAppendUserMessageRequest(aiThreadsAppendUserMessageRequest).Execute()
 
 Append user message
 
@@ -44,7 +44,7 @@ import (
 )
 
 func main() {
-	aiThreadsAppendUserMessageRequest := *openapiclient.NewAiThreadsAppendUserMessageRequest("ThreadId_example", *openapiclient.NewAiThreadMessageLike("Role_example", *openapiclient.NewAiThreadMessageLikeContent())) // AiThreadsAppendUserMessageRequest | 
+	aiThreadsAppendUserMessageRequest := *openapiclient.NewAiThreadsAppendUserMessageRequest("ThreadId_example", *openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiThreadsAppendUserMessageRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -53,7 +53,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIThreadsAPI.AiThreadsAppendUserMessage``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiThreadsAppendUserMessage`: AiThreadMessageLike
+	// response from `AiThreadsAppendUserMessage`: AiThreadsAppendUserMessage200Response
 	fmt.Fprintf(os.Stdout, "Response from `AIThreadsAPI.AiThreadsAppendUserMessage`: %v\n", resp)
 }
 ```
@@ -73,11 +73,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiThreadMessageLike**](AiThreadMessageLike.md)
+[**AiThreadsAppendUserMessage200Response**](AiThreadsAppendUserMessage200Response.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -112,7 +112,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | The ID of the thread to empty, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -137,7 +137,7 @@ Other parameters are passed through a pointer to a apiAiThreadsClearMessagesRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | The ID of the thread to empty, as a bare JSON string. | 
 
 ### Return type
 
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -161,7 +161,7 @@ No authorization required
 
 > AiThread AiThreadsCreate(ctx).AiThreadsCreateRequest(aiThreadsCreateRequest).Execute()
 
-Create
+Create a chat thread
 
 
 
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -229,7 +229,7 @@ No authorization required
 
 > AiSuccessResponse AiThreadsDelete(ctx).Body(body).Execute()
 
-Delete
+Delete a chat thread
 
 
 
@@ -248,7 +248,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | The ID of the thread to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -273,7 +273,7 @@ Other parameters are passed through a pointer to a apiAiThreadsDeleteRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | The ID of the thread to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -316,7 +316,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | The ID of the message to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -341,7 +341,7 @@ Other parameters are passed through a pointer to a apiAiThreadsDeleteMessageRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | The ID of the message to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -349,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -365,7 +365,7 @@ No authorization required
 
 > AiThread AiThreadsGetById(ctx).ThreadId(threadId).Execute()
 
-Get by id
+Get a chat thread
 
 
 
@@ -384,7 +384,7 @@ import (
 )
 
 func main() {
-	threadId := "threadId_example" // string | The chat thread identifier.
+	threadId := "11111111-1111-1111-1111-111111111111" // string | The chat thread identifier.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -433,7 +433,7 @@ No authorization required
 
 > AiThreadMessageLike AiThreadsGetMessageById(ctx).MessageId(messageId).Execute()
 
-Get message by id
+Get one chat message
 
 
 
@@ -452,7 +452,7 @@ import (
 )
 
 func main() {
-	messageId := "messageId_example" // string | The globally unique chat message identifier.
+	messageId := "22222222-2222-2222-2222-222222222222" // string | The globally unique chat message identifier.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -485,7 +485,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -501,7 +501,7 @@ No authorization required
 
 > []AiThread AiThreadsList(ctx).EntityId(entityId).Count(count).Cursor(cursor).Query(query).Execute()
 
-List
+List chat threads
 
 
 
@@ -520,10 +520,10 @@ import (
 )
 
 func main() {
-	entityId := "entityId_example" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
-	count := "count_example" // string | The maximum number of items to return in one page. (optional)
-	cursor := "cursor_example" // string | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. (optional)
-	query := "query_example" // string | The full-text query the thread list is filtered by. (optional)
+	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	count := int32(20) // int32 | The maximum number of items to return in one page. (optional)
+	cursor := "{\"id\":\"11111111-1111-1111-1111-111111111111\",\"lastEditDate\":1767225600000}" // string | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. (optional)
+	query := "contract" // string | The full-text query the thread list is filtered by. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -549,7 +549,7 @@ Other parameters are passed through a pointer to a apiAiThreadsListRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
- **count** | **string** | The maximum number of items to return in one page. | 
+ **count** | **int32** | The maximum number of items to return in one page. | 
  **cursor** | **string** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | 
  **query** | **string** | The full-text query the thread list is filtered by. | 
 
@@ -559,7 +559,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -594,7 +594,7 @@ import (
 )
 
 func main() {
-	aiThreadsOpenOrCreateRequest := *openapiclient.NewAiThreadsOpenOrCreateRequest(*openapiclient.NewAiProfile("Id_example", "Name_example", *openapiclient.NewAiProviderType(), "BaseUrl_example", "ModelId_example"), "ProfileId_example", *openapiclient.NewAiThreadMessageLike("Role_example", *openapiclient.NewAiThreadMessageLikeContent())) // AiThreadsOpenOrCreateRequest | 
+	aiThreadsOpenOrCreateRequest := *openapiclient.NewAiThreadsOpenOrCreateRequest(*openapiclient.NewAiProfile("00000000-0000-0000-0000-000000000000", "OpenAI GPT-4o", *openapiclient.NewAiProviderType(), "https://api.openai.com/v1", "gpt-4o"), "ProfileId_example", *openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiThreadsOpenOrCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -627,7 +627,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -662,10 +662,10 @@ import (
 )
 
 func main() {
-	threadId := "threadId_example" // string | The chat thread identifier.
-	count := "count_example" // string | The maximum number of items to return in one page. (optional)
-	cursor := "cursor_example" // string | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. (optional)
-	direction := "direction_example" // string | The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read. (optional)
+	threadId := "11111111-1111-1111-1111-111111111111" // string | The chat thread identifier.
+	count := int32(20) // int32 | The maximum number of items to return in one page. (optional)
+	cursor := "{\"id\":\"11111111-1111-1111-1111-111111111111\",\"lastEditDate\":1767225600000}" // string | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. (optional)
+	direction := "desc" // string | The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -691,7 +691,7 @@ Other parameters are passed through a pointer to a apiAiThreadsReadMessagesReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **threadId** | **string** | The chat thread identifier. | 
- **count** | **string** | The maximum number of items to return in one page. | 
+ **count** | **int32** | The maximum number of items to return in one page. | 
  **cursor** | **string** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | 
  **direction** | **string** | The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read. | 
 
@@ -701,7 +701,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -715,7 +715,7 @@ No authorization required
 
 ## AiThreadsRegenerateTitle
 
-> string AiThreadsRegenerateTitle(ctx).AiThreadsRegenerateTitleRequest(aiThreadsRegenerateTitleRequest).Execute()
+> AiThreadsRegenerateTitle200Response AiThreadsRegenerateTitle(ctx).AiThreadsRegenerateTitleRequest(aiThreadsRegenerateTitleRequest).Execute()
 
 Regenerate title
 
@@ -736,7 +736,7 @@ import (
 )
 
 func main() {
-	aiThreadsRegenerateTitleRequest := *openapiclient.NewAiThreadsRegenerateTitleRequest("ThreadId_example", *openapiclient.NewAiProfile("Id_example", "Name_example", *openapiclient.NewAiProviderType(), "BaseUrl_example", "ModelId_example")) // AiThreadsRegenerateTitleRequest | 
+	aiThreadsRegenerateTitleRequest := *openapiclient.NewAiThreadsRegenerateTitleRequest("ThreadId_example", *openapiclient.NewAiProfile("00000000-0000-0000-0000-000000000000", "OpenAI GPT-4o", *openapiclient.NewAiProviderType(), "https://api.openai.com/v1", "gpt-4o")) // AiThreadsRegenerateTitleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -745,7 +745,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIThreadsAPI.AiThreadsRegenerateTitle``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiThreadsRegenerateTitle`: string
+	// response from `AiThreadsRegenerateTitle`: AiThreadsRegenerateTitle200Response
 	fmt.Fprintf(os.Stdout, "Response from `AIThreadsAPI.AiThreadsRegenerateTitle`: %v\n", resp)
 }
 ```
@@ -765,11 +765,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**AiThreadsRegenerateTitle200Response**](AiThreadsRegenerateTitle200Response.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -785,7 +785,7 @@ No authorization required
 
 > AiSuccessResponse AiThreadsRename(ctx).AiThreadsRenameRequest(aiThreadsRenameRequest).Execute()
 
-Rename
+Rename a chat thread
 
 
 
@@ -837,7 +837,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -853,7 +853,7 @@ No authorization required
 
 > AiSuccessResponse AiThreadsTouch(ctx).AiThreadsTouchRequest(aiThreadsTouchRequest).Execute()
 
-Touch
+Bump a thread's activity
 
 
 
@@ -905,7 +905,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -940,7 +940,7 @@ import (
 )
 
 func main() {
-	aiThreadsUpdateMessageRequest := *openapiclient.NewAiThreadsUpdateMessageRequest("MessageId_example", *openapiclient.NewAiThreadMessageLike("Role_example", *openapiclient.NewAiThreadMessageLikeContent())) // AiThreadsUpdateMessageRequest | 
+	aiThreadsUpdateMessageRequest := *openapiclient.NewAiThreadsUpdateMessageRequest("MessageId_example", *openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiThreadsUpdateMessageRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -973,7 +973,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -21,9 +21,9 @@ import (
 // checks if the BackupServiceStateDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupServiceStateDto{}
 
-// BackupServiceStateDto Backup service state.
+// BackupServiceStateDto Whether the paid backup service is switched on for a portal.
 type BackupServiceStateDto struct {
-	// Specifies if the backup service is enabled or not.
+	// Specifies whether the paid backup service is switched on for this portal, which is a setting of its  wallet rather than the health of the backup service. While it is true, backups beyond the free  monthly allowance are charged to the wallet.
 	Enabled *bool `json:"enabled,omitempty"`
 }
 

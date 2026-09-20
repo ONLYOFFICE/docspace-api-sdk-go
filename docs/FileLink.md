@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Filetype** | **NullableString** | The type of the file for the source viewed or edited document. | 
-**Token** | Pointer to **NullableString** | The encrypted signature added to the config in the form of a token. | [optional] 
-**Url** | **NullableString** | The absolute URL where the source viewed or edited document is stored. | 
+**Filetype** | **NullableString** | The format the stored content is in, lower-cased and with the leading dot, which is how the document  service learns how to read the bytes behind the address. It stays empty when the file title carries no  extension at all. | 
+**Token** | Pointer to **NullableString** | Signs the address and the format above so that the document service can trust them. It stays empty on a  portal that has no signature secret configured for the document service, and the address is then meant  to be fetched unsigned. | [optional] 
+**Url** | **NullableString** | Where the content is fetched from: the portal download handler, pinned to the revision the file was at  when the address was issued and carrying an authorisation key of limited validity. It is addressed to  the host the document service can reach, which on a deployment with a private editor network is not the  address a browser should follow. | 
 
 ## Methods
 

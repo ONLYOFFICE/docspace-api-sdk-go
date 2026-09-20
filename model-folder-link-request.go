@@ -16,29 +16,28 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the FolderLinkRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FolderLinkRequest{}
 
-// FolderLinkRequest The folder link parameters.
+// FolderLinkRequest The external link of a folder, as it is to be created or rewritten.
 type FolderLinkRequest struct {
-	// The folder link ID.
+	// Which link the request addresses: the identifier of an existing link rewrites that link, while an identifier  that is not in use, the empty one included, creates a new link. Take an existing identifier from  `GET api/2.0/files/folder/{id}/links`.
 	LinkId *string `json:"linkId,omitempty"`
-	// The link sharing rights.
+	// The rights a visitor following the link is given. The value that grants nothing revokes the link instead of  setting it, and the answer is then empty.
 	Access *FileShare `json:"access,omitempty"`
-	// The link expiration date.
-	ExpirationDate NullableTime `json:"expirationDate,omitempty"`
-	// The link name.
+	// The moment the link stops working, sent as an ISO-8601 stamp. A moment that lies in the past is ignored,  and leaving the field out gives the link no expiry.
+	ExpirationDate *ApiDateTime `json:"expirationDate,omitempty"`
+	// The name the link is listed under for the people who manage the folder; a visitor following it never sees the  name.
 	Title NullableString `json:"title,omitempty"`
-	// The link password.
+	// The secret a visitor has to enter before the link opens. Leave it out for a link that opens without one; the  secret itself is never given back, only the fact that one is set.
 	Password NullableString `json:"password,omitempty"`
-	// Specifies if downloading the file from the link is disabled or not.
+	// Whether visitors are left with viewing alone: with true downloading and copying through the link are blocked,  with false they are allowed.
 	DenyDownload *bool `json:"denyDownload,omitempty"`
-	// The link scope, whether it is internal or not.
+	// Whether the link admits signed-in portal members only: with true a visitor has to sign in before the link  opens, with false anyone holding the address may follow it.
 	Internal *bool `json:"internal,omitempty"`
-	// Specifies whether the folder link is primary or not.
+	// Whether this link becomes the primary link of the folder, the one the Copy link action of a client hands  out; a folder has one primary link at a time.
 	Primary *bool `json:"primary,omitempty"`
 }
 
@@ -123,46 +122,36 @@ func (o *FolderLinkRequest) SetAccess(v FileShare) {
 	o.Access = &v
 }
 
-// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FolderLinkRequest) GetExpirationDate() time.Time {
-	if o == nil || IsNil(o.ExpirationDate.Get()) {
-		var ret time.Time
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
+func (o *FolderLinkRequest) GetExpirationDate() ApiDateTime {
+	if o == nil || IsNil(o.ExpirationDate) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.ExpirationDate.Get()
+	return *o.ExpirationDate
 }
 
 // GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FolderLinkRequest) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil {
+func (o *FolderLinkRequest) GetExpirationDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.ExpirationDate) {
 		return nil, false
 	}
-	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
+	return o.ExpirationDate, true
 }
 
 // HasExpirationDate returns a boolean if a field has been set.
 func (o *FolderLinkRequest) IsExpirationDateSet() bool {
-	if o != nil && o.ExpirationDate.IsSet() {
+	if o != nil && !IsNil(o.ExpirationDate) {
 		return true
 	}
 
 	return false
 }
 
-// SetExpirationDate gets a reference to the given NullableTime and assigns it to the ExpirationDate field.
-func (o *FolderLinkRequest) SetExpirationDate(v time.Time) {
-	o.ExpirationDate.Set(&v)
-}
-// SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-func (o *FolderLinkRequest) SetExpirationDateNil() {
-	o.ExpirationDate.Set(nil)
-}
-
-// UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
-func (o *FolderLinkRequest) UnsetExpirationDate() {
-	o.ExpirationDate.Unset()
+// SetExpirationDate gets a reference to the given ApiDateTime and assigns it to the ExpirationDate field.
+func (o *FolderLinkRequest) SetExpirationDate(v ApiDateTime) {
+	o.ExpirationDate = &v
 }
 
 // GetTitle returns the Title field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -361,8 +350,8 @@ func (o FolderLinkRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Access) {
 		toSerialize["access"] = o.Access
 	}
-	if o.ExpirationDate.IsSet() {
-		toSerialize["expirationDate"] = o.ExpirationDate.Get()
+	if !IsNil(o.ExpirationDate) {
+		toSerialize["expirationDate"] = o.ExpirationDate
 	}
 	if o.Title.IsSet() {
 		toSerialize["title"] = o.Title.Get()

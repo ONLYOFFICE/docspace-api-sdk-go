@@ -33,6 +33,8 @@ type AiModel struct {
 	Provider AiProviderType `json:"provider"`
 	// Whether this model supports extended thinking / chain-of-thought reasoning.
 	Reasoning *bool `json:"reasoning,omitempty"`
+	// What the model can do with extended thinking, when the provider's catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider's id-based table.
+	ReasoningSupport *AiReasoningSupport `json:"reasoningSupport,omitempty"`
 	// Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`.
 	Capabilities *float32 `json:"capabilities,omitempty"`
 }
@@ -163,6 +165,38 @@ func (o *AiModel) SetReasoning(v bool) {
 	o.Reasoning = &v
 }
 
+// GetReasoningSupport returns the ReasoningSupport field value if set, zero value otherwise.
+func (o *AiModel) GetReasoningSupport() AiReasoningSupport {
+	if o == nil || IsNil(o.ReasoningSupport) {
+		var ret AiReasoningSupport
+		return ret
+	}
+	return *o.ReasoningSupport
+}
+
+// GetReasoningSupportOk returns a tuple with the ReasoningSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiModel) GetReasoningSupportOk() (*AiReasoningSupport, bool) {
+	if o == nil || IsNil(o.ReasoningSupport) {
+		return nil, false
+	}
+	return o.ReasoningSupport, true
+}
+
+// HasReasoningSupport returns a boolean if a field has been set.
+func (o *AiModel) IsReasoningSupportSet() bool {
+	if o != nil && !IsNil(o.ReasoningSupport) {
+		return true
+	}
+
+	return false
+}
+
+// SetReasoningSupport gets a reference to the given AiReasoningSupport and assigns it to the ReasoningSupport field.
+func (o *AiModel) SetReasoningSupport(v AiReasoningSupport) {
+	o.ReasoningSupport = &v
+}
+
 // GetCapabilities returns the Capabilities field value if set, zero value otherwise.
 func (o *AiModel) GetCapabilities() float32 {
 	if o == nil || IsNil(o.Capabilities) {
@@ -210,6 +244,9 @@ func (o AiModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["provider"] = o.Provider
 	if !IsNil(o.Reasoning) {
 		toSerialize["reasoning"] = o.Reasoning
+	}
+	if !IsNil(o.ReasoningSupport) {
+		toSerialize["reasoningSupport"] = o.ReasoningSupport
 	}
 	if !IsNil(o.Capabilities) {
 		toSerialize["capabilities"] = o.Capabilities

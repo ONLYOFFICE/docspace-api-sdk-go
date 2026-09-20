@@ -21,10 +21,10 @@ import (
 // checks if the TariffWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TariffWrapper{}
 
-// TariffWrapper The successful API response containing the Tariff object.
+// TariffWrapper The successful API response containing the TariffDto object.
 type TariffWrapper struct {
-	// The Tariff object returned by the operation.
-	Response *Tariff `json:"response,omitempty"`
+	// The TariffDto object returned by the operation.
+	Response *TariffDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewTariffWrapperWithDefaults() *TariffWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *TariffWrapper) GetResponse() Tariff {
+func (o *TariffWrapper) GetResponse() TariffDto {
 	if o == nil || IsNil(o.Response) {
-		var ret Tariff
+		var ret TariffDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *TariffWrapper) GetResponse() Tariff {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TariffWrapper) GetResponseOk() (*Tariff, bool) {
+func (o *TariffWrapper) GetResponseOk() (*TariffDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *TariffWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given Tariff and assigns it to the Response field.
-func (o *TariffWrapper) SetResponse(v Tariff) {
+// SetResponse gets a reference to the given TariffDto and assigns it to the Response field.
+func (o *TariffWrapper) SetResponse(v TariffDto) {
 	o.Response = &v
 }
 

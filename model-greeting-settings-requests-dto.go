@@ -23,9 +23,9 @@ import (
 // checks if the GreetingSettingsRequestsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GreetingSettingsRequestsDto{}
 
-// GreetingSettingsRequestsDto The request parameters for managing the greeting settings.
+// GreetingSettingsRequestsDto The greeting caption the portal shows its users.
 type GreetingSettingsRequestsDto struct {
-	// The title of the tenant greeting settings.
+	// The caption to store, which is kept as the portal name. An empty value clears the greeting and returns the  portal to the built-in default caption. On a cloud portal with a free or trial plan the text is also matched  against the character rule configured for the installation and a text that breaks it is refused, while a paid  cloud plan and a self-hosted installation apply no such check.
 	Title NullableString `json:"title"`
 }
 

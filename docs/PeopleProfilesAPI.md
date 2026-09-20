@@ -5,10 +5,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddMember**](PeopleProfilesAPI.md#AddMember) | **Post** /api/2.0/people | Add a user
-[**CheckUserExistsByEmail**](PeopleProfilesAPI.md#CheckUserExistsByEmail) | **Get** /api/2.0/people/exists | Check if a user exists by email
+[**CheckUserExistsByEmail**](PeopleProfilesAPI.md#CheckUserExistsByEmail) | **Get** /api/2.0/people/exists | Check whether an email is taken
 [**DeleteMember**](PeopleProfilesAPI.md#DeleteMember) | **Delete** /api/2.0/people/{userid} | Delete a user
-[**DeleteProfile**](PeopleProfilesAPI.md#DeleteProfile) | **Delete** /api/2.0/people/@self | Delete my profile
-[**GetAllProfiles**](PeopleProfilesAPI.md#GetAllProfiles) | **Get** /api/2.0/people | Get profiles
+[**DeleteProfile**](PeopleProfilesAPI.md#DeleteProfile) | **Delete** /api/2.0/people/@self | Close my own profile
+[**GetAllProfiles**](PeopleProfilesAPI.md#GetAllProfiles) | **Get** /api/2.0/people | Get the active profiles
 [**GetClaims**](PeopleProfilesAPI.md#GetClaims) | **Get** /api/2.0/people/tokendiagnostics | Get user claims
 [**GetProfileByEmail**](PeopleProfilesAPI.md#GetProfileByEmail) | **Get** /api/2.0/people/email | Get a profile by user email
 [**GetProfileByUserId**](PeopleProfilesAPI.md#GetProfileByUserId) | **Get** /api/2.0/people/{userid} | Get a profile by user ID
@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 
 > UserExistsResponseWrapper CheckUserExistsByEmail(ctx).Email(email).Encemail(encemail).Culture(culture).Execute()
 
-Check if a user exists by email
+Check whether an email is taken
 
 
 
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
 
 > EmployeeFullWrapper DeleteProfile(ctx).Execute()
 
-Delete my profile
+Close my own profile
 
 
 
@@ -300,7 +300,7 @@ Other parameters are passed through a pointer to a apiDeleteProfileRequest struc
 
 > EmployeeFullArrayWrapper GetAllProfiles(ctx).Count(count).StartIndex(startIndex).FilterBy(filterBy).SortBy(sortBy).SortOrder(sortOrder).FilterSeparator(filterSeparator).FilterValue(filterValue).Execute()
 
-Get profiles
+Get the active profiles
 
 
 
@@ -319,13 +319,13 @@ import (
 )
 
 func main() {
-	count := int32(25) // int32 | The maximum number of items to be retrieved in the response. (optional)
-	startIndex := int32(0) // int32 | The zero-based index of the first item to be retrieved in a filtered result set. (optional)
-	filterBy := "displayName" // string | Specifies the filter criteria for user-related queries. (optional)
-	sortBy := "displayName" // string | Specifies the property or field name by which the results should be sorted. (optional)
-	sortOrder := openapiclient.SortOrder(0) // SortOrder | The order in which the results are sorted. (optional)
-	filterSeparator := "," // string | The character or string used to separate multiple filter values in a filtering query. (optional)
-	filterValue := "John" // string | The text value used as an additional filter criterion for profiles retrieval. (optional)
+	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
+	startIndex := int32(0) // int32 | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional)
+	filterBy := "group" // string | The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter. (optional)
+	sortBy := "DisplayName" // string | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. (optional)
+	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction of the ordering: `Ascending`, which is the default, or `Descending`. (optional)
+	filterSeparator := "," // string | The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match. (optional)
+	filterValue := "John" // string | The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -350,13 +350,13 @@ Other parameters are passed through a pointer to a apiGetAllProfilesRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **count** | **int32** | The maximum number of items to be retrieved in the response. | 
- **startIndex** | **int32** | The zero-based index of the first item to be retrieved in a filtered result set. | 
- **filterBy** | **string** | Specifies the filter criteria for user-related queries. | 
- **sortBy** | **string** | Specifies the property or field name by which the results should be sorted. | 
- **sortOrder** | [**SortOrder**](SortOrder.md) | The order in which the results are sorted. | 
- **filterSeparator** | **string** | The character or string used to separate multiple filter values in a filtering query. | 
- **filterValue** | **string** | The text value used as an additional filter criterion for profiles retrieval. | 
+ **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
+ **startIndex** | **int32** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | 
+ **filterBy** | **string** | The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter. | 
+ **sortBy** | **string** | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. | 
+ **sortOrder** | [**SortOrder**](SortOrder.md) | The direction of the ordering: `Ascending`, which is the default, or `Descending`. | 
+ **filterSeparator** | **string** | The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match. | 
+ **filterValue** | **string** | The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter. | 
 
 ### Return type
 
@@ -378,7 +378,7 @@ Name | Type | Description  | Notes
 
 ## GetClaims
 
-> ObjectWrapper GetClaims(ctx).Execute()
+> TokenDiagnosticsWrapper GetClaims(ctx).Execute()
 
 Get user claims
 
@@ -407,7 +407,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleProfilesAPI.GetClaims``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetClaims`: ObjectWrapper
+	// response from `GetClaims`: TokenDiagnosticsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PeopleProfilesAPI.GetClaims`: %v\n", resp)
 }
 ```
@@ -423,7 +423,7 @@ Other parameters are passed through a pointer to a apiGetClaimsRequest struct vi
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**TokenDiagnosticsWrapper**](TokenDiagnosticsWrapper.md)
 
 ### Authorization
 

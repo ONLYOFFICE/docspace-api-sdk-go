@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ContinuePortal**](PortalSettingsAPI.md#ContinuePortal) | **Put** /api/2.0/portal/continue | Restore a portal
 [**DeletePortal**](PortalSettingsAPI.md#DeletePortal) | **Delete** /api/2.0/portal/delete | Delete a portal
-[**GetPortalInformation**](PortalSettingsAPI.md#GetPortalInformation) | **Get** /api/2.0/portal | Get a portal
+[**GetPortalInformation**](PortalSettingsAPI.md#GetPortalInformation) | **Get** /api/2.0/portal | Get portal information
 [**GetPortalPath**](PortalSettingsAPI.md#GetPortalPath) | **Get** /api/2.0/portal/path | Get a path to the portal
 [**SendDeleteInstructions**](PortalSettingsAPI.md#SendDeleteInstructions) | **Post** /api/2.0/portal/delete | Send removal instructions
 [**SendSuspendInstructions**](PortalSettingsAPI.md#SendSuspendInstructions) | **Post** /api/2.0/portal/suspend | Send suspension instructions
@@ -142,7 +142,7 @@ Other parameters are passed through a pointer to a apiDeletePortalRequest struct
 
 > TenantWrapper GetPortalInformation(ctx).Execute()
 
-Get a portal
+Get portal information
 
 
 
@@ -203,7 +203,7 @@ Other parameters are passed through a pointer to a apiGetPortalInformationReques
 
 ## GetPortalPath
 
-> ObjectWrapper GetPortalPath(ctx).VirtualPath(virtualPath).Execute()
+> StringWrapper GetPortalPath(ctx).VirtualPath(virtualPath).Execute()
 
 Get a path to the portal
 
@@ -224,7 +224,7 @@ import (
 )
 
 func main() {
-	virtualPath := "/portal/documents" // string | The virtual path for the portal resource access. (optional)
+	virtualPath := "/portal/documents" // string | The path to resolve. It is taken as it is: an omitted or empty value yields the portal root, a value starting  with `/` is appended to that root, a value starting with `~/` is resolved against the virtual root, and one  that already begins with `http://`, `https://` or `mailto:` is handed back unchanged. Nothing checks that the  path exists or that the caller may open it. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -233,7 +233,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalSettingsAPI.GetPortalPath``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPortalPath`: ObjectWrapper
+	// response from `GetPortalPath`: StringWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PortalSettingsAPI.GetPortalPath`: %v\n", resp)
 }
 ```
@@ -249,11 +249,11 @@ Other parameters are passed through a pointer to a apiGetPortalPathRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **virtualPath** | **string** | The virtual path for the portal resource access. | 
+ **virtualPath** | **string** | The path to resolve. It is taken as it is: an omitted or empty value yields the portal root, a value starting  with `/` is appended to that root, a value starting with `~/` is resolved against the virtual root, and one  that already begins with `http://`, `https://` or `mailto:` is handed back unchanged. Nothing checks that the  path exists or that the caller may open it. | 
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**StringWrapper**](StringWrapper.md)
 
 ### Authorization
 

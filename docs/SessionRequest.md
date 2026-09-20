@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FileName** | **NullableString** | The file name. | 
-**FileSize** | Pointer to **int64** | The file size. | [optional] 
-**RelativePath** | Pointer to **NullableString** | The relative path to the file. | [optional] 
-**CreateOn** | Pointer to **NullableTime** | The date and time when the file was created. | [optional] 
-**Encrypted** | Pointer to **bool** | Specifies whether the file is encrypted or not. | [optional] 
-**CreateNewIfExist** | Pointer to **bool** | Specifies whether to create a new file if it already exists. | [optional] 
+**FileName** | **NullableString** | The name to store the file under, extension included. Characters a title cannot hold are replaced and the name  is truncated, so the stored title can differ from the one sent. | 
+**FileSize** | Pointer to **int64** | The exact number of bytes that will be sent. The size is reserved when the session opens and compared with the  parts as they arrive; below the portal chunk size the session takes the whole payload in one part, and above  the portal limit for chunked uploads it is refused. | [optional] 
+**RelativePath** | Pointer to **NullableString** | A slash-separated chain of folder titles under the target folder to store the file in; folders in the chain  that do not exist yet are created. Leave it empty to store the file in the folder from the path itself. | [optional] 
+**CreateOn** | Pointer to [**ApiDateTime**](ApiDateTime.md) | The creation time to stamp on a newly created file instead of the moment the upload finishes. It is ignored  when the upload lands on a file that already exists. | [optional] 
+**Encrypted** | Pointer to **bool** | Marks the stored file as client-side encrypted, which is how content uploaded into a private room is kept;  with false the bytes are stored as they arrive. | [optional] 
+**CreateNewIfExist** | Pointer to **bool** | Settles the clash when the folder already holds a file with this name: true stores the upload beside it under  a name with a numeric suffix, false takes the existing file over and adds the content to it as a new version. | [optional] 
 
 ## Methods
 
@@ -122,20 +122,20 @@ HasRelativePath returns a boolean if a field has been set.
 UnsetRelativePath ensures that no value is present for RelativePath, not even an explicit nil
 ### GetCreateOn
 
-`func (o *SessionRequest) GetCreateOn() time.Time`
+`func (o *SessionRequest) GetCreateOn() ApiDateTime`
 
 GetCreateOn returns the CreateOn field if non-nil, zero value otherwise.
 
 ### GetCreateOnOk
 
-`func (o *SessionRequest) GetCreateOnOk() (*time.Time, bool)`
+`func (o *SessionRequest) GetCreateOnOk() (*ApiDateTime, bool)`
 
 GetCreateOnOk returns a tuple with the CreateOn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreateOn
 
-`func (o *SessionRequest) SetCreateOn(v time.Time)`
+`func (o *SessionRequest) SetCreateOn(v ApiDateTime)`
 
 SetCreateOn sets CreateOn field to given value.
 
@@ -145,16 +145,6 @@ SetCreateOn sets CreateOn field to given value.
 
 HasCreateOn returns a boolean if a field has been set.
 
-### SetCreateOnNil
-
-`func (o *SessionRequest) SetCreateOnNil(b bool)`
-
- SetCreateOnNil sets the value for CreateOn to be an explicit nil
-
-### UnsetCreateOn
-`func (o *SessionRequest) UnsetCreateOn()`
-
-UnsetCreateOn ensures that no value is present for CreateOn, not even an explicit nil
 ### GetEncrypted
 
 `func (o *SessionRequest) GetEncrypted() bool`

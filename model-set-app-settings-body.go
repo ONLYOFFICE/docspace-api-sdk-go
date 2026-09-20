@@ -21,7 +21,7 @@ import (
 // checks if the SetAppSettingsBody type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SetAppSettingsBody{}
 
-// SetAppSettingsBody Request body for saving application-specific settings.
+// SetAppSettingsBody The configuration document a portal application keeps.
 type SetAppSettingsBody struct {
 	Settings *SetAppSettingsBodySettings `json:"settings,omitempty"`
 }

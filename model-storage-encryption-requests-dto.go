@@ -21,9 +21,9 @@ import (
 // checks if the StorageEncryptionRequestsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StorageEncryptionRequestsDto{}
 
-// StorageEncryptionRequestsDto The request parameters for managing storage encryption operations and notifications.
+// StorageEncryptionRequestsDto Whether the users are warned before the portals go down for the storage encryption pass.
 type StorageEncryptionRequestsDto struct {
-	// Specifies whether the users receive notifications about the storage encryption operations.
+	// Whether every user of every portal on the server is mailed before the encryption or decryption pass starts.  The pass runs either way; the flag only decides whether people are told that their portal is about to become  unavailable.
 	NotifyUsers *bool `json:"notifyUsers,omitempty"`
 }
 

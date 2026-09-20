@@ -21,9 +21,9 @@ import (
 // checks if the LockFileParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LockFileParameters{}
 
-// LockFileParameters The parameters for locking a file.
+// LockFileParameters The lock state a file is to be put into.
 type LockFileParameters struct {
-	// Specifies whether to lock a file or not.
+	// The state to reach: `true` locks the file, which blocks editing, renaming and deleting for everybody but the  account that locked it and the room admins, and drops the others out of a running editing session; `false`  releases the lock.
 	LockFile *bool `json:"lockFile,omitempty"`
 }
 

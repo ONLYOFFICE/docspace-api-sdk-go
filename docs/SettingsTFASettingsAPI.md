@@ -4,15 +4,15 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetTfaAppCodes**](SettingsTFASettingsAPI.md#GetTfaAppCodes) | **Get** /api/2.0/settings/tfaappcodes | Get the TFA codes
+[**GetTfaAppCodes**](SettingsTFASettingsAPI.md#GetTfaAppCodes) | **Get** /api/2.0/settings/tfaappcodes | Get the TFA backup codes
 [**GetTfaConfirmData**](SettingsTFASettingsAPI.md#GetTfaConfirmData) | **Get** /api/2.0/settings/tfaapp/confirm | Get TFA confirmation data
 [**GetTfaSettings**](SettingsTFASettingsAPI.md#GetTfaSettings) | **Get** /api/2.0/settings/tfaapp | Get the TFA settings
-[**TfaAppGenerateSetupCode**](SettingsTFASettingsAPI.md#TfaAppGenerateSetupCode) | **Get** /api/2.0/settings/tfaapp/setup | Generate setup code
+[**TfaAppGenerateSetupCode**](SettingsTFASettingsAPI.md#TfaAppGenerateSetupCode) | **Get** /api/2.0/settings/tfaapp/setup | Generate the TFA setup code
 [**TfaValidateAuthCode**](SettingsTFASettingsAPI.md#TfaValidateAuthCode) | **Post** /api/2.0/settings/tfaapp/validate | Validate the TFA code
 [**UnlinkTfaApp**](SettingsTFASettingsAPI.md#UnlinkTfaApp) | **Put** /api/2.0/settings/tfaappnewapp | Unlink the TFA application
-[**UpdateTfaAppCodes**](SettingsTFASettingsAPI.md#UpdateTfaAppCodes) | **Put** /api/2.0/settings/tfaappnewcodes | Update the TFA codes
+[**UpdateTfaAppCodes**](SettingsTFASettingsAPI.md#UpdateTfaAppCodes) | **Put** /api/2.0/settings/tfaappnewcodes | Regenerate the TFA backup codes
 [**UpdateTfaSettings**](SettingsTFASettingsAPI.md#UpdateTfaSettings) | **Put** /api/2.0/settings/tfaapp | Update the TFA settings
-[**UpdateTfaSettingsLink**](SettingsTFASettingsAPI.md#UpdateTfaSettingsLink) | **Put** /api/2.0/settings/tfaappwithlink | Updates TFA settings
+[**UpdateTfaSettingsLink**](SettingsTFASettingsAPI.md#UpdateTfaSettingsLink) | **Put** /api/2.0/settings/tfaappwithlink | Update TFA settings with a link
 
 
 
@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 > TfaAppCodeArrayWrapper GetTfaAppCodes(ctx).Execute()
 
-Get the TFA codes
+Get the TFA backup codes
 
 
 
@@ -209,7 +209,7 @@ Other parameters are passed through a pointer to a apiGetTfaSettingsRequest stru
 
 > TfaSetupCodeWrapper TfaAppGenerateSetupCode(ctx).Execute()
 
-Generate setup code
+Generate the TFA setup code
 
 
 
@@ -408,7 +408,7 @@ Name | Type | Description  | Notes
 
 > TfaAppCodeArrayWrapper UpdateTfaAppCodes(ctx).Execute()
 
-Update the TFA codes
+Regenerate the TFA backup codes
 
 
 
@@ -539,7 +539,7 @@ Name | Type | Description  | Notes
 
 > StringWrapper UpdateTfaSettingsLink(ctx).TfaRequestsDto(tfaRequestsDto).Execute()
 
-Updates TFA settings
+Update TFA settings with a link
 
 
 

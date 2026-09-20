@@ -21,11 +21,11 @@ import (
 // checks if the FormsItemDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FormsItemDto{}
 
-// FormsItemDto The forms item information.
+// FormsItemDto One field of a form, offered as a filter over the copies gathered in a form-filling room.
 type FormsItemDto struct {
-	// The form item key.              <example>field_name</example>
+	// The name of the field as it is written in the form; send it back as `formsItemKey` to keep only              the completed copies whose field of that name holds a value.              <example>first_name</example>
 	Key NullableString `json:"key,omitempty"`
-	// The form item type.              <example>text</example>
+	// The kind of value the field holds, a text box or a checkbox for instance; send it back as              `formsItemType` beside the key.              <example>text</example>
 	Type NullableString `json:"type,omitempty"`
 }
 

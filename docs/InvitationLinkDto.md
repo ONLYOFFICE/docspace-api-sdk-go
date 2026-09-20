@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The ID of the invitation link. | [optional] 
-**EmployeeType** | [**EmployeeType**](EmployeeType.md) | The type of employee role for the invitation link. | 
-**Expiration** | Pointer to **NullableTime** | The expiration date of the invitation link. | [optional] 
-**IsExpired** | Pointer to **bool** | Indicates whether the invitation link has expired. | [optional] 
-**MaxUseCount** | Pointer to **NullableInt32** | The maximum number of times the invitation link can be used. | [optional] 
-**CurrentUseCount** | Pointer to **int32** | The current number of times the invitation link has been used. | [optional] 
-**Url** | Pointer to **NullableString** | The URL of the invitation link. | [optional] 
+**Id** | Pointer to **string** | The identifier to address the link by in `PUT api/2.0/portal/users/invitationlink` and  `DELETE api/2.0/portal/users/invitationlink`. It survives a change of deadline or use limit, so it is  worth storing rather than re-reading. | [optional] 
+**EmployeeType** | [**EmployeeType**](EmployeeType.md) | The role an account gets by joining through this link. A portal keeps at most one link per role, and the  role of an existing link cannot be changed - the link has to be deleted and created again. | 
+**Expiration** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the link stops working, in the portal time zone. It is empty for a link that never expires, which is  what omitting the deadline on create or update leaves behind. | [optional] 
+**IsExpired** | Pointer to **bool** | Whether that deadline has already passed. A link without a deadline always reports `false`, and an expired  link is still returned rather than treated as gone - it can be revived by moving `expiration`. | [optional] 
+**MaxUseCount** | Pointer to **NullableInt32** | How many accounts may join through the link in total. It is empty for a link with no use limit, and an  update may not lower it below `currentUseCount`. | [optional] 
+**CurrentUseCount** | Pointer to **int32** | How many accounts have already joined through the link. It only ever grows, and reaching `maxUseCount`  retires the link as surely as a passed deadline. | [optional] 
+**Url** | Pointer to **NullableString** | The shortened address to hand to the people being invited. It is signed for the account that read it, so  two administrators are given two different URLs for one and the same link and both of them work; the `id`  above, not this string, is what identifies the link. | [optional] 
 
 ## Methods
 
@@ -78,20 +78,20 @@ SetEmployeeType sets EmployeeType field to given value.
 
 ### GetExpiration
 
-`func (o *InvitationLinkDto) GetExpiration() time.Time`
+`func (o *InvitationLinkDto) GetExpiration() ApiDateTime`
 
 GetExpiration returns the Expiration field if non-nil, zero value otherwise.
 
 ### GetExpirationOk
 
-`func (o *InvitationLinkDto) GetExpirationOk() (*time.Time, bool)`
+`func (o *InvitationLinkDto) GetExpirationOk() (*ApiDateTime, bool)`
 
 GetExpirationOk returns a tuple with the Expiration field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpiration
 
-`func (o *InvitationLinkDto) SetExpiration(v time.Time)`
+`func (o *InvitationLinkDto) SetExpiration(v ApiDateTime)`
 
 SetExpiration sets Expiration field to given value.
 
@@ -101,16 +101,6 @@ SetExpiration sets Expiration field to given value.
 
 HasExpiration returns a boolean if a field has been set.
 
-### SetExpirationNil
-
-`func (o *InvitationLinkDto) SetExpirationNil(b bool)`
-
- SetExpirationNil sets the value for Expiration to be an explicit nil
-
-### UnsetExpiration
-`func (o *InvitationLinkDto) UnsetExpiration()`
-
-UnsetExpiration ensures that no value is present for Expiration, not even an explicit nil
 ### GetIsExpired
 
 `func (o *InvitationLinkDto) GetIsExpired() bool`

@@ -21,7 +21,7 @@ import (
 // checks if the PluginsConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PluginsConfig{}
 
-// PluginsConfig The configuration settings to connect the special add-ons.
+// PluginsConfig Which editor add-ons the portal connects. It currently connects none.
 type PluginsConfig struct {
 	// The array of absolute URLs to the plugin configuration files.
 	PluginsData []string `json:"pluginsData,omitempty"`

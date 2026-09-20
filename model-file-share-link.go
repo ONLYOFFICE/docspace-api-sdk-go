@@ -16,39 +16,38 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the FileShareLink type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FileShareLink{}
 
-// FileShareLink A shareable link for a file with its configuration and status.
+// FileShareLink A sharing link of a file, a folder or a room, with everything set on it.
 type FileShareLink struct {
-	// The unique identifier of the shared link.
+	// The identifier of the link, the one to send back as `linkId` to change or delete it.
 	Id *string `json:"id,omitempty"`
-	// The title of the shared content.
+	// The name the link is listed under, which its author is free to choose and to leave empty.
 	Title NullableString `json:"title,omitempty"`
-	// The URL for accessing the shared content.
+	// The shortened address to hand out. Opening it is what turns the link into access; the address stays the same  while the link exists.
 	ShareLink NullableString `json:"shareLink,omitempty"`
-	// The date when the shared link expires.
-	ExpirationDate NullableTime `json:"expirationDate,omitempty"`
-	// The sharing link type (e.g., Invitation).
+	// The moment the link stops working, written with the offset of the portal time zone. Null when the link was  left without an end.
+	ExpirationDate *ApiDateTime `json:"expirationDate,omitempty"`
+	// Which of the two jobs the link does: letting somebody into the room as a member, or handing out the entry  itself. The counters of uses are filled in for the first kind only.
 	LinkType *LinkType `json:"linkType,omitempty"`
-	// The password protection for accessing the shared content.
+	// The password a visitor has to send before the link resolves, readable only by those who may manage the link.  Empty when the link asks for none.
 	Password NullableString `json:"password,omitempty"`
-	// Indicates whether downloading of the shared content is prohibited.
+	// Whether visitors coming through this link may only read the entry in the editor and not download or print it.
 	DenyDownload NullableBool `json:"denyDownload,omitempty"`
-	// Indicates whether the shared link has expired.
+	// Whether the moment in `expirationDate` has already passed, which leaves the link in place but refuses  everybody who opens it.
 	IsExpired NullableBool `json:"isExpired,omitempty"`
-	// Indicates whether this is the primary shared link.
+	// Whether this is the one link the entry always keeps: a public or a form-filling room is given it at creation,  and deleting it there only makes a new one.
 	Primary *bool `json:"primary,omitempty"`
-	// Indicates whether the link is for the internal sharing only.
+	// Whether the visitor has to sign in to the portal before the link resolves, as opposed to it being open to  anybody who has the address.
 	Internal NullableBool `json:"internal,omitempty"`
-	// The token for validating access requests.
+	// The key that stands for this link in the calls that resolve it, such as `GET api/2.0/files/share/{key}`. It is  filled in for links that hand out the entry, and empty for the ones that invite into a room.
 	RequestToken NullableString `json:"requestToken,omitempty"`
-	// The maximum number of times the invitation link can be used.
+	// How many accounts may still join the room through this invitation link in total. Null on a link that hands out  the entry, where nothing is counted.
 	MaxUseCount NullableInt32 `json:"maxUseCount,omitempty"`
-	// The current number of times the invitation link has been used.
+	// How many accounts have already joined through this invitation link. Once it reaches `maxUseCount` the link  stops letting anybody else in. Null on a link that hands out the entry.
 	CurrentUseCount NullableInt32 `json:"currentUseCount,omitempty"`
 }
 
@@ -185,46 +184,36 @@ func (o *FileShareLink) UnsetShareLink() {
 	o.ShareLink.Unset()
 }
 
-// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FileShareLink) GetExpirationDate() time.Time {
-	if o == nil || IsNil(o.ExpirationDate.Get()) {
-		var ret time.Time
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
+func (o *FileShareLink) GetExpirationDate() ApiDateTime {
+	if o == nil || IsNil(o.ExpirationDate) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.ExpirationDate.Get()
+	return *o.ExpirationDate
 }
 
 // GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FileShareLink) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil {
+func (o *FileShareLink) GetExpirationDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.ExpirationDate) {
 		return nil, false
 	}
-	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
+	return o.ExpirationDate, true
 }
 
 // HasExpirationDate returns a boolean if a field has been set.
 func (o *FileShareLink) IsExpirationDateSet() bool {
-	if o != nil && o.ExpirationDate.IsSet() {
+	if o != nil && !IsNil(o.ExpirationDate) {
 		return true
 	}
 
 	return false
 }
 
-// SetExpirationDate gets a reference to the given NullableTime and assigns it to the ExpirationDate field.
-func (o *FileShareLink) SetExpirationDate(v time.Time) {
-	o.ExpirationDate.Set(&v)
-}
-// SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-func (o *FileShareLink) SetExpirationDateNil() {
-	o.ExpirationDate.Set(nil)
-}
-
-// UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
-func (o *FileShareLink) UnsetExpirationDate() {
-	o.ExpirationDate.Unset()
+// SetExpirationDate gets a reference to the given ApiDateTime and assigns it to the ExpirationDate field.
+func (o *FileShareLink) SetExpirationDate(v ApiDateTime) {
+	o.ExpirationDate = &v
 }
 
 // GetLinkType returns the LinkType field value if set, zero value otherwise.
@@ -604,8 +593,8 @@ func (o FileShareLink) ToMap() (map[string]interface{}, error) {
 	if o.ShareLink.IsSet() {
 		toSerialize["shareLink"] = o.ShareLink.Get()
 	}
-	if o.ExpirationDate.IsSet() {
-		toSerialize["expirationDate"] = o.ExpirationDate.Get()
+	if !IsNil(o.ExpirationDate) {
+		toSerialize["expirationDate"] = o.ExpirationDate
 	}
 	if !IsNil(o.LinkType) {
 		toSerialize["linkType"] = o.LinkType

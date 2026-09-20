@@ -21,13 +21,13 @@ import (
 // checks if the TfaSetupCodeDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TfaSetupCodeDto{}
 
-// TfaSetupCodeDto The setup TFA code parameters.
+// TfaSetupCodeDto The secret to enrol in an authenticator application, in both of the forms an application can take it.
 type TfaSetupCodeDto struct {
-	// The account for which the setup code is generated.
+	// The label the authenticator application will list the credential under, which is the caller's own email  address. It identifies the entry to a person, and no application checks it.
 	Account NullableString `json:"account,omitempty"`
-	// The manual entry key.
+	// The secret in the base32 form that is typed into an application by hand. It describes the very same  credential as `qrCodeSetupImageUrl`, and repeating the call hands back the same value for the account until  the credential is reset.
 	ManualEntryKey NullableString `json:"manualEntryKey,omitempty"`
-	// The QR-code setup image URL (base64-encoded PNG image).
+	// The same secret as a scannable image, given as a `data:image/png;base64,` URL that can be rendered  directly - it is not a link to fetch.
 	QrCodeSetupImageUrl NullableString `json:"qrCodeSetupImageUrl,omitempty"`
 }
 

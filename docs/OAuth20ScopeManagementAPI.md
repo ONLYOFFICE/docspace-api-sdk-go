@@ -4,13 +4,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetScopes**](OAuth20ScopeManagementAPI.md#GetScopes) | **Get** /api/2.0/scopes | List available OAuth2 scopes
+[**GetScopes**](OAuth20ScopeManagementAPI.md#GetScopes) | **Get** /api/2.0/oauth2/scopes | List available OAuth2 scopes
 
 
 
 ## GetScopes
 
-> ScopeResponse GetScopes(ctx).Execute()
+> []ScopeResponse GetScopes(ctx).Execute()
 
 List available OAuth2 scopes
 
@@ -39,7 +39,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OAuth20ScopeManagementAPI.GetScopes``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetScopes`: ScopeResponse
+	// response from `GetScopes`: []ScopeResponse
 	fmt.Fprintf(os.Stdout, "Response from `OAuth20ScopeManagementAPI.GetScopes`: %v\n", resp)
 }
 ```
@@ -55,7 +55,7 @@ Other parameters are passed through a pointer to a apiGetScopesRequest struct vi
 
 ### Return type
 
-[**ScopeResponse**](ScopeResponse.md)
+[**[]ScopeResponse**](ScopeResponse.md)
 
 ### Authorization
 

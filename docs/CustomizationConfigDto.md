@@ -4,17 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**About** | Pointer to **bool** | Specifies if the customization is about. | [optional] 
-**Customer** | Pointer to [**CustomerConfigDto**](CustomerConfigDto.md) | The customization customer configuration. | [optional] 
-**Anonymous** | Pointer to [**AnonymousConfigDto**](AnonymousConfigDto.md) | The anonymous configuration of the customization. | [optional] 
-**Feedback** | Pointer to [**FeedbackConfig**](FeedbackConfig.md) | The feedback configuration of the customization. | [optional] 
-**Forcesave** | Pointer to **NullableBool** | Specifies if the customization should be force saved. | [optional] 
-**Goback** | Pointer to [**GobackConfig**](GobackConfig.md) | The go back configuration of the customization. | [optional] 
-**Review** | Pointer to [**ReviewConfig**](ReviewConfig.md) | The review configuration of the customization. | [optional] 
-**Logo** | Pointer to [**LogoConfigDto**](LogoConfigDto.md) | The logo of the customization. | [optional] 
-**MentionShare** | Pointer to **bool** | Specifies if the share should be mentioned. | [optional] 
-**SubmitForm** | Pointer to [**SubmitForm**](SubmitForm.md) | The Complete & Submit button settings. | [optional] 
-**StartFillingForm** | Pointer to [**StartFillingForm**](StartFillingForm.md) | The parameters of the button that starts filling out the form. | [optional] 
+**About** | Pointer to **bool** | Whether the About entry of the editor menu is shown. | [optional] 
+**Customer** | Pointer to [**CustomerConfigDto**](CustomerConfigDto.md) | The branding of the organization running the portal. It is filled in on a server installation only and is  empty in the cloud. | [optional] 
+**Anonymous** | Pointer to [**AnonymousConfigDto**](AnonymousConfigDto.md) | How an anonymous participant is treated in this session. | [optional] 
+**Feedback** | Pointer to [**FeedbackConfig**](FeedbackConfig.md) | The support link the editor offers behind its feedback button. | [optional] 
+**Forcesave** | Pointer to **NullableBool** | Whether the editors write intermediate revisions while the document stays open. It is empty when the portal  leaves the decision to the editors themselves. | [optional] 
+**Goback** | Pointer to [**GobackConfig**](GobackConfig.md) | Where the editor returns the user to when they leave the document. It is empty when there is nowhere to go  back to, as in an embedded opening. | [optional] 
+**Review** | Pointer to [**ReviewConfig**](ReviewConfig.md) | How tracked changes are displayed when the document opens; it depends on whether this session may write. | [optional] 
+**Logo** | Pointer to [**LogoConfigDto**](LogoConfigDto.md) | The logo the editor shows, in the variants the current layout and file type need. | [optional] 
+**MentionShare** | Pointer to **bool** | Whether mentioning a user who cannot yet open the document offers to share it with them, instead of silently  notifying nobody. | [optional] 
+**SubmitForm** | Pointer to [**SubmitForm**](SubmitForm.md) | The submit button of a form: whether it is shown and what it says. | [optional] 
+**StartFillingForm** | Pointer to [**StartFillingForm**](StartFillingForm.md) | The button that starts filling out the form. It is empty when this opening offers no such button. | [optional] 
+**Ai** | Pointer to [**AIConfig**](AIConfig.md) | The AI configuration settings. | [optional] 
 
 ## Methods
 
@@ -319,6 +320,31 @@ SetStartFillingForm sets StartFillingForm field to given value.
 `func (o *CustomizationConfigDto) HasStartFillingForm() bool`
 
 HasStartFillingForm returns a boolean if a field has been set.
+
+### GetAi
+
+`func (o *CustomizationConfigDto) GetAi() AIConfig`
+
+GetAi returns the Ai field if non-nil, zero value otherwise.
+
+### GetAiOk
+
+`func (o *CustomizationConfigDto) GetAiOk() (*AIConfig, bool)`
+
+GetAiOk returns a tuple with the Ai field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAi
+
+`func (o *CustomizationConfigDto) SetAi(v AIConfig)`
+
+SetAi sets Ai field to given value.
+
+### HasAi
+
+`func (o *CustomizationConfigDto) HasAi() bool`
+
+HasAi returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

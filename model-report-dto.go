@@ -21,19 +21,19 @@ import (
 // checks if the ReportDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReportDto{}
 
-// ReportDto Represents a report containing a collection of operations.
+// ReportDto One page of the portal wallet's money movements, with the paging figures needed to walk the rest.
 type ReportDto struct {
-	// A collection of operations.
+	// The movements on this page - top-ups, charges, refunds and corrections alike, newest first. It is empty  for a page past the end of the report as well as for a period in which nothing happened.
 	Collection []OperationDto `json:"collection,omitempty"`
-	// The report data offset.
+	// How many movements were skipped before this page, echoed from the request so a client need not remember  what it asked for.
 	Offset *int32 `json:"offset,omitempty"`
-	// The report data limit.
+	// How many movements one page may hold, echoed from the request; it is 25 unless another value was asked  for. A full page is not proof that more exist - compare `currentPage` with `totalPage`.
 	Limit *int32 `json:"limit,omitempty"`
-	// The total quantity of operations in the report.
+	// How many movements match the filters in total, across every page.
 	TotalQuantity *int64 `json:"totalQuantity,omitempty"`
-	// The total number of pages in the report.
+	// How many pages those movements come to at the current `limit`.
 	TotalPage *int32 `json:"totalPage,omitempty"`
-	// The current page number of the report.
+	// Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument.
 	CurrentPage *int32 `json:"currentPage,omitempty"`
 }
 

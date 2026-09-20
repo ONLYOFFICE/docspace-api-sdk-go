@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccessToken** | Pointer to **NullableString** | Access token | [optional] 
-**RefreshToken** | Pointer to **NullableString** | Refresh token | [optional] 
-**ExpiresIn** | Pointer to **int64** | Expires in | [optional] 
-**ClientId** | Pointer to **NullableString** | Client id | [optional] 
-**ClientSecret** | Pointer to **NullableString** | Client secret | [optional] 
-**RedirectUri** | Pointer to **NullableString** | Redirect uri | [optional] 
-**Timestamp** | Pointer to **time.Time** | Timestamp | [optional] 
-**IsExpired** | Pointer to **bool** | Is expired | [optional] [readonly] 
+**AccessToken** | Pointer to **NullableString** | The token sent to the provider with every request made on behalf of the account. | [optional] 
+**RefreshToken** | Pointer to **NullableString** | The token used to obtain a new access token when the current one expires. A provider that issues no refresh  token leaves it empty, and the account then has to be connected again to keep working. | [optional] 
+**ExpiresIn** | Pointer to **int64** | How long the access token stays usable, in seconds counted from `timestamp`. Zero means the provider did not  say, and the token is then treated as expired. | [optional] 
+**ClientId** | Pointer to **NullableString** | The OAuth 2.0 client ID of the application the token was issued to. | [optional] 
+**ClientSecret** | Pointer to **NullableString** | The client secret of the application the token was issued to, needed when the token is refreshed. | [optional] 
+**RedirectUri** | Pointer to **NullableString** | The redirect URL the authorization code behind this token was obtained with; providers require the same value  again when the token is refreshed. | [optional] 
+**Timestamp** | Pointer to **time.Time** | When the token was issued, in UTC. This is the point `expires_in` is counted from. | [optional] 
+**IsExpired** | Pointer to **bool** | Whether the access token can no longer be used and has to be refreshed. It is also true when the provider did  not say how long the token lives. | [optional] [readonly] 
 
 ## Methods
 

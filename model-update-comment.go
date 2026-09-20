@@ -23,11 +23,11 @@ import (
 // checks if the UpdateComment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateComment{}
 
-// UpdateComment The parameters for updating a comment.
+// UpdateComment The comment to store on one version of a file.
 type UpdateComment struct {
-	// The comment version.
+	// The version the comment belongs to, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. A version  that does not exist is rejected as an invalid request.
 	Version int32 `json:"version"`
-	// The comment text.
+	// The note that explains what changed in that version, as the version history shows it. An empty text clears the  note, and a longer one is cut rather than refused, so read the stored text from the answer.
 	Comment NullableString `json:"comment,omitempty"`
 }
 

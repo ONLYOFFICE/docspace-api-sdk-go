@@ -21,11 +21,11 @@ import (
 // checks if the LogoRequestsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogoRequestsDto{}
 
-// LogoRequestsDto The request parameters for the theme-specific logo configurations.
+// LogoRequestsDto The two theme variants of one branding logo.
 type LogoRequestsDto struct {
-	// The URL or base64-encoded image data for the light theme logo.
+	// The image used on a light background, either as a `data:image/png;base64,...` payload - `png`, `jpg` and  `svg` are accepted - or as the name of a file already put in the temporary store.
 	Light NullableString `json:"light,omitempty"`
-	// The URL or base64-encoded image data for the dark theme logo.
+	// The image used on a dark background, in the same two forms as `light`. It is only stored for the slots that  have a dark variant and is ignored for the favicon and the editor logos.
 	Dark NullableString `json:"dark,omitempty"`
 }
 

@@ -21,9 +21,9 @@ import (
 // checks if the ReviewConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReviewConfig{}
 
-// ReviewConfig Configuration for review display settings.
+// ReviewConfig How tracked changes are displayed when the document opens.
 type ReviewConfig struct {
-	// The review display string representation.
+	// How the editors render tracked changes at first: with the markup, in a simplified markup, as the final text,  or as the original text. A session that may not write opens on the final text.
 	ReviewDisplay NullableString `json:"reviewDisplay,omitempty"`
 }
 

@@ -5,7 +5,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AcceptLicense**](SettingsLicenseAPI.md#AcceptLicense) | **Post** /api/2.0/settings/license/accept | Activate a license
-[**GetIsLicenseRequired**](SettingsLicenseAPI.md#GetIsLicenseRequired) | **Get** /api/2.0/settings/license/required | Request a license
+[**GetIsLicenseRequired**](SettingsLicenseAPI.md#GetIsLicenseRequired) | **Get** /api/2.0/settings/license/required | Check if a license is required
 [**RefreshLicense**](SettingsLicenseAPI.md#RefreshLicense) | **Get** /api/2.0/settings/license/refresh | Refresh the license
 [**UploadLicense**](SettingsLicenseAPI.md#UploadLicense) | **Post** /api/2.0/settings/license | Upload a license
 
@@ -78,7 +78,7 @@ Other parameters are passed through a pointer to a apiAcceptLicenseRequest struc
 
 > BooleanWrapper GetIsLicenseRequired(ctx).Execute()
 
-Request a license
+Check if a license is required
 
 
 
@@ -125,7 +125,7 @@ Other parameters are passed through a pointer to a apiGetIsLicenseRequiredReques
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -223,7 +223,7 @@ import (
 )
 
 func main() {
-	files := []*os.File{"TODO"} // []*os.File | The list of license files to be uploaded.
+	files := []*os.File{"TODO"} // []*os.File | The license file, sent as `multipart/form-data`. Only the first entry is read and the rest are ignored, and a  request carrying none is refused with 400. A file that cannot be read as a license, that carries no customer  id or signature, or that was issued for the other edition fails the call; one whose start date has not  arrived yet is refused, while one already past its due date is still accepted. Staging only stores the file -  `POST api/2.0/settings/license/accept` puts it in force - and a file staged earlier is overwritten.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -248,7 +248,7 @@ Other parameters are passed through a pointer to a apiUploadLicenseRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **files** | **[]*os.File** | The list of license files to be uploaded. | 
+ **files** | **[]*os.File** | The license file, sent as `multipart/form-data`. Only the first entry is read and the rest are ignored, and a  request carrying none is refused with 400. A file that cannot be read as a license, that carries no customer  id or signature, or that was issued for the other edition fails the call; one whose start date has not  arrived yet is refused, while one already past its due date is still accepted. Staging only stores the file -  `POST api/2.0/settings/license/accept` puts it in force - and a file staged earlier is overwritten. | 
 
 ### Return type
 

@@ -4,8 +4,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetPortalQuota**](PortalQuotaAPI.md#GetPortalQuota) | **Get** /api/2.0/portal/quota | Get a portal quota
-[**GetPortalTariff**](PortalQuotaAPI.md#GetPortalTariff) | **Get** /api/2.0/portal/tariff | Get a portal tariff
+[**GetPortalQuota**](PortalQuotaAPI.md#GetPortalQuota) | **Get** /api/2.0/portal/quota | Get the portal quota
+[**GetPortalTariff**](PortalQuotaAPI.md#GetPortalTariff) | **Get** /api/2.0/portal/tariff | Get the portal tariff
 [**GetPortalUsedSpace**](PortalQuotaAPI.md#GetPortalUsedSpace) | **Get** /api/2.0/portal/usedspace | Get the portal used space
 [**GetRightQuota**](PortalQuotaAPI.md#GetRightQuota) | **Get** /api/2.0/portal/quota/right | Get the recommended quota
 [**GetUpcomingPayments**](PortalQuotaAPI.md#GetUpcomingPayments) | **Get** /api/2.0/portal/tariff/upcoming | Get upcoming payments
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > TenantQuotaWrapper GetPortalQuota(ctx).Execute()
 
-Get a portal quota
+Get the portal quota
 
 
 
@@ -79,7 +79,7 @@ Other parameters are passed through a pointer to a apiGetPortalQuotaRequest stru
 
 > TariffWrapper GetPortalTariff(ctx).Refresh(refresh).Execute()
 
-Get a portal tariff
+Get the portal tariff
 
 
 
@@ -98,7 +98,7 @@ import (
 )
 
 func main() {
-	refresh := true // bool | The value indicating whether the current portal tariff information should be refreshed. (optional)
+	refresh := true // bool | Whether the tariff is re-read from the billing system instead of the portal cache. The remote read is slower,  so ask for it right after a payment and leave it off for ordinary page loads. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -123,7 +123,7 @@ Other parameters are passed through a pointer to a apiGetPortalTariffRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh** | **bool** | The value indicating whether the current portal tariff information should be refreshed. | 
+ **refresh** | **bool** | Whether the tariff is re-read from the billing system instead of the portal cache. The remote read is slower,  so ask for it right after a payment and leave it off for ordinary page loads. | 
 
 ### Return type
 
@@ -292,7 +292,7 @@ import (
 )
 
 func main() {
-	refresh := true // bool | The value indicating whether the current portal tariff information should be refreshed. (optional)
+	refresh := true // bool | Whether the tariff is re-read from the billing system instead of the portal cache. The remote read is slower,  so ask for it right after a payment and leave it off for ordinary page loads. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -317,7 +317,7 @@ Other parameters are passed through a pointer to a apiGetUpcomingPaymentsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh** | **bool** | The value indicating whether the current portal tariff information should be refreshed. | 
+ **refresh** | **bool** | Whether the tariff is re-read from the billing system instead of the portal cache. The remote read is slower,  so ask for it right after a payment and leave it off for ordinary page loads. | 
 
 ### Return type
 

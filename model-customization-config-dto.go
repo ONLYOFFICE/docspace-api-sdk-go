@@ -21,30 +21,32 @@ import (
 // checks if the CustomizationConfigDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomizationConfigDto{}
 
-// CustomizationConfigDto The customization config parameters.
+// CustomizationConfigDto How the editor interface is dressed: branding, the buttons that lead back into the portal, and the behaviour of  review, mentions and form submission.
 type CustomizationConfigDto struct {
-	// Specifies if the customization is about.
+	// Whether the About entry of the editor menu is shown.
 	About *bool `json:"about,omitempty"`
-	// The customization customer configuration.
+	// The branding of the organization running the portal. It is filled in on a server installation only and is  empty in the cloud.
 	Customer *CustomerConfigDto `json:"customer,omitempty"`
-	// The anonymous configuration of the customization.
+	// How an anonymous participant is treated in this session.
 	Anonymous *AnonymousConfigDto `json:"anonymous,omitempty"`
-	// The feedback configuration of the customization.
+	// The support link the editor offers behind its feedback button.
 	Feedback *FeedbackConfig `json:"feedback,omitempty"`
-	// Specifies if the customization should be force saved.
+	// Whether the editors write intermediate revisions while the document stays open. It is empty when the portal  leaves the decision to the editors themselves.
 	Forcesave NullableBool `json:"forcesave,omitempty"`
-	// The go back configuration of the customization.
+	// Where the editor returns the user to when they leave the document. It is empty when there is nowhere to go  back to, as in an embedded opening.
 	Goback *GobackConfig `json:"goback,omitempty"`
-	// The review configuration of the customization.
+	// How tracked changes are displayed when the document opens; it depends on whether this session may write.
 	Review *ReviewConfig `json:"review,omitempty"`
-	// The logo of the customization.
+	// The logo the editor shows, in the variants the current layout and file type need.
 	Logo *LogoConfigDto `json:"logo,omitempty"`
-	// Specifies if the share should be mentioned.
+	// Whether mentioning a user who cannot yet open the document offers to share it with them, instead of silently  notifying nobody.
 	MentionShare *bool `json:"mentionShare,omitempty"`
-	// The Complete & Submit button settings.
+	// The submit button of a form: whether it is shown and what it says.
 	SubmitForm *SubmitForm `json:"submitForm,omitempty"`
-	// The parameters of the button that starts filling out the form.
+	// The button that starts filling out the form. It is empty when this opening offers no such button.
 	StartFillingForm *StartFillingForm `json:"startFillingForm,omitempty"`
+	// The AI configuration settings.
+	Ai *AIConfig `json:"ai,omitempty"`
 }
 
 // NewCustomizationConfigDto instantiates a new CustomizationConfigDto object
@@ -426,6 +428,38 @@ func (o *CustomizationConfigDto) SetStartFillingForm(v StartFillingForm) {
 	o.StartFillingForm = &v
 }
 
+// GetAi returns the Ai field value if set, zero value otherwise.
+func (o *CustomizationConfigDto) GetAi() AIConfig {
+	if o == nil || IsNil(o.Ai) {
+		var ret AIConfig
+		return ret
+	}
+	return *o.Ai
+}
+
+// GetAiOk returns a tuple with the Ai field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomizationConfigDto) GetAiOk() (*AIConfig, bool) {
+	if o == nil || IsNil(o.Ai) {
+		return nil, false
+	}
+	return o.Ai, true
+}
+
+// HasAi returns a boolean if a field has been set.
+func (o *CustomizationConfigDto) IsAiSet() bool {
+	if o != nil && !IsNil(o.Ai) {
+		return true
+	}
+
+	return false
+}
+
+// SetAi gets a reference to the given AIConfig and assigns it to the Ai field.
+func (o *CustomizationConfigDto) SetAi(v AIConfig) {
+	o.Ai = &v
+}
+
 func (o CustomizationConfigDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -468,6 +502,9 @@ func (o CustomizationConfigDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.StartFillingForm) {
 		toSerialize["startFillingForm"] = o.StartFillingForm
+	}
+	if !IsNil(o.Ai) {
+		toSerialize["ai"] = o.Ai
 	}
 	return toSerialize, nil
 }

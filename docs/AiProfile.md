@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Headers** | Pointer to **map[string]string** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] 
 **ModelId** | **string** | Selected model ID within this provider. | 
 **Reasoning** | Pointer to **bool** | Whether extended thinking is enabled for this profile's model. | [optional] 
+**ReasoningSupport** | Pointer to [**AiReasoningSupport**](AiReasoningSupport.md) | Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile. | [optional] 
 **Capabilities** | Pointer to **float32** | Bitmask of capabilities supported by the selected model. | [optional] 
 **CanUseTool** | Pointer to **bool** | Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record). | [optional] 
 **UseResponsesApi** | Pointer to **bool** | Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`. | [optional] 
@@ -238,6 +239,31 @@ SetReasoning sets Reasoning field to given value.
 `func (o *AiProfile) HasReasoning() bool`
 
 HasReasoning returns a boolean if a field has been set.
+
+### GetReasoningSupport
+
+`func (o *AiProfile) GetReasoningSupport() AiReasoningSupport`
+
+GetReasoningSupport returns the ReasoningSupport field if non-nil, zero value otherwise.
+
+### GetReasoningSupportOk
+
+`func (o *AiProfile) GetReasoningSupportOk() (*AiReasoningSupport, bool)`
+
+GetReasoningSupportOk returns a tuple with the ReasoningSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasoningSupport
+
+`func (o *AiProfile) SetReasoningSupport(v AiReasoningSupport)`
+
+SetReasoningSupport sets ReasoningSupport field to given value.
+
+### HasReasoningSupport
+
+`func (o *AiProfile) HasReasoningSupport() bool`
+
+HasReasoningSupport returns a boolean if a field has been set.
 
 ### GetCapabilities
 

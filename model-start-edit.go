@@ -21,9 +21,9 @@ import (
 // checks if the StartEdit type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StartEdit{}
 
-// StartEdit The parameters for starting file editing.
+// StartEdit The body of an editing session request.
 type StartEdit struct {
-	// Specifies whether to share the file with other users for editing or not.
+	// Claims the file for this caller alone: the session is opened without asking the document service to track  co-editing, and the call is refused when anybody else already has the file open. Left off, an ordinary  co-editing session is opened and others may join it.
 	EditingAlone *bool `json:"editingAlone,omitempty"`
 }
 

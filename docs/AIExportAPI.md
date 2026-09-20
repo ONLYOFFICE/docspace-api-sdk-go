@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## AiExportTextToDocx
 
-> AiExportTextToDocx200Response AiExportTextToDocx(ctx).AiExportTextToDocxRequest(aiExportTextToDocxRequest).Execute()
+> AiExportTextToDocx202Response AiExportTextToDocx(ctx).AiExportTextToDocxRequest(aiExportTextToDocxRequest).Execute()
 
 Start markdown → docx export
 
@@ -40,7 +40,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIExportAPI.AiExportTextToDocx``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiExportTextToDocx`: AiExportTextToDocx200Response
+	// response from `AiExportTextToDocx`: AiExportTextToDocx202Response
 	fmt.Fprintf(os.Stdout, "Response from `AIExportAPI.AiExportTextToDocx`: %v\n", resp)
 }
 ```
@@ -60,11 +60,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiExportTextToDocx200Response**](AiExportTextToDocx200Response.md)
+[**AiExportTextToDocx202Response**](AiExportTextToDocx202Response.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

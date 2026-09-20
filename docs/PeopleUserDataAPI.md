@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetDeletePersonalFolderProgress**](PeopleUserDataAPI.md#GetDeletePersonalFolderProgress) | **Get** /api/2.0/people/delete/personal/progress | Get the progress of deleting the personal folder
+[**GetDeletePersonalFolderProgress**](PeopleUserDataAPI.md#GetDeletePersonalFolderProgress) | **Get** /api/2.0/people/delete/personal/progress | Get the personal folder deletion progress
 [**GetReassignProgress**](PeopleUserDataAPI.md#GetReassignProgress) | **Get** /api/2.0/people/reassign/progress/{userid} | Get the reassignment progress
 [**GetRemoveProgress**](PeopleUserDataAPI.md#GetRemoveProgress) | **Get** /api/2.0/people/remove/progress/{userid} | Get the deletion progress
 [**NecessaryReassign**](PeopleUserDataAPI.md#NecessaryReassign) | **Get** /api/2.0/people/reassign/necessary | Check data for reassignment need
@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 > TaskProgressResponseWrapper GetDeletePersonalFolderProgress(ctx).Execute()
 
-Get the progress of deleting the personal folder
+Get the personal folder deletion progress
 
 
 
@@ -103,7 +103,7 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -123,7 +123,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
 
 ### Other Parameters
 
@@ -175,7 +175,7 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -195,7 +195,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
 
 ### Other Parameters
 
@@ -247,8 +247,8 @@ import (
 )
 
 func main() {
-	userId := "00000000-0000-0000-0000-000000000000" // string | The user ID. (optional)
-	type_ := openapiclient.EmployeeType("All") // EmployeeType | The expected user type. (optional)
+	userId := "00000000-0000-0000-0000-000000000000" // string | The ID of the user whose rooms and shared files are checked. (optional)
+	type_ := openapiclient.EmployeeType("All") // EmployeeType | The type the user is about to be changed to, which decides what counts as data that has to be reassigned:  `RoomAdmin`, `DocSpaceAdmin` and `User` are checked for owned rooms only, while `Guest` is also checked for  files that are still shared. The default is `All`, which checks owned rooms only. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -273,8 +273,8 @@ Other parameters are passed through a pointer to a apiNecessaryReassignRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **string** | The user ID. | 
- **type_** | [**EmployeeType**](EmployeeType.md) | The expected user type. | 
+ **userId** | **string** | The ID of the user whose rooms and shared files are checked. | 
+ **type_** | [**EmployeeType**](EmployeeType.md) | The type the user is about to be changed to, which decides what counts as data that has to be reassigned:  `RoomAdmin`, `DocSpaceAdmin` and `User` are checked for owned rooms only, while `Guest` is also checked for  files that are still shared. The default is `All`, which checks owned rooms only. | 
 
 ### Return type
 

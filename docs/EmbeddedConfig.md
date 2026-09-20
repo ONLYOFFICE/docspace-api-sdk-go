@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EmbedUrl** | Pointer to **NullableString** | The absolute URL to the document serving as a source file for the document embedded into the web page. | [optional] 
-**SaveUrl** | Pointer to **NullableString** | The absolute URL that will allow the document to be saved onto the user personal computer. | [optional] [readonly] 
-**ShareLinkParam** | Pointer to **NullableString** | The shared URL parameter. | [optional] 
-**ShareUrl** | Pointer to **NullableString** | The absolute URL that will allow other users to share this document. | [optional] 
-**ToolbarDocked** | Pointer to **NullableString** | The place for the embedded viewer toolbar, can be either top or bottom. | [optional] [readonly] 
+**EmbedUrl** | Pointer to **NullableString** | The page to put into the frame. It is empty when the opening carries no external share key, since a framed  viewer cannot authenticate a portal member. | [optional] 
+**SaveUrl** | Pointer to **NullableString** | Where the download button of the framed viewer leads. | [optional] [readonly] 
+**ShareLinkParam** | Pointer to **NullableString** | The query fragment carrying the external share key, ampersand included, out of which the addresses around it  are built. | [optional] 
+**ShareUrl** | Pointer to **NullableString** | The address behind the share button of the framed viewer, the document opened full-screen for reading. It is  empty when the opening carries no external share key. | [optional] 
+**ToolbarDocked** | Pointer to **NullableString** | Where the framed viewer puts its toolbar. The portal always asks for the top. | [optional] [readonly] 
 
 ## Methods
 

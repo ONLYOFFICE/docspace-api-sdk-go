@@ -37,13 +37,13 @@ func (r ApiAiAgentsCreateRequest) AiAgentsCreateRequest(aiAgentsCreateRequest Ai
 	return r
 }
 
-func (r ApiAiAgentsCreateRequest) Execute() (*AiFolderIntegerWrapper, *http.Response, error) {
+func (r ApiAiAgentsCreateRequest) Execute() (*AiFolderWrapper, *http.Response, error) {
 	return r.ApiService.AiAgentsCreateExecute(r)
 }
 
 // AiAgentsCreate Create an agent
 //
-// Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
+// Creates an AI agent room and binds a model to it, in that order. `profileId` is required, has to be a UUID, has to name an existing profile, and that profile has to support chat - an image-only model is refused here rather than failing on every later request. `prompt` is required and is stored on the room as its standing instruction with any markup stripped, so it cannot round-trip HTML into another user's reply. The two steps are not atomic: when the room is created but the model binding fails, the call reports an error and the room is left behind, so re-bind it with `PUT api/2.0/ai/agents/{id}` rather than creating a second one.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-create/
 //
@@ -57,13 +57,13 @@ func (a *AIAgentsAPIService) AiAgentsCreate(ctx context.Context) ApiAiAgentsCrea
 }
 
 // Execute executes the request
-//  @return AiFolderIntegerWrapper
-func (a *AIAgentsAPIService) AiAgentsCreateExecute(r ApiAiAgentsCreateRequest) (*AiFolderIntegerWrapper, *http.Response, error) {
+//  @return AiFolderWrapper
+func (a *AIAgentsAPIService) AiAgentsCreateExecute(r ApiAiAgentsCreateRequest) (*AiFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiFolderIntegerWrapper
+		localVarReturnValue  *AiFolderWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAgentsAPIService.AiAgentsCreate")
@@ -121,7 +121,51 @@ func (a *AIAgentsAPIService) AiAgentsCreateExecute(r ApiAiAgentsCreateRequest) (
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -163,7 +207,7 @@ func (r ApiAiAgentsDeleteRequest) Execute() (*AiFileOperationWrapper, *http.Resp
 
 // AiAgentsDelete Delete an agent
 //
-// Deletes an AI agent room.
+// Deletes an AI agent room. The ID has to be the room's integer identifier, and the body is forwarded to the DocSpace AI service unchanged, so it accepts the same options as deleting an ordinary room - `deleteAfter` among them. Deletion is asynchronous there: the answer is a file-operation payload to poll, not a completed result. The agent's model binding is deliberately left behind, because the upstream assignment API has no per-entry delete, so an orphaned assignment row survives the room.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-delete/
 //
@@ -244,7 +288,51 @@ func (a *AIAgentsAPIService) AiAgentsDeleteExecute(r ApiAiAgentsDeleteRequest) (
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -275,13 +363,13 @@ type ApiAiAgentsGetRequest struct {
 	id string
 }
 
-func (r ApiAiAgentsGetRequest) Execute() (*AiFolderIntegerWrapper, *http.Response, error) {
+func (r ApiAiAgentsGetRequest) Execute() (*AiAgentsGet200Response, *http.Response, error) {
 	return r.ApiService.AiAgentsGetExecute(r)
 }
 
 // AiAgentsGet Get an agent
 //
-// Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
+// Returns one AI agent room, enriched with the `profileId` currently bound to it so an edit form can prefill its model selector. The ID is the room's integer identifier, and a non-integer value is refused rather than passed on to fail opaquely upstream. The binding lives in an assignment rather than on the room, so it is looked up separately: a missing or unreadable assignment simply leaves `profileId` out of the answer instead of failing the call. The standing instruction comes back on the room as `chatSettings.prompt`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-get/
 //
@@ -297,13 +385,13 @@ func (a *AIAgentsAPIService) AiAgentsGet(ctx context.Context, id string) ApiAiAg
 }
 
 // Execute executes the request
-//  @return AiFolderIntegerWrapper
-func (a *AIAgentsAPIService) AiAgentsGetExecute(r ApiAiAgentsGetRequest) (*AiFolderIntegerWrapper, *http.Response, error) {
+//  @return AiAgentsGet200Response
+func (a *AIAgentsAPIService) AiAgentsGetExecute(r ApiAiAgentsGetRequest) (*AiAgentsGet200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiFolderIntegerWrapper
+		localVarReturnValue  *AiAgentsGet200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAgentsAPIService.AiAgentsGet")
@@ -357,7 +445,40 @@ func (a *AIAgentsAPIService) AiAgentsGetExecute(r ApiAiAgentsGetRequest) (*AiFol
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -385,15 +506,81 @@ func (a *AIAgentsAPIService) AiAgentsGetExecute(r ApiAiAgentsGetRequest) (*AiFol
 type ApiAiAgentsListRequest struct {
 	ctx context.Context
 	ApiService *AIAgentsAPIService
+	subjectId *string
+	subjectOwnerId *string
+	excludeSubject *bool
+	tags *string
+	withoutTags *bool
+	quotaFilter *int32
+	filterValue *string
+	sortBy *string
+	sortOrder *string
+	startIndex *int32
+	count *int32
 }
 
-func (r ApiAiAgentsListRequest) Execute() (*AiFolderContentIntegerWrapper, *http.Response, error) {
+// Show only the agent rooms this user takes part in.
+func (r ApiAiAgentsListRequest) SubjectId(subjectId string) ApiAiAgentsListRequest {	r.subjectId = &subjectId
+	return r
+}
+
+// Show only the agent rooms owned by this user.
+func (r ApiAiAgentsListRequest) SubjectOwnerId(subjectOwnerId string) ApiAiAgentsListRequest {	r.subjectOwnerId = &subjectOwnerId
+	return r
+}
+
+// Invert the user filter: leave out what `subjectId` selects instead of keeping it.
+func (r ApiAiAgentsListRequest) ExcludeSubject(excludeSubject bool) ApiAiAgentsListRequest {	r.excludeSubject = &excludeSubject
+	return r
+}
+
+// Show only the agent rooms carrying these tags, comma-separated.
+func (r ApiAiAgentsListRequest) Tags(tags string) ApiAiAgentsListRequest {	r.tags = &tags
+	return r
+}
+
+// Show only the agent rooms that carry no tags at all.
+func (r ApiAiAgentsListRequest) WithoutTags(withoutTags bool) ApiAiAgentsListRequest {	r.withoutTags = &withoutTags
+	return r
+}
+
+// Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one.
+func (r ApiAiAgentsListRequest) QuotaFilter(quotaFilter int32) ApiAiAgentsListRequest {	r.quotaFilter = &quotaFilter
+	return r
+}
+
+// Show only the agent rooms whose title matches this text.
+func (r ApiAiAgentsListRequest) FilterValue(filterValue string) ApiAiAgentsListRequest {	r.filterValue = &filterValue
+	return r
+}
+
+// Field to sort by, for example `DateAndTime`.
+func (r ApiAiAgentsListRequest) SortBy(sortBy string) ApiAiAgentsListRequest {	r.sortBy = &sortBy
+	return r
+}
+
+// Sort direction, `ascending` or `descending`.
+func (r ApiAiAgentsListRequest) SortOrder(sortOrder string) ApiAiAgentsListRequest {	r.sortOrder = &sortOrder
+	return r
+}
+
+// Index of the first entry to return; 0 starts at the beginning.
+func (r ApiAiAgentsListRequest) StartIndex(startIndex int32) ApiAiAgentsListRequest {	r.startIndex = &startIndex
+	return r
+}
+
+// How many entries to return. The internal service applies its own default.
+func (r ApiAiAgentsListRequest) Count(count int32) ApiAiAgentsListRequest {	r.count = &count
+	return r
+}
+
+func (r ApiAiAgentsListRequest) Execute() (*AiFolderContentWrapper, *http.Response, error) {
 	return r.ApiService.AiAgentsListExecute(r)
 }
 
 // AiAgentsList List agents
 //
-// Lists the portal's AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
+// Lists the portal's AI agent rooms. The query is forwarded unchanged to the DocSpace AI service, so it takes the same paging, sorting and filtering parameters as an ordinary room listing, and the answer is that service's folder-content payload rather than a shape of this API's own. Array and object query values are dropped rather than guessed at, so send flat strings. The profile bound to each agent is not included here - read one agent with `GET api/2.0/ai/agents/{id}` for that.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-list/
 //
@@ -407,13 +594,13 @@ func (a *AIAgentsAPIService) AiAgentsList(ctx context.Context) ApiAiAgentsListRe
 }
 
 // Execute executes the request
-//  @return AiFolderContentIntegerWrapper
-func (a *AIAgentsAPIService) AiAgentsListExecute(r ApiAiAgentsListRequest) (*AiFolderContentIntegerWrapper, *http.Response, error) {
+//  @return AiFolderContentWrapper
+func (a *AIAgentsAPIService) AiAgentsListExecute(r ApiAiAgentsListRequest) (*AiFolderContentWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiFolderContentIntegerWrapper
+		localVarReturnValue  *AiFolderContentWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAgentsAPIService.AiAgentsList")
@@ -427,6 +614,39 @@ func (a *AIAgentsAPIService) AiAgentsListExecute(r ApiAiAgentsListRequest) (*AiF
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.subjectId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "subjectId", r.subjectId, "form", "")
+	}
+	if r.subjectOwnerId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "subjectOwnerId", r.subjectOwnerId, "form", "")
+	}
+	if r.excludeSubject != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "excludeSubject", r.excludeSubject, "form", "")
+	}
+	if r.tags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
+	}
+	if r.withoutTags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "withoutTags", r.withoutTags, "form", "")
+	}
+	if r.quotaFilter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "quotaFilter", r.quotaFilter, "form", "")
+	}
+	if r.filterValue != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filterValue", r.filterValue, "form", "")
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortBy", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortOrder", r.sortOrder, "form", "")
+	}
+	if r.startIndex != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "startIndex", r.startIndex, "form", "")
+	}
+	if r.count != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "count", r.count, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -475,6 +695,28 @@ func (a *AIAgentsAPIService) AiAgentsListExecute(r ApiAiAgentsListRequest) (*AiF
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -502,7 +744,7 @@ func (r ApiAiAgentsNewsRequest) Execute() (*AiNewItemsAgentNewItemsArrayWrapper,
 
 // AiAgentsNews List agent news items
 //
-// Lists the new items across the caller's AI agent rooms.
+// Lists the unread items across the caller's AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service's new-items payload. This is a read-only operation and does not mark anything as seen.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-news/
 //
@@ -584,6 +826,28 @@ func (a *AIAgentsAPIService) AiAgentsNewsExecute(r ApiAiAgentsNewsRequest) (*AiN
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -610,13 +874,13 @@ func (r ApiAiAgentsResetQuotaRequest) AiAgentsResetQuotaRequest(aiAgentsResetQuo
 	return r
 }
 
-func (r ApiAiAgentsResetQuotaRequest) Execute() (*AiFolderIntegerArrayWrapper, *http.Response, error) {
+func (r ApiAiAgentsResetQuotaRequest) Execute() (*AiFolderArrayWrapper, *http.Response, error) {
 	return r.ApiService.AiAgentsResetQuotaExecute(r)
 }
 
 // AiAgentsResetQuota Reset agents' quota
 //
-// Resets the storage quota of the given AI agent rooms.
+// Returns the listed AI agent rooms to the portal's default storage quota, forwarding `roomIds` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. This is the counterpart of `PUT api/2.0/ai/agents/agentquota` and takes no quota value of its own. Rooms already on the default are unaffected.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-reset-quota/
 //
@@ -630,13 +894,13 @@ func (a *AIAgentsAPIService) AiAgentsResetQuota(ctx context.Context) ApiAiAgents
 }
 
 // Execute executes the request
-//  @return AiFolderIntegerArrayWrapper
-func (a *AIAgentsAPIService) AiAgentsResetQuotaExecute(r ApiAiAgentsResetQuotaRequest) (*AiFolderIntegerArrayWrapper, *http.Response, error) {
+//  @return AiFolderArrayWrapper
+func (a *AIAgentsAPIService) AiAgentsResetQuotaExecute(r ApiAiAgentsResetQuotaRequest) (*AiFolderArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiFolderIntegerArrayWrapper
+		localVarReturnValue  *AiFolderArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAgentsAPIService.AiAgentsResetQuota")
@@ -703,6 +967,39 @@ func (a *AIAgentsAPIService) AiAgentsResetQuotaExecute(r ApiAiAgentsResetQuotaRe
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -730,13 +1027,13 @@ func (r ApiAiAgentsUpdateRequest) AiAgentsUpdateRequest(aiAgentsUpdateRequest Ai
 	return r
 }
 
-func (r ApiAiAgentsUpdateRequest) Execute() (*AiFolderIntegerWrapper, *http.Response, error) {
+func (r ApiAiAgentsUpdateRequest) Execute() (*AiFolderWrapper, *http.Response, error) {
 	return r.ApiService.AiAgentsUpdateExecute(r)
 }
 
 // AiAgentsUpdate Update an agent
 //
-// Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent's assignment afterwards.
+// Changes an AI agent room - its title, tags or standing instruction - and optionally rebinds its model. The ID has to be the room's integer identifier. `profileId` is not part of the room contract: it is taken out of the forwarded body and applied afterwards as the agent's assignment, and it has to be a UUID naming an existing chat-capable profile. An instruction sent as `chatSettings.prompt` has its markup stripped, as on create; note that when `chatSettings` is present the upstream service still requires the rest of that object to be valid, so send it whole.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update/
 //
@@ -752,13 +1049,13 @@ func (a *AIAgentsAPIService) AiAgentsUpdate(ctx context.Context, id string) ApiA
 }
 
 // Execute executes the request
-//  @return AiFolderIntegerWrapper
-func (a *AIAgentsAPIService) AiAgentsUpdateExecute(r ApiAiAgentsUpdateRequest) (*AiFolderIntegerWrapper, *http.Response, error) {
+//  @return AiFolderWrapper
+func (a *AIAgentsAPIService) AiAgentsUpdateExecute(r ApiAiAgentsUpdateRequest) (*AiFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiFolderIntegerWrapper
+		localVarReturnValue  *AiFolderWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAgentsAPIService.AiAgentsUpdate")
@@ -817,7 +1114,51 @@ func (a *AIAgentsAPIService) AiAgentsUpdateExecute(r ApiAiAgentsUpdateRequest) (
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -852,13 +1193,13 @@ func (r ApiAiAgentsUpdateQuotaRequest) AiAgentsUpdateQuotaRequest(aiAgentsUpdate
 	return r
 }
 
-func (r ApiAiAgentsUpdateQuotaRequest) Execute() (*AiFolderIntegerArrayWrapper, *http.Response, error) {
+func (r ApiAiAgentsUpdateQuotaRequest) Execute() (*AiFolderArrayWrapper, *http.Response, error) {
 	return r.ApiService.AiAgentsUpdateQuotaExecute(r)
 }
 
 // AiAgentsUpdateQuota Update agents' quota
 //
-// Changes the storage quota of the given AI agent rooms.
+// Sets the storage quota of the listed AI agent rooms in one call, forwarding `roomIds` and `quota` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. A quota applies to the room's stored files, not to the model usage of its chats. Use `PUT api/2.0/ai/agents/resetquota` to return rooms to the portal default instead of naming a number.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update-quota/
 //
@@ -872,13 +1213,13 @@ func (a *AIAgentsAPIService) AiAgentsUpdateQuota(ctx context.Context) ApiAiAgent
 }
 
 // Execute executes the request
-//  @return AiFolderIntegerArrayWrapper
-func (a *AIAgentsAPIService) AiAgentsUpdateQuotaExecute(r ApiAiAgentsUpdateQuotaRequest) (*AiFolderIntegerArrayWrapper, *http.Response, error) {
+//  @return AiFolderArrayWrapper
+func (a *AIAgentsAPIService) AiAgentsUpdateQuotaExecute(r ApiAiAgentsUpdateQuotaRequest) (*AiFolderArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiFolderIntegerArrayWrapper
+		localVarReturnValue  *AiFolderArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAgentsAPIService.AiAgentsUpdateQuota")
@@ -937,6 +1278,39 @@ func (a *AIAgentsAPIService) AiAgentsUpdateQuotaExecute(r ApiAiAgentsUpdateQuota
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

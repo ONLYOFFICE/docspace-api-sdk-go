@@ -23,12 +23,12 @@ import (
 // checks if the DownloadRequestItemDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DownloadRequestItemDto{}
 
-// DownloadRequestItemDto The download request item with conversion parameters and security settings.
+// DownloadRequestItemDto One file of a bulk download, together with the format it is converted to.
 type DownloadRequestItemDto struct {
 	Key DownloadRequestItemDtoKey `json:"key"`
-	// The target format or conversion type for the file download.
+	// The format the file is converted to before it is packed, as a file extension without a leading dot.
 	Value NullableString `json:"value"`
-	// The optional password for accessing protected files.
+	// The password that opens the source file, for a file protected with one; a protected file cannot be converted  without it.
 	Password NullableString `json:"password,omitempty"`
 }
 

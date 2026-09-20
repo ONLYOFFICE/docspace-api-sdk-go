@@ -22,15 +22,14 @@ import (
 // checks if the PageableResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PageableResponse{}
 
-// PageableResponse The response containing paginated data.
+// PageableResponse One page of results together with the cursor that asks for the next page.
 type PageableResponse struct {
-	// The paginated data.
-	Data map[string]interface{} `json:"data,omitempty"`
-	// The maximum number of results returned per page.
+	Data interface{} `json:"data,omitempty"`
+	// The page size that was applied to this request, between 1 and 50.
 	Limit *int32 `json:"limit,omitempty"`
-	// The identifier of the last retrieved client.
+	// The cursor to send back as last_client_id to ask for the next page, together with last_created_on. It is null when the page is empty.
 	LastClientId *string `json:"last_client_id,omitempty"`
-	// The creation date of the last retrieved client.
+	// The cursor to send back as last_created_on to ask for the next page, together with last_client_id. It is null when the page is empty.
 	LastCreatedOn *time.Time `json:"last_created_on,omitempty"`
 }
 
@@ -51,10 +50,10 @@ func NewPageableResponseWithDefaults() *PageableResponse {
 	return &this
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
-func (o *PageableResponse) GetData() map[string]interface{} {
-	if o == nil || IsNil(o.Data) {
-		var ret map[string]interface{}
+// GetData returns the Data field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PageableResponse) GetData() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
 	return o.Data
@@ -62,11 +61,12 @@ func (o *PageableResponse) GetData() map[string]interface{} {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PageableResponse) GetDataOk() (map[string]interface{}, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PageableResponse) GetDataOk() (*interface{}, bool) {
 	if o == nil || IsNil(o.Data) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.Data, true
+	return &o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
@@ -78,8 +78,8 @@ func (o *PageableResponse) IsDataSet() bool {
 	return false
 }
 
-// SetData gets a reference to the given map[string]interface{} and assigns it to the Data field.
-func (o *PageableResponse) SetData(v map[string]interface{}) {
+// SetData gets a reference to the given interface{} and assigns it to the Data field.
+func (o *PageableResponse) SetData(v interface{}) {
 	o.Data = v
 }
 
@@ -189,7 +189,7 @@ func (o PageableResponse) MarshalJSON() ([]byte, error) {
 
 func (o PageableResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Data) {
+	if o.Data != nil {
 		toSerialize["data"] = o.Data
 	}
 	if !IsNil(o.Limit) {

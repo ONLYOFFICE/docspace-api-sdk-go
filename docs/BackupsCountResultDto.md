@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Free** | Pointer to **int32** | The number of free backups. | [optional] 
-**Paid** | Pointer to **int32** | The number of paid backups. | [optional] 
+**Free** | Pointer to **int32** | The number of backups covered by the free monthly allowance. | [optional] 
+**Paid** | Pointer to **int32** | The number of backups charged to the portal wallet. | [optional] 
 
 ## Methods
 

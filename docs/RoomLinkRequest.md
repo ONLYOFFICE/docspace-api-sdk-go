@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LinkId** | Pointer to **string** | The room link ID. | [optional] 
-**Access** | Pointer to [**FileShare**](FileShare.md) | The link sharing rights. | [optional] 
-**ExpirationDate** | Pointer to **NullableTime** | The link expiration date. | [optional] 
-**Internal** | Pointer to **bool** | The link scope, whether it is internal or not. | [optional] 
-**Title** | Pointer to **NullableString** | The link name. | [optional] 
-**LinkType** | Pointer to [**LinkType**](LinkType.md) | The link type. | [optional] 
-**Password** | Pointer to **NullableString** | The link password. | [optional] 
-**DenyDownload** | Pointer to **bool** | Specifies if downloading the file from the link is disabled or not. | [optional] 
-**MaxUseCount** | Pointer to **NullableInt32** | The maximum number of times the invitation link can be used. | [optional] 
-**CurrentUseCount** | Pointer to **int32** | The current number of times the invitation link has been used. | [optional] 
+**LinkId** | Pointer to **string** | Which link to change, taken from `GET api/2.0/files/rooms/{id}/links`. Leaving it out creates a link, and an  identifier the room does not know creates a link carrying that identifier. | [optional] 
+**Access** | Pointer to [**FileShare**](FileShare.md) | What whoever opens the link may do in the room. The value 0 revokes the link instead of changing it, and the  levels a room accepts depend on its kind. | [optional] 
+**ExpirationDate** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the link stops working, written with the offset of the portal time zone. A date already past is dropped  silently for an external link and refused for an invitation link, and a date further ahead than the portal  allows is refused as well; leaving it out means the link does not expire. | [optional] 
+**Internal** | Pointer to **bool** | Whether the external link works only for people already signed in to the portal. With it off the link opens  the room for anyone who has the address, subject to the password. | [optional] 
+**Title** | Pointer to **NullableString** | The name the link is shown under in the room. An empty value is accepted and the portal names the link itself,  so the answer is what tells the caller the name in use. | [optional] 
+**LinkType** | Pointer to [**LinkType**](LinkType.md) | Which kind of link to create: an invitation link makes whoever opens it a member of the room, while an  external link opens the room without an account. It is fixed when the link is created and is ignored on later  changes. | [optional] 
+**Password** | Pointer to **NullableString** | The password an external link asks for before it opens the room. An empty value leaves the link open to anyone  who has the address, and the password is never returned when links are listed. | [optional] 
+**DenyDownload** | Pointer to **bool** | Whether people arriving through the link are stopped from downloading and printing what they open. They can  still read the documents in the editor. | [optional] 
+**MaxUseCount** | Pointer to **NullableInt32** | How many people an invitation link may still let in before it stops working. A value below the number of  people who already used it is refused, and leaving it out puts no ceiling on the link. | [optional] 
+**CurrentUseCount** | Pointer to **int32** | How many people have already joined through this invitation link. The value is kept by the portal: it is  reported back when links are listed and anything sent here is ignored. | [optional] 
 
 ## Methods
 
@@ -86,20 +86,20 @@ HasAccess returns a boolean if a field has been set.
 
 ### GetExpirationDate
 
-`func (o *RoomLinkRequest) GetExpirationDate() time.Time`
+`func (o *RoomLinkRequest) GetExpirationDate() ApiDateTime`
 
 GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
 
 ### GetExpirationDateOk
 
-`func (o *RoomLinkRequest) GetExpirationDateOk() (*time.Time, bool)`
+`func (o *RoomLinkRequest) GetExpirationDateOk() (*ApiDateTime, bool)`
 
 GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpirationDate
 
-`func (o *RoomLinkRequest) SetExpirationDate(v time.Time)`
+`func (o *RoomLinkRequest) SetExpirationDate(v ApiDateTime)`
 
 SetExpirationDate sets ExpirationDate field to given value.
 
@@ -109,16 +109,6 @@ SetExpirationDate sets ExpirationDate field to given value.
 
 HasExpirationDate returns a boolean if a field has been set.
 
-### SetExpirationDateNil
-
-`func (o *RoomLinkRequest) SetExpirationDateNil(b bool)`
-
- SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-
-### UnsetExpirationDate
-`func (o *RoomLinkRequest) UnsetExpirationDate()`
-
-UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
 ### GetInternal
 
 `func (o *RoomLinkRequest) GetInternal() bool`

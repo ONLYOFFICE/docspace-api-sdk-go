@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Get**](AppsAPI.md#Get) | **Get** /api/2.0/apps/{id} | Get a single app
+[**Get**](AppsAPI.md#Get) | **Get** /api/2.0/apps/{id} | Get an app
 [**GetAll**](AppsAPI.md#GetAll) | **Get** /api/2.0/apps | Get all apps
 [**GetSettings**](AppsAPI.md#GetSettings) | **Get** /api/2.0/apps/{id}/settings | Get app settings
 [**SetEnabled**](AppsAPI.md#SetEnabled) | **Put** /api/2.0/apps/{id}/enabled | Enable or disable an app
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > AppWrapper Get(ctx, id).Execute()
 
-Get a single app
+Get an app
 
 
 
@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-	id := "ai-room" // string | The application identifier.
+	id := "ai-room" // string | The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -55,7 +55,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The application identifier. | 
+**id** | **string** | The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here. | 
 
 ### Other Parameters
 
@@ -149,7 +149,7 @@ Other parameters are passed through a pointer to a apiGetAllRequest struct via t
 
 ## GetSettings
 
-> ObjectWrapper GetSettings(ctx, id).Execute()
+> UnknownNullableWrapper GetSettings(ctx, id).Execute()
 
 Get app settings
 
@@ -170,7 +170,7 @@ import (
 )
 
 func main() {
-	id := "ai-room" // string | The application identifier.
+	id := "ai-room" // string | The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -179,7 +179,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.GetSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSettings`: ObjectWrapper
+	// response from `GetSettings`: UnknownNullableWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AppsAPI.GetSettings`: %v\n", resp)
 }
 ```
@@ -190,7 +190,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The application identifier. | 
+**id** | **string** | The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here. | 
 
 ### Other Parameters
 
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**UnknownNullableWrapper**](UnknownNullableWrapper.md)
 
 ### Authorization
 
@@ -242,8 +242,8 @@ import (
 )
 
 func main() {
-	id := "ai-room" // string | The application identifier.
-	setAppEnabledBody := *openapiclient.NewSetAppEnabledBody() // SetAppEnabledBody | New enabled state.
+	id := "ai-room" // string | The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything.
+	setAppEnabledBody := *openapiclient.NewSetAppEnabledBody() // SetAppEnabledBody | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -263,7 +263,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The application identifier. | 
+**id** | **string** | The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. | 
 
 ### Other Parameters
 
@@ -273,7 +273,7 @@ Other parameters are passed through a pointer to a apiSetEnabledRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **setAppEnabledBody** | [**SetAppEnabledBody**](SetAppEnabledBody.md) | New enabled state. | 
+ **setAppEnabledBody** | [**SetAppEnabledBody**](SetAppEnabledBody.md) | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. | 
 
 ### Return type
 
@@ -316,8 +316,8 @@ import (
 )
 
 func main() {
-	id := "ai-room" // string | The application identifier.
-	setAppSettingsBody := *openapiclient.NewSetAppSettingsBody() // SetAppSettingsBody | New settings document.
+	id := "ai-room" // string | The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404.
+	setAppSettingsBody := *openapiclient.NewSetAppSettingsBody() // SetAppSettingsBody | The configuration to store for this portal, replacing whatever was stored before.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -337,7 +337,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The application identifier. | 
+**id** | **string** | The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. | 
 
 ### Other Parameters
 
@@ -347,7 +347,7 @@ Other parameters are passed through a pointer to a apiSetSettingsRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **setAppSettingsBody** | [**SetAppSettingsBody**](SetAppSettingsBody.md) | New settings document. | 
+ **setAppSettingsBody** | [**SetAppSettingsBody**](SetAppSettingsBody.md) | The configuration to store for this portal, replacing whatever was stored before. | 
 
 ### Return type
 

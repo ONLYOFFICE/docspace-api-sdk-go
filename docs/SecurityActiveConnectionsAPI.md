@@ -5,10 +5,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetAllActiveConnections**](SecurityActiveConnectionsAPI.md#GetAllActiveConnections) | **Get** /api/2.0/security/activeconnections | Get active connections
-[**LogOutActiveConnection**](SecurityActiveConnectionsAPI.md#LogOutActiveConnection) | **Put** /api/2.0/security/activeconnections/logout/{loginEventId} | Log out from the connection
-[**LogOutAllActiveConnectionsChangePassword**](SecurityActiveConnectionsAPI.md#LogOutAllActiveConnectionsChangePassword) | **Put** /api/2.0/security/activeconnections/logoutallchangepassword | Log out and change password
-[**LogOutAllActiveConnectionsForUser**](SecurityActiveConnectionsAPI.md#LogOutAllActiveConnectionsForUser) | **Put** /api/2.0/security/activeconnections/logoutall/{userId} | Log out for the user by ID
-[**LogOutAllExceptThisConnection**](SecurityActiveConnectionsAPI.md#LogOutAllExceptThisConnection) | **Put** /api/2.0/security/activeconnections/logoutallexceptthis | Log out from all connections except the current one
+[**LogOutActiveConnection**](SecurityActiveConnectionsAPI.md#LogOutActiveConnection) | **Put** /api/2.0/security/activeconnections/logout/{loginEventId} | Log out one connection
+[**LogOutAllActiveConnectionsChangePassword**](SecurityActiveConnectionsAPI.md#LogOutAllActiveConnectionsChangePassword) | **Put** /api/2.0/security/activeconnections/logoutallchangepassword | Log out and reset password
+[**LogOutAllActiveConnectionsForUser**](SecurityActiveConnectionsAPI.md#LogOutAllActiveConnectionsForUser) | **Put** /api/2.0/security/activeconnections/logoutall/{userId} | Log out a user everywhere
+[**LogOutAllExceptThisConnection**](SecurityActiveConnectionsAPI.md#LogOutAllExceptThisConnection) | **Put** /api/2.0/security/activeconnections/logoutallexceptthis | Log out other connections
 
 
 
@@ -79,7 +79,7 @@ Other parameters are passed through a pointer to a apiGetAllActiveConnectionsReq
 
 > BooleanWrapper LogOutActiveConnection(ctx, loginEventId).Execute()
 
-Log out from the connection
+Log out one connection
 
 
 
@@ -98,7 +98,7 @@ import (
 )
 
 func main() {
-	loginEventId := int32(12345) // int32 | The ID of the specific login event.
+	loginEventId := int32(12345) // int32 | The sign-in to act on, by login event ID. Take it from the `id` of an item of  `GET api/2.0/security/activeconnections`, which also marks the connection the caller is using, so a client  can avoid picking its own.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -118,7 +118,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**loginEventId** | **int32** | The ID of the specific login event. | 
+**loginEventId** | **int32** | The sign-in to act on, by login event ID. Take it from the `id` of an item of  `GET api/2.0/security/activeconnections`, which also marks the connection the caller is using, so a client  can avoid picking its own. | 
 
 ### Other Parameters
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 > StringWrapper LogOutAllActiveConnectionsChangePassword(ctx).Execute()
 
-Log out and change password
+Log out and reset password
 
 
 
@@ -214,7 +214,7 @@ Other parameters are passed through a pointer to a apiLogOutAllActiveConnections
 
 > LogOutAllActiveConnectionsForUser(ctx, userId).Execute()
 
-Log out for the user by ID
+Log out a user everywhere
 
 
 
@@ -233,7 +233,7 @@ import (
 )
 
 func main() {
-	userId := "00000000-0000-0000-0000-000000000000" // string | The user ID extracted from the route parameters.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. Acting on an account  other than the caller's own generally needs administrator rights.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -251,7 +251,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **string** | The user ID extracted from the route parameters. | 
+**userId** | **string** | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. Acting on an account  other than the caller's own generally needs administrator rights. | 
 
 ### Other Parameters
 
@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 
 > StringWrapper LogOutAllExceptThisConnection(ctx).Execute()
 
-Log out from all connections except the current one
+Log out other connections
 
 
 

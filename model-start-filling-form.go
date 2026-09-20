@@ -21,9 +21,9 @@ import (
 // checks if the StartFillingForm type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StartFillingForm{}
 
-// StartFillingForm The parameters of the button that starts filling out the form.
+// StartFillingForm The button the editor shows to begin filling out a form.
 type StartFillingForm struct {
-	// The caption of the button that starts filling out the form.
+	// The caption to put on the button, already translated into the language of the caller.
 	Text NullableString `json:"text,omitempty"`
 }
 

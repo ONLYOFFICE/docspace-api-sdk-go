@@ -23,11 +23,11 @@ import (
 // checks if the ChangeHistory type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ChangeHistory{}
 
-// ChangeHistory The parameters for changing version history.
+// ChangeHistory The change to make to a revision group of a file.
 type ChangeHistory struct {
-	// The file version of the change history.
+	// The version the change applies to; 0 means the current version of the file.
 	Version int32 `json:"version"`
-	// Specifies whether to start a new version or continue revision of the change history.
+	// What to do with the revision group: `false` completes the named version, storing its content again as a fresh  version that opens a new group, while `true` folds the last group back into the group before it, so the next  save continues that revision.
 	ContinueVersion *bool `json:"continueVersion,omitempty"`
 }
 

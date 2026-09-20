@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Favorite** | Pointer to **NullableBool** | Specifies if the file is favorite or not. | [optional] 
-**Folder** | Pointer to **NullableString** | The folder of the file. | [optional] 
-**Owner** | Pointer to **NullableString** | The file owner. | [optional] 
-**SharingSettings** | Pointer to [**[]AceShortWrapper**](AceShortWrapper.md) | The sharing settings of the file. | [optional] 
-**Type** | Pointer to [**EditorType**](EditorType.md) | The editor type of the file. | [optional] 
-**Uploaded** | Pointer to **NullableString** | The uploaded file. | [optional] 
+**Favorite** | Pointer to **NullableBool** | Whether the caller has this document among their favorites. It is empty when favorites do not apply - for an  anonymous caller, for a guest, and for an encrypted document. | [optional] 
+**Folder** | Pointer to **NullableString** | The place of the document as a readable path, its folders joined from the root downwards. It is empty in the  embedded layout, which shows no such panel. | [optional] 
+**Owner** | Pointer to **NullableString** | The display name of the owner of the document. It is empty for an anonymous session. | [optional] 
+**SharingSettings** | Pointer to [**[]AceShortWrapper**](AceShortWrapper.md) | Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner. | [optional] 
+**Type** | Pointer to [**EditorType**](EditorType.md) | The layout the information panel is rendered for. | [optional] 
+**Uploaded** | Pointer to **NullableString** | When the document was created on the portal, already formatted for reading in the culture of the caller rather  than as a machine timestamp. | [optional] 
 
 ## Methods
 

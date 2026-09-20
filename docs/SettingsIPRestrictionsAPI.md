@@ -4,10 +4,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetIpRestrictions**](SettingsIPRestrictionsAPI.md#GetIpRestrictions) | **Get** /api/2.0/settings/iprestrictions | Get the IP portal restrictions
-[**ReadIpRestrictionsSettings**](SettingsIPRestrictionsAPI.md#ReadIpRestrictionsSettings) | **Get** /api/2.0/settings/iprestrictions/settings | Get the IP restriction settings
-[**SaveIpRestrictions**](SettingsIPRestrictionsAPI.md#SaveIpRestrictions) | **Put** /api/2.0/settings/iprestrictions | Update the IP restrictions
-[**UpdateIpRestrictionsSettings**](SettingsIPRestrictionsAPI.md#UpdateIpRestrictionsSettings) | **Put** /api/2.0/settings/iprestrictions/settings | Update the IP restriction settings
+[**GetIpRestrictions**](SettingsIPRestrictionsAPI.md#GetIpRestrictions) | **Get** /api/2.0/settings/iprestrictions | Get IP restrictions
+[**ReadIpRestrictionsSettings**](SettingsIPRestrictionsAPI.md#ReadIpRestrictionsSettings) | **Get** /api/2.0/settings/iprestrictions/settings | Get IP restriction settings
+[**SaveIpRestrictions**](SettingsIPRestrictionsAPI.md#SaveIpRestrictions) | **Put** /api/2.0/settings/iprestrictions | Save IP restrictions
+[**UpdateIpRestrictionsSettings**](SettingsIPRestrictionsAPI.md#UpdateIpRestrictionsSettings) | **Put** /api/2.0/settings/iprestrictions/settings | Update IP restriction settings
 
 
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 > IPRestrictionArrayWrapper GetIpRestrictions(ctx).Execute()
 
-Get the IP portal restrictions
+Get IP restrictions
 
 
 
@@ -78,7 +78,7 @@ Other parameters are passed through a pointer to a apiGetIpRestrictionsRequest s
 
 > IPRestrictionsSettingsWrapper ReadIpRestrictionsSettings(ctx).Execute()
 
-Get the IP restriction settings
+Get IP restriction settings
 
 
 
@@ -141,7 +141,7 @@ Other parameters are passed through a pointer to a apiReadIpRestrictionsSettings
 
 > IpRestrictionsWrapper SaveIpRestrictions(ctx).IpRestrictionsDto(ipRestrictionsDto).Execute()
 
-Update the IP restrictions
+Save IP restrictions
 
 
 
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 
 > IpRestrictionsWrapper UpdateIpRestrictionsSettings(ctx).IpRestrictionsDto(ipRestrictionsDto).Execute()
 
-Update the IP restriction settings
+Update IP restriction settings
 
 
 

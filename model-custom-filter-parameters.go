@@ -21,9 +21,9 @@ import (
 // checks if the CustomFilterParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomFilterParameters{}
 
-// CustomFilterParameters The parameters for setting the Custom Filter editing mode.
+// CustomFilterParameters The Custom Filter state a spreadsheet is to be put into.
 type CustomFilterParameters struct {
-	// Specifies whether the Custom Filter editing mode is enabled or not.
+	// The state to reach: `true` turns the mode on, so that the sorting and filtering each person applies stays  visible to that person alone, and drops the others out of a running editing session; `false` turns it off and  makes filtering shared again.
 	Enabled *bool `json:"enabled,omitempty"`
 }
 

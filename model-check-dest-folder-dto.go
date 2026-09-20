@@ -21,11 +21,11 @@ import (
 // checks if the CheckDestFolderDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CheckDestFolderDto{}
 
-// CheckDestFolderDto The result of checking whether files can be moved or copied to the specified folder.
+// CheckDestFolderDto The verdict on placing the requested files in the destination folder.
 type CheckDestFolderDto struct {
-	// The result of the validation operation.
+	// Whether the destination folder accepts all of the requested files, only some of them or none at all.
 	Result *CheckDestFolderResult `json:"result,omitempty"`
-	// The list of files in the destination folder.
+	// The requested files the destination accepts, each with the information it was listed under. The files it  rejects are absent, so an empty list means that none of them is accepted.
 	Files []FileEntryBaseDto `json:"files,omitempty"`
 }
 

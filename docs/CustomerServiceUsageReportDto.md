@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Collection** | Pointer to [**[]CustomerServiceUsageDto**](CustomerServiceUsageDto.md) | A collection of service usage statistics. | [optional] 
-**Offset** | Pointer to **int32** | The report data offset. | [optional] 
-**Limit** | Pointer to **int32** | The report data limit. | [optional] 
-**TotalQuantity** | Pointer to **int64** | The total quantity of records in the report. | [optional] 
-**TotalPage** | Pointer to **int32** | The total number of pages in the report. | [optional] 
-**CurrentPage** | Pointer to **int32** | The current page number of the report. | [optional] 
+**Collection** | Pointer to [**[]CustomerServiceUsageDto**](CustomerServiceUsageDto.md) | The services on this page, one entry per service rather than per charge. It is empty for a period in  which nothing was consumed as well as for a page past the end of the report. | [optional] 
+**Offset** | Pointer to **int32** | How many entries were skipped before this page, echoed from the request. | [optional] 
+**Limit** | Pointer to **int32** | How many entries one page may hold, echoed from the request; it is 25 unless another value was asked for. | [optional] 
+**TotalQuantity** | Pointer to **int64** | How many services match the filters in total, across every page - services, not charges. | [optional] 
+**TotalPage** | Pointer to **int32** | How many pages those entries come to at the current `limit`. | [optional] 
+**CurrentPage** | Pointer to **int32** | Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument. | [optional] 
 
 ## Methods
 

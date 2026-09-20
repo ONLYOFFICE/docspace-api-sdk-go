@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Change** | Pointer to **bool** | Specifies if the co-editing mode can be changed in the editor interface or not. | [optional] 
-**Fast** | Pointer to **bool** | Specifies if the co-editing mode is fast. | [optional] 
-**Mode** | Pointer to [**CoEditingConfigMode**](CoEditingConfigMode.md) | The co-editing mode (fast or strict). | [optional] 
+**Change** | Pointer to **bool** | Whether the user may switch between the two co-editing modes from the editor interface, or is held to the one  the portal preset. | [optional] 
+**Fast** | Pointer to **bool** | Whether other participants see each change as it is typed. Left off, changes are exchanged only when a  participant saves, and the paragraph being edited is locked for the others meanwhile. | [optional] 
+**Mode** | Pointer to [**CoEditingConfigMode**](CoEditingConfigMode.md) | The mode the two settings above amount to, as the editors name it. | [optional] 
 
 ## Methods
 

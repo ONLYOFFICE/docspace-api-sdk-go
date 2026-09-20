@@ -21,13 +21,13 @@ import (
 // checks if the BackupDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupDto{}
 
-// BackupDto The backup parameters.
+// BackupDto The request parameters for starting a backup.
 type BackupDto struct {
-	// The backup storage type.
+	// The storage the archive is written to. It defaults to `Documents`, and it decides which keys  `storageParams` has to carry.
 	StorageType *BackupStorageType `json:"storageType,omitempty"`
-	// The backup storage parameters.
+	// The settings of the chosen storage, as an array of key and value pairs. `Documents` needs an integer  `folderId`, `ThridpartyDocuments` a provider-specific non-integer `folderId`, `Local` a `filePath`,  `ThirdPartyConsumer` a `module` plus the settings of that consumer, and `DataStore` none. The  `subdir` key is added by the operation itself and must not be sent.
 	StorageParams []ItemKeyValuePairObjectObject `json:"storageParams,omitempty"`
-	// Specifies if a dump will be created or not.
+	// Backs up the whole server rather than this one portal. It requires the space access permission and  works on a standalone installation only.
 	Dump *bool `json:"dump,omitempty"`
 }
 

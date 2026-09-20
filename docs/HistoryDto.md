@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int32** | The unique identifier for the file history entry. | 
-**Action** | [**HistoryAction**](HistoryAction.md) | The action performed on the file. | 
-**Initiator** | [**EmployeeDto**](EmployeeDto.md) | The action initiator. | 
-**Date** | **NullableTime** | The date and time when an action on the file was performed. | 
-**Data** | [**HistoryData**](HistoryData.md) | The history data. | 
-**Related** | Pointer to [**[]HistoryDto**](HistoryDto.md) | The list of related history. | [optional] 
+**Id** | **int32** | The identifier of the record, which tells two records of the same action apart and stays stable as long as the  portal keeps the log. | 
+**Action** | [**HistoryAction**](HistoryAction.md) | What happened - the kind of event the record stands for, such as a file being uploaded, renamed, moved or  shared - with the key a client can key its own wording off. | 
+**Initiator** | [**EmployeeDto**](EmployeeDto.md) | Who caused the event. For an event caused by a visitor following an external link only the name they gave is  filled in, the account fields staying empty. | 
+**Date** | [**ApiDateTime**](ApiDateTime.md) | When the event happened, written with the offset of the portal's time zone. | 
+**Data** | Pointer to [**HistoryData**](HistoryData.md) | The history data. Absent for actions that carry no payload of their own - changing a room's  logo, icon colour or cover, whose interpreter returns no data (see  `RoomLogoChangedInterpreter`). It used to be declared required, which put it in the  OpenAPI document's required list while the null-dropping serializer left it out of the  response, so a generated client threw on any history page holding one of those entries. | [optional] 
+**Related** | Pointer to [**[]HistoryDto**](HistoryDto.md) | The records folded into this one because they belong to the same action, the separate files of one upload for  instance. It is empty when the record stands alone, and the records inside it carry no further nesting. | [optional] 
 
 ## Methods
 
 ### NewHistoryDto
 
-`func NewHistoryDto(id int32, action HistoryAction, initiator EmployeeDto, date NullableTime, data HistoryData, ) *HistoryDto`
+`func NewHistoryDto(id int32, action HistoryAction, initiator EmployeeDto, date ApiDateTime, ) *HistoryDto`
 
 NewHistoryDto instantiates a new HistoryDto object
 This constructor will assign default values to properties that have it defined,
@@ -92,34 +92,24 @@ SetInitiator sets Initiator field to given value.
 
 ### GetDate
 
-`func (o *HistoryDto) GetDate() time.Time`
+`func (o *HistoryDto) GetDate() ApiDateTime`
 
 GetDate returns the Date field if non-nil, zero value otherwise.
 
 ### GetDateOk
 
-`func (o *HistoryDto) GetDateOk() (*time.Time, bool)`
+`func (o *HistoryDto) GetDateOk() (*ApiDateTime, bool)`
 
 GetDateOk returns a tuple with the Date field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDate
 
-`func (o *HistoryDto) SetDate(v time.Time)`
+`func (o *HistoryDto) SetDate(v ApiDateTime)`
 
 SetDate sets Date field to given value.
 
 
-### SetDateNil
-
-`func (o *HistoryDto) SetDateNil(b bool)`
-
- SetDateNil sets the value for Date to be an explicit nil
-
-### UnsetDate
-`func (o *HistoryDto) UnsetDate()`
-
-UnsetDate ensures that no value is present for Date, not even an explicit nil
 ### GetData
 
 `func (o *HistoryDto) GetData() HistoryData`
@@ -139,6 +129,11 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
+### HasData
+
+`func (o *HistoryDto) HasData() bool`
+
+HasData returns a boolean if a field has been set.
 
 ### GetRelated
 

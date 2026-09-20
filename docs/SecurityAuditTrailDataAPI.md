@@ -4,15 +4,15 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAuditTrailReport**](SecurityAuditTrailDataAPI.md#CreateAuditTrailReport) | **Post** /api/2.0/security/audit/events/report | Start the audit trail report generation
-[**GetAuditEventsByFilter**](SecurityAuditTrailDataAPI.md#GetAuditEventsByFilter) | **Get** /api/2.0/security/audit/events/filter | Get filtered audit trail data
-[**GetAuditSettings**](SecurityAuditTrailDataAPI.md#GetAuditSettings) | **Get** /api/2.0/security/audit/settings/lifetime | Get the audit trail settings
+[**CreateAuditTrailReport**](SecurityAuditTrailDataAPI.md#CreateAuditTrailReport) | **Post** /api/2.0/security/audit/events/report | Start audit trail report
+[**GetAuditEventsByFilter**](SecurityAuditTrailDataAPI.md#GetAuditEventsByFilter) | **Get** /api/2.0/security/audit/events/filter | Get filtered audit events
+[**GetAuditSettings**](SecurityAuditTrailDataAPI.md#GetAuditSettings) | **Get** /api/2.0/security/audit/settings/lifetime | Get audit lifetime settings
 [**GetAuditTrailMappers**](SecurityAuditTrailDataAPI.md#GetAuditTrailMappers) | **Get** /api/2.0/security/audit/mappers | Get audit trail mappers
-[**GetAuditTrailReport**](SecurityAuditTrailDataAPI.md#GetAuditTrailReport) | **Get** /api/2.0/security/audit/events/report | Get the audit trail report generation status
+[**GetAuditTrailReport**](SecurityAuditTrailDataAPI.md#GetAuditTrailReport) | **Get** /api/2.0/security/audit/events/report | Get audit trail report status
 [**GetAuditTrailTypes**](SecurityAuditTrailDataAPI.md#GetAuditTrailTypes) | **Get** /api/2.0/security/audit/types | Get audit trail types
-[**GetLastAuditEvents**](SecurityAuditTrailDataAPI.md#GetLastAuditEvents) | **Get** /api/2.0/security/audit/events/last | Get audit trail data
-[**SetAuditSettings**](SecurityAuditTrailDataAPI.md#SetAuditSettings) | **Post** /api/2.0/security/audit/settings/lifetime | Set the audit trail settings
-[**TerminateAuditTrailReport**](SecurityAuditTrailDataAPI.md#TerminateAuditTrailReport) | **Delete** /api/2.0/security/audit/events/report | Terminate the audit trail report generation
+[**GetLastAuditEvents**](SecurityAuditTrailDataAPI.md#GetLastAuditEvents) | **Get** /api/2.0/security/audit/events/last | Get recent audit events
+[**SetAuditSettings**](SecurityAuditTrailDataAPI.md#SetAuditSettings) | **Post** /api/2.0/security/audit/settings/lifetime | Set audit lifetime settings
+[**TerminateAuditTrailReport**](SecurityAuditTrailDataAPI.md#TerminateAuditTrailReport) | **Delete** /api/2.0/security/audit/events/report | Terminate audit trail report
 
 
 
@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 > DocumentBuilderTaskWrapper CreateAuditTrailReport(ctx).Format(format).Execute()
 
-Start the audit trail report generation
+Start audit trail report
 
 
 
@@ -39,7 +39,7 @@ import (
 )
 
 func main() {
-	format := openapiclient.AuditReportFormat(0) // AuditReportFormat | The output file format of the report. Defaults to XLSX. (optional)
+	format := openapiclient.AuditReportFormat(0) // AuditReportFormat | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiCreateAuditTrailReportRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **format** | [**AuditReportFormat**](AuditReportFormat.md) | The output file format of the report. Defaults to XLSX. | 
+ **format** | [**AuditReportFormat**](AuditReportFormat.md) | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. | 
 
 ### Return type
 
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 > AuditEventArrayWrapper GetAuditEventsByFilter(ctx).UserId(userId).ModuleType(moduleType).ActionType(actionType).Action(action).EntryType(entryType).Target(target).From(from).To(to).Count(count).StartIndex(startIndex).Execute()
 
-Get filtered audit trail data
+Get filtered audit events
 
 
 
@@ -108,16 +108,16 @@ import (
 )
 
 func main() {
-	userId := "00000000-0000-0000-0000-000000000001" // string | The ID of the user who triggered the audit event. (optional)
-	moduleType := openapiclient.LocationType(0) // LocationType | The location where the audit event occurred. (optional)
-	actionType := openapiclient.ActionType(0) // ActionType | The type of action performed in the audit event (e.g., Create, Update, Delete). (optional)
-	action := openapiclient.MessageAction(1000) // MessageAction | The specific action that occurred within the audit event. (optional)
-	entryType := openapiclient.EntryType(0) // EntryType | The type of audit entry (e.g., Folder, User, File). (optional)
-	target := "document.docx" // string | The target object affected by the audit event (e.g., document ID, user account). (optional)
-	from := time.Now() // time.Time | The starting date and time for filtering audit events. (optional)
-	to := time.Now() // time.Time | The ending date and time for filtering audit events. (optional)
-	count := int32(100) // int32 | The maximum number of audit event records to retrieve. (optional)
-	startIndex := int32(0) // int32 | The index of the first audit event record to retrieve in a paged query. (optional)
+	userId := "00000000-0000-0000-0000-000000000001" // string | The user who performed the action, given by portal user ID. Leave it at the empty GUID to keep the events of  every user. (optional)
+	moduleType := openapiclient.LocationType(0) // LocationType | The module the recorded action belongs to, spelled as `GET api/2.0/security/audit/types` lists it under  `moduleTypes`. `GET api/2.0/security/audit/mappers` shows which module records which action. The default  value keeps every module. (optional)
+	actionType := openapiclient.ActionType(0) // ActionType | The kind of change the action made, spelled as `GET api/2.0/security/audit/types` lists it under  `actionTypes`. The default value keeps every kind. (optional)
+	action := openapiclient.MessageAction(1000) // MessageAction | The exact action recorded, spelled as the `messageAction` of `GET api/2.0/security/audit/mappers`. Naming  one narrows the answer to that single action and overrides `moduleType` and `actionType`, which stop  narrowing anything once it is set. (optional)
+	entryType := openapiclient.EntryType(0) // EntryType | The kind of object the action was performed on, spelled as `GET api/2.0/security/audit/types` lists it under  `entryTypes`. Pair it with `target` to filter by object without pinning a single action. (optional)
+	target := "document.docx" // string | The object the action was performed on, as the audit trail recorded it - a file name, a user account, a room  title. It is matched in full and exactly as stored, so it narrows the answer only when `action` or  `entryType` is set as well. (optional)
+	from := time.Now() // time.Time | The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC. (optional)
+	to := time.Now() // time.Time | The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`. (optional)
+	count := int32(100) // int32 | How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; a full page means there may be further matches beyond it. (optional)
+	startIndex := int32(0) // int32 | How many matching events to skip before the page begins, counting from the newest. Advance it by `count` to  walk backwards through the trail. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -142,16 +142,16 @@ Other parameters are passed through a pointer to a apiGetAuditEventsByFilterRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **string** | The ID of the user who triggered the audit event. | 
- **moduleType** | [**LocationType**](LocationType.md) | The location where the audit event occurred. | 
- **actionType** | [**ActionType**](ActionType.md) | The type of action performed in the audit event (e.g., Create, Update, Delete). | 
- **action** | [**MessageAction**](MessageAction.md) | The specific action that occurred within the audit event. | 
- **entryType** | [**EntryType**](EntryType.md) | The type of audit entry (e.g., Folder, User, File). | 
- **target** | **string** | The target object affected by the audit event (e.g., document ID, user account). | 
- **from** | **time.Time** | The starting date and time for filtering audit events. | 
- **to** | **time.Time** | The ending date and time for filtering audit events. | 
- **count** | **int32** | The maximum number of audit event records to retrieve. | 
- **startIndex** | **int32** | The index of the first audit event record to retrieve in a paged query. | 
+ **userId** | **string** | The user who performed the action, given by portal user ID. Leave it at the empty GUID to keep the events of  every user. | 
+ **moduleType** | [**LocationType**](LocationType.md) | The module the recorded action belongs to, spelled as `GET api/2.0/security/audit/types` lists it under  `moduleTypes`. `GET api/2.0/security/audit/mappers` shows which module records which action. The default  value keeps every module. | 
+ **actionType** | [**ActionType**](ActionType.md) | The kind of change the action made, spelled as `GET api/2.0/security/audit/types` lists it under  `actionTypes`. The default value keeps every kind. | 
+ **action** | [**MessageAction**](MessageAction.md) | The exact action recorded, spelled as the `messageAction` of `GET api/2.0/security/audit/mappers`. Naming  one narrows the answer to that single action and overrides `moduleType` and `actionType`, which stop  narrowing anything once it is set. | 
+ **entryType** | [**EntryType**](EntryType.md) | The kind of object the action was performed on, spelled as `GET api/2.0/security/audit/types` lists it under  `entryTypes`. Pair it with `target` to filter by object without pinning a single action. | 
+ **target** | **string** | The object the action was performed on, as the audit trail recorded it - a file name, a user account, a room  title. It is matched in full and exactly as stored, so it narrows the answer only when `action` or  `entryType` is set as well. | 
+ **from** | **time.Time** | The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC. | 
+ **to** | **time.Time** | The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`. | 
+ **count** | **int32** | How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; a full page means there may be further matches beyond it. | 
+ **startIndex** | **int32** | How many matching events to skip before the page begins, counting from the newest. Advance it by `count` to  walk backwards through the trail. | 
 
 ### Return type
 
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 
 > TenantAuditSettingsResponseWrapper GetAuditSettings(ctx).Execute()
 
-Get the audit trail settings
+Get audit lifetime settings
 
 
 
@@ -236,7 +236,7 @@ Other parameters are passed through a pointer to a apiGetAuditSettingsRequest st
 
 ## GetAuditTrailMappers
 
-> ObjectWrapper GetAuditTrailMappers(ctx).ProductType(productType).ModuleType(moduleType).Execute()
+> AuditTrailProductMapperArrayWrapper GetAuditTrailMappers(ctx).ProductType(productType).ModuleType(moduleType).Execute()
 
 Get audit trail mappers
 
@@ -257,8 +257,8 @@ import (
 )
 
 func main() {
-	productType := openapiclient.ProductType(2) // ProductType | The type of product related to the audit trail. (optional)
-	moduleType := openapiclient.LocationType(0) // LocationType | The location associated with the audit trail. (optional)
+	productType := openapiclient.ProductType(2) // ProductType | The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error. (optional)
+	moduleType := openapiclient.LocationType(0) // LocationType | The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -267,7 +267,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityAuditTrailDataAPI.GetAuditTrailMappers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAuditTrailMappers`: ObjectWrapper
+	// response from `GetAuditTrailMappers`: AuditTrailProductMapperArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SecurityAuditTrailDataAPI.GetAuditTrailMappers`: %v\n", resp)
 }
 ```
@@ -283,12 +283,12 @@ Other parameters are passed through a pointer to a apiGetAuditTrailMappersReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **productType** | [**ProductType**](ProductType.md) | The type of product related to the audit trail. | 
- **moduleType** | [**LocationType**](LocationType.md) | The location associated with the audit trail. | 
+ **productType** | [**ProductType**](ProductType.md) | The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error. | 
+ **moduleType** | [**LocationType**](LocationType.md) | The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products. | 
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**AuditTrailProductMapperArrayWrapper**](AuditTrailProductMapperArrayWrapper.md)
 
 ### Authorization
 
@@ -308,7 +308,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper GetAuditTrailReport(ctx).Execute()
 
-Get the audit trail report generation status
+Get audit trail report status
 
 
 
@@ -369,7 +369,7 @@ Other parameters are passed through a pointer to a apiGetAuditTrailReportRequest
 
 ## GetAuditTrailTypes
 
-> ObjectWrapper GetAuditTrailTypes(ctx).Execute()
+> AuditTrailTypesWrapper GetAuditTrailTypes(ctx).Execute()
 
 Get audit trail types
 
@@ -398,7 +398,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityAuditTrailDataAPI.GetAuditTrailTypes``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAuditTrailTypes`: ObjectWrapper
+	// response from `GetAuditTrailTypes`: AuditTrailTypesWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SecurityAuditTrailDataAPI.GetAuditTrailTypes`: %v\n", resp)
 }
 ```
@@ -414,7 +414,7 @@ Other parameters are passed through a pointer to a apiGetAuditTrailTypesRequest 
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**AuditTrailTypesWrapper**](AuditTrailTypesWrapper.md)
 
 ### Authorization
 
@@ -434,7 +434,7 @@ Other parameters are passed through a pointer to a apiGetAuditTrailTypesRequest 
 
 > AuditEventArrayWrapper GetLastAuditEvents(ctx).Execute()
 
-Get audit trail data
+Get recent audit events
 
 
 
@@ -497,7 +497,7 @@ Other parameters are passed through a pointer to a apiGetLastAuditEventsRequest 
 
 > TenantAuditSettingsResponseWrapper SetAuditSettings(ctx).TenantAuditSettingsWrapper(tenantAuditSettingsWrapper).Execute()
 
-Set the audit trail settings
+Set audit lifetime settings
 
 
 
@@ -565,7 +565,7 @@ Name | Type | Description  | Notes
 
 > TerminateAuditTrailReport(ctx).Execute()
 
-Terminate the audit trail report generation
+Terminate audit trail report
 
 
 
