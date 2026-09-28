@@ -110,11 +110,11 @@ type TenantQuota struct {
 	AiTools *bool `json:"aiTools,omitempty"`
 	// Specifies if the AI search enabled as a wallet service or not.
 	AiSearch *bool `json:"aiSearch,omitempty"`
-	// The number of DocsCloud users.
+	// The number of Docs Connect users.
 	DocsCloud *int32 `json:"docsCloud,omitempty"`
-	// Specifies if the DocsCloudDevPack enabled or not.
+	// Specifies if the Docs Connect Dev Pack enabled or not.
 	DocsCloudDevPack *bool `json:"docsCloudDevPack,omitempty"`
-	// Specifies if the DocsCloudTrial enabled or not.
+	// Specifies if the Docs Connect trial enabled or not.
 	DocsCloudTrial *bool `json:"docsCloudTrial,omitempty"`
 }
 

@@ -1,4 +1,4 @@
-# UnknownNullableWrapper
+# JsonValueWrapper
 
 ## Properties
 
@@ -12,155 +12,155 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewUnknownNullableWrapper
+### NewJsonValueWrapper
 
-`func NewUnknownNullableWrapper() *UnknownNullableWrapper`
+`func NewJsonValueWrapper() *JsonValueWrapper`
 
-NewUnknownNullableWrapper instantiates a new UnknownNullableWrapper object
+NewJsonValueWrapper instantiates a new JsonValueWrapper object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewUnknownNullableWrapperWithDefaults
+### NewJsonValueWrapperWithDefaults
 
-`func NewUnknownNullableWrapperWithDefaults() *UnknownNullableWrapper`
+`func NewJsonValueWrapperWithDefaults() *JsonValueWrapper`
 
-NewUnknownNullableWrapperWithDefaults instantiates a new UnknownNullableWrapper object
+NewJsonValueWrapperWithDefaults instantiates a new JsonValueWrapper object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetResponse
 
-`func (o *UnknownNullableWrapper) GetResponse() interface{}`
+`func (o *JsonValueWrapper) GetResponse() interface{}`
 
 GetResponse returns the Response field if non-nil, zero value otherwise.
 
 ### GetResponseOk
 
-`func (o *UnknownNullableWrapper) GetResponseOk() (*interface{}, bool)`
+`func (o *JsonValueWrapper) GetResponseOk() (*interface{}, bool)`
 
 GetResponseOk returns a tuple with the Response field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResponse
 
-`func (o *UnknownNullableWrapper) SetResponse(v interface{})`
+`func (o *JsonValueWrapper) SetResponse(v interface{})`
 
 SetResponse sets Response field to given value.
 
 ### HasResponse
 
-`func (o *UnknownNullableWrapper) HasResponse() bool`
+`func (o *JsonValueWrapper) HasResponse() bool`
 
 HasResponse returns a boolean if a field has been set.
 
 ### SetResponseNil
 
-`func (o *UnknownNullableWrapper) SetResponseNil(b bool)`
+`func (o *JsonValueWrapper) SetResponseNil(b bool)`
 
  SetResponseNil sets the value for Response to be an explicit nil
 
 ### UnsetResponse
-`func (o *UnknownNullableWrapper) UnsetResponse()`
+`func (o *JsonValueWrapper) UnsetResponse()`
 
 UnsetResponse ensures that no value is present for Response, not even an explicit nil
 ### GetCount
 
-`func (o *UnknownNullableWrapper) GetCount() int32`
+`func (o *JsonValueWrapper) GetCount() int32`
 
 GetCount returns the Count field if non-nil, zero value otherwise.
 
 ### GetCountOk
 
-`func (o *UnknownNullableWrapper) GetCountOk() (*int32, bool)`
+`func (o *JsonValueWrapper) GetCountOk() (*int32, bool)`
 
 GetCountOk returns a tuple with the Count field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCount
 
-`func (o *UnknownNullableWrapper) SetCount(v int32)`
+`func (o *JsonValueWrapper) SetCount(v int32)`
 
 SetCount sets Count field to given value.
 
 ### HasCount
 
-`func (o *UnknownNullableWrapper) HasCount() bool`
+`func (o *JsonValueWrapper) HasCount() bool`
 
 HasCount returns a boolean if a field has been set.
 
 ### GetLinks
 
-`func (o *UnknownNullableWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner`
+`func (o *JsonValueWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner`
 
 GetLinks returns the Links field if non-nil, zero value otherwise.
 
 ### GetLinksOk
 
-`func (o *UnknownNullableWrapper) GetLinksOk() (*[]GetPortalPrices200ResponseLinksInner, bool)`
+`func (o *JsonValueWrapper) GetLinksOk() (*[]GetPortalPrices200ResponseLinksInner, bool)`
 
 GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinks
 
-`func (o *UnknownNullableWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner)`
+`func (o *JsonValueWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner)`
 
 SetLinks sets Links field to given value.
 
 ### HasLinks
 
-`func (o *UnknownNullableWrapper) HasLinks() bool`
+`func (o *JsonValueWrapper) HasLinks() bool`
 
 HasLinks returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *UnknownNullableWrapper) GetStatus() int32`
+`func (o *JsonValueWrapper) GetStatus() int32`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *UnknownNullableWrapper) GetStatusOk() (*int32, bool)`
+`func (o *JsonValueWrapper) GetStatusOk() (*int32, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *UnknownNullableWrapper) SetStatus(v int32)`
+`func (o *JsonValueWrapper) SetStatus(v int32)`
 
 SetStatus sets Status field to given value.
 
 ### HasStatus
 
-`func (o *UnknownNullableWrapper) HasStatus() bool`
+`func (o *JsonValueWrapper) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
 
 ### GetStatusCode
 
-`func (o *UnknownNullableWrapper) GetStatusCode() int32`
+`func (o *JsonValueWrapper) GetStatusCode() int32`
 
 GetStatusCode returns the StatusCode field if non-nil, zero value otherwise.
 
 ### GetStatusCodeOk
 
-`func (o *UnknownNullableWrapper) GetStatusCodeOk() (*int32, bool)`
+`func (o *JsonValueWrapper) GetStatusCodeOk() (*int32, bool)`
 
 GetStatusCodeOk returns a tuple with the StatusCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatusCode
 
-`func (o *UnknownNullableWrapper) SetStatusCode(v int32)`
+`func (o *JsonValueWrapper) SetStatusCode(v int32)`
 
 SetStatusCode sets StatusCode field to given value.
 
 ### HasStatusCode
 
-`func (o *UnknownNullableWrapper) HasStatusCode() bool`
+`func (o *JsonValueWrapper) HasStatusCode() bool`
 
 HasStatusCode returns a boolean if a field has been set.
 

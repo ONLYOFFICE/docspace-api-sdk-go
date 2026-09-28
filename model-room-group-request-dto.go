@@ -31,6 +31,8 @@ type RoomGroupRequestDto struct {
 	Icon string `json:"icon"`
 	// The rooms to gather in the group, each given as a number for a room stored in the portal or as a string for a  room on a connected third-party account. Every identifier has to name a room the caller can read; repeats are  collapsed, and an element of any other shape - a decimal number, a number sent as a string, null - is refused.
 	Rooms []DuplicateRequestDtoAllOfFileIds `json:"rooms"`
+	// The section the group belongs to: Active for Rooms and Forms for Forms. Active when omitted.
+	SearchArea *SearchArea `json:"searchArea,omitempty"`
 }
 
 type _RoomGroupRequestDto RoomGroupRequestDto
@@ -127,6 +129,38 @@ func (o *RoomGroupRequestDto) SetRooms(v []DuplicateRequestDtoAllOfFileIds) {
 	o.Rooms = v
 }
 
+// GetSearchArea returns the SearchArea field value if set, zero value otherwise.
+func (o *RoomGroupRequestDto) GetSearchArea() SearchArea {
+	if o == nil || IsNil(o.SearchArea) {
+		var ret SearchArea
+		return ret
+	}
+	return *o.SearchArea
+}
+
+// GetSearchAreaOk returns a tuple with the SearchArea field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoomGroupRequestDto) GetSearchAreaOk() (*SearchArea, bool) {
+	if o == nil || IsNil(o.SearchArea) {
+		return nil, false
+	}
+	return o.SearchArea, true
+}
+
+// HasSearchArea returns a boolean if a field has been set.
+func (o *RoomGroupRequestDto) IsSearchAreaSet() bool {
+	if o != nil && !IsNil(o.SearchArea) {
+		return true
+	}
+
+	return false
+}
+
+// SetSearchArea gets a reference to the given SearchArea and assigns it to the SearchArea field.
+func (o *RoomGroupRequestDto) SetSearchArea(v SearchArea) {
+	o.SearchArea = &v
+}
+
 func (o RoomGroupRequestDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -140,6 +174,9 @@ func (o RoomGroupRequestDto) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["icon"] = o.Icon
 	toSerialize["rooms"] = o.Rooms
+	if !IsNil(o.SearchArea) {
+		toSerialize["searchArea"] = o.SearchArea
+	}
 	return toSerialize, nil
 }
 

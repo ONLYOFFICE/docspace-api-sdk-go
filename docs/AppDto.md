@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **NullableString** | The application's stable key, declared in the installation configuration - `ai-rooms`, `docs-cloud` and  the like. It is what every other operation of this group addresses an application by, and a client maps it  to a title and an icon of its own; the portal ships no display name for it. | [optional] 
 **Enabled** | Pointer to **bool** | Whether the application is switched on for this portal. It is the portal's own flag where one has been  saved, and the default the installation configuration gives the application otherwise. | [optional] 
-**Settings** | Pointer to [**AppDtoSettings**](AppDtoSettings.md) |  | [optional] 
+**Settings** | Pointer to **interface{}** |  | [optional] 
 
 ## Methods
 
@@ -89,20 +89,20 @@ HasEnabled returns a boolean if a field has been set.
 
 ### GetSettings
 
-`func (o *AppDto) GetSettings() AppDtoSettings`
+`func (o *AppDto) GetSettings() interface{}`
 
 GetSettings returns the Settings field if non-nil, zero value otherwise.
 
 ### GetSettingsOk
 
-`func (o *AppDto) GetSettingsOk() (*AppDtoSettings, bool)`
+`func (o *AppDto) GetSettingsOk() (*interface{}, bool)`
 
 GetSettingsOk returns a tuple with the Settings field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSettings
 
-`func (o *AppDto) SetSettings(v AppDtoSettings)`
+`func (o *AppDto) SetSettings(v interface{})`
 
 SetSettings sets Settings field to given value.
 
@@ -112,6 +112,16 @@ SetSettings sets Settings field to given value.
 
 HasSettings returns a boolean if a field has been set.
 
+### SetSettingsNil
+
+`func (o *AppDto) SetSettingsNil(b bool)`
+
+ SetSettingsNil sets the value for Settings to be an explicit nil
+
+### UnsetSettings
+`func (o *AppDto) UnsetSettings()`
+
+UnsetSettings ensures that no value is present for Settings, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

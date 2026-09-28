@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudPayment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudPayment{}
 
-// DocsCloudPayment Represents the payment information of a DocsCloud tenant.
+// DocsCloudPayment Represents the payment information of a Docs Connect tenant.
 type DocsCloudPayment struct {
 	// The cart ID.
 	CartId NullableString `json:"cartId,omitempty"`

@@ -7,26 +7,17 @@ Method | HTTP request | Description
 [**ApplyExternalSharePassword**](FilesSharingAPI.md#ApplyExternalSharePassword) | **Post** /api/2.0/files/share/{key}/password | Unlock a password-protected link
 [**ChangeFileOwner**](FilesSharingAPI.md#ChangeFileOwner) | **Post** /api/2.0/files/owner | Change the room or file owner
 [**GetEncryptionAccess**](FilesSharingAPI.md#GetEncryptionAccess) | **Get** /api/2.0/files/file/{fileId}/publickeys | Get file encryption keys
-[**GetEncryptionAccessThirdParty**](FilesSharingAPI.md#GetEncryptionAccessThirdParty) | **Get** /api/2.0/files/file/{fileId}/publickeys | Get file encryption keys (third-party storage)
 [**GetExternalShareData**](FilesSharingAPI.md#GetExternalShareData) | **Get** /api/2.0/files/share/{key} | Resolve an external share link
 [**GetFileSecurityInfo**](FilesSharingAPI.md#GetFileSecurityInfo) | **Get** /api/2.0/files/file/{id}/share | Get file sharing rights
-[**GetFileSecurityInfoThirdParty**](FilesSharingAPI.md#GetFileSecurityInfoThirdParty) | **Get** /api/2.0/files/file/{id}/share | Get file sharing rights (third-party storage)
 [**GetFolderSecurityInfo**](FilesSharingAPI.md#GetFolderSecurityInfo) | **Get** /api/2.0/files/folder/{id}/share | Get folder sharing rights
-[**GetFolderSecurityInfoThirdParty**](FilesSharingAPI.md#GetFolderSecurityInfoThirdParty) | **Get** /api/2.0/files/folder/{id}/share | Get folder sharing rights (third-party storage)
 [**GetGroupsMembersWithFileSecurity**](FilesSharingAPI.md#GetGroupsMembersWithFileSecurity) | **Get** /api/2.0/files/file/{fileId}/group/{groupId}/share | Get file access of group members
-[**GetGroupsMembersWithFileSecurityThirdParty**](FilesSharingAPI.md#GetGroupsMembersWithFileSecurityThirdParty) | **Get** /api/2.0/files/file/{fileId}/group/{groupId}/share | Get file access of group members (third-party storage)
 [**GetGroupsMembersWithFolderSecurity**](FilesSharingAPI.md#GetGroupsMembersWithFolderSecurity) | **Get** /api/2.0/files/folder/{folderId}/group/{groupId}/share | Get folder access of group members
-[**GetGroupsMembersWithFolderSecurityThirdParty**](FilesSharingAPI.md#GetGroupsMembersWithFolderSecurityThirdParty) | **Get** /api/2.0/files/folder/{folderId}/group/{groupId}/share | Get folder access of group members (third-party storage)
 [**GetSecurityInfo**](FilesSharingAPI.md#GetSecurityInfo) | **Post** /api/2.0/files/share | Get sharing rights in batch
 [**GetSharedUsers**](FilesSharingAPI.md#GetSharedUsers) | **Get** /api/2.0/files/file/{fileId}/sharedusers | Get users to mention in a file
-[**GetSharedUsersThirdParty**](FilesSharingAPI.md#GetSharedUsersThirdParty) | **Get** /api/2.0/files/file/{fileId}/sharedusers | Get users to mention in a file (third-party storage)
 [**RemoveSecurityInfo**](FilesSharingAPI.md#RemoveSecurityInfo) | **Delete** /api/2.0/files/share | Remove sharing rights in batch
 [**SendEditorNotify**](FilesSharingAPI.md#SendEditorNotify) | **Post** /api/2.0/files/file/{fileId}/sendeditornotify | Notify mentioned users
-[**SendEditorNotifyThirdParty**](FilesSharingAPI.md#SendEditorNotifyThirdParty) | **Post** /api/2.0/files/file/{fileId}/sendeditornotify | Notify mentioned users (third-party storage)
 [**SetFileSecurityInfo**](FilesSharingAPI.md#SetFileSecurityInfo) | **Put** /api/2.0/files/file/{id}/share | Share a file
-[**SetFileSecurityInfoThirdParty**](FilesSharingAPI.md#SetFileSecurityInfoThirdParty) | **Put** /api/2.0/files/file/{id}/share | Share a file (third-party storage)
 [**SetFolderSecurityInfo**](FilesSharingAPI.md#SetFolderSecurityInfo) | **Put** /api/2.0/files/folder/{id}/share | Share a folder
-[**SetFolderSecurityInfoThirdParty**](FilesSharingAPI.md#SetFolderSecurityInfoThirdParty) | **Put** /api/2.0/files/folder/{id}/share | Share a folder (third-party storage)
 [**SetSecurityInfo**](FilesSharingAPI.md#SetSecurityInfo) | **Put** /api/2.0/files/share | Set sharing rights in batch
 
 
@@ -245,78 +236,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetEncryptionAccessThirdParty
-
-> EncryptionKeyArrayWrapper GetEncryptionAccessThirdParty(ctx, fileId).Execute()
-
-Get file encryption keys (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	fileId := "10" // string | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSharingAPI.GetEncryptionAccessThirdParty(context.Background(), fileId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.GetEncryptionAccessThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetEncryptionAccessThirdParty`: EncryptionKeyArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.GetEncryptionAccessThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **string** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetEncryptionAccessThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**EncryptionKeyArrayWrapper**](EncryptionKeyArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetExternalShareData
 
 > ExternalShareWrapper GetExternalShareData(ctx, key).FileId(fileId).FolderId(folderId).Execute()
@@ -469,82 +388,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetFileSecurityInfoThirdParty
-
-> FileShareArrayWrapper GetFileSecurityInfoThirdParty(ctx, id).Count(count).StartIndex(startIndex).Execute()
-
-Get file sharing rights (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "10" // string | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-	count := int32(25) // int32 | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. (optional)
-	startIndex := int32(0) // int32 | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSharingAPI.GetFileSecurityInfoThirdParty(context.Background(), id).Count(count).StartIndex(startIndex).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.GetFileSecurityInfoThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetFileSecurityInfoThirdParty`: FileShareArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.GetFileSecurityInfoThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetFileSecurityInfoThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **count** | **int32** | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | 
- **startIndex** | **int32** | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | 
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetFolderSecurityInfo
 
 > FileShareArrayWrapper GetFolderSecurityInfo(ctx, id).Count(count).StartIndex(startIndex).Execute()
@@ -595,82 +438,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetFolderSecurityInfoRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **count** | **int32** | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. | 
- **startIndex** | **int32** | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | 
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetFolderSecurityInfoThirdParty
-
-> FileShareArrayWrapper GetFolderSecurityInfoThirdParty(ctx, id).Count(count).StartIndex(startIndex).Execute()
-
-Get folder sharing rights (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "10" // string | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
-	count := int32(25) // int32 | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. (optional)
-	startIndex := int32(0) // int32 | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSharingAPI.GetFolderSecurityInfoThirdParty(context.Background(), id).Count(count).StartIndex(startIndex).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.GetFolderSecurityInfoThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetFolderSecurityInfoThirdParty`: FileShareArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.GetFolderSecurityInfoThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetFolderSecurityInfoThirdPartyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -778,87 +545,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetGroupsMembersWithFileSecurityThirdParty
-
-> GroupMemberSecurityRequestArrayWrapper GetGroupsMembersWithFileSecurityThirdParty(ctx, fileId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
-
-Get file access of group members (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	fileId := "10" // string | The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-	groupId := "9924256a-739c-462b-af15-e652a3b1b6eb" // string | The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
-	count := int32(25) // int32 | How many members at most to answer with. (optional)
-	startIndex := int32(0) // int32 | How many members to skip before answering, used together with `count` to page through a large group. (optional)
-	filterValue := "john" // string | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSharingAPI.GetGroupsMembersWithFileSecurityThirdParty(context.Background(), fileId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.GetGroupsMembersWithFileSecurityThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetGroupsMembersWithFileSecurityThirdParty`: GroupMemberSecurityRequestArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.GetGroupsMembersWithFileSecurityThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **string** | The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | 
-**groupId** | **string** | The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetGroupsMembersWithFileSecurityThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **count** | **int32** | How many members at most to answer with. | 
- **startIndex** | **int32** | How many members to skip before answering, used together with `count` to page through a large group. | 
- **filterValue** | **string** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | 
-
-### Return type
-
-[**GroupMemberSecurityRequestArrayWrapper**](GroupMemberSecurityRequestArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetGroupsMembersWithFolderSecurity
 
 > GroupMemberSecurityRequestArrayWrapper GetGroupsMembersWithFolderSecurity(ctx, folderId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
@@ -912,87 +598,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetGroupsMembersWithFolderSecurityRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **count** | **int32** | How many members at most to answer with. | 
- **startIndex** | **int32** | How many members to skip before answering, used together with `count` to page through a large group. | 
- **filterValue** | **string** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | 
-
-### Return type
-
-[**GroupMemberSecurityRequestArrayWrapper**](GroupMemberSecurityRequestArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetGroupsMembersWithFolderSecurityThirdParty
-
-> GroupMemberSecurityRequestArrayWrapper GetGroupsMembersWithFolderSecurityThirdParty(ctx, folderId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
-
-Get folder access of group members (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	folderId := "10" // string | The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
-	groupId := "9924256a-739c-462b-af15-e652a3b1b6eb" // string | The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
-	count := int32(25) // int32 | How many members at most to answer with. (optional)
-	startIndex := int32(0) // int32 | How many members to skip before answering, used together with `count` to page through a large group. (optional)
-	filterValue := "john" // string | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSharingAPI.GetGroupsMembersWithFolderSecurityThirdParty(context.Background(), folderId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.GetGroupsMembersWithFolderSecurityThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetGroupsMembersWithFolderSecurityThirdParty`: GroupMemberSecurityRequestArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.GetGroupsMembersWithFolderSecurityThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **string** | The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | 
-**groupId** | **string** | The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetGroupsMembersWithFolderSecurityThirdPartyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1161,78 +766,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetSharedUsersThirdParty
-
-> MentionWrapperArrayWrapper GetSharedUsersThirdParty(ctx, fileId).Execute()
-
-Get users to mention in a file (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	fileId := "10" // string | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSharingAPI.GetSharedUsersThirdParty(context.Background(), fileId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.GetSharedUsersThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetSharedUsersThirdParty`: MentionWrapperArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.GetSharedUsersThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **string** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetSharedUsersThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## RemoveSecurityInfo
 
 > BooleanWrapper RemoveSecurityInfo(ctx).BaseBatchRequestDto(baseBatchRequestDto).Execute()
@@ -1375,80 +908,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SendEditorNotifyThirdParty
-
-> AceShortWrapperArrayWrapper SendEditorNotifyThirdParty(ctx, fileId).MentionMessageWrapper(mentionMessageWrapper).Execute()
-
-Notify mentioned users (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	fileId := "10" // string | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-	mentionMessageWrapper := *openapiclient.NewMentionMessageWrapper() // MentionMessageWrapper | The notification to send. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSharingAPI.SendEditorNotifyThirdParty(context.Background(), fileId).MentionMessageWrapper(mentionMessageWrapper).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.SendEditorNotifyThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `SendEditorNotifyThirdParty`: AceShortWrapperArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.SendEditorNotifyThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **string** | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSendEditorNotifyThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **mentionMessageWrapper** | [**MentionMessageWrapper**](MentionMessageWrapper.md) | The notification to send. | 
-
-### Return type
-
-[**AceShortWrapperArrayWrapper**](AceShortWrapperArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## SetFileSecurityInfo
 
 > FileShareArrayWrapper SetFileSecurityInfo(ctx, id).SecurityInfoSimpleRequestDto(securityInfoSimpleRequestDto).Execute()
@@ -1523,80 +982,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SetFileSecurityInfoThirdParty
-
-> FileShareArrayWrapper SetFileSecurityInfoThirdParty(ctx, id).SecurityInfoSimpleRequestDto(securityInfoSimpleRequestDto).Execute()
-
-Share a file (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "10" // string | The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-	securityInfoSimpleRequestDto := *openapiclient.NewSecurityInfoSimpleRequestDto() // SecurityInfoSimpleRequestDto | The rights to apply to the file, and whether to announce them by mail.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSharingAPI.SetFileSecurityInfoThirdParty(context.Background(), id).SecurityInfoSimpleRequestDto(securityInfoSimpleRequestDto).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.SetFileSecurityInfoThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `SetFileSecurityInfoThirdParty`: FileShareArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.SetFileSecurityInfoThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSetFileSecurityInfoThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **securityInfoSimpleRequestDto** | [**SecurityInfoSimpleRequestDto**](SecurityInfoSimpleRequestDto.md) | The rights to apply to the file, and whether to announce them by mail. | 
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## SetFolderSecurityInfo
 
 > FileShareArrayWrapper SetFolderSecurityInfo(ctx, id).SecurityInfoSimpleRequestDto(securityInfoSimpleRequestDto).Execute()
@@ -1646,80 +1031,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSetFolderSecurityInfoRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **securityInfoSimpleRequestDto** | [**SecurityInfoSimpleRequestDto**](SecurityInfoSimpleRequestDto.md) | The rights to apply to the folder, and whether to announce them by mail. | 
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## SetFolderSecurityInfoThirdParty
-
-> FileShareArrayWrapper SetFolderSecurityInfoThirdParty(ctx, id).SecurityInfoSimpleRequestDto(securityInfoSimpleRequestDto).Execute()
-
-Share a folder (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "10" // string | The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
-	securityInfoSimpleRequestDto := *openapiclient.NewSecurityInfoSimpleRequestDto() // SecurityInfoSimpleRequestDto | The rights to apply to the folder, and whether to announce them by mail.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSharingAPI.SetFolderSecurityInfoThirdParty(context.Background(), id).SecurityInfoSimpleRequestDto(securityInfoSimpleRequestDto).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.SetFolderSecurityInfoThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `SetFolderSecurityInfoThirdParty`: FileShareArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.SetFolderSecurityInfoThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSetFolderSecurityInfoThirdPartyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

@@ -306,7 +306,6 @@ docs/ApiKeyResponseWrapper.md
 docs/ApiKeysAPI.md
 docs/AppArrayWrapper.md
 docs/AppDto.md
-docs/AppDtoSettings.md
 docs/AppWrapper.md
 docs/ApplyFilterOption.md
 docs/AppsAPI.md
@@ -707,6 +706,7 @@ docs/ItemKeyValuePairObjectObject.md
 docs/ItemKeyValuePairStringBoolean.md
 docs/ItemKeyValuePairStringLogoRequestsDto.md
 docs/ItemKeyValuePairStringString.md
+docs/JsonValueWrapper.md
 docs/LinkAccountRequestDto.md
 docs/LinkType.md
 docs/Location.md
@@ -891,7 +891,6 @@ docs/ServicePriceInfoArrayWrapper.md
 docs/SessionRequest.md
 docs/SetAppEnabledBody.md
 docs/SetAppSettingsBody.md
-docs/SetAppSettingsBodySettings.md
 docs/SetManagerRequest.md
 docs/SetPublicDto.md
 docs/SetRestrictedAiModelsRequestDto.md
@@ -1071,7 +1070,6 @@ docs/TokenDiagnosticsWrapper.md
 docs/TopUpDepositRequestDto.md
 docs/TransactionInfo.md
 docs/TurnOnAdminMessageSettingsRequestDto.md
-docs/UnknownNullableWrapper.md
 docs/UpcomingPaymentArrayWrapper.md
 docs/UpcomingPaymentDto.md
 docs/UpdateApiKeyRequest.md
@@ -1338,7 +1336,6 @@ model-api-key-response-array-wrapper.go
 model-api-key-response-dto.go
 model-api-key-response-wrapper.go
 model-app-array-wrapper.go
-model-app-dto-settings.go
 model-app-dto.go
 model-app-wrapper.go
 model-apply-filter-option.go
@@ -1727,6 +1724,7 @@ model-item-key-value-pair-object-object.go
 model-item-key-value-pair-string-boolean.go
 model-item-key-value-pair-string-logo-requests-dto.go
 model-item-key-value-pair-string-string.go
+model-json-value-wrapper.go
 model-link-account-request-dto.go
 model-link-type.go
 model-location-type.go
@@ -1874,7 +1872,6 @@ model-service-price-info-array-wrapper.go
 model-service-price-info.go
 model-session-request.go
 model-set-app-enabled-body.go
-model-set-app-settings-body-settings.go
 model-set-app-settings-body.go
 model-set-manager-request.go
 model-set-public-dto.go
@@ -2031,7 +2028,6 @@ model-token-diagnostics-wrapper.go
 model-top-up-deposit-request-dto.go
 model-transaction-info.go
 model-turn-on-admin-message-settings-request-dto.go
-model-unknown-nullable-wrapper.go
 model-upcoming-payment-array-wrapper.go
 model-upcoming-payment-dto.go
 model-update-api-key-request.go

@@ -33,7 +33,7 @@ type ApiAbortUploadSessionRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
 	sessionId string
-	folderId int32
+	folderId interface{}
 }
 
 func (r ApiAbortUploadSessionRequest) Execute() (*http.Response, error) {
@@ -50,7 +50,7 @@ func (r ApiAbortUploadSessionRequest) Execute() (*http.Response, error) {
 // @param sessionId The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
 // @param folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
 // @return ApiAbortUploadSessionRequest
-func (a *FilesOperationsAPIService) AbortUploadSession(ctx context.Context, sessionId string, folderId int32) ApiAbortUploadSessionRequest {
+func (a *FilesOperationsAPIService) AbortUploadSession(ctx context.Context, sessionId string, folderId interface{}) ApiAbortUploadSessionRequest {
 	return ApiAbortUploadSessionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -68,160 +68,6 @@ func (a *FilesOperationsAPIService) AbortUploadSessionExecute(r ApiAbortUploadSe
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.AbortUploadSession")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/{folderId}/session/{sessionId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sessionId"+"}", url.PathEscape(parameterValueToString(r.sessionId, "sessionId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"folderId"+"}", url.PathEscape(parameterValueToString(r.folderId, "folderId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiAbortUploadSessionThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *FilesOperationsAPIService
-	sessionId string
-	folderId string
-}
-
-func (r ApiAbortUploadSessionThirdPartyRequest) Execute() (*http.Response, error) {
-	return r.ApiService.AbortUploadSessionThirdPartyExecute(r)
-}
-
-// AbortUploadSessionThirdParty Abort an upload session (third-party storage)
-//
-// Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param sessionId The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-// @param folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-// @return ApiAbortUploadSessionThirdPartyRequest
-func (a *FilesOperationsAPIService) AbortUploadSessionThirdParty(ctx context.Context, sessionId string, folderId string) ApiAbortUploadSessionThirdPartyRequest {
-	return ApiAbortUploadSessionThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		sessionId: sessionId,
-		folderId: folderId,
-	}
-}
-
-// Execute executes the request
-func (a *FilesOperationsAPIService) AbortUploadSessionThirdPartyExecute(r ApiAbortUploadSessionThirdPartyRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.AbortUploadSessionThirdParty")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -643,7 +489,7 @@ func (a *FilesOperationsAPIService) BulkDownloadExecute(r ApiBulkDownloadRequest
 type ApiCheckConversionStatusRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
-	fileId int32
+	fileId interface{}
 	start *bool
 }
 
@@ -665,7 +511,7 @@ func (r ApiCheckConversionStatusRequest) Execute() (*ConversationResultArrayWrap
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param fileId The file whose conversion is asked about.
 // @return ApiCheckConversionStatusRequest
-func (a *FilesOperationsAPIService) CheckConversionStatus(ctx context.Context, fileId int32) ApiCheckConversionStatusRequest {
+func (a *FilesOperationsAPIService) CheckConversionStatus(ctx context.Context, fileId interface{}) ApiCheckConversionStatusRequest {
 	return ApiCheckConversionStatusRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -684,176 +530,6 @@ func (a *FilesOperationsAPIService) CheckConversionStatusExecute(r ApiCheckConve
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.CheckConversionStatus")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/file/{fileId}/checkconversion"
-	localVarPath = strings.Replace(localVarPath, "{"+"fileId"+"}", url.PathEscape(parameterValueToString(r.fileId, "fileId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.start != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCheckConversionStatusThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *FilesOperationsAPIService
-	fileId string
-	start *bool
-}
-
-// Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
-func (r ApiCheckConversionStatusThirdPartyRequest) Start(start bool) ApiCheckConversionStatusThirdPartyRequest {	r.start = &start
-	return r
-}
-
-func (r ApiCheckConversionStatusThirdPartyRequest) Execute() (*ConversationResultArrayWrapper, *http.Response, error) {
-	return r.ApiService.CheckConversionStatusThirdPartyExecute(r)
-}
-
-// CheckConversionStatusThirdParty Get conversion status (third-party storage)
-//
-// Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param fileId The file whose conversion is asked about.
-// @return ApiCheckConversionStatusThirdPartyRequest
-func (a *FilesOperationsAPIService) CheckConversionStatusThirdParty(ctx context.Context, fileId string) ApiCheckConversionStatusThirdPartyRequest {
-	return ApiCheckConversionStatusThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		fileId: fileId,
-	}
-}
-
-// Execute executes the request
-//  @return ConversationResultArrayWrapper
-func (a *FilesOperationsAPIService) CheckConversionStatusThirdPartyExecute(r ApiCheckConversionStatusThirdPartyRequest) (*ConversationResultArrayWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ConversationResultArrayWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.CheckConversionStatusThirdParty")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1479,7 +1155,7 @@ func (a *FilesOperationsAPIService) CopyBatchItemsExecute(r ApiCopyBatchItemsReq
 type ApiCreateUploadSessionRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
-	folderId int32
+	folderId interface{}
 	sessionRequest *SessionRequest
 }
 
@@ -1490,6 +1166,12 @@ func (r ApiCreateUploadSessionRequest) SessionRequest(sessionRequest SessionRequ
 
 func (r ApiCreateUploadSessionRequest) Execute() (*ChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
 	return r.ApiService.CreateUploadSessionExecute(r)
+}
+
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiCreateUploadSessionRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
+	return r.ApiService.CreateUploadSessionExecuteThirdParty(r)
 }
 
 // CreateUploadSession Chunked upload
@@ -1503,7 +1185,7 @@ func (r ApiCreateUploadSessionRequest) Execute() (*ChunkedUploadSessionResponseW
 // @return ApiCreateUploadSessionRequest
 //
 // Deprecated
-func (a *FilesOperationsAPIService) CreateUploadSession(ctx context.Context, folderId int32) ApiCreateUploadSessionRequest {
+func (a *FilesOperationsAPIService) CreateUploadSession(ctx context.Context, folderId interface{}) ApiCreateUploadSessionRequest {
 	return ApiCreateUploadSessionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1651,45 +1333,10 @@ func (a *FilesOperationsAPIService) CreateUploadSessionExecute(r ApiCreateUpload
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateUploadSessionThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *FilesOperationsAPIService
-	folderId string
-	sessionRequest *SessionRequest
-}
-
-// The file the session is opened for, and how a clash with an existing name is settled.
-func (r ApiCreateUploadSessionThirdPartyRequest) SessionRequest(sessionRequest SessionRequest) ApiCreateUploadSessionThirdPartyRequest {	r.sessionRequest = &sessionRequest
-	return r
-}
-
-func (r ApiCreateUploadSessionThirdPartyRequest) Execute() (*ThirdPartyChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
-	return r.ApiService.CreateUploadSessionThirdPartyExecute(r)
-}
-
-// CreateUploadSessionThirdParty Chunked upload (third-party storage)
-//
-// Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-// @return ApiCreateUploadSessionThirdPartyRequest
-//
-// Deprecated
-func (a *FilesOperationsAPIService) CreateUploadSessionThirdParty(ctx context.Context, folderId string) ApiCreateUploadSessionThirdPartyRequest {
-	return ApiCreateUploadSessionThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		folderId: folderId,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyChunkedUploadSessionResponseWrapperWrapper
 // Deprecated
-func (a *FilesOperationsAPIService) CreateUploadSessionThirdPartyExecute(r ApiCreateUploadSessionThirdPartyRequest) (*ThirdPartyChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
+func (a *FilesOperationsAPIService) CreateUploadSessionExecuteThirdParty(r ApiCreateUploadSessionRequest) (*ThirdPartyChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1697,7 +1344,7 @@ func (a *FilesOperationsAPIService) CreateUploadSessionThirdPartyExecute(r ApiCr
 		localVarReturnValue  *ThirdPartyChunkedUploadSessionResponseWrapperWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.CreateUploadSessionThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.CreateUploadSession")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1731,20 +1378,6 @@ func (a *FilesOperationsAPIService) CreateUploadSessionThirdPartyExecute(r ApiCr
 	}
 	// body params
 	localVarPostBody = r.sessionRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1829,7 +1462,7 @@ func (a *FilesOperationsAPIService) CreateUploadSessionThirdPartyExecute(r ApiCr
 type ApiCreateUploadSessionInFolderRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
-	folderId int32
+	folderId interface{}
 	sessionRequest *SessionRequest
 }
 
@@ -1842,6 +1475,12 @@ func (r ApiCreateUploadSessionInFolderRequest) Execute() (*ChunkedUploadSessionR
 	return r.ApiService.CreateUploadSessionInFolderExecute(r)
 }
 
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiCreateUploadSessionInFolderRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+	return r.ApiService.CreateUploadSessionInFolderExecuteThirdParty(r)
+}
+
 // CreateUploadSessionInFolder Create an upload session
 //
 // Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
@@ -1851,7 +1490,7 @@ func (r ApiCreateUploadSessionInFolderRequest) Execute() (*ChunkedUploadSessionR
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
 // @return ApiCreateUploadSessionInFolderRequest
-func (a *FilesOperationsAPIService) CreateUploadSessionInFolder(ctx context.Context, folderId int32) ApiCreateUploadSessionInFolderRequest {
+func (a *FilesOperationsAPIService) CreateUploadSessionInFolder(ctx context.Context, folderId interface{}) ApiCreateUploadSessionInFolderRequest {
 	return ApiCreateUploadSessionInFolderRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1998,42 +1637,9 @@ func (a *FilesOperationsAPIService) CreateUploadSessionInFolderExecute(r ApiCrea
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateUploadSessionInFolderThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *FilesOperationsAPIService
-	folderId string
-	sessionRequest *SessionRequest
-}
-
-// The file the session is opened for, and how a clash with an existing name is settled.
-func (r ApiCreateUploadSessionInFolderThirdPartyRequest) SessionRequest(sessionRequest SessionRequest) ApiCreateUploadSessionInFolderThirdPartyRequest {	r.sessionRequest = &sessionRequest
-	return r
-}
-
-func (r ApiCreateUploadSessionInFolderThirdPartyRequest) Execute() (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
-	return r.ApiService.CreateUploadSessionInFolderThirdPartyExecute(r)
-}
-
-// CreateUploadSessionInFolderThirdParty Create an upload session (third-party storage)
-//
-// Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-// @return ApiCreateUploadSessionInFolderThirdPartyRequest
-func (a *FilesOperationsAPIService) CreateUploadSessionInFolderThirdParty(ctx context.Context, folderId string) ApiCreateUploadSessionInFolderThirdPartyRequest {
-	return ApiCreateUploadSessionInFolderThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		folderId: folderId,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyChunkedUploadSessionResponseResponseWrapper
-func (a *FilesOperationsAPIService) CreateUploadSessionInFolderThirdPartyExecute(r ApiCreateUploadSessionInFolderThirdPartyRequest) (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+func (a *FilesOperationsAPIService) CreateUploadSessionInFolderExecuteThirdParty(r ApiCreateUploadSessionInFolderRequest) (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -2041,7 +1647,7 @@ func (a *FilesOperationsAPIService) CreateUploadSessionInFolderThirdPartyExecute
 		localVarReturnValue  *ThirdPartyChunkedUploadSessionResponseResponseWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.CreateUploadSessionInFolderThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.CreateUploadSessionInFolder")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -2075,20 +1681,6 @@ func (a *FilesOperationsAPIService) CreateUploadSessionInFolderThirdPartyExecute
 	}
 	// body params
 	localVarPostBody = r.sessionRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -3012,12 +2604,18 @@ func (a *FilesOperationsAPIService) EmptyTrashExecute(r ApiEmptyTrashRequest) (*
 type ApiFinalizeSessionRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
-	folderId int32
+	folderId interface{}
 	sessionId string
 }
 
 func (r ApiFinalizeSessionRequest) Execute() (*UploadSessionResponseWrapper, *http.Response, error) {
 	return r.ApiService.FinalizeSessionExecute(r)
+}
+
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiFinalizeSessionRequest) ExecuteThirdParty() (*ThirdPartyUploadSessionResponseWrapper, *http.Response, error) {
+	return r.ApiService.FinalizeSessionExecuteThirdParty(r)
 }
 
 // FinalizeSession Finalize an upload session
@@ -3030,7 +2628,7 @@ func (r ApiFinalizeSessionRequest) Execute() (*UploadSessionResponseWrapper, *ht
 // @param folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
 // @param sessionId The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
 // @return ApiFinalizeSessionRequest
-func (a *FilesOperationsAPIService) FinalizeSession(ctx context.Context, folderId int32, sessionId string) ApiFinalizeSessionRequest {
+func (a *FilesOperationsAPIService) FinalizeSession(ctx context.Context, folderId interface{}, sessionId string) ApiFinalizeSessionRequest {
 	return ApiFinalizeSessionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3174,39 +2772,9 @@ func (a *FilesOperationsAPIService) FinalizeSessionExecute(r ApiFinalizeSessionR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiFinalizeSessionThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *FilesOperationsAPIService
-	folderId string
-	sessionId string
-}
-
-func (r ApiFinalizeSessionThirdPartyRequest) Execute() (*ThirdPartyUploadSessionResponseWrapper, *http.Response, error) {
-	return r.ApiService.FinalizeSessionThirdPartyExecute(r)
-}
-
-// FinalizeSessionThirdParty Finalize an upload session (third-party storage)
-//
-// Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-// @param sessionId The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-// @return ApiFinalizeSessionThirdPartyRequest
-func (a *FilesOperationsAPIService) FinalizeSessionThirdParty(ctx context.Context, folderId string, sessionId string) ApiFinalizeSessionThirdPartyRequest {
-	return ApiFinalizeSessionThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		folderId: folderId,
-		sessionId: sessionId,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyUploadSessionResponseWrapper
-func (a *FilesOperationsAPIService) FinalizeSessionThirdPartyExecute(r ApiFinalizeSessionThirdPartyRequest) (*ThirdPartyUploadSessionResponseWrapper, *http.Response, error) {
+func (a *FilesOperationsAPIService) FinalizeSessionExecuteThirdParty(r ApiFinalizeSessionRequest) (*ThirdPartyUploadSessionResponseWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -3214,7 +2782,7 @@ func (a *FilesOperationsAPIService) FinalizeSessionThirdPartyExecute(r ApiFinali
 		localVarReturnValue  *ThirdPartyUploadSessionResponseWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.FinalizeSessionThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.FinalizeSession")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -3243,20 +2811,6 @@ func (a *FilesOperationsAPIService) FinalizeSessionThirdPartyExecute(r ApiFinali
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -3956,12 +3510,17 @@ func (a *FilesOperationsAPIService) MoveBatchItemsExecute(r ApiMoveBatchItemsReq
 type ApiStartFileConversionRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
-	fileId int32
-	checkConversionRequestDto *CheckConversionRequestDto
+	fileId interface{}
+	checkConversionRequestDto interface{}
 }
 
 // The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
-func (r ApiStartFileConversionRequest) CheckConversionRequestDto(checkConversionRequestDto CheckConversionRequestDto) ApiStartFileConversionRequest {	r.checkConversionRequestDto = &checkConversionRequestDto
+func (r ApiStartFileConversionRequest) CheckConversionRequestDto(checkConversionRequestDto CheckConversionRequestDto) ApiStartFileConversionRequest {	r.checkConversionRequestDto = checkConversionRequestDto
+	return r
+}
+
+// The same parameter for an entry in a connected third-party storage.
+func (r ApiStartFileConversionRequest) CheckConversionRequestDtoThirdParty(checkConversionRequestDto ThirdPartyCheckConversionRequestDto) ApiStartFileConversionRequest {	r.checkConversionRequestDto = checkConversionRequestDto
 	return r
 }
 
@@ -3978,7 +3537,7 @@ func (r ApiStartFileConversionRequest) Execute() (*ConversationResultArrayWrappe
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param fileId The file to convert.
 // @return ApiStartFileConversionRequest
-func (a *FilesOperationsAPIService) StartFileConversion(ctx context.Context, fileId int32) ApiStartFileConversionRequest {
+func (a *FilesOperationsAPIService) StartFileConversion(ctx context.Context, fileId interface{}) ApiStartFileConversionRequest {
 	return ApiStartFileConversionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -4027,175 +3586,6 @@ func (a *FilesOperationsAPIService) StartFileConversionExecute(r ApiStartFileCon
 	}
 	// body params
 	localVarPostBody = r.checkConversionRequestDto
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiStartFileConversionThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *FilesOperationsAPIService
-	fileId string
-	thirdPartyCheckConversionRequestDto *ThirdPartyCheckConversionRequestDto
-}
-
-// The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
-func (r ApiStartFileConversionThirdPartyRequest) ThirdPartyCheckConversionRequestDto(thirdPartyCheckConversionRequestDto ThirdPartyCheckConversionRequestDto) ApiStartFileConversionThirdPartyRequest {	r.thirdPartyCheckConversionRequestDto = &thirdPartyCheckConversionRequestDto
-	return r
-}
-
-func (r ApiStartFileConversionThirdPartyRequest) Execute() (*ConversationResultArrayWrapper, *http.Response, error) {
-	return r.ApiService.StartFileConversionThirdPartyExecute(r)
-}
-
-// StartFileConversionThirdParty Start file conversion (third-party storage)
-//
-// Queues the conversion of a file into the portal's own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal's default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param fileId The file to convert.
-// @return ApiStartFileConversionThirdPartyRequest
-func (a *FilesOperationsAPIService) StartFileConversionThirdParty(ctx context.Context, fileId string) ApiStartFileConversionThirdPartyRequest {
-	return ApiStartFileConversionThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		fileId: fileId,
-	}
-}
-
-// Execute executes the request
-//  @return ConversationResultArrayWrapper
-func (a *FilesOperationsAPIService) StartFileConversionThirdPartyExecute(r ApiStartFileConversionThirdPartyRequest) (*ConversationResultArrayWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ConversationResultArrayWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.StartFileConversionThirdParty")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/file/{fileId}/checkconversion"
-	localVarPath = strings.Replace(localVarPath, "{"+"fileId"+"}", url.PathEscape(parameterValueToString(r.fileId, "fileId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.thirdPartyCheckConversionRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -4430,7 +3820,7 @@ func (a *FilesOperationsAPIService) TerminateTasksExecute(r ApiTerminateTasksReq
 type ApiUpdateFileCommentRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
-	fileId int32
+	fileId interface{}
 	updateComment *UpdateComment
 }
 
@@ -4452,7 +3842,7 @@ func (r ApiUpdateFileCommentRequest) Execute() (*StringWrapper, *http.Response, 
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param fileId The file whose version comment is replaced.
 // @return ApiUpdateFileCommentRequest
-func (a *FilesOperationsAPIService) UpdateFileComment(ctx context.Context, fileId int32) ApiUpdateFileCommentRequest {
+func (a *FilesOperationsAPIService) UpdateFileComment(ctx context.Context, fileId interface{}) ApiUpdateFileCommentRequest {
 	return ApiUpdateFileCommentRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -4599,182 +3989,10 @@ func (a *FilesOperationsAPIService) UpdateFileCommentExecute(r ApiUpdateFileComm
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateFileCommentThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *FilesOperationsAPIService
-	fileId string
-	updateComment *UpdateComment
-}
-
-// The version and the comment to store on it.
-func (r ApiUpdateFileCommentThirdPartyRequest) UpdateComment(updateComment UpdateComment) ApiUpdateFileCommentThirdPartyRequest {	r.updateComment = &updateComment
-	return r
-}
-
-func (r ApiUpdateFileCommentThirdPartyRequest) Execute() (*StringWrapper, *http.Response, error) {
-	return r.ApiService.UpdateFileCommentThirdPartyExecute(r)
-}
-
-// UpdateFileCommentThirdParty Update a comment (third-party storage)
-//
-// Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else's file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param fileId The file whose version comment is replaced.
-// @return ApiUpdateFileCommentThirdPartyRequest
-func (a *FilesOperationsAPIService) UpdateFileCommentThirdParty(ctx context.Context, fileId string) ApiUpdateFileCommentThirdPartyRequest {
-	return ApiUpdateFileCommentThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		fileId: fileId,
-	}
-}
-
-// Execute executes the request
-//  @return StringWrapper
-func (a *FilesOperationsAPIService) UpdateFileCommentThirdPartyExecute(r ApiUpdateFileCommentThirdPartyRequest) (*StringWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *StringWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.UpdateFileCommentThirdParty")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/file/{fileId}/comment"
-	localVarPath = strings.Replace(localVarPath, "{"+"fileId"+"}", url.PathEscape(parameterValueToString(r.fileId, "fileId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.updateComment == nil {
-		return localVarReturnValue, nil, reportError("updateComment is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.updateComment
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiUploadAsyncSessionRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
-	folderId int32
+	folderId interface{}
 	sessionId string
 	chunkNumber *int32
 	file *os.File
@@ -4794,6 +4012,12 @@ func (r ApiUploadAsyncSessionRequest) Execute() (*ChunkedUploadSessionResponseRe
 	return r.ApiService.UploadAsyncSessionExecute(r)
 }
 
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiUploadAsyncSessionRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+	return r.ApiService.UploadAsyncSessionExecuteThirdParty(r)
+}
+
 // UploadAsyncSession Upload a numbered chunk
 //
 // Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
@@ -4804,7 +4028,7 @@ func (r ApiUploadAsyncSessionRequest) Execute() (*ChunkedUploadSessionResponseRe
 // @param folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
 // @param sessionId The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
 // @return ApiUploadAsyncSessionRequest
-func (a *FilesOperationsAPIService) UploadAsyncSession(ctx context.Context, folderId int32, sessionId string) ApiUploadAsyncSessionRequest {
+func (a *FilesOperationsAPIService) UploadAsyncSession(ctx context.Context, folderId interface{}, sessionId string) ApiUploadAsyncSessionRequest {
 	return ApiUploadAsyncSessionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -4966,51 +4190,9 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionExecute(r ApiUploadAsyncSe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUploadAsyncSessionThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *FilesOperationsAPIService
-	folderId string
-	sessionId string
-	chunkNumber *int32
-	file *os.File
-}
-
-// The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
-func (r ApiUploadAsyncSessionThirdPartyRequest) ChunkNumber(chunkNumber int32) ApiUploadAsyncSessionThirdPartyRequest {	r.chunkNumber = &chunkNumber
-	return r
-}
-
-// The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
-func (r ApiUploadAsyncSessionThirdPartyRequest) File(file *os.File) ApiUploadAsyncSessionThirdPartyRequest {	r.file = file
-	return r
-}
-
-func (r ApiUploadAsyncSessionThirdPartyRequest) Execute() (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
-	return r.ApiService.UploadAsyncSessionThirdPartyExecute(r)
-}
-
-// UploadAsyncSessionThirdParty Upload a numbered chunk (third-party storage)
-//
-// Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-// @param sessionId The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
-// @return ApiUploadAsyncSessionThirdPartyRequest
-func (a *FilesOperationsAPIService) UploadAsyncSessionThirdParty(ctx context.Context, folderId string, sessionId string) ApiUploadAsyncSessionThirdPartyRequest {
-	return ApiUploadAsyncSessionThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		folderId: folderId,
-		sessionId: sessionId,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyChunkedUploadSessionResponseResponseWrapper
-func (a *FilesOperationsAPIService) UploadAsyncSessionThirdPartyExecute(r ApiUploadAsyncSessionThirdPartyRequest) (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+func (a *FilesOperationsAPIService) UploadAsyncSessionExecuteThirdParty(r ApiUploadAsyncSessionRequest) (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -5018,7 +4200,7 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionThirdPartyExecute(r ApiUpl
 		localVarReturnValue  *ThirdPartyChunkedUploadSessionResponseResponseWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.UploadAsyncSessionThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.UploadAsyncSession")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -5065,20 +4247,6 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionThirdPartyExecute(r ApiUpl
 		fileLocalVarFileName = fileLocalVarFile.Name()
 		fileLocalVarFile.Close()
 		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -5164,7 +4332,7 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionThirdPartyExecute(r ApiUpl
 type ApiUploadSessionRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
-	folderId int32
+	folderId interface{}
 	sessionId string
 	file *os.File
 }
@@ -5178,6 +4346,12 @@ func (r ApiUploadSessionRequest) Execute() (*UploadSessionResponseWrapper, *http
 	return r.ApiService.UploadSessionExecute(r)
 }
 
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiUploadSessionRequest) ExecuteThirdParty() (*ThirdPartyUploadSessionResponseWrapper, *http.Response, error) {
+	return r.ApiService.UploadSessionExecuteThirdParty(r)
+}
+
 // UploadSession Upload the next chunk
 //
 // Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
@@ -5188,7 +4362,7 @@ func (r ApiUploadSessionRequest) Execute() (*UploadSessionResponseWrapper, *http
 // @param folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
 // @param sessionId The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
 // @return ApiUploadSessionRequest
-func (a *FilesOperationsAPIService) UploadSession(ctx context.Context, folderId int32, sessionId string) ApiUploadSessionRequest {
+func (a *FilesOperationsAPIService) UploadSession(ctx context.Context, folderId interface{}, sessionId string) ApiUploadSessionRequest {
 	return ApiUploadSessionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -5347,45 +4521,9 @@ func (a *FilesOperationsAPIService) UploadSessionExecute(r ApiUploadSessionReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUploadSessionThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *FilesOperationsAPIService
-	folderId string
-	sessionId string
-	file *os.File
-}
-
-// The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
-func (r ApiUploadSessionThirdPartyRequest) File(file *os.File) ApiUploadSessionThirdPartyRequest {	r.file = file
-	return r
-}
-
-func (r ApiUploadSessionThirdPartyRequest) Execute() (*ThirdPartyUploadSessionResponseWrapper, *http.Response, error) {
-	return r.ApiService.UploadSessionThirdPartyExecute(r)
-}
-
-// UploadSessionThirdParty Upload the next chunk (third-party storage)
-//
-// Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-// @param sessionId The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
-// @return ApiUploadSessionThirdPartyRequest
-func (a *FilesOperationsAPIService) UploadSessionThirdParty(ctx context.Context, folderId string, sessionId string) ApiUploadSessionThirdPartyRequest {
-	return ApiUploadSessionThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		folderId: folderId,
-		sessionId: sessionId,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyUploadSessionResponseWrapper
-func (a *FilesOperationsAPIService) UploadSessionThirdPartyExecute(r ApiUploadSessionThirdPartyRequest) (*ThirdPartyUploadSessionResponseWrapper, *http.Response, error) {
+func (a *FilesOperationsAPIService) UploadSessionExecuteThirdParty(r ApiUploadSessionRequest) (*ThirdPartyUploadSessionResponseWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -5393,7 +4531,7 @@ func (a *FilesOperationsAPIService) UploadSessionThirdPartyExecute(r ApiUploadSe
 		localVarReturnValue  *ThirdPartyUploadSessionResponseWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.UploadSessionThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.UploadSession")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -5437,20 +4575,6 @@ func (a *FilesOperationsAPIService) UploadSessionThirdPartyExecute(r ApiUploadSe
 		fileLocalVarFileName = fileLocalVarFile.Name()
 		fileLocalVarFile.Close()
 		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

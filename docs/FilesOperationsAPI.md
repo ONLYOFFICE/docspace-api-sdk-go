@@ -5,38 +5,29 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AbortUploadSession**](FilesOperationsAPI.md#AbortUploadSession) | **Delete** /api/2.0/files/{folderId}/session/{sessionId} | Abort an upload session
-[**AbortUploadSessionThirdParty**](FilesOperationsAPI.md#AbortUploadSessionThirdParty) | **Delete** /api/2.0/files/{folderId}/session/{sessionId} | Abort an upload session (third-party storage)
 [**AddFavorites**](FilesOperationsAPI.md#AddFavorites) | **Post** /api/2.0/files/favorites | Add favorite files and folders
 [**BulkDownload**](FilesOperationsAPI.md#BulkDownload) | **Put** /api/2.0/files/fileops/bulkdownload | Bulk download
 [**CheckConversionStatus**](FilesOperationsAPI.md#CheckConversionStatus) | **Get** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status
-[**CheckConversionStatusThirdParty**](FilesOperationsAPI.md#CheckConversionStatusThirdParty) | **Get** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status (third-party storage)
 [**CheckMoveOrCopyBatchItems**](FilesOperationsAPI.md#CheckMoveOrCopyBatchItems) | **Get** /api/2.0/files/fileops/move | Check move or copy conflicts
 [**CheckMoveOrCopyDestFolder**](FilesOperationsAPI.md#CheckMoveOrCopyDestFolder) | **Get** /api/2.0/files/fileops/checkdestfolder | Check the destination folder
 [**CopyBatchItems**](FilesOperationsAPI.md#CopyBatchItems) | **Put** /api/2.0/files/fileops/copy | Copy files and folders
 [**CreateUploadSession**](FilesOperationsAPI.md#CreateUploadSession) | **Post** /api/2.0/files/{folderId}/upload/create_session | Chunked upload
-[**CreateUploadSessionThirdParty**](FilesOperationsAPI.md#CreateUploadSessionThirdParty) | **Post** /api/2.0/files/{folderId}/upload/create_session | Chunked upload (third-party storage)
 [**CreateUploadSessionInFolder**](FilesOperationsAPI.md#CreateUploadSessionInFolder) | **Post** /api/2.0/files/{folderId}/session | Create an upload session
-[**CreateUploadSessionInFolderThirdParty**](FilesOperationsAPI.md#CreateUploadSessionInFolderThirdParty) | **Post** /api/2.0/files/{folderId}/session | Create an upload session (third-party storage)
 [**DeleteBatchItems**](FilesOperationsAPI.md#DeleteBatchItems) | **Put** /api/2.0/files/fileops/delete | Delete files and folders
 [**DeleteFavoritesFromBody**](FilesOperationsAPI.md#DeleteFavoritesFromBody) | **Delete** /api/2.0/files/favorites | Delete favorite files and folders
 [**DeleteFileVersions**](FilesOperationsAPI.md#DeleteFileVersions) | **Put** /api/2.0/files/fileops/deleteversion | Delete file versions
 [**DuplicateBatchItems**](FilesOperationsAPI.md#DuplicateBatchItems) | **Put** /api/2.0/files/fileops/duplicate | Duplicate files and folders
 [**EmptyTrash**](FilesOperationsAPI.md#EmptyTrash) | **Put** /api/2.0/files/fileops/emptytrash | Empty the Trash folder
 [**FinalizeSession**](FilesOperationsAPI.md#FinalizeSession) | **Put** /api/2.0/files/{folderId}/session/{sessionId}/finalize | Finalize an upload session
-[**FinalizeSessionThirdParty**](FilesOperationsAPI.md#FinalizeSessionThirdParty) | **Put** /api/2.0/files/{folderId}/session/{sessionId}/finalize | Finalize an upload session (third-party storage)
 [**GetOperationStatuses**](FilesOperationsAPI.md#GetOperationStatuses) | **Get** /api/2.0/files/fileops | Get active file operations
 [**GetOperationStatusesByType**](FilesOperationsAPI.md#GetOperationStatusesByType) | **Get** /api/2.0/files/fileops/{operationType} | Get file operations by type
 [**MarkAsRead**](FilesOperationsAPI.md#MarkAsRead) | **Put** /api/2.0/files/fileops/markasread | Mark files and folders as read
 [**MoveBatchItems**](FilesOperationsAPI.md#MoveBatchItems) | **Put** /api/2.0/files/fileops/move | Move files and folders
 [**StartFileConversion**](FilesOperationsAPI.md#StartFileConversion) | **Put** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion
-[**StartFileConversionThirdParty**](FilesOperationsAPI.md#StartFileConversionThirdParty) | **Put** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion (third-party storage)
 [**TerminateTasks**](FilesOperationsAPI.md#TerminateTasks) | **Put** /api/2.0/files/fileops/terminate/{id} | Cancel file operations
 [**UpdateFileComment**](FilesOperationsAPI.md#UpdateFileComment) | **Put** /api/2.0/files/file/{fileId}/comment | Update a comment
-[**UpdateFileCommentThirdParty**](FilesOperationsAPI.md#UpdateFileCommentThirdParty) | **Put** /api/2.0/files/file/{fileId}/comment | Update a comment (third-party storage)
 [**UploadAsyncSession**](FilesOperationsAPI.md#UploadAsyncSession) | **Post** /api/2.0/files/{folderId}/session/{sessionId}/upload | Upload a numbered chunk
-[**UploadAsyncSessionThirdParty**](FilesOperationsAPI.md#UploadAsyncSessionThirdParty) | **Post** /api/2.0/files/{folderId}/session/{sessionId}/upload | Upload a numbered chunk (third-party storage)
 [**UploadSession**](FilesOperationsAPI.md#UploadSession) | **Post** /api/2.0/files/{folderId}/session/{sessionId} | Upload the next chunk
-[**UploadSessionThirdParty**](FilesOperationsAPI.md#UploadSessionThirdParty) | **Post** /api/2.0/files/{folderId}/session/{sessionId} | Upload the next chunk (third-party storage)
 
 
 
@@ -88,79 +79,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAbortUploadSessionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## AbortUploadSessionThirdParty
-
-> AbortUploadSessionThirdParty(ctx, sessionId, folderId).Execute()
-
-Abort an upload session (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	sessionId := "9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c" // string | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-	folderId := "1" // string | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FilesOperationsAPI.AbortUploadSessionThirdParty(context.Background(), sessionId, folderId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.AbortUploadSessionThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sessionId** | **string** | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | 
-**folderId** | **string** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAbortUploadSessionThirdPartyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -371,80 +289,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCheckConversionStatusRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **start** | **bool** | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. | 
-
-### Return type
-
-[**ConversationResultArrayWrapper**](ConversationResultArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CheckConversionStatusThirdParty
-
-> ConversationResultArrayWrapper CheckConversionStatusThirdParty(ctx, fileId).Start(start).Execute()
-
-Get conversion status (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	fileId := "1" // string | The file whose conversion is asked about.
-	start := false // bool | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.CheckConversionStatusThirdParty(context.Background(), fileId).Start(start).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.CheckConversionStatusThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CheckConversionStatusThirdParty`: ConversationResultArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.CheckConversionStatusThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **string** | The file whose conversion is asked about. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCheckConversionStatusThirdPartyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -703,6 +547,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesOperationsAPI.CreateUploadSession(context.Background(), folderId).SessionRequest(sessionRequest).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// folderId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesOperationsAPI.CreateUploadSession(context.Background(), folderId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.CreateUploadSession``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -748,80 +595,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateUploadSessionThirdParty
-
-> ThirdPartyChunkedUploadSessionResponseWrapperWrapper CreateUploadSessionThirdParty(ctx, folderId).SessionRequest(sessionRequest).Execute()
-
-Chunked upload (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	folderId := "1" // string | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-	sessionRequest := *openapiclient.NewSessionRequest("My Document.docx") // SessionRequest | The file the session is opened for, and how a clash with an existing name is settled.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.CreateUploadSessionThirdParty(context.Background(), folderId).SessionRequest(sessionRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.CreateUploadSessionThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateUploadSessionThirdParty`: ThirdPartyChunkedUploadSessionResponseWrapperWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.CreateUploadSessionThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **string** | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateUploadSessionThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **sessionRequest** | [**SessionRequest**](SessionRequest.md) | The file the session is opened for, and how a clash with an existing name is settled. | 
-
-### Return type
-
-[**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## CreateUploadSessionInFolder
 
 > ChunkedUploadSessionResponseResponseWrapper CreateUploadSessionInFolder(ctx, folderId).SessionRequest(sessionRequest).Execute()
@@ -851,6 +624,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesOperationsAPI.CreateUploadSessionInFolder(context.Background(), folderId).SessionRequest(sessionRequest).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// folderId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesOperationsAPI.CreateUploadSessionInFolder(context.Background(), folderId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.CreateUploadSessionInFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -881,80 +657,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateUploadSessionInFolderThirdParty
-
-> ThirdPartyChunkedUploadSessionResponseResponseWrapper CreateUploadSessionInFolderThirdParty(ctx, folderId).SessionRequest(sessionRequest).Execute()
-
-Create an upload session (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	folderId := "1" // string | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-	sessionRequest := *openapiclient.NewSessionRequest("My Document.docx") // SessionRequest | The file the session is opened for, and how a clash with an existing name is settled.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.CreateUploadSessionInFolderThirdParty(context.Background(), folderId).SessionRequest(sessionRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.CreateUploadSessionInFolderThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateUploadSessionInFolderThirdParty`: ThirdPartyChunkedUploadSessionResponseResponseWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.CreateUploadSessionInFolderThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **string** | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateUploadSessionInFolderThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **sessionRequest** | [**SessionRequest**](SessionRequest.md) | The file the session is opened for, and how a clash with an existing name is settled. | 
-
-### Return type
-
-[**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md)
 
 ### Authorization
 
@@ -1341,6 +1043,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesOperationsAPI.FinalizeSession(context.Background(), folderId, sessionId).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// folderId := "sbox-42"sessionId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesOperationsAPI.FinalizeSession(context.Background(), folderId, sessionId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.FinalizeSession``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1372,81 +1077,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UploadSessionResponseWrapper**](UploadSessionResponseWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## FinalizeSessionThirdParty
-
-> ThirdPartyUploadSessionResponseWrapper FinalizeSessionThirdParty(ctx, folderId, sessionId).Execute()
-
-Finalize an upload session (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	folderId := "1" // string | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-	sessionId := "9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c" // string | The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.FinalizeSessionThirdParty(context.Background(), folderId, sessionId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.FinalizeSessionThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `FinalizeSessionThirdParty`: ThirdPartyUploadSessionResponseWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.FinalizeSessionThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **string** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
-**sessionId** | **string** | The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiFinalizeSessionThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**ThirdPartyUploadSessionResponseWrapper**](ThirdPartyUploadSessionResponseWrapper.md)
 
 ### Authorization
 
@@ -1814,80 +1444,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## StartFileConversionThirdParty
-
-> ConversationResultArrayWrapper StartFileConversionThirdParty(ctx, fileId).ThirdPartyCheckConversionRequestDto(thirdPartyCheckConversionRequestDto).Execute()
-
-Start file conversion (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	fileId := "1" // string | The file to convert.
-	thirdPartyCheckConversionRequestDto := *openapiclient.NewThirdPartyCheckConversionRequestDto() // ThirdPartyCheckConversionRequestDto | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.StartFileConversionThirdParty(context.Background(), fileId).ThirdPartyCheckConversionRequestDto(thirdPartyCheckConversionRequestDto).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.StartFileConversionThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `StartFileConversionThirdParty`: ConversationResultArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.StartFileConversionThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **string** | The file to convert. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiStartFileConversionThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **thirdPartyCheckConversionRequestDto** | [**ThirdPartyCheckConversionRequestDto**](ThirdPartyCheckConversionRequestDto.md) | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | 
-
-### Return type
-
-[**ConversationResultArrayWrapper**](ConversationResultArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## TerminateTasks
 
 > FileOperationArrayWrapper TerminateTasks(ctx, id).Execute()
@@ -2034,80 +1590,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateFileCommentThirdParty
-
-> StringWrapper UpdateFileCommentThirdParty(ctx, fileId).UpdateComment(updateComment).Execute()
-
-Update a comment (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	fileId := "1" // string | The file whose version comment is replaced.
-	updateComment := *openapiclient.NewUpdateComment(int32(1)) // UpdateComment | The version and the comment to store on it.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.UpdateFileCommentThirdParty(context.Background(), fileId).UpdateComment(updateComment).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.UpdateFileCommentThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFileCommentThirdParty`: StringWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.UpdateFileCommentThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **string** | The file whose version comment is replaced. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFileCommentThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **updateComment** | [**UpdateComment**](UpdateComment.md) | The version and the comment to store on it. | 
-
-### Return type
-
-[**StringWrapper**](StringWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UploadAsyncSession
 
 > ChunkedUploadSessionResponseResponseWrapper UploadAsyncSession(ctx, folderId, sessionId).ChunkNumber(chunkNumber).File(file).Execute()
@@ -2139,6 +1621,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesOperationsAPI.UploadAsyncSession(context.Background(), folderId, sessionId).ChunkNumber(chunkNumber).File(file).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// folderId := "sbox-42"sessionId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesOperationsAPI.UploadAsyncSession(context.Background(), folderId, sessionId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.UploadAsyncSession``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2187,85 +1672,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UploadAsyncSessionThirdParty
-
-> ThirdPartyChunkedUploadSessionResponseResponseWrapper UploadAsyncSessionThirdParty(ctx, folderId, sessionId).ChunkNumber(chunkNumber).File(file).Execute()
-
-Upload a numbered chunk (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	folderId := "1" // string | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-	sessionId := "9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c" // string | The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
-	chunkNumber := int32(1) // int32 | The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself. (optional)
-	file := os.NewFile(1234, "some_file") // *os.File | The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.UploadAsyncSessionThirdParty(context.Background(), folderId, sessionId).ChunkNumber(chunkNumber).File(file).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.UploadAsyncSessionThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UploadAsyncSessionThirdParty`: ThirdPartyChunkedUploadSessionResponseResponseWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.UploadAsyncSessionThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **string** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
-**sessionId** | **string** | The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUploadAsyncSessionThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **chunkNumber** | **int32** | The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself. | 
- **file** | ***os.File** | The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused. | 
-
-### Return type
-
-[**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UploadSession
 
 > UploadSessionResponseWrapper UploadSession(ctx, folderId, sessionId).File(file).Execute()
@@ -2296,6 +1702,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesOperationsAPI.UploadSession(context.Background(), folderId, sessionId).File(file).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// folderId := "sbox-42"sessionId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesOperationsAPI.UploadSession(context.Background(), folderId, sessionId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.UploadSession``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2328,83 +1737,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UploadSessionResponseWrapper**](UploadSessionResponseWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UploadSessionThirdParty
-
-> ThirdPartyUploadSessionResponseWrapper UploadSessionThirdParty(ctx, folderId, sessionId).File(file).Execute()
-
-Upload the next chunk (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	folderId := "1" // string | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-	sessionId := "9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c" // string | The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
-	file := os.NewFile(1234, "some_file") // *os.File | The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.UploadSessionThirdParty(context.Background(), folderId, sessionId).File(file).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.UploadSessionThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UploadSessionThirdParty`: ThirdPartyUploadSessionResponseWrapper
-	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.UploadSessionThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **string** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
-**sessionId** | **string** | The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUploadSessionThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **file** | ***os.File** | The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused. | 
-
-### Return type
-
-[**ThirdPartyUploadSessionResponseWrapper**](ThirdPartyUploadSessionResponseWrapper.md)
 
 ### Authorization
 

@@ -27,6 +27,12 @@ type AiChatPriceDto struct {
 	Prompt *float64 `json:"prompt,omitempty"`
 	// The cost of one million tokens the model writes back. It is normally the dearer of the two directions.
 	Completion *float64 `json:"completion,omitempty"`
+	// The cost of one million prompt tokens served from the prompt cache. It is absent when the model does not  support prompt caching.
+	PromptCacheRead NullableFloat64 `json:"promptCacheRead,omitempty"`
+	// The cost of one million prompt tokens written to the prompt cache with the default lifetime. It is absent  when the model does not support prompt caching.
+	PromptCacheWrite NullableFloat64 `json:"promptCacheWrite,omitempty"`
+	// The cost of one million prompt tokens written to the prompt cache with a one-hour lifetime. It is absent  when the model offers no such option.
+	PromptCacheWrite1H NullableFloat64 `json:"promptCacheWrite1H,omitempty"`
 }
 
 // NewAiChatPriceDto instantiates a new AiChatPriceDto object
@@ -110,6 +116,132 @@ func (o *AiChatPriceDto) SetCompletion(v float64) {
 	o.Completion = &v
 }
 
+// GetPromptCacheRead returns the PromptCacheRead field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AiChatPriceDto) GetPromptCacheRead() float64 {
+	if o == nil || IsNil(o.PromptCacheRead.Get()) {
+		var ret float64
+		return ret
+	}
+	return *o.PromptCacheRead.Get()
+}
+
+// GetPromptCacheReadOk returns a tuple with the PromptCacheRead field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AiChatPriceDto) GetPromptCacheReadOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PromptCacheRead.Get(), o.PromptCacheRead.IsSet()
+}
+
+// HasPromptCacheRead returns a boolean if a field has been set.
+func (o *AiChatPriceDto) IsPromptCacheReadSet() bool {
+	if o != nil && o.PromptCacheRead.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPromptCacheRead gets a reference to the given NullableFloat64 and assigns it to the PromptCacheRead field.
+func (o *AiChatPriceDto) SetPromptCacheRead(v float64) {
+	o.PromptCacheRead.Set(&v)
+}
+// SetPromptCacheReadNil sets the value for PromptCacheRead to be an explicit nil
+func (o *AiChatPriceDto) SetPromptCacheReadNil() {
+	o.PromptCacheRead.Set(nil)
+}
+
+// UnsetPromptCacheRead ensures that no value is present for PromptCacheRead, not even an explicit nil
+func (o *AiChatPriceDto) UnsetPromptCacheRead() {
+	o.PromptCacheRead.Unset()
+}
+
+// GetPromptCacheWrite returns the PromptCacheWrite field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AiChatPriceDto) GetPromptCacheWrite() float64 {
+	if o == nil || IsNil(o.PromptCacheWrite.Get()) {
+		var ret float64
+		return ret
+	}
+	return *o.PromptCacheWrite.Get()
+}
+
+// GetPromptCacheWriteOk returns a tuple with the PromptCacheWrite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AiChatPriceDto) GetPromptCacheWriteOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PromptCacheWrite.Get(), o.PromptCacheWrite.IsSet()
+}
+
+// HasPromptCacheWrite returns a boolean if a field has been set.
+func (o *AiChatPriceDto) IsPromptCacheWriteSet() bool {
+	if o != nil && o.PromptCacheWrite.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPromptCacheWrite gets a reference to the given NullableFloat64 and assigns it to the PromptCacheWrite field.
+func (o *AiChatPriceDto) SetPromptCacheWrite(v float64) {
+	o.PromptCacheWrite.Set(&v)
+}
+// SetPromptCacheWriteNil sets the value for PromptCacheWrite to be an explicit nil
+func (o *AiChatPriceDto) SetPromptCacheWriteNil() {
+	o.PromptCacheWrite.Set(nil)
+}
+
+// UnsetPromptCacheWrite ensures that no value is present for PromptCacheWrite, not even an explicit nil
+func (o *AiChatPriceDto) UnsetPromptCacheWrite() {
+	o.PromptCacheWrite.Unset()
+}
+
+// GetPromptCacheWrite1H returns the PromptCacheWrite1H field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AiChatPriceDto) GetPromptCacheWrite1H() float64 {
+	if o == nil || IsNil(o.PromptCacheWrite1H.Get()) {
+		var ret float64
+		return ret
+	}
+	return *o.PromptCacheWrite1H.Get()
+}
+
+// GetPromptCacheWrite1HOk returns a tuple with the PromptCacheWrite1H field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AiChatPriceDto) GetPromptCacheWrite1HOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PromptCacheWrite1H.Get(), o.PromptCacheWrite1H.IsSet()
+}
+
+// HasPromptCacheWrite1H returns a boolean if a field has been set.
+func (o *AiChatPriceDto) IsPromptCacheWrite1HSet() bool {
+	if o != nil && o.PromptCacheWrite1H.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPromptCacheWrite1H gets a reference to the given NullableFloat64 and assigns it to the PromptCacheWrite1H field.
+func (o *AiChatPriceDto) SetPromptCacheWrite1H(v float64) {
+	o.PromptCacheWrite1H.Set(&v)
+}
+// SetPromptCacheWrite1HNil sets the value for PromptCacheWrite1H to be an explicit nil
+func (o *AiChatPriceDto) SetPromptCacheWrite1HNil() {
+	o.PromptCacheWrite1H.Set(nil)
+}
+
+// UnsetPromptCacheWrite1H ensures that no value is present for PromptCacheWrite1H, not even an explicit nil
+func (o *AiChatPriceDto) UnsetPromptCacheWrite1H() {
+	o.PromptCacheWrite1H.Unset()
+}
+
 func (o AiChatPriceDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -125,6 +257,15 @@ func (o AiChatPriceDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Completion) {
 		toSerialize["completion"] = o.Completion
+	}
+	if o.PromptCacheRead.IsSet() {
+		toSerialize["promptCacheRead"] = o.PromptCacheRead.Get()
+	}
+	if o.PromptCacheWrite.IsSet() {
+		toSerialize["promptCacheWrite"] = o.PromptCacheWrite.Get()
+	}
+	if o.PromptCacheWrite1H.IsSet() {
+		toSerialize["promptCacheWrite1H"] = o.PromptCacheWrite1H.Get()
 	}
 	return toSerialize, nil
 }

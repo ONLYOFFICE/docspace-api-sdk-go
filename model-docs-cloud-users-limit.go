@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudUsersLimit type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudUsersLimit{}
 
-// DocsCloudUsersLimit Represents the user limits of a DocsCloud license.
+// DocsCloudUsersLimit Represents the user limits of a Docs Connect license.
 type DocsCloudUsersLimit struct {
 	// The maximum number of users who can edit documents.
 	Edit *int32 `json:"edit,omitempty"`

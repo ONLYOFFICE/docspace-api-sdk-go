@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudSecurityConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudSecurityConfig{}
 
-// DocsCloudSecurityConfig Represents the security configuration of a DocsCloud tenant.
+// DocsCloudSecurityConfig Represents the security configuration of a Docs Connect tenant.
 type DocsCloudSecurityConfig struct {
 	// The security secret.
 	Secret NullableString `json:"secret,omitempty"`

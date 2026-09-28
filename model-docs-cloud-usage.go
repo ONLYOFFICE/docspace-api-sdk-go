@@ -22,7 +22,7 @@ import (
 // checks if the DocsCloudUsage type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudUsage{}
 
-// DocsCloudUsage Represents the usage statistics of a DocsCloud tenant.
+// DocsCloudUsage Represents the usage statistics of a Docs Connect tenant.
 type DocsCloudUsage struct {
 	// The date and time the usage statistics are counted from.
 	Since *time.Time `json:"since,omitempty"`

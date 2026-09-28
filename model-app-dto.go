@@ -27,7 +27,7 @@ type AppDto struct {
 	Id NullableString `json:"id,omitempty"`
 	// Whether the application is switched on for this portal. It is the portal's own flag where one has been  saved, and the default the installation configuration gives the application otherwise.
 	Enabled *bool `json:"enabled,omitempty"`
-	Settings *AppDtoSettings `json:"settings,omitempty"`
+	Settings interface{} `json:"settings,omitempty"`
 }
 
 // NewAppDto instantiates a new AppDto object
@@ -121,22 +121,23 @@ func (o *AppDto) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise.
-func (o *AppDto) GetSettings() AppDtoSettings {
-	if o == nil || IsNil(o.Settings) {
-		var ret AppDtoSettings
+// GetSettings returns the Settings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AppDto) GetSettings() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Settings
+	return o.Settings
 }
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AppDto) GetSettingsOk() (*AppDtoSettings, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AppDto) GetSettingsOk() (*interface{}, bool) {
 	if o == nil || IsNil(o.Settings) {
 		return nil, false
 	}
-	return o.Settings, true
+	return &o.Settings, true
 }
 
 // HasSettings returns a boolean if a field has been set.
@@ -148,9 +149,9 @@ func (o *AppDto) IsSettingsSet() bool {
 	return false
 }
 
-// SetSettings gets a reference to the given AppDtoSettings and assigns it to the Settings field.
-func (o *AppDto) SetSettings(v AppDtoSettings) {
-	o.Settings = &v
+// SetSettings gets a reference to the given interface{} and assigns it to the Settings field.
+func (o *AppDto) SetSettings(v interface{}) {
+	o.Settings = v
 }
 
 func (o AppDto) MarshalJSON() ([]byte, error) {
@@ -169,7 +170,7 @@ func (o AppDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.Settings) {
+	if o.Settings != nil {
 		toSerialize["settings"] = o.Settings
 	}
 	return toSerialize, nil

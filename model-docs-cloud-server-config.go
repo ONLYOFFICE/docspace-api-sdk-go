@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudServerConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudServerConfig{}
 
-// DocsCloudServerConfig Represents the server configuration of a DocsCloud tenant.
+// DocsCloudServerConfig Represents the server configuration of a Docs Connect tenant.
 type DocsCloudServerConfig struct {
 	// Whether anonymous access is supported.
 	IsAnonymousSupport *bool `json:"isAnonymousSupport,omitempty"`

@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudWopiConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudWopiConfig{}
 
-// DocsCloudWopiConfig Represents the WOPI configuration of a DocsCloud tenant.
+// DocsCloudWopiConfig Represents the WOPI configuration of a Docs Connect tenant.
 type DocsCloudWopiConfig struct {
 	// Whether WOPI is enabled.
 	Enable *bool `json:"enable,omitempty"`

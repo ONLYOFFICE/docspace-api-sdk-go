@@ -23,7 +23,7 @@ var _ MappedNullable = &SetAppSettingsBody{}
 
 // SetAppSettingsBody The configuration document a portal application keeps.
 type SetAppSettingsBody struct {
-	Settings *SetAppSettingsBodySettings `json:"settings,omitempty"`
+	Settings interface{} `json:"settings,omitempty"`
 }
 
 // NewSetAppSettingsBody instantiates a new SetAppSettingsBody object
@@ -43,22 +43,23 @@ func NewSetAppSettingsBodyWithDefaults() *SetAppSettingsBody {
 	return &this
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise.
-func (o *SetAppSettingsBody) GetSettings() SetAppSettingsBodySettings {
-	if o == nil || IsNil(o.Settings) {
-		var ret SetAppSettingsBodySettings
+// GetSettings returns the Settings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SetAppSettingsBody) GetSettings() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Settings
+	return o.Settings
 }
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SetAppSettingsBody) GetSettingsOk() (*SetAppSettingsBodySettings, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SetAppSettingsBody) GetSettingsOk() (*interface{}, bool) {
 	if o == nil || IsNil(o.Settings) {
 		return nil, false
 	}
-	return o.Settings, true
+	return &o.Settings, true
 }
 
 // HasSettings returns a boolean if a field has been set.
@@ -70,9 +71,9 @@ func (o *SetAppSettingsBody) IsSettingsSet() bool {
 	return false
 }
 
-// SetSettings gets a reference to the given SetAppSettingsBodySettings and assigns it to the Settings field.
-func (o *SetAppSettingsBody) SetSettings(v SetAppSettingsBodySettings) {
-	o.Settings = &v
+// SetSettings gets a reference to the given interface{} and assigns it to the Settings field.
+func (o *SetAppSettingsBody) SetSettings(v interface{}) {
+	o.Settings = v
 }
 
 func (o SetAppSettingsBody) MarshalJSON() ([]byte, error) {
@@ -85,7 +86,7 @@ func (o SetAppSettingsBody) MarshalJSON() ([]byte, error) {
 
 func (o SetAppSettingsBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Settings) {
+	if o.Settings != nil {
 		toSerialize["settings"] = o.Settings
 	}
 	return toSerialize, nil

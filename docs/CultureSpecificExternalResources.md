@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AdminPanel** | Pointer to [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the administration panel. It is returned only to the full administrators of a licensed (Enterprise) server (standalone) portal. | [optional] 
 **Api** | Pointer to [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the product API. | [optional] 
 **Common** | Pointer to [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the common product information. | [optional] 
 **Forum** | Pointer to [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the forum. | [optional] 
@@ -32,6 +33,31 @@ will change when the set of required properties is changed
 NewCultureSpecificExternalResourcesWithDefaults instantiates a new CultureSpecificExternalResources object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAdminPanel
+
+`func (o *CultureSpecificExternalResources) GetAdminPanel() CultureSpecificExternalResource`
+
+GetAdminPanel returns the AdminPanel field if non-nil, zero value otherwise.
+
+### GetAdminPanelOk
+
+`func (o *CultureSpecificExternalResources) GetAdminPanelOk() (*CultureSpecificExternalResource, bool)`
+
+GetAdminPanelOk returns a tuple with the AdminPanel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminPanel
+
+`func (o *CultureSpecificExternalResources) SetAdminPanel(v CultureSpecificExternalResource)`
+
+SetAdminPanel sets AdminPanel field to given value.
+
+### HasAdminPanel
+
+`func (o *CultureSpecificExternalResources) HasAdminPanel() bool`
+
+HasAdminPanel returns a boolean if a field has been set.
 
 ### GetApi
 

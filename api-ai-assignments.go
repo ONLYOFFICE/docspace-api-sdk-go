@@ -674,7 +674,7 @@ type ApiAiAssignmentsGetAssignmentRequest struct {
 	actionType *string
 }
 
-// The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+// The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
 func (r ApiAiAssignmentsGetAssignmentRequest) ActionType(actionType string) ApiAiAssignmentsGetAssignmentRequest {	r.actionType = &actionType
 	return r
 }
@@ -827,7 +827,7 @@ type ApiAiAssignmentsResolveForActionRequest struct {
 	entityId *string
 }
 
-// The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+// The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
 func (r ApiAiAssignmentsResolveForActionRequest) ActionType(actionType string) ApiAiAssignmentsResolveForActionRequest {	r.actionType = &actionType
 	return r
 }
@@ -988,7 +988,7 @@ type ApiAiAssignmentsTryResolveForActionRequest struct {
 	entityId *string
 }
 
-// The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+// The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
 func (r ApiAiAssignmentsTryResolveForActionRequest) ActionType(actionType string) ApiAiAssignmentsTryResolveForActionRequest {	r.actionType = &actionType
 	return r
 }

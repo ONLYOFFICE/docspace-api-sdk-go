@@ -340,7 +340,7 @@ type ApiGetSettingsRequest struct {
 	id string
 }
 
-func (r ApiGetSettingsRequest) Execute() (*UnknownNullableWrapper, *http.Response, error) {
+func (r ApiGetSettingsRequest) Execute() (*JsonValueWrapper, *http.Response, error) {
 	return r.ApiService.GetSettingsExecute(r)
 }
 
@@ -362,13 +362,13 @@ func (a *AppsAPIService) GetSettings(ctx context.Context, id string) ApiGetSetti
 }
 
 // Execute executes the request
-//  @return UnknownNullableWrapper
-func (a *AppsAPIService) GetSettingsExecute(r ApiGetSettingsRequest) (*UnknownNullableWrapper, *http.Response, error) {
+//  @return JsonValueWrapper
+func (a *AppsAPIService) GetSettingsExecute(r ApiGetSettingsRequest) (*JsonValueWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *UnknownNullableWrapper
+		localVarReturnValue  *JsonValueWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsAPIService.GetSettings")

@@ -31,6 +31,8 @@ type RoomGroupDto struct {
 	Icon *MultiSizeLogoCover `json:"icon,omitempty"`
 	// The account that created the group and the only one able to read, change or delete it; for any other member of  the portal the group does not exist.
 	UserId *string `json:"userId,omitempty"`
+	// The section the group belongs to, which categorizes it within the application's structure. This property determines  which area of the interface the group is associated with and affects how its rooms are filtered and displayed.  Common values include Active for standard rooms, Forms for form-based rooms, Archive for archived content, and  Templates for template rooms. The search area ensures that when retrieving a group, only rooms that belong to  the specified section are included in the results, maintaining proper organizational boundaries within the system.
+	SearchArea *SearchArea `json:"searchArea,omitempty"`
 	// The rooms the group gathers, those stored in the portal first and those on connected third-party accounts  after them. Null when the group was asked for without its members, and an empty array when the group holds no  room the caller can still see. A room moved to the archive is left out until it is taken out of the archive.
 	Rooms []FileEntryBaseDto `json:"rooms,omitempty"`
 	// How many rooms the group shows: the same rooms `rooms` lists, so archived ones are not counted either. It is  filled even when the rooms themselves were not asked for, which makes it the cheap way to tell an empty group  from a populated one.
@@ -192,6 +194,38 @@ func (o *RoomGroupDto) SetUserId(v string) {
 	o.UserId = &v
 }
 
+// GetSearchArea returns the SearchArea field value if set, zero value otherwise.
+func (o *RoomGroupDto) GetSearchArea() SearchArea {
+	if o == nil || IsNil(o.SearchArea) {
+		var ret SearchArea
+		return ret
+	}
+	return *o.SearchArea
+}
+
+// GetSearchAreaOk returns a tuple with the SearchArea field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoomGroupDto) GetSearchAreaOk() (*SearchArea, bool) {
+	if o == nil || IsNil(o.SearchArea) {
+		return nil, false
+	}
+	return o.SearchArea, true
+}
+
+// HasSearchArea returns a boolean if a field has been set.
+func (o *RoomGroupDto) IsSearchAreaSet() bool {
+	if o != nil && !IsNil(o.SearchArea) {
+		return true
+	}
+
+	return false
+}
+
+// SetSearchArea gets a reference to the given SearchArea and assigns it to the SearchArea field.
+func (o *RoomGroupDto) SetSearchArea(v SearchArea) {
+	o.SearchArea = &v
+}
+
 // GetRooms returns the Rooms field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RoomGroupDto) GetRooms() []FileEntryBaseDto {
 	if o == nil {
@@ -278,6 +312,9 @@ func (o RoomGroupDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.UserId) {
 		toSerialize["userId"] = o.UserId
+	}
+	if !IsNil(o.SearchArea) {
+		toSerialize["searchArea"] = o.SearchArea
 	}
 	if o.Rooms != nil {
 		toSerialize["rooms"] = o.Rooms

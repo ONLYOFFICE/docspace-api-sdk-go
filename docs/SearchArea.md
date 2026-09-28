@@ -3,25 +3,25 @@
 ## Enum
 
 
-* `Active` (value: `0`)
+* `ACTIVE` (value: `"Active"`)
 
-* `Archive` (value: `1`)
+* `ARCHIVE` (value: `"Archive"`)
 
-* `Any` (value: `2`)
+* `ANY` (value: `"Any"`)
 
-* `RecentByLinks` (value: `3`)
+* `RECENT_BY_LINKS` (value: `"RecentByLinks"`)
 
-* `Templates` (value: `4`)
+* `TEMPLATES` (value: `"Templates"`)
 
-* `Knowledge` (value: `5`)
+* `KNOWLEDGE` (value: `"Knowledge"`)
 
-* `ResultStorage` (value: `6`)
+* `RESULT_STORAGE` (value: `"ResultStorage"`)
 
-* `AiAgents` (value: `7`)
+* `AI_AGENTS` (value: `"AiAgents"`)
 
-* `Forms` (value: `8`)
+* `FORMS` (value: `"Forms"`)
 
-* `FormTemplates` (value: `9`)
+* `FORM_TEMPLATES` (value: `"FormTemplates"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

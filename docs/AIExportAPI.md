@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AiExportTextToDocx**](AIExportAPI.md#AiExportTextToDocx) | **Post** /api/2.0/ai/text-to-docx | Start markdown → docx export
+[**AiExportTextToDocx**](AIExportAPI.md#AiExportTextToDocx) | **Post** /api/2.0/ai/text-to-docx | Start markdown export
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > AiExportTextToDocx202Response AiExportTextToDocx(ctx).AiExportTextToDocxRequest(aiExportTextToDocxRequest).Execute()
 
-Start markdown → docx export
+Start markdown export
 
 
 

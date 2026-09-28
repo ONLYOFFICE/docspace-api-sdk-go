@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudConfig{}
 
-// DocsCloudConfig Represents the configuration of a DocsCloud tenant.
+// DocsCloudConfig Represents the configuration of a Docs Connect tenant.
 type DocsCloudConfig struct {
 	// The tenant name.
 	TenantName NullableString `json:"tenantName,omitempty"`

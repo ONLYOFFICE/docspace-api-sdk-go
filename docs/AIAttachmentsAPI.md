@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**AiAttachmentsDeleteMany**](AIAttachmentsAPI.md#AiAttachmentsDeleteMany) | **Delete** /api/2.0/ai/attachments/delete-many | Delete many
 [**AiAttachmentsGet**](AIAttachmentsAPI.md#AiAttachmentsGet) | **Post** /api/2.0/ai/attachments/get | Get one attachment
 [**AiAttachmentsGetMany**](AIAttachmentsAPI.md#AiAttachmentsGetMany) | **Post** /api/2.0/ai/attachments/get-many | Get many
+[**AiAttachmentsGetSuggestedQuestions**](AIAttachmentsAPI.md#AiAttachmentsGetSuggestedQuestions) | **Post** /api/2.0/ai/attachments/suggested-questions | Get suggested questions
 [**AiAttachmentsLinkToMessage**](AIAttachmentsAPI.md#AiAttachmentsLinkToMessage) | **Post** /api/2.0/ai/attachments/link-to-message | Link to message
 [**AiAttachmentsSaveFile**](AIAttachmentsAPI.md#AiAttachmentsSaveFile) | **Post** /api/2.0/ai/attachments/save-file | Save file
 [**AiAttachmentsSaveFilesMany**](AIAttachmentsAPI.md#AiAttachmentsSaveFilesMany) | **Post** /api/2.0/ai/attachments/save-files-many | Save files many
@@ -271,6 +272,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]*AiAttachment**](AiAttachment.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AiAttachmentsGetSuggestedQuestions
+
+> AiSuccessResponse AiAttachmentsGetSuggestedQuestions(ctx).RequestBody(requestBody).Execute()
+
+Get suggested questions
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsGetSuggestedQuestions(context.Background()).RequestBody(requestBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AIAttachmentsAPI.AiAttachmentsGetSuggestedQuestions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AiAttachmentsGetSuggestedQuestions`: AiSuccessResponse
+	fmt.Fprintf(os.Stdout, "Response from `AIAttachmentsAPI.AiAttachmentsGetSuggestedQuestions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAiAttachmentsGetSuggestedQuestionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **requestBody** | **map[string]interface{}** |  | 
+
+### Return type
+
+[**AiSuccessResponse**](AiSuccessResponse.md)
 
 ### Authorization
 

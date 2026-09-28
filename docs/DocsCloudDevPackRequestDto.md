@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Quantity** | Pointer to **int32** | The number of users to subscribe to DocsCloudDevPack for. It must be at least the number of users of  the currently purchased DocsCloud subscription, and at least the DocsCloudDevPack minimum configured  for the installation, which is 10 users by default; a smaller value is rejected with 400. | [optional] 
+**Quantity** | Pointer to **int32** | The number of users to subscribe to Docs Connect Dev Pack for. It must be at least the number of users of  the currently purchased Docs Connect subscription, and at least the Docs Connect Dev Pack minimum configured  for the installation, which is 10 users by default; a smaller value is rejected with 400. | [optional] 
 
 ## Methods
 

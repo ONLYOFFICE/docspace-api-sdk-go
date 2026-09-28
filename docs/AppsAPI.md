@@ -149,7 +149,7 @@ Other parameters are passed through a pointer to a apiGetAllRequest struct via t
 
 ## GetSettings
 
-> UnknownNullableWrapper GetSettings(ctx, id).Execute()
+> JsonValueWrapper GetSettings(ctx, id).Execute()
 
 Get app settings
 
@@ -179,7 +179,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.GetSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSettings`: UnknownNullableWrapper
+	// response from `GetSettings`: JsonValueWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AppsAPI.GetSettings`: %v\n", resp)
 }
 ```
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UnknownNullableWrapper**](UnknownNullableWrapper.md)
+[**JsonValueWrapper**](JsonValueWrapper.md)
 
 ### Authorization
 

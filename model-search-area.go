@@ -19,39 +19,39 @@ import (
 	"fmt"
 )
 
-// SearchArea [0 - Active, 1 - Archive, 2 - Any, 3 - Recent by links, 4 - Template, 5 - Knowledge, 6 - Result storage, 7 - AiAgents, 8 - Forms, 9 - Form templates]
-type SearchArea int32
+// SearchArea [Active - Active, Archive - Archive, Any - Any, RecentByLinks - Recent by links, Templates - Template, Knowledge - Knowledge, ResultStorage - Result storage, AiAgents - AiAgents, Forms - Forms, FormTemplates - Form templates]
+type SearchArea string
 
 // List of SearchArea
 const (
-	SEARCHAREA_Active SearchArea = 0
-	SEARCHAREA_Archive SearchArea = 1
-	SEARCHAREA_Any SearchArea = 2
-	SEARCHAREA_RecentByLinks SearchArea = 3
-	SEARCHAREA_Templates SearchArea = 4
-	SEARCHAREA_Knowledge SearchArea = 5
-	SEARCHAREA_ResultStorage SearchArea = 6
-	SEARCHAREA_AiAgents SearchArea = 7
-	SEARCHAREA_Forms SearchArea = 8
-	SEARCHAREA_FormTemplates SearchArea = 9
+	SEARCHAREA_ACTIVE SearchArea = "Active"
+	SEARCHAREA_ARCHIVE SearchArea = "Archive"
+	SEARCHAREA_ANY SearchArea = "Any"
+	SEARCHAREA_RECENT_BY_LINKS SearchArea = "RecentByLinks"
+	SEARCHAREA_TEMPLATES SearchArea = "Templates"
+	SEARCHAREA_KNOWLEDGE SearchArea = "Knowledge"
+	SEARCHAREA_RESULT_STORAGE SearchArea = "ResultStorage"
+	SEARCHAREA_AI_AGENTS SearchArea = "AiAgents"
+	SEARCHAREA_FORMS SearchArea = "Forms"
+	SEARCHAREA_FORM_TEMPLATES SearchArea = "FormTemplates"
 )
 
 // All allowed values of SearchArea enum
 var AllowedSearchAreaEnumValues = []SearchArea{
-	0,
-	1,
-	2,
-	3,
-	4,
-	5,
-	6,
-	7,
-	8,
-	9,
+	"Active",
+	"Archive",
+	"Any",
+	"RecentByLinks",
+	"Templates",
+	"Knowledge",
+	"ResultStorage",
+	"AiAgents",
+	"Forms",
+	"FormTemplates",
 }
 
 func (v *SearchArea) UnmarshalJSON(src []byte) error {
-	var value int32
+	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
@@ -69,7 +69,7 @@ func (v *SearchArea) UnmarshalJSON(src []byte) error {
 
 // NewSearchAreaFromValue returns a pointer to a valid SearchArea
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewSearchAreaFromValue(v int32) (*SearchArea, error) {
+func NewSearchAreaFromValue(v string) (*SearchArea, error) {
 	ev := SearchArea(v)
 	if ev.IsValid() {
 		return &ev, nil

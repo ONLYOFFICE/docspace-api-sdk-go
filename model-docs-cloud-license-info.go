@@ -22,7 +22,7 @@ import (
 // checks if the DocsCloudLicenseInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudLicenseInfo{}
 
-// DocsCloudLicenseInfo Represents the license information of a DocsCloud tenant.
+// DocsCloudLicenseInfo Represents the license information of a Docs Connect tenant.
 type DocsCloudLicenseInfo struct {
 	// The date and time until which the license is valid.
 	Valid *time.Time `json:"valid,omitempty"`

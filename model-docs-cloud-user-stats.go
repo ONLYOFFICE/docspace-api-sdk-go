@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudUserStats type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudUserStats{}
 
-// DocsCloudUserStats Represents the usage statistics of a single DocsCloud user category (editor or viewer).
+// DocsCloudUserStats Represents the usage statistics of a single Docs Connect user category (editor or viewer).
 type DocsCloudUserStats struct {
 	// The number of active users.
 	Active *int32 `json:"active,omitempty"`

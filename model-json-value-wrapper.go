@@ -18,11 +18,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the UnknownNullableWrapper type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UnknownNullableWrapper{}
+// checks if the JsonValueWrapper type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &JsonValueWrapper{}
 
-// UnknownNullableWrapper The successful API response.
-type UnknownNullableWrapper struct {
+// JsonValueWrapper The successful API response containing an arbitrary JSON value.
+type JsonValueWrapper struct {
 	Response interface{} `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
@@ -34,25 +34,25 @@ type UnknownNullableWrapper struct {
 	StatusCode *int32 `json:"statusCode,omitempty"`
 }
 
-// NewUnknownNullableWrapper instantiates a new UnknownNullableWrapper object
+// NewJsonValueWrapper instantiates a new JsonValueWrapper object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUnknownNullableWrapper() *UnknownNullableWrapper {
-	this := UnknownNullableWrapper{}
+func NewJsonValueWrapper() *JsonValueWrapper {
+	this := JsonValueWrapper{}
 	return &this
 }
 
-// NewUnknownNullableWrapperWithDefaults instantiates a new UnknownNullableWrapper object
+// NewJsonValueWrapperWithDefaults instantiates a new JsonValueWrapper object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUnknownNullableWrapperWithDefaults() *UnknownNullableWrapper {
-	this := UnknownNullableWrapper{}
+func NewJsonValueWrapperWithDefaults() *JsonValueWrapper {
+	this := JsonValueWrapper{}
 	return &this
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UnknownNullableWrapper) GetResponse() interface{} {
+func (o *JsonValueWrapper) GetResponse() interface{} {
 	if o == nil {
 		var ret interface{}
 		return ret
@@ -63,7 +63,7 @@ func (o *UnknownNullableWrapper) GetResponse() interface{} {
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UnknownNullableWrapper) GetResponseOk() (*interface{}, bool) {
+func (o *JsonValueWrapper) GetResponseOk() (*interface{}, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -71,7 +71,7 @@ func (o *UnknownNullableWrapper) GetResponseOk() (*interface{}, bool) {
 }
 
 // HasResponse returns a boolean if a field has been set.
-func (o *UnknownNullableWrapper) IsResponseSet() bool {
+func (o *JsonValueWrapper) IsResponseSet() bool {
 	if o != nil && !IsNil(o.Response) {
 		return true
 	}
@@ -80,12 +80,12 @@ func (o *UnknownNullableWrapper) IsResponseSet() bool {
 }
 
 // SetResponse gets a reference to the given interface{} and assigns it to the Response field.
-func (o *UnknownNullableWrapper) SetResponse(v interface{}) {
+func (o *JsonValueWrapper) SetResponse(v interface{}) {
 	o.Response = v
 }
 
 // GetCount returns the Count field value if set, zero value otherwise.
-func (o *UnknownNullableWrapper) GetCount() int32 {
+func (o *JsonValueWrapper) GetCount() int32 {
 	if o == nil || IsNil(o.Count) {
 		var ret int32
 		return ret
@@ -95,7 +95,7 @@ func (o *UnknownNullableWrapper) GetCount() int32 {
 
 // GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UnknownNullableWrapper) GetCountOk() (*int32, bool) {
+func (o *JsonValueWrapper) GetCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *UnknownNullableWrapper) GetCountOk() (*int32, bool) {
 }
 
 // HasCount returns a boolean if a field has been set.
-func (o *UnknownNullableWrapper) IsCountSet() bool {
+func (o *JsonValueWrapper) IsCountSet() bool {
 	if o != nil && !IsNil(o.Count) {
 		return true
 	}
@@ -112,12 +112,12 @@ func (o *UnknownNullableWrapper) IsCountSet() bool {
 }
 
 // SetCount gets a reference to the given int32 and assigns it to the Count field.
-func (o *UnknownNullableWrapper) SetCount(v int32) {
+func (o *JsonValueWrapper) SetCount(v int32) {
 	o.Count = &v
 }
 
 // GetLinks returns the Links field value if set, zero value otherwise.
-func (o *UnknownNullableWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner {
+func (o *JsonValueWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner {
 	if o == nil || IsNil(o.Links) {
 		var ret []GetPortalPrices200ResponseLinksInner
 		return ret
@@ -127,7 +127,7 @@ func (o *UnknownNullableWrapper) GetLinks() []GetPortalPrices200ResponseLinksInn
 
 // GetLinksOk returns a tuple with the Links field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UnknownNullableWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinksInner, bool) {
+func (o *JsonValueWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinksInner, bool) {
 	if o == nil || IsNil(o.Links) {
 		return nil, false
 	}
@@ -135,7 +135,7 @@ func (o *UnknownNullableWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinks
 }
 
 // HasLinks returns a boolean if a field has been set.
-func (o *UnknownNullableWrapper) IsLinksSet() bool {
+func (o *JsonValueWrapper) IsLinksSet() bool {
 	if o != nil && !IsNil(o.Links) {
 		return true
 	}
@@ -144,12 +144,12 @@ func (o *UnknownNullableWrapper) IsLinksSet() bool {
 }
 
 // SetLinks gets a reference to the given []GetPortalPrices200ResponseLinksInner and assigns it to the Links field.
-func (o *UnknownNullableWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner) {
+func (o *JsonValueWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner) {
 	o.Links = v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *UnknownNullableWrapper) GetStatus() int32 {
+func (o *JsonValueWrapper) GetStatus() int32 {
 	if o == nil || IsNil(o.Status) {
 		var ret int32
 		return ret
@@ -159,7 +159,7 @@ func (o *UnknownNullableWrapper) GetStatus() int32 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UnknownNullableWrapper) GetStatusOk() (*int32, bool) {
+func (o *JsonValueWrapper) GetStatusOk() (*int32, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -167,7 +167,7 @@ func (o *UnknownNullableWrapper) GetStatusOk() (*int32, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *UnknownNullableWrapper) IsStatusSet() bool {
+func (o *JsonValueWrapper) IsStatusSet() bool {
 	if o != nil && !IsNil(o.Status) {
 		return true
 	}
@@ -176,12 +176,12 @@ func (o *UnknownNullableWrapper) IsStatusSet() bool {
 }
 
 // SetStatus gets a reference to the given int32 and assigns it to the Status field.
-func (o *UnknownNullableWrapper) SetStatus(v int32) {
+func (o *JsonValueWrapper) SetStatus(v int32) {
 	o.Status = &v
 }
 
 // GetStatusCode returns the StatusCode field value if set, zero value otherwise.
-func (o *UnknownNullableWrapper) GetStatusCode() int32 {
+func (o *JsonValueWrapper) GetStatusCode() int32 {
 	if o == nil || IsNil(o.StatusCode) {
 		var ret int32
 		return ret
@@ -191,7 +191,7 @@ func (o *UnknownNullableWrapper) GetStatusCode() int32 {
 
 // GetStatusCodeOk returns a tuple with the StatusCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UnknownNullableWrapper) GetStatusCodeOk() (*int32, bool) {
+func (o *JsonValueWrapper) GetStatusCodeOk() (*int32, bool) {
 	if o == nil || IsNil(o.StatusCode) {
 		return nil, false
 	}
@@ -199,7 +199,7 @@ func (o *UnknownNullableWrapper) GetStatusCodeOk() (*int32, bool) {
 }
 
 // HasStatusCode returns a boolean if a field has been set.
-func (o *UnknownNullableWrapper) IsStatusCodeSet() bool {
+func (o *JsonValueWrapper) IsStatusCodeSet() bool {
 	if o != nil && !IsNil(o.StatusCode) {
 		return true
 	}
@@ -208,11 +208,11 @@ func (o *UnknownNullableWrapper) IsStatusCodeSet() bool {
 }
 
 // SetStatusCode gets a reference to the given int32 and assigns it to the StatusCode field.
-func (o *UnknownNullableWrapper) SetStatusCode(v int32) {
+func (o *JsonValueWrapper) SetStatusCode(v int32) {
 	o.StatusCode = &v
 }
 
-func (o UnknownNullableWrapper) MarshalJSON() ([]byte, error) {
+func (o JsonValueWrapper) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -220,7 +220,7 @@ func (o UnknownNullableWrapper) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UnknownNullableWrapper) ToMap() (map[string]interface{}, error) {
+func (o JsonValueWrapper) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Response != nil {
 		toSerialize["response"] = o.Response
@@ -240,38 +240,38 @@ func (o UnknownNullableWrapper) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableUnknownNullableWrapper struct {
-	value *UnknownNullableWrapper
+type NullableJsonValueWrapper struct {
+	value *JsonValueWrapper
 	isSet bool
 }
 
-func (v NullableUnknownNullableWrapper) Get() *UnknownNullableWrapper {
+func (v NullableJsonValueWrapper) Get() *JsonValueWrapper {
 	return v.value
 }
 
-func (v *NullableUnknownNullableWrapper) Set(val *UnknownNullableWrapper) {
+func (v *NullableJsonValueWrapper) Set(val *JsonValueWrapper) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUnknownNullableWrapper) IsSet() bool {
+func (v NullableJsonValueWrapper) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUnknownNullableWrapper) Unset() {
+func (v *NullableJsonValueWrapper) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUnknownNullableWrapper(val *UnknownNullableWrapper) *NullableUnknownNullableWrapper {
-	return &NullableUnknownNullableWrapper{value: val, isSet: true}
+func NewNullableJsonValueWrapper(val *JsonValueWrapper) *NullableJsonValueWrapper {
+	return &NullableJsonValueWrapper{value: val, isSet: true}
 }
 
-func (v NullableUnknownNullableWrapper) MarshalJSON() ([]byte, error) {
+func (v NullableJsonValueWrapper) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUnknownNullableWrapper) UnmarshalJSON(src []byte) error {
+func (v *NullableJsonValueWrapper) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

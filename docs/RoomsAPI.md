@@ -5,65 +5,45 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddRoomTags**](RoomsAPI.md#AddRoomTags) | **Put** /api/2.0/files/rooms/{id}/tags | Attach tags to a room
-[**AddRoomTagsThirdParty**](RoomsAPI.md#AddRoomTagsThirdParty) | **Put** /api/2.0/files/rooms/{id}/tags | Attach tags to a room (third-party storage)
 [**ArchiveRoom**](RoomsAPI.md#ArchiveRoom) | **Put** /api/2.0/files/rooms/{id}/archive | Archive a room
-[**ArchiveRoomThirdParty**](RoomsAPI.md#ArchiveRoomThirdParty) | **Put** /api/2.0/files/rooms/{id}/archive | Archive a room (third-party storage)
 [**ChangeRoomCover**](RoomsAPI.md#ChangeRoomCover) | **Post** /api/2.0/files/rooms/{id}/cover | Change the room cover
-[**ChangeRoomCoverThirdParty**](RoomsAPI.md#ChangeRoomCoverThirdParty) | **Post** /api/2.0/files/rooms/{id}/cover | Change the room cover (third-party storage)
 [**CreateRoom**](RoomsAPI.md#CreateRoom) | **Post** /api/2.0/files/rooms | Create a room
 [**CreateRoomFromTemplate**](RoomsAPI.md#CreateRoomFromTemplate) | **Post** /api/2.0/files/rooms/fromtemplate | Create a room from the template
 [**CreateRoomLogo**](RoomsAPI.md#CreateRoomLogo) | **Post** /api/2.0/files/rooms/{id}/logo | Set the room logo
-[**CreateRoomLogoThirdParty**](RoomsAPI.md#CreateRoomLogoThirdParty) | **Post** /api/2.0/files/rooms/{id}/logo | Set the room logo (third-party storage)
 [**CreateRoomTag**](RoomsAPI.md#CreateRoomTag) | **Post** /api/2.0/files/tags | Create a room tag
 [**CreateRoomTemplate**](RoomsAPI.md#CreateRoomTemplate) | **Post** /api/2.0/files/roomtemplate | Create a room template
 [**CreateRoomThirdParty**](RoomsAPI.md#CreateRoomThirdParty) | **Post** /api/2.0/files/rooms/thirdparty/{id} | Create a third-party room
 [**DeleteCustomTags**](RoomsAPI.md#DeleteCustomTags) | **Delete** /api/2.0/files/tags | Delete the custom room tags
 [**DeleteRoom**](RoomsAPI.md#DeleteRoom) | **Delete** /api/2.0/files/rooms/{id} | Remove a room
-[**DeleteRoomThirdParty**](RoomsAPI.md#DeleteRoomThirdParty) | **Delete** /api/2.0/files/rooms/{id} | Remove a room (third-party storage)
 [**DeleteRoomLogo**](RoomsAPI.md#DeleteRoomLogo) | **Delete** /api/2.0/files/rooms/{id}/logo | Remove a room logo
-[**DeleteRoomLogoThirdParty**](RoomsAPI.md#DeleteRoomLogoThirdParty) | **Delete** /api/2.0/files/rooms/{id}/logo | Remove a room logo (third-party storage)
 [**DeleteRoomTags**](RoomsAPI.md#DeleteRoomTags) | **Delete** /api/2.0/files/rooms/{id}/tags | Detach tags from a room
-[**DeleteRoomTagsThirdParty**](RoomsAPI.md#DeleteRoomTagsThirdParty) | **Delete** /api/2.0/files/rooms/{id}/tags | Detach tags from a room (third-party storage)
 [**GetExternalDbSyncStatus**](RoomsAPI.md#GetExternalDbSyncStatus) | **Get** /api/2.0/files/rooms/{id}/externaldbsync | Get external DB sync status
 [**GetNewRoomItems**](RoomsAPI.md#GetNewRoomItems) | **Get** /api/2.0/files/rooms/{id}/news | Get new items in a room
-[**GetNewRoomItemsThirdParty**](RoomsAPI.md#GetNewRoomItemsThirdParty) | **Get** /api/2.0/files/rooms/{id}/news | Get new items in a room (third-party storage)
 [**GetPublicSettings**](RoomsAPI.md#GetPublicSettings) | **Get** /api/2.0/files/roomtemplate/{id}/public | Get room template public access
 [**GetRoomCovers**](RoomsAPI.md#GetRoomCovers) | **Get** /api/2.0/files/rooms/covers | Get room cover gallery
 [**GetRoomCreatingStatus**](RoomsAPI.md#GetRoomCreatingStatus) | **Get** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress
 [**GetRoomIndexExport**](RoomsAPI.md#GetRoomIndexExport) | **Get** /api/2.0/files/rooms/indexexport | Get the room index export
 [**GetRoomInfo**](RoomsAPI.md#GetRoomInfo) | **Get** /api/2.0/files/rooms/{id} | Get room information
-[**GetRoomInfoThirdParty**](RoomsAPI.md#GetRoomInfoThirdParty) | **Get** /api/2.0/files/rooms/{id} | Get room information (third-party storage)
 [**GetRoomLinks**](RoomsAPI.md#GetRoomLinks) | **Get** /api/2.0/files/rooms/{id}/links | Get the room links
-[**GetRoomLinksThirdParty**](RoomsAPI.md#GetRoomLinksThirdParty) | **Get** /api/2.0/files/rooms/{id}/links | Get the room links (third-party storage)
 [**GetRoomSecurityInfo**](RoomsAPI.md#GetRoomSecurityInfo) | **Get** /api/2.0/files/rooms/{id}/share | Get the room access rights
-[**GetRoomSecurityInfoThirdParty**](RoomsAPI.md#GetRoomSecurityInfoThirdParty) | **Get** /api/2.0/files/rooms/{id}/share | Get the room access rights (third-party storage)
 [**GetRoomTagsInfo**](RoomsAPI.md#GetRoomTagsInfo) | **Get** /api/2.0/files/tags | Get available room tags
 [**GetRoomTemplateCreatingStatus**](RoomsAPI.md#GetRoomTemplateCreatingStatus) | **Get** /api/2.0/files/roomtemplate/status | Get room template creation status
 [**GetRoomsFolder**](RoomsAPI.md#GetRoomsFolder) | **Get** /api/2.0/files/rooms | Get rooms
 [**GetRoomsNewItems**](RoomsAPI.md#GetRoomsNewItems) | **Get** /api/2.0/files/rooms/news | Get new items in all rooms
 [**GetRoomsPrimaryExternalLink**](RoomsAPI.md#GetRoomsPrimaryExternalLink) | **Get** /api/2.0/files/rooms/{id}/link | Get the room primary external link
-[**GetRoomsPrimaryExternalLinkThirdParty**](RoomsAPI.md#GetRoomsPrimaryExternalLinkThirdParty) | **Get** /api/2.0/files/rooms/{id}/link | Get the room primary external link (third-party storage)
 [**HasTagLinks**](RoomsAPI.md#HasTagLinks) | **Get** /api/2.0/files/tags/{tagName}/haslinks | Check room tag usage
 [**PinRoom**](RoomsAPI.md#PinRoom) | **Put** /api/2.0/files/rooms/{id}/pin | Pin a room
-[**PinRoomThirdParty**](RoomsAPI.md#PinRoomThirdParty) | **Put** /api/2.0/files/rooms/{id}/pin | Pin a room (third-party storage)
 [**ReorderRoom**](RoomsAPI.md#ReorderRoom) | **Put** /api/2.0/files/rooms/{id}/reorder | Reorder room contents
-[**ReorderRoomThirdParty**](RoomsAPI.md#ReorderRoomThirdParty) | **Put** /api/2.0/files/rooms/{id}/reorder | Reorder room contents (third-party storage)
 [**ResendEmailInvitations**](RoomsAPI.md#ResendEmailInvitations) | **Post** /api/2.0/files/rooms/{id}/resend | Resend the room invitations
-[**ResendEmailInvitationsThirdParty**](RoomsAPI.md#ResendEmailInvitationsThirdParty) | **Post** /api/2.0/files/rooms/{id}/resend | Resend the room invitations (third-party storage)
 [**SetPublicSettings**](RoomsAPI.md#SetPublicSettings) | **Put** /api/2.0/files/roomtemplate/public | Set room template public access
 [**SetRoomLink**](RoomsAPI.md#SetRoomLink) | **Put** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link
-[**SetRoomLinkThirdParty**](RoomsAPI.md#SetRoomLinkThirdParty) | **Put** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link (third-party storage)
 [**SetRoomSecurity**](RoomsAPI.md#SetRoomSecurity) | **Put** /api/2.0/files/rooms/{id}/share | Set the room access rights
-[**SetRoomSecurityThirdParty**](RoomsAPI.md#SetRoomSecurityThirdParty) | **Put** /api/2.0/files/rooms/{id}/share | Set the room access rights (third-party storage)
 [**StartExternalDbSync**](RoomsAPI.md#StartExternalDbSync) | **Post** /api/2.0/files/rooms/{id}/externaldbsync | Start external DB sync
 [**StartRoomIndexExport**](RoomsAPI.md#StartRoomIndexExport) | **Post** /api/2.0/files/rooms/{id}/indexexport | Start the room index export
 [**TerminateRoomIndexExport**](RoomsAPI.md#TerminateRoomIndexExport) | **Delete** /api/2.0/files/rooms/indexexport | Terminate the room index export
 [**UnarchiveRoom**](RoomsAPI.md#UnarchiveRoom) | **Put** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room
-[**UnarchiveRoomThirdParty**](RoomsAPI.md#UnarchiveRoomThirdParty) | **Put** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room (third-party storage)
 [**UnpinRoom**](RoomsAPI.md#UnpinRoom) | **Put** /api/2.0/files/rooms/{id}/unpin | Unpin a room
-[**UnpinRoomThirdParty**](RoomsAPI.md#UnpinRoomThirdParty) | **Put** /api/2.0/files/rooms/{id}/unpin | Unpin a room (third-party storage)
 [**UpdateRoom**](RoomsAPI.md#UpdateRoom) | **Put** /api/2.0/files/rooms/{id} | Update a room
-[**UpdateRoomThirdParty**](RoomsAPI.md#UpdateRoomThirdParty) | **Put** /api/2.0/files/rooms/{id} | Update a room (third-party storage)
 [**UpdateRoomTag**](RoomsAPI.md#UpdateRoomTag) | **Put** /api/2.0/files/tags | Rename a room tag
 [**UploadRoomLogo**](RoomsAPI.md#UploadRoomLogo) | **Post** /api/2.0/files/logos | Upload a room logo image
 
@@ -98,6 +78,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.RoomsAPI.AddRoomTags(context.Background(), id).BatchTagsRequestDto(batchTagsRequestDto).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.RoomsAPI.AddRoomTags(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.AddRoomTags``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -128,80 +111,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## AddRoomTagsThirdParty
-
-> ThirdPartyFolderWrapper AddRoomTagsThirdParty(ctx, id).BatchTagsRequestDto(batchTagsRequestDto).Execute()
-
-Attach tags to a room (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	batchTagsRequestDto := *openapiclient.NewBatchTagsRequestDto([]string{"Names_example"}) // BatchTagsRequestDto | The names to attach or to detach. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.AddRoomTagsThirdParty(context.Background(), id).BatchTagsRequestDto(batchTagsRequestDto).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.AddRoomTagsThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `AddRoomTagsThirdParty`: ThirdPartyFolderWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.AddRoomTagsThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddRoomTagsThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **batchTagsRequestDto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md) | The names to attach or to detach. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
 
 ### Authorization
 
@@ -291,80 +200,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ArchiveRoomThirdParty
-
-> FileOperationWrapper ArchiveRoomThirdParty(ctx, id).ArchiveRoomRequest(archiveRoomRequest).Execute()
-
-Archive a room (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	archiveRoomRequest := *openapiclient.NewArchiveRoomRequest() // ArchiveRoomRequest | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.ArchiveRoomThirdParty(context.Background(), id).ArchiveRoomRequest(archiveRoomRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.ArchiveRoomThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ArchiveRoomThirdParty`: FileOperationWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.ArchiveRoomThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiArchiveRoomThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **archiveRoomRequest** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md) | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | 
-
-### Return type
-
-[**FileOperationWrapper**](FileOperationWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ChangeRoomCover
 
 > FolderWrapper ChangeRoomCover(ctx, id).CoverRequestDto(coverRequestDto).Execute()
@@ -394,6 +229,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.RoomsAPI.ChangeRoomCover(context.Background(), id).CoverRequestDto(coverRequestDto).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.RoomsAPI.ChangeRoomCover(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.ChangeRoomCover``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -424,80 +262,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ChangeRoomCoverThirdParty
-
-> ThirdPartyFolderWrapper ChangeRoomCoverThirdParty(ctx, id).CoverRequestDto(coverRequestDto).Execute()
-
-Change the room cover (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	coverRequestDto := *openapiclient.NewCoverRequestDto() // CoverRequestDto | The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.ChangeRoomCoverThirdParty(context.Background(), id).CoverRequestDto(coverRequestDto).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.ChangeRoomCoverThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ChangeRoomCoverThirdParty`: ThirdPartyFolderWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.ChangeRoomCoverThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiChangeRoomCoverThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **coverRequestDto** | [**CoverRequestDto**](CoverRequestDto.md) | The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
 
 ### Authorization
 
@@ -678,6 +442,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.RoomsAPI.CreateRoomLogo(context.Background(), id).LogoRequest(logoRequest).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.RoomsAPI.CreateRoomLogo(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.CreateRoomLogo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -708,80 +475,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateRoomLogoThirdParty
-
-> ThirdPartyFolderWrapper CreateRoomLogoThirdParty(ctx, id).LogoRequest(logoRequest).Execute()
-
-Set the room logo (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room the logo is set on.
-	logoRequest := *openapiclient.NewLogoRequest("/temp/logo_a1b2c3.png") // LogoRequest | The uploaded picture and the piece of it to use.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.CreateRoomLogoThirdParty(context.Background(), id).LogoRequest(logoRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.CreateRoomLogoThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateRoomLogoThirdParty`: ThirdPartyFolderWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.CreateRoomLogoThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room the logo is set on. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateRoomLogoThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **logoRequest** | [**LogoRequest**](LogoRequest.md) | The uploaded picture and the piece of it to use. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
 
 ### Authorization
 
@@ -1147,80 +840,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteRoomThirdParty
-
-> FileOperationWrapper DeleteRoomThirdParty(ctx, id).DeleteRoomRequest(deleteRoomRequest).Execute()
-
-Remove a room (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "10" // string | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	deleteRoomRequest := *openapiclient.NewDeleteRoomRequest() // DeleteRoomRequest | The body of the request. It is required even though the deletion does not depend on what it holds.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.DeleteRoomThirdParty(context.Background(), id).DeleteRoomRequest(deleteRoomRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.DeleteRoomThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `DeleteRoomThirdParty`: FileOperationWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.DeleteRoomThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteRoomThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **deleteRoomRequest** | [**DeleteRoomRequest**](DeleteRoomRequest.md) | The body of the request. It is required even though the deletion does not depend on what it holds. | 
-
-### Return type
-
-[**FileOperationWrapper**](FileOperationWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteRoomLogo
 
 > FolderWrapper DeleteRoomLogo(ctx, id).Execute()
@@ -1249,6 +868,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.RoomsAPI.DeleteRoomLogo(context.Background(), id).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.RoomsAPI.DeleteRoomLogo(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.DeleteRoomLogo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1293,78 +915,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteRoomLogoThirdParty
-
-> ThirdPartyFolderWrapper DeleteRoomLogoThirdParty(ctx, id).Execute()
-
-Remove a room logo (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.DeleteRoomLogoThirdParty(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.DeleteRoomLogoThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `DeleteRoomLogoThirdParty`: ThirdPartyFolderWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.DeleteRoomLogoThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteRoomLogoThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteRoomTags
 
 > FolderWrapper DeleteRoomTags(ctx, id).BatchTagsRequestDto(batchTagsRequestDto).Execute()
@@ -1394,6 +944,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.RoomsAPI.DeleteRoomTags(context.Background(), id).BatchTagsRequestDto(batchTagsRequestDto).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.RoomsAPI.DeleteRoomTags(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.DeleteRoomTags``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1424,80 +977,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteRoomTagsThirdParty
-
-> ThirdPartyFolderWrapper DeleteRoomTagsThirdParty(ctx, id).BatchTagsRequestDto(batchTagsRequestDto).Execute()
-
-Detach tags from a room (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	batchTagsRequestDto := *openapiclient.NewBatchTagsRequestDto([]string{"Names_example"}) // BatchTagsRequestDto | The names to attach or to detach. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.DeleteRoomTagsThirdParty(context.Background(), id).BatchTagsRequestDto(batchTagsRequestDto).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.DeleteRoomTagsThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `DeleteRoomTagsThirdParty`: ThirdPartyFolderWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.DeleteRoomTagsThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteRoomTagsThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **batchTagsRequestDto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md) | The names to attach or to detach. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
 
 ### Authorization
 
@@ -1633,78 +1112,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetNewRoomItemsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**NewItemsFileEntryBaseArrayWrapper**](NewItemsFileEntryBaseArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetNewRoomItemsThirdParty
-
-> NewItemsFileEntryBaseArrayWrapper GetNewRoomItemsThirdParty(ctx, id).Execute()
-
-Get new items in a room (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.GetNewRoomItemsThirdParty(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.GetNewRoomItemsThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetNewRoomItemsThirdParty`: NewItemsFileEntryBaseArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.GetNewRoomItemsThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetNewRoomItemsThirdPartyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -2018,6 +1425,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.RoomsAPI.GetRoomInfo(context.Background(), id).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.RoomsAPI.GetRoomInfo(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.GetRoomInfo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2047,78 +1457,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetRoomInfoThirdParty
-
-> ThirdPartyFolderWrapper GetRoomInfoThirdParty(ctx, id).Execute()
-
-Get room information (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.GetRoomInfoThirdParty(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.GetRoomInfoThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetRoomInfoThirdParty`: ThirdPartyFolderWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.GetRoomInfoThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetRoomInfoThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
 
 ### Authorization
 
@@ -2208,80 +1546,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetRoomLinksThirdParty
-
-> FileShareArrayWrapper GetRoomLinksThirdParty(ctx, id).Type_(type_).Execute()
-
-Get the room links (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	type_ := openapiclient.LinkType(0) // LinkType | Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.GetRoomLinksThirdParty(context.Background(), id).Type_(type_).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.GetRoomLinksThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetRoomLinksThirdParty`: FileShareArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.GetRoomLinksThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetRoomLinksThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **type_** | [**LinkType**](LinkType.md) | Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together. | 
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetRoomSecurityInfo
 
 > FileShareArrayWrapper GetRoomSecurityInfo(ctx, id).FilterType(filterType).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
@@ -2334,86 +1598,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetRoomSecurityInfoRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **filterType** | [**ShareFilterType**](ShareFilterType.md) | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. | 
- **count** | **int32** | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. | 
- **startIndex** | **int32** | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. | 
- **filterValue** | **string** | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. | 
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetRoomSecurityInfoThirdParty
-
-> FileShareArrayWrapper GetRoomSecurityInfoThirdParty(ctx, id).FilterType(filterType).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
-
-Get the room access rights (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	filterType := openapiclient.ShareFilterType(0) // ShareFilterType | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. (optional)
-	count := int32(25) // int32 | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. (optional)
-	startIndex := int32(0) // int32 | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. (optional)
-	filterValue := "Smith" // string | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.GetRoomSecurityInfoThirdParty(context.Background(), id).FilterType(filterType).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.GetRoomSecurityInfoThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetRoomSecurityInfoThirdParty`: FileShareArrayWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.GetRoomSecurityInfoThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetRoomSecurityInfoThirdPartyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -2603,7 +1787,7 @@ func main() {
 	type_ := []openapiclient.RoomType{openapiclient.RoomType(1)} // []RoomType | Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind. (optional)
 	subjectId := "9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9" // string | Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite. (optional)
 	subjectOwnerId := "9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9" // string | Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite. (optional)
-	searchArea := openapiclient.SearchArea(0) // SearchArea | The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value. (optional)
+	searchArea := openapiclient.SearchArea("Active") // SearchArea | The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value. (optional)
 	withoutTags := false // bool | When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection. (optional)
 	tags := "[\"Important\"]" // string | A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing. (optional)
 	excludeSubject := false // bool | Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own. (optional)
@@ -2812,78 +1996,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetRoomsPrimaryExternalLinkThirdParty
-
-> FileShareWrapper GetRoomsPrimaryExternalLinkThirdParty(ctx, id).Execute()
-
-Get the room primary external link (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.GetRoomsPrimaryExternalLinkThirdParty(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.GetRoomsPrimaryExternalLinkThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetRoomsPrimaryExternalLinkThirdParty`: FileShareWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.GetRoomsPrimaryExternalLinkThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetRoomsPrimaryExternalLinkThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**FileShareWrapper**](FileShareWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## HasTagLinks
 
 > BooleanWrapper HasTagLinks(ctx, tagName2).TagName(tagName).Execute()
@@ -2986,6 +2098,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.RoomsAPI.PinRoom(context.Background(), id).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.RoomsAPI.PinRoom(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.PinRoom``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3030,78 +2145,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PinRoomThirdParty
-
-> ThirdPartyFolderWrapper PinRoomThirdParty(ctx, id).Execute()
-
-Pin a room (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.PinRoomThirdParty(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.PinRoomThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PinRoomThirdParty`: ThirdPartyFolderWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.PinRoomThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPinRoomThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ReorderRoom
 
 > FolderWrapper ReorderRoom(ctx, id).Execute()
@@ -3130,6 +2173,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.RoomsAPI.ReorderRoom(context.Background(), id).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.RoomsAPI.ReorderRoom(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.ReorderRoom``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3159,78 +2205,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ReorderRoomThirdParty
-
-> ThirdPartyFolderWrapper ReorderRoomThirdParty(ctx, id).Execute()
-
-Reorder room contents (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.ReorderRoomThirdParty(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.ReorderRoomThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ReorderRoomThirdParty`: ThirdPartyFolderWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.ReorderRoomThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiReorderRoomThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
 
 ### Authorization
 
@@ -3293,78 +2267,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiResendEmailInvitationsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **userInvitation** | [**UserInvitation**](UserInvitation.md) | Which pending invitations to send again. | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ResendEmailInvitationsThirdParty
-
-> ResendEmailInvitationsThirdParty(ctx, id).UserInvitation(userInvitation).Execute()
-
-Resend the room invitations (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	userInvitation := *openapiclient.NewUserInvitation() // UserInvitation | Which pending invitations to send again.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.RoomsAPI.ResendEmailInvitationsThirdParty(context.Background(), id).UserInvitation(userInvitation).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.ResendEmailInvitationsThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiResendEmailInvitationsThirdPartyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -3530,80 +2432,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SetRoomLinkThirdParty
-
-> FileShareWrapper SetRoomLinkThirdParty(ctx, id).RoomLinkRequest(roomLinkRequest).Execute()
-
-Set the room external or invitation link (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	roomLinkRequest := *openapiclient.NewRoomLinkRequest() // RoomLinkRequest | The link to create, change or revoke.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.SetRoomLinkThirdParty(context.Background(), id).RoomLinkRequest(roomLinkRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.SetRoomLinkThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `SetRoomLinkThirdParty`: FileShareWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.SetRoomLinkThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSetRoomLinkThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **roomLinkRequest** | [**RoomLinkRequest**](RoomLinkRequest.md) | The link to create, change or revoke. | 
-
-### Return type
-
-[**FileShareWrapper**](FileShareWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## SetRoomSecurity
 
 > RoomSecurityWrapper SetRoomSecurity(ctx, id).RoomInvitationRequest(roomInvitationRequest).Execute()
@@ -3653,80 +2481,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSetRoomSecurityRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **roomInvitationRequest** | [**RoomInvitationRequest**](RoomInvitationRequest.md) | The membership changes to apply, together with how the people concerned are notified. | 
-
-### Return type
-
-[**RoomSecurityWrapper**](RoomSecurityWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## SetRoomSecurityThirdParty
-
-> RoomSecurityWrapper SetRoomSecurityThirdParty(ctx, id).RoomInvitationRequest(roomInvitationRequest).Execute()
-
-Set the room access rights (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	roomInvitationRequest := *openapiclient.NewRoomInvitationRequest() // RoomInvitationRequest | The membership changes to apply, together with how the people concerned are notified.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.SetRoomSecurityThirdParty(context.Background(), id).RoomInvitationRequest(roomInvitationRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.SetRoomSecurityThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `SetRoomSecurityThirdParty`: RoomSecurityWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.SetRoomSecurityThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSetRoomSecurityThirdPartyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -4031,80 +2785,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UnarchiveRoomThirdParty
-
-> FileOperationWrapper UnarchiveRoomThirdParty(ctx, id).ArchiveRoomRequest(archiveRoomRequest).Execute()
-
-Unarchive a room (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	archiveRoomRequest := *openapiclient.NewArchiveRoomRequest() // ArchiveRoomRequest | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.UnarchiveRoomThirdParty(context.Background(), id).ArchiveRoomRequest(archiveRoomRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.UnarchiveRoomThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UnarchiveRoomThirdParty`: FileOperationWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.UnarchiveRoomThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUnarchiveRoomThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **archiveRoomRequest** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md) | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | 
-
-### Return type
-
-[**FileOperationWrapper**](FileOperationWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UnpinRoom
 
 > FolderWrapper UnpinRoom(ctx, id).Execute()
@@ -4133,6 +2813,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.RoomsAPI.UnpinRoom(context.Background(), id).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.RoomsAPI.UnpinRoom(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.UnpinRoom``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4177,78 +2860,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UnpinRoomThirdParty
-
-> ThirdPartyFolderWrapper UnpinRoomThirdParty(ctx, id).Execute()
-
-Unpin a room (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.UnpinRoomThirdParty(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.UnpinRoomThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UnpinRoomThirdParty`: ThirdPartyFolderWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.UnpinRoomThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUnpinRoomThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpdateRoom
 
 > FolderWrapper UpdateRoom(ctx, id).UpdateRoomRequest(updateRoomRequest).Execute()
@@ -4278,6 +2889,9 @@ func main() {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.RoomsAPI.UpdateRoom(context.Background(), id).UpdateRoomRequest(updateRoomRequest).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.RoomsAPI.UpdateRoom(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.UpdateRoom``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4308,80 +2922,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateRoomThirdParty
-
-> ThirdPartyFolderWrapper UpdateRoomThirdParty(ctx, id).UpdateRoomRequest(updateRoomRequest).Execute()
-
-Update a room (third-party storage)
-
-
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-third-party/).
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	id := "1" // string | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-	updateRoomRequest := *openapiclient.NewUpdateRoomRequest() // UpdateRoomRequest | The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.UpdateRoomThirdParty(context.Background(), id).UpdateRoomRequest(updateRoomRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.UpdateRoomThirdParty``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateRoomThirdParty`: ThirdPartyFolderWrapper
-	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.UpdateRoomThirdParty`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateRoomThirdPartyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **updateRoomRequest** | [**UpdateRoomRequest**](UpdateRoomRequest.md) | The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
 
 ### Authorization
 

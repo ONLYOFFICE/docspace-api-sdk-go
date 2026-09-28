@@ -32,7 +32,7 @@ type RoomsAPIService service
 type ApiAddRoomTagsRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	batchTagsRequestDto *BatchTagsRequestDto
 }
 
@@ -45,6 +45,12 @@ func (r ApiAddRoomTagsRequest) Execute() (*FolderWrapper, *http.Response, error)
 	return r.ApiService.AddRoomTagsExecute(r)
 }
 
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiAddRoomTagsRequest) ExecuteThirdParty() (*ThirdPartyFolderWrapper, *http.Response, error) {
+	return r.ApiService.AddRoomTagsExecuteThirdParty(r)
+}
+
 // AddRoomTags Attach tags to a room
 //
 // Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
@@ -54,7 +60,7 @@ func (r ApiAddRoomTagsRequest) Execute() (*FolderWrapper, *http.Response, error)
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiAddRoomTagsRequest
-func (a *RoomsAPIService) AddRoomTags(ctx context.Context, id int32) ApiAddRoomTagsRequest {
+func (a *RoomsAPIService) AddRoomTags(ctx context.Context, id interface{}) ApiAddRoomTagsRequest {
 	return ApiAddRoomTagsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -198,42 +204,9 @@ func (a *RoomsAPIService) AddRoomTagsExecute(r ApiAddRoomTagsRequest) (*FolderWr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAddRoomTagsThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	batchTagsRequestDto *BatchTagsRequestDto
-}
-
-// The names to attach or to detach.
-func (r ApiAddRoomTagsThirdPartyRequest) BatchTagsRequestDto(batchTagsRequestDto BatchTagsRequestDto) ApiAddRoomTagsThirdPartyRequest {	r.batchTagsRequestDto = &batchTagsRequestDto
-	return r
-}
-
-func (r ApiAddRoomTagsThirdPartyRequest) Execute() (*ThirdPartyFolderWrapper, *http.Response, error) {
-	return r.ApiService.AddRoomTagsThirdPartyExecute(r)
-}
-
-// AddRoomTagsThirdParty Attach tags to a room (third-party storage)
-//
-// Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiAddRoomTagsThirdPartyRequest
-func (a *RoomsAPIService) AddRoomTagsThirdParty(ctx context.Context, id string) ApiAddRoomTagsThirdPartyRequest {
-	return ApiAddRoomTagsThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyFolderWrapper
-func (a *RoomsAPIService) AddRoomTagsThirdPartyExecute(r ApiAddRoomTagsThirdPartyRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
+func (a *RoomsAPIService) AddRoomTagsExecuteThirdParty(r ApiAddRoomTagsRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -241,7 +214,7 @@ func (a *RoomsAPIService) AddRoomTagsThirdPartyExecute(r ApiAddRoomTagsThirdPart
 		localVarReturnValue  *ThirdPartyFolderWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.AddRoomTagsThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.AddRoomTags")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -272,20 +245,6 @@ func (a *RoomsAPIService) AddRoomTagsThirdPartyExecute(r ApiAddRoomTagsThirdPart
 	}
 	// body params
 	localVarPostBody = r.batchTagsRequestDto
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -370,7 +329,7 @@ func (a *RoomsAPIService) AddRoomTagsThirdPartyExecute(r ApiAddRoomTagsThirdPart
 type ApiArchiveRoomRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	archiveRoomRequest *ArchiveRoomRequest
 }
 
@@ -392,7 +351,7 @@ func (r ApiArchiveRoomRequest) Execute() (*FileOperationWrapper, *http.Response,
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiArchiveRoomRequest
-func (a *RoomsAPIService) ArchiveRoom(ctx context.Context, id int32) ApiArchiveRoomRequest {
+func (a *RoomsAPIService) ArchiveRoom(ctx context.Context, id interface{}) ApiArchiveRoomRequest {
 	return ApiArchiveRoomRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -536,179 +495,10 @@ func (a *RoomsAPIService) ArchiveRoomExecute(r ApiArchiveRoomRequest) (*FileOper
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiArchiveRoomThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	archiveRoomRequest *ArchiveRoomRequest
-}
-
-// The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-func (r ApiArchiveRoomThirdPartyRequest) ArchiveRoomRequest(archiveRoomRequest ArchiveRoomRequest) ApiArchiveRoomThirdPartyRequest {	r.archiveRoomRequest = &archiveRoomRequest
-	return r
-}
-
-func (r ApiArchiveRoomThirdPartyRequest) Execute() (*FileOperationWrapper, *http.Response, error) {
-	return r.ApiService.ArchiveRoomThirdPartyExecute(r)
-}
-
-// ArchiveRoomThirdParty Archive a room (third-party storage)
-//
-// Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiArchiveRoomThirdPartyRequest
-func (a *RoomsAPIService) ArchiveRoomThirdParty(ctx context.Context, id string) ApiArchiveRoomThirdPartyRequest {
-	return ApiArchiveRoomThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return FileOperationWrapper
-func (a *RoomsAPIService) ArchiveRoomThirdPartyExecute(r ApiArchiveRoomThirdPartyRequest) (*FileOperationWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FileOperationWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.ArchiveRoomThirdParty")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/rooms/{id}/archive"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.archiveRoomRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiChangeRoomCoverRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	coverRequestDto *CoverRequestDto
 }
 
@@ -721,6 +511,12 @@ func (r ApiChangeRoomCoverRequest) Execute() (*FolderWrapper, *http.Response, er
 	return r.ApiService.ChangeRoomCoverExecute(r)
 }
 
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiChangeRoomCoverRequest) ExecuteThirdParty() (*ThirdPartyFolderWrapper, *http.Response, error) {
+	return r.ApiService.ChangeRoomCoverExecuteThirdParty(r)
+}
+
 // ChangeRoomCover Change the room cover
 //
 // Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
@@ -730,7 +526,7 @@ func (r ApiChangeRoomCoverRequest) Execute() (*FolderWrapper, *http.Response, er
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiChangeRoomCoverRequest
-func (a *RoomsAPIService) ChangeRoomCover(ctx context.Context, id int32) ApiChangeRoomCoverRequest {
+func (a *RoomsAPIService) ChangeRoomCover(ctx context.Context, id interface{}) ApiChangeRoomCoverRequest {
 	return ApiChangeRoomCoverRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -877,42 +673,9 @@ func (a *RoomsAPIService) ChangeRoomCoverExecute(r ApiChangeRoomCoverRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiChangeRoomCoverThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	coverRequestDto *CoverRequestDto
-}
-
-// The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
-func (r ApiChangeRoomCoverThirdPartyRequest) CoverRequestDto(coverRequestDto CoverRequestDto) ApiChangeRoomCoverThirdPartyRequest {	r.coverRequestDto = &coverRequestDto
-	return r
-}
-
-func (r ApiChangeRoomCoverThirdPartyRequest) Execute() (*ThirdPartyFolderWrapper, *http.Response, error) {
-	return r.ApiService.ChangeRoomCoverThirdPartyExecute(r)
-}
-
-// ChangeRoomCoverThirdParty Change the room cover (third-party storage)
-//
-// Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiChangeRoomCoverThirdPartyRequest
-func (a *RoomsAPIService) ChangeRoomCoverThirdParty(ctx context.Context, id string) ApiChangeRoomCoverThirdPartyRequest {
-	return ApiChangeRoomCoverThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyFolderWrapper
-func (a *RoomsAPIService) ChangeRoomCoverThirdPartyExecute(r ApiChangeRoomCoverThirdPartyRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
+func (a *RoomsAPIService) ChangeRoomCoverExecuteThirdParty(r ApiChangeRoomCoverRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -920,7 +683,7 @@ func (a *RoomsAPIService) ChangeRoomCoverThirdPartyExecute(r ApiChangeRoomCoverT
 		localVarReturnValue  *ThirdPartyFolderWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.ChangeRoomCoverThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.ChangeRoomCover")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -954,20 +717,6 @@ func (a *RoomsAPIService) ChangeRoomCoverThirdPartyExecute(r ApiChangeRoomCoverT
 	}
 	// body params
 	localVarPostBody = r.coverRequestDto
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1380,7 +1129,7 @@ func (a *RoomsAPIService) CreateRoomFromTemplateExecute(r ApiCreateRoomFromTempl
 type ApiCreateRoomLogoRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	logoRequest *LogoRequest
 }
 
@@ -1393,6 +1142,12 @@ func (r ApiCreateRoomLogoRequest) Execute() (*FolderWrapper, *http.Response, err
 	return r.ApiService.CreateRoomLogoExecute(r)
 }
 
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiCreateRoomLogoRequest) ExecuteThirdParty() (*ThirdPartyFolderWrapper, *http.Response, error) {
+	return r.ApiService.CreateRoomLogoExecuteThirdParty(r)
+}
+
 // CreateRoomLogo Set the room logo
 //
 // Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
@@ -1402,7 +1157,7 @@ func (r ApiCreateRoomLogoRequest) Execute() (*FolderWrapper, *http.Response, err
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room the logo is set on.
 // @return ApiCreateRoomLogoRequest
-func (a *RoomsAPIService) CreateRoomLogo(ctx context.Context, id int32) ApiCreateRoomLogoRequest {
+func (a *RoomsAPIService) CreateRoomLogo(ctx context.Context, id interface{}) ApiCreateRoomLogoRequest {
 	return ApiCreateRoomLogoRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1549,42 +1304,9 @@ func (a *RoomsAPIService) CreateRoomLogoExecute(r ApiCreateRoomLogoRequest) (*Fo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateRoomLogoThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	logoRequest *LogoRequest
-}
-
-// The uploaded picture and the piece of it to use.
-func (r ApiCreateRoomLogoThirdPartyRequest) LogoRequest(logoRequest LogoRequest) ApiCreateRoomLogoThirdPartyRequest {	r.logoRequest = &logoRequest
-	return r
-}
-
-func (r ApiCreateRoomLogoThirdPartyRequest) Execute() (*ThirdPartyFolderWrapper, *http.Response, error) {
-	return r.ApiService.CreateRoomLogoThirdPartyExecute(r)
-}
-
-// CreateRoomLogoThirdParty Set the room logo (third-party storage)
-//
-// Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room the logo is set on.
-// @return ApiCreateRoomLogoThirdPartyRequest
-func (a *RoomsAPIService) CreateRoomLogoThirdParty(ctx context.Context, id string) ApiCreateRoomLogoThirdPartyRequest {
-	return ApiCreateRoomLogoThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyFolderWrapper
-func (a *RoomsAPIService) CreateRoomLogoThirdPartyExecute(r ApiCreateRoomLogoThirdPartyRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
+func (a *RoomsAPIService) CreateRoomLogoExecuteThirdParty(r ApiCreateRoomLogoRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1592,7 +1314,7 @@ func (a *RoomsAPIService) CreateRoomLogoThirdPartyExecute(r ApiCreateRoomLogoThi
 		localVarReturnValue  *ThirdPartyFolderWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.CreateRoomLogoThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.CreateRoomLogo")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1626,20 +1348,6 @@ func (a *RoomsAPIService) CreateRoomLogoThirdPartyExecute(r ApiCreateRoomLogoThi
 	}
 	// body params
 	localVarPostBody = r.logoRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2377,7 +2085,7 @@ func (a *RoomsAPIService) DeleteCustomTagsExecute(r ApiDeleteCustomTagsRequest) 
 type ApiDeleteRoomRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	deleteRoomRequest *DeleteRoomRequest
 }
 
@@ -2399,7 +2107,7 @@ func (r ApiDeleteRoomRequest) Execute() (*FileOperationWrapper, *http.Response, 
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiDeleteRoomRequest
-func (a *RoomsAPIService) DeleteRoom(ctx context.Context, id int32) ApiDeleteRoomRequest {
+func (a *RoomsAPIService) DeleteRoom(ctx context.Context, id interface{}) ApiDeleteRoomRequest {
 	return ApiDeleteRoomRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2546,186 +2254,20 @@ func (a *RoomsAPIService) DeleteRoomExecute(r ApiDeleteRoomRequest) (*FileOperat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteRoomThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	deleteRoomRequest *DeleteRoomRequest
-}
-
-// The body of the request. It is required even though the deletion does not depend on what it holds.
-func (r ApiDeleteRoomThirdPartyRequest) DeleteRoomRequest(deleteRoomRequest DeleteRoomRequest) ApiDeleteRoomThirdPartyRequest {	r.deleteRoomRequest = &deleteRoomRequest
-	return r
-}
-
-func (r ApiDeleteRoomThirdPartyRequest) Execute() (*FileOperationWrapper, *http.Response, error) {
-	return r.ApiService.DeleteRoomThirdPartyExecute(r)
-}
-
-// DeleteRoomThirdParty Remove a room (third-party storage)
-//
-// Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiDeleteRoomThirdPartyRequest
-func (a *RoomsAPIService) DeleteRoomThirdParty(ctx context.Context, id string) ApiDeleteRoomThirdPartyRequest {
-	return ApiDeleteRoomThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return FileOperationWrapper
-func (a *RoomsAPIService) DeleteRoomThirdPartyExecute(r ApiDeleteRoomThirdPartyRequest) (*FileOperationWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FileOperationWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.DeleteRoomThirdParty")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/rooms/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.deleteRoomRequest == nil {
-		return localVarReturnValue, nil, reportError("deleteRoomRequest is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.deleteRoomRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiDeleteRoomLogoRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 }
 
 func (r ApiDeleteRoomLogoRequest) Execute() (*FolderWrapper, *http.Response, error) {
 	return r.ApiService.DeleteRoomLogoExecute(r)
+}
+
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiDeleteRoomLogoRequest) ExecuteThirdParty() (*ThirdPartyFolderWrapper, *http.Response, error) {
+	return r.ApiService.DeleteRoomLogoExecuteThirdParty(r)
 }
 
 // DeleteRoomLogo Remove a room logo
@@ -2737,7 +2279,7 @@ func (r ApiDeleteRoomLogoRequest) Execute() (*FolderWrapper, *http.Response, err
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
 // @return ApiDeleteRoomLogoRequest
-func (a *RoomsAPIService) DeleteRoomLogo(ctx context.Context, id int32) ApiDeleteRoomLogoRequest {
+func (a *RoomsAPIService) DeleteRoomLogo(ctx context.Context, id interface{}) ApiDeleteRoomLogoRequest {
 	return ApiDeleteRoomLogoRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2879,36 +2421,9 @@ func (a *RoomsAPIService) DeleteRoomLogoExecute(r ApiDeleteRoomLogoRequest) (*Fo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteRoomLogoThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-}
-
-func (r ApiDeleteRoomLogoThirdPartyRequest) Execute() (*ThirdPartyFolderWrapper, *http.Response, error) {
-	return r.ApiService.DeleteRoomLogoThirdPartyExecute(r)
-}
-
-// DeleteRoomLogoThirdParty Remove a room logo (third-party storage)
-//
-// Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-// @return ApiDeleteRoomLogoThirdPartyRequest
-func (a *RoomsAPIService) DeleteRoomLogoThirdParty(ctx context.Context, id string) ApiDeleteRoomLogoThirdPartyRequest {
-	return ApiDeleteRoomLogoThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyFolderWrapper
-func (a *RoomsAPIService) DeleteRoomLogoThirdPartyExecute(r ApiDeleteRoomLogoThirdPartyRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
+func (a *RoomsAPIService) DeleteRoomLogoExecuteThirdParty(r ApiDeleteRoomLogoRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -2916,7 +2431,7 @@ func (a *RoomsAPIService) DeleteRoomLogoThirdPartyExecute(r ApiDeleteRoomLogoThi
 		localVarReturnValue  *ThirdPartyFolderWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.DeleteRoomLogoThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.DeleteRoomLogo")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -2944,20 +2459,6 @@ func (a *RoomsAPIService) DeleteRoomLogoThirdPartyExecute(r ApiDeleteRoomLogoThi
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -3043,7 +2544,7 @@ func (a *RoomsAPIService) DeleteRoomLogoThirdPartyExecute(r ApiDeleteRoomLogoThi
 type ApiDeleteRoomTagsRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	batchTagsRequestDto *BatchTagsRequestDto
 }
 
@@ -3056,6 +2557,12 @@ func (r ApiDeleteRoomTagsRequest) Execute() (*FolderWrapper, *http.Response, err
 	return r.ApiService.DeleteRoomTagsExecute(r)
 }
 
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiDeleteRoomTagsRequest) ExecuteThirdParty() (*ThirdPartyFolderWrapper, *http.Response, error) {
+	return r.ApiService.DeleteRoomTagsExecuteThirdParty(r)
+}
+
 // DeleteRoomTags Detach tags from a room
 //
 // Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
@@ -3065,7 +2572,7 @@ func (r ApiDeleteRoomTagsRequest) Execute() (*FolderWrapper, *http.Response, err
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiDeleteRoomTagsRequest
-func (a *RoomsAPIService) DeleteRoomTags(ctx context.Context, id int32) ApiDeleteRoomTagsRequest {
+func (a *RoomsAPIService) DeleteRoomTags(ctx context.Context, id interface{}) ApiDeleteRoomTagsRequest {
 	return ApiDeleteRoomTagsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3209,42 +2716,9 @@ func (a *RoomsAPIService) DeleteRoomTagsExecute(r ApiDeleteRoomTagsRequest) (*Fo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteRoomTagsThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	batchTagsRequestDto *BatchTagsRequestDto
-}
-
-// The names to attach or to detach.
-func (r ApiDeleteRoomTagsThirdPartyRequest) BatchTagsRequestDto(batchTagsRequestDto BatchTagsRequestDto) ApiDeleteRoomTagsThirdPartyRequest {	r.batchTagsRequestDto = &batchTagsRequestDto
-	return r
-}
-
-func (r ApiDeleteRoomTagsThirdPartyRequest) Execute() (*ThirdPartyFolderWrapper, *http.Response, error) {
-	return r.ApiService.DeleteRoomTagsThirdPartyExecute(r)
-}
-
-// DeleteRoomTagsThirdParty Detach tags from a room (third-party storage)
-//
-// Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiDeleteRoomTagsThirdPartyRequest
-func (a *RoomsAPIService) DeleteRoomTagsThirdParty(ctx context.Context, id string) ApiDeleteRoomTagsThirdPartyRequest {
-	return ApiDeleteRoomTagsThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyFolderWrapper
-func (a *RoomsAPIService) DeleteRoomTagsThirdPartyExecute(r ApiDeleteRoomTagsThirdPartyRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
+func (a *RoomsAPIService) DeleteRoomTagsExecuteThirdParty(r ApiDeleteRoomTagsRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -3252,7 +2726,7 @@ func (a *RoomsAPIService) DeleteRoomTagsThirdPartyExecute(r ApiDeleteRoomTagsThi
 		localVarReturnValue  *ThirdPartyFolderWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.DeleteRoomTagsThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.DeleteRoomTags")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -3283,20 +2757,6 @@ func (a *RoomsAPIService) DeleteRoomTagsThirdPartyExecute(r ApiDeleteRoomTagsThi
 	}
 	// body params
 	localVarPostBody = r.batchTagsRequestDto
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -3542,7 +3002,7 @@ func (a *RoomsAPIService) GetExternalDbSyncStatusExecute(r ApiGetExternalDbSyncS
 type ApiGetNewRoomItemsRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 }
 
 func (r ApiGetNewRoomItemsRequest) Execute() (*NewItemsFileEntryBaseArrayWrapper, *http.Response, error) {
@@ -3558,7 +3018,7 @@ func (r ApiGetNewRoomItemsRequest) Execute() (*NewItemsFileEntryBaseArrayWrapper
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
 // @return ApiGetNewRoomItemsRequest
-func (a *RoomsAPIService) GetNewRoomItems(ctx context.Context, id int32) ApiGetNewRoomItemsRequest {
+func (a *RoomsAPIService) GetNewRoomItems(ctx context.Context, id interface{}) ApiGetNewRoomItemsRequest {
 	return ApiGetNewRoomItemsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3577,167 +3037,6 @@ func (a *RoomsAPIService) GetNewRoomItemsExecute(r ApiGetNewRoomItemsRequest) (*
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.GetNewRoomItems")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/rooms/{id}/news"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetNewRoomItemsThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-}
-
-func (r ApiGetNewRoomItemsThirdPartyRequest) Execute() (*NewItemsFileEntryBaseArrayWrapper, *http.Response, error) {
-	return r.ApiService.GetNewRoomItemsThirdPartyExecute(r)
-}
-
-// GetNewRoomItemsThirdParty Get new items in a room (third-party storage)
-//
-// Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-// @return ApiGetNewRoomItemsThirdPartyRequest
-func (a *RoomsAPIService) GetNewRoomItemsThirdParty(ctx context.Context, id string) ApiGetNewRoomItemsThirdPartyRequest {
-	return ApiGetNewRoomItemsThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return NewItemsFileEntryBaseArrayWrapper
-func (a *RoomsAPIService) GetNewRoomItemsThirdPartyExecute(r ApiGetNewRoomItemsThirdPartyRequest) (*NewItemsFileEntryBaseArrayWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *NewItemsFileEntryBaseArrayWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.GetNewRoomItemsThirdParty")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -4469,11 +3768,17 @@ func (a *RoomsAPIService) GetRoomIndexExportExecute(r ApiGetRoomIndexExportReque
 type ApiGetRoomInfoRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 }
 
 func (r ApiGetRoomInfoRequest) Execute() (*FolderWrapper, *http.Response, error) {
 	return r.ApiService.GetRoomInfoExecute(r)
+}
+
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiGetRoomInfoRequest) ExecuteThirdParty() (*ThirdPartyFolderWrapper, *http.Response, error) {
+	return r.ApiService.GetRoomInfoExecuteThirdParty(r)
 }
 
 // GetRoomInfo Get room information
@@ -4485,7 +3790,7 @@ func (r ApiGetRoomInfoRequest) Execute() (*FolderWrapper, *http.Response, error)
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
 // @return ApiGetRoomInfoRequest
-func (a *RoomsAPIService) GetRoomInfo(ctx context.Context, id int32) ApiGetRoomInfoRequest {
+func (a *RoomsAPIService) GetRoomInfo(ctx context.Context, id interface{}) ApiGetRoomInfoRequest {
 	return ApiGetRoomInfoRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -4602,36 +3907,9 @@ func (a *RoomsAPIService) GetRoomInfoExecute(r ApiGetRoomInfoRequest) (*FolderWr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetRoomInfoThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-}
-
-func (r ApiGetRoomInfoThirdPartyRequest) Execute() (*ThirdPartyFolderWrapper, *http.Response, error) {
-	return r.ApiService.GetRoomInfoThirdPartyExecute(r)
-}
-
-// GetRoomInfoThirdParty Get room information (third-party storage)
-//
-// Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-// @return ApiGetRoomInfoThirdPartyRequest
-func (a *RoomsAPIService) GetRoomInfoThirdParty(ctx context.Context, id string) ApiGetRoomInfoThirdPartyRequest {
-	return ApiGetRoomInfoThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyFolderWrapper
-func (a *RoomsAPIService) GetRoomInfoThirdPartyExecute(r ApiGetRoomInfoThirdPartyRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
+func (a *RoomsAPIService) GetRoomInfoExecuteThirdParty(r ApiGetRoomInfoRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -4639,7 +3917,7 @@ func (a *RoomsAPIService) GetRoomInfoThirdPartyExecute(r ApiGetRoomInfoThirdPart
 		localVarReturnValue  *ThirdPartyFolderWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.GetRoomInfoThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.GetRoomInfo")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -4741,7 +4019,7 @@ func (a *RoomsAPIService) GetRoomInfoThirdPartyExecute(r ApiGetRoomInfoThirdPart
 type ApiGetRoomLinksRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	type_ *LinkType
 }
 
@@ -4763,7 +4041,7 @@ func (r ApiGetRoomLinksRequest) Execute() (*FileShareArrayWrapper, *http.Respons
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiGetRoomLinksRequest
-func (a *RoomsAPIService) GetRoomLinks(ctx context.Context, id int32) ApiGetRoomLinksRequest {
+func (a *RoomsAPIService) GetRoomLinks(ctx context.Context, id interface{}) ApiGetRoomLinksRequest {
 	return ApiGetRoomLinksRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -4908,180 +4186,10 @@ func (a *RoomsAPIService) GetRoomLinksExecute(r ApiGetRoomLinksRequest) (*FileSh
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetRoomLinksThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	type_ *LinkType
-}
-
-// Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
-func (r ApiGetRoomLinksThirdPartyRequest) Type_(type_ LinkType) ApiGetRoomLinksThirdPartyRequest {	r.type_ = &type_
-	return r
-}
-
-func (r ApiGetRoomLinksThirdPartyRequest) Execute() (*FileShareArrayWrapper, *http.Response, error) {
-	return r.ApiService.GetRoomLinksThirdPartyExecute(r)
-}
-
-// GetRoomLinksThirdParty Get the room links (third-party storage)
-//
-// Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiGetRoomLinksThirdPartyRequest
-func (a *RoomsAPIService) GetRoomLinksThirdParty(ctx context.Context, id string) ApiGetRoomLinksThirdPartyRequest {
-	return ApiGetRoomLinksThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return FileShareArrayWrapper
-func (a *RoomsAPIService) GetRoomLinksThirdPartyExecute(r ApiGetRoomLinksThirdPartyRequest) (*FileShareArrayWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FileShareArrayWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.GetRoomLinksThirdParty")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/rooms/{id}/links"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiGetRoomSecurityInfoRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	filterType *ShareFilterType
 	count *int32
 	startIndex *int32
@@ -5121,7 +4229,7 @@ func (r ApiGetRoomSecurityInfoRequest) Execute() (*FileShareArrayWrapper, *http.
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiGetRoomSecurityInfoRequest
-func (a *RoomsAPIService) GetRoomSecurityInfo(ctx context.Context, id int32) ApiGetRoomSecurityInfoRequest {
+func (a *RoomsAPIService) GetRoomSecurityInfo(ctx context.Context, id interface{}) ApiGetRoomSecurityInfoRequest {
 	return ApiGetRoomSecurityInfoRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -5140,203 +4248,6 @@ func (a *RoomsAPIService) GetRoomSecurityInfoExecute(r ApiGetRoomSecurityInfoReq
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.GetRoomSecurityInfo")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/rooms/{id}/share"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.filterType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filterType", r.filterType, "form", "")
-	}
-	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "count", r.count, "form", "")
-	}
-	if r.startIndex != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "startIndex", r.startIndex, "form", "")
-	}
-	if r.filterValue != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filterValue", r.filterValue, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetRoomSecurityInfoThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	filterType *ShareFilterType
-	count *int32
-	startIndex *int32
-	filterValue *string
-}
-
-// What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
-func (r ApiGetRoomSecurityInfoThirdPartyRequest) FilterType(filterType ShareFilterType) ApiGetRoomSecurityInfoThirdPartyRequest {	r.filterType = &filterType
-	return r
-}
-
-// How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
-func (r ApiGetRoomSecurityInfoThirdPartyRequest) Count(count int32) ApiGetRoomSecurityInfoThirdPartyRequest {	r.count = &count
-	return r
-}
-
-// How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.
-func (r ApiGetRoomSecurityInfoThirdPartyRequest) StartIndex(startIndex int32) ApiGetRoomSecurityInfoThirdPartyRequest {	r.startIndex = &startIndex
-	return r
-}
-
-// Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
-func (r ApiGetRoomSecurityInfoThirdPartyRequest) FilterValue(filterValue string) ApiGetRoomSecurityInfoThirdPartyRequest {	r.filterValue = &filterValue
-	return r
-}
-
-func (r ApiGetRoomSecurityInfoThirdPartyRequest) Execute() (*FileShareArrayWrapper, *http.Response, error) {
-	return r.ApiService.GetRoomSecurityInfoThirdPartyExecute(r)
-}
-
-// GetRoomSecurityInfoThirdParty Get the room access rights (third-party storage)
-//
-// Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiGetRoomSecurityInfoThirdPartyRequest
-func (a *RoomsAPIService) GetRoomSecurityInfoThirdParty(ctx context.Context, id string) ApiGetRoomSecurityInfoThirdPartyRequest {
-	return ApiGetRoomSecurityInfoThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return FileShareArrayWrapper
-func (a *RoomsAPIService) GetRoomSecurityInfoThirdPartyExecute(r ApiGetRoomSecurityInfoThirdPartyRequest) (*FileShareArrayWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FileShareArrayWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.GetRoomSecurityInfoThirdParty")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -6269,7 +5180,7 @@ func (a *RoomsAPIService) GetRoomsNewItemsExecute(r ApiGetRoomsNewItemsRequest) 
 type ApiGetRoomsPrimaryExternalLinkRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 }
 
 func (r ApiGetRoomsPrimaryExternalLinkRequest) Execute() (*FileShareWrapper, *http.Response, error) {
@@ -6285,7 +5196,7 @@ func (r ApiGetRoomsPrimaryExternalLinkRequest) Execute() (*FileShareWrapper, *ht
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
 // @return ApiGetRoomsPrimaryExternalLinkRequest
-func (a *RoomsAPIService) GetRoomsPrimaryExternalLink(ctx context.Context, id int32) ApiGetRoomsPrimaryExternalLinkRequest {
+func (a *RoomsAPIService) GetRoomsPrimaryExternalLink(ctx context.Context, id interface{}) ApiGetRoomsPrimaryExternalLinkRequest {
 	return ApiGetRoomsPrimaryExternalLinkRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -6304,167 +5215,6 @@ func (a *RoomsAPIService) GetRoomsPrimaryExternalLinkExecute(r ApiGetRoomsPrimar
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.GetRoomsPrimaryExternalLink")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/rooms/{id}/link"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetRoomsPrimaryExternalLinkThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-}
-
-func (r ApiGetRoomsPrimaryExternalLinkThirdPartyRequest) Execute() (*FileShareWrapper, *http.Response, error) {
-	return r.ApiService.GetRoomsPrimaryExternalLinkThirdPartyExecute(r)
-}
-
-// GetRoomsPrimaryExternalLinkThirdParty Get the room primary external link (third-party storage)
-//
-// Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-// @return ApiGetRoomsPrimaryExternalLinkThirdPartyRequest
-func (a *RoomsAPIService) GetRoomsPrimaryExternalLinkThirdParty(ctx context.Context, id string) ApiGetRoomsPrimaryExternalLinkThirdPartyRequest {
-	return ApiGetRoomsPrimaryExternalLinkThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return FileShareWrapper
-func (a *RoomsAPIService) GetRoomsPrimaryExternalLinkThirdPartyExecute(r ApiGetRoomsPrimaryExternalLinkThirdPartyRequest) (*FileShareWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FileShareWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.GetRoomsPrimaryExternalLinkThirdParty")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -6761,11 +5511,17 @@ func (a *RoomsAPIService) HasTagLinksExecute(r ApiHasTagLinksRequest) (*BooleanW
 type ApiPinRoomRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 }
 
 func (r ApiPinRoomRequest) Execute() (*FolderWrapper, *http.Response, error) {
 	return r.ApiService.PinRoomExecute(r)
+}
+
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiPinRoomRequest) ExecuteThirdParty() (*ThirdPartyFolderWrapper, *http.Response, error) {
+	return r.ApiService.PinRoomExecuteThirdParty(r)
 }
 
 // PinRoom Pin a room
@@ -6777,7 +5533,7 @@ func (r ApiPinRoomRequest) Execute() (*FolderWrapper, *http.Response, error) {
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
 // @return ApiPinRoomRequest
-func (a *RoomsAPIService) PinRoom(ctx context.Context, id int32) ApiPinRoomRequest {
+func (a *RoomsAPIService) PinRoom(ctx context.Context, id interface{}) ApiPinRoomRequest {
 	return ApiPinRoomRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -6919,36 +5675,9 @@ func (a *RoomsAPIService) PinRoomExecute(r ApiPinRoomRequest) (*FolderWrapper, *
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPinRoomThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-}
-
-func (r ApiPinRoomThirdPartyRequest) Execute() (*ThirdPartyFolderWrapper, *http.Response, error) {
-	return r.ApiService.PinRoomThirdPartyExecute(r)
-}
-
-// PinRoomThirdParty Pin a room (third-party storage)
-//
-// Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-// @return ApiPinRoomThirdPartyRequest
-func (a *RoomsAPIService) PinRoomThirdParty(ctx context.Context, id string) ApiPinRoomThirdPartyRequest {
-	return ApiPinRoomThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyFolderWrapper
-func (a *RoomsAPIService) PinRoomThirdPartyExecute(r ApiPinRoomThirdPartyRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
+func (a *RoomsAPIService) PinRoomExecuteThirdParty(r ApiPinRoomRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -6956,7 +5685,7 @@ func (a *RoomsAPIService) PinRoomThirdPartyExecute(r ApiPinRoomThirdPartyRequest
 		localVarReturnValue  *ThirdPartyFolderWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.PinRoomThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.PinRoom")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -6984,20 +5713,6 @@ func (a *RoomsAPIService) PinRoomThirdPartyExecute(r ApiPinRoomThirdPartyRequest
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -7083,11 +5798,17 @@ func (a *RoomsAPIService) PinRoomThirdPartyExecute(r ApiPinRoomThirdPartyRequest
 type ApiReorderRoomRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 }
 
 func (r ApiReorderRoomRequest) Execute() (*FolderWrapper, *http.Response, error) {
 	return r.ApiService.ReorderRoomExecute(r)
+}
+
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiReorderRoomRequest) ExecuteThirdParty() (*ThirdPartyFolderWrapper, *http.Response, error) {
+	return r.ApiService.ReorderRoomExecuteThirdParty(r)
 }
 
 // ReorderRoom Reorder room contents
@@ -7099,7 +5820,7 @@ func (r ApiReorderRoomRequest) Execute() (*FolderWrapper, *http.Response, error)
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
 // @return ApiReorderRoomRequest
-func (a *RoomsAPIService) ReorderRoom(ctx context.Context, id int32) ApiReorderRoomRequest {
+func (a *RoomsAPIService) ReorderRoom(ctx context.Context, id interface{}) ApiReorderRoomRequest {
 	return ApiReorderRoomRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -7241,36 +5962,9 @@ func (a *RoomsAPIService) ReorderRoomExecute(r ApiReorderRoomRequest) (*FolderWr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiReorderRoomThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-}
-
-func (r ApiReorderRoomThirdPartyRequest) Execute() (*ThirdPartyFolderWrapper, *http.Response, error) {
-	return r.ApiService.ReorderRoomThirdPartyExecute(r)
-}
-
-// ReorderRoomThirdParty Reorder room contents (third-party storage)
-//
-// Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-// @return ApiReorderRoomThirdPartyRequest
-func (a *RoomsAPIService) ReorderRoomThirdParty(ctx context.Context, id string) ApiReorderRoomThirdPartyRequest {
-	return ApiReorderRoomThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyFolderWrapper
-func (a *RoomsAPIService) ReorderRoomThirdPartyExecute(r ApiReorderRoomThirdPartyRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
+func (a *RoomsAPIService) ReorderRoomExecuteThirdParty(r ApiReorderRoomRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -7278,7 +5972,7 @@ func (a *RoomsAPIService) ReorderRoomThirdPartyExecute(r ApiReorderRoomThirdPart
 		localVarReturnValue  *ThirdPartyFolderWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.ReorderRoomThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.ReorderRoom")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -7306,20 +6000,6 @@ func (a *RoomsAPIService) ReorderRoomThirdPartyExecute(r ApiReorderRoomThirdPart
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -7405,7 +6085,7 @@ func (a *RoomsAPIService) ReorderRoomThirdPartyExecute(r ApiReorderRoomThirdPart
 type ApiResendEmailInvitationsRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	userInvitation *UserInvitation
 }
 
@@ -7427,7 +6107,7 @@ func (r ApiResendEmailInvitationsRequest) Execute() (*http.Response, error) {
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiResendEmailInvitationsRequest
-func (a *RoomsAPIService) ResendEmailInvitations(ctx context.Context, id int32) ApiResendEmailInvitationsRequest {
+func (a *RoomsAPIService) ResendEmailInvitations(ctx context.Context, id interface{}) ApiResendEmailInvitationsRequest {
 	return ApiResendEmailInvitationsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -7444,167 +6124,6 @@ func (a *RoomsAPIService) ResendEmailInvitationsExecute(r ApiResendEmailInvitati
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.ResendEmailInvitations")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/rooms/{id}/resend"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.userInvitation == nil {
-		return nil, reportError("userInvitation is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.userInvitation
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiResendEmailInvitationsThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	userInvitation *UserInvitation
-}
-
-// Which pending invitations to send again.
-func (r ApiResendEmailInvitationsThirdPartyRequest) UserInvitation(userInvitation UserInvitation) ApiResendEmailInvitationsThirdPartyRequest {	r.userInvitation = &userInvitation
-	return r
-}
-
-func (r ApiResendEmailInvitationsThirdPartyRequest) Execute() (*http.Response, error) {
-	return r.ApiService.ResendEmailInvitationsThirdPartyExecute(r)
-}
-
-// ResendEmailInvitationsThirdParty Resend the room invitations (third-party storage)
-//
-// Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiResendEmailInvitationsThirdPartyRequest
-func (a *RoomsAPIService) ResendEmailInvitationsThirdParty(ctx context.Context, id string) ApiResendEmailInvitationsThirdPartyRequest {
-	return ApiResendEmailInvitationsThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-func (a *RoomsAPIService) ResendEmailInvitationsThirdPartyExecute(r ApiResendEmailInvitationsThirdPartyRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.ResendEmailInvitationsThirdParty")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -7880,7 +6399,7 @@ func (a *RoomsAPIService) SetPublicSettingsExecute(r ApiSetPublicSettingsRequest
 type ApiSetRoomLinkRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	roomLinkRequest *RoomLinkRequest
 }
 
@@ -7902,7 +6421,7 @@ func (r ApiSetRoomLinkRequest) Execute() (*FileShareWrapper, *http.Response, err
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiSetRoomLinkRequest
-func (a *RoomsAPIService) SetRoomLink(ctx context.Context, id int32) ApiSetRoomLinkRequest {
+func (a *RoomsAPIService) SetRoomLink(ctx context.Context, id interface{}) ApiSetRoomLinkRequest {
 	return ApiSetRoomLinkRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -8049,182 +6568,10 @@ func (a *RoomsAPIService) SetRoomLinkExecute(r ApiSetRoomLinkRequest) (*FileShar
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetRoomLinkThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	roomLinkRequest *RoomLinkRequest
-}
-
-// The link to create, change or revoke.
-func (r ApiSetRoomLinkThirdPartyRequest) RoomLinkRequest(roomLinkRequest RoomLinkRequest) ApiSetRoomLinkThirdPartyRequest {	r.roomLinkRequest = &roomLinkRequest
-	return r
-}
-
-func (r ApiSetRoomLinkThirdPartyRequest) Execute() (*FileShareWrapper, *http.Response, error) {
-	return r.ApiService.SetRoomLinkThirdPartyExecute(r)
-}
-
-// SetRoomLinkThirdParty Set the room external or invitation link (third-party storage)
-//
-// Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiSetRoomLinkThirdPartyRequest
-func (a *RoomsAPIService) SetRoomLinkThirdParty(ctx context.Context, id string) ApiSetRoomLinkThirdPartyRequest {
-	return ApiSetRoomLinkThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return FileShareWrapper
-func (a *RoomsAPIService) SetRoomLinkThirdPartyExecute(r ApiSetRoomLinkThirdPartyRequest) (*FileShareWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FileShareWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.SetRoomLinkThirdParty")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/rooms/{id}/links"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.roomLinkRequest == nil {
-		return localVarReturnValue, nil, reportError("roomLinkRequest is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.roomLinkRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiSetRoomSecurityRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	roomInvitationRequest *RoomInvitationRequest
 }
 
@@ -8246,7 +6593,7 @@ func (r ApiSetRoomSecurityRequest) Execute() (*RoomSecurityWrapper, *http.Respon
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiSetRoomSecurityRequest
-func (a *RoomsAPIService) SetRoomSecurity(ctx context.Context, id int32) ApiSetRoomSecurityRequest {
+func (a *RoomsAPIService) SetRoomSecurity(ctx context.Context, id interface{}) ApiSetRoomSecurityRequest {
 	return ApiSetRoomSecurityRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -8265,167 +6612,6 @@ func (a *RoomsAPIService) SetRoomSecurityExecute(r ApiSetRoomSecurityRequest) (*
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.SetRoomSecurity")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/rooms/{id}/share"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.roomInvitationRequest == nil {
-		return localVarReturnValue, nil, reportError("roomInvitationRequest is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.roomInvitationRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiSetRoomSecurityThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	roomInvitationRequest *RoomInvitationRequest
-}
-
-// The membership changes to apply, together with how the people concerned are notified.
-func (r ApiSetRoomSecurityThirdPartyRequest) RoomInvitationRequest(roomInvitationRequest RoomInvitationRequest) ApiSetRoomSecurityThirdPartyRequest {	r.roomInvitationRequest = &roomInvitationRequest
-	return r
-}
-
-func (r ApiSetRoomSecurityThirdPartyRequest) Execute() (*RoomSecurityWrapper, *http.Response, error) {
-	return r.ApiService.SetRoomSecurityThirdPartyExecute(r)
-}
-
-// SetRoomSecurityThirdParty Set the room access rights (third-party storage)
-//
-// Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiSetRoomSecurityThirdPartyRequest
-func (a *RoomsAPIService) SetRoomSecurityThirdParty(ctx context.Context, id string) ApiSetRoomSecurityThirdPartyRequest {
-	return ApiSetRoomSecurityThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return RoomSecurityWrapper
-func (a *RoomsAPIService) SetRoomSecurityThirdPartyExecute(r ApiSetRoomSecurityThirdPartyRequest) (*RoomSecurityWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RoomSecurityWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.SetRoomSecurityThirdParty")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -8992,7 +7178,7 @@ func (a *RoomsAPIService) TerminateRoomIndexExportExecute(r ApiTerminateRoomInde
 type ApiUnarchiveRoomRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	archiveRoomRequest *ArchiveRoomRequest
 }
 
@@ -9014,7 +7200,7 @@ func (r ApiUnarchiveRoomRequest) Execute() (*FileOperationWrapper, *http.Respons
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiUnarchiveRoomRequest
-func (a *RoomsAPIService) UnarchiveRoom(ctx context.Context, id int32) ApiUnarchiveRoomRequest {
+func (a *RoomsAPIService) UnarchiveRoom(ctx context.Context, id interface{}) ApiUnarchiveRoomRequest {
 	return ApiUnarchiveRoomRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -9158,183 +7344,20 @@ func (a *RoomsAPIService) UnarchiveRoomExecute(r ApiUnarchiveRoomRequest) (*File
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUnarchiveRoomThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	archiveRoomRequest *ArchiveRoomRequest
-}
-
-// The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-func (r ApiUnarchiveRoomThirdPartyRequest) ArchiveRoomRequest(archiveRoomRequest ArchiveRoomRequest) ApiUnarchiveRoomThirdPartyRequest {	r.archiveRoomRequest = &archiveRoomRequest
-	return r
-}
-
-func (r ApiUnarchiveRoomThirdPartyRequest) Execute() (*FileOperationWrapper, *http.Response, error) {
-	return r.ApiService.UnarchiveRoomThirdPartyExecute(r)
-}
-
-// UnarchiveRoomThirdParty Unarchive a room (third-party storage)
-//
-// Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiUnarchiveRoomThirdPartyRequest
-func (a *RoomsAPIService) UnarchiveRoomThirdParty(ctx context.Context, id string) ApiUnarchiveRoomThirdPartyRequest {
-	return ApiUnarchiveRoomThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return FileOperationWrapper
-func (a *RoomsAPIService) UnarchiveRoomThirdPartyExecute(r ApiUnarchiveRoomThirdPartyRequest) (*FileOperationWrapper, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FileOperationWrapper
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.UnarchiveRoomThirdParty")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/2.0/files/rooms/{id}/unarchive"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.archiveRoomRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiUnpinRoomRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 }
 
 func (r ApiUnpinRoomRequest) Execute() (*FolderWrapper, *http.Response, error) {
 	return r.ApiService.UnpinRoomExecute(r)
+}
+
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiUnpinRoomRequest) ExecuteThirdParty() (*ThirdPartyFolderWrapper, *http.Response, error) {
+	return r.ApiService.UnpinRoomExecuteThirdParty(r)
 }
 
 // UnpinRoom Unpin a room
@@ -9346,7 +7369,7 @@ func (r ApiUnpinRoomRequest) Execute() (*FolderWrapper, *http.Response, error) {
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
 // @return ApiUnpinRoomRequest
-func (a *RoomsAPIService) UnpinRoom(ctx context.Context, id int32) ApiUnpinRoomRequest {
+func (a *RoomsAPIService) UnpinRoom(ctx context.Context, id interface{}) ApiUnpinRoomRequest {
 	return ApiUnpinRoomRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -9488,36 +7511,9 @@ func (a *RoomsAPIService) UnpinRoomExecute(r ApiUnpinRoomRequest) (*FolderWrappe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUnpinRoomThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-}
-
-func (r ApiUnpinRoomThirdPartyRequest) Execute() (*ThirdPartyFolderWrapper, *http.Response, error) {
-	return r.ApiService.UnpinRoomThirdPartyExecute(r)
-}
-
-// UnpinRoomThirdParty Unpin a room (third-party storage)
-//
-// Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-// @return ApiUnpinRoomThirdPartyRequest
-func (a *RoomsAPIService) UnpinRoomThirdParty(ctx context.Context, id string) ApiUnpinRoomThirdPartyRequest {
-	return ApiUnpinRoomThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyFolderWrapper
-func (a *RoomsAPIService) UnpinRoomThirdPartyExecute(r ApiUnpinRoomThirdPartyRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
+func (a *RoomsAPIService) UnpinRoomExecuteThirdParty(r ApiUnpinRoomRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -9525,7 +7521,7 @@ func (a *RoomsAPIService) UnpinRoomThirdPartyExecute(r ApiUnpinRoomThirdPartyReq
 		localVarReturnValue  *ThirdPartyFolderWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.UnpinRoomThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.UnpinRoom")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -9553,20 +7549,6 @@ func (a *RoomsAPIService) UnpinRoomThirdPartyExecute(r ApiUnpinRoomThirdPartyReq
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -9652,7 +7634,7 @@ func (a *RoomsAPIService) UnpinRoomThirdPartyExecute(r ApiUnpinRoomThirdPartyReq
 type ApiUpdateRoomRequest struct {
 	ctx context.Context
 	ApiService *RoomsAPIService
-	id int32
+	id interface{}
 	updateRoomRequest *UpdateRoomRequest
 }
 
@@ -9665,6 +7647,12 @@ func (r ApiUpdateRoomRequest) Execute() (*FolderWrapper, *http.Response, error) 
 	return r.ApiService.UpdateRoomExecute(r)
 }
 
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiUpdateRoomRequest) ExecuteThirdParty() (*ThirdPartyFolderWrapper, *http.Response, error) {
+	return r.ApiService.UpdateRoomExecuteThirdParty(r)
+}
+
 // UpdateRoom Update a room
 //
 // Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
@@ -9674,7 +7662,7 @@ func (r ApiUpdateRoomRequest) Execute() (*FolderWrapper, *http.Response, error) 
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 // @param id The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
 // @return ApiUpdateRoomRequest
-func (a *RoomsAPIService) UpdateRoom(ctx context.Context, id int32) ApiUpdateRoomRequest {
+func (a *RoomsAPIService) UpdateRoom(ctx context.Context, id interface{}) ApiUpdateRoomRequest {
 	return ApiUpdateRoomRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -9821,42 +7809,9 @@ func (a *RoomsAPIService) UpdateRoomExecute(r ApiUpdateRoomRequest) (*FolderWrap
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateRoomThirdPartyRequest struct {
-	ctx context.Context
-	ApiService *RoomsAPIService
-	id string
-	updateRoomRequest *UpdateRoomRequest
-}
-
-// The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
-func (r ApiUpdateRoomThirdPartyRequest) UpdateRoomRequest(updateRoomRequest UpdateRoomRequest) ApiUpdateRoomThirdPartyRequest {	r.updateRoomRequest = &updateRoomRequest
-	return r
-}
-
-func (r ApiUpdateRoomThirdPartyRequest) Execute() (*ThirdPartyFolderWrapper, *http.Response, error) {
-	return r.ApiService.UpdateRoomThirdPartyExecute(r)
-}
-
-// UpdateRoomThirdParty Update a room (third-party storage)
-//
-// Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
-//
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-third-party/
-//
-// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-// @return ApiUpdateRoomThirdPartyRequest
-func (a *RoomsAPIService) UpdateRoomThirdParty(ctx context.Context, id string) ApiUpdateRoomThirdPartyRequest {
-	return ApiUpdateRoomThirdPartyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
 // Execute executes the request
 //  @return ThirdPartyFolderWrapper
-func (a *RoomsAPIService) UpdateRoomThirdPartyExecute(r ApiUpdateRoomThirdPartyRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
+func (a *RoomsAPIService) UpdateRoomExecuteThirdParty(r ApiUpdateRoomRequest) (*ThirdPartyFolderWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -9864,7 +7819,7 @@ func (a *RoomsAPIService) UpdateRoomThirdPartyExecute(r ApiUpdateRoomThirdPartyR
 		localVarReturnValue  *ThirdPartyFolderWrapper
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.UpdateRoomThirdParty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoomsAPIService.UpdateRoom")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -9898,20 +7853,6 @@ func (a *RoomsAPIService) UpdateRoomThirdPartyExecute(r ApiUpdateRoomThirdPartyR
 	}
 	// body params
 	localVarPostBody = r.updateRoomRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyBearer"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["ApiKeyBearer"] = key
-			}
-		}
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

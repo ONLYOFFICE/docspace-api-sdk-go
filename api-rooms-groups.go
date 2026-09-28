@@ -693,10 +693,16 @@ type ApiGetRoomGroupsRequest struct {
 	ctx context.Context
 	ApiService *RoomsGroupsAPIService
 	includeMembers *bool
+	searchArea *SearchArea
 }
 
 // Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
 func (r ApiGetRoomGroupsRequest) IncludeMembers(includeMembers bool) ApiGetRoomGroupsRequest {	r.includeMembers = &includeMembers
+	return r
+}
+
+// The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
+func (r ApiGetRoomGroupsRequest) SearchArea(searchArea SearchArea) ApiGetRoomGroupsRequest {	r.searchArea = &searchArea
 	return r
 }
 
@@ -742,6 +748,9 @@ func (a *RoomsGroupsAPIService) GetRoomGroupsExecute(r ApiGetRoomGroupsRequest) 
 
 	if r.includeMembers != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "includeMembers", r.includeMembers, "form", "")
+	}
+	if r.searchArea != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "searchArea", r.searchArea, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

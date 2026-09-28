@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudIpFilterConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudIpFilterConfig{}
 
-// DocsCloudIpFilterConfig Represents the IP filter configuration of a DocsCloud tenant.
+// DocsCloudIpFilterConfig Represents the IP filter configuration of a Docs Connect tenant.
 type DocsCloudIpFilterConfig struct {
 	// The IP filter rules.
 	Rules []DocsCloudIpFilterRule `json:"rules,omitempty"`

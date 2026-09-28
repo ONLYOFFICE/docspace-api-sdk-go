@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ## GetRoomGroups
 
-> RoomGroupArrayWrapper GetRoomGroups(ctx).IncludeMembers(includeMembers).Execute()
+> RoomGroupArrayWrapper GetRoomGroups(ctx).IncludeMembers(includeMembers).SearchArea(searchArea).Execute()
 
 List room groups
 
@@ -325,10 +325,11 @@ import (
 
 func main() {
 	includeMembers := true // bool | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. (optional)
+	searchArea := openapiclient.SearchArea("Active") // SearchArea | The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsGroupsAPI.GetRoomGroups(context.Background()).IncludeMembers(includeMembers).Execute()
+	resp, r, err := apiClient.RoomsGroupsAPI.GetRoomGroups(context.Background()).IncludeMembers(includeMembers).SearchArea(searchArea).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsGroupsAPI.GetRoomGroups``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -350,6 +351,7 @@ Other parameters are passed through a pointer to a apiGetRoomGroupsRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **includeMembers** | **bool** | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. | 
+ **searchArea** | [**SearchArea**](SearchArea.md) | The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted. | 
 
 ### Return type
 

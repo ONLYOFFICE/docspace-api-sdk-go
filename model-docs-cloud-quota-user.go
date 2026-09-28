@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudQuotaUser type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudQuotaUser{}
 
-// DocsCloudQuotaUser Represents a single user entry of a DocsCloud quota.
+// DocsCloudQuotaUser Represents a single user entry of a Docs Connect quota.
 type DocsCloudQuotaUser struct {
 	// The user ID.
 	UserId NullableString `json:"userId,omitempty"`

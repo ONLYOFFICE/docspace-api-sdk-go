@@ -404,6 +404,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get many</td>
       </tr>
       <tr>
+        <td><a href="docs/AIAttachmentsAPI.md#aiattachmentsgetsuggestedquestions"><strong>AiAttachmentsGetSuggestedQuestions</strong></a></td>
+        <td><strong>Post</strong> /api/2.0/ai/attachments/suggested-questions</td>
+        <td>Get suggested questions</td>
+      </tr>
+      <tr>
         <td><a href="docs/AIAttachmentsAPI.md#aiattachmentslinktomessage"><strong>AiAttachmentsLinkToMessage</strong></a></td>
         <td><strong>Post</strong> /api/2.0/ai/attachments/link-to-message</td>
         <td>Link to message</td>
@@ -437,7 +442,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/AIExportAPI.md#aiexporttexttodocx"><strong>AiExportTextToDocx</strong></a></td>
         <td><strong>Post</strong> /api/2.0/ai/text-to-docx</td>
-        <td>Start markdown → docx export</td>
+        <td>Start markdown export</td>
       </tr>
       <tr>
         <td colspan="3" style="text-align: center;"><strong>OpenAIPassthroughAPI</strong></td>
@@ -1089,11 +1094,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Add a file to Recent</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#addfiletorecentthirdparty"><strong>AddFileToRecentThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/file/{fileId}/recent</td>
-        <td>Add a file to Recent (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#addtemplates"><strong>AddTemplates</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/templates</td>
         <td>Add template files</td>
@@ -1104,19 +1104,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Change version history</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#changeversionhistorythirdparty"><strong>ChangeVersionHistoryThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/file/{fileId}/history</td>
-        <td>Change version history (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#checkfillformdraft"><strong>CheckFillFormDraft</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/masterform/{fileId}/checkfillformdraft</td>
         <td>Open a form draft for filling</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#checkfillformdraftthirdparty"><strong>CheckFillFormDraftThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/masterform/{fileId}/checkfillformdraft</td>
-        <td>Open a form draft for filling (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#copyfileas"><strong>CopyFileAs</strong></a></td>
@@ -1124,29 +1114,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Copy a file</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#copyfileasthirdparty"><strong>CopyFileAsThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/file/{fileId}/copyas</td>
-        <td>Copy a file (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#createeditsession"><strong>CreateEditSession</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/file/{fileId}/edit_session</td>
         <td>Create the editing session</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#createeditsessionthirdparty"><strong>CreateEditSessionThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/file/{fileId}/edit_session</td>
-        <td>Create the editing session (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#createfile"><strong>CreateFile</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/{folderId}/file</td>
         <td>Create a file</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#createfilethirdparty"><strong>CreateFileThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/{folderId}/file</td>
-        <td>Create a file (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#createfileinmydocuments"><strong>CreateFileInMyDocuments</strong></a></td>
@@ -1159,19 +1134,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Create the file primary external link</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#createfileprimaryexternallinkthirdparty"><strong>CreateFilePrimaryExternalLinkThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/file/{id}/link</td>
-        <td>Create the file primary external link (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#createhtmlfile"><strong>CreateHtmlFile</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/{folderId}/html</td>
         <td>Create an HTML file</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#createhtmlfilethirdparty"><strong>CreateHtmlFileThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/{folderId}/html</td>
-        <td>Create an HTML file (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#createhtmlfileinmydocuments"><strong>CreateHtmlFileInMyDocuments</strong></a></td>
@@ -1182,11 +1147,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFilesAPI.md#createtextfile"><strong>CreateTextFile</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/{folderId}/text</td>
         <td>Create a text file</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#createtextfilethirdparty"><strong>CreateTextFileThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/{folderId}/text</td>
-        <td>Create a text file (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#createtextfileinmydocuments"><strong>CreateTextFileInMyDocuments</strong></a></td>
@@ -1202,11 +1162,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFilesAPI.md#deletefile"><strong>DeleteFile</strong></a></td>
         <td><strong>Delete</strong> /api/2.0/files/file/{fileId}</td>
         <td>Delete a file</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#deletefilethirdparty"><strong>DeleteFileThirdParty</strong></a></td>
-        <td><strong>Delete</strong> /api/2.0/files/file/{fileId}</td>
-        <td>Delete a file (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#deleterecent"><strong>DeleteRecent</strong></a></td>
@@ -1229,19 +1184,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get form roles</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#getallformrolesthirdparty"><strong>GetAllFormRolesThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/formroles</td>
-        <td>Get form roles (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#geteditdiffurl"><strong>GetEditDiffUrl</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/file/{fileId}/edit/diff</td>
         <td>Get changes URL</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#geteditdiffurlthirdparty"><strong>GetEditDiffUrlThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/edit/diff</td>
-        <td>Get changes URL (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#getedithistory"><strong>GetEditHistory</strong></a></td>
@@ -1249,19 +1194,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get version history</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#getedithistorythirdparty"><strong>GetEditHistoryThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/edit/history</td>
-        <td>Get version history (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#getencryptioninfo"><strong>GetEncryptionInfo</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/{fileId}/access</td>
         <td>Get file encryption information</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#getencryptioninfothirdparty"><strong>GetEncryptionInfoThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/{fileId}/access</td>
-        <td>Get file encryption information (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#getfilehistory"><strong>GetFileHistory</strong></a></td>
@@ -1274,19 +1209,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get file information</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#getfileinfothirdparty"><strong>GetFileInfoThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}</td>
-        <td>Get file information (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#getfilelinks"><strong>GetFileLinks</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/file/{id}/links</td>
         <td>Get file external links</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#getfilelinksthirdparty"><strong>GetFileLinksThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{id}/links</td>
-        <td>Get file external links (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#getfileprimaryexternallink"><strong>GetFilePrimaryExternalLink</strong></a></td>
@@ -1294,19 +1219,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get the file primary external link</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#getfileprimaryexternallinkthirdparty"><strong>GetFilePrimaryExternalLinkThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{id}/link</td>
-        <td>Get the file primary external link (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#getfileversioninfo"><strong>GetFileVersionInfo</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/file/{fileId}/history</td>
         <td>Get file versions</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#getfileversioninfothirdparty"><strong>GetFileVersionInfoThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/history</td>
-        <td>Get file versions (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#getfillresult"><strong>GetFillResult</strong></a></td>
@@ -1324,29 +1239,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get a signed download address</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#getpresignedfileurithirdparty"><strong>GetPresignedFileUriThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/presigned</td>
-        <td>Get a signed download address (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#getpresigneduri"><strong>GetPresignedUri</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/file/{fileId}/presigneduri</td>
         <td>Get file download link</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#getpresignedurithirdparty"><strong>GetPresignedUriThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/presigneduri</td>
-        <td>Get file download link (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#getprotectedfileusers"><strong>GetProtectedFileUsers</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/file/{fileId}/protectusers</td>
         <td>Get users for document protection</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#getprotectedfileusersthirdparty"><strong>GetProtectedFileUsersThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/protectusers</td>
-        <td>Get users for document protection (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#getreferencedata"><strong>GetReferenceData</strong></a></td>
@@ -1364,19 +1264,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Check the PDF file</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#isformpdfthirdparty"><strong>IsFormPDFThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/isformpdf</td>
-        <td>Check the PDF file (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#lockfile"><strong>LockFile</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/file/{fileId}/lock</td>
         <td>Lock a file</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#lockfilethirdparty"><strong>LockFileThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/file/{fileId}/lock</td>
-        <td>Lock a file (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#manageformfilling"><strong>ManageFormFilling</strong></a></td>
@@ -1389,19 +1279,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get the editor configuration</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#openeditfilethirdparty"><strong>OpenEditFileThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/openedit</td>
-        <td>Get the editor configuration (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#restorefileversion"><strong>RestoreFileVersion</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/file/{fileId}/restoreversion</td>
         <td>Restore a file version</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#restorefileversionthirdparty"><strong>RestoreFileVersionThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/file/{fileId}/restoreversion</td>
-        <td>Restore a file version (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#saveeditingfilefromform"><strong>SaveEditingFileFromForm</strong></a></td>
@@ -1409,19 +1289,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Save edited file content</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#saveeditingfilefromformthirdparty"><strong>SaveEditingFileFromFormThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/file/{fileId}/saveediting</td>
-        <td>Save edited file content (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#savefileaspdf"><strong>SaveFileAsPdf</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/file/{id}/saveaspdf</td>
         <td>Save a file as PDF</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#savefileaspdfthirdparty"><strong>SaveFileAsPdfThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/file/{id}/saveaspdf</td>
-        <td>Save a file as PDF (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#saveformrolemapping"><strong>SaveFormRoleMapping</strong></a></td>
@@ -1434,19 +1304,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Set the Custom Filter editing mode</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#setcustomfiltertagthirdparty"><strong>SetCustomFilterTagThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/file/{fileId}/customfilter</td>
-        <td>Set the Custom Filter editing mode (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#setencryptioninfo"><strong>SetEncryptionInfo</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/{fileId}/access</td>
         <td>Set file encryption information</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#setencryptioninfothirdparty"><strong>SetEncryptionInfoThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/{fileId}/access</td>
-        <td>Set file encryption information (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#setfileexternallink"><strong>SetFileExternalLink</strong></a></td>
@@ -1454,19 +1314,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Set a file external link</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#setfileexternallinkthirdparty"><strong>SetFileExternalLinkThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/file/{id}/links</td>
-        <td>Set a file external link (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#setfileorder"><strong>SetFileOrder</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/{fileId}/order</td>
         <td>Set file order</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#setfileorderthirdparty"><strong>SetFileOrderThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/{fileId}/order</td>
-        <td>Set file order (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#setfilesorder"><strong>SetFilesOrder</strong></a></td>
@@ -1479,19 +1329,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Open an editing session</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#starteditfilethirdparty"><strong>StartEditFileThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/file/{fileId}/startedit</td>
-        <td>Open an editing session (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#startfillingfile"><strong>StartFillingFile</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/file/{fileId}/startfilling</td>
         <td>Start filling a form</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#startfillingfilethirdparty"><strong>StartFillingFileThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/file/{fileId}/startfilling</td>
-        <td>Start filling a form (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesAPI.md#togglefilefavorite"><strong>ToggleFileFavorite</strong></a></td>
@@ -1499,29 +1339,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Set the file favorite status</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#togglefilefavoritethirdparty"><strong>ToggleFileFavoriteThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/favorites/{fileId}</td>
-        <td>Set the file favorite status (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#trackeditfile"><strong>TrackEditFile</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/file/{fileId}/trackeditfile</td>
         <td>Track an editing session</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesAPI.md#trackeditfilethirdparty"><strong>TrackEditFileThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/trackeditfile</td>
-        <td>Track an editing session (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFilesAPI.md#updatefile"><strong>UpdateFile</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/file/{fileId}</td>
         <td>Update a file</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesAPI.md#updatefilethirdparty"><strong>UpdateFileThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/file/{fileId}</td>
-        <td>Update a file (third-party storage)</td>
       </tr>
       <tr>
         <td colspan="3" style="text-align: center;"><strong>FoldersAPI</strong></td>
@@ -1532,29 +1357,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Check for upload conflicts</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersAPI.md#checkuploadthirdparty"><strong>CheckUploadThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/{folderId}/upload/check</td>
-        <td>Check for upload conflicts (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersAPI.md#createfolder"><strong>CreateFolder</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/folder/{folderId}</td>
         <td>Create a folder</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersAPI.md#createfolderthirdparty"><strong>CreateFolderThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/folder/{folderId}</td>
-        <td>Create a folder (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersAPI.md#createfolderprimaryexternallink"><strong>CreateFolderPrimaryExternalLink</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/folder/{id}/link</td>
         <td>Create the folder primary external link</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFoldersAPI.md#createfolderprimaryexternallinkthirdparty"><strong>CreateFolderPrimaryExternalLinkThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/folder/{id}/link</td>
-        <td>Create the folder primary external link (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersAPI.md#createreportfolderhistory"><strong>CreateReportFolderHistory</strong></a></td>
@@ -1565,11 +1375,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFoldersAPI.md#deletefolder"><strong>DeleteFolder</strong></a></td>
         <td><strong>Delete</strong> /api/2.0/files/folder/{folderId}</td>
         <td>Delete a folder</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFoldersAPI.md#deletefolderthirdparty"><strong>DeleteFolderThirdParty</strong></a></td>
-        <td><strong>Delete</strong> /api/2.0/files/folder/{folderId}</td>
-        <td>Delete a folder (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersAPI.md#generatexlsxbyfolder"><strong>GenerateXlsxByFolder</strong></a></td>
@@ -1597,11 +1402,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get a folder by ID</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersAPI.md#getfolderbyfolderidthirdparty"><strong>GetFolderByFolderIdThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/{folderId}</td>
-        <td>Get a folder by ID (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersAPI.md#getfolderhistory"><strong>GetFolderHistory</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/folder/{folderId}/log</td>
         <td>Get folder history</td>
@@ -1612,19 +1412,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get folder information</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersAPI.md#getfolderinfothirdparty"><strong>GetFolderInfoThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/folder/{folderId}</td>
-        <td>Get folder information (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersAPI.md#getfolderlinks"><strong>GetFolderLinks</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/folder/{id}/links</td>
         <td>Get folder external links</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFoldersAPI.md#getfolderlinksthirdparty"><strong>GetFolderLinksThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/folder/{id}/links</td>
-        <td>Get folder external links (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersAPI.md#getfolderpath"><strong>GetFolderPath</strong></a></td>
@@ -1632,29 +1422,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get the folder path</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersAPI.md#getfolderpaththirdparty"><strong>GetFolderPathThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/folder/{folderId}/path</td>
-        <td>Get the folder path (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersAPI.md#getfolderprimaryexternallink"><strong>GetFolderPrimaryExternalLink</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/folder/{id}/link</td>
         <td>Get the folder primary external link</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersAPI.md#getfolderprimaryexternallinkthirdparty"><strong>GetFolderPrimaryExternalLinkThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/folder/{id}/link</td>
-        <td>Get the folder primary external link (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersAPI.md#getfolders"><strong>GetFolders</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/{folderId}/subfolders</td>
         <td>Get subfolders</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFoldersAPI.md#getfoldersthirdparty"><strong>GetFoldersThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/{folderId}/subfolders</td>
-        <td>Get subfolders (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersAPI.md#getformsfolder"><strong>GetFormsFolder</strong></a></td>
@@ -1670,11 +1445,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFoldersAPI.md#getnewfolderitems"><strong>GetNewFolderItems</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/{folderId}/news</td>
         <td>Get new folder items</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFoldersAPI.md#getnewfolderitemsthirdparty"><strong>GetNewFolderItemsThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/{folderId}/news</td>
-        <td>Get new folder items (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersAPI.md#getrecentfolder"><strong>GetRecentFolder</strong></a></td>
@@ -1702,11 +1472,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Insert a file</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersAPI.md#insertfilethirdparty"><strong>InsertFileThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/{folderId}/insert</td>
-        <td>Insert a file (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersAPI.md#insertfiletomyfrombody"><strong>InsertFileToMyFromBody</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/@my/insert</td>
         <td>Insert a file into My documents</td>
@@ -1717,29 +1482,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Rename a folder</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersAPI.md#renamefolderthirdparty"><strong>RenameFolderThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/folder/{folderId}</td>
-        <td>Rename a folder (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersAPI.md#setfolderorder"><strong>SetFolderOrder</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/folder/{folderId}/order</td>
         <td>Set folder order</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersAPI.md#setfolderorderthirdparty"><strong>SetFolderOrderThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/folder/{folderId}/order</td>
-        <td>Set folder order (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersAPI.md#setfolderprimaryexternallink"><strong>SetFolderPrimaryExternalLink</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/folder/{id}/links</td>
         <td>Set the folder external link</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFoldersAPI.md#setfolderprimaryexternallinkthirdparty"><strong>SetFolderPrimaryExternalLinkThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/folder/{id}/links</td>
-        <td>Set the folder external link (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersAPI.md#terminatereportfolderhistory"><strong>TerminateReportFolderHistory</strong></a></td>
@@ -1750,11 +1500,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFoldersAPI.md#uploadfile"><strong>UploadFile</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/{folderId}/upload</td>
         <td>Upload a file</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFoldersAPI.md#uploadfilethirdparty"><strong>UploadFileThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/{folderId}/upload</td>
-        <td>Upload a file (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersAPI.md#uploadfiletomy"><strong>UploadFileToMy</strong></a></td>
@@ -1770,11 +1515,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Abort an upload session</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesOperationsAPI.md#abortuploadsessionthirdparty"><strong>AbortUploadSessionThirdParty</strong></a></td>
-        <td><strong>Delete</strong> /api/2.0/files/{folderId}/session/{sessionId}</td>
-        <td>Abort an upload session (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesOperationsAPI.md#addfavorites"><strong>AddFavorites</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/favorites</td>
         <td>Add favorite files and folders</td>
@@ -1788,11 +1528,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesOperationsAPI.md#checkconversionstatus"><strong>CheckConversionStatus</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/file/{fileId}/checkconversion</td>
         <td>Get conversion status</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesOperationsAPI.md#checkconversionstatusthirdparty"><strong>CheckConversionStatusThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/checkconversion</td>
-        <td>Get conversion status (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsAPI.md#checkmoveorcopybatchitems"><strong>CheckMoveOrCopyBatchItems</strong></a></td>
@@ -1815,19 +1550,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Chunked upload</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesOperationsAPI.md#createuploadsessionthirdparty"><strong>CreateUploadSessionThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/{folderId}/upload/create_session</td>
-        <td>Chunked upload (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesOperationsAPI.md#createuploadsessioninfolder"><strong>CreateUploadSessionInFolder</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/{folderId}/session</td>
         <td>Create an upload session</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesOperationsAPI.md#createuploadsessioninfolderthirdparty"><strong>CreateUploadSessionInFolderThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/{folderId}/session</td>
-        <td>Create an upload session (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsAPI.md#deletebatchitems"><strong>DeleteBatchItems</strong></a></td>
@@ -1860,11 +1585,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Finalize an upload session</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesOperationsAPI.md#finalizesessionthirdparty"><strong>FinalizeSessionThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/{folderId}/session/{sessionId}/finalize</td>
-        <td>Finalize an upload session (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesOperationsAPI.md#getoperationstatuses"><strong>GetOperationStatuses</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/fileops</td>
         <td>Get active file operations</td>
@@ -1890,11 +1610,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Start file conversion</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesOperationsAPI.md#startfileconversionthirdparty"><strong>StartFileConversionThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/file/{fileId}/checkconversion</td>
-        <td>Start file conversion (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesOperationsAPI.md#terminatetasks"><strong>TerminateTasks</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/fileops/terminate/{id}</td>
         <td>Cancel file operations</td>
@@ -1905,29 +1620,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Update a comment</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesOperationsAPI.md#updatefilecommentthirdparty"><strong>UpdateFileCommentThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/file/{fileId}/comment</td>
-        <td>Update a comment (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesOperationsAPI.md#uploadasyncsession"><strong>UploadAsyncSession</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/{folderId}/session/{sessionId}/upload</td>
         <td>Upload a numbered chunk</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesOperationsAPI.md#uploadasyncsessionthirdparty"><strong>UploadAsyncSessionThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/{folderId}/session/{sessionId}/upload</td>
-        <td>Upload a numbered chunk (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesOperationsAPI.md#uploadsession"><strong>UploadSession</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/{folderId}/session/{sessionId}</td>
         <td>Upload the next chunk</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesOperationsAPI.md#uploadsessionthirdparty"><strong>UploadSessionThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/{folderId}/session/{sessionId}</td>
-        <td>Upload the next chunk (third-party storage)</td>
       </tr>
       <tr>
         <td colspan="3" style="text-align: center;"><strong>QuotaAPI</strong></td>
@@ -2114,11 +1814,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get file encryption keys</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesSharingAPI.md#getencryptionaccessthirdparty"><strong>GetEncryptionAccessThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/publickeys</td>
-        <td>Get file encryption keys (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesSharingAPI.md#getexternalsharedata"><strong>GetExternalShareData</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/share/{key}</td>
         <td>Resolve an external share link</td>
@@ -2129,19 +1824,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get file sharing rights</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesSharingAPI.md#getfilesecurityinfothirdparty"><strong>GetFileSecurityInfoThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{id}/share</td>
-        <td>Get file sharing rights (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesSharingAPI.md#getfoldersecurityinfo"><strong>GetFolderSecurityInfo</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/folder/{id}/share</td>
         <td>Get folder sharing rights</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesSharingAPI.md#getfoldersecurityinfothirdparty"><strong>GetFolderSecurityInfoThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/folder/{id}/share</td>
-        <td>Get folder sharing rights (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSharingAPI.md#getgroupsmemberswithfilesecurity"><strong>GetGroupsMembersWithFileSecurity</strong></a></td>
@@ -2149,19 +1834,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get file access of group members</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesSharingAPI.md#getgroupsmemberswithfilesecuritythirdparty"><strong>GetGroupsMembersWithFileSecurityThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/group/{groupId}/share</td>
-        <td>Get file access of group members (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesSharingAPI.md#getgroupsmemberswithfoldersecurity"><strong>GetGroupsMembersWithFolderSecurity</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/folder/{folderId}/group/{groupId}/share</td>
         <td>Get folder access of group members</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesSharingAPI.md#getgroupsmemberswithfoldersecuritythirdparty"><strong>GetGroupsMembersWithFolderSecurityThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/folder/{folderId}/group/{groupId}/share</td>
-        <td>Get folder access of group members (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSharingAPI.md#getsecurityinfo"><strong>GetSecurityInfo</strong></a></td>
@@ -2174,11 +1849,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get users to mention in a file</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesSharingAPI.md#getsharedusersthirdparty"><strong>GetSharedUsersThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/file/{fileId}/sharedusers</td>
-        <td>Get users to mention in a file (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesSharingAPI.md#removesecurityinfo"><strong>RemoveSecurityInfo</strong></a></td>
         <td><strong>Delete</strong> /api/2.0/files/share</td>
         <td>Remove sharing rights in batch</td>
@@ -2189,29 +1859,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Notify mentioned users</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesSharingAPI.md#sendeditornotifythirdparty"><strong>SendEditorNotifyThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/file/{fileId}/sendeditornotify</td>
-        <td>Notify mentioned users (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesSharingAPI.md#setfilesecurityinfo"><strong>SetFileSecurityInfo</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/file/{id}/share</td>
         <td>Share a file</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesSharingAPI.md#setfilesecurityinfothirdparty"><strong>SetFileSecurityInfoThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/file/{id}/share</td>
-        <td>Share a file (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesSharingAPI.md#setfoldersecurityinfo"><strong>SetFolderSecurityInfo</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/folder/{id}/share</td>
         <td>Share a folder</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesSharingAPI.md#setfoldersecurityinfothirdparty"><strong>SetFolderSecurityInfoThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/folder/{id}/share</td>
-        <td>Share a folder (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSharingAPI.md#setsecurityinfo"><strong>SetSecurityInfo</strong></a></td>
@@ -2342,29 +1997,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Search groups for a file</td>
       </tr>
       <tr>
-        <td><a href="docs/GroupSearchAPI.md#getgroupswithfilessharedthirdparty"><strong>GetGroupsWithFilesSharedThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/group/file/{id}</td>
-        <td>Search groups for a file (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/GroupSearchAPI.md#getgroupswithfoldersshared"><strong>GetGroupsWithFoldersShared</strong></a></td>
         <td><strong>Get</strong> /api/2.0/group/folder/{id}</td>
         <td>Search groups for a folder</td>
       </tr>
       <tr>
-        <td><a href="docs/GroupSearchAPI.md#getgroupswithfolderssharedthirdparty"><strong>GetGroupsWithFoldersSharedThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/group/folder/{id}</td>
-        <td>Search groups for a folder (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/GroupSearchAPI.md#getgroupswithroomsshared"><strong>GetGroupsWithRoomsShared</strong></a></td>
         <td><strong>Get</strong> /api/2.0/group/room/{id}</td>
         <td>Search groups for a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/GroupSearchAPI.md#getgroupswithroomssharedthirdparty"><strong>GetGroupsWithRoomsSharedThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/group/room/{id}</td>
-        <td>Search groups for a room (third-party storage)</td>
       </tr>
     </tbody>
   </table>
@@ -2723,29 +2363,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Search accounts for a file</td>
       </tr>
       <tr>
-        <td><a href="docs/PeopleSearchAPI.md#getaccountsentrieswithfilessharedthirdparty"><strong>GetAccountsEntriesWithFilesSharedThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/accounts/file/{id}/search</td>
-        <td>Search accounts for a file (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/PeopleSearchAPI.md#getaccountsentrieswithfoldersshared"><strong>GetAccountsEntriesWithFoldersShared</strong></a></td>
         <td><strong>Get</strong> /api/2.0/accounts/folder/{id}/search</td>
         <td>Search accounts for a folder</td>
       </tr>
       <tr>
-        <td><a href="docs/PeopleSearchAPI.md#getaccountsentrieswithfolderssharedthirdparty"><strong>GetAccountsEntriesWithFoldersSharedThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/accounts/folder/{id}/search</td>
-        <td>Search accounts for a folder (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/PeopleSearchAPI.md#getaccountsentrieswithroomsshared"><strong>GetAccountsEntriesWithRoomsShared</strong></a></td>
         <td><strong>Get</strong> /api/2.0/accounts/room/{id}/search</td>
         <td>Search accounts for a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/PeopleSearchAPI.md#getaccountsentrieswithroomssharedthirdparty"><strong>GetAccountsEntriesWithRoomsSharedThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/accounts/room/{id}/search</td>
-        <td>Search accounts for a room (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/PeopleSearchAPI.md#getsearch"><strong>GetSearch</strong></a></td>
@@ -2763,29 +2388,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Search users for a file</td>
       </tr>
       <tr>
-        <td><a href="docs/PeopleSearchAPI.md#getuserswithfilessharedthirdparty"><strong>GetUsersWithFilesSharedThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/people/file/{id}</td>
-        <td>Search users for a file (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/PeopleSearchAPI.md#getuserswithfoldersshared"><strong>GetUsersWithFoldersShared</strong></a></td>
         <td><strong>Get</strong> /api/2.0/people/folder/{id}</td>
         <td>Search users for a folder</td>
       </tr>
       <tr>
-        <td><a href="docs/PeopleSearchAPI.md#getuserswithfolderssharedthirdparty"><strong>GetUsersWithFoldersSharedThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/people/folder/{id}</td>
-        <td>Search users for a folder (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/PeopleSearchAPI.md#getuserswithroomshared"><strong>GetUsersWithRoomShared</strong></a></td>
         <td><strong>Get</strong> /api/2.0/people/room/{id}</td>
         <td>Search users for a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/PeopleSearchAPI.md#getuserswithroomsharedthirdparty"><strong>GetUsersWithRoomSharedThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/people/room/{id}</td>
-        <td>Search users for a room (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/PeopleSearchAPI.md#searchusersbyextendedfilter"><strong>SearchUsersByExtendedFilter</strong></a></td>
@@ -3289,29 +2899,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Attach tags to a room</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#addroomtagsthirdparty"><strong>AddRoomTagsThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/rooms/{id}/tags</td>
-        <td>Attach tags to a room (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#archiveroom"><strong>ArchiveRoom</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/rooms/{id}/archive</td>
         <td>Archive a room</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#archiveroomthirdparty"><strong>ArchiveRoomThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/rooms/{id}/archive</td>
-        <td>Archive a room (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#changeroomcover"><strong>ChangeRoomCover</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/rooms/{id}/cover</td>
         <td>Change the room cover</td>
-      </tr>
-      <tr>
-        <td><a href="docs/RoomsAPI.md#changeroomcoverthirdparty"><strong>ChangeRoomCoverThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/rooms/{id}/cover</td>
-        <td>Change the room cover (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsAPI.md#createroom"><strong>CreateRoom</strong></a></td>
@@ -3327,11 +2922,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/RoomsAPI.md#createroomlogo"><strong>CreateRoomLogo</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/rooms/{id}/logo</td>
         <td>Set the room logo</td>
-      </tr>
-      <tr>
-        <td><a href="docs/RoomsAPI.md#createroomlogothirdparty"><strong>CreateRoomLogoThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/rooms/{id}/logo</td>
-        <td>Set the room logo (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsAPI.md#createroomtag"><strong>CreateRoomTag</strong></a></td>
@@ -3359,29 +2949,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Remove a room</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#deleteroomthirdparty"><strong>DeleteRoomThirdParty</strong></a></td>
-        <td><strong>Delete</strong> /api/2.0/files/rooms/{id}</td>
-        <td>Remove a room (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#deleteroomlogo"><strong>DeleteRoomLogo</strong></a></td>
         <td><strong>Delete</strong> /api/2.0/files/rooms/{id}/logo</td>
         <td>Remove a room logo</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#deleteroomlogothirdparty"><strong>DeleteRoomLogoThirdParty</strong></a></td>
-        <td><strong>Delete</strong> /api/2.0/files/rooms/{id}/logo</td>
-        <td>Remove a room logo (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#deleteroomtags"><strong>DeleteRoomTags</strong></a></td>
         <td><strong>Delete</strong> /api/2.0/files/rooms/{id}/tags</td>
         <td>Detach tags from a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/RoomsAPI.md#deleteroomtagsthirdparty"><strong>DeleteRoomTagsThirdParty</strong></a></td>
-        <td><strong>Delete</strong> /api/2.0/files/rooms/{id}/tags</td>
-        <td>Detach tags from a room (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsAPI.md#getexternaldbsyncstatus"><strong>GetExternalDbSyncStatus</strong></a></td>
@@ -3392,11 +2967,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/RoomsAPI.md#getnewroomitems"><strong>GetNewRoomItems</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/rooms/{id}/news</td>
         <td>Get new items in a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/RoomsAPI.md#getnewroomitemsthirdparty"><strong>GetNewRoomItemsThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/rooms/{id}/news</td>
-        <td>Get new items in a room (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsAPI.md#getpublicsettings"><strong>GetPublicSettings</strong></a></td>
@@ -3424,29 +2994,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get room information</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#getroominfothirdparty"><strong>GetRoomInfoThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/rooms/{id}</td>
-        <td>Get room information (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#getroomlinks"><strong>GetRoomLinks</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/rooms/{id}/links</td>
         <td>Get the room links</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#getroomlinksthirdparty"><strong>GetRoomLinksThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/rooms/{id}/links</td>
-        <td>Get the room links (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#getroomsecurityinfo"><strong>GetRoomSecurityInfo</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/rooms/{id}/share</td>
         <td>Get the room access rights</td>
-      </tr>
-      <tr>
-        <td><a href="docs/RoomsAPI.md#getroomsecurityinfothirdparty"><strong>GetRoomSecurityInfoThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/rooms/{id}/share</td>
-        <td>Get the room access rights (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsAPI.md#getroomtagsinfo"><strong>GetRoomTagsInfo</strong></a></td>
@@ -3474,11 +3029,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get the room primary external link</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#getroomsprimaryexternallinkthirdparty"><strong>GetRoomsPrimaryExternalLinkThirdParty</strong></a></td>
-        <td><strong>Get</strong> /api/2.0/files/rooms/{id}/link</td>
-        <td>Get the room primary external link (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#hastaglinks"><strong>HasTagLinks</strong></a></td>
         <td><strong>Get</strong> /api/2.0/files/tags/{tagName}/haslinks</td>
         <td>Check room tag usage</td>
@@ -3489,29 +3039,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Pin a room</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#pinroomthirdparty"><strong>PinRoomThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/rooms/{id}/pin</td>
-        <td>Pin a room (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#reorderroom"><strong>ReorderRoom</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/rooms/{id}/reorder</td>
         <td>Reorder room contents</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#reorderroomthirdparty"><strong>ReorderRoomThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/rooms/{id}/reorder</td>
-        <td>Reorder room contents (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#resendemailinvitations"><strong>ResendEmailInvitations</strong></a></td>
         <td><strong>Post</strong> /api/2.0/files/rooms/{id}/resend</td>
         <td>Resend the room invitations</td>
-      </tr>
-      <tr>
-        <td><a href="docs/RoomsAPI.md#resendemailinvitationsthirdparty"><strong>ResendEmailInvitationsThirdParty</strong></a></td>
-        <td><strong>Post</strong> /api/2.0/files/rooms/{id}/resend</td>
-        <td>Resend the room invitations (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsAPI.md#setpublicsettings"><strong>SetPublicSettings</strong></a></td>
@@ -3524,19 +3059,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Set the room external or invitation link</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#setroomlinkthirdparty"><strong>SetRoomLinkThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/rooms/{id}/links</td>
-        <td>Set the room external or invitation link (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#setroomsecurity"><strong>SetRoomSecurity</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/rooms/{id}/share</td>
         <td>Set the room access rights</td>
-      </tr>
-      <tr>
-        <td><a href="docs/RoomsAPI.md#setroomsecuritythirdparty"><strong>SetRoomSecurityThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/rooms/{id}/share</td>
-        <td>Set the room access rights (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsAPI.md#startexternaldbsync"><strong>StartExternalDbSync</strong></a></td>
@@ -3559,29 +3084,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Unarchive a room</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#unarchiveroomthirdparty"><strong>UnarchiveRoomThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/rooms/{id}/unarchive</td>
-        <td>Unarchive a room (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#unpinroom"><strong>UnpinRoom</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/rooms/{id}/unpin</td>
         <td>Unpin a room</td>
       </tr>
       <tr>
-        <td><a href="docs/RoomsAPI.md#unpinroomthirdparty"><strong>UnpinRoomThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/rooms/{id}/unpin</td>
-        <td>Unpin a room (third-party storage)</td>
-      </tr>
-      <tr>
         <td><a href="docs/RoomsAPI.md#updateroom"><strong>UpdateRoom</strong></a></td>
         <td><strong>Put</strong> /api/2.0/files/rooms/{id}</td>
         <td>Update a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/RoomsAPI.md#updateroomthirdparty"><strong>UpdateRoomThirdParty</strong></a></td>
-        <td><strong>Put</strong> /api/2.0/files/rooms/{id}</td>
-        <td>Update a room (third-party storage)</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsAPI.md#updateroomtag"><strong>UpdateRoomTag</strong></a></td>
@@ -4030,62 +3540,62 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#calculatedevpack"><strong>CalculateDevPack</strong></a></td>
         <td><strong>Post</strong> /api/2.0/settings/docscloud/calculatedevpack</td>
-        <td>Calculate the DocsCloudDevPack switch cost</td>
+        <td>Calculate the Docs Connect Dev Pack switch cost</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#createtenantquotareport"><strong>CreateTenantQuotaReport</strong></a></td>
         <td><strong>Post</strong> /api/2.0/settings/docscloud/tenant/quota/report</td>
-        <td>Start the DocsCloud quota report</td>
+        <td>Start the Docs Connect quota report</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#gettenant"><strong>GetTenant</strong></a></td>
         <td><strong>Get</strong> /api/2.0/settings/docscloud/tenant</td>
-        <td>Get the DocsCloud tenant</td>
+        <td>Get the Docs Connect tenant</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#gettenantconfig"><strong>GetTenantConfig</strong></a></td>
         <td><strong>Get</strong> /api/2.0/settings/docscloud/tenant/config</td>
-        <td>Get the DocsCloud tenant configuration</td>
+        <td>Get the Docs Connect tenant configuration</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#gettenantinfo"><strong>GetTenantInfo</strong></a></td>
         <td><strong>Get</strong> /api/2.0/settings/docscloud/tenant/info</td>
-        <td>Get the DocsCloud tenant information</td>
+        <td>Get the Docs Connect tenant information</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#gettenantquota"><strong>GetTenantQuota</strong></a></td>
         <td><strong>Get</strong> /api/2.0/settings/docscloud/tenant/quota</td>
-        <td>Get the DocsCloud tenant quota</td>
+        <td>Get the Docs Connect tenant quota</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#gettenantquotareport"><strong>GetTenantQuotaReport</strong></a></td>
         <td><strong>Get</strong> /api/2.0/settings/docscloud/tenant/quota/report</td>
-        <td>Get the DocsCloud quota report status</td>
+        <td>Get the Docs Connect quota report status</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#gettenantusage"><strong>GetTenantUsage</strong></a></td>
         <td><strong>Get</strong> /api/2.0/settings/docscloud/tenant/usage</td>
-        <td>Get the DocsCloud tenant usage</td>
+        <td>Get the Docs Connect tenant usage</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#startdocscloudtrial"><strong>StartDocsCloudTrial</strong></a></td>
         <td><strong>Post</strong> /api/2.0/settings/docscloud/trial</td>
-        <td>Start the DocsCloud trial</td>
+        <td>Start the Docs Connect trial</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#switchtodevpack"><strong>SwitchToDevPack</strong></a></td>
         <td><strong>Post</strong> /api/2.0/settings/docscloud/switchtodevpack</td>
-        <td>Switch DocsCloud to DocsCloudDevPack</td>
+        <td>Switch Docs Connect to Docs Connect Dev Pack</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#terminatetenantquotareport"><strong>TerminateTenantQuotaReport</strong></a></td>
         <td><strong>Delete</strong> /api/2.0/settings/docscloud/tenant/quota/report</td>
-        <td>Terminate the DocsCloud quota report</td>
+        <td>Terminate the Docs Connect quota report</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudAPI.md#updatetenantconfig"><strong>UpdateTenantConfig</strong></a></td>
         <td><strong>Put</strong> /api/2.0/settings/docscloud/tenant/config</td>
-        <td>Update the DocsCloud tenant configuration</td>
+        <td>Update the Docs Connect tenant configuration</td>
       </tr>
       <tr>
         <td colspan="3" style="text-align: center;"><strong>EncryptionAPI</strong></td>
@@ -4866,7 +4376,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ApiKeyResponseWrapper](docs/ApiKeyResponseWrapper.md)
  - [AppArrayWrapper](docs/AppArrayWrapper.md)
  - [AppDto](docs/AppDto.md)
- - [AppDtoSettings](docs/AppDtoSettings.md)
  - [AppWrapper](docs/AppWrapper.md)
  - [ApplyFilterOption](docs/ApplyFilterOption.md)
  - [ArchiveRoomRequest](docs/ArchiveRoomRequest.md)
@@ -5254,6 +4763,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ItemKeyValuePairStringBoolean](docs/ItemKeyValuePairStringBoolean.md)
  - [ItemKeyValuePairStringLogoRequestsDto](docs/ItemKeyValuePairStringLogoRequestsDto.md)
  - [ItemKeyValuePairStringString](docs/ItemKeyValuePairStringString.md)
+ - [JsonValueWrapper](docs/JsonValueWrapper.md)
  - [LinkAccountRequestDto](docs/LinkAccountRequestDto.md)
  - [LinkType](docs/LinkType.md)
  - [Location](docs/Location.md)
@@ -5403,7 +4913,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [SessionRequest](docs/SessionRequest.md)
  - [SetAppEnabledBody](docs/SetAppEnabledBody.md)
  - [SetAppSettingsBody](docs/SetAppSettingsBody.md)
- - [SetAppSettingsBodySettings](docs/SetAppSettingsBodySettings.md)
  - [SetManagerRequest](docs/SetManagerRequest.md)
  - [SetPublicDto](docs/SetPublicDto.md)
  - [SetRestrictedAiModelsRequestDto](docs/SetRestrictedAiModelsRequestDto.md)
@@ -5558,7 +5067,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [TopUpDepositRequestDto](docs/TopUpDepositRequestDto.md)
  - [TransactionInfo](docs/TransactionInfo.md)
  - [TurnOnAdminMessageSettingsRequestDto](docs/TurnOnAdminMessageSettingsRequestDto.md)
- - [UnknownNullableWrapper](docs/UnknownNullableWrapper.md)
  - [UpcomingPaymentArrayWrapper](docs/UpcomingPaymentArrayWrapper.md)
  - [UpcomingPaymentDto](docs/UpcomingPaymentDto.md)
  - [UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)

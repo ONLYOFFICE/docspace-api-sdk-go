@@ -310,7 +310,7 @@ import (
 )
 
 func main() {
-	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -335,7 +335,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsGetAssignment
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | 
+ **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | 
 
 ### Return type
 
@@ -378,7 +378,7 @@ import (
 )
 
 func main() {
-	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
 	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -404,7 +404,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsResolveForAct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | 
+ **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | 
  **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
 
 ### Return type
@@ -448,7 +448,7 @@ import (
 )
 
 func main() {
-	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
 	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -474,7 +474,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsTryResolveFor
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | 
+ **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | 
  **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
 
 ### Return type
