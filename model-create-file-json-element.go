@@ -23,14 +23,14 @@ import (
 // checks if the CreateFileJsonElement type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateFileJsonElement{}
 
-// CreateFileJsonElement The parameters for creating a file.
+// CreateFileJsonElement The parameters of a file that the portal creates from a template or a blank document.
 type CreateFileJsonElement struct {
-	// The file title for creation.
+	// The title of the new file. The extension in it decides the format, and one of a known text, spreadsheet or  presentation format is rewritten to the DOCX, XLSX or PPTX of the portal unless `enableExternalExt` says  otherwise; a title with no extension gets DOCX added.
 	Title NullableString `json:"title"`
 	TemplateId *CreateFileJsonElementTemplateId `json:"templateId,omitempty"`
-	// Specifies whether to allow creating a file of an external extension or not.
+	// Whether the extension of the title is kept as it is: `true` stores the title verbatim, `false` rewrites a  known foreign format to the format the portal edits itself.
 	EnableExternalExt *bool `json:"enableExternalExt,omitempty"`
-	// The form ID for creation.
+	// A ready form from the form gallery of the portal to copy instead of a template, named by the identifier the  gallery reports for it. It takes precedence over `templateId`; 0 means no form.
 	FormId *int32 `json:"formId,omitempty"`
 }
 

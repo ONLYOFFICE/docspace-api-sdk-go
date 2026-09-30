@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Title** | **NullableString** | The file title for creation. | 
+**Title** | **NullableString** | The title of the new file. The extension in it decides the format, and one of a known text, spreadsheet or  presentation format is rewritten to the DOCX, XLSX or PPTX of the portal unless `enableExternalExt` says  otherwise; a title with no extension gets DOCX added. | 
 **TemplateId** | Pointer to [**CreateFileJsonElementTemplateId**](CreateFileJsonElementTemplateId.md) |  | [optional] 
-**EnableExternalExt** | Pointer to **bool** | Specifies whether to allow creating a file of an external extension or not. | [optional] 
-**FormId** | Pointer to **int32** | The form ID for creation. | [optional] 
+**EnableExternalExt** | Pointer to **bool** | Whether the extension of the title is kept as it is: `true` stores the title verbatim, `false` rewrites a  known foreign format to the format the portal edits itself. | [optional] 
+**FormId** | Pointer to **int32** | A ready form from the form gallery of the portal to copy instead of a template, named by the identifier the  gallery reports for it. It takes precedence over `templateId`; 0 means no form. | [optional] 
 
 ## Methods
 

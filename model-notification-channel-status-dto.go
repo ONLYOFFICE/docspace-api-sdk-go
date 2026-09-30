@@ -21,9 +21,9 @@ import (
 // checks if the NotificationChannelStatusDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationChannelStatusDto{}
 
-// NotificationChannelStatusDto The notification channel settings.
+// NotificationChannelStatusDto The ways this installation can deliver a notification, and whether each of them is usable.
 type NotificationChannelStatusDto struct {
-	// The list of notification channels.
+	// The channels the running installation is configured with. A channel appears only when the notification  service names a sender for it, so the list can be shorter than the channels this build implements, and an  empty list means the configuration names none of them.
 	Channels []NotificationChannelDto `json:"channels,omitempty"`
 }
 

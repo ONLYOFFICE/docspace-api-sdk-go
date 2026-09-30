@@ -5,8 +5,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddRoomGroup**](RoomsGroupsAPI.md#AddRoomGroup) | **Post** /api/2.0/files/group | Add a new room group
-[**ChangeRoomGroupIcon**](RoomsGroupsAPI.md#ChangeRoomGroupIcon) | **Post** /api/2.0/files/group/{id}/icon | Change group icon
-[**DeleteRoomGroup**](RoomsGroupsAPI.md#DeleteRoomGroup) | **Delete** /api/2.0/files/group/{id} | Delete group
+[**ChangeRoomGroupIcon**](RoomsGroupsAPI.md#ChangeRoomGroupIcon) | **Post** /api/2.0/files/group/{id}/icon | Change room group icon
+[**DeleteRoomGroup**](RoomsGroupsAPI.md#DeleteRoomGroup) | **Delete** /api/2.0/files/group/{id} | Delete a room group
 [**GetRoomGroupInfo**](RoomsGroupsAPI.md#GetRoomGroupInfo) | **Get** /api/2.0/files/group/{id} | Get room group info
 [**GetRoomGroups**](RoomsGroupsAPI.md#GetRoomGroups) | **Get** /api/2.0/files/group | List room groups
 [**UpdateRoomGroup**](RoomsGroupsAPI.md#UpdateRoomGroup) | **Put** /api/2.0/files/group/{id} | Update room group
@@ -36,7 +36,7 @@ import (
 )
 
 func main() {
-	roomGroupRequestDto := *openapiclient.NewRoomGroupRequestDto("My Group", "cover1", []openapiclient.DuplicateRequestDtoAllOfFileIds{*openapiclient.NewDuplicateRequestDtoAllOfFileIds()}) // RoomGroupRequestDto |  (optional)
+	roomGroupRequestDto := *openapiclient.NewRoomGroupRequestDto("Client projects", "star", []openapiclient.DuplicateRequestDtoAllOfFileIds{*openapiclient.NewDuplicateRequestDtoAllOfFileIds()}) // RoomGroupRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 > RoomGroupWrapper ChangeRoomGroupIcon(ctx, id).IconRequest(iconRequest).Execute()
 
-Change group icon
+Change room group icon
 
 
 
@@ -104,8 +104,8 @@ import (
 )
 
 func main() {
-	id := int32(1) // int32 | Group id
-	iconRequest := *openapiclient.NewIconRequest() // IconRequest | Icon update data. (optional)
+	id := int32(42) // int32 | The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing.
+	iconRequest := *openapiclient.NewIconRequest() // IconRequest | The icon to give the group. A body that leaves the icon out is accepted and changes nothing. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -125,7 +125,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | Group id | 
+**id** | **int32** | The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing. | 
 
 ### Other Parameters
 
@@ -135,7 +135,7 @@ Other parameters are passed through a pointer to a apiChangeRoomGroupIconRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **iconRequest** | [**IconRequest**](IconRequest.md) | Icon update data. | 
+ **iconRequest** | [**IconRequest**](IconRequest.md) | The icon to give the group. A body that leaves the icon out is accepted and changes nothing. | 
 
 ### Return type
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 > DeleteRoomGroup(ctx, id).IncludeMembers(includeMembers).Execute()
 
-Delete group
+Delete a room group
 
 
 
@@ -178,8 +178,8 @@ import (
 )
 
 func main() {
-	id := int32(10) // int32 | The group unique identifier.
-	includeMembers := true // bool | Whether to include group members. (optional)
+	id := int32(42) // int32 | The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.
+	includeMembers := true // bool | Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -197,7 +197,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The group unique identifier. | 
+**id** | **int32** | The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | 
 
 ### Other Parameters
 
@@ -207,7 +207,7 @@ Other parameters are passed through a pointer to a apiDeleteRoomGroupRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **includeMembers** | **bool** | Whether to include group members. | 
+ **includeMembers** | **bool** | Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`. | 
 
 ### Return type
 
@@ -250,8 +250,8 @@ import (
 )
 
 func main() {
-	id := int32(10) // int32 | The group unique identifier.
-	includeMembers := true // bool | Whether to include group members. (optional)
+	id := int32(42) // int32 | The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.
+	includeMembers := true // bool | Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -271,7 +271,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The group unique identifier. | 
+**id** | **int32** | The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | 
 
 ### Other Parameters
 
@@ -281,7 +281,7 @@ Other parameters are passed through a pointer to a apiGetRoomGroupInfoRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **includeMembers** | **bool** | Whether to include group members. | 
+ **includeMembers** | **bool** | Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`. | 
 
 ### Return type
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ## GetRoomGroups
 
-> RoomGroupArrayWrapper GetRoomGroups(ctx).IncludeMembers(includeMembers).Execute()
+> RoomGroupArrayWrapper GetRoomGroups(ctx).IncludeMembers(includeMembers).SearchArea(searchArea).Execute()
 
 List room groups
 
@@ -324,11 +324,12 @@ import (
 )
 
 func main() {
-	includeMembers := true // bool | Whether to include group members. (optional)
+	includeMembers := true // bool | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. (optional)
+	searchArea := openapiclient.SearchArea("Active") // SearchArea | The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsGroupsAPI.GetRoomGroups(context.Background()).IncludeMembers(includeMembers).Execute()
+	resp, r, err := apiClient.RoomsGroupsAPI.GetRoomGroups(context.Background()).IncludeMembers(includeMembers).SearchArea(searchArea).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsGroupsAPI.GetRoomGroups``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -349,7 +350,8 @@ Other parameters are passed through a pointer to a apiGetRoomGroupsRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **includeMembers** | **bool** | Whether to include group members. | 
+ **includeMembers** | **bool** | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. | 
+ **searchArea** | [**SearchArea**](SearchArea.md) | The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted. | 
 
 ### Return type
 
@@ -392,8 +394,8 @@ import (
 )
 
 func main() {
-	id := int32(1) // int32 | The group ID.
-	updateRoomGroupRequest := *openapiclient.NewUpdateRoomGroupRequest() // UpdateRoomGroupRequest | The request for updating a group.
+	id := int32(42) // int32 | The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.
+	updateRoomGroupRequest := *openapiclient.NewUpdateRoomGroupRequest() // UpdateRoomGroupRequest | The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -413,7 +415,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The group ID. | 
+**id** | **int32** | The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | 
 
 ### Other Parameters
 
@@ -423,7 +425,7 @@ Other parameters are passed through a pointer to a apiUpdateRoomGroupRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateRoomGroupRequest** | [**UpdateRoomGroupRequest**](UpdateRoomGroupRequest.md) | The request for updating a group. | 
+ **updateRoomGroupRequest** | [**UpdateRoomGroupRequest**](UpdateRoomGroupRequest.md) | The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others. | 
 
 ### Return type
 

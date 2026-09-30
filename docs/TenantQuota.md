@@ -47,9 +47,9 @@ Name | Type | Description | Notes
 **CountAIAgent** | Pointer to **int32** | The number of AI agents. | [optional] 
 **AiTools** | Pointer to **bool** | Specifies if the AI tools enabled as a wallet service or not. | [optional] 
 **AiSearch** | Pointer to **bool** | Specifies if the AI search enabled as a wallet service or not. | [optional] 
-**DocsCloud** | Pointer to **int32** | The number of DocsCloud users. | [optional] 
-**DocsCloudDevPack** | Pointer to **bool** | Specifies if the DocsCloudDevPack enabled or not. | [optional] 
-**DocsCloudTrial** | Pointer to **bool** | Specifies if the DocsCloudTrial enabled or not. | [optional] 
+**DocsCloud** | Pointer to **int32** | The number of Docs Connect users. | [optional] 
+**DocsCloudDevPack** | Pointer to **bool** | Specifies if the Docs Connect Dev Pack enabled or not. | [optional] 
+**DocsCloudTrial** | Pointer to **bool** | Specifies if the Docs Connect trial enabled or not. | [optional] 
 
 ## Methods
 

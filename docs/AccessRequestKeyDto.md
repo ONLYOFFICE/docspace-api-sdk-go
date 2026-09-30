@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **string** | User ID | [optional] 
-**PublicKeyId** | Pointer to **string** | Public key ID | [optional] 
-**PrivateKeyEnc** | Pointer to **NullableString** | Encrypted private key | [optional] 
+**UserId** | Pointer to **string** | The account that is to open the file with this key; it has to have read access to the file. | [optional] 
+**PublicKeyId** | Pointer to **string** | The public key the file key was encrypted with, as reported for that account by  `GET api/2.0/files/file/{fileId}/publickeys`. | [optional] 
+**PrivateKeyEnc** | Pointer to **NullableString** | The key of the file itself, encrypted by the client with that public key, so that the plain key never reaches  the portal. | [optional] 
 
 ## Methods
 

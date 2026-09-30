@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## GetGreetingSettings
 
-> ObjectWrapper GetGreetingSettings(ctx).Execute()
+> StringWrapper GetGreetingSettings(ctx).Execute()
 
 Get greeting settings
 
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsGreetingSettingsAPI.GetGreetingSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetGreetingSettings`: ObjectWrapper
+	// response from `GetGreetingSettings`: StringWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsGreetingSettingsAPI.GetGreetingSettings`: %v\n", resp)
 }
 ```
@@ -58,7 +58,7 @@ Other parameters are passed through a pointer to a apiGetGreetingSettingsRequest
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**StringWrapper**](StringWrapper.md)
 
 ### Authorization
 

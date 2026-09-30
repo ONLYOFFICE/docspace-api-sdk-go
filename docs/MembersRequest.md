@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Members** | Pointer to **[]string** | The list of group member IDs. | [optional] 
+**Members** | Pointer to **[]string** | The accounts the operation applies to. When adding or replacing members, an account that is a guest, is  disabled or does not exist is skipped without an error; when removing them, an ID that is not a member is  skipped as well. | [optional] 
 
 ## Methods
 

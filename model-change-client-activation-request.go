@@ -25,7 +25,7 @@ var _ MappedNullable = &ChangeClientActivationRequest{}
 
 // ChangeClientActivationRequest Client activation change request
 type ChangeClientActivationRequest struct {
-	// The activation status of the client
+	// Whether the client may obtain tokens from now on. Sending false leaves the registration and the already issued tokens in place but refuses new authorization requests; sending true allows them again.
 	Status bool `json:"status"`
 }
 

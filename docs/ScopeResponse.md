@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | The scope name. | [optional] 
-**Group** | Pointer to **string** | The group the scope belongs to. | [optional] 
-**Type** | Pointer to **string** | The scope type. | [optional] 
+**Name** | Pointer to **string** | The scope exactly as it is written in an authorization request, for example files:read or openid. | [optional] 
+**Group** | Pointer to **string** | The area of the portal the scope belongs to, which is what groups the scopes on the consent screen: files, rooms, contacts, profiles or openid. | [optional] 
+**Type** | Pointer to **string** | What the scope allows inside its group: read for read-only access, write for changes, and openid for the identity scope itself. | [optional] 
 
 ## Methods
 

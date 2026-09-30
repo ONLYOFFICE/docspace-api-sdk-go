@@ -23,14 +23,16 @@ import (
 // checks if the RoomGroupRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoomGroupRequestDto{}
 
-// RoomGroupRequestDto The request parameters for creating a room group
+// RoomGroupRequestDto The name, the icon and the rooms of a room group to create.
 type RoomGroupRequestDto struct {
-	// Group name
+	// The name to show the group under. Surrounding spaces are trimmed before it is stored, a name that is blank  once trimmed is refused, and the name does not have to differ from the names of the caller's other groups.
 	Name string `json:"name"`
-	// Group icon
+	// The icon of the group, given as the identifier of one of the built-in covers listed by  `GET api/2.0/files/rooms/covers`. An uploaded image cannot be used, and any value that is not one of those  identifiers is refused.
 	Icon string `json:"icon"`
-	// The list of room IDs.
+	// The rooms to gather in the group, each given as a number for a room stored in the portal or as a string for a  room on a connected third-party account. Every identifier has to name a room the caller can read; repeats are  collapsed, and an element of any other shape - a decimal number, a number sent as a string, null - is refused.
 	Rooms []DuplicateRequestDtoAllOfFileIds `json:"rooms"`
+	// The section the group belongs to: Active for Rooms and Forms for Forms. Active when omitted.
+	SearchArea *SearchArea `json:"searchArea,omitempty"`
 }
 
 type _RoomGroupRequestDto RoomGroupRequestDto
@@ -127,6 +129,38 @@ func (o *RoomGroupRequestDto) SetRooms(v []DuplicateRequestDtoAllOfFileIds) {
 	o.Rooms = v
 }
 
+// GetSearchArea returns the SearchArea field value if set, zero value otherwise.
+func (o *RoomGroupRequestDto) GetSearchArea() SearchArea {
+	if o == nil || IsNil(o.SearchArea) {
+		var ret SearchArea
+		return ret
+	}
+	return *o.SearchArea
+}
+
+// GetSearchAreaOk returns a tuple with the SearchArea field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoomGroupRequestDto) GetSearchAreaOk() (*SearchArea, bool) {
+	if o == nil || IsNil(o.SearchArea) {
+		return nil, false
+	}
+	return o.SearchArea, true
+}
+
+// HasSearchArea returns a boolean if a field has been set.
+func (o *RoomGroupRequestDto) IsSearchAreaSet() bool {
+	if o != nil && !IsNil(o.SearchArea) {
+		return true
+	}
+
+	return false
+}
+
+// SetSearchArea gets a reference to the given SearchArea and assigns it to the SearchArea field.
+func (o *RoomGroupRequestDto) SetSearchArea(v SearchArea) {
+	o.SearchArea = &v
+}
+
 func (o RoomGroupRequestDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -140,6 +174,9 @@ func (o RoomGroupRequestDto) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["icon"] = o.Icon
 	toSerialize["rooms"] = o.Rooms
+	if !IsNil(o.SearchArea) {
+		toSerialize["searchArea"] = o.SearchArea
+	}
 	return toSerialize, nil
 }
 

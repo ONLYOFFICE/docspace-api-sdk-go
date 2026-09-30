@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Result** | Pointer to [**CheckDestFolderResult**](CheckDestFolderResult.md) | The result of the validation operation. | [optional] 
-**Files** | Pointer to [**[]FileEntryBaseDto**](FileEntryBaseDto.md) | The list of files in the destination folder. | [optional] 
+**Result** | Pointer to [**CheckDestFolderResult**](CheckDestFolderResult.md) | Whether the destination folder accepts all of the requested files, only some of them or none at all. | [optional] 
+**Files** | Pointer to [**[]FileEntryBaseDto**](FileEntryBaseDto.md) | The requested files the destination accepts, each with the information it was listed under. The files it  rejects are absent, so an empty list means that none of them is accepted. | [optional] 
 
 ## Methods
 

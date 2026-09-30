@@ -36,13 +36,13 @@ func (r ApiAiExportTextToDocxRequest) AiExportTextToDocxRequest(aiExportTextToDo
 	return r
 }
 
-func (r ApiAiExportTextToDocxRequest) Execute() (*AiExportTextToDocx200Response, *http.Response, error) {
+func (r ApiAiExportTextToDocxRequest) Execute() (*AiExportTextToDocx202Response, *http.Response, error) {
 	return r.ApiService.AiExportTextToDocxExecute(r)
 }
 
-// AiExportTextToDocx Start markdown → docx export
+// AiExportTextToDocx Start markdown export
 //
-// Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
+// Queues a markdown export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. `format` is optional and selects the output - `Docx` (the default), `Pdf`, or `Md`, which stores the markdown verbatim instead of converting it. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-export-text-to-docx/
 //
@@ -56,13 +56,13 @@ func (a *AIExportAPIService) AiExportTextToDocx(ctx context.Context) ApiAiExport
 }
 
 // Execute executes the request
-//  @return AiExportTextToDocx200Response
-func (a *AIExportAPIService) AiExportTextToDocxExecute(r ApiAiExportTextToDocxRequest) (*AiExportTextToDocx200Response, *http.Response, error) {
+//  @return AiExportTextToDocx202Response
+func (a *AIExportAPIService) AiExportTextToDocxExecute(r ApiAiExportTextToDocxRequest) (*AiExportTextToDocx202Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiExportTextToDocx200Response
+		localVarReturnValue  *AiExportTextToDocx202Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIExportAPIService.AiExportTextToDocx")
@@ -120,7 +120,51 @@ func (a *AIExportAPIService) AiExportTextToDocxExecute(r ApiAiExportTextToDocxRe
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

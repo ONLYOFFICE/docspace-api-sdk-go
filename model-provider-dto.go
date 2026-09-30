@@ -21,21 +21,21 @@ import (
 // checks if the ProviderDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ProviderDto{}
 
-// ProviderDto The provider information.
+// ProviderDto One storage service this portal can connect, with the values a connection form needs.
 type ProviderDto struct {
-	// The provider name.
+	// The display name of the service, and the only thing that tells the WebDAV presets apart: `kDrive`, `Yandex`,  `WebDav`, `Nextcloud` and `ownCloud` all report the same key.
 	Name NullableString `json:"name,omitempty"`
-	// The provider key.
+	// The value to send as `providerKey` when an account of this service is connected.
 	Key NullableString `json:"key,omitempty"`
-	// Specifies whether the provider is connected.
+	// Whether the service can be used on this portal: it is enabled in the configuration and, for an OAuth service,  its application is registered. It says nothing about whether an account of it is connected.
 	Connected *bool `json:"connected,omitempty"`
-	// Specifies if the provider is OAuth.
+	// Whether an account of this service is connected with an OAuth 2.0 authorization code in `token`; when false,  it is connected with `login` and `password`.
 	Oauth *bool `json:"oauth,omitempty"`
-	// The provider redirect URL.
+	// The redirect URL this portal is registered with at the service, to build the consent screen URL from. It comes  back as null for the services that do not use OAuth.
 	RedirectUrl NullableString `json:"redirectUrl,omitempty"`
-	// The required connection URL flag.
+	// Whether an account of this service cannot be connected without `url`, which is the case for the WebDAV servers  whose address is not known in advance. The presets with a fixed address and the OAuth services do not need it.
 	RequiredConnectionUrl *bool `json:"requiredConnectionUrl,omitempty"`
-	// The provider OAuth client ID.
+	// The OAuth 2.0 client ID this portal is registered with at the service, to build the consent screen URL from.  It comes back as null for the services that do not use OAuth.
 	ClientId NullableString `json:"clientId,omitempty"`
 }
 

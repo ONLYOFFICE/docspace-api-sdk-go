@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **Contacts** | Pointer to [**[]Contact**](Contact.md) | The list of user contacts. | [optional] 
 **Status** | Pointer to [**EmployeeStatus**](EmployeeStatus.md) | The user status. | [optional] 
 **ActivationStatus** | Pointer to [**EmployeeActivationStatus**](EmployeeActivationStatus.md) | The user activation status. | [optional] 
-**Terminated** | Pointer to **NullableTime** | The date when the user account was terminated. | [optional] 
+**Terminated** | Pointer to [**ApiDateTime**](ApiDateTime.md) | The date when the user account was terminated. | [optional] 
 **Department** | Pointer to **NullableString** | The user department. | [optional] 
 **Groups** | Pointer to [**[]GroupSummaryDto**](GroupSummaryDto.md) | The list of user groups. | [optional] 
 **Location** | Pointer to **NullableString** | The user location. | [optional] 
@@ -45,7 +45,7 @@ Name | Type | Description | Notes
 **LoginEventId** | Pointer to **NullableInt32** | The current login event ID. | [optional] 
 **AuthCookieLifetime** | Pointer to **NullableFloat64** | The auth cookie lifetime in seconds. | [optional] 
 **CreatedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | The user who created the current user. | [optional] 
-**RegistrationDate** | Pointer to **NullableTime** | The user registration date. | [optional] 
+**RegistrationDate** | Pointer to [**ApiDateTime**](ApiDateTime.md) | The user registration date. | [optional] 
 **HasPersonalFolder** | Pointer to **NullableBool** | Specifies if the user has a personal folder or not. | [optional] 
 **TfaAppEnabled** | Pointer to **NullableBool** | Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app. | [optional] 
 
@@ -545,20 +545,20 @@ HasActivationStatus returns a boolean if a field has been set.
 
 ### GetTerminated
 
-`func (o *EmployeeFullDto) GetTerminated() time.Time`
+`func (o *EmployeeFullDto) GetTerminated() ApiDateTime`
 
 GetTerminated returns the Terminated field if non-nil, zero value otherwise.
 
 ### GetTerminatedOk
 
-`func (o *EmployeeFullDto) GetTerminatedOk() (*time.Time, bool)`
+`func (o *EmployeeFullDto) GetTerminatedOk() (*ApiDateTime, bool)`
 
 GetTerminatedOk returns a tuple with the Terminated field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTerminated
 
-`func (o *EmployeeFullDto) SetTerminated(v time.Time)`
+`func (o *EmployeeFullDto) SetTerminated(v ApiDateTime)`
 
 SetTerminated sets Terminated field to given value.
 
@@ -568,16 +568,6 @@ SetTerminated sets Terminated field to given value.
 
 HasTerminated returns a boolean if a field has been set.
 
-### SetTerminatedNil
-
-`func (o *EmployeeFullDto) SetTerminatedNil(b bool)`
-
- SetTerminatedNil sets the value for Terminated to be an explicit nil
-
-### UnsetTerminated
-`func (o *EmployeeFullDto) UnsetTerminated()`
-
-UnsetTerminated ensures that no value is present for Terminated, not even an explicit nil
 ### GetDepartment
 
 `func (o *EmployeeFullDto) GetDepartment() string`
@@ -1285,20 +1275,20 @@ HasCreatedBy returns a boolean if a field has been set.
 
 ### GetRegistrationDate
 
-`func (o *EmployeeFullDto) GetRegistrationDate() time.Time`
+`func (o *EmployeeFullDto) GetRegistrationDate() ApiDateTime`
 
 GetRegistrationDate returns the RegistrationDate field if non-nil, zero value otherwise.
 
 ### GetRegistrationDateOk
 
-`func (o *EmployeeFullDto) GetRegistrationDateOk() (*time.Time, bool)`
+`func (o *EmployeeFullDto) GetRegistrationDateOk() (*ApiDateTime, bool)`
 
 GetRegistrationDateOk returns a tuple with the RegistrationDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegistrationDate
 
-`func (o *EmployeeFullDto) SetRegistrationDate(v time.Time)`
+`func (o *EmployeeFullDto) SetRegistrationDate(v ApiDateTime)`
 
 SetRegistrationDate sets RegistrationDate field to given value.
 
@@ -1308,16 +1298,6 @@ SetRegistrationDate sets RegistrationDate field to given value.
 
 HasRegistrationDate returns a boolean if a field has been set.
 
-### SetRegistrationDateNil
-
-`func (o *EmployeeFullDto) SetRegistrationDateNil(b bool)`
-
- SetRegistrationDateNil sets the value for RegistrationDate to be an explicit nil
-
-### UnsetRegistrationDate
-`func (o *EmployeeFullDto) UnsetRegistrationDate()`
-
-UnsetRegistrationDate ensures that no value is present for RegistrationDate, not even an explicit nil
 ### GetHasPersonalFolder
 
 `func (o *EmployeeFullDto) GetHasPersonalFolder() bool`

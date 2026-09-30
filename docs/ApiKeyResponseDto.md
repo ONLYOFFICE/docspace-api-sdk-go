@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The API key unique identifier. | 
-**Name** | **NullableString** | The API key name. | 
-**Key** | **NullableString** | The full API key value (only returned when creating a new key). | 
-**KeyPostfix** | Pointer to **NullableString** | The API key postfix (used for identification). | [optional] 
-**Permissions** | **[]string** | The list of permissions granted to the API key. | 
-**LastUsed** | Pointer to **NullableTime** | The date and time when the API key was last used. | [optional] 
-**CreateOn** | Pointer to **NullableTime** | The date and time when the API key was created. | [optional] 
-**CreateBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | The identifier of the user who created the API key. | [optional] 
-**ExpiresAt** | Pointer to **NullableTime** | The date and time when the API key expires. | [optional] 
-**IsActive** | **bool** | Indicates whether the API key is active or not. | 
+**Id** | **string** | The ID of the key. This is the value to pass to `PUT api/2.0/keys/{keyId}` and  `DELETE api/2.0/keys/{keyId}`. | 
+**Name** | **NullableString** | The label given to the key when it was created or last updated. | 
+**Key** | **NullableString** | The secret to send in the `Authorization` header as `Bearer sk-...`. It is filled in only by the answer of  `POST api/2.0/keys` and cannot be read again afterwards, so it has to be stored at that moment. | 
+**KeyPostfix** | Pointer to **NullableString** | The last four characters of the secret. It is the only part of the secret that later reads expose, and it is  meant for telling keys apart in a list. | [optional] 
+**Permissions** | **[]string** | The scopes the key may use, as accepted by `GET api/2.0/keys/permissions`. An empty list means the key has no  scope restrictions. | 
+**LastUsed** | Pointer to [**ApiDateTime**](ApiDateTime.md) | The UTC moment the key was last used to authenticate a request. It is empty for a key that has never been  used. | [optional] 
+**CreateOn** | Pointer to [**ApiDateTime**](ApiDateTime.md) | The UTC moment the key was created. | [optional] 
+**CreateBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | The portal member who created the key, and whose access the key acts with. | [optional] 
+**ExpiresAt** | Pointer to [**ApiDateTime**](ApiDateTime.md) | The UTC moment the key stops working. It is empty for a key created without `expiresInDays`, which never  expires. | [optional] 
+**IsActive** | **bool** | Whether the key may authenticate requests. A key deactivated through `PUT api/2.0/keys/{keyId}` stays in the  list with this field set to false. | 
 
 ## Methods
 
@@ -181,20 +181,20 @@ SetPermissions sets Permissions field to given value.
 UnsetPermissions ensures that no value is present for Permissions, not even an explicit nil
 ### GetLastUsed
 
-`func (o *ApiKeyResponseDto) GetLastUsed() time.Time`
+`func (o *ApiKeyResponseDto) GetLastUsed() ApiDateTime`
 
 GetLastUsed returns the LastUsed field if non-nil, zero value otherwise.
 
 ### GetLastUsedOk
 
-`func (o *ApiKeyResponseDto) GetLastUsedOk() (*time.Time, bool)`
+`func (o *ApiKeyResponseDto) GetLastUsedOk() (*ApiDateTime, bool)`
 
 GetLastUsedOk returns a tuple with the LastUsed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastUsed
 
-`func (o *ApiKeyResponseDto) SetLastUsed(v time.Time)`
+`func (o *ApiKeyResponseDto) SetLastUsed(v ApiDateTime)`
 
 SetLastUsed sets LastUsed field to given value.
 
@@ -204,32 +204,22 @@ SetLastUsed sets LastUsed field to given value.
 
 HasLastUsed returns a boolean if a field has been set.
 
-### SetLastUsedNil
-
-`func (o *ApiKeyResponseDto) SetLastUsedNil(b bool)`
-
- SetLastUsedNil sets the value for LastUsed to be an explicit nil
-
-### UnsetLastUsed
-`func (o *ApiKeyResponseDto) UnsetLastUsed()`
-
-UnsetLastUsed ensures that no value is present for LastUsed, not even an explicit nil
 ### GetCreateOn
 
-`func (o *ApiKeyResponseDto) GetCreateOn() time.Time`
+`func (o *ApiKeyResponseDto) GetCreateOn() ApiDateTime`
 
 GetCreateOn returns the CreateOn field if non-nil, zero value otherwise.
 
 ### GetCreateOnOk
 
-`func (o *ApiKeyResponseDto) GetCreateOnOk() (*time.Time, bool)`
+`func (o *ApiKeyResponseDto) GetCreateOnOk() (*ApiDateTime, bool)`
 
 GetCreateOnOk returns a tuple with the CreateOn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreateOn
 
-`func (o *ApiKeyResponseDto) SetCreateOn(v time.Time)`
+`func (o *ApiKeyResponseDto) SetCreateOn(v ApiDateTime)`
 
 SetCreateOn sets CreateOn field to given value.
 
@@ -239,16 +229,6 @@ SetCreateOn sets CreateOn field to given value.
 
 HasCreateOn returns a boolean if a field has been set.
 
-### SetCreateOnNil
-
-`func (o *ApiKeyResponseDto) SetCreateOnNil(b bool)`
-
- SetCreateOnNil sets the value for CreateOn to be an explicit nil
-
-### UnsetCreateOn
-`func (o *ApiKeyResponseDto) UnsetCreateOn()`
-
-UnsetCreateOn ensures that no value is present for CreateOn, not even an explicit nil
 ### GetCreateBy
 
 `func (o *ApiKeyResponseDto) GetCreateBy() EmployeeDto`
@@ -276,20 +256,20 @@ HasCreateBy returns a boolean if a field has been set.
 
 ### GetExpiresAt
 
-`func (o *ApiKeyResponseDto) GetExpiresAt() time.Time`
+`func (o *ApiKeyResponseDto) GetExpiresAt() ApiDateTime`
 
 GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
 
 ### GetExpiresAtOk
 
-`func (o *ApiKeyResponseDto) GetExpiresAtOk() (*time.Time, bool)`
+`func (o *ApiKeyResponseDto) GetExpiresAtOk() (*ApiDateTime, bool)`
 
 GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpiresAt
 
-`func (o *ApiKeyResponseDto) SetExpiresAt(v time.Time)`
+`func (o *ApiKeyResponseDto) SetExpiresAt(v ApiDateTime)`
 
 SetExpiresAt sets ExpiresAt field to given value.
 
@@ -299,16 +279,6 @@ SetExpiresAt sets ExpiresAt field to given value.
 
 HasExpiresAt returns a boolean if a field has been set.
 
-### SetExpiresAtNil
-
-`func (o *ApiKeyResponseDto) SetExpiresAtNil(b bool)`
-
- SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
-
-### UnsetExpiresAt
-`func (o *ApiKeyResponseDto) UnsetExpiresAt()`
-
-UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
 ### GetIsActive
 
 `func (o *ApiKeyResponseDto) GetIsActive() bool`

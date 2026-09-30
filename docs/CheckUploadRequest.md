@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FilesTitle** | Pointer to **[]string** | The list of file titles. | [optional] 
+**FilesTitle** | Pointer to **[]string** | The names to test, extensions included, spelled as they would be sent to the upload. Matching ignores case,  and a name repeated in the list is answered once. | [optional] 
 
 ## Methods
 

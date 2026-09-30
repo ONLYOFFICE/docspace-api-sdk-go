@@ -4,11 +4,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetSmtpOperationStatus**](SecuritySMTPSettingsAPI.md#GetSmtpOperationStatus) | **Get** /api/2.0/smtpsettings/smtp/test/status | Get the SMTP testing process status
-[**GetSmtpSettings**](SecuritySMTPSettingsAPI.md#GetSmtpSettings) | **Get** /api/2.0/smtpsettings/smtp | Get the SMTP settings
-[**ResetSmtpSettings**](SecuritySMTPSettingsAPI.md#ResetSmtpSettings) | **Delete** /api/2.0/smtpsettings/smtp | Reset the SMTP settings
-[**SaveSmtpSettings**](SecuritySMTPSettingsAPI.md#SaveSmtpSettings) | **Post** /api/2.0/smtpsettings/smtp | Save the SMTP settings
-[**TestSmtpSettings**](SecuritySMTPSettingsAPI.md#TestSmtpSettings) | **Get** /api/2.0/smtpsettings/smtp/test | Test the SMTP settings
+[**GetSmtpOperationStatus**](SecuritySMTPSettingsAPI.md#GetSmtpOperationStatus) | **Get** /api/2.0/smtpsettings/smtp/test/status | Get SMTP test status
+[**GetSmtpSettings**](SecuritySMTPSettingsAPI.md#GetSmtpSettings) | **Get** /api/2.0/smtpsettings/smtp | Get SMTP settings
+[**ResetSmtpSettings**](SecuritySMTPSettingsAPI.md#ResetSmtpSettings) | **Delete** /api/2.0/smtpsettings/smtp | Reset SMTP settings
+[**SaveSmtpSettings**](SecuritySMTPSettingsAPI.md#SaveSmtpSettings) | **Post** /api/2.0/smtpsettings/smtp | Save SMTP settings
+[**TestSmtpSettings**](SecuritySMTPSettingsAPI.md#TestSmtpSettings) | **Get** /api/2.0/smtpsettings/smtp/test | Test SMTP settings
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > SmtpOperationStatusRequestsWrapper GetSmtpOperationStatus(ctx).Execute()
 
-Get the SMTP testing process status
+Get SMTP test status
 
 
 
@@ -79,7 +79,7 @@ Other parameters are passed through a pointer to a apiGetSmtpOperationStatusRequ
 
 > SmtpSettingsWrapper GetSmtpSettings(ctx).Execute()
 
-Get the SMTP settings
+Get SMTP settings
 
 
 
@@ -142,7 +142,7 @@ Other parameters are passed through a pointer to a apiGetSmtpSettingsRequest str
 
 > SmtpSettingsWrapper ResetSmtpSettings(ctx).Execute()
 
-Reset the SMTP settings
+Reset SMTP settings
 
 
 
@@ -205,7 +205,7 @@ Other parameters are passed through a pointer to a apiResetSmtpSettingsRequest s
 
 > SmtpSettingsWrapper SaveSmtpSettings(ctx).SmtpSettingsDto(smtpSettingsDto).Execute()
 
-Save the SMTP settings
+Save SMTP settings
 
 
 
@@ -273,7 +273,7 @@ Name | Type | Description  | Notes
 
 > SmtpOperationStatusRequestsWrapper TestSmtpSettings(ctx).Execute()
 
-Test the SMTP settings
+Test SMTP settings
 
 
 

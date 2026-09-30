@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Text** | Pointer to **NullableString** | The caption of the button that starts filling out the form. | [optional] 
+**Text** | Pointer to **NullableString** | The caption to put on the button, already translated into the language of the caller. | [optional] 
 
 ## Methods
 

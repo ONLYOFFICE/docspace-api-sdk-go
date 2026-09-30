@@ -22,37 +22,36 @@ import (
 // checks if the ClientInfoResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ClientInfoResponse{}
 
-// ClientInfoResponse The response containing public client information.
+// ClientInfoResponse The consent-facing subset of a client: everything needed to render a consent screen, and nothing that would let a caller act as the client.
 type ClientInfoResponse struct {
-	// The client name.
+	// The display name shown to the user on the consent screen, between 3 and 256 characters.
 	Name *string `json:"name,omitempty"`
-	// The client description.
+	// The free-text description shown next to the name on the consent screen, at most 255 characters.
 	Description *string `json:"description,omitempty"`
-	// The client scopes.
+	// The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here.
 	Scopes []string `json:"scopes,omitempty"`
-	Public *bool `json:"public,omitempty"`
-	// The client ID.
+	// The generated identifier of the client, sent as client_id in every OAuth2 request. It is assigned when the client is registered and never changes afterwards.
 	ClientId *string `json:"client_id,omitempty"`
-	// The URL to the client's website
+	// The URL of the client home page, offered to the user before they consent.
 	WebsiteUrl *string `json:"website_url,omitempty"`
-	// The URL to the client's terms of service.
+	// The URL of the client terms of service, linked from the consent screen.
 	TermsUrl *string `json:"terms_url,omitempty"`
-	// The URL to the client's privacy policy.
+	// The URL of the client privacy policy, linked from the consent screen.
 	PolicyUrl *string `json:"policy_url,omitempty"`
-	// The client logo in base64 format.
+	// The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted, the whole string may not exceed 2000000 characters and the decoded image may not exceed 256000 bytes.
 	Logo *string `json:"logo,omitempty"`
-	// The authentication methods supported by the client.
+	// How the client authenticates itself at the token endpoint: client_secret_post for a confidential client that sends its secret, none for a public client that proves itself with PKCE instead.
 	AuthenticationMethods []string `json:"authentication_methods,omitempty"`
-	// Indicates whether the client is accessible by third-party tenants.
-	IsPublic *bool `json:"is_public,omitempty"`
-	// The date and time when the client was created.
+	// When the client was registered, as an ISO-8601 timestamp with a zone offset.
 	CreatedOn *time.Time `json:"created_on,omitempty"`
-	// The user who created the client.
+	// The identifier of the user who registered the client. A plain user may read and change only the clients where this is their own identifier.
 	CreatedBy *string `json:"created_by,omitempty"`
-	// The date and time when the client was last modified.
+	// When the client was last changed, as an ISO-8601 timestamp with a zone offset.
 	ModifiedOn *time.Time `json:"modified_on,omitempty"`
-	// The user who last modified the client.
+	// The identifier of the user who last changed the client.
 	ModifiedBy *string `json:"modified_by,omitempty"`
+	// Whether the client is offered to third-party tenants rather than only to the tenant that registered it.
+	IsPublic *bool `json:"is_public,omitempty"`
 }
 
 // NewClientInfoResponse instantiates a new ClientInfoResponse object
@@ -166,38 +165,6 @@ func (o *ClientInfoResponse) IsScopesSet() bool {
 // SetScopes gets a reference to the given []string and assigns it to the Scopes field.
 func (o *ClientInfoResponse) SetScopes(v []string) {
 	o.Scopes = v
-}
-
-// GetPublic returns the Public field value if set, zero value otherwise.
-func (o *ClientInfoResponse) GetPublic() bool {
-	if o == nil || IsNil(o.Public) {
-		var ret bool
-		return ret
-	}
-	return *o.Public
-}
-
-// GetPublicOk returns a tuple with the Public field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ClientInfoResponse) GetPublicOk() (*bool, bool) {
-	if o == nil || IsNil(o.Public) {
-		return nil, false
-	}
-	return o.Public, true
-}
-
-// HasPublic returns a boolean if a field has been set.
-func (o *ClientInfoResponse) IsPublicSet() bool {
-	if o != nil && !IsNil(o.Public) {
-		return true
-	}
-
-	return false
-}
-
-// SetPublic gets a reference to the given bool and assigns it to the Public field.
-func (o *ClientInfoResponse) SetPublic(v bool) {
-	o.Public = &v
 }
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
@@ -392,38 +359,6 @@ func (o *ClientInfoResponse) SetAuthenticationMethods(v []string) {
 	o.AuthenticationMethods = v
 }
 
-// GetIsPublic returns the IsPublic field value if set, zero value otherwise.
-func (o *ClientInfoResponse) GetIsPublic() bool {
-	if o == nil || IsNil(o.IsPublic) {
-		var ret bool
-		return ret
-	}
-	return *o.IsPublic
-}
-
-// GetIsPublicOk returns a tuple with the IsPublic field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ClientInfoResponse) GetIsPublicOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsPublic) {
-		return nil, false
-	}
-	return o.IsPublic, true
-}
-
-// HasIsPublic returns a boolean if a field has been set.
-func (o *ClientInfoResponse) IsIsPublicSet() bool {
-	if o != nil && !IsNil(o.IsPublic) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsPublic gets a reference to the given bool and assigns it to the IsPublic field.
-func (o *ClientInfoResponse) SetIsPublic(v bool) {
-	o.IsPublic = &v
-}
-
 // GetCreatedOn returns the CreatedOn field value if set, zero value otherwise.
 func (o *ClientInfoResponse) GetCreatedOn() time.Time {
 	if o == nil || IsNil(o.CreatedOn) {
@@ -552,6 +487,38 @@ func (o *ClientInfoResponse) SetModifiedBy(v string) {
 	o.ModifiedBy = &v
 }
 
+// GetIsPublic returns the IsPublic field value if set, zero value otherwise.
+func (o *ClientInfoResponse) GetIsPublic() bool {
+	if o == nil || IsNil(o.IsPublic) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPublic
+}
+
+// GetIsPublicOk returns a tuple with the IsPublic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClientInfoResponse) GetIsPublicOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsPublic) {
+		return nil, false
+	}
+	return o.IsPublic, true
+}
+
+// HasIsPublic returns a boolean if a field has been set.
+func (o *ClientInfoResponse) IsIsPublicSet() bool {
+	if o != nil && !IsNil(o.IsPublic) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPublic gets a reference to the given bool and assigns it to the IsPublic field.
+func (o *ClientInfoResponse) SetIsPublic(v bool) {
+	o.IsPublic = &v
+}
+
 func (o ClientInfoResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -571,9 +538,6 @@ func (o ClientInfoResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Scopes) {
 		toSerialize["scopes"] = o.Scopes
 	}
-	if !IsNil(o.Public) {
-		toSerialize["public"] = o.Public
-	}
 	if !IsNil(o.ClientId) {
 		toSerialize["client_id"] = o.ClientId
 	}
@@ -592,9 +556,6 @@ func (o ClientInfoResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AuthenticationMethods) {
 		toSerialize["authentication_methods"] = o.AuthenticationMethods
 	}
-	if !IsNil(o.IsPublic) {
-		toSerialize["is_public"] = o.IsPublic
-	}
 	if !IsNil(o.CreatedOn) {
 		toSerialize["created_on"] = o.CreatedOn
 	}
@@ -606,6 +567,9 @@ func (o ClientInfoResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ModifiedBy) {
 		toSerialize["modified_by"] = o.ModifiedBy
+	}
+	if !IsNil(o.IsPublic) {
+		toSerialize["is_public"] = o.IsPublic
 	}
 	return toSerialize, nil
 }

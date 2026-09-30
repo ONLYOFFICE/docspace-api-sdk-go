@@ -23,13 +23,13 @@ var _ MappedNullable = &ExchangeToken200Response{}
 
 // ExchangeToken200Response struct for ExchangeToken200Response
 type ExchangeToken200Response struct {
-	// The access token issued by the authorization server.
+	// The token to send as a Bearer credential when calling the portal on the user behalf.
 	AccessToken *string `json:"access_token,omitempty"`
-	// The type of token issued, typically 'Bearer'.
+	// How the access token is to be presented. It is always Bearer.
 	TokenType *string `json:"token_type,omitempty"`
-	// The number of seconds until the access token expires.
+	// How many seconds the access token stays valid, counted from the moment it was issued.
 	ExpiresIn *int32 `json:"expires_in,omitempty"`
-	// The token used to obtain a new access token when the current one expires.
+	// The token that buys a new access token once the current one expires. It is present only when the client is registered for the refresh token grant.
 	RefreshToken *string `json:"refresh_token,omitempty"`
 }
 

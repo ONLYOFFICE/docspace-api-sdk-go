@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | Pointer to **NullableString** | The address of the customer configuration. | [optional] 
-**Logo** | Pointer to **NullableString** | The logo of the customer configuration. | [optional] 
-**LogoDark** | Pointer to **NullableString** | The dark logo of the customer configuration. | [optional] 
-**Mail** | Pointer to **NullableString** | The mail address of the customer configuration. | [optional] 
-**Name** | Pointer to **NullableString** | The name of the customer configuration. | [optional] 
-**Www** | Pointer to **NullableString** | The site web address of the customer configuration. | [optional] 
+**Address** | Pointer to **NullableString** | The postal address from the portal branding settings; empty when none was entered. | [optional] 
+**Logo** | Pointer to **NullableString** | The About-panel logo of the organization. | [optional] 
+**LogoDark** | Pointer to **NullableString** | The About-panel logo for a dark interface theme. | [optional] 
+**Mail** | Pointer to **NullableString** | The contact address from the portal branding settings. | [optional] 
+**Name** | Pointer to **NullableString** | The organization name shown in the editor. | [optional] 
+**Www** | Pointer to **NullableString** | The website of the organization. | [optional] 
 
 ## Methods
 

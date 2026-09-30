@@ -16,49 +16,48 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the AuditEventDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AuditEventDto{}
 
-// AuditEventDto The audit event parameters.
+// AuditEventDto One entry of the portal audit trail: who changed what, from where, and where it belongs in the product.
 type AuditEventDto struct {
-	// The audit event ID.
+	// The ID of the recorded entry. Nothing accepts it as an argument - no operation fetches a single audit event  - so it serves only to tell two otherwise identical entries apart.
 	Id *int32 `json:"id,omitempty"`
-	// The audit event date.
-	Date NullableTime `json:"date,omitempty"`
-	// The name of the user who triggered the audit event.
+	// When the action happened, in the portal time zone. The `from` and `to` filters are read as UTC instants, so  the two do not line up on a portal that is not on UTC.
+	Date *ApiDateTime `json:"date,omitempty"`
+	// The display name of the user who acted, taken from the account as it stands now rather than as it stood  when the entry was written. A localised placeholder stands in when there is no account to read: a portal  background job, an anonymous guest, or a user who has since been deleted.
 	User NullableString `json:"user,omitempty"`
-	// The ID of the user who triggered the audit event.
+	// The ID of the user who acted, which is what the `userId` filter of this operation matches on. It stays  readable after the account is deleted, which is when `user` falls back to a placeholder.
 	UserId *string `json:"userId,omitempty"`
-	// The audit event action.
+	// The whole event as a readable sentence in the portal language, with the names of the objects involved  substituted into it. On the two `audit/.../last` operations each substituted value is cut to 50 characters;  the filtered operations substitute them in full. It is empty when the build has no wording for the action.
 	Action NullableString `json:"action,omitempty"`
-	// The specific action that occurred within the audit event.
+	// The action itself, as the `action` filter of this operation spells it and as  `GET api/2.0/security/audit/mappers` lists it under `messageAction`. Use this rather than parsing `action`,  which is prose and changes with the portal language.
 	ActionId *MessageAction `json:"actionId,omitempty"`
-	// The audit event IP.
+	// The IP address the request came from, with the port stripped off. It is empty for an action a portal  background job performed, which has no request behind it.
 	Ip NullableString `json:"ip,omitempty"`
-	// The audit event country.
+	// The English name of the country the IP address is located in, empty when the address cannot be located -  the normal outcome for private and loopback addresses.
 	Country NullableString `json:"country,omitempty"`
-	// The audit event city.
+	// The city the IP address is located in, empty under the same conditions as `country`.
 	City NullableString `json:"city,omitempty"`
-	// The audit event browser.
+	// The browser and its version as parsed from the user agent of the request, empty when the client sent none  that could be parsed or when no request was involved.
 	Browser NullableString `json:"browser,omitempty"`
-	// The audit event platform.
+	// The operating system as parsed from the same user agent, empty under the same conditions as `browser`.
 	Platform NullableString `json:"platform,omitempty"`
-	// The audit event page.
+	// Where in the portal the action was made from: the referrer of the request, or that request's own path when  it carried no referrer. Long values are cut off at 512 characters.
 	Page NullableString `json:"page,omitempty"`
-	// The type of action performed in the audit event (e.g., Create, Update, Delete).
+	// The kind of change the action stands for, as the `actionType` filter of this operation spells it. It is  derived from `actionId`, not stored per entry, so it is the same on every entry of one action.
 	ActionType *ActionType `json:"actionType,omitempty"`
-	// The type of product related to the audit event.
+	// The product the action belongs to. It cannot be filtered on here; the tree that groups actions by product  is `GET api/2.0/security/audit/mappers`.
 	Product *ProductType `json:"product,omitempty"`
-	// The location where the audit event occurred.
+	// The location inside that product, as the `moduleType` filter of this operation spells it. It is also  derived from `actionId` rather than stored per entry.
 	Location *LocationType `json:"location,omitempty"`
-	// The list of target objects affected by the audit event (e.g., document ID, user account).
+	// The objects the action was applied to, as the trail recorded them - a title, an account, an ID - one string  each. It is empty for an action that targets nothing, such as a settings change, and the `target` filter of  this operation matches one of these values in full.
 	Target []string `json:"target,omitempty"`
-	// The list of audit entry types (e.g., Folder, User, File).
+	// The kinds of object the action applies to, holding at most two entries and none at all for an action that  targets nothing. Only the first of them can be filtered on, through `entryType`.
 	Entries []EntryType `json:"entries,omitempty"`
-	// The audit event context.
+	// Where the action took place, spelled out in the portal language rather than as a code: for a Documents  event the room or the root folder it happened in, and for anything else the name of the module. Nothing  filters on it.
 	Context NullableString `json:"context,omitempty"`
 }
 
@@ -111,46 +110,36 @@ func (o *AuditEventDto) SetId(v int32) {
 	o.Id = &v
 }
 
-// GetDate returns the Date field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AuditEventDto) GetDate() time.Time {
-	if o == nil || IsNil(o.Date.Get()) {
-		var ret time.Time
+// GetDate returns the Date field value if set, zero value otherwise.
+func (o *AuditEventDto) GetDate() ApiDateTime {
+	if o == nil || IsNil(o.Date) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.Date.Get()
+	return *o.Date
 }
 
 // GetDateOk returns a tuple with the Date field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AuditEventDto) GetDateOk() (*time.Time, bool) {
-	if o == nil {
+func (o *AuditEventDto) GetDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Date) {
 		return nil, false
 	}
-	return o.Date.Get(), o.Date.IsSet()
+	return o.Date, true
 }
 
 // HasDate returns a boolean if a field has been set.
 func (o *AuditEventDto) IsDateSet() bool {
-	if o != nil && o.Date.IsSet() {
+	if o != nil && !IsNil(o.Date) {
 		return true
 	}
 
 	return false
 }
 
-// SetDate gets a reference to the given NullableTime and assigns it to the Date field.
-func (o *AuditEventDto) SetDate(v time.Time) {
-	o.Date.Set(&v)
-}
-// SetDateNil sets the value for Date to be an explicit nil
-func (o *AuditEventDto) SetDateNil() {
-	o.Date.Set(nil)
-}
-
-// UnsetDate ensures that no value is present for Date, not even an explicit nil
-func (o *AuditEventDto) UnsetDate() {
-	o.Date.Unset()
+// SetDate gets a reference to the given ApiDateTime and assigns it to the Date field.
+func (o *AuditEventDto) SetDate(v ApiDateTime) {
+	o.Date = &v
 }
 
 // GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -770,8 +759,8 @@ func (o AuditEventDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Date.IsSet() {
-		toSerialize["date"] = o.Date.Get()
+	if !IsNil(o.Date) {
+		toSerialize["date"] = o.Date
 	}
 	if o.User.IsSet() {
 		toSerialize["user"] = o.User.Get()

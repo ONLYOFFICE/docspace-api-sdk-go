@@ -21,19 +21,19 @@ import (
 // checks if the InfoConfigDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InfoConfigDto{}
 
-// InfoConfigDto The information config parameters.
+// InfoConfigDto The facts the editor information panel shows about the open document.
 type InfoConfigDto struct {
-	// Specifies if the file is favorite or not.
+	// Whether the caller has this document among their favorites. It is empty when favorites do not apply - for an  anonymous caller, for a guest, and for an encrypted document.
 	Favorite NullableBool `json:"favorite,omitempty"`
-	// The folder of the file.
+	// The place of the document as a readable path, its folders joined from the root downwards. It is empty in the  embedded layout, which shows no such panel.
 	Folder NullableString `json:"folder,omitempty"`
-	// The file owner.
+	// The display name of the owner of the document. It is empty for an anonymous session.
 	Owner NullableString `json:"owner,omitempty"`
-	// The sharing settings of the file.
+	// Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner.
 	SharingSettings []AceShortWrapper `json:"sharingSettings,omitempty"`
-	// The editor type of the file.
+	// The layout the information panel is rendered for.
 	Type *EditorType `json:"type,omitempty"`
-	// The uploaded file.
+	// When the document was created on the portal, already formatted for reading in the culture of the caller rather  than as a machine timestamp.
 	Uploaded NullableString `json:"uploaded,omitempty"`
 }
 

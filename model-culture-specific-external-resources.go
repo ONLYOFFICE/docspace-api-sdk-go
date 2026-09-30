@@ -23,6 +23,8 @@ var _ MappedNullable = &CultureSpecificExternalResources{}
 
 // CultureSpecificExternalResources The external resources settings.
 type CultureSpecificExternalResources struct {
+	// The link to the administration panel. It is returned only to the full administrators of a licensed (Enterprise) server (standalone) portal.
+	AdminPanel *CultureSpecificExternalResource `json:"adminPanel,omitempty"`
 	// The link to the product API.
 	Api *CultureSpecificExternalResource `json:"api,omitempty"`
 	// The link to the common product information.
@@ -58,6 +60,38 @@ func NewCultureSpecificExternalResources() *CultureSpecificExternalResources {
 func NewCultureSpecificExternalResourcesWithDefaults() *CultureSpecificExternalResources {
 	this := CultureSpecificExternalResources{}
 	return &this
+}
+
+// GetAdminPanel returns the AdminPanel field value if set, zero value otherwise.
+func (o *CultureSpecificExternalResources) GetAdminPanel() CultureSpecificExternalResource {
+	if o == nil || IsNil(o.AdminPanel) {
+		var ret CultureSpecificExternalResource
+		return ret
+	}
+	return *o.AdminPanel
+}
+
+// GetAdminPanelOk returns a tuple with the AdminPanel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CultureSpecificExternalResources) GetAdminPanelOk() (*CultureSpecificExternalResource, bool) {
+	if o == nil || IsNil(o.AdminPanel) {
+		return nil, false
+	}
+	return o.AdminPanel, true
+}
+
+// HasAdminPanel returns a boolean if a field has been set.
+func (o *CultureSpecificExternalResources) IsAdminPanelSet() bool {
+	if o != nil && !IsNil(o.AdminPanel) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdminPanel gets a reference to the given CultureSpecificExternalResource and assigns it to the AdminPanel field.
+func (o *CultureSpecificExternalResources) SetAdminPanel(v CultureSpecificExternalResource) {
+	o.AdminPanel = &v
 }
 
 // GetApi returns the Api field value if set, zero value otherwise.
@@ -358,6 +392,9 @@ func (o CultureSpecificExternalResources) MarshalJSON() ([]byte, error) {
 
 func (o CultureSpecificExternalResources) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AdminPanel) {
+		toSerialize["adminPanel"] = o.AdminPanel
+	}
 	if !IsNil(o.Api) {
 		toSerialize["api"] = o.Api
 	}

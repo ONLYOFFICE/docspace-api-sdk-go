@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **int32** | The login event ID. | [optional] 
-**Date** | Pointer to **NullableTime** | The login event date. | [optional] 
-**User** | Pointer to **NullableString** | The user name of the login event. | [optional] 
-**UserId** | Pointer to **string** | The user ID of the login event. | [optional] 
-**Login** | Pointer to **NullableString** | The user login of the login event. | [optional] 
-**Action** | Pointer to **NullableString** | The login event action. | [optional] 
-**ActionId** | Pointer to [**MessageAction**](MessageAction.md) | The login-related action to filter events by. | [optional] 
-**Ip** | Pointer to **NullableString** | The login event IP. | [optional] 
-**Country** | Pointer to **NullableString** | The login event country. | [optional] 
-**City** | Pointer to **NullableString** | The login event city. | [optional] 
-**Browser** | Pointer to **NullableString** | The login event browser. | [optional] 
-**Platform** | Pointer to **NullableString** | The login event platform. | [optional] 
-**Page** | Pointer to **NullableString** | The login event page. | [optional] 
+**Id** | Pointer to **int32** | The ID of the recorded sign-in. When the entry is a successful sign-in that is still open, this is also  the value `GET api/2.0/security/activeconnections` reports as the connection's `id`. | [optional] 
+**Date** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the attempt was made, in the portal time zone. The `from` and `to` filters are read as UTC instants,  so the two do not line up on a portal that is not on UTC. | [optional] 
+**User** | Pointer to **NullableString** | The display name of the account the attempt was made against, taken from the account as it stands now  rather than as it stood at the time. A localised placeholder stands in when there is no account to read,  which is the usual case for a failed attempt on an address nobody owns. | [optional] 
+**UserId** | Pointer to **string** | The ID of that account, which is what the `userId` filter of this operation matches on. It is the empty  GUID when the attempt could not be tied to an account. | [optional] 
+**Login** | Pointer to **NullableString** | The login string as it was typed - normally the email address. It is the only field that survives a failed  attempt against an unknown account, which makes it the one to read when `user` is a placeholder. | [optional] 
+**Action** | Pointer to **NullableString** | The event as a readable sentence in the portal language. On `GET api/2.0/security/audit/login/last` each  substituted value is cut to 50 characters; the filtered operation substitutes them in full. | [optional] 
+**ActionId** | Pointer to [**MessageAction**](MessageAction.md) | What happened, as the `action` filter of this operation spells it: a successful sign-in, a failed one, a  sign-out. Use this rather than parsing `action`, which is prose and changes with the portal language. | [optional] 
+**Ip** | Pointer to **NullableString** | The IP address the attempt came from, with the port stripped off. | [optional] 
+**Country** | Pointer to **NullableString** | The English name of the country the IP address is located in, empty when the address cannot be located -  the normal outcome for private and loopback addresses. | [optional] 
+**City** | Pointer to **NullableString** | The city the IP address is located in, empty under the same conditions as `country`. | [optional] 
+**Browser** | Pointer to **NullableString** | The browser and its version as parsed from the user agent of the attempt, empty when the client sent none  that could be parsed. | [optional] 
+**Platform** | Pointer to **NullableString** | The operating system as parsed from the same user agent, empty under the same conditions as `browser`. | [optional] 
+**Page** | Pointer to **NullableString** | Where in the portal the attempt was made from: the referrer of the request, or that request's own path  when it carried no referrer. Long values are cut off at 512 characters. | [optional] 
 
 ## Methods
 
@@ -64,20 +64,20 @@ HasId returns a boolean if a field has been set.
 
 ### GetDate
 
-`func (o *LoginEventDto) GetDate() time.Time`
+`func (o *LoginEventDto) GetDate() ApiDateTime`
 
 GetDate returns the Date field if non-nil, zero value otherwise.
 
 ### GetDateOk
 
-`func (o *LoginEventDto) GetDateOk() (*time.Time, bool)`
+`func (o *LoginEventDto) GetDateOk() (*ApiDateTime, bool)`
 
 GetDateOk returns a tuple with the Date field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDate
 
-`func (o *LoginEventDto) SetDate(v time.Time)`
+`func (o *LoginEventDto) SetDate(v ApiDateTime)`
 
 SetDate sets Date field to given value.
 
@@ -87,16 +87,6 @@ SetDate sets Date field to given value.
 
 HasDate returns a boolean if a field has been set.
 
-### SetDateNil
-
-`func (o *LoginEventDto) SetDateNil(b bool)`
-
- SetDateNil sets the value for Date to be an explicit nil
-
-### UnsetDate
-`func (o *LoginEventDto) UnsetDate()`
-
-UnsetDate ensures that no value is present for Date, not even an explicit nil
 ### GetUser
 
 `func (o *LoginEventDto) GetUser() string`

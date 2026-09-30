@@ -4,9 +4,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**EnableAdminMessageSettings**](SettingsMessagesAPI.md#EnableAdminMessageSettings) | **Post** /api/2.0/settings/messagesettings | Enable the administrator message settings
+[**EnableAdminMessageSettings**](SettingsMessagesAPI.md#EnableAdminMessageSettings) | **Post** /api/2.0/settings/messagesettings | Enable or disable administrator messages
 [**SendAdminMail**](SettingsMessagesAPI.md#SendAdminMail) | **Post** /api/2.0/settings/sendadmmail | Send a message to the administrator
-[**SendJoinInviteMail**](SettingsMessagesAPI.md#SendJoinInviteMail) | **Post** /api/2.0/settings/sendjoininvite | Sends an invitation email
+[**SendJoinInviteMail**](SettingsMessagesAPI.md#SendJoinInviteMail) | **Post** /api/2.0/settings/sendjoininvite | Send an invitation email
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > StringWrapper EnableAdminMessageSettings(ctx).TurnOnAdminMessageSettingsRequestDto(turnOnAdminMessageSettingsRequestDto).Execute()
 
-Enable the administrator message settings
+Enable or disable administrator messages
 
 
 
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -150,7 +150,7 @@ No authorization required
 
 > StringWrapper SendJoinInviteMail(ctx).AdminMessageBaseSettingsRequestsDto(adminMessageBaseSettingsRequestsDto).Execute()
 
-Sends an invitation email
+Send an invitation email
 
 
 
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

@@ -23,12 +23,12 @@ import (
 // checks if the EditorToolCallStateDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EditorToolCallStateDto{}
 
-// EditorToolCallStateDto The editor tool call state. Used to run the agent flow in the editor.
+// EditorToolCallStateDto A generation the editor is expected to run as soon as the document opens, left behind by an AI agent that created  the file but not its content.
 type EditorToolCallStateDto struct {
-	// The tool name.
+	// Which generation to run, which also decides the shape of the parameters below.
 	ToolName NullableString `json:"toolName"`
-	// The tool call parameters.
-	Parameters map[string]interface{} `json:"parameters"`
+	// The arguments of the generation named above.
+	Parameters EditorToolCallParametersDto `json:"parameters"`
 }
 
 type _EditorToolCallStateDto EditorToolCallStateDto
@@ -37,7 +37,7 @@ type _EditorToolCallStateDto EditorToolCallStateDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEditorToolCallStateDto(toolName NullableString, parameters map[string]interface{}) *EditorToolCallStateDto {
+func NewEditorToolCallStateDto(toolName NullableString, parameters EditorToolCallParametersDto) *EditorToolCallStateDto {
 	this := EditorToolCallStateDto{}
 	this.ToolName = toolName
 	this.Parameters = parameters
@@ -79,9 +79,9 @@ func (o *EditorToolCallStateDto) SetToolName(v string) {
 }
 
 // GetParameters returns the Parameters field value
-func (o *EditorToolCallStateDto) GetParameters() map[string]interface{} {
+func (o *EditorToolCallStateDto) GetParameters() EditorToolCallParametersDto {
 	if o == nil {
-		var ret map[string]interface{}
+		var ret EditorToolCallParametersDto
 		return ret
 	}
 
@@ -90,15 +90,15 @@ func (o *EditorToolCallStateDto) GetParameters() map[string]interface{} {
 
 // GetParametersOk returns a tuple with the Parameters field value
 // and a boolean to check if the value has been set.
-func (o *EditorToolCallStateDto) GetParametersOk() (map[string]interface{}, bool) {
+func (o *EditorToolCallStateDto) GetParametersOk() (*EditorToolCallParametersDto, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.Parameters, true
+	return &o.Parameters, true
 }
 
 // SetParameters sets field value
-func (o *EditorToolCallStateDto) SetParameters(v map[string]interface{}) {
+func (o *EditorToolCallStateDto) SetParameters(v EditorToolCallParametersDto) {
 	o.Parameters = v
 }
 

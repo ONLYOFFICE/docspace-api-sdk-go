@@ -21,11 +21,11 @@ import (
 // checks if the ActionConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionConfig{}
 
-// ActionConfig The information about the action in the document that will be scrolled to.
+// ActionConfig An anchor inside a document, as the editor writes it.
 type ActionConfig struct {
-	// The action data that will be scrolled to.
+	// The anchor value produced by the editor, opaque to the portal: it names the comment, the mention or the  place the document is scrolled to.
 	Data NullableString `json:"data,omitempty"`
-	// The action type.
+	// What the anchor points at, as the editor names it - a comment thread, for instance.
 	Type NullableString `json:"type,omitempty"`
 }
 

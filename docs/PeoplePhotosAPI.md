@@ -35,8 +35,8 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
-	thumbnailsRequest := *openapiclient.NewThumbnailsRequest() // ThumbnailsRequest | The thumbnail request.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+	thumbnailsRequest := *openapiclient.NewThumbnailsRequest() // ThumbnailsRequest | The crop rectangle, and optionally the temporary image to crop.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -56,7 +56,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | 
 
 ### Other Parameters
 
@@ -66,7 +66,7 @@ Other parameters are passed through a pointer to a apiCreateMemberPhotoThumbnail
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **thumbnailsRequest** | [**ThumbnailsRequest**](ThumbnailsRequest.md) | The thumbnail request. | 
+ **thumbnailsRequest** | [**ThumbnailsRequest**](ThumbnailsRequest.md) | The crop rectangle, and optionally the temporary image to crop. | 
 
 ### Return type
 
@@ -109,7 +109,7 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -129,7 +129,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. | 
 
 ### Other Parameters
 
@@ -181,7 +181,7 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -201,7 +201,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. | 
 
 ### Other Parameters
 
@@ -253,8 +253,8 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
-	updatePhotoMemberRequest := *openapiclient.NewUpdatePhotoMemberRequest() // UpdatePhotoMemberRequest | The request parameters for updating a photo.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+	updatePhotoMemberRequest := *openapiclient.NewUpdatePhotoMemberRequest() // UpdatePhotoMemberRequest | The address of the image to use as the new avatar.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -274,7 +274,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | 
 
 ### Other Parameters
 
@@ -284,7 +284,7 @@ Other parameters are passed through a pointer to a apiUpdateMemberPhotoRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updatePhotoMemberRequest** | [**UpdatePhotoMemberRequest**](UpdatePhotoMemberRequest.md) | The request parameters for updating a photo. | 
+ **updatePhotoMemberRequest** | [**UpdatePhotoMemberRequest**](UpdatePhotoMemberRequest.md) | The address of the image to use as the new avatar. | 
 
 ### Return type
 
@@ -327,9 +327,9 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
-	file := os.NewFile(1234, "some_file") // *os.File | The image data.
-	autosave := true // bool | Specifies whether to autosave a photo or not. (optional)
+	userid := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+	file := os.NewFile(1234, "some_file") // *os.File | The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status.
+	autosave := true // bool | Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userid}/photo/thumbnails` to take effect. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -349,7 +349,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | 
 
 ### Other Parameters
 
@@ -359,8 +359,8 @@ Other parameters are passed through a pointer to a apiUploadMemberPhotoRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **file** | ***os.File** | The image data. | 
- **autosave** | **bool** | Specifies whether to autosave a photo or not. | 
+ **file** | ***os.File** | The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status. | 
+ **autosave** | **bool** | Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userid}/photo/thumbnails` to take effect. | 
 
 ### Return type
 

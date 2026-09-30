@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Year** | Pointer to **int32** | The calendar year. | [optional] 
-**Month** | Pointer to **int32** | The calendar month (1-12). | [optional] 
-**Currency** | Pointer to **NullableString** | The three-character ISO 4217 currency symbol of the amounts. | [optional] 
-**TotalAmount** | Pointer to **float64** | The total amount charged across all services in this month. | [optional] 
-**OperationCount** | Pointer to **int32** | The number of individual purchase operations in this month. | [optional] 
+**Year** | Pointer to **int32** | The year the month belongs to. Months are cut in the portal time zone, so a movement at the edge of a  month falls where the portal sees it and not where UTC does. | [optional] 
+**Month** | Pointer to **int32** | The month itself, January being 1. Only months that had spending appear at all, so a gap in the list is a  month with nothing in it rather than missing data. | [optional] 
+**Currency** | Pointer to **NullableString** | The currency `totalAmount` is expressed in, as a three-letter ISO 4217 code - the accounting currency of  the wallet. | [optional] 
+**TotalAmount** | Pointer to **float64** | What the month came to across every service, as a positive amount spent rather than a signed balance. | [optional] 
+**OperationCount** | Pointer to **int32** | How many separate movements that total was added up from, for a client that wants to show the weight  behind a figure. The movements themselves are in `GET api/2.0/portal/payment/customer/operations`. | [optional] 
 
 ## Methods
 

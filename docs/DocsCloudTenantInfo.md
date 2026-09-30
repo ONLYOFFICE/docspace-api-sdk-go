@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **License** | Pointer to [**DocsCloudLicenseInfo**](DocsCloudLicenseInfo.md) | The license information. | [optional] 
-**Server** | Pointer to [**DocsCloudServerInfo**](DocsCloudServerInfo.md) | The DocsCloud server information. | [optional] 
+**Server** | Pointer to [**DocsCloudServerInfo**](DocsCloudServerInfo.md) | The Docs Connect server information. | [optional] 
 **UsersLimit** | Pointer to [**DocsCloudUsersLimit**](DocsCloudUsersLimit.md) | The user limits of the license. | [optional] 
 **Stats** | Pointer to [**DocsCloudStats**](DocsCloudStats.md) | The usage statistics for the current period. | [optional] 
 

@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AspectRatio** | Pointer to **bool** | Specifies whether the size is an aspect ratio. | [optional] 
-**FillArea** | Pointer to **bool** | Specifies whether the logo is resized based on the smallest fitting dimension. | [optional] 
-**Greater** | Pointer to **bool** | Specifies whether the logo is resized only if it is greater than the size. | [optional] 
-**Height** | Pointer to **int32** | The logo height, in pixels. | [optional] 
-**IgnoreAspectRatio** | Pointer to **bool** | Specifies whether the logo is resized without preserving the aspect ratio. | [optional] 
-**IsPercentage** | Pointer to **bool** | Specifies whether the width and height are expressed as percentages. | [optional] 
-**Less** | Pointer to **bool** | Specifies whether the logo is resized only if it is less than the size. | [optional] 
-**LimitPixels** | Pointer to **bool** | Specifies whether the logo is resized using a pixel area count limit. | [optional] 
-**Width** | Pointer to **int32** | The logo width, in pixels. | [optional] 
-**X** | Pointer to **int32** | The X offset from the origin, in pixels. | [optional] 
-**Y** | Pointer to **int32** | The Y offset from the origin, in pixels. | [optional] 
+**AspectRatio** | Pointer to **bool** | Whether the numbers are to be read as an aspect ratio rather than as pixels. Always `false` on the sizes  this API reports. | [optional] 
+**FillArea** | Pointer to **bool** | Whether an image would be scaled to cover the box rather than to fit inside it. Always `false` here. | [optional] 
+**Greater** | Pointer to **bool** | Whether scaling would apply only to an image larger than the box. Always `false` here. | [optional] 
+**Height** | Pointer to **int32** | The height of the box in pixels - one of the two fields of this object that carry information. | [optional] 
+**IgnoreAspectRatio** | Pointer to **bool** | Whether scaling would be allowed to distort the image. Always `false` here. | [optional] 
+**IsPercentage** | Pointer to **bool** | Whether `width` and `height` are to be read as percentages. Always `false` here, so both are pixels. | [optional] 
+**Less** | Pointer to **bool** | Whether scaling would apply only to an image smaller than the box. Always `false` here. | [optional] 
+**LimitPixels** | Pointer to **bool** | Whether the box is to be read as a total pixel-area budget instead of as two dimensions. Always `false`  here. | [optional] 
+**Width** | Pointer to **int32** | The width of the box in pixels - the other field of this object that carries information. | [optional] 
+**X** | Pointer to **int32** | The horizontal offset of the box from the origin. Always `0` here. | [optional] 
+**Y** | Pointer to **int32** | The vertical offset of the box from the origin. Always `0` here. | [optional] 
 
 ## Methods
 

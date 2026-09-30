@@ -23,9 +23,9 @@ import (
 // checks if the OwnerIdSettingsRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OwnerIdSettingsRequestDto{}
 
-// OwnerIdSettingsRequestDto The request parameters for managing the owner-specific settings.
+// OwnerIdSettingsRequestDto The portal member named as the new owner of the portal.
 type OwnerIdSettingsRequestDto struct {
-	// The ID of the owner whose settings are being managed.
+	// The member who is to become the portal owner, by user ID. They have to be an active member of this portal and  not a guest; a member who is not a DocSpace administrator yet is promoted to one as part of the transfer, so  the portal needs a paid seat for them.
 	OwnerId string `json:"ownerId"`
 }
 

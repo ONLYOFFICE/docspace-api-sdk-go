@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AiAssignmentsAssign**](AIAssignmentsAPI.md#AiAssignmentsAssign) | **Put** /api/2.0/ai/assignments/assign | Assign
+[**AiAssignmentsAssign**](AIAssignmentsAPI.md#AiAssignmentsAssign) | **Put** /api/2.0/ai/assignments/assign | Bind a profile to an action
 [**AiAssignmentsBulkAssign**](AIAssignmentsAPI.md#AiAssignmentsBulkAssign) | **Put** /api/2.0/ai/assignments/bulk-assign | Bulk assign
 [**AiAssignmentsCascadeProfileDelete**](AIAssignmentsAPI.md#AiAssignmentsCascadeProfileDelete) | **Delete** /api/2.0/ai/assignments/cascade-profile-delete | Cascade profile delete
 [**AiAssignmentsGetAllAssignments**](AIAssignmentsAPI.md#AiAssignmentsGetAllAssignments) | **Get** /api/2.0/ai/assignments/get-all-assignments | Get all assignments
 [**AiAssignmentsGetAssignment**](AIAssignmentsAPI.md#AiAssignmentsGetAssignment) | **Get** /api/2.0/ai/assignments/get-assignment | Get assignment
 [**AiAssignmentsResolveForAction**](AIAssignmentsAPI.md#AiAssignmentsResolveForAction) | **Get** /api/2.0/ai/assignments/resolve-for-action | Resolve for action
 [**AiAssignmentsTryResolveForAction**](AIAssignmentsAPI.md#AiAssignmentsTryResolveForAction) | **Get** /api/2.0/ai/assignments/try-resolve-for-action | Try resolve for action
-[**AiAssignmentsUnassign**](AIAssignmentsAPI.md#AiAssignmentsUnassign) | **Delete** /api/2.0/ai/assignments/unassign | Unassign
+[**AiAssignmentsUnassign**](AIAssignmentsAPI.md#AiAssignmentsUnassign) | **Delete** /api/2.0/ai/assignments/unassign | Clear an action's profile
 
 
 
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 > AiAssignmentMutationResult AiAssignmentsAssign(ctx).AiAssignmentsAssignRequest(aiAssignmentsAssignRequest).Execute()
 
-Assign
+Bind a profile to an action
 
 
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -106,7 +106,7 @@ import (
 )
 
 func main() {
-	requestBody := map[string]string{"key": "Inner_example"} // map[string]string | 
+	requestBody := map[string]string{"key": "Inner_example"} // map[string]string | A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -131,7 +131,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsBulkAssignReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]string** |  | 
+ **requestBody** | **map[string]string** | A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. | 
 
 ### Return type
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -153,7 +153,7 @@ No authorization required
 
 ## AiAssignmentsCascadeProfileDelete
 
-> AiSuccessResponse AiAssignmentsCascadeProfileDelete(ctx).Body(body).Execute()
+> AiSuccessResponse AiAssignmentsCascadeProfileDelete(ctx).AiAssignmentsCascadeProfileDeleteRequest(aiAssignmentsCascadeProfileDeleteRequest).Execute()
 
 Cascade profile delete
 
@@ -174,11 +174,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	aiAssignmentsCascadeProfileDeleteRequest := *openapiclient.NewAiAssignmentsCascadeProfileDeleteRequest("00000000-0000-0000-0000-000000000000") // AiAssignmentsCascadeProfileDeleteRequest | The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIAssignmentsAPI.AiAssignmentsCascadeProfileDelete(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIAssignmentsAPI.AiAssignmentsCascadeProfileDelete(context.Background()).AiAssignmentsCascadeProfileDeleteRequest(aiAssignmentsCascadeProfileDeleteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAssignmentsAPI.AiAssignmentsCascadeProfileDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -199,7 +199,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsCascadeProfil
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **aiAssignmentsCascadeProfileDeleteRequest** | [**AiAssignmentsCascadeProfileDeleteRequest**](AiAssignmentsCascadeProfileDeleteRequest.md) | The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body. | 
 
 ### Return type
 
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -242,7 +242,7 @@ import (
 )
 
 func main() {
-	entityId := "entityId_example" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -310,7 +310,7 @@ import (
 )
 
 func main() {
-	actionType := "actionType_example" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -335,7 +335,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsGetAssignment
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | 
+ **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | 
 
 ### Return type
 
@@ -343,7 +343,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -378,8 +378,8 @@ import (
 )
 
 func main() {
-	actionType := "actionType_example" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
-	entityId := "entityId_example" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -404,7 +404,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsResolveForAct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | 
+ **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | 
  **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
 
 ### Return type
@@ -413,7 +413,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -448,8 +448,8 @@ import (
 )
 
 func main() {
-	actionType := "actionType_example" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
-	entityId := "entityId_example" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -474,7 +474,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsTryResolveFor
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | 
+ **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | 
  **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
 
 ### Return type
@@ -483,7 +483,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -499,7 +499,7 @@ No authorization required
 
 > AiSuccessResponse AiAssignmentsUnassign(ctx).Body(body).Execute()
 
-Unassign
+Clear an action's profile
 
 
 
@@ -551,7 +551,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **NullableString** | The provider name. | [optional] 
-**Key** | Pointer to **NullableString** | The provider key. | [optional] 
-**Connected** | Pointer to **bool** | Specifies whether the provider is connected. | [optional] 
-**Oauth** | Pointer to **bool** | Specifies if the provider is OAuth. | [optional] 
-**RedirectUrl** | Pointer to **NullableString** | The provider redirect URL. | [optional] 
-**RequiredConnectionUrl** | Pointer to **bool** | The required connection URL flag. | [optional] 
-**ClientId** | Pointer to **NullableString** | The provider OAuth client ID. | [optional] 
+**Name** | Pointer to **NullableString** | The display name of the service, and the only thing that tells the WebDAV presets apart: `kDrive`, `Yandex`,  `WebDav`, `Nextcloud` and `ownCloud` all report the same key. | [optional] 
+**Key** | Pointer to **NullableString** | The value to send as `providerKey` when an account of this service is connected. | [optional] 
+**Connected** | Pointer to **bool** | Whether the service can be used on this portal: it is enabled in the configuration and, for an OAuth service,  its application is registered. It says nothing about whether an account of it is connected. | [optional] 
+**Oauth** | Pointer to **bool** | Whether an account of this service is connected with an OAuth 2.0 authorization code in `token`; when false,  it is connected with `login` and `password`. | [optional] 
+**RedirectUrl** | Pointer to **NullableString** | The redirect URL this portal is registered with at the service, to build the consent screen URL from. It comes  back as null for the services that do not use OAuth. | [optional] 
+**RequiredConnectionUrl** | Pointer to **bool** | Whether an account of this service cannot be connected without `url`, which is the case for the WebDAV servers  whose address is not known in advance. The presets with a fixed address and the OAuth services do not need it. | [optional] 
+**ClientId** | Pointer to **NullableString** | The OAuth 2.0 client ID this portal is registered with at the service, to build the consent screen URL from.  It comes back as null for the services that do not use OAuth. | [optional] 
 
 ## Methods
 

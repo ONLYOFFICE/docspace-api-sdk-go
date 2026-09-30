@@ -4,24 +4,24 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddFileToRecent**](FilesFilesAPI.md#AddFileToRecent) | **Post** /api/2.0/files/file/{fileId}/recent | Add a file to the Recent section
+[**AddFileToRecent**](FilesFilesAPI.md#AddFileToRecent) | **Post** /api/2.0/files/file/{fileId}/recent | Add a file to Recent
 [**AddTemplates**](FilesFilesAPI.md#AddTemplates) | **Post** /api/2.0/files/templates | Add template files
 [**ChangeVersionHistory**](FilesFilesAPI.md#ChangeVersionHistory) | **Put** /api/2.0/files/file/{fileId}/history | Change version history
-[**CheckFillFormDraft**](FilesFilesAPI.md#CheckFillFormDraft) | **Post** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Check the form draft filling
+[**CheckFillFormDraft**](FilesFilesAPI.md#CheckFillFormDraft) | **Post** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Open a form draft for filling
 [**CopyFileAs**](FilesFilesAPI.md#CopyFileAs) | **Post** /api/2.0/files/file/{fileId}/copyas | Copy a file
 [**CreateEditSession**](FilesFilesAPI.md#CreateEditSession) | **Post** /api/2.0/files/file/{fileId}/edit_session | Create the editing session
 [**CreateFile**](FilesFilesAPI.md#CreateFile) | **Post** /api/2.0/files/{folderId}/file | Create a file
-[**CreateFileInMyDocuments**](FilesFilesAPI.md#CreateFileInMyDocuments) | **Post** /api/2.0/files/@my/file | Create a file in the My documents section
-[**CreateFilePrimaryExternalLink**](FilesFilesAPI.md#CreateFilePrimaryExternalLink) | **Post** /api/2.0/files/file/{id}/link | Create primary external link
+[**CreateFileInMyDocuments**](FilesFilesAPI.md#CreateFileInMyDocuments) | **Post** /api/2.0/files/@my/file | Create a file in My documents
+[**CreateFilePrimaryExternalLink**](FilesFilesAPI.md#CreateFilePrimaryExternalLink) | **Post** /api/2.0/files/file/{id}/link | Create the file primary external link
 [**CreateHtmlFile**](FilesFilesAPI.md#CreateHtmlFile) | **Post** /api/2.0/files/{folderId}/html | Create an HTML file
-[**CreateHtmlFileInMyDocuments**](FilesFilesAPI.md#CreateHtmlFileInMyDocuments) | **Post** /api/2.0/files/@my/html | Create an HTML file in the My documents section
+[**CreateHtmlFileInMyDocuments**](FilesFilesAPI.md#CreateHtmlFileInMyDocuments) | **Post** /api/2.0/files/@my/html | Create an HTML file in My documents
 [**CreateTextFile**](FilesFilesAPI.md#CreateTextFile) | **Post** /api/2.0/files/{folderId}/text | Create a text file
-[**CreateTextFileInMyDocuments**](FilesFilesAPI.md#CreateTextFileInMyDocuments) | **Post** /api/2.0/files/@my/text | Create a text file in the My documents section
-[**CreateThumbnails**](FilesFilesAPI.md#CreateThumbnails) | **Post** /api/2.0/files/thumbnails | Create file thumbnails
+[**CreateTextFileInMyDocuments**](FilesFilesAPI.md#CreateTextFileInMyDocuments) | **Post** /api/2.0/files/@my/text | Create a text file in My documents
+[**CreateThumbnails**](FilesFilesAPI.md#CreateThumbnails) | **Post** /api/2.0/files/thumbnails | Queue file thumbnails
 [**DeleteFile**](FilesFilesAPI.md#DeleteFile) | **Delete** /api/2.0/files/file/{fileId} | Delete a file
 [**DeleteRecent**](FilesFilesAPI.md#DeleteRecent) | **Delete** /api/2.0/files/recent | Delete recent files
 [**DeleteTemplates**](FilesFilesAPI.md#DeleteTemplates) | **Delete** /api/2.0/files/templates | Delete template files
-[**GenerateXlsx**](FilesFilesAPI.md#GenerateXlsx) | **Post** /api/2.0/files/file/{fileId}/xlsx | Generate XLSX report
+[**GenerateXlsx**](FilesFilesAPI.md#GenerateXlsx) | **Post** /api/2.0/files/file/{fileId}/xlsx | Generate a form answers report
 [**GetAllFormRoles**](FilesFilesAPI.md#GetAllFormRoles) | **Get** /api/2.0/files/file/{fileId}/formroles | Get form roles
 [**GetEditDiffUrl**](FilesFilesAPI.md#GetEditDiffUrl) | **Get** /api/2.0/files/file/{fileId}/edit/diff | Get changes URL
 [**GetEditHistory**](FilesFilesAPI.md#GetEditHistory) | **Get** /api/2.0/files/file/{fileId}/edit/history | Get version history
@@ -29,41 +29,41 @@ Method | HTTP request | Description
 [**GetFileHistory**](FilesFilesAPI.md#GetFileHistory) | **Get** /api/2.0/files/file/{fileId}/log | Get file history
 [**GetFileInfo**](FilesFilesAPI.md#GetFileInfo) | **Get** /api/2.0/files/file/{fileId} | Get file information
 [**GetFileLinks**](FilesFilesAPI.md#GetFileLinks) | **Get** /api/2.0/files/file/{id}/links | Get file external links
-[**GetFilePrimaryExternalLink**](FilesFilesAPI.md#GetFilePrimaryExternalLink) | **Get** /api/2.0/files/file/{id}/link | Get primary external link
+[**GetFilePrimaryExternalLink**](FilesFilesAPI.md#GetFilePrimaryExternalLink) | **Get** /api/2.0/files/file/{id}/link | Get the file primary external link
 [**GetFileVersionInfo**](FilesFilesAPI.md#GetFileVersionInfo) | **Get** /api/2.0/files/file/{fileId}/history | Get file versions
 [**GetFillResult**](FilesFilesAPI.md#GetFillResult) | **Get** /api/2.0/files/file/fillresult | Get form-filling result
 [**GetFormSubmissions**](FilesFilesAPI.md#GetFormSubmissions) | **Get** /api/2.0/files/file/{fileId}/submissions | Get form submission results
-[**GetPresignedFileUri**](FilesFilesAPI.md#GetPresignedFileUri) | **Get** /api/2.0/files/file/{fileId}/presigned | Get file download link asynchronously
+[**GetPresignedFileUri**](FilesFilesAPI.md#GetPresignedFileUri) | **Get** /api/2.0/files/file/{fileId}/presigned | Get a signed download address
 [**GetPresignedUri**](FilesFilesAPI.md#GetPresignedUri) | **Get** /api/2.0/files/file/{fileId}/presigneduri | Get file download link
-[**GetProtectedFileUsers**](FilesFilesAPI.md#GetProtectedFileUsers) | **Get** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file
-[**GetReferenceData**](FilesFilesAPI.md#GetReferenceData) | **Post** /api/2.0/files/file/referencedata | Get reference data
-[**GetXlsx**](FilesFilesAPI.md#GetXlsx) | **Get** /api/2.0/files/file/{fileId}/xlsx | Get XLSX report generation status
+[**GetProtectedFileUsers**](FilesFilesAPI.md#GetProtectedFileUsers) | **Get** /api/2.0/files/file/{fileId}/protectusers | Get users for document protection
+[**GetReferenceData**](FilesFilesAPI.md#GetReferenceData) | **Post** /api/2.0/files/file/referencedata | Resolve a spreadsheet reference
+[**GetXlsx**](FilesFilesAPI.md#GetXlsx) | **Get** /api/2.0/files/file/{fileId}/xlsx | Get form report generation status
 [**IsFormPDF**](FilesFilesAPI.md#IsFormPDF) | **Get** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file
 [**LockFile**](FilesFilesAPI.md#LockFile) | **Put** /api/2.0/files/file/{fileId}/lock | Lock a file
 [**ManageFormFilling**](FilesFilesAPI.md#ManageFormFilling) | **Put** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action
-[**OpenEditFile**](FilesFilesAPI.md#OpenEditFile) | **Get** /api/2.0/files/file/{fileId}/openedit | Open a file configuration
+[**OpenEditFile**](FilesFilesAPI.md#OpenEditFile) | **Get** /api/2.0/files/file/{fileId}/openedit | Get the editor configuration
 [**RestoreFileVersion**](FilesFilesAPI.md#RestoreFileVersion) | **Post** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version
-[**SaveEditingFileFromForm**](FilesFilesAPI.md#SaveEditingFileFromForm) | **Put** /api/2.0/files/file/{fileId}/saveediting | Save file edits
+[**SaveEditingFileFromForm**](FilesFilesAPI.md#SaveEditingFileFromForm) | **Put** /api/2.0/files/file/{fileId}/saveediting | Save edited file content
 [**SaveFileAsPdf**](FilesFilesAPI.md#SaveFileAsPdf) | **Post** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF
 [**SaveFormRoleMapping**](FilesFilesAPI.md#SaveFormRoleMapping) | **Post** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping
 [**SetCustomFilterTag**](FilesFilesAPI.md#SetCustomFilterTag) | **Put** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode
 [**SetEncryptionInfo**](FilesFilesAPI.md#SetEncryptionInfo) | **Put** /api/2.0/files/{fileId}/access | Set file encryption information
-[**SetFileExternalLink**](FilesFilesAPI.md#SetFileExternalLink) | **Put** /api/2.0/files/file/{id}/links | Set an external link
+[**SetFileExternalLink**](FilesFilesAPI.md#SetFileExternalLink) | **Put** /api/2.0/files/file/{id}/links | Set a file external link
 [**SetFileOrder**](FilesFilesAPI.md#SetFileOrder) | **Put** /api/2.0/files/{fileId}/order | Set file order
 [**SetFilesOrder**](FilesFilesAPI.md#SetFilesOrder) | **Put** /api/2.0/files/order | Set order of files
-[**StartEditFile**](FilesFilesAPI.md#StartEditFile) | **Post** /api/2.0/files/file/{fileId}/startedit | Start file editing
-[**StartFillingFile**](FilesFilesAPI.md#StartFillingFile) | **Put** /api/2.0/files/file/{fileId}/startfilling | Start file filling
-[**ToggleFileFavorite**](FilesFilesAPI.md#ToggleFileFavorite) | **Get** /api/2.0/files/favorites/{fileId} | Change the file favorite status
-[**TrackEditFile**](FilesFilesAPI.md#TrackEditFile) | **Get** /api/2.0/files/file/{fileId}/trackeditfile | Track file editing
+[**StartEditFile**](FilesFilesAPI.md#StartEditFile) | **Post** /api/2.0/files/file/{fileId}/startedit | Open an editing session
+[**StartFillingFile**](FilesFilesAPI.md#StartFillingFile) | **Put** /api/2.0/files/file/{fileId}/startfilling | Start filling a form
+[**ToggleFileFavorite**](FilesFilesAPI.md#ToggleFileFavorite) | **Get** /api/2.0/files/favorites/{fileId} | Set the file favorite status
+[**TrackEditFile**](FilesFilesAPI.md#TrackEditFile) | **Get** /api/2.0/files/file/{fileId}/trackeditfile | Track an editing session
 [**UpdateFile**](FilesFilesAPI.md#UpdateFile) | **Put** /api/2.0/files/file/{fileId} | Update a file
 
 
 
 ## AddFileToRecent
 
-> FileIntegerWrapper AddFileToRecent(ctx, fileId).Execute()
+> FileWrapper AddFileToRecent(ctx, fileId).Execute()
 
-Add a file to the Recent section
+Add a file to Recent
 
 
 
@@ -82,16 +82,19 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.AddFileToRecent(context.Background(), fileId).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.AddFileToRecent(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.AddFileToRecent``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AddFileToRecent`: FileIntegerWrapper
+	// response from `AddFileToRecent`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.AddFileToRecent`: %v\n", resp)
 }
 ```
@@ -102,7 +105,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -115,7 +118,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -201,7 +204,7 @@ Name | Type | Description  | Notes
 
 ## ChangeVersionHistory
 
-> FileIntegerArrayWrapper ChangeVersionHistory(ctx, fileId).ChangeHistory(changeHistory).Execute()
+> FileArrayWrapper ChangeVersionHistory(ctx, fileId).ChangeHistory(changeHistory).Execute()
 
 Change version history
 
@@ -222,17 +225,20 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file Id to change its version history.
-	changeHistory := *openapiclient.NewChangeHistory(int32(1)) // ChangeHistory | The parameters for changing version history.
+	fileId := int32(1) // int32 | The file whose version history is changed.
+	changeHistory := *openapiclient.NewChangeHistory(int32(1)) // ChangeHistory | The change to make to the revision group.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.ChangeVersionHistory(context.Background(), fileId).ChangeHistory(changeHistory).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.ChangeVersionHistory(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.ChangeVersionHistory``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ChangeVersionHistory`: FileIntegerArrayWrapper
+	// response from `ChangeVersionHistory`: FileArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.ChangeVersionHistory`: %v\n", resp)
 }
 ```
@@ -243,7 +249,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file Id to change its version history. | 
+**fileId** | **int32** | The file whose version history is changed. | 
 
 ### Other Parameters
 
@@ -253,11 +259,11 @@ Other parameters are passed through a pointer to a apiChangeVersionHistoryReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **changeHistory** | [**ChangeHistory**](ChangeHistory.md) | The parameters for changing version history. | 
+ **changeHistory** | [**ChangeHistory**](ChangeHistory.md) | The change to make to the revision group. | 
 
 ### Return type
 
-[**FileIntegerArrayWrapper**](FileIntegerArrayWrapper.md)
+[**FileArrayWrapper**](FileArrayWrapper.md)
 
 ### Authorization
 
@@ -277,7 +283,7 @@ Name | Type | Description  | Notes
 
 > StringWrapper CheckFillFormDraft(ctx, fileId).CheckFillFormDraft(checkFillFormDraft).Execute()
 
-Check the form draft filling
+Open a form draft for filling
 
 
 
@@ -296,8 +302,8 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID of the form draft.
-	checkFillFormDraft := *openapiclient.NewCheckFillFormDraft(int32(1)) // CheckFillFormDraft | The parameters for checking the form draft filling.
+	fileId := int32(1) // int32 | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
+	checkFillFormDraft := *openapiclient.NewCheckFillFormDraft(int32(0)) // CheckFillFormDraft | The revision of the form to open and what the caller intends to do with it.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -317,7 +323,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID of the form draft. | 
+**fileId** | **int32** | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | 
 
 ### Other Parameters
 
@@ -327,7 +333,7 @@ Other parameters are passed through a pointer to a apiCheckFillFormDraftRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **checkFillFormDraft** | [**CheckFillFormDraft**](CheckFillFormDraft.md) | The parameters for checking the form draft filling. | 
+ **checkFillFormDraft** | [**CheckFillFormDraft**](CheckFillFormDraft.md) | The revision of the form to open and what the caller intends to do with it. | 
 
 ### Return type
 
@@ -335,7 +341,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -370,8 +376,8 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID to copy.
-	copyAsJsonElement := *openapiclient.NewCopyAsJsonElement("Document Copy.docx", openapiclient.CopyAsJsonElement_destFolderId{Int32: new(int32)}) // CopyAsJsonElement | The parameters for copying a file.
+	fileId := int32(1) // int32 | The file to copy.
+	copyAsJsonElement := *openapiclient.NewCopyAsJsonElement("Document Copy.docx", openapiclient.CopyAsJsonElement_destFolderId{Int32: new(int32)}) // CopyAsJsonElement | The title, the destination and the conversion options of the copy.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -391,7 +397,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID to copy. | 
+**fileId** | **int32** | The file to copy. | 
 
 ### Other Parameters
 
@@ -401,7 +407,7 @@ Other parameters are passed through a pointer to a apiCopyFileAsRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **copyAsJsonElement** | [**CopyAsJsonElement**](CopyAsJsonElement.md) | The parameters for copying a file. | 
+ **copyAsJsonElement** | [**CopyAsJsonElement**](CopyAsJsonElement.md) | The title, the destination and the conversion options of the copy. | 
 
 ### Return type
 
@@ -423,7 +429,7 @@ Name | Type | Description  | Notes
 
 ## CreateEditSession
 
-> ChunkedUploadSessionResponseWrapperIntegerWrapper CreateEditSession(ctx, fileId).FileSize(fileSize).Execute()
+> ChunkedUploadSessionResponseWrapperWrapper CreateEditSession(ctx, fileId).FileSize(fileSize).Execute()
 
 Create the editing session
 
@@ -444,17 +450,20 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID.
-	fileSize := int64(1024) // int64 | The file size in bytes. (optional)
+	fileId := int32(1) // int32 | The file whose content the session will replace; take the id from a folder listing or from the file itself.
+	fileSize := int64(1024) // int64 | The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.CreateEditSession(context.Background(), fileId).FileSize(fileSize).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.CreateEditSession(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateEditSession``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateEditSession`: ChunkedUploadSessionResponseWrapperIntegerWrapper
+	// response from `CreateEditSession`: ChunkedUploadSessionResponseWrapperWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.CreateEditSession`: %v\n", resp)
 }
 ```
@@ -465,7 +474,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID. | 
+**fileId** | **int32** | The file whose content the session will replace; take the id from a folder listing or from the file itself. | 
 
 ### Other Parameters
 
@@ -475,11 +484,11 @@ Other parameters are passed through a pointer to a apiCreateEditSessionRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fileSize** | **int64** | The file size in bytes. | 
+ **fileSize** | **int64** | The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part. | 
 
 ### Return type
 
-[**ChunkedUploadSessionResponseWrapperIntegerWrapper**](ChunkedUploadSessionResponseWrapperIntegerWrapper.md)
+[**ChunkedUploadSessionResponseWrapperWrapper**](ChunkedUploadSessionResponseWrapperWrapper.md)
 
 ### Authorization
 
@@ -497,7 +506,7 @@ Name | Type | Description  | Notes
 
 ## CreateFile
 
-> FileIntegerWrapper CreateFile(ctx, folderId).CreateFileJsonElement(createFileJsonElement).Execute()
+> FileWrapper CreateFile(ctx, folderId).CreateFileJsonElement(createFileJsonElement).Execute()
 
 Create a file
 
@@ -518,17 +527,20 @@ import (
 )
 
 func main() {
-	folderId := int32(1) // int32 | The folder ID for the file creation.
-	createFileJsonElement := *openapiclient.NewCreateFileJsonElement("New Document.docx") // CreateFileJsonElement | The parameters for creating a file.
+	folderId := int32(1) // int32 | The folder the file is created in.
+	createFileJsonElement := *openapiclient.NewCreateFileJsonElement("New Document.docx") // CreateFileJsonElement | The title of the new file and the source of its content.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.CreateFile(context.Background(), folderId).CreateFileJsonElement(createFileJsonElement).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// folderId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.CreateFile(context.Background(), folderId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFile`: FileIntegerWrapper
+	// response from `CreateFile`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.CreateFile`: %v\n", resp)
 }
 ```
@@ -539,7 +551,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **int32** | The folder ID for the file creation. | 
+**folderId** | **int32** | The folder the file is created in. | 
 
 ### Other Parameters
 
@@ -549,11 +561,11 @@ Other parameters are passed through a pointer to a apiCreateFileRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createFileJsonElement** | [**CreateFileJsonElement**](CreateFileJsonElement.md) | The parameters for creating a file. | 
+ **createFileJsonElement** | [**CreateFileJsonElement**](CreateFileJsonElement.md) | The title of the new file and the source of its content. | 
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -571,9 +583,9 @@ Name | Type | Description  | Notes
 
 ## CreateFileInMyDocuments
 
-> FileIntegerWrapper CreateFileInMyDocuments(ctx).CreateFileJsonElement(createFileJsonElement).Execute()
+> FileWrapper CreateFileInMyDocuments(ctx).CreateFileJsonElement(createFileJsonElement).Execute()
 
-Create a file in the My documents section
+Create a file in My documents
 
 
 
@@ -601,7 +613,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateFileInMyDocuments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFileInMyDocuments`: FileIntegerWrapper
+	// response from `CreateFileInMyDocuments`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.CreateFileInMyDocuments`: %v\n", resp)
 }
 ```
@@ -621,7 +633,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -641,7 +653,7 @@ Name | Type | Description  | Notes
 
 > FileShareWrapper CreateFilePrimaryExternalLink(ctx, id).FileLinkRequest(fileLinkRequest).Execute()
 
-Create primary external link
+Create the file primary external link
 
 
 
@@ -660,8 +672,8 @@ import (
 )
 
 func main() {
-	id := int32(1) // int32 | The file ID.
-	fileLinkRequest := *openapiclient.NewFileLinkRequest() // FileLinkRequest | The file external link parameters.
+	id := int32(1) // int32 | The file the link points at.
+	fileLinkRequest := *openapiclient.NewFileLinkRequest() // FileLinkRequest | The settings of the link. They are applied in full, so a field left out is reset rather than kept.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -681,7 +693,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The file ID. | 
+**id** | **int32** | The file the link points at. | 
 
 ### Other Parameters
 
@@ -691,7 +703,7 @@ Other parameters are passed through a pointer to a apiCreateFilePrimaryExternalL
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fileLinkRequest** | [**FileLinkRequest**](FileLinkRequest.md) | The file external link parameters. | 
+ **fileLinkRequest** | [**FileLinkRequest**](FileLinkRequest.md) | The settings of the link. They are applied in full, so a field left out is reset rather than kept. | 
 
 ### Return type
 
@@ -713,7 +725,7 @@ Name | Type | Description  | Notes
 
 ## CreateHtmlFile
 
-> FileIntegerWrapper CreateHtmlFile(ctx, folderId).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+> FileWrapper CreateHtmlFile(ctx, folderId).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
 
 Create an HTML file
 
@@ -734,17 +746,20 @@ import (
 )
 
 func main() {
-	folderId := int32(1) // int32 | The folder ID to create the text or HTML file.
-	createTextOrHtmlFile := *openapiclient.NewCreateTextOrHtmlFile("Document.txt") // CreateTextOrHtmlFile | The parameters for creating an HTML or text file.
+	folderId := int32(1) // int32 | The folder the file is created in.
+	createTextOrHtmlFile := *openapiclient.NewCreateTextOrHtmlFile("Document.txt") // CreateTextOrHtmlFile | The title, the content and the collision behaviour of the new file.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.CreateHtmlFile(context.Background(), folderId).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// folderId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.CreateHtmlFile(context.Background(), folderId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateHtmlFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateHtmlFile`: FileIntegerWrapper
+	// response from `CreateHtmlFile`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.CreateHtmlFile`: %v\n", resp)
 }
 ```
@@ -755,7 +770,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **int32** | The folder ID to create the text or HTML file. | 
+**folderId** | **int32** | The folder the file is created in. | 
 
 ### Other Parameters
 
@@ -765,11 +780,11 @@ Other parameters are passed through a pointer to a apiCreateHtmlFileRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createTextOrHtmlFile** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) | The parameters for creating an HTML or text file. | 
+ **createTextOrHtmlFile** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) | The title, the content and the collision behaviour of the new file. | 
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -787,9 +802,9 @@ Name | Type | Description  | Notes
 
 ## CreateHtmlFileInMyDocuments
 
-> FileIntegerWrapper CreateHtmlFileInMyDocuments(ctx).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+> FileWrapper CreateHtmlFileInMyDocuments(ctx).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
 
-Create an HTML file in the My documents section
+Create an HTML file in My documents
 
 
 
@@ -817,7 +832,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateHtmlFileInMyDocuments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateHtmlFileInMyDocuments`: FileIntegerWrapper
+	// response from `CreateHtmlFileInMyDocuments`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.CreateHtmlFileInMyDocuments`: %v\n", resp)
 }
 ```
@@ -837,7 +852,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -855,7 +870,7 @@ Name | Type | Description  | Notes
 
 ## CreateTextFile
 
-> FileIntegerWrapper CreateTextFile(ctx, folderId).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+> FileWrapper CreateTextFile(ctx, folderId).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
 
 Create a text file
 
@@ -876,17 +891,20 @@ import (
 )
 
 func main() {
-	folderId := int32(1) // int32 | The folder ID to create the text or HTML file.
-	createTextOrHtmlFile := *openapiclient.NewCreateTextOrHtmlFile("Document.txt") // CreateTextOrHtmlFile | The parameters for creating an HTML or text file.
+	folderId := int32(1) // int32 | The folder the file is created in.
+	createTextOrHtmlFile := *openapiclient.NewCreateTextOrHtmlFile("Document.txt") // CreateTextOrHtmlFile | The title, the content and the collision behaviour of the new file.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.CreateTextFile(context.Background(), folderId).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// folderId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.CreateTextFile(context.Background(), folderId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateTextFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTextFile`: FileIntegerWrapper
+	// response from `CreateTextFile`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.CreateTextFile`: %v\n", resp)
 }
 ```
@@ -897,7 +915,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **int32** | The folder ID to create the text or HTML file. | 
+**folderId** | **int32** | The folder the file is created in. | 
 
 ### Other Parameters
 
@@ -907,11 +925,11 @@ Other parameters are passed through a pointer to a apiCreateTextFileRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createTextOrHtmlFile** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) | The parameters for creating an HTML or text file. | 
+ **createTextOrHtmlFile** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) | The title, the content and the collision behaviour of the new file. | 
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -929,9 +947,9 @@ Name | Type | Description  | Notes
 
 ## CreateTextFileInMyDocuments
 
-> FileIntegerWrapper CreateTextFileInMyDocuments(ctx).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+> FileWrapper CreateTextFileInMyDocuments(ctx).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
 
-Create a text file in the My documents section
+Create a text file in My documents
 
 
 
@@ -959,7 +977,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateTextFileInMyDocuments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTextFileInMyDocuments`: FileIntegerWrapper
+	// response from `CreateTextFileInMyDocuments`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.CreateTextFileInMyDocuments`: %v\n", resp)
 }
 ```
@@ -979,7 +997,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -999,7 +1017,7 @@ Name | Type | Description  | Notes
 
 > ObjectArrayWrapper CreateThumbnails(ctx).BaseBatchRequestDto(baseBatchRequestDto).Execute()
 
-Create file thumbnails
+Queue file thumbnails
 
 
 
@@ -1051,7 +1069,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1086,9 +1104,9 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID to delete.
-	delete := *openapiclient.NewDelete() // Delete | The parameters for deleting a file.
-	returnSingleOperation := false // bool | Specifies whether to return only the current operation (optional)
+	fileId := int32(1) // int32 | The file to delete.
+	delete := *openapiclient.NewDelete() // Delete | When and how the file is deleted.
+	returnSingleOperation := false // bool | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1108,7 +1126,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID to delete. | 
+**fileId** | **int32** | The file to delete. | 
 
 ### Other Parameters
 
@@ -1118,8 +1136,8 @@ Other parameters are passed through a pointer to a apiDeleteFileRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **delete** | [**Delete**](Delete.md) | The parameters for deleting a file. | 
- **returnSingleOperation** | **bool** | Specifies whether to return only the current operation | 
+ **delete** | [**Delete**](Delete.md) | When and how the file is deleted. | 
+ **returnSingleOperation** | **bool** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | 
 
 ### Return type
 
@@ -1228,7 +1246,7 @@ import (
 )
 
 func main() {
-	requestBody := []int32{int32(123)} // []int32 | The file IDs. (optional)
+	requestBody := []int32{int32(123)} // []int32 | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1253,7 +1271,7 @@ Other parameters are passed through a pointer to a apiDeleteTemplatesRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **[]int32** | The file IDs. | 
+ **requestBody** | **[]int32** | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. | 
 
 ### Return type
 
@@ -1277,7 +1295,7 @@ Name | Type | Description  | Notes
 
 > XlsxReportResponseWrapper GenerateXlsx(ctx, fileId).Execute()
 
-Generate XLSX report
+Generate a form answers report
 
 
 
@@ -1296,7 +1314,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1316,7 +1334,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -1368,7 +1386,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1388,7 +1406,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -1440,8 +1458,8 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID.
-	version := int32(1) // int32 | The file version. (optional)
+	fileId := int32(1) // int32 | The file whose changes are read.
+	version := int32(1) // int32 | The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1461,7 +1479,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID. | 
+**fileId** | **int32** | The file whose changes are read. | 
 
 ### Other Parameters
 
@@ -1471,7 +1489,7 @@ Other parameters are passed through a pointer to a apiGetEditDiffUrlRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **version** | **int32** | The file version. | 
+ **version** | **int32** | The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version. | 
 
 ### Return type
 
@@ -1479,7 +1497,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1514,7 +1532,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1534,7 +1552,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -1551,7 +1569,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1586,7 +1604,7 @@ import (
 )
 
 func main() {
-	fileId := int32(56) // int32 | The file unique identifier.
+	fileId := int32(56) // int32 | The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1606,7 +1624,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any. | 
 
 ### Other Parameters
 
@@ -1659,11 +1677,11 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID of the history request.
-	fromDate := time.Now() // time.Time | The start date of the history. (optional)
-	toDate := time.Now() // time.Time | The end date of the history. (optional)
-	count := int32(25) // int32 | The number of history entries to retrieve for the file log. (optional)
-	startIndex := int32(0) // int32 | The starting index for retrieving a subset of file history entries. (optional)
+	fileId := int32(1) // int32 | The file whose activity log is read; only files stored in the portal itself have one.
+	fromDate := time.Now() // time.Time | The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps. (optional)
+	toDate := time.Now() // time.Time | The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry. (optional)
+	count := int32(25) // int32 | How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body. (optional)
+	startIndex := int32(0) // int32 | How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1683,7 +1701,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID of the history request. | 
+**fileId** | **int32** | The file whose activity log is read; only files stored in the portal itself have one. | 
 
 ### Other Parameters
 
@@ -1693,10 +1711,10 @@ Other parameters are passed through a pointer to a apiGetFileHistoryRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fromDate** | **time.Time** | The start date of the history. | 
- **toDate** | **time.Time** | The end date of the history. | 
- **count** | **int32** | The number of history entries to retrieve for the file log. | 
- **startIndex** | **int32** | The starting index for retrieving a subset of file history entries. | 
+ **fromDate** | **time.Time** | The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps. | 
+ **toDate** | **time.Time** | The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry. | 
+ **count** | **int32** | How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body. | 
+ **startIndex** | **int32** | How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it. | 
 
 ### Return type
 
@@ -1718,7 +1736,7 @@ Name | Type | Description  | Notes
 
 ## GetFileInfo
 
-> FileIntegerWrapper GetFileInfo(ctx, fileId).Version(version).Execute()
+> FileWrapper GetFileInfo(ctx, fileId).Version(version).Execute()
 
 Get file information
 
@@ -1739,17 +1757,20 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID.
-	version := int32(1) // int32 | The file version. (optional)
+	fileId := int32(1) // int32 | The file to read.
+	version := int32(1) // int32 | The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.GetFileInfo(context.Background(), fileId).Version(version).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.GetFileInfo(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.GetFileInfo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFileInfo`: FileIntegerWrapper
+	// response from `GetFileInfo`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.GetFileInfo`: %v\n", resp)
 }
 ```
@@ -1760,7 +1781,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID. | 
+**fileId** | **int32** | The file to read. | 
 
 ### Other Parameters
 
@@ -1770,15 +1791,15 @@ Other parameters are passed through a pointer to a apiGetFileInfoRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **version** | **int32** | The file version. | 
+ **version** | **int32** | The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version. | 
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1813,9 +1834,9 @@ import (
 )
 
 func main() {
-	id := int32(10) // int32 | The file unique identifier.
-	count := int32(25) // int32 | The number of items to retrieve in the request. (optional)
-	startIndex := int32(0) // int32 | The starting index for the query results. (optional)
+	id := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+	count := int32(25) // int32 | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. (optional)
+	startIndex := int32(0) // int32 | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1835,7 +1856,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The file unique identifier. | 
+**id** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -1845,8 +1866,8 @@ Other parameters are passed through a pointer to a apiGetFileLinksRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **count** | **int32** | The number of items to retrieve in the request. | 
- **startIndex** | **int32** | The starting index for the query results. | 
+ **count** | **int32** | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | 
+ **startIndex** | **int32** | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | 
 
 ### Return type
 
@@ -1870,7 +1891,7 @@ Name | Type | Description  | Notes
 
 > FileShareWrapper GetFilePrimaryExternalLink(ctx, id).Count(count).StartIndex(startIndex).Execute()
 
-Get primary external link
+Get the file primary external link
 
 
 
@@ -1889,9 +1910,9 @@ import (
 )
 
 func main() {
-	id := int32(10) // int32 | The file unique identifier.
-	count := int32(25) // int32 | The number of items to retrieve in the request. (optional)
-	startIndex := int32(0) // int32 | The starting index for the query results. (optional)
+	id := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+	count := int32(25) // int32 | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. (optional)
+	startIndex := int32(0) // int32 | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1911,7 +1932,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The file unique identifier. | 
+**id** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -1921,8 +1942,8 @@ Other parameters are passed through a pointer to a apiGetFilePrimaryExternalLink
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **count** | **int32** | The number of items to retrieve in the request. | 
- **startIndex** | **int32** | The starting index for the query results. | 
+ **count** | **int32** | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | 
+ **startIndex** | **int32** | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | 
 
 ### Return type
 
@@ -1930,7 +1951,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1944,7 +1965,7 @@ No authorization required
 
 ## GetFileVersionInfo
 
-> FileIntegerArrayWrapper GetFileVersionInfo(ctx, fileId).Execute()
+> FileArrayWrapper GetFileVersionInfo(ctx, fileId).Execute()
 
 Get file versions
 
@@ -1965,16 +1986,19 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.GetFileVersionInfo(context.Background(), fileId).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.GetFileVersionInfo(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.GetFileVersionInfo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFileVersionInfo`: FileIntegerArrayWrapper
+	// response from `GetFileVersionInfo`: FileArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.GetFileVersionInfo`: %v\n", resp)
 }
 ```
@@ -1985,7 +2009,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -1998,11 +2022,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FileIntegerArrayWrapper**](FileIntegerArrayWrapper.md)
+[**FileArrayWrapper**](FileArrayWrapper.md)
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2016,7 +2040,7 @@ No authorization required
 
 ## GetFillResult
 
-> FillingFormResultIntegerWrapper GetFillResult(ctx).FillingSessionId(fillingSessionId).Execute()
+> FillingFormResultWrapper GetFillResult(ctx).FillingSessionId(fillingSessionId).Execute()
 
 Get form-filling result
 
@@ -2037,7 +2061,7 @@ import (
 )
 
 func main() {
-	fillingSessionId := "doc_key_123" // string | The form-filling session ID. (optional)
+	fillingSessionId := "11111111-2222-3333-4444-555555555555" // string | The identifier of the finished filling session, the value the document service reports when the filling ends.  The portal remembers it only for a while afterwards, so an older session is answered as not found. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2046,7 +2070,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.GetFillResult``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFillResult`: FillingFormResultIntegerWrapper
+	// response from `GetFillResult`: FillingFormResultWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.GetFillResult`: %v\n", resp)
 }
 ```
@@ -2062,15 +2086,15 @@ Other parameters are passed through a pointer to a apiGetFillResultRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fillingSessionId** | **string** | The form-filling session ID. | 
+ **fillingSessionId** | **string** | The identifier of the finished filling session, the value the document service reports when the filling ends.  The portal remembers it only for a while afterwards, so an older session is answered as not found. | 
 
 ### Return type
 
-[**FillingFormResultIntegerWrapper**](FillingFormResultIntegerWrapper.md)
+[**FillingFormResultWrapper**](FillingFormResultWrapper.md)
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2105,7 +2129,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2125,7 +2149,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -2158,7 +2182,7 @@ Name | Type | Description  | Notes
 
 > FileLinkWrapper GetPresignedFileUri(ctx, fileId).Execute()
 
-Get file download link asynchronously
+Get a signed download address
 
 
 
@@ -2177,7 +2201,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2197,7 +2221,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -2249,7 +2273,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2269,7 +2293,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -2302,7 +2326,7 @@ Name | Type | Description  | Notes
 
 > MentionWrapperArrayWrapper GetProtectedFileUsers(ctx, fileId).Execute()
 
-Get users access rights to the protected file
+Get users for document protection
 
 
 
@@ -2321,7 +2345,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2341,7 +2365,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -2372,9 +2396,9 @@ Name | Type | Description  | Notes
 
 ## GetReferenceData
 
-> FileReferenceWrapper GetReferenceData(ctx).GetReferenceDataDtoInteger(getReferenceDataDtoInteger).Execute()
+> FileReferenceWrapper GetReferenceData(ctx).GetReferenceDataDto(getReferenceDataDto).Execute()
 
-Get reference data
+Resolve a spreadsheet reference
 
 
 
@@ -2393,11 +2417,11 @@ import (
 )
 
 func main() {
-	getReferenceDataDtoInteger := *openapiclient.NewGetReferenceDataDtoInteger("doc_key_123", "doc_key_123") // GetReferenceDataDtoInteger |  (optional)
+	getReferenceDataDto := *openapiclient.NewGetReferenceDataDto("512", "1") // GetReferenceDataDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.GetReferenceData(context.Background()).GetReferenceDataDtoInteger(getReferenceDataDtoInteger).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.GetReferenceData(context.Background()).GetReferenceDataDto(getReferenceDataDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.GetReferenceData``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2418,7 +2442,7 @@ Other parameters are passed through a pointer to a apiGetReferenceDataRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **getReferenceDataDtoInteger** | [**GetReferenceDataDtoInteger**](GetReferenceDataDtoInteger.md) |  | 
+ **getReferenceDataDto** | [**GetReferenceDataDto**](GetReferenceDataDto.md) |  | 
 
 ### Return type
 
@@ -2442,7 +2466,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper GetXlsx(ctx, fileId).Execute()
 
-Get XLSX report generation status
+Get form report generation status
 
 
 
@@ -2461,7 +2485,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2481,7 +2505,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -2533,7 +2557,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2553,7 +2577,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -2584,7 +2608,7 @@ Name | Type | Description  | Notes
 
 ## LockFile
 
-> FileIntegerWrapper LockFile(ctx, fileId).LockFileParameters(lockFileParameters).Execute()
+> FileWrapper LockFile(ctx, fileId).LockFileParameters(lockFileParameters).Execute()
 
 Lock a file
 
@@ -2605,17 +2629,20 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID for locking.
-	lockFileParameters := *openapiclient.NewLockFileParameters() // LockFileParameters | The parameters for locking a file.
+	fileId := int32(1) // int32 | The file to lock or unlock.
+	lockFileParameters := *openapiclient.NewLockFileParameters() // LockFileParameters | The lock state to reach.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.LockFile(context.Background(), fileId).LockFileParameters(lockFileParameters).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.LockFile(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.LockFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `LockFile`: FileIntegerWrapper
+	// response from `LockFile`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.LockFile`: %v\n", resp)
 }
 ```
@@ -2626,7 +2653,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID for locking. | 
+**fileId** | **int32** | The file to lock or unlock. | 
 
 ### Other Parameters
 
@@ -2636,11 +2663,11 @@ Other parameters are passed through a pointer to a apiLockFileRequest struct via
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **lockFileParameters** | [**LockFileParameters**](LockFileParameters.md) | The parameters for locking a file. | 
+ **lockFileParameters** | [**LockFileParameters**](LockFileParameters.md) | The lock state to reach. | 
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -2658,7 +2685,7 @@ Name | Type | Description  | Notes
 
 ## ManageFormFilling
 
-> ManageFormFilling(ctx, fileId).ManageFormFillingDtoInteger(manageFormFillingDtoInteger).Execute()
+> ManageFormFilling(ctx, fileId).ManageFormFillingDto(manageFormFillingDto).Execute()
 
 Perform form filling action
 
@@ -2680,11 +2707,11 @@ import (
 
 func main() {
 	fileId := "fileId_example" // string | The form the action applies to. Send the same value as the `formId` of the request body, which is the one the handler reads.
-	manageFormFillingDtoInteger := *openapiclient.NewManageFormFillingDtoInteger(int32(1)) // ManageFormFillingDtoInteger |  (optional)
+	manageFormFillingDto := *openapiclient.NewManageFormFillingDto(int32(1)) // ManageFormFillingDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FilesFilesAPI.ManageFormFilling(context.Background(), fileId).ManageFormFillingDtoInteger(manageFormFillingDtoInteger).Execute()
+	r, err := apiClient.FilesFilesAPI.ManageFormFilling(context.Background(), fileId).ManageFormFillingDto(manageFormFillingDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.ManageFormFilling``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2708,7 +2735,7 @@ Other parameters are passed through a pointer to a apiManageFormFillingRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **manageFormFillingDtoInteger** | [**ManageFormFillingDtoInteger**](ManageFormFillingDtoInteger.md) |  | 
+ **manageFormFillingDto** | [**ManageFormFillingDto**](ManageFormFillingDto.md) |  | 
 
 ### Return type
 
@@ -2730,9 +2757,9 @@ Name | Type | Description  | Notes
 
 ## OpenEditFile
 
-> ConfigurationIntegerWrapper OpenEditFile(ctx, fileId).Version(version).View(view).EditorType(editorType).Edit(edit).Fill(fill).Execute()
+> ConfigurationWrapper OpenEditFile(ctx, fileId).Version(version).View(view).EditorType(editorType).Edit(edit).Fill(fill).Execute()
 
-Open a file configuration
+Get the editor configuration
 
 
 
@@ -2751,21 +2778,24 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID to open.
-	version := int32(1) // int32 | The file version to open. (optional)
-	view := false // bool | Specifies if the document will be opened for viewing only or not. (optional)
-	editorType := openapiclient.EditorType(0) // EditorType | The editor type to open the file. (optional)
-	edit := false // bool | Specifies if the document is opened in the editing mode or not. (optional)
-	fill := false // bool | Specifies if the document is opened in the form-filling mode or not. (optional)
+	fileId := int32(1) // int32 | The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`.
+	version := int32(1) // int32 | Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. (optional)
+	view := false // bool | Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller's  rights and the room the file lies in allow. (optional)
+	editorType := openapiclient.EditorType(0) // EditorType | Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. (optional)
+	edit := false // bool | Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. (optional)
+	fill := false // bool | Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.OpenEditFile(context.Background(), fileId).Version(version).View(view).EditorType(editorType).Edit(edit).Fill(fill).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.OpenEditFile(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.OpenEditFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `OpenEditFile`: ConfigurationIntegerWrapper
+	// response from `OpenEditFile`: ConfigurationWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.OpenEditFile`: %v\n", resp)
 }
 ```
@@ -2776,7 +2806,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID to open. | 
+**fileId** | **int32** | The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`. | 
 
 ### Other Parameters
 
@@ -2786,19 +2816,19 @@ Other parameters are passed through a pointer to a apiOpenEditFileRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **version** | **int32** | The file version to open. | 
- **view** | **bool** | Specifies if the document will be opened for viewing only or not. | 
- **editorType** | [**EditorType**](EditorType.md) | The editor type to open the file. | 
- **edit** | **bool** | Specifies if the document is opened in the editing mode or not. | 
- **fill** | **bool** | Specifies if the document is opened in the form-filling mode or not. | 
+ **version** | **int32** | Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. | 
+ **view** | **bool** | Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller's  rights and the room the file lies in allow. | 
+ **editorType** | [**EditorType**](EditorType.md) | Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. | 
+ **edit** | **bool** | Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. | 
+ **fill** | **bool** | Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. | 
 
 ### Return type
 
-[**ConfigurationIntegerWrapper**](ConfigurationIntegerWrapper.md)
+[**ConfigurationWrapper**](ConfigurationWrapper.md)
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2833,9 +2863,9 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID of the restore version.
-	version := int32(1) // int32 | The file version of the restore. (optional)
-	url := "https://example.com" // string | The file version URL of the restore. (optional)
+	fileId := int32(1) // int32 | The file whose version is restored.
+	version := int32(1) // int32 | The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one. (optional)
+	url := "https://document-server.example.com/cache/files/conv_1_docx/output.docx" // string | The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2855,7 +2885,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID of the restore version. | 
+**fileId** | **int32** | The file whose version is restored. | 
 
 ### Other Parameters
 
@@ -2865,8 +2895,8 @@ Other parameters are passed through a pointer to a apiRestoreFileVersionRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **version** | **int32** | The file version of the restore. | 
- **url** | **string** | The file version URL of the restore. | 
+ **version** | **int32** | The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one. | 
+ **url** | **string** | The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used. | 
 
 ### Return type
 
@@ -2874,7 +2904,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2888,9 +2918,9 @@ No authorization required
 
 ## SaveEditingFileFromForm
 
-> FileIntegerWrapper SaveEditingFileFromForm(ctx, fileId).DownloadUri(downloadUri).FileExtension(fileExtension).File(file).Forcesave(forcesave).Execute()
+> FileWrapper SaveEditingFileFromForm(ctx, fileId).DownloadUri(downloadUri).FileExtension(fileExtension).File(file).Forcesave(forcesave).Execute()
 
-Save file edits
+Save edited file content
 
 
 
@@ -2909,20 +2939,23 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The editing file ID from the request.
-	downloadUri := "https://example.com/file.txt" // string | The URI to download the editing file. (optional)
-	fileExtension := "fileExtension_example" // string | The editing file extension from the request. (optional)
-	file := os.NewFile(1234, "some_file") // *os.File | The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream. (optional)
-	forcesave := true // bool | Specifies whether to force save the file or not. (optional)
+	fileId := int32(1) // int32 | The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it.
+	downloadUri := "https://example.com/file.txt" // string | An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given. (optional)
+	fileExtension := "fileExtension_example" // string | The format the submitted content is in, with the leading dot, as in `.docx`. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed. (optional)
+	file := os.NewFile(1234, "some_file") // *os.File | The edited content, sent as the `File` part of a `multipart/form-data` body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file. (optional)
+	forcesave := true // bool | Records the write as an editor autosave: the file keeps its running editing session and the previous autosave  revision is overwritten. Left off, the write closes the solo editing session, is refused while somebody else  has the file open, and adds a version to the history. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.SaveEditingFileFromForm(context.Background(), fileId).DownloadUri(downloadUri).FileExtension(fileExtension).File(file).Forcesave(forcesave).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.SaveEditingFileFromForm(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.SaveEditingFileFromForm``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SaveEditingFileFromForm`: FileIntegerWrapper
+	// response from `SaveEditingFileFromForm`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.SaveEditingFileFromForm`: %v\n", resp)
 }
 ```
@@ -2933,7 +2966,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The editing file ID from the request. | 
+**fileId** | **int32** | The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it. | 
 
 ### Other Parameters
 
@@ -2943,14 +2976,14 @@ Other parameters are passed through a pointer to a apiSaveEditingFileFromFormReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **downloadUri** | **string** | The URI to download the editing file. | 
- **fileExtension** | **string** | The editing file extension from the request. | 
- **file** | ***os.File** | The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream. | 
- **forcesave** | **bool** | Specifies whether to force save the file or not. | 
+ **downloadUri** | **string** | An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given. | 
+ **fileExtension** | **string** | The format the submitted content is in, with the leading dot, as in `.docx`. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed. | 
+ **file** | ***os.File** | The edited content, sent as the `File` part of a `multipart/form-data` body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file. | 
+ **forcesave** | **bool** | Records the write as an editor autosave: the file keeps its running editing session and the previous autosave  revision is overwritten. Left off, the write closes the solo editing session, is refused while somebody else  has the file open, and adds a version to the history. | 
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -2968,7 +3001,7 @@ Name | Type | Description  | Notes
 
 ## SaveFileAsPdf
 
-> FileIntegerWrapper SaveFileAsPdf(ctx, id).SaveAsPdfInteger(saveAsPdfInteger).Execute()
+> FileWrapper SaveFileAsPdf(ctx, id).SaveAsPdf(saveAsPdf).Execute()
 
 Save a file as PDF
 
@@ -2989,17 +3022,20 @@ import (
 )
 
 func main() {
-	id := int32(1) // int32 | The file ID to save as PDF.
-	saveAsPdfInteger := *openapiclient.NewSaveAsPdfInteger(int32(1), "My Document") // SaveAsPdfInteger | The parameters for saving the file as PDF.
+	id := int32(1) // int32 | The file to convert; it is left untouched.
+	saveAsPdf := *openapiclient.NewSaveAsPdf(int32(1), "My Document") // SaveAsPdf | The destination folder and the name of the PDF.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.SaveFileAsPdf(context.Background(), id).SaveAsPdfInteger(saveAsPdfInteger).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.SaveFileAsPdf(context.Background(), id).SaveAsPdf(saveAsPdf).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// id := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.SaveFileAsPdf(context.Background(), id).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.SaveFileAsPdf``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SaveFileAsPdf`: FileIntegerWrapper
+	// response from `SaveFileAsPdf`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.SaveFileAsPdf`: %v\n", resp)
 }
 ```
@@ -3010,7 +3046,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The file ID to save as PDF. | 
+**id** | **int32** | The file to convert; it is left untouched. | 
 
 ### Other Parameters
 
@@ -3020,11 +3056,11 @@ Other parameters are passed through a pointer to a apiSaveFileAsPdfRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **saveAsPdfInteger** | [**SaveAsPdfInteger**](SaveAsPdfInteger.md) | The parameters for saving the file as PDF. | 
+ **saveAsPdf** | [**SaveAsPdf**](SaveAsPdf.md) | The destination folder and the name of the PDF. | 
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -3042,7 +3078,7 @@ Name | Type | Description  | Notes
 
 ## SaveFormRoleMapping
 
-> SaveFormRoleMapping(ctx, fileId).SaveFormRoleMappingDtoInteger(saveFormRoleMappingDtoInteger).Execute()
+> SaveFormRoleMapping(ctx, fileId).SaveFormRoleMappingDto(saveFormRoleMappingDto).Execute()
 
 Save form role mapping
 
@@ -3064,11 +3100,11 @@ import (
 
 func main() {
 	fileId := "fileId_example" // string | The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads.
-	saveFormRoleMappingDtoInteger := *openapiclient.NewSaveFormRoleMappingDtoInteger(int32(1), []openapiclient.FormRole{*openapiclient.NewFormRole()}) // SaveFormRoleMappingDtoInteger |  (optional)
+	saveFormRoleMappingDto := *openapiclient.NewSaveFormRoleMappingDto(int32(1), []openapiclient.FormRole{*openapiclient.NewFormRole()}) // SaveFormRoleMappingDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FilesFilesAPI.SaveFormRoleMapping(context.Background(), fileId).SaveFormRoleMappingDtoInteger(saveFormRoleMappingDtoInteger).Execute()
+	r, err := apiClient.FilesFilesAPI.SaveFormRoleMapping(context.Background(), fileId).SaveFormRoleMappingDto(saveFormRoleMappingDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.SaveFormRoleMapping``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3092,7 +3128,7 @@ Other parameters are passed through a pointer to a apiSaveFormRoleMappingRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **saveFormRoleMappingDtoInteger** | [**SaveFormRoleMappingDtoInteger**](SaveFormRoleMappingDtoInteger.md) |  | 
+ **saveFormRoleMappingDto** | [**SaveFormRoleMappingDto**](SaveFormRoleMappingDto.md) |  | 
 
 ### Return type
 
@@ -3114,7 +3150,7 @@ Name | Type | Description  | Notes
 
 ## SetCustomFilterTag
 
-> FileIntegerWrapper SetCustomFilterTag(ctx, fileId).CustomFilterParameters(customFilterParameters).Execute()
+> FileWrapper SetCustomFilterTag(ctx, fileId).CustomFilterParameters(customFilterParameters).Execute()
 
 Set the Custom Filter editing mode
 
@@ -3135,17 +3171,20 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID.
-	customFilterParameters := *openapiclient.NewCustomFilterParameters() // CustomFilterParameters | The parameters for setting the Custom Filter editing mode.
+	fileId := int32(1) // int32 | The spreadsheet whose Custom Filter mode is switched.
+	customFilterParameters := *openapiclient.NewCustomFilterParameters() // CustomFilterParameters | The Custom Filter state to reach.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.SetCustomFilterTag(context.Background(), fileId).CustomFilterParameters(customFilterParameters).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.SetCustomFilterTag(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.SetCustomFilterTag``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SetCustomFilterTag`: FileIntegerWrapper
+	// response from `SetCustomFilterTag`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.SetCustomFilterTag`: %v\n", resp)
 }
 ```
@@ -3156,7 +3195,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID. | 
+**fileId** | **int32** | The spreadsheet whose Custom Filter mode is switched. | 
 
 ### Other Parameters
 
@@ -3166,11 +3205,11 @@ Other parameters are passed through a pointer to a apiSetCustomFilterTagRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **customFilterParameters** | [**CustomFilterParameters**](CustomFilterParameters.md) | The parameters for setting the Custom Filter editing mode. | 
+ **customFilterParameters** | [**CustomFilterParameters**](CustomFilterParameters.md) | The Custom Filter state to reach. | 
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -3209,8 +3248,8 @@ import (
 )
 
 func main() {
-	fileId := int32(12345) // int32 | File ID
-	accessRequestKeyDto := []openapiclient.AccessRequestKeyDto{*openapiclient.NewAccessRequestKeyDto()} // []AccessRequestKeyDto | Collection of encryption key data for users with access to the file (optional)
+	fileId := int32(12345) // int32 | The file the keys are issued for; it has to lie in a private room.
+	accessRequestKeyDto := []openapiclient.AccessRequestKeyDto{*openapiclient.NewAccessRequestKeyDto()} // []AccessRequestKeyDto | One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person's key. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3228,7 +3267,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | File ID | 
+**fileId** | **int32** | The file the keys are issued for; it has to lie in a private room. | 
 
 ### Other Parameters
 
@@ -3238,7 +3277,7 @@ Other parameters are passed through a pointer to a apiSetEncryptionInfoRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **accessRequestKeyDto** | [**[]AccessRequestKeyDto**](AccessRequestKeyDto.md) | Collection of encryption key data for users with access to the file | 
+ **accessRequestKeyDto** | [**[]AccessRequestKeyDto**](AccessRequestKeyDto.md) | One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person's key. | 
 
 ### Return type
 
@@ -3262,7 +3301,7 @@ Name | Type | Description  | Notes
 
 > FileShareWrapper SetFileExternalLink(ctx, id).FileLinkRequest(fileLinkRequest).Execute()
 
-Set an external link
+Set a file external link
 
 
 
@@ -3281,8 +3320,8 @@ import (
 )
 
 func main() {
-	id := int32(1) // int32 | The file ID.
-	fileLinkRequest := *openapiclient.NewFileLinkRequest() // FileLinkRequest | The file external link parameters.
+	id := int32(1) // int32 | The file the link points at.
+	fileLinkRequest := *openapiclient.NewFileLinkRequest() // FileLinkRequest | The settings of the link. They are applied in full, so a field left out is reset rather than kept.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3302,7 +3341,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The file ID. | 
+**id** | **int32** | The file the link points at. | 
 
 ### Other Parameters
 
@@ -3312,7 +3351,7 @@ Other parameters are passed through a pointer to a apiSetFileExternalLinkRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fileLinkRequest** | [**FileLinkRequest**](FileLinkRequest.md) | The file external link parameters. | 
+ **fileLinkRequest** | [**FileLinkRequest**](FileLinkRequest.md) | The settings of the link. They are applied in full, so a field left out is reset rather than kept. | 
 
 ### Return type
 
@@ -3334,7 +3373,7 @@ Name | Type | Description  | Notes
 
 ## SetFileOrder
 
-> FileIntegerWrapper SetFileOrder(ctx, fileId).OrderRequestDto(orderRequestDto).Execute()
+> FileWrapper SetFileOrder(ctx, fileId).OrderRequestDto(orderRequestDto).Execute()
 
 Set file order
 
@@ -3355,17 +3394,20 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
-	orderRequestDto := *openapiclient.NewOrderRequestDto() // OrderRequestDto | The file order information. (optional)
+	fileId := int32(1) // int32 | The file to move.
+	orderRequestDto := *openapiclient.NewOrderRequestDto() // OrderRequestDto | The position the file is to take. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.SetFileOrder(context.Background(), fileId).OrderRequestDto(orderRequestDto).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.SetFileOrder(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.SetFileOrder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SetFileOrder`: FileIntegerWrapper
+	// response from `SetFileOrder`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.SetFileOrder`: %v\n", resp)
 }
 ```
@@ -3376,7 +3418,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file to move. | 
 
 ### Other Parameters
 
@@ -3386,11 +3428,11 @@ Other parameters are passed through a pointer to a apiSetFileOrderRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **orderRequestDto** | [**OrderRequestDto**](OrderRequestDto.md) | The file order information. | 
+ **orderRequestDto** | [**OrderRequestDto**](OrderRequestDto.md) | The position the file is to take. | 
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -3408,7 +3450,7 @@ Name | Type | Description  | Notes
 
 ## SetFilesOrder
 
-> FileEntryIntegerArrayWrapper SetFilesOrder(ctx).OrdersRequestDtoInteger(ordersRequestDtoInteger).Execute()
+> FileEntryArrayWrapper SetFilesOrder(ctx).OrdersRequestDto(ordersRequestDto).Execute()
 
 Set order of files
 
@@ -3429,16 +3471,16 @@ import (
 )
 
 func main() {
-	ordersRequestDtoInteger := *openapiclient.NewOrdersRequestDtoInteger([]openapiclient.OrdersItemRequestDtoInteger{*openapiclient.NewOrdersItemRequestDtoInteger(int32(1), openapiclient.FileEntryType(1), int32(1))}) // OrdersRequestDtoInteger |  (optional)
+	ordersRequestDto := *openapiclient.NewOrdersRequestDto([]openapiclient.OrdersItemRequestDto{*openapiclient.NewOrdersItemRequestDto(int32(1), openapiclient.FileEntryType(1), int32(1))}) // OrdersRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.SetFilesOrder(context.Background()).OrdersRequestDtoInteger(ordersRequestDtoInteger).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.SetFilesOrder(context.Background()).OrdersRequestDto(ordersRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.SetFilesOrder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SetFilesOrder`: FileEntryIntegerArrayWrapper
+	// response from `SetFilesOrder`: FileEntryArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.SetFilesOrder`: %v\n", resp)
 }
 ```
@@ -3454,11 +3496,11 @@ Other parameters are passed through a pointer to a apiSetFilesOrderRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ordersRequestDtoInteger** | [**OrdersRequestDtoInteger**](OrdersRequestDtoInteger.md) |  | 
+ **ordersRequestDto** | [**OrdersRequestDto**](OrdersRequestDto.md) |  | 
 
 ### Return type
 
-[**FileEntryIntegerArrayWrapper**](FileEntryIntegerArrayWrapper.md)
+[**FileEntryArrayWrapper**](FileEntryArrayWrapper.md)
 
 ### Authorization
 
@@ -3478,7 +3520,7 @@ Name | Type | Description  | Notes
 
 > StringWrapper StartEditFile(ctx, fileId).StartEdit(startEdit).Execute()
 
-Start file editing
+Open an editing session
 
 
 
@@ -3497,8 +3539,8 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID to start editing.
-	startEdit := *openapiclient.NewStartEdit() // StartEdit | The file parameters to start editing.
+	fileId := int32(1) // int32 | The file to open the editing session on. The caller needs edit access to it.
+	startEdit := *openapiclient.NewStartEdit() // StartEdit | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3518,7 +3560,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID to start editing. | 
+**fileId** | **int32** | The file to open the editing session on. The caller needs edit access to it. | 
 
 ### Other Parameters
 
@@ -3528,7 +3570,7 @@ Other parameters are passed through a pointer to a apiStartEditFileRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **startEdit** | [**StartEdit**](StartEdit.md) | The file parameters to start editing. | 
+ **startEdit** | [**StartEdit**](StartEdit.md) | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | 
 
 ### Return type
 
@@ -3536,7 +3578,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -3550,9 +3592,9 @@ No authorization required
 
 ## StartFillingFile
 
-> FileIntegerWrapper StartFillingFile(ctx, fileId).Execute()
+> FileWrapper StartFillingFile(ctx, fileId).Execute()
 
-Start file filling
+Start filling a form
 
 
 
@@ -3571,16 +3613,19 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID to start filling.
+	fileId := int32(1) // int32 | The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.StartFillingFile(context.Background(), fileId).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.StartFillingFile(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.StartFillingFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StartFillingFile`: FileIntegerWrapper
+	// response from `StartFillingFile`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.StartFillingFile`: %v\n", resp)
 }
 ```
@@ -3591,7 +3636,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID to start filling. | 
+**fileId** | **int32** | The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result. | 
 
 ### Other Parameters
 
@@ -3604,7 +3649,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
@@ -3624,7 +3669,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper ToggleFileFavorite(ctx, fileId).Favorite(favorite).Execute()
 
-Change the file favorite status
+Set the file favorite status
 
 
 
@@ -3643,8 +3688,8 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID.
-	favorite := true // bool | Specifies if the file is marked as favorite or not. (optional)
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+	favorite := true // bool | Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3664,7 +3709,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -3674,7 +3719,7 @@ Other parameters are passed through a pointer to a apiToggleFileFavoriteRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **favorite** | **bool** | Specifies if the file is marked as favorite or not. | 
+ **favorite** | **bool** | Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it. | 
 
 ### Return type
 
@@ -3698,7 +3743,7 @@ Name | Type | Description  | Notes
 
 > ItemKeyValuePairBooleanStringWrapper TrackEditFile(ctx, fileId).TabId(tabId).DocKeyForTrack(docKeyForTrack).IsFinish(isFinish).Execute()
 
-Track file editing
+Track an editing session
 
 
 
@@ -3717,10 +3762,10 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID to track editing changes.
-	tabId := "00000000-0000-0000-0000-000000000000" // string | The tab ID to track editing changes. (optional)
-	docKeyForTrack := "abc123" // string | The document key for tracking changes. (optional)
-	isFinish := true // bool | Specifies whether to finish file tracking or not. (optional)
+	fileId := int32(1) // int32 | The file whose editing session is being tracked.
+	tabId := "00000000-0000-0000-0000-000000000000" // string | The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor. (optional)
+	docKeyForTrack := "abc123" // string | The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file's current key on every call, so a key left over from an older revision is refused. (optional)
+	isFinish := true // bool | Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3740,7 +3785,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID to track editing changes. | 
+**fileId** | **int32** | The file whose editing session is being tracked. | 
 
 ### Other Parameters
 
@@ -3750,9 +3795,9 @@ Other parameters are passed through a pointer to a apiTrackEditFileRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **tabId** | **string** | The tab ID to track editing changes. | 
- **docKeyForTrack** | **string** | The document key for tracking changes. | 
- **isFinish** | **bool** | Specifies whether to finish file tracking or not. | 
+ **tabId** | **string** | The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor. | 
+ **docKeyForTrack** | **string** | The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file's current key on every call, so a key left over from an older revision is refused. | 
+ **isFinish** | **bool** | Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited. | 
 
 ### Return type
 
@@ -3760,7 +3805,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -3774,7 +3819,7 @@ No authorization required
 
 ## UpdateFile
 
-> FileIntegerWrapper UpdateFile(ctx, fileId).UpdateFile(updateFile).Execute()
+> FileWrapper UpdateFile(ctx, fileId).UpdateFile(updateFile).Execute()
 
 Update a file
 
@@ -3795,17 +3840,20 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID to update.
-	updateFile := *openapiclient.NewUpdateFile() // UpdateFile | The parameters for updating a file.
+	fileId := int32(1) // int32 | The file to update.
+	updateFile := *openapiclient.NewUpdateFile() // UpdateFile | The new title and the version to restore.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.FilesFilesAPI.UpdateFile(context.Background(), fileId).UpdateFile(updateFile).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// fileId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.UpdateFile(context.Background(), fileId).ExecuteThirdParty()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.UpdateFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFile`: FileIntegerWrapper
+	// response from `UpdateFile`: FileWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.UpdateFile`: %v\n", resp)
 }
 ```
@@ -3816,7 +3864,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID to update. | 
+**fileId** | **int32** | The file to update. | 
 
 ### Other Parameters
 
@@ -3826,15 +3874,15 @@ Other parameters are passed through a pointer to a apiUpdateFileRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateFile** | [**UpdateFile**](UpdateFile.md) | The parameters for updating a file. | 
+ **updateFile** | [**UpdateFile**](UpdateFile.md) | The new title and the version to restore. | 
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**FileWrapper**](FileWrapper.md)
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

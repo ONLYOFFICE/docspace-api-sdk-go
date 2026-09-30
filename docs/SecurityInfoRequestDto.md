@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FolderIds** | Pointer to [**[]DuplicateRequestDtoAllOfFileIds**](DuplicateRequestDtoAllOfFileIds.md) | The list of the shared folder IDs. | [optional] 
-**FileIds** | Pointer to [**[]DuplicateRequestDtoAllOfFileIds**](DuplicateRequestDtoAllOfFileIds.md) | The list of the shared file IDs. | [optional] 
-**Share** | Pointer to [**[]FileShareParams**](FileShareParams.md) | The collection of sharing parameters. | [optional] 
-**Notify** | Pointer to **bool** | Specifies whether to notify users about the shared file or not. | [optional] 
-**SharingMessage** | Pointer to **NullableString** | The message to send when notifying about the shared file. | [optional] 
+**FolderIds** | Pointer to [**[]DuplicateRequestDtoAllOfFileIds**](DuplicateRequestDtoAllOfFileIds.md) | The folders and rooms whose rights are being changed, identified as a listing operation returns them - a  number on the portal, a string on a connected third-party account. | [optional] 
+**FileIds** | Pointer to [**[]DuplicateRequestDtoAllOfFileIds**](DuplicateRequestDtoAllOfFileIds.md) | The files whose rights are being changed, identified as a listing operation returns them - a number on the  portal, a string on a connected third-party account. | [optional] 
+**Share** | Pointer to [**[]FileShareParams**](FileShareParams.md) | One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of `None` takes the access away. An empty collection makes the call change  nothing. | [optional] 
+**Notify** | Pointer to **bool** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] 
+**SharingMessage** | Pointer to **NullableString** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] 
 
 ## Methods
 

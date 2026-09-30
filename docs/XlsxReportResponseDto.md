@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Form** | Pointer to [**FileDtoInteger**](FileDtoInteger.md) | The original form file information. | [optional] 
-**Task** | Pointer to [**DocumentBuilderTaskDto**](DocumentBuilderTaskDto.md) | The Document Builder task information. | [optional] 
-**IsNewFile** | Pointer to **bool** | Specifies whether the XLSX report file is newly created or an existing file will be updated. | [optional] 
+**Form** | Pointer to [**FileDto**](FileDto.md) | The original form the answers are collected from. It is not the produced spreadsheet - that one arrives with  the task, once the task reports completion. | [optional] 
+**Task** | Pointer to [**DocumentBuilderTaskDto**](DocumentBuilderTaskDto.md) | The queued generation. Poll it with `GET api/2.0/files/file/{fileId}/xlsx` until it reports completion, and  take the produced file from it then. | [optional] 
+**IsNewFile** | Pointer to **bool** | True when this run creates the report file, false when an existing report is rewritten in place, which means  it keeps its id and the links already shared for it. | [optional] 
 
 ## Methods
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetForm
 
-`func (o *XlsxReportResponseDto) GetForm() FileDtoInteger`
+`func (o *XlsxReportResponseDto) GetForm() FileDto`
 
 GetForm returns the Form field if non-nil, zero value otherwise.
 
 ### GetFormOk
 
-`func (o *XlsxReportResponseDto) GetFormOk() (*FileDtoInteger, bool)`
+`func (o *XlsxReportResponseDto) GetFormOk() (*FileDto, bool)`
 
 GetFormOk returns a tuple with the Form field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetForm
 
-`func (o *XlsxReportResponseDto) SetForm(v FileDtoInteger)`
+`func (o *XlsxReportResponseDto) SetForm(v FileDto)`
 
 SetForm sets Form field to given value.
 

@@ -23,9 +23,9 @@ import (
 // checks if the TerminateRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TerminateRequestDto{}
 
-// TerminateRequestDto The request parameters for terminating the reassignment/deletion process.
+// TerminateRequestDto The request parameters that address the queued job of a single user - a data reassignment, a data deletion or a  user type change.
 type TerminateRequestDto struct {
-	// The user ID whose data is reassigned/removed.
+	// The ID of the user whose job is addressed. For a terminate operation it has to be the same ID that was passed  when the job was started.
 	UserId string `json:"userId"`
 }
 

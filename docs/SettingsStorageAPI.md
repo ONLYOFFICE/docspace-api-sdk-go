@@ -6,13 +6,13 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetAllBackupStorages**](SettingsStorageAPI.md#GetAllBackupStorages) | **Get** /api/2.0/settings/storage/backup | Get the backup storages
 [**GetAllCdnStorages**](SettingsStorageAPI.md#GetAllCdnStorages) | **Get** /api/2.0/settings/storage/cdn | Get the CDN storages
-[**GetAllStorages**](SettingsStorageAPI.md#GetAllStorages) | **Get** /api/2.0/settings/storage | Get storages
-[**GetAmazonS3Regions**](SettingsStorageAPI.md#GetAmazonS3Regions) | **Get** /api/2.0/settings/storage/s3/regions | Get Amazon regions
-[**GetStorageProgress**](SettingsStorageAPI.md#GetStorageProgress) | **Get** /api/2.0/settings/storage/progress | Get the storage progress
+[**GetAllStorages**](SettingsStorageAPI.md#GetAllStorages) | **Get** /api/2.0/settings/storage | Get the portal storages
+[**GetAmazonS3Regions**](SettingsStorageAPI.md#GetAmazonS3Regions) | **Get** /api/2.0/settings/storage/s3/regions | Get the Amazon S3 regions
+[**GetStorageProgress**](SettingsStorageAPI.md#GetStorageProgress) | **Get** /api/2.0/settings/storage/progress | Get the storage migration progress
 [**ResetCdnToDefault**](SettingsStorageAPI.md#ResetCdnToDefault) | **Delete** /api/2.0/settings/storage/cdn | Reset the CDN storage settings
 [**ResetStorageToDefault**](SettingsStorageAPI.md#ResetStorageToDefault) | **Delete** /api/2.0/settings/storage | Reset the storage settings
 [**UpdateCdnStorage**](SettingsStorageAPI.md#UpdateCdnStorage) | **Put** /api/2.0/settings/storage/cdn | Update the CDN storage
-[**UpdateStorage**](SettingsStorageAPI.md#UpdateStorage) | **Put** /api/2.0/settings/storage | Update a storage
+[**UpdateStorage**](SettingsStorageAPI.md#UpdateStorage) | **Put** /api/2.0/settings/storage | Switch the portal storage
 
 
 
@@ -39,7 +39,7 @@ import (
 )
 
 func main() {
-	dump := true // bool | Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process. (optional)
+	dump := true // bool | Whether the schedule of the whole server is read instead of the one of the current portal. It only changes  which schedule marks an entry as `current`; the list of storages itself is the same either way, and the flag  makes sense only on a self-hosted installation. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiGetAllBackupStoragesReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dump** | **bool** | Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process. | 
+ **dump** | **bool** | Whether the schedule of the whole server is read instead of the one of the current portal. It only changes  which schedule marks an entry as `current`; the list of storages itself is the same either way, and the flag  makes sense only on a self-hosted installation. | 
 
 ### Return type
 
@@ -151,7 +151,7 @@ Other parameters are passed through a pointer to a apiGetAllCdnStoragesRequest s
 
 > StorageArrayWrapper GetAllStorages(ctx).Execute()
 
-Get storages
+Get the portal storages
 
 
 
@@ -212,9 +212,9 @@ Other parameters are passed through a pointer to a apiGetAllStoragesRequest stru
 
 ## GetAmazonS3Regions
 
-> ObjectWrapper GetAmazonS3Regions(ctx).Execute()
+> AmazonS3RegionArrayWrapper GetAmazonS3Regions(ctx).Execute()
 
-Get Amazon regions
+Get the Amazon S3 regions
 
 
 
@@ -241,7 +241,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsStorageAPI.GetAmazonS3Regions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAmazonS3Regions`: ObjectWrapper
+	// response from `GetAmazonS3Regions`: AmazonS3RegionArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsStorageAPI.GetAmazonS3Regions`: %v\n", resp)
 }
 ```
@@ -257,7 +257,7 @@ Other parameters are passed through a pointer to a apiGetAmazonS3RegionsRequest 
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**AmazonS3RegionArrayWrapper**](AmazonS3RegionArrayWrapper.md)
 
 ### Authorization
 
@@ -277,7 +277,7 @@ Other parameters are passed through a pointer to a apiGetAmazonS3RegionsRequest 
 
 > DoubleWrapper GetStorageProgress(ctx).Execute()
 
-Get the storage progress
+Get the storage migration progress
 
 
 
@@ -530,7 +530,7 @@ Name | Type | Description  | Notes
 
 > StorageSettingsWrapper UpdateStorage(ctx).StorageRequestsDto(storageRequestsDto).Execute()
 
-Update a storage
+Switch the portal storage
 
 
 

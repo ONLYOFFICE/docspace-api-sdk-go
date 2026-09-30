@@ -21,13 +21,13 @@ import (
 // checks if the AppDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AppDto{}
 
-// AppDto The portal application information.
+// AppDto One feature module of the portal: whether it is switched on here, and the settings stored for it.
 type AppDto struct {
-	// The application identifier (stable slug). The client maps this to its title, description and icon.
+	// The application's stable key, declared in the installation configuration - `ai-rooms`, `docs-cloud` and  the like. It is what every other operation of this group addresses an application by, and a client maps it  to a title and an icon of its own; the portal ships no display name for it.
 	Id NullableString `json:"id,omitempty"`
-	// Whether the application is enabled for the current tenant.
+	// Whether the application is switched on for this portal. It is the portal's own flag where one has been  saved, and the default the installation configuration gives the application otherwise.
 	Enabled *bool `json:"enabled,omitempty"`
-	Settings *AppDtoSettings `json:"settings,omitempty"`
+	Settings interface{} `json:"settings,omitempty"`
 }
 
 // NewAppDto instantiates a new AppDto object
@@ -121,22 +121,23 @@ func (o *AppDto) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise.
-func (o *AppDto) GetSettings() AppDtoSettings {
-	if o == nil || IsNil(o.Settings) {
-		var ret AppDtoSettings
+// GetSettings returns the Settings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AppDto) GetSettings() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Settings
+	return o.Settings
 }
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AppDto) GetSettingsOk() (*AppDtoSettings, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AppDto) GetSettingsOk() (*interface{}, bool) {
 	if o == nil || IsNil(o.Settings) {
 		return nil, false
 	}
-	return o.Settings, true
+	return &o.Settings, true
 }
 
 // HasSettings returns a boolean if a field has been set.
@@ -148,9 +149,9 @@ func (o *AppDto) IsSettingsSet() bool {
 	return false
 }
 
-// SetSettings gets a reference to the given AppDtoSettings and assigns it to the Settings field.
-func (o *AppDto) SetSettings(v AppDtoSettings) {
-	o.Settings = &v
+// SetSettings gets a reference to the given interface{} and assigns it to the Settings field.
+func (o *AppDto) SetSettings(v interface{}) {
+	o.Settings = v
 }
 
 func (o AppDto) MarshalJSON() ([]byte, error) {
@@ -169,7 +170,7 @@ func (o AppDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.Settings) {
+	if o.Settings != nil {
 		toSerialize["settings"] = o.Settings
 	}
 	return toSerialize, nil

@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AuthenticateMe**](AuthenticationAPI.md#AuthenticateMe) | **Post** /api/2.0/authentication | Authenticate a user
 [**AuthenticateMeFromBodyWithCode**](AuthenticationAPI.md#AuthenticateMeFromBodyWithCode) | **Post** /api/2.0/authentication/{code} | Authenticate a user by code
-[**CheckConfirm**](AuthenticationAPI.md#CheckConfirm) | **Post** /api/2.0/authentication/confirm | Open confirmation email URL
+[**CheckConfirm**](AuthenticationAPI.md#CheckConfirm) | **Post** /api/2.0/authentication/confirm | Check a confirmation link
 [**GetIsAuthentificated**](AuthenticationAPI.md#GetIsAuthentificated) | **Get** /api/2.0/authentication | Check authentication
 [**Logout**](AuthenticationAPI.md#Logout) | **Post** /api/2.0/authentication/logout | Log out
 [**SaveMobilePhone**](AuthenticationAPI.md#SaveMobilePhone) | **Post** /api/2.0/authentication/setphone | Set a mobile phone
@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -160,7 +160,7 @@ No authorization required
 
 > ConfirmWrapper CheckConfirm(ctx).EmailValidationKeyModel(emailValidationKeyModel).Execute()
 
-Open confirmation email URL
+Check a confirmation link
 
 
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -275,7 +275,7 @@ Other parameters are passed through a pointer to a apiGetIsAuthentificatedReques
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -338,7 +338,7 @@ Other parameters are passed through a pointer to a apiLogoutRequest struct via t
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -474,7 +474,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

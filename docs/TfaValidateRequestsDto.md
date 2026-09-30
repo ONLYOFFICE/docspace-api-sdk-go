@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Code** | **NullableString** | The verification code provided by the user. | 
-**Session** | Pointer to **bool** | Specifies whether the authentication is session-based. | [optional] 
+**Code** | **NullableString** | The code to check - either one from the authenticator application or one of the account's unused backup  codes, which is spent by the check. A wrong code is refused with 400 and counts against the portal login  attempt limit. | 
+**Session** | Pointer to **bool** | Whether the sign-in that follows is tied to the browser session. When it is, the session ends with the  browser rather than lasting for the portal session lifetime. | [optional] 
 
 ## Methods
 

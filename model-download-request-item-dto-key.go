@@ -20,7 +20,7 @@ import (
 	"gopkg.in/validator.v2"
 )
 
-// DownloadRequestItemDtoKey - The unique identifier or reference key for the file to be downloaded.
+// DownloadRequestItemDtoKey - The file to convert and pack, by id — a number for a file stored in the portal itself, a string for a file on  a connected third-party account.
 type DownloadRequestItemDtoKey struct {
 	Int32 *int32
 	String *string

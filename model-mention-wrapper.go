@@ -21,19 +21,19 @@ import (
 // checks if the MentionWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MentionWrapper{}
 
-// MentionWrapper The parameters of a user mentioned in a message.
+// MentionWrapper A user the editor may offer: to be mentioned in a comment, or to be picked when protecting a document.
 type MentionWrapper struct {
-	// The user information.
+	// The account itself, in the shape the people listings use.
 	User *UserInfo `json:"user,omitempty"`
-	// The user email address.
+	// Where a mention notification for this user is delivered.
 	Email NullableString `json:"email,omitempty"`
-	// The user unique identification.
+	// The account id as text, the same value the account object carries; it is what identifies the user in a sharing  request built from this list.
 	Id NullableString `json:"id,omitempty"`
-	// The path to the user's avatar.
+	// An absolute address of the medium-sized avatar. A generated default avatar is reported when the user never  uploaded one, so the field is never empty.
 	Image NullableString `json:"image,omitempty"`
-	// Specifies whether the user has the access to the file where they are mentioned.
+	// Not filled in by the operations that return this list: it always comes back false. Whether a user can already  open the document has to be read from the sharing settings of the file.
 	HasAccess *bool `json:"hasAccess,omitempty"`
-	// The user full name.
+	// The name to display, assembled the way the portal is configured to show names.
 	Name NullableString `json:"name,omitempty"`
 }
 

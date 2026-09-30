@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## ResetRoomQuota
 
-> FolderIntegerArrayWrapper ResetRoomQuota(ctx).UpdateRoomsRoomIdsRequestDtoInteger(updateRoomsRoomIdsRequestDtoInteger).Execute()
+> FolderArrayWrapper ResetRoomQuota(ctx).UpdateRoomsRoomIdsRequestDto(updateRoomsRoomIdsRequestDto).Execute()
 
 Reset the room quota limit
 
@@ -32,16 +32,16 @@ import (
 )
 
 func main() {
-	updateRoomsRoomIdsRequestDtoInteger := *openapiclient.NewUpdateRoomsRoomIdsRequestDtoInteger() // UpdateRoomsRoomIdsRequestDtoInteger |  (optional)
+	updateRoomsRoomIdsRequestDto := *openapiclient.NewUpdateRoomsRoomIdsRequestDto() // UpdateRoomsRoomIdsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesQuotaAPI.ResetRoomQuota(context.Background()).UpdateRoomsRoomIdsRequestDtoInteger(updateRoomsRoomIdsRequestDtoInteger).Execute()
+	resp, r, err := apiClient.FilesQuotaAPI.ResetRoomQuota(context.Background()).UpdateRoomsRoomIdsRequestDto(updateRoomsRoomIdsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesQuotaAPI.ResetRoomQuota``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ResetRoomQuota`: FolderIntegerArrayWrapper
+	// response from `ResetRoomQuota`: FolderArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesQuotaAPI.ResetRoomQuota`: %v\n", resp)
 }
 ```
@@ -57,11 +57,11 @@ Other parameters are passed through a pointer to a apiResetRoomQuotaRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **updateRoomsRoomIdsRequestDtoInteger** | [**UpdateRoomsRoomIdsRequestDtoInteger**](UpdateRoomsRoomIdsRequestDtoInteger.md) |  | 
+ **updateRoomsRoomIdsRequestDto** | [**UpdateRoomsRoomIdsRequestDto**](UpdateRoomsRoomIdsRequestDto.md) |  | 
 
 ### Return type
 
-[**FolderIntegerArrayWrapper**](FolderIntegerArrayWrapper.md)
+[**FolderArrayWrapper**](FolderArrayWrapper.md)
 
 ### Authorization
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## UpdateRoomsQuota
 
-> FolderIntegerArrayWrapper UpdateRoomsQuota(ctx).UpdateRoomsQuotaRequestDtoInteger(updateRoomsQuotaRequestDtoInteger).Execute()
+> FolderArrayWrapper UpdateRoomsQuota(ctx).UpdateRoomsQuotaRequestDto(updateRoomsQuotaRequestDto).Execute()
 
 Change the room quota limit
 
@@ -100,16 +100,16 @@ import (
 )
 
 func main() {
-	updateRoomsQuotaRequestDtoInteger := *openapiclient.NewUpdateRoomsQuotaRequestDtoInteger() // UpdateRoomsQuotaRequestDtoInteger |  (optional)
+	updateRoomsQuotaRequestDto := *openapiclient.NewUpdateRoomsQuotaRequestDto() // UpdateRoomsQuotaRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesQuotaAPI.UpdateRoomsQuota(context.Background()).UpdateRoomsQuotaRequestDtoInteger(updateRoomsQuotaRequestDtoInteger).Execute()
+	resp, r, err := apiClient.FilesQuotaAPI.UpdateRoomsQuota(context.Background()).UpdateRoomsQuotaRequestDto(updateRoomsQuotaRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesQuotaAPI.UpdateRoomsQuota``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateRoomsQuota`: FolderIntegerArrayWrapper
+	// response from `UpdateRoomsQuota`: FolderArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesQuotaAPI.UpdateRoomsQuota`: %v\n", resp)
 }
 ```
@@ -125,11 +125,11 @@ Other parameters are passed through a pointer to a apiUpdateRoomsQuotaRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **updateRoomsQuotaRequestDtoInteger** | [**UpdateRoomsQuotaRequestDtoInteger**](UpdateRoomsQuotaRequestDtoInteger.md) |  | 
+ **updateRoomsQuotaRequestDto** | [**UpdateRoomsQuotaRequestDto**](UpdateRoomsQuotaRequestDto.md) |  | 
 
 ### Return type
 
-[**FolderIntegerArrayWrapper**](FolderIntegerArrayWrapper.md)
+[**FolderArrayWrapper**](FolderArrayWrapper.md)
 
 ### Authorization
 

@@ -21,17 +21,17 @@ import (
 // checks if the EmbeddedConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EmbeddedConfig{}
 
-// EmbeddedConfig The configuration parameters for the embedded document type.
+// EmbeddedConfig The addresses the framed viewer needs. It is reported for the embedded layout only.
 type EmbeddedConfig struct {
-	// The absolute URL to the document serving as a source file for the document embedded into the web page.
+	// The page to put into the frame. It is empty when the opening carries no external share key, since a framed  viewer cannot authenticate a portal member.
 	EmbedUrl NullableString `json:"embedUrl,omitempty"`
-	// The absolute URL that will allow the document to be saved onto the user personal computer.
+	// Where the download button of the framed viewer leads.
 	SaveUrl NullableString `json:"saveUrl,omitempty"`
-	// The shared URL parameter.
+	// The query fragment carrying the external share key, ampersand included, out of which the addresses around it  are built.
 	ShareLinkParam NullableString `json:"shareLinkParam,omitempty"`
-	// The absolute URL that will allow other users to share this document.
+	// The address behind the share button of the framed viewer, the document opened full-screen for reading. It is  empty when the opening carries no external share key.
 	ShareUrl NullableString `json:"shareUrl,omitempty"`
-	// The place for the embedded viewer toolbar, can be either top or bottom.
+	// Where the framed viewer puts its toolbar. The portal always asks for the top.
 	ToolbarDocked NullableString `json:"toolbarDocked,omitempty"`
 }
 

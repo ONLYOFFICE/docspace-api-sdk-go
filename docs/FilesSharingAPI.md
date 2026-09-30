@@ -4,21 +4,21 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ApplyExternalSharePassword**](FilesSharingAPI.md#ApplyExternalSharePassword) | **Post** /api/2.0/files/share/{key}/password | Apply external data password
-[**ChangeFileOwner**](FilesSharingAPI.md#ChangeFileOwner) | **Post** /api/2.0/files/owner | Change the file owner
+[**ApplyExternalSharePassword**](FilesSharingAPI.md#ApplyExternalSharePassword) | **Post** /api/2.0/files/share/{key}/password | Unlock a password-protected link
+[**ChangeFileOwner**](FilesSharingAPI.md#ChangeFileOwner) | **Post** /api/2.0/files/owner | Change the room or file owner
 [**GetEncryptionAccess**](FilesSharingAPI.md#GetEncryptionAccess) | **Get** /api/2.0/files/file/{fileId}/publickeys | Get file encryption keys
-[**GetExternalShareData**](FilesSharingAPI.md#GetExternalShareData) | **Get** /api/2.0/files/share/{key} | Get the external data
-[**GetFileSecurityInfo**](FilesSharingAPI.md#GetFileSecurityInfo) | **Get** /api/2.0/files/file/{id}/share | Get the shared file information
-[**GetFolderSecurityInfo**](FilesSharingAPI.md#GetFolderSecurityInfo) | **Get** /api/2.0/files/folder/{id}/share | Get the shared folder information
-[**GetGroupsMembersWithFileSecurity**](FilesSharingAPI.md#GetGroupsMembersWithFileSecurity) | **Get** /api/2.0/files/file/{fileId}/group/{groupId}/share | Get file group members with security information
-[**GetGroupsMembersWithFolderSecurity**](FilesSharingAPI.md#GetGroupsMembersWithFolderSecurity) | **Get** /api/2.0/files/folder/{folderId}/group/{groupId}/share | Get folder group members with security information
-[**GetSecurityInfo**](FilesSharingAPI.md#GetSecurityInfo) | **Post** /api/2.0/files/share | Get the sharing rights
-[**GetSharedUsers**](FilesSharingAPI.md#GetSharedUsers) | **Get** /api/2.0/files/file/{fileId}/sharedusers | Get user access rights by file ID
-[**RemoveSecurityInfo**](FilesSharingAPI.md#RemoveSecurityInfo) | **Delete** /api/2.0/files/share | Remove the sharing rights
-[**SendEditorNotify**](FilesSharingAPI.md#SendEditorNotify) | **Post** /api/2.0/files/file/{fileId}/sendeditornotify | Send the mention message
+[**GetExternalShareData**](FilesSharingAPI.md#GetExternalShareData) | **Get** /api/2.0/files/share/{key} | Resolve an external share link
+[**GetFileSecurityInfo**](FilesSharingAPI.md#GetFileSecurityInfo) | **Get** /api/2.0/files/file/{id}/share | Get file sharing rights
+[**GetFolderSecurityInfo**](FilesSharingAPI.md#GetFolderSecurityInfo) | **Get** /api/2.0/files/folder/{id}/share | Get folder sharing rights
+[**GetGroupsMembersWithFileSecurity**](FilesSharingAPI.md#GetGroupsMembersWithFileSecurity) | **Get** /api/2.0/files/file/{fileId}/group/{groupId}/share | Get file access of group members
+[**GetGroupsMembersWithFolderSecurity**](FilesSharingAPI.md#GetGroupsMembersWithFolderSecurity) | **Get** /api/2.0/files/folder/{folderId}/group/{groupId}/share | Get folder access of group members
+[**GetSecurityInfo**](FilesSharingAPI.md#GetSecurityInfo) | **Post** /api/2.0/files/share | Get sharing rights in batch
+[**GetSharedUsers**](FilesSharingAPI.md#GetSharedUsers) | **Get** /api/2.0/files/file/{fileId}/sharedusers | Get users to mention in a file
+[**RemoveSecurityInfo**](FilesSharingAPI.md#RemoveSecurityInfo) | **Delete** /api/2.0/files/share | Remove sharing rights in batch
+[**SendEditorNotify**](FilesSharingAPI.md#SendEditorNotify) | **Post** /api/2.0/files/file/{fileId}/sendeditornotify | Notify mentioned users
 [**SetFileSecurityInfo**](FilesSharingAPI.md#SetFileSecurityInfo) | **Put** /api/2.0/files/file/{id}/share | Share a file
 [**SetFolderSecurityInfo**](FilesSharingAPI.md#SetFolderSecurityInfo) | **Put** /api/2.0/files/folder/{id}/share | Share a folder
-[**SetSecurityInfo**](FilesSharingAPI.md#SetSecurityInfo) | **Put** /api/2.0/files/share | Set the sharing rights
+[**SetSecurityInfo**](FilesSharingAPI.md#SetSecurityInfo) | **Put** /api/2.0/files/share | Set sharing rights in batch
 
 
 
@@ -26,7 +26,7 @@ Method | HTTP request | Description
 
 > ExternalShareWrapper ApplyExternalSharePassword(ctx, key).ExternalShareRequestParam(externalShareRequestParam).Execute()
 
-Apply external data password
+Unlock a password-protected link
 
 
 
@@ -45,8 +45,8 @@ import (
 )
 
 func main() {
-	key := "doc_key_123" // string | The unique document identifier.
-	externalShareRequestParam := *openapiclient.NewExternalShareRequestParam() // ExternalShareRequestParam | The external data share request parameters.
+	key := "q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg" // string | The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand.
+	externalShareRequestParam := *openapiclient.NewExternalShareRequestParam() // ExternalShareRequestParam | The body of the request, holding the password to check.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -66,7 +66,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**key** | **string** | The unique document identifier. | 
+**key** | **string** | The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. | 
 
 ### Other Parameters
 
@@ -76,7 +76,7 @@ Other parameters are passed through a pointer to a apiApplyExternalSharePassword
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **externalShareRequestParam** | [**ExternalShareRequestParam**](ExternalShareRequestParam.md) | The external data share request parameters. | 
+ **externalShareRequestParam** | [**ExternalShareRequestParam**](ExternalShareRequestParam.md) | The body of the request, holding the password to check. | 
 
 ### Return type
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -100,7 +100,7 @@ No authorization required
 
 > FileEntryBaseArrayWrapper ChangeFileOwner(ctx).ChangeOwnerRequestDto(changeOwnerRequestDto).Execute()
 
-Change the file owner
+Change the room or file owner
 
 
 
@@ -119,7 +119,7 @@ import (
 )
 
 func main() {
-	changeOwnerRequestDto := *openapiclient.NewChangeOwnerRequestDto("00000000-0000-0000-0000-000000000000") // ChangeOwnerRequestDto |  (optional)
+	changeOwnerRequestDto := *openapiclient.NewChangeOwnerRequestDto("9924256a-739c-462b-af15-e652a3b1b6eb") // ChangeOwnerRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -187,7 +187,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -207,7 +207,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 
 > ExternalShareWrapper GetExternalShareData(ctx, key).FileId(fileId).FolderId(folderId).Execute()
 
-Get the external data
+Resolve an external share link
 
 
 
@@ -259,9 +259,9 @@ import (
 )
 
 func main() {
-	key := "doc_key_123" // string | The unique key of the external shared data.
-	fileId := "1" // string | The unique document identifier. (optional)
-	folderId := "1" // string | The unique folder identifier. (optional)
+	key := "q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg" // string | The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand.
+	fileId := "9" // string | A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins. (optional)
+	folderId := "3" // string | A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -281,7 +281,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**key** | **string** | The unique key of the external shared data. | 
+**key** | **string** | The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. | 
 
 ### Other Parameters
 
@@ -291,8 +291,8 @@ Other parameters are passed through a pointer to a apiGetExternalShareDataReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fileId** | **string** | The unique document identifier. | 
- **folderId** | **string** | The unique folder identifier. | 
+ **fileId** | **string** | A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins. | 
+ **folderId** | **string** | A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well. | 
 
 ### Return type
 
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -316,7 +316,7 @@ No authorization required
 
 > FileShareArrayWrapper GetFileSecurityInfo(ctx, id).Count(count).StartIndex(startIndex).Execute()
 
-Get the shared file information
+Get file sharing rights
 
 
 
@@ -335,9 +335,9 @@ import (
 )
 
 func main() {
-	id := int32(10) // int32 | The file unique identifier.
-	count := int32(25) // int32 | The number of items to retrieve in the request. (optional)
-	startIndex := int32(0) // int32 | The starting index for the query results. (optional)
+	id := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+	count := int32(25) // int32 | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. (optional)
+	startIndex := int32(0) // int32 | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -357,7 +357,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The file unique identifier. | 
+**id** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -367,8 +367,8 @@ Other parameters are passed through a pointer to a apiGetFileSecurityInfoRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **count** | **int32** | The number of items to retrieve in the request. | 
- **startIndex** | **int32** | The starting index for the query results. | 
+ **count** | **int32** | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | 
+ **startIndex** | **int32** | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | 
 
 ### Return type
 
@@ -392,7 +392,7 @@ Name | Type | Description  | Notes
 
 > FileShareArrayWrapper GetFolderSecurityInfo(ctx, id).Count(count).StartIndex(startIndex).Execute()
 
-Get the shared folder information
+Get folder sharing rights
 
 
 
@@ -411,9 +411,9 @@ import (
 )
 
 func main() {
-	id := int32(10) // int32 | The folder unique identifier.
-	count := int32(25) // int32 | The number of items to retrieve in the request. (optional)
-	startIndex := int32(0) // int32 | The starting index for the query results. (optional)
+	id := int32(10) // int32 | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+	count := int32(25) // int32 | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. (optional)
+	startIndex := int32(0) // int32 | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -433,7 +433,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The folder unique identifier. | 
+**id** | **int32** | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | 
 
 ### Other Parameters
 
@@ -443,8 +443,8 @@ Other parameters are passed through a pointer to a apiGetFolderSecurityInfoReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **count** | **int32** | The number of items to retrieve in the request. | 
- **startIndex** | **int32** | The starting index for the query results. | 
+ **count** | **int32** | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. | 
+ **startIndex** | **int32** | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | 
 
 ### Return type
 
@@ -468,7 +468,7 @@ Name | Type | Description  | Notes
 
 > GroupMemberSecurityRequestArrayWrapper GetGroupsMembersWithFileSecurity(ctx, fileId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
 
-Get file group members with security information
+Get file access of group members
 
 
 
@@ -487,11 +487,11 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file ID.
-	groupId := "00000000-0000-0000-0000-000000000000" // string | The group ID.
-	count := int32(25) // int32 | The number of items to be retrieved in the current query. (optional)
-	startIndex := int32(0) // int32 | The starting index for the query result set. (optional)
-	filterValue := "My Document" // string | The filter value used for searching or querying group members based on text input. (optional)
+	fileId := int32(10) // int32 | The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+	groupId := "9924256a-739c-462b-af15-e652a3b1b6eb" // string | The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
+	count := int32(25) // int32 | How many members at most to answer with. (optional)
+	startIndex := int32(0) // int32 | How many members to skip before answering, used together with `count` to page through a large group. (optional)
+	filterValue := "john" // string | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -511,8 +511,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID. | 
-**groupId** | **string** | The group ID. | 
+**fileId** | **int32** | The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | 
+**groupId** | **string** | The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list. | 
 
 ### Other Parameters
 
@@ -523,9 +523,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **count** | **int32** | The number of items to be retrieved in the current query. | 
- **startIndex** | **int32** | The starting index for the query result set. | 
- **filterValue** | **string** | The filter value used for searching or querying group members based on text input. | 
+ **count** | **int32** | How many members at most to answer with. | 
+ **startIndex** | **int32** | How many members to skip before answering, used together with `count` to page through a large group. | 
+ **filterValue** | **string** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | 
 
 ### Return type
 
@@ -549,7 +549,7 @@ Name | Type | Description  | Notes
 
 > GroupMemberSecurityRequestArrayWrapper GetGroupsMembersWithFolderSecurity(ctx, folderId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
 
-Get folder group members with security information
+Get folder access of group members
 
 
 
@@ -568,11 +568,11 @@ import (
 )
 
 func main() {
-	folderId := int32(1) // int32 | The folder ID.
-	groupId := "00000000-0000-0000-0000-000000000000" // string | The group ID.
-	count := int32(25) // int32 | The number of items to be retrieved in the current query. (optional)
-	startIndex := int32(0) // int32 | The starting index for the query result set. (optional)
-	filterValue := "My Document" // string | The filter value used for searching or querying group members based on text input. (optional)
+	folderId := int32(10) // int32 | The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+	groupId := "9924256a-739c-462b-af15-e652a3b1b6eb" // string | The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
+	count := int32(25) // int32 | How many members at most to answer with. (optional)
+	startIndex := int32(0) // int32 | How many members to skip before answering, used together with `count` to page through a large group. (optional)
+	filterValue := "john" // string | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -592,8 +592,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **int32** | The folder ID. | 
-**groupId** | **string** | The group ID. | 
+**folderId** | **int32** | The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | 
+**groupId** | **string** | The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list. | 
 
 ### Other Parameters
 
@@ -604,9 +604,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **count** | **int32** | The number of items to be retrieved in the current query. | 
- **startIndex** | **int32** | The starting index for the query result set. | 
- **filterValue** | **string** | The filter value used for searching or querying group members based on text input. | 
+ **count** | **int32** | How many members at most to answer with. | 
+ **startIndex** | **int32** | How many members to skip before answering, used together with `count` to page through a large group. | 
+ **filterValue** | **string** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | 
 
 ### Return type
 
@@ -630,7 +630,7 @@ Name | Type | Description  | Notes
 
 > FileShareArrayWrapper GetSecurityInfo(ctx).BaseBatchRequestDto(baseBatchRequestDto).Execute()
 
-Get the sharing rights
+Get sharing rights in batch
 
 
 
@@ -698,7 +698,7 @@ Name | Type | Description  | Notes
 
 > MentionWrapperArrayWrapper GetSharedUsers(ctx, fileId).Execute()
 
-Get user access rights by file ID
+Get users to mention in a file
 
 
 
@@ -717,7 +717,7 @@ import (
 )
 
 func main() {
-	fileId := int32(1) // int32 | The file unique identifier.
+	fileId := int32(10) // int32 | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -737,7 +737,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file unique identifier. | 
+**fileId** | **int32** | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Other Parameters
 
@@ -770,7 +770,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper RemoveSecurityInfo(ctx).BaseBatchRequestDto(baseBatchRequestDto).Execute()
 
-Remove the sharing rights
+Remove sharing rights in batch
 
 
 
@@ -838,7 +838,7 @@ Name | Type | Description  | Notes
 
 > AceShortWrapperArrayWrapper SendEditorNotify(ctx, fileId).MentionMessageWrapper(mentionMessageWrapper).Execute()
 
-Send the mention message
+Notify mentioned users
 
 
 
@@ -857,8 +857,8 @@ import (
 )
 
 func main() {
-	fileId := int32(file-id) // int32 | The file ID with the mention message.
-	mentionMessageWrapper := *openapiclient.NewMentionMessageWrapper() // MentionMessageWrapper | The mention message. (optional)
+	fileId := int32(10) // int32 | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+	mentionMessageWrapper := *openapiclient.NewMentionMessageWrapper() // MentionMessageWrapper | The notification to send. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -878,7 +878,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fileId** | **int32** | The file ID with the mention message. | 
+**fileId** | **int32** | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | 
 
 ### Other Parameters
 
@@ -888,7 +888,7 @@ Other parameters are passed through a pointer to a apiSendEditorNotifyRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **mentionMessageWrapper** | [**MentionMessageWrapper**](MentionMessageWrapper.md) | The mention message. | 
+ **mentionMessageWrapper** | [**MentionMessageWrapper**](MentionMessageWrapper.md) | The notification to send. | 
 
 ### Return type
 
@@ -931,8 +931,8 @@ import (
 )
 
 func main() {
-	id := int32(1) // int32 | The file ID.
-	securityInfoSimpleRequestDto := *openapiclient.NewSecurityInfoSimpleRequestDto() // SecurityInfoSimpleRequestDto | The parameters of the security information simple request.
+	id := int32(10) // int32 | The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+	securityInfoSimpleRequestDto := *openapiclient.NewSecurityInfoSimpleRequestDto() // SecurityInfoSimpleRequestDto | The rights to apply to the file, and whether to announce them by mail.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -952,7 +952,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The file ID. | 
+**id** | **int32** | The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | 
 
 ### Other Parameters
 
@@ -962,7 +962,7 @@ Other parameters are passed through a pointer to a apiSetFileSecurityInfoRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **securityInfoSimpleRequestDto** | [**SecurityInfoSimpleRequestDto**](SecurityInfoSimpleRequestDto.md) | The parameters of the security information simple request. | 
+ **securityInfoSimpleRequestDto** | [**SecurityInfoSimpleRequestDto**](SecurityInfoSimpleRequestDto.md) | The rights to apply to the file, and whether to announce them by mail. | 
 
 ### Return type
 
@@ -1005,8 +1005,8 @@ import (
 )
 
 func main() {
-	id := int32(1) // int32 | The folder ID.
-	securityInfoSimpleRequestDto := *openapiclient.NewSecurityInfoSimpleRequestDto() // SecurityInfoSimpleRequestDto | The parameters of the security information simple request.
+	id := int32(10) // int32 | The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+	securityInfoSimpleRequestDto := *openapiclient.NewSecurityInfoSimpleRequestDto() // SecurityInfoSimpleRequestDto | The rights to apply to the folder, and whether to announce them by mail.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1026,7 +1026,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The folder ID. | 
+**id** | **int32** | The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | 
 
 ### Other Parameters
 
@@ -1036,7 +1036,7 @@ Other parameters are passed through a pointer to a apiSetFolderSecurityInfoReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **securityInfoSimpleRequestDto** | [**SecurityInfoSimpleRequestDto**](SecurityInfoSimpleRequestDto.md) | The parameters of the security information simple request. | 
+ **securityInfoSimpleRequestDto** | [**SecurityInfoSimpleRequestDto**](SecurityInfoSimpleRequestDto.md) | The rights to apply to the folder, and whether to announce them by mail. | 
 
 ### Return type
 
@@ -1060,7 +1060,7 @@ Name | Type | Description  | Notes
 
 > FileShareArrayWrapper SetSecurityInfo(ctx).SecurityInfoRequestDto(securityInfoRequestDto).Execute()
 
-Set the sharing rights
+Set sharing rights in batch
 
 
 

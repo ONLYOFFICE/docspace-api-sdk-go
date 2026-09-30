@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **NullableString** | The trigger name. | [optional] 
-**Id** | Pointer to **int64** | The trigger bit value. | [optional] 
-**Available** | Pointer to **bool** | Specifies whether this trigger is available for the current user's role. | [optional] 
+**Name** | Pointer to **NullableString** | The event name exactly as it appears in a delivered payload, so a receiver can match on it. The entry  named `*` is not an event but the catch-all. | [optional] 
+**Id** | Pointer to **int64** | The bit that stands for this event in the `triggers` bitmask of a subscription. Add the bits of the wanted  events together; the catch-all entry has the value `0` and is used on its own rather than added to  anything. | [optional] 
+**Available** | Pointer to **bool** | Whether the caller's own role may subscribe to this event - a plain member cannot subscribe to user, group  or room creation, where a room administrator can. An unavailable event is listed all the same, and sending  its bit to `POST api/2.0/settings/webhook` is refused as an invalid request. | [optional] 
 
 ## Methods
 

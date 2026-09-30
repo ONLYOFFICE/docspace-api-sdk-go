@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TmpFile** | Pointer to **NullableString** | The path to the temporary thumbnail file. | [optional] 
-**X** | Pointer to **int32** | The thumbnail horizontal coordinate. | [optional] 
-**Y** | Pointer to **int32** | The thumbnail vertical coordinate. | [optional] 
-**Width** | Pointer to **int32** | The thumbnail width. | [optional] 
-**Height** | Pointer to **int32** | The thumbnail height. | [optional] 
+**TmpFile** | Pointer to **NullableString** | The temporary image to crop, as returned in the `data` of an upload made with `autosave` off. Only the file  name part of the value is used. Omit it to re-crop the photo the profile already has. | [optional] 
+**X** | Pointer to **int32** | The distance in pixels from the left edge of the original image to the left edge of the crop rectangle. | [optional] 
+**Y** | Pointer to **int32** | The distance in pixels from the top edge of the original image to the top edge of the crop rectangle. | [optional] 
+**Width** | Pointer to **int32** | The width of the crop rectangle in pixels. Passing 0 together with `height` and `tmpFile` keeps the whole  uploaded image instead of cropping it. | [optional] 
+**Height** | Pointer to **int32** | The height of the crop rectangle in pixels. Passing 0 together with `width` and `tmpFile` keeps the whole  uploaded image instead of cropping it. | [optional] 
 
 ## Methods
 

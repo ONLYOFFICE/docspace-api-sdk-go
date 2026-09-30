@@ -21,9 +21,9 @@ import (
 // checks if the TemplatesRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TemplatesRequestDto{}
 
-// TemplatesRequestDto The request parameters for adding files to the template list.
+// TemplatesRequestDto The files to put on the personal template list of the calling account.
 type TemplatesRequestDto struct {
-	// The list of file IDs.
+	// The files to put on the template list, by id, as reported by a folder listing such as  `GET api/2.0/files/{folderId}`. Only a file stored in the portal itself can become a template, which is why an  id here is always numeric.
 	FileIds []int32 `json:"fileIds,omitempty"`
 }
 

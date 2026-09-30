@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AttemptCount** | Pointer to **int32** | The maximum number of consecutive failed login attempts allowed before triggering account suspension. | [optional] 
-**BlockTime** | Pointer to **int32** | The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts. | [optional] 
-**CheckPeriod** | Pointer to **int32** | The maximum time (in seconds) allowed for server to process and respond to login requests. | [optional] 
+**AttemptCount** | Pointer to **int32** | How many failed sign-in attempts inside one window are tolerated before the offender is blocked. Attempts are  counted per user name and client address together, so one member being blocked leaves the rest of the portal  signing in normally. | [optional] 
+**BlockTime** | Pointer to **int32** | How long, in seconds, a blocked user name and address pair stays refused. While the block lasts the sign-in  is refused even when the password is finally correct. | [optional] 
+**CheckPeriod** | Pointer to **int32** | The length, in seconds, of the rolling window the failed attempts are counted over. A wider window makes the  same `attemptCount` stricter, because failures further apart still add up. | [optional] 
 
 ## Methods
 

@@ -21,7 +21,7 @@ import (
 // checks if the TemplatesConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TemplatesConfig{}
 
-// TemplatesConfig The presence or absence of the templates in the Create New... menu option.
+// TemplatesConfig One creation template offered in the editor. The portal no longer offers any, so this never appears in an editor  configuration.
 type TemplatesConfig struct {
 	// The absolute URL to the image for template.
 	Image NullableString `json:"image,omitempty"`

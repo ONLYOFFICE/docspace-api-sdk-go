@@ -21,29 +21,29 @@ import (
 // checks if the WhiteLabelItemSizeDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WhiteLabelItemSizeDto{}
 
-// WhiteLabelItemSizeDto The white label logo size parameters.
+// WhiteLabelItemSizeDto The pixel box a logo slot is drawn in, in the shape the imaging library reports a geometry.
 type WhiteLabelItemSizeDto struct {
-	// Specifies whether the size is an aspect ratio.
+	// Whether the numbers are to be read as an aspect ratio rather than as pixels. Always `false` on the sizes  this API reports.
 	AspectRatio *bool `json:"aspectRatio,omitempty"`
-	// Specifies whether the logo is resized based on the smallest fitting dimension.
+	// Whether an image would be scaled to cover the box rather than to fit inside it. Always `false` here.
 	FillArea *bool `json:"fillArea,omitempty"`
-	// Specifies whether the logo is resized only if it is greater than the size.
+	// Whether scaling would apply only to an image larger than the box. Always `false` here.
 	Greater *bool `json:"greater,omitempty"`
-	// The logo height, in pixels.
+	// The height of the box in pixels - one of the two fields of this object that carry information.
 	Height *int32 `json:"height,omitempty"`
-	// Specifies whether the logo is resized without preserving the aspect ratio.
+	// Whether scaling would be allowed to distort the image. Always `false` here.
 	IgnoreAspectRatio *bool `json:"ignoreAspectRatio,omitempty"`
-	// Specifies whether the width and height are expressed as percentages.
+	// Whether `width` and `height` are to be read as percentages. Always `false` here, so both are pixels.
 	IsPercentage *bool `json:"isPercentage,omitempty"`
-	// Specifies whether the logo is resized only if it is less than the size.
+	// Whether scaling would apply only to an image smaller than the box. Always `false` here.
 	Less *bool `json:"less,omitempty"`
-	// Specifies whether the logo is resized using a pixel area count limit.
+	// Whether the box is to be read as a total pixel-area budget instead of as two dimensions. Always `false`  here.
 	LimitPixels *bool `json:"limitPixels,omitempty"`
-	// The logo width, in pixels.
+	// The width of the box in pixels - the other field of this object that carries information.
 	Width *int32 `json:"width,omitempty"`
-	// The X offset from the origin, in pixels.
+	// The horizontal offset of the box from the origin. Always `0` here.
 	X *int32 `json:"x,omitempty"`
-	// The Y offset from the origin, in pixels.
+	// The vertical offset of the box from the origin. Always `0` here.
 	Y *int32 `json:"y,omitempty"`
 }
 

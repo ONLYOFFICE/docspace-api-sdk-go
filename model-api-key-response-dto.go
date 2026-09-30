@@ -16,7 +16,6 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 	"bytes"
 	"fmt"
 )
@@ -26,25 +25,25 @@ var _ MappedNullable = &ApiKeyResponseDto{}
 
 // ApiKeyResponseDto The response data for the API key operations.
 type ApiKeyResponseDto struct {
-	// The API key unique identifier.
+	// The ID of the key. This is the value to pass to `PUT api/2.0/keys/{keyId}` and  `DELETE api/2.0/keys/{keyId}`.
 	Id string `json:"id"`
-	// The API key name.
+	// The label given to the key when it was created or last updated.
 	Name NullableString `json:"name"`
-	// The full API key value (only returned when creating a new key).
+	// The secret to send in the `Authorization` header as `Bearer sk-...`. It is filled in only by the answer of  `POST api/2.0/keys` and cannot be read again afterwards, so it has to be stored at that moment.
 	Key NullableString `json:"key"`
-	// The API key postfix (used for identification).
+	// The last four characters of the secret. It is the only part of the secret that later reads expose, and it is  meant for telling keys apart in a list.
 	KeyPostfix NullableString `json:"keyPostfix,omitempty"`
-	// The list of permissions granted to the API key.
+	// The scopes the key may use, as accepted by `GET api/2.0/keys/permissions`. An empty list means the key has no  scope restrictions.
 	Permissions []string `json:"permissions"`
-	// The date and time when the API key was last used.
-	LastUsed NullableTime `json:"lastUsed,omitempty"`
-	// The date and time when the API key was created.
-	CreateOn NullableTime `json:"createOn,omitempty"`
-	// The identifier of the user who created the API key.
+	// The UTC moment the key was last used to authenticate a request. It is empty for a key that has never been  used.
+	LastUsed *ApiDateTime `json:"lastUsed,omitempty"`
+	// The UTC moment the key was created.
+	CreateOn *ApiDateTime `json:"createOn,omitempty"`
+	// The portal member who created the key, and whose access the key acts with.
 	CreateBy *EmployeeDto `json:"createBy,omitempty"`
-	// The date and time when the API key expires.
-	ExpiresAt NullableTime `json:"expiresAt,omitempty"`
-	// Indicates whether the API key is active or not.
+	// The UTC moment the key stops working. It is empty for a key created without `expiresInDays`, which never  expires.
+	ExpiresAt *ApiDateTime `json:"expiresAt,omitempty"`
+	// Whether the key may authenticate requests. A key deactivated through `PUT api/2.0/keys/{keyId}` stays in the  list with this field set to false.
 	IsActive bool `json:"isActive"`
 }
 
@@ -216,88 +215,68 @@ func (o *ApiKeyResponseDto) SetPermissions(v []string) {
 	o.Permissions = v
 }
 
-// GetLastUsed returns the LastUsed field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ApiKeyResponseDto) GetLastUsed() time.Time {
-	if o == nil || IsNil(o.LastUsed.Get()) {
-		var ret time.Time
+// GetLastUsed returns the LastUsed field value if set, zero value otherwise.
+func (o *ApiKeyResponseDto) GetLastUsed() ApiDateTime {
+	if o == nil || IsNil(o.LastUsed) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.LastUsed.Get()
+	return *o.LastUsed
 }
 
 // GetLastUsedOk returns a tuple with the LastUsed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApiKeyResponseDto) GetLastUsedOk() (*time.Time, bool) {
-	if o == nil {
+func (o *ApiKeyResponseDto) GetLastUsedOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.LastUsed) {
 		return nil, false
 	}
-	return o.LastUsed.Get(), o.LastUsed.IsSet()
+	return o.LastUsed, true
 }
 
 // HasLastUsed returns a boolean if a field has been set.
 func (o *ApiKeyResponseDto) IsLastUsedSet() bool {
-	if o != nil && o.LastUsed.IsSet() {
+	if o != nil && !IsNil(o.LastUsed) {
 		return true
 	}
 
 	return false
 }
 
-// SetLastUsed gets a reference to the given NullableTime and assigns it to the LastUsed field.
-func (o *ApiKeyResponseDto) SetLastUsed(v time.Time) {
-	o.LastUsed.Set(&v)
-}
-// SetLastUsedNil sets the value for LastUsed to be an explicit nil
-func (o *ApiKeyResponseDto) SetLastUsedNil() {
-	o.LastUsed.Set(nil)
+// SetLastUsed gets a reference to the given ApiDateTime and assigns it to the LastUsed field.
+func (o *ApiKeyResponseDto) SetLastUsed(v ApiDateTime) {
+	o.LastUsed = &v
 }
 
-// UnsetLastUsed ensures that no value is present for LastUsed, not even an explicit nil
-func (o *ApiKeyResponseDto) UnsetLastUsed() {
-	o.LastUsed.Unset()
-}
-
-// GetCreateOn returns the CreateOn field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ApiKeyResponseDto) GetCreateOn() time.Time {
-	if o == nil || IsNil(o.CreateOn.Get()) {
-		var ret time.Time
+// GetCreateOn returns the CreateOn field value if set, zero value otherwise.
+func (o *ApiKeyResponseDto) GetCreateOn() ApiDateTime {
+	if o == nil || IsNil(o.CreateOn) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.CreateOn.Get()
+	return *o.CreateOn
 }
 
 // GetCreateOnOk returns a tuple with the CreateOn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApiKeyResponseDto) GetCreateOnOk() (*time.Time, bool) {
-	if o == nil {
+func (o *ApiKeyResponseDto) GetCreateOnOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.CreateOn) {
 		return nil, false
 	}
-	return o.CreateOn.Get(), o.CreateOn.IsSet()
+	return o.CreateOn, true
 }
 
 // HasCreateOn returns a boolean if a field has been set.
 func (o *ApiKeyResponseDto) IsCreateOnSet() bool {
-	if o != nil && o.CreateOn.IsSet() {
+	if o != nil && !IsNil(o.CreateOn) {
 		return true
 	}
 
 	return false
 }
 
-// SetCreateOn gets a reference to the given NullableTime and assigns it to the CreateOn field.
-func (o *ApiKeyResponseDto) SetCreateOn(v time.Time) {
-	o.CreateOn.Set(&v)
-}
-// SetCreateOnNil sets the value for CreateOn to be an explicit nil
-func (o *ApiKeyResponseDto) SetCreateOnNil() {
-	o.CreateOn.Set(nil)
-}
-
-// UnsetCreateOn ensures that no value is present for CreateOn, not even an explicit nil
-func (o *ApiKeyResponseDto) UnsetCreateOn() {
-	o.CreateOn.Unset()
+// SetCreateOn gets a reference to the given ApiDateTime and assigns it to the CreateOn field.
+func (o *ApiKeyResponseDto) SetCreateOn(v ApiDateTime) {
+	o.CreateOn = &v
 }
 
 // GetCreateBy returns the CreateBy field value if set, zero value otherwise.
@@ -332,46 +311,36 @@ func (o *ApiKeyResponseDto) SetCreateBy(v EmployeeDto) {
 	o.CreateBy = &v
 }
 
-// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ApiKeyResponseDto) GetExpiresAt() time.Time {
-	if o == nil || IsNil(o.ExpiresAt.Get()) {
-		var ret time.Time
+// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
+func (o *ApiKeyResponseDto) GetExpiresAt() ApiDateTime {
+	if o == nil || IsNil(o.ExpiresAt) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.ExpiresAt.Get()
+	return *o.ExpiresAt
 }
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApiKeyResponseDto) GetExpiresAtOk() (*time.Time, bool) {
-	if o == nil {
+func (o *ApiKeyResponseDto) GetExpiresAtOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.ExpiresAt) {
 		return nil, false
 	}
-	return o.ExpiresAt.Get(), o.ExpiresAt.IsSet()
+	return o.ExpiresAt, true
 }
 
 // HasExpiresAt returns a boolean if a field has been set.
 func (o *ApiKeyResponseDto) IsExpiresAtSet() bool {
-	if o != nil && o.ExpiresAt.IsSet() {
+	if o != nil && !IsNil(o.ExpiresAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetExpiresAt gets a reference to the given NullableTime and assigns it to the ExpiresAt field.
-func (o *ApiKeyResponseDto) SetExpiresAt(v time.Time) {
-	o.ExpiresAt.Set(&v)
-}
-// SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
-func (o *ApiKeyResponseDto) SetExpiresAtNil() {
-	o.ExpiresAt.Set(nil)
-}
-
-// UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
-func (o *ApiKeyResponseDto) UnsetExpiresAt() {
-	o.ExpiresAt.Unset()
+// SetExpiresAt gets a reference to the given ApiDateTime and assigns it to the ExpiresAt field.
+func (o *ApiKeyResponseDto) SetExpiresAt(v ApiDateTime) {
+	o.ExpiresAt = &v
 }
 
 // GetIsActive returns the IsActive field value
@@ -417,17 +386,17 @@ func (o ApiKeyResponseDto) ToMap() (map[string]interface{}, error) {
 	if o.Permissions != nil {
 		toSerialize["permissions"] = o.Permissions
 	}
-	if o.LastUsed.IsSet() {
-		toSerialize["lastUsed"] = o.LastUsed.Get()
+	if !IsNil(o.LastUsed) {
+		toSerialize["lastUsed"] = o.LastUsed
 	}
-	if o.CreateOn.IsSet() {
-		toSerialize["createOn"] = o.CreateOn.Get()
+	if !IsNil(o.CreateOn) {
+		toSerialize["createOn"] = o.CreateOn
 	}
 	if !IsNil(o.CreateBy) {
 		toSerialize["createBy"] = o.CreateBy
 	}
-	if o.ExpiresAt.IsSet() {
-		toSerialize["expiresAt"] = o.ExpiresAt.Get()
+	if !IsNil(o.ExpiresAt) {
+		toSerialize["expiresAt"] = o.ExpiresAt
 	}
 	toSerialize["isActive"] = o.IsActive
 	return toSerialize, nil

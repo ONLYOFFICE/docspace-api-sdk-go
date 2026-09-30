@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudStats type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudStats{}
 
-// DocsCloudStats Represents the usage statistics of a DocsCloud tenant for the current period.
+// DocsCloudStats Represents the usage statistics of a Docs Connect tenant for the current period.
 type DocsCloudStats struct {
 	// The length of the statistics period in days.
 	PeriodDay *int32 `json:"periodDay,omitempty"`

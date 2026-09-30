@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AuthData** | Pointer to [**AuthData**](AuthData.md) | The authentication data. | [optional] 
-**Corporate** | Pointer to **bool** | Specifies if this is a corporate account or not. | [optional] 
-**RoomsStorage** | Pointer to **bool** | Specifies if this is a room storage or not. | [optional] 
-**CustomerTitle** | Pointer to **NullableString** | The customer title. | [optional] 
-**ProviderId** | Pointer to **NullableInt32** | The provider ID. | [optional] 
-**ProviderKey** | Pointer to **NullableString** | The provider key. | [optional] 
+**AuthData** | Pointer to [**AuthData**](AuthData.md) | The stored credentials of the account. They are not filled in here: the portal does not give back credentials  once an account is saved. | [optional] 
+**Corporate** | Pointer to **bool** | Whether the account is attached to the legacy Common section, which is the case only for accounts inherited  from an older portal. | [optional] 
+**RoomsStorage** | Pointer to **bool** | Whether the account is attached to the Rooms section, room templates and the archive counted in. This is where  `POST api/2.0/files/thirdparty` puts every account it connects. | [optional] 
+**CustomerTitle** | Pointer to **NullableString** | The name the account is shown under in the portal, as it was saved when the account was connected. | [optional] 
+**ProviderId** | Pointer to **NullableInt32** | The account ID to send to `DELETE api/2.0/files/thirdparty/{providerId}`, or as `providerId` to  re-authenticate the account. | [optional] 
+**ProviderKey** | Pointer to **NullableString** | The storage service behind the account. `WebDav` stands for every WebDAV preset, so it does not tell which of  them was chosen when the account was connected. | [optional] 
 
 ## Methods
 

@@ -21,9 +21,9 @@ import (
 // checks if the CheckUploadRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CheckUploadRequest{}
 
-// CheckUploadRequest The request parameters for checking file uploads.
+// CheckUploadRequest The names to test against the files the folder already holds.
 type CheckUploadRequest struct {
-	// The list of file titles.
+	// The names to test, extensions included, spelled as they would be sent to the upload. Matching ignores case,  and a name repeated in the list is answered once.
 	FilesTitle []string `json:"filesTitle,omitempty"`
 }
 

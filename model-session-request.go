@@ -16,7 +16,6 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 	"bytes"
 	"fmt"
 )
@@ -24,19 +23,19 @@ import (
 // checks if the SessionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SessionRequest{}
 
-// SessionRequest The session request parameters.
+// SessionRequest The file a chunked upload session is opened for, and how a clash with an existing name is settled.
 type SessionRequest struct {
-	// The file name.
+	// The name to store the file under, extension included. Characters a title cannot hold are replaced and the name  is truncated, so the stored title can differ from the one sent.
 	FileName NullableString `json:"fileName"`
-	// The file size.
+	// The exact number of bytes that will be sent. The size is reserved when the session opens and compared with the  parts as they arrive; below the portal chunk size the session takes the whole payload in one part, and above  the portal limit for chunked uploads it is refused.
 	FileSize *int64 `json:"fileSize,omitempty"`
-	// The relative path to the file.
+	// A slash-separated chain of folder titles under the target folder to store the file in; folders in the chain  that do not exist yet are created. Leave it empty to store the file in the folder from the path itself.
 	RelativePath NullableString `json:"relativePath,omitempty"`
-	// The date and time when the file was created.
-	CreateOn NullableTime `json:"createOn,omitempty"`
-	// Specifies whether the file is encrypted or not.
+	// The creation time to stamp on a newly created file instead of the moment the upload finishes. It is ignored  when the upload lands on a file that already exists.
+	CreateOn *ApiDateTime `json:"createOn,omitempty"`
+	// Marks the stored file as client-side encrypted, which is how content uploaded into a private room is kept;  with false the bytes are stored as they arrive.
 	Encrypted *bool `json:"encrypted,omitempty"`
-	// Specifies whether to create a new file if it already exists.
+	// Settles the clash when the folder already holds a file with this name: true stores the upload beside it under  a name with a numeric suffix, false takes the existing file over and adds the content to it as a new version.
 	CreateNewIfExist *bool `json:"createNewIfExist,omitempty"`
 }
 
@@ -160,46 +159,36 @@ func (o *SessionRequest) UnsetRelativePath() {
 	o.RelativePath.Unset()
 }
 
-// GetCreateOn returns the CreateOn field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SessionRequest) GetCreateOn() time.Time {
-	if o == nil || IsNil(o.CreateOn.Get()) {
-		var ret time.Time
+// GetCreateOn returns the CreateOn field value if set, zero value otherwise.
+func (o *SessionRequest) GetCreateOn() ApiDateTime {
+	if o == nil || IsNil(o.CreateOn) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.CreateOn.Get()
+	return *o.CreateOn
 }
 
 // GetCreateOnOk returns a tuple with the CreateOn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SessionRequest) GetCreateOnOk() (*time.Time, bool) {
-	if o == nil {
+func (o *SessionRequest) GetCreateOnOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.CreateOn) {
 		return nil, false
 	}
-	return o.CreateOn.Get(), o.CreateOn.IsSet()
+	return o.CreateOn, true
 }
 
 // HasCreateOn returns a boolean if a field has been set.
 func (o *SessionRequest) IsCreateOnSet() bool {
-	if o != nil && o.CreateOn.IsSet() {
+	if o != nil && !IsNil(o.CreateOn) {
 		return true
 	}
 
 	return false
 }
 
-// SetCreateOn gets a reference to the given NullableTime and assigns it to the CreateOn field.
-func (o *SessionRequest) SetCreateOn(v time.Time) {
-	o.CreateOn.Set(&v)
-}
-// SetCreateOnNil sets the value for CreateOn to be an explicit nil
-func (o *SessionRequest) SetCreateOnNil() {
-	o.CreateOn.Set(nil)
-}
-
-// UnsetCreateOn ensures that no value is present for CreateOn, not even an explicit nil
-func (o *SessionRequest) UnsetCreateOn() {
-	o.CreateOn.Unset()
+// SetCreateOn gets a reference to the given ApiDateTime and assigns it to the CreateOn field.
+func (o *SessionRequest) SetCreateOn(v ApiDateTime) {
+	o.CreateOn = &v
 }
 
 // GetEncrypted returns the Encrypted field value if set, zero value otherwise.
@@ -283,8 +272,8 @@ func (o SessionRequest) ToMap() (map[string]interface{}, error) {
 	if o.RelativePath.IsSet() {
 		toSerialize["relativePath"] = o.RelativePath.Get()
 	}
-	if o.CreateOn.IsSet() {
-		toSerialize["createOn"] = o.CreateOn.Get()
+	if !IsNil(o.CreateOn) {
+		toSerialize["createOn"] = o.CreateOn
 	}
 	if !IsNil(o.Encrypted) {
 		toSerialize["encrypted"] = o.Encrypted

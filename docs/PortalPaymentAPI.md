@@ -5,43 +5,44 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CalculateWalletPayment**](PortalPaymentAPI.md#CalculateWalletPayment) | **Put** /api/2.0/portal/payment/calculatewallet | Calculate the wallet payment amount
-[**ChangeTenantWalletServiceState**](PortalPaymentAPI.md#ChangeTenantWalletServiceState) | **Post** /api/2.0/portal/payment/servicestate | Change tenant wallet service state
-[**CreateCustomerMonthlyUsageReport**](PortalPaymentAPI.md#CreateCustomerMonthlyUsageReport) | **Post** /api/2.0/portal/payment/customer/usage/monthly/report | Start the customer monthly usage report generation
-[**CreateCustomerOperationsReport**](PortalPaymentAPI.md#CreateCustomerOperationsReport) | **Post** /api/2.0/portal/payment/customer/operationsreport | Start the customer operations report generation
-[**CreateCustomerServiceUsageReport**](PortalPaymentAPI.md#CreateCustomerServiceUsageReport) | **Post** /api/2.0/portal/payment/customer/usage/report | Start the customer service usage report generation
+[**ChangeTenantWalletServiceState**](PortalPaymentAPI.md#ChangeTenantWalletServiceState) | **Post** /api/2.0/portal/payment/servicestate | Switch a wallet service
+[**CreateCustomerMonthlyUsageReport**](PortalPaymentAPI.md#CreateCustomerMonthlyUsageReport) | **Post** /api/2.0/portal/payment/customer/usage/monthly/report | Start the monthly usage report
+[**CreateCustomerOperationsReport**](PortalPaymentAPI.md#CreateCustomerOperationsReport) | **Post** /api/2.0/portal/payment/customer/operationsreport | Start the operations report
+[**CreateCustomerServiceUsageReport**](PortalPaymentAPI.md#CreateCustomerServiceUsageReport) | **Post** /api/2.0/portal/payment/customer/usage/report | Start the service usage report
+[**GetAccountingServicePrices**](PortalPaymentAPI.md#GetAccountingServicePrices) | **Get** /api/2.0/portal/payment/accounting/prices/{serviceName} | Get the service prices from the accounting service
 [**GetActiveServices**](PortalPaymentAPI.md#GetActiveServices) | **Get** /api/2.0/portal/payment/activeservices | Get the active wallet services
 [**GetAiPrices**](PortalPaymentAPI.md#GetAiPrices) | **Get** /api/2.0/portal/payment/ai-prices | Get AI model prices
 [**GetCheckoutSetupUrl**](PortalPaymentAPI.md#GetCheckoutSetupUrl) | **Get** /api/2.0/portal/payment/checkoutsetupurl | Get the checkout setup page URL
 [**GetCustomerBalance**](PortalPaymentAPI.md#GetCustomerBalance) | **Get** /api/2.0/portal/payment/customer/balance | Get the customer balance
 [**GetCustomerInfo**](PortalPaymentAPI.md#GetCustomerInfo) | **Get** /api/2.0/portal/payment/customerinfo | Get the customer information
 [**GetCustomerMonthlyUsage**](PortalPaymentAPI.md#GetCustomerMonthlyUsage) | **Get** /api/2.0/portal/payment/customer/usage/monthly | Get the customer monthly usage
-[**GetCustomerMonthlyUsageReport**](PortalPaymentAPI.md#GetCustomerMonthlyUsageReport) | **Get** /api/2.0/portal/payment/customer/usage/monthly/report | Get the status of the customer monthly usage report generation
-[**GetCustomerOperations**](PortalPaymentAPI.md#GetCustomerOperations) | **Get** /api/2.0/portal/payment/customer/operations | Get the customer operations
-[**GetCustomerOperationsReport**](PortalPaymentAPI.md#GetCustomerOperationsReport) | **Get** /api/2.0/portal/payment/customer/operationsreport | Get the status of the customer operations report generation
+[**GetCustomerMonthlyUsageReport**](PortalPaymentAPI.md#GetCustomerMonthlyUsageReport) | **Get** /api/2.0/portal/payment/customer/usage/monthly/report | Get the monthly usage report status
+[**GetCustomerOperations**](PortalPaymentAPI.md#GetCustomerOperations) | **Get** /api/2.0/portal/payment/customer/operations | Get the wallet operations
+[**GetCustomerOperationsReport**](PortalPaymentAPI.md#GetCustomerOperationsReport) | **Get** /api/2.0/portal/payment/customer/operationsreport | Get the operations report status
 [**GetCustomerServiceUsage**](PortalPaymentAPI.md#GetCustomerServiceUsage) | **Get** /api/2.0/portal/payment/customer/usage | Get the customer service usage
-[**GetCustomerServiceUsageReport**](PortalPaymentAPI.md#GetCustomerServiceUsageReport) | **Get** /api/2.0/portal/payment/customer/usage/report | Get the status of the customer service usage report generation
-[**GetPaymentAccount**](PortalPaymentAPI.md#GetPaymentAccount) | **Get** /api/2.0/portal/payment/account | Get the payment account
-[**GetPaymentCurrencies**](PortalPaymentAPI.md#GetPaymentCurrencies) | **Get** /api/2.0/portal/payment/currencies | Get currencies
-[**GetPaymentQuotas**](PortalPaymentAPI.md#GetPaymentQuotas) | **Get** /api/2.0/portal/payment/quotas | Get quotas
+[**GetCustomerServiceUsageReport**](PortalPaymentAPI.md#GetCustomerServiceUsageReport) | **Get** /api/2.0/portal/payment/customer/usage/report | Get the service usage report status
+[**GetPaymentAccount**](PortalPaymentAPI.md#GetPaymentAccount) | **Get** /api/2.0/portal/payment/account | Get the billing account page
+[**GetPaymentCurrencies**](PortalPaymentAPI.md#GetPaymentCurrencies) | **Get** /api/2.0/portal/payment/currencies | Get the billing currencies
+[**GetPaymentQuotas**](PortalPaymentAPI.md#GetPaymentQuotas) | **Get** /api/2.0/portal/payment/quotas | Get the purchasable quotas
 [**GetPaymentUrl**](PortalPaymentAPI.md#GetPaymentUrl) | **Put** /api/2.0/portal/payment/url | Get the payment page URL
-[**GetPortalPrices**](PortalPaymentAPI.md#GetPortalPrices) | **Get** /api/2.0/portal/payment/prices | Get prices
-[**GetQuotaPaymentInformation**](PortalPaymentAPI.md#GetQuotaPaymentInformation) | **Get** /api/2.0/portal/payment/quota | Get quota payment information
+[**GetPortalPrices**](PortalPaymentAPI.md#GetPortalPrices) | **Get** /api/2.0/portal/payment/prices | Get the product prices
+[**GetQuotaPaymentInformation**](PortalPaymentAPI.md#GetQuotaPaymentInformation) | **Get** /api/2.0/portal/payment/quota | Get the current plan and limits
 [**GetRestrictedAiModels**](PortalPaymentAPI.md#GetRestrictedAiModels) | **Get** /api/2.0/portal/payment/ai-model/restrictions | Get restricted AI models
 [**GetSubscriptionBalanceInfo**](PortalPaymentAPI.md#GetSubscriptionBalanceInfo) | **Get** /api/2.0/portal/payment/subscription/balance | Get the subscription balance information
-[**GetTenantWalletServiceSettings**](PortalPaymentAPI.md#GetTenantWalletServiceSettings) | **Get** /api/2.0/portal/payment/servicessettings | Gets the wallet service settings for the tenant.
-[**GetTenantWalletSettings**](PortalPaymentAPI.md#GetTenantWalletSettings) | **Get** /api/2.0/portal/payment/topupsettings | Gets the tenant wallet auto top up settings
-[**GetWalletService**](PortalPaymentAPI.md#GetWalletService) | **Get** /api/2.0/portal/payment/walletservice | Get wallet service
+[**GetTenantWalletServiceSettings**](PortalPaymentAPI.md#GetTenantWalletServiceSettings) | **Get** /api/2.0/portal/payment/servicessettings | Get the wallet service settings
+[**GetTenantWalletSettings**](PortalPaymentAPI.md#GetTenantWalletSettings) | **Get** /api/2.0/portal/payment/topupsettings | Get the auto top-up settings
+[**GetWalletService**](PortalPaymentAPI.md#GetWalletService) | **Get** /api/2.0/portal/payment/walletservice | Get a wallet service
 [**GetWalletServices**](PortalPaymentAPI.md#GetWalletServices) | **Get** /api/2.0/portal/payment/walletservices | Get wallet services
-[**MoveSubscriptionToWallet**](PortalPaymentAPI.md#MoveSubscriptionToWallet) | **Post** /api/2.0/portal/payment/subscription/movetowallet | Move the subscription balance to the wallet and purchase admins
-[**SendPaymentRequest**](PortalPaymentAPI.md#SendPaymentRequest) | **Post** /api/2.0/portal/payment/request | Send a payment request
+[**MoveSubscriptionToWallet**](PortalPaymentAPI.md#MoveSubscriptionToWallet) | **Post** /api/2.0/portal/payment/subscription/movetowallet | Move the subscription to the wallet
+[**SendPaymentRequest**](PortalPaymentAPI.md#SendPaymentRequest) | **Post** /api/2.0/portal/payment/request | Contact the sales team
 [**SetRestrictedAiModels**](PortalPaymentAPI.md#SetRestrictedAiModels) | **Put** /api/2.0/portal/payment/ai-model/restrictions | Set restricted AI models
-[**SetTenantWalletSettings**](PortalPaymentAPI.md#SetTenantWalletSettings) | **Post** /api/2.0/portal/payment/topupsettings | Set the wallet auto top up settings
-[**TerminateCustomerMonthlyUsageReport**](PortalPaymentAPI.md#TerminateCustomerMonthlyUsageReport) | **Delete** /api/2.0/portal/payment/customer/usage/monthly/report | Terminate the customer monthly usage report generation
-[**TerminateCustomerOperationsReport**](PortalPaymentAPI.md#TerminateCustomerOperationsReport) | **Delete** /api/2.0/portal/payment/customer/operationsreport | Terminate the customer operations report generation
-[**TerminateCustomerServiceUsageReport**](PortalPaymentAPI.md#TerminateCustomerServiceUsageReport) | **Delete** /api/2.0/portal/payment/customer/usage/report | Terminate the customer service usage report generation
-[**TopUpDeposit**](PortalPaymentAPI.md#TopUpDeposit) | **Post** /api/2.0/portal/payment/deposit | Put money on deposit
-[**UpdatePayment**](PortalPaymentAPI.md#UpdatePayment) | **Put** /api/2.0/portal/payment/update | Update the payment quantity
-[**UpdateWalletPayment**](PortalPaymentAPI.md#UpdateWalletPayment) | **Put** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity
+[**SetTenantWalletSettings**](PortalPaymentAPI.md#SetTenantWalletSettings) | **Post** /api/2.0/portal/payment/topupsettings | Set the auto top-up settings
+[**TerminateCustomerMonthlyUsageReport**](PortalPaymentAPI.md#TerminateCustomerMonthlyUsageReport) | **Delete** /api/2.0/portal/payment/customer/usage/monthly/report | Terminate the monthly usage report
+[**TerminateCustomerOperationsReport**](PortalPaymentAPI.md#TerminateCustomerOperationsReport) | **Delete** /api/2.0/portal/payment/customer/operationsreport | Terminate the operations report
+[**TerminateCustomerServiceUsageReport**](PortalPaymentAPI.md#TerminateCustomerServiceUsageReport) | **Delete** /api/2.0/portal/payment/customer/usage/report | Terminate the service usage report
+[**TopUpDeposit**](PortalPaymentAPI.md#TopUpDeposit) | **Post** /api/2.0/portal/payment/deposit | Top up the wallet
+[**UpdatePayment**](PortalPaymentAPI.md#UpdatePayment) | **Put** /api/2.0/portal/payment/update | Change the subscription quantity
+[**UpdateWalletPayment**](PortalPaymentAPI.md#UpdateWalletPayment) | **Put** /api/2.0/portal/payment/updatewallet | Change a wallet service quantity
 
 
 
@@ -117,7 +118,7 @@ Name | Type | Description  | Notes
 
 > TenantWalletServiceSettingsWrapper ChangeTenantWalletServiceState(ctx).ChangeWalletServiceStateRequestDto(changeWalletServiceStateRequestDto).Execute()
 
-Change tenant wallet service state
+Switch a wallet service
 
 
 
@@ -185,7 +186,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper CreateCustomerMonthlyUsageReport(ctx).CustomerMonthlyUsageReportRequestDto(customerMonthlyUsageReportRequestDto).Execute()
 
-Start the customer monthly usage report generation
+Start the monthly usage report
 
 
 
@@ -253,7 +254,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper CreateCustomerOperationsReport(ctx).CustomerOperationsReportRequestDto(customerOperationsReportRequestDto).Execute()
 
-Start the customer operations report generation
+Start the operations report
 
 
 
@@ -321,7 +322,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper CreateCustomerServiceUsageReport(ctx).CustomerServiceUsageReportRequestDto(customerServiceUsageReportRequestDto).Execute()
 
-Start the customer service usage report generation
+Start the service usage report
 
 
 
@@ -378,6 +379,80 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAccountingServicePrices
+
+> ServicePriceInfoArrayWrapper GetAccountingServicePrices(ctx, serviceName).Active(active).Execute()
+
+Get the service prices from the accounting service
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounting-service-prices/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	serviceName := "ai-tools" // string | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error.
+	active := false // bool | Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.GetAccountingServicePrices(context.Background(), serviceName).Active(active).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetAccountingServicePrices``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAccountingServicePrices`: ServicePriceInfoArrayWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetAccountingServicePrices`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**serviceName** | **string** | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAccountingServicePricesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **active** | **bool** | Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs. | 
+
+### Return type
+
+[**ServicePriceInfoArrayWrapper**](ServicePriceInfoArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -450,7 +525,7 @@ Other parameters are passed through a pointer to a apiGetActiveServicesRequest s
 
 ## GetAiPrices
 
-> AiPricesResponseWrapper GetAiPrices(ctx).Execute()
+> AiPricesWrapper GetAiPrices(ctx).Execute()
 
 Get AI model prices
 
@@ -479,7 +554,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetAiPrices``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAiPrices`: AiPricesResponseWrapper
+	// response from `GetAiPrices`: AiPricesWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetAiPrices`: %v\n", resp)
 }
 ```
@@ -495,7 +570,7 @@ Other parameters are passed through a pointer to a apiGetAiPricesRequest struct 
 
 ### Return type
 
-[**AiPricesResponseWrapper**](AiPricesResponseWrapper.md)
+[**AiPricesWrapper**](AiPricesWrapper.md)
 
 ### Authorization
 
@@ -534,8 +609,8 @@ import (
 )
 
 func main() {
-	backUrl := "https://example.com/payment/back" // string | The URL where the user will be redirected after setup cancellation.
-	successUrl := "https://example.com/payment/success" // string | The URL where the user will be redirected after successful payment.
+	backUrl := "https://example.com/payment/back" // string | The absolute address the setup page sends the user back to when attaching a payment method is abandoned. It  has to be a well-formed URL and must be reachable by that user rather than by the portal.
+	successUrl := "https://example.com/payment/success" // string | The absolute address the setup page sends the user to once the payment provider has stored the payment  method. Reaching it means a method is now on file, which `GET api/2.0/portal/payment/customerinfo` confirms;  nothing has been charged.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -560,8 +635,8 @@ Other parameters are passed through a pointer to a apiGetCheckoutSetupUrlRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **backUrl** | **string** | The URL where the user will be redirected after setup cancellation. | 
- **successUrl** | **string** | The URL where the user will be redirected after successful payment. | 
+ **backUrl** | **string** | The absolute address the setup page sends the user back to when attaching a payment method is abandoned. It  has to be a well-formed URL and must be reachable by that user rather than by the portal. | 
+ **successUrl** | **string** | The absolute address the setup page sends the user to once the payment provider has stored the payment  method. Reaching it means a method is now on file, which `GET api/2.0/portal/payment/customerinfo` confirms;  nothing has been charged. | 
 
 ### Return type
 
@@ -604,7 +679,7 @@ import (
 )
 
 func main() {
-	refresh := true // bool | Specifies whether to refresh the payment information cache or not. (optional)
+	refresh := true // bool | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -629,7 +704,7 @@ Other parameters are passed through a pointer to a apiGetCustomerBalanceRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh** | **bool** | Specifies whether to refresh the payment information cache or not. | 
+ **refresh** | **bool** | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. | 
 
 ### Return type
 
@@ -672,7 +747,7 @@ import (
 )
 
 func main() {
-	refresh := true // bool | Specifies whether to refresh the payment information cache or not. (optional)
+	refresh := true // bool | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -697,7 +772,7 @@ Other parameters are passed through a pointer to a apiGetCustomerInfoRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh** | **bool** | Specifies whether to refresh the payment information cache or not. | 
+ **refresh** | **bool** | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. | 
 
 ### Return type
 
@@ -741,8 +816,8 @@ import (
 )
 
 func main() {
-	startDate := time.Now() // time.Time | Start of the period (inclusive). (optional)
-	endDate := time.Now() // time.Time | End of the period (inclusive). (optional)
+	startDate := time.Now() // time.Time | The beginning of the reported period, inclusive. The months are cut in the portal time zone rather than in  UTC, so spending at the turn of a month falls where the portal sees it; defaults to the portal creation date. (optional)
+	endDate := time.Now() // time.Time | The end of the reported period, inclusive. Cut in the portal time zone in the same way as `startDate`, and  defaults to the moment the call is made. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -767,8 +842,8 @@ Other parameters are passed through a pointer to a apiGetCustomerMonthlyUsageReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **startDate** | **time.Time** | Start of the period (inclusive). | 
- **endDate** | **time.Time** | End of the period (inclusive). | 
+ **startDate** | **time.Time** | The beginning of the reported period, inclusive. The months are cut in the portal time zone rather than in  UTC, so spending at the turn of a month falls where the portal sees it; defaults to the portal creation date. | 
+ **endDate** | **time.Time** | The end of the reported period, inclusive. Cut in the portal time zone in the same way as `startDate`, and  defaults to the moment the call is made. | 
 
 ### Return type
 
@@ -792,7 +867,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper GetCustomerMonthlyUsageReport(ctx).Execute()
 
-Get the status of the customer monthly usage report generation
+Get the monthly usage report status
 
 
 
@@ -855,7 +930,7 @@ Other parameters are passed through a pointer to a apiGetCustomerMonthlyUsageRep
 
 > ReportWrapper GetCustomerOperations(ctx).Offset(offset).Limit(limit).ServiceName(serviceName).StartDate(startDate).EndDate(endDate).ParticipantName(participantName).Credit(credit).Debit(debit).Type_(type_).Status(status).OrderBy(orderBy).OrderType(orderType).Execute()
 
-Get the customer operations
+Get the wallet operations
 
 
 
@@ -875,18 +950,18 @@ import (
 )
 
 func main() {
-	offset := int32(0) // int32 | The number of items to skip for pagination. The default value is 0. (optional)
-	limit := int32(25) // int32 | The maximum number of items to return for pagination. The default value is 25. (optional)
-	serviceName := []string{"Inner_example"} // []string | The service name list. A single string is also accepted for backward compatibility. (optional)
-	startDate := time.Now() // time.Time | The report start date. (optional)
-	endDate := time.Now() // time.Time | The report end date. (optional)
-	participantName := "My Own Corporation" // string | The participant name. (optional)
-	credit := true // bool | Specifies whether to include credit operations in the report. (optional)
-	debit := false // bool | Specifies whether to include debit operations in the report. (optional)
-	type_ := openapiclient.OperationType(0) // OperationType | The operation type to filter by. (optional)
-	status := openapiclient.OperationStatus(0) // OperationStatus | The operation status to filter by. (optional)
-	orderBy := "StartDate" // string | The field to order by. (optional)
-	orderType := openapiclient.OperationOrderType(0) // OperationOrderType | Order direction: Ascending or Descending. (optional)
+	offset := int32(0) // int32 | The number of movements to skip before the first one returned, for walking through a long history page by  page. Counted after the filters and the ordering are applied, and starts at 0 when omitted. (optional)
+	limit := int32(25) // int32 | The maximum number of movements returned in one page. Defaults to 25 when omitted; the answer echoes the  window back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed  without counting the items. (optional)
+	serviceName := []string{"Inner_example"} // []string | The wallet services whose movements are kept, named the way the billing catalogue names them - `backup`,  `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field of  `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not sell  fails the call with 404, and an omitted list keeps every service. A bare string is accepted in place of an  array for backward compatibility. (optional)
+	startDate := time.Now() // time.Time | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, so a  movement at the edge of the period falls where the portal sees it; defaults to the portal creation date. (optional)
+	endDate := time.Now() // time.Time | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. (optional)
+	participantName := "My Own Corporation" // string | The participant whose movements are kept - the account the accounting service records as the cause of a  movement. A movement caused by a portal user carries that user ID here, and one caused by the portal itself  carries the customer name; surrounding whitespace is trimmed, and an omitted value keeps every participant. (optional)
+	credit := true // bool | Whether movements that add money to the wallet - top-ups, refunds and corrections in the portal's favour -  are kept. Both directions are reported when neither this nor `debit` is given. (optional)
+	debit := false // bool | Whether movements that take money out of the wallet - the charges of the wallet services - are kept. Both  directions are reported when neither this nor `credit` is given. (optional)
+	type_ := openapiclient.OperationType(0) // OperationType | The kind of movement to keep, which says what caused the money to move rather than how it ended. Every kind  is reported when it is omitted. (optional)
+	status := openapiclient.OperationStatus(0) // OperationStatus | The outcome to keep. A movement that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted. (optional)
+	orderBy := "StartDate" // string | The name of the field the movements are sorted by, spelled as the accounting service names it, such as  `StartDate` or `ServiceName`. Surrounding whitespace is trimmed, and the accounting service applies its own  ordering when this is omitted. (optional)
+	orderType := openapiclient.OperationOrderType(0) // OperationOrderType | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -911,18 +986,18 @@ Other parameters are passed through a pointer to a apiGetCustomerOperationsReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **int32** | The number of items to skip for pagination. The default value is 0. | 
- **limit** | **int32** | The maximum number of items to return for pagination. The default value is 25. | 
- **serviceName** | **[]string** | The service name list. A single string is also accepted for backward compatibility. | 
- **startDate** | **time.Time** | The report start date. | 
- **endDate** | **time.Time** | The report end date. | 
- **participantName** | **string** | The participant name. | 
- **credit** | **bool** | Specifies whether to include credit operations in the report. | 
- **debit** | **bool** | Specifies whether to include debit operations in the report. | 
- **type_** | [**OperationType**](OperationType.md) | The operation type to filter by. | 
- **status** | [**OperationStatus**](OperationStatus.md) | The operation status to filter by. | 
- **orderBy** | **string** | The field to order by. | 
- **orderType** | [**OperationOrderType**](OperationOrderType.md) | Order direction: Ascending or Descending. | 
+ **offset** | **int32** | The number of movements to skip before the first one returned, for walking through a long history page by  page. Counted after the filters and the ordering are applied, and starts at 0 when omitted. | 
+ **limit** | **int32** | The maximum number of movements returned in one page. Defaults to 25 when omitted; the answer echoes the  window back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed  without counting the items. | 
+ **serviceName** | **[]string** | The wallet services whose movements are kept, named the way the billing catalogue names them - `backup`,  `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field of  `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not sell  fails the call with 404, and an omitted list keeps every service. A bare string is accepted in place of an  array for backward compatibility. | 
+ **startDate** | **time.Time** | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, so a  movement at the edge of the period falls where the portal sees it; defaults to the portal creation date. | 
+ **endDate** | **time.Time** | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | 
+ **participantName** | **string** | The participant whose movements are kept - the account the accounting service records as the cause of a  movement. A movement caused by a portal user carries that user ID here, and one caused by the portal itself  carries the customer name; surrounding whitespace is trimmed, and an omitted value keeps every participant. | 
+ **credit** | **bool** | Whether movements that add money to the wallet - top-ups, refunds and corrections in the portal's favour -  are kept. Both directions are reported when neither this nor `debit` is given. | 
+ **debit** | **bool** | Whether movements that take money out of the wallet - the charges of the wallet services - are kept. Both  directions are reported when neither this nor `credit` is given. | 
+ **type_** | [**OperationType**](OperationType.md) | The kind of movement to keep, which says what caused the money to move rather than how it ended. Every kind  is reported when it is omitted. | 
+ **status** | [**OperationStatus**](OperationStatus.md) | The outcome to keep. A movement that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted. | 
+ **orderBy** | **string** | The name of the field the movements are sorted by, spelled as the accounting service names it, such as  `StartDate` or `ServiceName`. Surrounding whitespace is trimmed, and the accounting service applies its own  ordering when this is omitted. | 
+ **orderType** | [**OperationOrderType**](OperationOrderType.md) | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | 
 
 ### Return type
 
@@ -946,7 +1021,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper GetCustomerOperationsReport(ctx).Execute()
 
-Get the status of the customer operations report generation
+Get the operations report status
 
 
 
@@ -1029,16 +1104,16 @@ import (
 )
 
 func main() {
-	serviceName := []string{"Inner_example"} // []string | The service name list. (optional)
-	participantName := "My Own Corporation" // string | The participant name. (optional)
-	status := openapiclient.OperationStatus(0) // OperationStatus | The operation status to filter by. (optional)
-	startDate := time.Now() // time.Time | Start of the period (inclusive). (optional)
-	endDate := time.Now() // time.Time | End of the period (inclusive). (optional)
-	metadata := map[string]*string{"key": map[string]*string{"key": "Inner_example"}} // map[string]*string | Metadata key-value pairs to filter by. (optional)
-	offset := int32(0) // int32 | The number of items to skip for pagination. The default value is 0. (optional)
-	limit := int32(25) // int32 | The maximum number of items to return for pagination. The default value is 25. (optional)
-	orderBy := "ServiceName" // string | The field to order by. (optional)
-	orderType := openapiclient.OperationOrderType(0) // OperationOrderType | Order direction: Ascending or Descending. (optional)
+	serviceName := []string{"Inner_example"} // []string | The wallet services whose consumption is added up, named the way the billing catalogue names them -  `backup`, `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field  of `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not  sell fails the call with 404, and an omitted list covers every service. (optional)
+	participantName := "My Own Corporation" // string | The participant whose consumption is added up - the account the accounting service records as the consumer.  Consumption caused by a portal user carries that user ID here; surrounding whitespace is trimmed, and an  omitted value covers every participant. (optional)
+	status := openapiclient.OperationStatus(0) // OperationStatus | The outcome to keep. Consumption that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is counted when this is omitted. (optional)
+	startDate := time.Now() // time.Time | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, and  defaults to the portal creation date. (optional)
+	endDate := time.Now() // time.Time | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. (optional)
+	metadata := map[string]*string{"key": map[string]*string{"key": "Inner_example"}} // map[string]*string | The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be counted. The keys are chosen by the service that writes them, so read them  off the `metadata` of the records already returned rather than guessing; an omitted map counts every record. (optional)
+	offset := int32(0) // int32 | The number of per-service totals to skip before the first one returned. Counted after the filters and the  ordering are applied, and starts at 0 when omitted. (optional)
+	limit := int32(25) // int32 | The maximum number of per-service totals returned in one page. Defaults to 25 when omitted; the answer echoes  the window back with its paging information, so the next `offset` can be computed without counting the items. (optional)
+	orderBy := "ServiceName" // string | The name of the field the per-service totals are sorted by, spelled as the accounting service names it, such  as `ServiceName` or `StartDate`. Surrounding whitespace is trimmed, and the accounting service applies its  own ordering when this is omitted. (optional)
+	orderType := openapiclient.OperationOrderType(0) // OperationOrderType | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1063,16 +1138,16 @@ Other parameters are passed through a pointer to a apiGetCustomerServiceUsageReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceName** | **[]string** | The service name list. | 
- **participantName** | **string** | The participant name. | 
- **status** | [**OperationStatus**](OperationStatus.md) | The operation status to filter by. | 
- **startDate** | **time.Time** | Start of the period (inclusive). | 
- **endDate** | **time.Time** | End of the period (inclusive). | 
- **metadata** | **map[string]map[string]*string** | Metadata key-value pairs to filter by. | 
- **offset** | **int32** | The number of items to skip for pagination. The default value is 0. | 
- **limit** | **int32** | The maximum number of items to return for pagination. The default value is 25. | 
- **orderBy** | **string** | The field to order by. | 
- **orderType** | [**OperationOrderType**](OperationOrderType.md) | Order direction: Ascending or Descending. | 
+ **serviceName** | **[]string** | The wallet services whose consumption is added up, named the way the billing catalogue names them -  `backup`, `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field  of `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not  sell fails the call with 404, and an omitted list covers every service. | 
+ **participantName** | **string** | The participant whose consumption is added up - the account the accounting service records as the consumer.  Consumption caused by a portal user carries that user ID here; surrounding whitespace is trimmed, and an  omitted value covers every participant. | 
+ **status** | [**OperationStatus**](OperationStatus.md) | The outcome to keep. Consumption that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is counted when this is omitted. | 
+ **startDate** | **time.Time** | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, and  defaults to the portal creation date. | 
+ **endDate** | **time.Time** | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | 
+ **metadata** | **map[string]map[string]*string** | The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be counted. The keys are chosen by the service that writes them, so read them  off the `metadata` of the records already returned rather than guessing; an omitted map counts every record. | 
+ **offset** | **int32** | The number of per-service totals to skip before the first one returned. Counted after the filters and the  ordering are applied, and starts at 0 when omitted. | 
+ **limit** | **int32** | The maximum number of per-service totals returned in one page. Defaults to 25 when omitted; the answer echoes  the window back with its paging information, so the next `offset` can be computed without counting the items. | 
+ **orderBy** | **string** | The name of the field the per-service totals are sorted by, spelled as the accounting service names it, such  as `ServiceName` or `StartDate`. Surrounding whitespace is trimmed, and the accounting service applies its  own ordering when this is omitted. | 
+ **orderType** | [**OperationOrderType**](OperationOrderType.md) | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | 
 
 ### Return type
 
@@ -1096,7 +1171,7 @@ Name | Type | Description  | Notes
 
 > DocumentBuilderTaskWrapper GetCustomerServiceUsageReport(ctx).Execute()
 
-Get the status of the customer service usage report generation
+Get the service usage report status
 
 
 
@@ -1159,7 +1234,7 @@ Other parameters are passed through a pointer to a apiGetCustomerServiceUsageRep
 
 > StringWrapper GetPaymentAccount(ctx).BackUrl(backUrl).Execute()
 
-Get the payment account
+Get the billing account page
 
 
 
@@ -1178,7 +1253,7 @@ import (
 )
 
 func main() {
-	backUrl := "https://example.com" // string | The URL where the user will be redirected after payment processing. (optional)
+	backUrl := "https://example.com" // string | The absolute address the billing account page should offer as its way back. It is appended to the returned  portal-relative address as a query parameter rather than followed here, and omitting it yields the bare  address of the page. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1203,7 +1278,7 @@ Other parameters are passed through a pointer to a apiGetPaymentAccountRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **backUrl** | **string** | The URL where the user will be redirected after payment processing. | 
+ **backUrl** | **string** | The absolute address the billing account page should offer as its way back. It is appended to the returned  portal-relative address as a query parameter rather than followed here, and omitting it yields the bare  address of the page. | 
 
 ### Return type
 
@@ -1227,7 +1302,7 @@ Name | Type | Description  | Notes
 
 > CurrenciesArrayWrapper GetPaymentCurrencies(ctx).Execute()
 
-Get currencies
+Get the billing currencies
 
 
 
@@ -1290,7 +1365,7 @@ Other parameters are passed through a pointer to a apiGetPaymentCurrenciesReques
 
 > QuotaArrayWrapper GetPaymentQuotas(ctx).Wallet(wallet).Additional(additional).Execute()
 
-Get quotas
+Get the purchasable quotas
 
 
 
@@ -1309,8 +1384,8 @@ import (
 )
 
 func main() {
-	wallet := true // bool | Specifies whether to return the wallet quotas only. (optional)
-	additional := true // bool | Specifies whether to return additional quotas only. (optional)
+	wallet := true // bool | Which side of the catalogue is listed: `true` keeps the services paid out of the portal wallet, `false` keeps  the subscription plans, and omitting it keeps both. (optional)
+	additional := true // bool | Which layer of the catalogue is listed: `true` keeps the add-ons that extend a plan, `false` keeps the plans  themselves, and omitting it keeps both. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1335,8 +1410,8 @@ Other parameters are passed through a pointer to a apiGetPaymentQuotasRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **wallet** | **bool** | Specifies whether to return the wallet quotas only. | 
- **additional** | **bool** | Specifies whether to return additional quotas only. | 
+ **wallet** | **bool** | Which side of the catalogue is listed: `true` keeps the services paid out of the portal wallet, `false` keeps  the subscription plans, and omitting it keeps both. | 
+ **additional** | **bool** | Which layer of the catalogue is listed: `true` keeps the add-ons that extend a plan, `false` keeps the plans  themselves, and omitting it keeps both. | 
 
 ### Return type
 
@@ -1428,7 +1503,7 @@ Name | Type | Description  | Notes
 
 > GetPortalPrices200Response GetPortalPrices(ctx).Execute()
 
-Get prices
+Get the product prices
 
 
 
@@ -1491,7 +1566,7 @@ Other parameters are passed through a pointer to a apiGetPortalPricesRequest str
 
 > QuotaWrapper GetQuotaPaymentInformation(ctx).Refresh(refresh).Execute()
 
-Get quota payment information
+Get the current plan and limits
 
 
 
@@ -1510,7 +1585,7 @@ import (
 )
 
 func main() {
-	refresh := true // bool | Specifies whether to refresh the payment information cache or not. (optional)
+	refresh := true // bool | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1535,7 +1610,7 @@ Other parameters are passed through a pointer to a apiGetQuotaPaymentInformation
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh** | **bool** | Specifies whether to refresh the payment information cache or not. | 
+ **refresh** | **bool** | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. | 
 
 ### Return type
 
@@ -1685,7 +1760,7 @@ Other parameters are passed through a pointer to a apiGetSubscriptionBalanceInfo
 
 > TenantWalletServiceSettingsWrapper GetTenantWalletServiceSettings(ctx).Execute()
 
-Gets the wallet service settings for the tenant.
+Get the wallet service settings
 
 
 
@@ -1748,7 +1823,7 @@ Other parameters are passed through a pointer to a apiGetTenantWalletServiceSett
 
 > TenantWalletSettingsResponseWrapper GetTenantWalletSettings(ctx).Execute()
 
-Gets the tenant wallet auto top up settings
+Get the auto top-up settings
 
 
 
@@ -1811,7 +1886,7 @@ Other parameters are passed through a pointer to a apiGetTenantWalletSettingsReq
 
 > WalletServiceWrapper GetWalletService(ctx).Service(service).Execute()
 
-Get wallet service
+Get a wallet service
 
 
 
@@ -1830,7 +1905,7 @@ import (
 )
 
 func main() {
-	service := openapiclient.TenantWalletService(-18) // TenantWalletService | The wallet service type.
+	service := openapiclient.TenantWalletService(-18) // TenantWalletService | The service to look up, given by its catalogue name. A service this installation does not sell answers 404,  and the whole catalogue is `GET api/2.0/portal/payment/walletservices`.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1855,7 +1930,7 @@ Other parameters are passed through a pointer to a apiGetWalletServiceRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **service** | [**TenantWalletService**](TenantWalletService.md) | The wallet service type. | 
+ **service** | [**TenantWalletService**](TenantWalletService.md) | The service to look up, given by its catalogue name. A service this installation does not sell answers 404,  and the whole catalogue is `GET api/2.0/portal/payment/walletservices`. | 
 
 ### Return type
 
@@ -1942,7 +2017,7 @@ Other parameters are passed through a pointer to a apiGetWalletServicesRequest s
 
 > BooleanWrapper MoveSubscriptionToWallet(ctx).QuantityRequestDto(quantityRequestDto).Execute()
 
-Move the subscription balance to the wallet and purchase admins
+Move the subscription to the wallet
 
 
 
@@ -2010,7 +2085,7 @@ Name | Type | Description  | Notes
 
 > SendPaymentRequest(ctx).SalesRequestsDto(salesRequestsDto).Execute()
 
-Send a payment request
+Contact the sales team
 
 
 
@@ -2144,7 +2219,7 @@ Name | Type | Description  | Notes
 
 > TenantWalletSettingsResponseWrapper SetTenantWalletSettings(ctx).TenantWalletSettingsWrapper(tenantWalletSettingsWrapper).Execute()
 
-Set the wallet auto top up settings
+Set the auto top-up settings
 
 
 
@@ -2212,7 +2287,7 @@ Name | Type | Description  | Notes
 
 > TerminateCustomerMonthlyUsageReport(ctx).Execute()
 
-Terminate the customer monthly usage report generation
+Terminate the monthly usage report
 
 
 
@@ -2273,7 +2348,7 @@ Other parameters are passed through a pointer to a apiTerminateCustomerMonthlyUs
 
 > TerminateCustomerOperationsReport(ctx).Execute()
 
-Terminate the customer operations report generation
+Terminate the operations report
 
 
 
@@ -2334,7 +2409,7 @@ Other parameters are passed through a pointer to a apiTerminateCustomerOperation
 
 > TerminateCustomerServiceUsageReport(ctx).Execute()
 
-Terminate the customer service usage report generation
+Terminate the service usage report
 
 
 
@@ -2395,7 +2470,7 @@ Other parameters are passed through a pointer to a apiTerminateCustomerServiceUs
 
 > BooleanWrapper TopUpDeposit(ctx).TopUpDepositRequestDto(topUpDepositRequestDto).Execute()
 
-Put money on deposit
+Top up the wallet
 
 
 
@@ -2463,7 +2538,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper UpdatePayment(ctx).QuantityRequestDto(quantityRequestDto).Execute()
 
-Update the payment quantity
+Change the subscription quantity
 
 
 
@@ -2531,7 +2606,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper UpdateWalletPayment(ctx).WalletQuantityRequestDto(walletQuantityRequestDto).Execute()
 
-Update the wallet payment quantity
+Change a wallet service quantity
 
 
 

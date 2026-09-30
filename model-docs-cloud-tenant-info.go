@@ -21,11 +21,11 @@ import (
 // checks if the DocsCloudTenantInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudTenantInfo{}
 
-// DocsCloudTenantInfo Represents the license and server information of a DocsCloud tenant, with usage statistics for the current period.
+// DocsCloudTenantInfo Represents the license and server information of a Docs Connect tenant, with usage statistics for the current period.
 type DocsCloudTenantInfo struct {
 	// The license information.
 	License *DocsCloudLicenseInfo `json:"license,omitempty"`
-	// The DocsCloud server information.
+	// The Docs Connect server information.
 	Server *DocsCloudServerInfo `json:"server,omitempty"`
 	// The user limits of the license.
 	UsersLimit *DocsCloudUsersLimit `json:"usersLimit,omitempty"`

@@ -22,7 +22,7 @@ import (
 // checks if the DocsCloudServerInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudServerInfo{}
 
-// DocsCloudServerInfo Represents the DocsCloud server information.
+// DocsCloudServerInfo Represents the Docs Connect server information.
 type DocsCloudServerInfo struct {
 	// The server version.
 	Version NullableString `json:"version,omitempty"`

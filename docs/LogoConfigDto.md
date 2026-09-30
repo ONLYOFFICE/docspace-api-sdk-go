@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Image** | Pointer to **NullableString** | The image of the logo. | [optional] 
-**ImageDark** | Pointer to **NullableString** | The dark image of the logo. | [optional] 
-**ImageLight** | Pointer to **NullableString** | The light image of the logo. | [optional] 
-**ImageEmbedded** | Pointer to **NullableString** | The embedded image of the logo. | [optional] 
-**Url** | Pointer to **NullableString** | The url link of the logo. | [optional] 
-**Visible** | Pointer to **bool** | Specifies if the logo is visible. | [optional] 
+**Image** | Pointer to **NullableString** | The logo for the current layout and file type, as the portal branding defines it. | [optional] 
+**ImageDark** | Pointer to **NullableString** | The variant for a dark interface theme. | [optional] 
+**ImageLight** | Pointer to **NullableString** | The variant for a light interface theme. | [optional] 
+**ImageEmbedded** | Pointer to **NullableString** | The variant for the framed viewer. It is empty in every layout but the embedded one. | [optional] 
+**Url** | Pointer to **NullableString** | Where clicking the logo takes the user. | [optional] 
+**Visible** | Pointer to **bool** | Whether the logo is shown at all; the mobile layout hides it. | [optional] 
 
 ## Methods
 

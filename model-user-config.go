@@ -21,17 +21,17 @@ import (
 // checks if the UserConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UserConfig{}
 
-// UserConfig The configuration parameters of the user currently viewing or editing the document.
+// UserConfig The account the editors attribute the changes of this session to.
 type UserConfig struct {
-	// The user ID.
+	// The account the changes are recorded under. Two sessions carrying the same value are taken by the editors for  the same person.
 	Id NullableString `json:"id,omitempty"`
-	// The full name of the user.
+	// The name shown next to the changes and in the list of participants.
 	Name NullableString `json:"name,omitempty"`
-	// The path to the user's avatar.
+	// An absolute address of the avatar shown for this participant.
 	Image NullableString `json:"image,omitempty"`
-	// Roles
+	// The filling roles this participant holds in the form being filled out. It is set only for a form in a virtual  data room, where the role decides which fields open for them.
 	Roles []string `json:"roles,omitempty"`
-	// Customer identifier associated with the user.
+	// Identifies the paying customer this participant belongs to, on deployments where the editors are licensed per  customer.
 	CustomerId NullableString `json:"customerId,omitempty"`
 }
 

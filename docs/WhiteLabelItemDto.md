@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | Pointer to [**WhiteLabelLogoType**](WhiteLabelLogoType.md) | The white label logo type. | [optional] 
-**Name** | Pointer to **NullableString** | The white label file name. | [optional] 
-**Size** | Pointer to [**WhiteLabelItemSizeDto**](WhiteLabelItemSizeDto.md) | The white label file size. | [optional] 
-**Path** | Pointer to [**WhiteLabelItemPathDto**](WhiteLabelItemPathDto.md) | The white label file path. | [optional] 
+**Type** | Pointer to [**WhiteLabelLogoType**](WhiteLabelLogoType.md) | Which branding slot this entry describes. `Notification` is part of the type but never appears here: that  logo is derived from the login-page one and used only in letters. | [optional] 
+**Name** | Pointer to **NullableString** | The stable name of the same slot, which is what `GET api/2.0/settings/whitelabel/logos/isdefault` keys its  entries by. It is a name to match on, not a file name. | [optional] 
+**Size** | Pointer to [**WhiteLabelItemSizeDto**](WhiteLabelItemSizeDto.md) | The pixel box the slot is drawn in. Only `width` and `height` carry information here; the resize flags and  offsets alongside them are left at their defaults and say nothing about how an uploaded image is treated. | [optional] 
+**Path** | Pointer to [**WhiteLabelItemPathDto**](WhiteLabelItemPathDto.md) | The absolute URLs to render the slot from, one per theme. | [optional] 
 
 ## Methods
 

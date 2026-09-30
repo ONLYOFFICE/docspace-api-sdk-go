@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Value** | **interface{}** |  | 
-**Title** | Pointer to **NullableString** | The used space title. | [optional] 
+**Title** | Pointer to **NullableString** | The same figure as a sentence in the portal language, ready to print. It is empty when this build ships no  wording for the feature. | [optional] 
 
 ## Methods
 

@@ -25,7 +25,7 @@ var _ MappedNullable = &FeedbackConfig{}
 type FeedbackConfig struct {
 	// The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button.
 	Url NullableString `json:"url,omitempty"`
-	// Shows or hides the Feedback & Support menu button.
+	// Whether the support button is shown. The portal always asks for it to be shown.
 	Visible *bool `json:"visible,omitempty"`
 }
 

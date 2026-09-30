@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Name** | **string** | Human-readable model name for display in the UI. | 
 **Provider** | [**AiProviderType**](AiProviderType.md) | Provider that offers this model. | 
 **Reasoning** | Pointer to **bool** | Whether this model supports extended thinking / chain-of-thought reasoning. | [optional] 
+**ReasoningSupport** | Pointer to [**AiReasoningSupport**](AiReasoningSupport.md) | What the model can do with extended thinking, when the provider's catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider's id-based table. | [optional] 
 **Capabilities** | Pointer to **float32** | Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`. | [optional] 
 
 ## Methods
@@ -113,6 +114,31 @@ SetReasoning sets Reasoning field to given value.
 `func (o *AiModel) HasReasoning() bool`
 
 HasReasoning returns a boolean if a field has been set.
+
+### GetReasoningSupport
+
+`func (o *AiModel) GetReasoningSupport() AiReasoningSupport`
+
+GetReasoningSupport returns the ReasoningSupport field if non-nil, zero value otherwise.
+
+### GetReasoningSupportOk
+
+`func (o *AiModel) GetReasoningSupportOk() (*AiReasoningSupport, bool)`
+
+GetReasoningSupportOk returns a tuple with the ReasoningSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasoningSupport
+
+`func (o *AiModel) SetReasoningSupport(v AiReasoningSupport)`
+
+SetReasoningSupport sets ReasoningSupport field to given value.
+
+### HasReasoningSupport
+
+`func (o *AiModel) HasReasoningSupport() bool`
+
+HasReasoningSupport returns a boolean if a field has been set.
 
 ### GetCapabilities
 

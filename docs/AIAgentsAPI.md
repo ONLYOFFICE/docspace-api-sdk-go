@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## AiAgentsCreate
 
-> AiFolderIntegerWrapper AiAgentsCreate(ctx).AiAgentsCreateRequest(aiAgentsCreateRequest).Execute()
+> AiFolderWrapper AiAgentsCreate(ctx).AiAgentsCreateRequest(aiAgentsCreateRequest).Execute()
 
 Create an agent
 
@@ -47,7 +47,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.AiAgentsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiAgentsCreate`: AiFolderIntegerWrapper
+	// response from `AiAgentsCreate`: AiFolderWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.AiAgentsCreate`: %v\n", resp)
 }
 ```
@@ -67,11 +67,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiFolderIntegerWrapper**](AiFolderIntegerWrapper.md)
+[**AiFolderWrapper**](AiFolderWrapper.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -106,7 +106,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | The agent identifier.
+	id := "1234" // string | The agent identifier.
 	aiAgentsDeleteRequest := *openapiclient.NewAiAgentsDeleteRequest() // AiAgentsDeleteRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -159,7 +159,7 @@ No authorization required
 
 ## AiAgentsGet
 
-> AiFolderIntegerWrapper AiAgentsGet(ctx, id).Execute()
+> AiAgentsGet200Response AiAgentsGet(ctx, id).Execute()
 
 Get an agent
 
@@ -180,7 +180,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | The agent identifier.
+	id := "1234" // string | The agent identifier.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -189,7 +189,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.AiAgentsGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiAgentsGet`: AiFolderIntegerWrapper
+	// response from `AiAgentsGet`: AiAgentsGet200Response
 	fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.AiAgentsGet`: %v\n", resp)
 }
 ```
@@ -213,11 +213,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiFolderIntegerWrapper**](AiFolderIntegerWrapper.md)
+[**AiAgentsGet200Response**](AiAgentsGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -231,7 +231,7 @@ No authorization required
 
 ## AiAgentsList
 
-> AiFolderContentIntegerWrapper AiAgentsList(ctx).Execute()
+> AiFolderContentWrapper AiAgentsList(ctx).SubjectId(subjectId).SubjectOwnerId(subjectOwnerId).ExcludeSubject(excludeSubject).Tags(tags).WithoutTags(withoutTags).QuotaFilter(quotaFilter).FilterValue(filterValue).SortBy(sortBy).SortOrder(sortOrder).StartIndex(startIndex).Count(count).Execute()
 
 List agents
 
@@ -252,35 +252,60 @@ import (
 )
 
 func main() {
+	subjectId := "00000000-0000-0000-0000-000000000000" // string | Show only the agent rooms this user takes part in. (optional)
+	subjectOwnerId := "00000000-0000-0000-0000-000000000000" // string | Show only the agent rooms owned by this user. (optional)
+	excludeSubject := false // bool | Invert the user filter: leave out what `subjectId` selects instead of keeping it. (optional)
+	tags := "ai,assistant" // string | Show only the agent rooms carrying these tags, comma-separated. (optional)
+	withoutTags := false // bool | Show only the agent rooms that carry no tags at all. (optional)
+	quotaFilter := int32(0) // int32 | Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. (optional)
+	filterValue := "assistant" // string | Show only the agent rooms whose title matches this text. (optional)
+	sortBy := "DateAndTime" // string | Field to sort by, for example `DateAndTime`. (optional)
+	sortOrder := "descending" // string | Sort direction, `ascending` or `descending`. (optional)
+	startIndex := int32(0) // int32 | Index of the first entry to return; 0 starts at the beginning. (optional)
+	count := int32(25) // int32 | How many entries to return. The internal service applies its own default. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIAgentsAPI.AiAgentsList(context.Background()).Execute()
+	resp, r, err := apiClient.AIAgentsAPI.AiAgentsList(context.Background()).SubjectId(subjectId).SubjectOwnerId(subjectOwnerId).ExcludeSubject(excludeSubject).Tags(tags).WithoutTags(withoutTags).QuotaFilter(quotaFilter).FilterValue(filterValue).SortBy(sortBy).SortOrder(sortOrder).StartIndex(startIndex).Count(count).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.AiAgentsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiAgentsList`: AiFolderContentIntegerWrapper
+	// response from `AiAgentsList`: AiFolderContentWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.AiAgentsList`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAiAgentsListRequest struct via the builder pattern
 
 
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subjectId** | **string** | Show only the agent rooms this user takes part in. | 
+ **subjectOwnerId** | **string** | Show only the agent rooms owned by this user. | 
+ **excludeSubject** | **bool** | Invert the user filter: leave out what `subjectId` selects instead of keeping it. | 
+ **tags** | **string** | Show only the agent rooms carrying these tags, comma-separated. | 
+ **withoutTags** | **bool** | Show only the agent rooms that carry no tags at all. | 
+ **quotaFilter** | **int32** | Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. | 
+ **filterValue** | **string** | Show only the agent rooms whose title matches this text. | 
+ **sortBy** | **string** | Field to sort by, for example `DateAndTime`. | 
+ **sortOrder** | **string** | Sort direction, `ascending` or `descending`. | 
+ **startIndex** | **int32** | Index of the first entry to return; 0 starts at the beginning. | 
+ **count** | **int32** | How many entries to return. The internal service applies its own default. | 
+
 ### Return type
 
-[**AiFolderContentIntegerWrapper**](AiFolderContentIntegerWrapper.md)
+[**AiFolderContentWrapper**](AiFolderContentWrapper.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -343,7 +368,7 @@ Other parameters are passed through a pointer to a apiAiAgentsNewsRequest struct
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -357,7 +382,7 @@ No authorization required
 
 ## AiAgentsResetQuota
 
-> AiFolderIntegerArrayWrapper AiAgentsResetQuota(ctx).AiAgentsResetQuotaRequest(aiAgentsResetQuotaRequest).Execute()
+> AiFolderArrayWrapper AiAgentsResetQuota(ctx).AiAgentsResetQuotaRequest(aiAgentsResetQuotaRequest).Execute()
 
 Reset agents' quota
 
@@ -387,7 +412,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.AiAgentsResetQuota``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiAgentsResetQuota`: AiFolderIntegerArrayWrapper
+	// response from `AiAgentsResetQuota`: AiFolderArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.AiAgentsResetQuota`: %v\n", resp)
 }
 ```
@@ -407,11 +432,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiFolderIntegerArrayWrapper**](AiFolderIntegerArrayWrapper.md)
+[**AiFolderArrayWrapper**](AiFolderArrayWrapper.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -425,7 +450,7 @@ No authorization required
 
 ## AiAgentsUpdate
 
-> AiFolderIntegerWrapper AiAgentsUpdate(ctx, id).AiAgentsUpdateRequest(aiAgentsUpdateRequest).Execute()
+> AiFolderWrapper AiAgentsUpdate(ctx, id).AiAgentsUpdateRequest(aiAgentsUpdateRequest).Execute()
 
 Update an agent
 
@@ -446,7 +471,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | The agent identifier.
+	id := "1234" // string | The agent identifier.
 	aiAgentsUpdateRequest := *openapiclient.NewAiAgentsUpdateRequest() // AiAgentsUpdateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -456,7 +481,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.AiAgentsUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiAgentsUpdate`: AiFolderIntegerWrapper
+	// response from `AiAgentsUpdate`: AiFolderWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.AiAgentsUpdate`: %v\n", resp)
 }
 ```
@@ -481,11 +506,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiFolderIntegerWrapper**](AiFolderIntegerWrapper.md)
+[**AiFolderWrapper**](AiFolderWrapper.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -499,7 +524,7 @@ No authorization required
 
 ## AiAgentsUpdateQuota
 
-> AiFolderIntegerArrayWrapper AiAgentsUpdateQuota(ctx).AiAgentsUpdateQuotaRequest(aiAgentsUpdateQuotaRequest).Execute()
+> AiFolderArrayWrapper AiAgentsUpdateQuota(ctx).AiAgentsUpdateQuotaRequest(aiAgentsUpdateQuotaRequest).Execute()
 
 Update agents' quota
 
@@ -529,7 +554,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.AiAgentsUpdateQuota``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiAgentsUpdateQuota`: AiFolderIntegerArrayWrapper
+	// response from `AiAgentsUpdateQuota`: AiFolderArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.AiAgentsUpdateQuota`: %v\n", resp)
 }
 ```
@@ -549,11 +574,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiFolderIntegerArrayWrapper**](AiFolderIntegerArrayWrapper.md)
+[**AiFolderArrayWrapper**](AiFolderArrayWrapper.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

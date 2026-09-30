@@ -21,9 +21,9 @@ import (
 // checks if the ExternalShareRequestParam type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExternalShareRequestParam{}
 
-// ExternalShareRequestParam The external data parameters.
+// ExternalShareRequestParam The password that unlocks a protected external share link.
 type ExternalShareRequestParam struct {
-	// The password to share external data.
+	// The password chosen by the member who shared the entry, spelled exactly as they typed it. It is compared  against the stored value and never returned back; a mismatch is reported through the answer's status instead  of an error.
 	Password NullableString `json:"password,omitempty"`
 }
 

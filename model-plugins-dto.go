@@ -21,13 +21,13 @@ import (
 // checks if the PluginsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PluginsDto{}
 
-// PluginsDto The plugins parameters.
+// PluginsDto What the installation allows to be done with web plugins.
 type PluginsDto struct {
-	// Specifies if the plugins are enabled or not.
+	// Whether web plugins run on this portal at all. While it is `false` the operations under  `api/2.0/settings/webplugins` are of no use, whatever the other two flags say. All three are `false`  unless the installation switched plugins on in its configuration.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Specifies if the plugins can be uploaded or not.
+	// Whether an administrator may add a plugin of their own through  `POST api/2.0/settings/webplugins`. While it is `false` only the plugins that ship with the installation  are available.
 	Upload *bool `json:"upload,omitempty"`
-	// Specifies if the plugins can be deleted or not.
+	// Whether an added plugin may be removed again through `DELETE api/2.0/settings/webplugins/{name}`. The  plugins that ship with the installation cannot be removed regardless of this flag.
 	Delete *bool `json:"delete,omitempty"`
 }
 

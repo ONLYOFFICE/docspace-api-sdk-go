@@ -21,9 +21,9 @@ import (
 // checks if the MembersRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MembersRequest{}
 
-// MembersRequest The member request.
+// MembersRequest The accounts a member operation applies to.
 type MembersRequest struct {
-	// The list of group member IDs.
+	// The accounts the operation applies to. When adding or replacing members, an account that is a guest, is  disabled or does not exist is skipped without an error; when removing them, an ID that is not a member is  skipped as well.
 	Members []string `json:"members,omitempty"`
 }
 

@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Service** | Pointer to **NullableString** | The name of the service. | [optional] 
-**Title** | Pointer to **NullableString** | The title of the service. | [optional] 
-**ServiceUnit** | Pointer to **NullableString** | The unit of measurement for the service. | [optional] 
-**Currency** | Pointer to **NullableString** | The three-character ISO 4217 currency symbol of the amounts. | [optional] 
-**TotalQuantity** | Pointer to **int32** | The total number of units consumed. | [optional] 
-**TotalAmount** | Pointer to **float64** | The total amount charged for the service. | [optional] 
-**OperationCount** | Pointer to **int32** | The number of individual purchase operations. | [optional] 
-**Price** | Pointer to **float64** | The price of the service. | [optional] 
-**Subscription** | Pointer to **bool** | Indicates whether the service is subscription-based. | [optional] 
+**Service** | Pointer to **NullableString** | The stable key of the service, which is what the `serviceName` filter of this operation matches on and  what `GET api/2.0/portal/payment/walletservice` looks a service up by. | [optional] 
+**Title** | Pointer to **NullableString** | The service name in the portal language, for printing rather than matching. | [optional] 
+**ServiceUnit** | Pointer to **NullableString** | What `totalQuantity` counts, in the portal language. AI consumption is reported in tokens here rather  than in the AI credits the service is sold in, so it does not line up with the price list. | [optional] 
+**Currency** | Pointer to **NullableString** | The currency `totalAmount` and `price` are expressed in, as a three-letter ISO 4217 code. | [optional] 
+**TotalQuantity** | Pointer to **int32** | How many units of the service were consumed over the period, in the unit named by `serviceUnit`. | [optional] 
+**TotalAmount** | Pointer to **float64** | What that consumption cost over the period. It is what was actually charged, so it can differ from  `price` times `totalQuantity` when the price changed inside the period. | [optional] 
+**OperationCount** | Pointer to **int32** | How many separate charges the total was added up from. The charges themselves are in  `GET api/2.0/portal/payment/customer/operations`. | [optional] 
+**Price** | Pointer to **float64** | What one unit of the service costs today, not what it cost during the period. It is `0` when the service  is no longer on the installation's price list. | [optional] 
+**Subscription** | Pointer to **bool** | Whether the service is billed as a standing subscription rather than per unit consumed. It is derived  from today's price list, so it describes the service as it is sold now. | [optional] 
 
 ## Methods
 

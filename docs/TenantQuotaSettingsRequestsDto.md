@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TenantId** | **int32** | The ID of the tenant whose quota is being configured. | 
-**Quota** | Pointer to **int64** | The storage quota limit in bytes allocated to the tenant. | [optional] 
+**TenantId** | **int32** | The tenant the limit applies to, by tenant ID. Only a self-hosted installation has more than one, which is  why the operation is refused on SaaS. | 
+**Quota** | Pointer to **int64** | The limit in bytes. A negative value is not a smaller limit but the absence of one: it removes whatever limit  the tenant had. The value is a ceiling on stored data and says nothing about how much of it is already used. | [optional] 
 
 ## Methods
 

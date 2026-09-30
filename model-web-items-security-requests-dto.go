@@ -21,9 +21,9 @@ import (
 // checks if the WebItemsSecurityRequestsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebItemsSecurityRequestsDto{}
 
-// WebItemsSecurityRequestsDto The request parameters for configuring security settings across multiple web modules.
+// WebItemsSecurityRequestsDto The modules switched on or off together, one entry per module.
 type WebItemsSecurityRequestsDto struct {
-	// The list of module security configurations.
+	// The modules to switch, each entry pairing a module GUID as its `key` with the new enabled flag as its  `value`. A key that is not a GUID fails the whole request as invalid, and a module listed twice is applied  once, from its first entry. No allow-list travels here: switching a product module on restores the users and  groups it was last restricted to, and everything else is stored as a plain allow or deny for everyone.
 	Items []ItemKeyValuePairStringBoolean `json:"items,omitempty"`
 }
 

@@ -21,19 +21,19 @@ import (
 // checks if the CustomerServiceUsageReportDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomerServiceUsageReportDto{}
 
-// CustomerServiceUsageReportDto Represents a paged report of customer service usage statistics.
+// CustomerServiceUsageReportDto One page of the per-service consumption totals, with the paging figures needed to walk the rest.
 type CustomerServiceUsageReportDto struct {
-	// A collection of service usage statistics.
+	// The services on this page, one entry per service rather than per charge. It is empty for a period in  which nothing was consumed as well as for a page past the end of the report.
 	Collection []CustomerServiceUsageDto `json:"collection,omitempty"`
-	// The report data offset.
+	// How many entries were skipped before this page, echoed from the request.
 	Offset *int32 `json:"offset,omitempty"`
-	// The report data limit.
+	// How many entries one page may hold, echoed from the request; it is 25 unless another value was asked for.
 	Limit *int32 `json:"limit,omitempty"`
-	// The total quantity of records in the report.
+	// How many services match the filters in total, across every page - services, not charges.
 	TotalQuantity *int64 `json:"totalQuantity,omitempty"`
-	// The total number of pages in the report.
+	// How many pages those entries come to at the current `limit`.
 	TotalPage *int32 `json:"totalPage,omitempty"`
-	// The current page number of the report.
+	// Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument.
 	CurrentPage *int32 `json:"currentPage,omitempty"`
 }
 

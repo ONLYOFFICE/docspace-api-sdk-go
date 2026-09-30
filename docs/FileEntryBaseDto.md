@@ -4,28 +4,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Title** | Pointer to **NullableString** | The file entry title. | [optional] 
-**Access** | Pointer to [**FileShare**](FileShare.md) | The access rights to the file entry. | [optional] 
-**SharedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | Provides information about the employee who shared the file or folder. | [optional] 
-**OwnedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | The information about the employee who owns the file entry. | [optional] 
-**Shared** | Pointer to **bool** | Specifies if the file entry is shared via link or not. | [optional] 
-**SharedForUser** | Pointer to **bool** | Specifies if the file entry is shared for user or not. | [optional] 
-**SharedExternal** | Pointer to **bool** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] 
-**ParentShared** | Pointer to **bool** | Indicates whether the parent entity is shared. | [optional] 
-**ShortWebUrl** | Pointer to **NullableString** | The short Web URL. | [optional] 
-**Created** | Pointer to **NullableTime** | The creation date and time of the file entry. | [optional] 
-**CreatedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | The file entry author. | [optional] 
-**Updated** | Pointer to **NullableTime** | The last date and time when the file entry was updated. | [optional] 
-**AutoDelete** | Pointer to **NullableTime** | The date and time when the file entry will be automatically deleted. | [optional] 
-**RootFolderType** | Pointer to [**FolderType**](FolderType.md) | The root folder type of the file entry. | [optional] 
-**ParentRoomType** | Pointer to [**FolderType**](FolderType.md) | The parent room type of the file entry. | [optional] 
-**UpdatedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | The user who updated the file entry. | [optional] 
-**ProviderItem** | Pointer to **NullableBool** | Specifies if the file entry provider is specified or not. | [optional] 
-**ProviderKey** | Pointer to **NullableString** | The provider key of the file entry. | [optional] 
-**ProviderId** | Pointer to **NullableInt32** | The provider ID of the file entry. | [optional] 
-**Order** | Pointer to **NullableString** | The order of the file entry. | [optional] 
-**IsFavorite** | Pointer to **NullableBool** | Specifies if the file is a favorite or not. | [optional] 
-**FileEntryType** | Pointer to [**FileEntryType**](FileEntryType.md) | The file entry type. | [optional] 
+**Title** | Pointer to **NullableString** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] 
+**Access** | Pointer to [**FileShare**](FileShare.md) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] 
+**SharedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] 
+**OwnedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] 
+**Shared** | Pointer to **bool** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] 
+**SharedForUser** | Pointer to **bool** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] 
+**SharedExternal** | Pointer to **bool** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] 
+**ParentShared** | Pointer to **bool** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] 
+**ShortWebUrl** | Pointer to **NullableString** | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] 
+**Created** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] 
+**CreatedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] 
+**Updated** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] 
+**AutoDelete** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] 
+**RootFolderType** | Pointer to [**FolderType**](FolderType.md) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] 
+**ParentRoomType** | Pointer to [**FolderType**](FolderType.md) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] 
+**UpdatedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | Who changed the entry last. It is null for a caller without an account. | [optional] 
+**ProviderItem** | Pointer to **NullableBool** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] 
+**ProviderKey** | Pointer to **NullableString** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] 
+**ProviderId** | Pointer to **NullableInt32** | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] 
+**Order** | Pointer to **NullableString** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] 
+**IsFavorite** | Pointer to **NullableBool** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] 
+**FileEntryType** | Pointer to [**FileEntryType**](FileEntryType.md) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] 
 
 ## Methods
 
@@ -293,20 +293,20 @@ HasShortWebUrl returns a boolean if a field has been set.
 UnsetShortWebUrl ensures that no value is present for ShortWebUrl, not even an explicit nil
 ### GetCreated
 
-`func (o *FileEntryBaseDto) GetCreated() time.Time`
+`func (o *FileEntryBaseDto) GetCreated() ApiDateTime`
 
 GetCreated returns the Created field if non-nil, zero value otherwise.
 
 ### GetCreatedOk
 
-`func (o *FileEntryBaseDto) GetCreatedOk() (*time.Time, bool)`
+`func (o *FileEntryBaseDto) GetCreatedOk() (*ApiDateTime, bool)`
 
 GetCreatedOk returns a tuple with the Created field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreated
 
-`func (o *FileEntryBaseDto) SetCreated(v time.Time)`
+`func (o *FileEntryBaseDto) SetCreated(v ApiDateTime)`
 
 SetCreated sets Created field to given value.
 
@@ -316,16 +316,6 @@ SetCreated sets Created field to given value.
 
 HasCreated returns a boolean if a field has been set.
 
-### SetCreatedNil
-
-`func (o *FileEntryBaseDto) SetCreatedNil(b bool)`
-
- SetCreatedNil sets the value for Created to be an explicit nil
-
-### UnsetCreated
-`func (o *FileEntryBaseDto) UnsetCreated()`
-
-UnsetCreated ensures that no value is present for Created, not even an explicit nil
 ### GetCreatedBy
 
 `func (o *FileEntryBaseDto) GetCreatedBy() EmployeeDto`
@@ -353,20 +343,20 @@ HasCreatedBy returns a boolean if a field has been set.
 
 ### GetUpdated
 
-`func (o *FileEntryBaseDto) GetUpdated() time.Time`
+`func (o *FileEntryBaseDto) GetUpdated() ApiDateTime`
 
 GetUpdated returns the Updated field if non-nil, zero value otherwise.
 
 ### GetUpdatedOk
 
-`func (o *FileEntryBaseDto) GetUpdatedOk() (*time.Time, bool)`
+`func (o *FileEntryBaseDto) GetUpdatedOk() (*ApiDateTime, bool)`
 
 GetUpdatedOk returns a tuple with the Updated field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdated
 
-`func (o *FileEntryBaseDto) SetUpdated(v time.Time)`
+`func (o *FileEntryBaseDto) SetUpdated(v ApiDateTime)`
 
 SetUpdated sets Updated field to given value.
 
@@ -376,32 +366,22 @@ SetUpdated sets Updated field to given value.
 
 HasUpdated returns a boolean if a field has been set.
 
-### SetUpdatedNil
-
-`func (o *FileEntryBaseDto) SetUpdatedNil(b bool)`
-
- SetUpdatedNil sets the value for Updated to be an explicit nil
-
-### UnsetUpdated
-`func (o *FileEntryBaseDto) UnsetUpdated()`
-
-UnsetUpdated ensures that no value is present for Updated, not even an explicit nil
 ### GetAutoDelete
 
-`func (o *FileEntryBaseDto) GetAutoDelete() time.Time`
+`func (o *FileEntryBaseDto) GetAutoDelete() ApiDateTime`
 
 GetAutoDelete returns the AutoDelete field if non-nil, zero value otherwise.
 
 ### GetAutoDeleteOk
 
-`func (o *FileEntryBaseDto) GetAutoDeleteOk() (*time.Time, bool)`
+`func (o *FileEntryBaseDto) GetAutoDeleteOk() (*ApiDateTime, bool)`
 
 GetAutoDeleteOk returns a tuple with the AutoDelete field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAutoDelete
 
-`func (o *FileEntryBaseDto) SetAutoDelete(v time.Time)`
+`func (o *FileEntryBaseDto) SetAutoDelete(v ApiDateTime)`
 
 SetAutoDelete sets AutoDelete field to given value.
 
@@ -411,16 +391,6 @@ SetAutoDelete sets AutoDelete field to given value.
 
 HasAutoDelete returns a boolean if a field has been set.
 
-### SetAutoDeleteNil
-
-`func (o *FileEntryBaseDto) SetAutoDeleteNil(b bool)`
-
- SetAutoDeleteNil sets the value for AutoDelete to be an explicit nil
-
-### UnsetAutoDelete
-`func (o *FileEntryBaseDto) UnsetAutoDelete()`
-
-UnsetAutoDelete ensures that no value is present for AutoDelete, not even an explicit nil
 ### GetRootFolderType
 
 `func (o *FileEntryBaseDto) GetRootFolderType() FolderType`

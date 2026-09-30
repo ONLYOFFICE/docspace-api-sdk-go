@@ -22,7 +22,7 @@ import (
 // checks if the DocsCloudTenant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudTenant{}
 
-// DocsCloudTenant Represents a DocsCloud tenant of a portal.
+// DocsCloudTenant Represents a Docs Connect tenant of a portal.
 type DocsCloudTenant struct {
 	// The external ID of the dedicated resource the tenant is hosted on.
 	DedicatedResourceExId *int32 `json:"dedicatedResourceExId,omitempty"`

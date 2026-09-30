@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**User** | Pointer to [**UserInfo**](UserInfo.md) | The user information. | [optional] 
-**Email** | Pointer to **NullableString** | The user email address. | [optional] [readonly] 
-**Id** | Pointer to **NullableString** | The user unique identification. | [optional] [readonly] 
-**Image** | Pointer to **NullableString** | The path to the user's avatar. | [optional] [readonly] 
-**HasAccess** | Pointer to **bool** | Specifies whether the user has the access to the file where they are mentioned. | [optional] [readonly] 
-**Name** | Pointer to **NullableString** | The user full name. | [optional] [readonly] 
+**User** | Pointer to [**UserInfo**](UserInfo.md) | The account itself, in the shape the people listings use. | [optional] 
+**Email** | Pointer to **NullableString** | Where a mention notification for this user is delivered. | [optional] [readonly] 
+**Id** | Pointer to **NullableString** | The account id as text, the same value the account object carries; it is what identifies the user in a sharing  request built from this list. | [optional] [readonly] 
+**Image** | Pointer to **NullableString** | An absolute address of the medium-sized avatar. A generated default avatar is reported when the user never  uploaded one, so the field is never empty. | [optional] [readonly] 
+**HasAccess** | Pointer to **bool** | Not filled in by the operations that return this list: it always comes back false. Whether a user can already  open the document has to be read from the sharing settings of the file. | [optional] [readonly] 
+**Name** | Pointer to **NullableString** | The name to display, assembled the way the portal is configured to show names. | [optional] [readonly] 
 
 ## Methods
 

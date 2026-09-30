@@ -5,13 +5,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteThirdParty**](FilesThirdPartyIntegrationAPI.md#DeleteThirdParty) | **Delete** /api/2.0/files/thirdparty/{providerId} | Remove a third-party account
-[**GetAllProviders**](FilesThirdPartyIntegrationAPI.md#GetAllProviders) | **Get** /api/2.0/files/thirdparty/providers | Get all providers
-[**GetBackupThirdPartyAccount**](FilesThirdPartyIntegrationAPI.md#GetBackupThirdPartyAccount) | **Get** /api/2.0/files/thirdparty/backup | Get a third-party account backup
-[**GetCapabilities**](FilesThirdPartyIntegrationAPI.md#GetCapabilities) | **Get** /api/2.0/files/thirdparty/capabilities | Get providers
-[**GetCommonThirdPartyFolders**](FilesThirdPartyIntegrationAPI.md#GetCommonThirdPartyFolders) | **Get** /api/2.0/files/thirdparty/common | Get the common third-party services
+[**GetAllProviders**](FilesThirdPartyIntegrationAPI.md#GetAllProviders) | **Get** /api/2.0/files/thirdparty/providers | Get all third-party providers
+[**GetBackupThirdPartyAccount**](FilesThirdPartyIntegrationAPI.md#GetBackupThirdPartyAccount) | **Get** /api/2.0/files/thirdparty/backup | Get the third-party backup folder
+[**GetCapabilities**](FilesThirdPartyIntegrationAPI.md#GetCapabilities) | **Get** /api/2.0/files/thirdparty/capabilities | Get third-party provider capabilities
+[**GetCommonThirdPartyFolders**](FilesThirdPartyIntegrationAPI.md#GetCommonThirdPartyFolders) | **Get** /api/2.0/files/thirdparty/common | Get common third-party folders
 [**GetThirdPartyAccounts**](FilesThirdPartyIntegrationAPI.md#GetThirdPartyAccounts) | **Get** /api/2.0/files/thirdparty | Get the third-party accounts
-[**SaveThirdParty**](FilesThirdPartyIntegrationAPI.md#SaveThirdParty) | **Post** /api/2.0/files/thirdparty | Save a third-party account
-[**SaveThirdPartyBackup**](FilesThirdPartyIntegrationAPI.md#SaveThirdPartyBackup) | **Post** /api/2.0/files/thirdparty/backup | Save a third-party account backup
+[**SaveThirdParty**](FilesThirdPartyIntegrationAPI.md#SaveThirdParty) | **Post** /api/2.0/files/thirdparty | Connect a third-party account
+[**SaveThirdPartyBackup**](FilesThirdPartyIntegrationAPI.md#SaveThirdPartyBackup) | **Post** /api/2.0/files/thirdparty/backup | Connect the third-party backup storage
 
 
 
@@ -38,7 +38,7 @@ import (
 )
 
 func main() {
-	providerId := int32(1) // int32 | The provider ID.
+	providerId := int32(12) // int32 | The ID of the connected third-party storage account, as `providerId` of `GET api/2.0/files/thirdparty`.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -58,7 +58,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**providerId** | **int32** | The provider ID. | 
+**providerId** | **int32** | The ID of the connected third-party storage account, as `providerId` of `GET api/2.0/files/thirdparty`. | 
 
 ### Other Parameters
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 > ProviderArrayWrapper GetAllProviders(ctx).Excludewebdav(excludewebdav).Execute()
 
-Get all providers
+Get all third-party providers
 
 
 
@@ -110,7 +110,7 @@ import (
 )
 
 func main() {
-	excludewebdav := false // bool | Specifies whether WebDAV resources should be excluded from the result.. (optional)
+	excludewebdav := false // bool | Set to true to leave out the whole WebDAV family, the kDrive and Yandex presets included, and keep only the  services that authenticate through OAuth 2.0; false lists all of them. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -135,7 +135,7 @@ Other parameters are passed through a pointer to a apiGetAllProvidersRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **excludewebdav** | **bool** | Specifies whether WebDAV resources should be excluded from the result.. | 
+ **excludewebdav** | **bool** | Set to true to leave out the whole WebDAV family, the kDrive and Yandex presets included, and keep only the  services that authenticate through OAuth 2.0; false lists all of them. | 
 
 ### Return type
 
@@ -157,9 +157,9 @@ Name | Type | Description  | Notes
 
 ## GetBackupThirdPartyAccount
 
-> FolderStringWrapper GetBackupThirdPartyAccount(ctx).Execute()
+> ThirdPartyFolderWrapper GetBackupThirdPartyAccount(ctx).Execute()
 
-Get a third-party account backup
+Get the third-party backup folder
 
 
 
@@ -186,7 +186,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesThirdPartyIntegrationAPI.GetBackupThirdPartyAccount``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetBackupThirdPartyAccount`: FolderStringWrapper
+	// response from `GetBackupThirdPartyAccount`: ThirdPartyFolderWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesThirdPartyIntegrationAPI.GetBackupThirdPartyAccount`: %v\n", resp)
 }
 ```
@@ -202,7 +202,7 @@ Other parameters are passed through a pointer to a apiGetBackupThirdPartyAccount
 
 ### Return type
 
-[**FolderStringWrapper**](FolderStringWrapper.md)
+[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
 
 ### Authorization
 
@@ -222,7 +222,7 @@ Other parameters are passed through a pointer to a apiGetBackupThirdPartyAccount
 
 > ArrayArrayWrapper GetCapabilities(ctx).Execute()
 
-Get providers
+Get third-party provider capabilities
 
 
 
@@ -283,9 +283,9 @@ Other parameters are passed through a pointer to a apiGetCapabilitiesRequest str
 
 ## GetCommonThirdPartyFolders
 
-> FolderStringArrayWrapper GetCommonThirdPartyFolders(ctx).Execute()
+> ThirdPartyFolderArrayWrapper GetCommonThirdPartyFolders(ctx).Execute()
 
-Get the common third-party services
+Get common third-party folders
 
 
 
@@ -312,7 +312,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesThirdPartyIntegrationAPI.GetCommonThirdPartyFolders``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetCommonThirdPartyFolders`: FolderStringArrayWrapper
+	// response from `GetCommonThirdPartyFolders`: ThirdPartyFolderArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesThirdPartyIntegrationAPI.GetCommonThirdPartyFolders`: %v\n", resp)
 }
 ```
@@ -328,7 +328,7 @@ Other parameters are passed through a pointer to a apiGetCommonThirdPartyFolders
 
 ### Return type
 
-[**FolderStringArrayWrapper**](FolderStringArrayWrapper.md)
+[**ThirdPartyFolderArrayWrapper**](ThirdPartyFolderArrayWrapper.md)
 
 ### Authorization
 
@@ -409,9 +409,9 @@ Other parameters are passed through a pointer to a apiGetThirdPartyAccountsReque
 
 ## SaveThirdParty
 
-> FolderStringWrapper SaveThirdParty(ctx).ThirdPartyRequestDto(thirdPartyRequestDto).Execute()
+> ThirdPartyFolderWrapper SaveThirdParty(ctx).ThirdPartyRequestDto(thirdPartyRequestDto).Execute()
 
-Save a third-party account
+Connect a third-party account
 
 
 
@@ -430,7 +430,7 @@ import (
 )
 
 func main() {
-	thirdPartyRequestDto := *openapiclient.NewThirdPartyRequestDto("My Document", "abc123") // ThirdPartyRequestDto |  (optional)
+	thirdPartyRequestDto := *openapiclient.NewThirdPartyRequestDto("Nextcloud storage", "Nextcloud") // ThirdPartyRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -439,7 +439,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesThirdPartyIntegrationAPI.SaveThirdParty``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SaveThirdParty`: FolderStringWrapper
+	// response from `SaveThirdParty`: ThirdPartyFolderWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesThirdPartyIntegrationAPI.SaveThirdParty`: %v\n", resp)
 }
 ```
@@ -459,7 +459,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FolderStringWrapper**](FolderStringWrapper.md)
+[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
 
 ### Authorization
 
@@ -477,9 +477,9 @@ Name | Type | Description  | Notes
 
 ## SaveThirdPartyBackup
 
-> FolderStringWrapper SaveThirdPartyBackup(ctx).ThirdPartyBackupRequestDto(thirdPartyBackupRequestDto).Execute()
+> ThirdPartyFolderWrapper SaveThirdPartyBackup(ctx).ThirdPartyBackupRequestDto(thirdPartyBackupRequestDto).Execute()
 
-Save a third-party account backup
+Connect the third-party backup storage
 
 
 
@@ -507,7 +507,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesThirdPartyIntegrationAPI.SaveThirdPartyBackup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SaveThirdPartyBackup`: FolderStringWrapper
+	// response from `SaveThirdPartyBackup`: ThirdPartyFolderWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesThirdPartyIntegrationAPI.SaveThirdPartyBackup`: %v\n", resp)
 }
 ```
@@ -527,7 +527,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FolderStringWrapper**](FolderStringWrapper.md)
+[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
 
 ### Authorization
 

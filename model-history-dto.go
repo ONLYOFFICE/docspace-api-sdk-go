@@ -16,7 +16,6 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 	"bytes"
 	"fmt"
 )
@@ -24,19 +23,19 @@ import (
 // checks if the HistoryDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HistoryDto{}
 
-// HistoryDto The file history information.
+// HistoryDto One record of the activity log of a file or a folder.
 type HistoryDto struct {
-	// The unique identifier for the file history entry.
+	// The identifier of the record, which tells two records of the same action apart and stays stable as long as the  portal keeps the log.
 	Id int32 `json:"id"`
-	// The action performed on the file.
+	// What happened - the kind of event the record stands for, such as a file being uploaded, renamed, moved or  shared - with the key a client can key its own wording off.
 	Action HistoryAction `json:"action"`
-	// The action initiator.
+	// Who caused the event. For an event caused by a visitor following an external link only the name they gave is  filled in, the account fields staying empty.
 	Initiator EmployeeDto `json:"initiator"`
-	// The date and time when an action on the file was performed.
-	Date NullableTime `json:"date"`
-	// The history data.
-	Data HistoryData `json:"data"`
-	// The list of related history.
+	// When the event happened, written with the offset of the portal's time zone.
+	Date ApiDateTime `json:"date"`
+	// The history data. Absent for actions that carry no payload of their own - changing a room's  logo, icon colour or cover, whose interpreter returns no data (see  `RoomLogoChangedInterpreter`). It used to be declared required, which put it in the  OpenAPI document's required list while the null-dropping serializer left it out of the  response, so a generated client threw on any history page holding one of those entries.
+	Data *HistoryData `json:"data,omitempty"`
+	// The records folded into this one because they belong to the same action, the separate files of one upload for  instance. It is empty when the record stands alone, and the records inside it carry no further nesting.
 	Related []HistoryDto `json:"related,omitempty"`
 }
 
@@ -46,13 +45,12 @@ type _HistoryDto HistoryDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHistoryDto(id int32, action HistoryAction, initiator EmployeeDto, date NullableTime, data HistoryData) *HistoryDto {
+func NewHistoryDto(id int32, action HistoryAction, initiator EmployeeDto, date ApiDateTime) *HistoryDto {
 	this := HistoryDto{}
 	this.Id = id
 	this.Action = action
 	this.Initiator = initiator
 	this.Date = date
-	this.Data = data
 	return &this
 }
 
@@ -137,53 +135,59 @@ func (o *HistoryDto) SetInitiator(v EmployeeDto) {
 }
 
 // GetDate returns the Date field value
-// If the value is explicit nil, the zero value for time.Time will be returned
-func (o *HistoryDto) GetDate() time.Time {
-	if o == nil || o.Date.Get() == nil {
-		var ret time.Time
+func (o *HistoryDto) GetDate() ApiDateTime {
+	if o == nil {
+		var ret ApiDateTime
 		return ret
 	}
 
-	return *o.Date.Get()
+	return o.Date
 }
 
 // GetDateOk returns a tuple with the Date field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HistoryDto) GetDateOk() (*time.Time, bool) {
+func (o *HistoryDto) GetDateOk() (*ApiDateTime, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Date.Get(), o.Date.IsSet()
+	return &o.Date, true
 }
 
 // SetDate sets field value
-func (o *HistoryDto) SetDate(v time.Time) {
-	o.Date.Set(&v)
+func (o *HistoryDto) SetDate(v ApiDateTime) {
+	o.Date = v
 }
 
-// GetData returns the Data field value
+// GetData returns the Data field value if set, zero value otherwise.
 func (o *HistoryDto) GetData() HistoryData {
-	if o == nil {
+	if o == nil || IsNil(o.Data) {
 		var ret HistoryData
 		return ret
 	}
-
-	return o.Data
+	return *o.Data
 }
 
-// GetDataOk returns a tuple with the Data field value
+// GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HistoryDto) GetDataOk() (*HistoryData, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
-	return &o.Data, true
+	return o.Data, true
 }
 
-// SetData sets field value
+// HasData returns a boolean if a field has been set.
+func (o *HistoryDto) IsDataSet() bool {
+	if o != nil && !IsNil(o.Data) {
+		return true
+	}
+
+	return false
+}
+
+// SetData gets a reference to the given HistoryData and assigns it to the Data field.
 func (o *HistoryDto) SetData(v HistoryData) {
-	o.Data = v
+	o.Data = &v
 }
 
 // GetRelated returns the Related field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -232,8 +236,10 @@ func (o HistoryDto) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["action"] = o.Action
 	toSerialize["initiator"] = o.Initiator
-	toSerialize["date"] = o.Date.Get()
-	toSerialize["data"] = o.Data
+	toSerialize["date"] = o.Date
+	if !IsNil(o.Data) {
+		toSerialize["data"] = o.Data
+	}
 	if o.Related != nil {
 		toSerialize["related"] = o.Related
 	}
@@ -249,7 +255,6 @@ func (o *HistoryDto) UnmarshalJSON(data []byte) (err error) {
 		"action",
 		"initiator",
 		"date",
-		"data",
 	}
 
 	allProperties := make(map[string]interface{})

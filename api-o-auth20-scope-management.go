@@ -31,13 +31,13 @@ type ApiGetScopesRequest struct {
 	ApiService *OAuth20ScopeManagementAPIService
 }
 
-func (r ApiGetScopesRequest) Execute() (*ScopeResponse, *http.Response, error) {
+func (r ApiGetScopesRequest) Execute() ([]ScopeResponse, *http.Response, error) {
 	return r.ApiService.GetScopesExecute(r)
 }
 
 // GetScopes List available OAuth2 scopes
 //
-// Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
+// Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-scopes/
 //
@@ -51,13 +51,13 @@ func (a *OAuth20ScopeManagementAPIService) GetScopes(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return ScopeResponse
-func (a *OAuth20ScopeManagementAPIService) GetScopesExecute(r ApiGetScopesRequest) (*ScopeResponse, *http.Response, error) {
+//  @return []ScopeResponse
+func (a *OAuth20ScopeManagementAPIService) GetScopesExecute(r ApiGetScopesRequest) ([]ScopeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ScopeResponse
+		localVarReturnValue  []ScopeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OAuth20ScopeManagementAPIService.GetScopes")
@@ -65,7 +65,7 @@ func (a *OAuth20ScopeManagementAPIService) GetScopesExecute(r ApiGetScopesReques
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/2.0/scopes"
+	localVarPath := localBasePath + "/api/2.0/oauth2/scopes"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -110,7 +110,7 @@ func (a *OAuth20ScopeManagementAPIService) GetScopesExecute(r ApiGetScopesReques
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v ProblemDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -121,7 +121,7 @@ func (a *OAuth20ScopeManagementAPIService) GetScopesExecute(r ApiGetScopesReques
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 403 {
+		if localVarHTTPResponse.StatusCode == 406 {
 			var v ProblemDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -144,6 +144,17 @@ func (a *OAuth20ScopeManagementAPIService) GetScopesExecute(r ApiGetScopesReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
+			var v ProblemDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
 			var v ProblemDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

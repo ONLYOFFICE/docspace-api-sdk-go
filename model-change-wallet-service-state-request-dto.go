@@ -21,11 +21,11 @@ import (
 // checks if the ChangeWalletServiceStateRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ChangeWalletServiceStateRequestDto{}
 
-// ChangeWalletServiceStateRequestDto The request parameters for changing the tenant wallet service state.
+// ChangeWalletServiceStateRequestDto Which wallet service is switched, and which way.
 type ChangeWalletServiceStateRequestDto struct {
-	// The wallet service type.
+	// The service being switched, given by its catalogue name. Switching it on only makes it available to the  portal; its units are still bought with `PUT api/2.0/portal/payment/updatewallet`.
 	Service *TenantWalletService `json:"service,omitempty"`
-	// Specifies whether the wallet service is enabled.
+	// Which way the service is switched: `true` makes it available to the portal, `false` withdraws it. Setting the  state the service already has changes nothing.
 	Enabled *bool `json:"enabled,omitempty"`
 }
 

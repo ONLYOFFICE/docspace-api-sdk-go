@@ -21,13 +21,13 @@ import (
 // checks if the ScopeResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScopeResponse{}
 
-// ScopeResponse The response containing the scope information.
+// ScopeResponse One scope from the tenant scope catalogue, as it may be requested by a client.
 type ScopeResponse struct {
-	// The scope name.
+	// The scope exactly as it is written in an authorization request, for example files:read or openid.
 	Name *string `json:"name,omitempty"`
-	// The group the scope belongs to.
+	// The area of the portal the scope belongs to, which is what groups the scopes on the consent screen: files, rooms, contacts, profiles or openid.
 	Group *string `json:"group,omitempty"`
-	// The scope type.
+	// What the scope allows inside its group: read for read-only access, write for changes, and openid for the identity scope itself.
 	Type *string `json:"type,omitempty"`
 }
 

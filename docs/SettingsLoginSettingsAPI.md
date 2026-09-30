@@ -4,9 +4,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetLoginSettings**](SettingsLoginSettingsAPI.md#GetLoginSettings) | **Get** /api/2.0/settings/security/loginsettings | Get the login settings
-[**SetDefaultLoginSettings**](SettingsLoginSettingsAPI.md#SetDefaultLoginSettings) | **Delete** /api/2.0/settings/security/loginsettings | Reset the login settings
-[**UpdateLoginSettings**](SettingsLoginSettingsAPI.md#UpdateLoginSettings) | **Put** /api/2.0/settings/security/loginsettings | Update the login settings
+[**GetLoginSettings**](SettingsLoginSettingsAPI.md#GetLoginSettings) | **Get** /api/2.0/settings/security/loginsettings | Get login settings
+[**SetDefaultLoginSettings**](SettingsLoginSettingsAPI.md#SetDefaultLoginSettings) | **Delete** /api/2.0/settings/security/loginsettings | Reset login settings
+[**UpdateLoginSettings**](SettingsLoginSettingsAPI.md#UpdateLoginSettings) | **Put** /api/2.0/settings/security/loginsettings | Update login settings
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > LoginSettingsWrapper GetLoginSettings(ctx).Execute()
 
-Get the login settings
+Get login settings
 
 
 
@@ -77,7 +77,7 @@ Other parameters are passed through a pointer to a apiGetLoginSettingsRequest st
 
 > LoginSettingsWrapper SetDefaultLoginSettings(ctx).Execute()
 
-Reset the login settings
+Reset login settings
 
 
 
@@ -140,7 +140,7 @@ Other parameters are passed through a pointer to a apiSetDefaultLoginSettingsReq
 
 > LoginSettingsWrapper UpdateLoginSettings(ctx).LoginSettingsRequestDto(loginSettingsRequestDto).Execute()
 
-Update the login settings
+Update login settings
 
 
 

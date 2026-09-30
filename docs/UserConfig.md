@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **NullableString** | The user ID. | [optional] 
-**Name** | Pointer to **NullableString** | The full name of the user. | [optional] 
-**Image** | Pointer to **NullableString** | The path to the user's avatar. | [optional] 
-**Roles** | Pointer to **[]string** | Roles | [optional] 
-**CustomerId** | Pointer to **NullableString** | Customer identifier associated with the user. | [optional] 
+**Id** | Pointer to **NullableString** | The account the changes are recorded under. Two sessions carrying the same value are taken by the editors for  the same person. | [optional] 
+**Name** | Pointer to **NullableString** | The name shown next to the changes and in the list of participants. | [optional] 
+**Image** | Pointer to **NullableString** | An absolute address of the avatar shown for this participant. | [optional] 
+**Roles** | Pointer to **[]string** | The filling roles this participant holds in the form being filled out. It is set only for a form in a virtual  data room, where the role decides which fields open for them. | [optional] 
+**CustomerId** | Pointer to **NullableString** | Identifies the paying customer this participant belongs to, on deployments where the editors are licensed per  customer. | [optional] 
 
 ## Methods
 

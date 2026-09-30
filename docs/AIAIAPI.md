@@ -7,10 +7,10 @@ Method | HTTP request | Description
 [**AiAiApproveToolCall**](AIAIAPI.md#AiAiApproveToolCall) | **Post** /api/2.0/ai/ai/approve-tool-call | Approve tool call
 [**AiAiDenyToolCall**](AIAIAPI.md#AiAiDenyToolCall) | **Post** /api/2.0/ai/ai/deny-tool-call | Deny tool call
 [**AiAiRegenerateStream**](AIAIAPI.md#AiAiRegenerateStream) | **Post** /api/2.0/ai/ai/regenerate-stream | Regenerate stream
-[**AiAiSend**](AIAIAPI.md#AiAiSend) | **Post** /api/2.0/ai/ai/send | Send
+[**AiAiSend**](AIAIAPI.md#AiAiSend) | **Post** /api/2.0/ai/ai/send | Run an AI action
 [**AiAiSendCustom**](AIAIAPI.md#AiAiSendCustom) | **Post** /api/2.0/ai/ai/send-custom | Send custom
 [**AiAiSendWithStream**](AIAIAPI.md#AiAiSendWithStream) | **Post** /api/2.0/ai/ai/send-with-stream | Send with stream
-[**AiAiSendWithStreamOpenAI**](AIAIAPI.md#AiAiSendWithStreamOpenAI) | **Post** /api/2.0/ai/ai/send-with-stream-openai | Send with stream open ai
+[**AiAiSendWithStreamOpenAI**](AIAIAPI.md#AiAiSendWithStreamOpenAI) | **Post** /api/2.0/ai/ai/send-with-stream-openai | Stream a chat in OpenAI format
 
 
 
@@ -37,7 +37,7 @@ import (
 )
 
 func main() {
-	aiAiApproveToolCallRequest := *openapiclient.NewAiAiApproveToolCallRequest(interface{}(123), "ThreadId_example", "MessageId_example", float32(123), *openapiclient.NewAiThreadMessageLike("Role_example", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiApproveToolCallRequest | 
+	aiAiApproveToolCallRequest := *openapiclient.NewAiAiApproveToolCallRequest(interface{}(123), "ThreadId_example", "MessageId_example", float32(123), *openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiApproveToolCallRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -105,7 +105,7 @@ import (
 )
 
 func main() {
-	aiAiToolCallData := *openapiclient.NewAiAiToolCallData("ThreadId_example", "MessageId_example", float32(123), *openapiclient.NewAiThreadMessageLike("Role_example", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiToolCallData | 
+	aiAiToolCallData := *openapiclient.NewAiAiToolCallData("11111111-1111-1111-1111-111111111111", "22222222-2222-2222-2222-222222222222", float32(0), *openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiToolCallData | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -222,7 +222,7 @@ No authorization required
 
 > AiThreadMessageLike AiAiSend(ctx).AiAiSendRequest(aiAiSendRequest).Execute()
 
-Send
+Run an AI action
 
 
 
@@ -241,7 +241,7 @@ import (
 )
 
 func main() {
-	aiAiSendRequest := *openapiclient.NewAiAiSendRequest(openapiclient.AiActionType("Default"), *openapiclient.NewAiThreadMessageLike("Role_example", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiSendRequest | 
+	aiAiSendRequest := *openapiclient.NewAiAiSendRequest(openapiclient.AiActionType("Default"), *openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiSendRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -309,7 +309,7 @@ import (
 )
 
 func main() {
-	aiAiSendCustomRequest := *openapiclient.NewAiAiSendCustomRequest(false, "SystemPrompt_example", *openapiclient.NewAiThreadMessageLike("Role_example", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiSendCustomRequest | 
+	aiAiSendCustomRequest := *openapiclient.NewAiAiSendCustomRequest(false, "SystemPrompt_example", *openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiSendCustomRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -342,7 +342,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -377,7 +377,7 @@ import (
 )
 
 func main() {
-	aiAiSendStreamBody := *openapiclient.NewAiAiSendStreamBody(*openapiclient.NewAiThreadMessageLike("Role_example", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiSendStreamBody | 
+	aiAiSendStreamBody := *openapiclient.NewAiAiSendStreamBody(*openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiSendStreamBody | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -410,7 +410,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -426,7 +426,7 @@ No authorization required
 
 > AiOpenAIStreamChunk AiAiSendWithStreamOpenAI(ctx).AiAiSendStreamBody(aiAiSendStreamBody).Execute()
 
-Send with stream open ai
+Stream a chat in OpenAI format
 
 
 
@@ -445,7 +445,7 @@ import (
 )
 
 func main() {
-	aiAiSendStreamBody := *openapiclient.NewAiAiSendStreamBody(*openapiclient.NewAiThreadMessageLike("Role_example", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiSendStreamBody | 
+	aiAiSendStreamBody := *openapiclient.NewAiAiSendStreamBody(*openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiAiSendStreamBody | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -478,7 +478,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

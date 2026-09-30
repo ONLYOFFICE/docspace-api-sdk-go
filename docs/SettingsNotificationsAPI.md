@@ -6,9 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetNotificationChannels**](SettingsNotificationsAPI.md#GetNotificationChannels) | **Get** /api/2.0/settings/notification/channels | Get notification channels
 [**GetNotificationSettings**](SettingsNotificationsAPI.md#GetNotificationSettings) | **Get** /api/2.0/settings/notification/{type} | Check notification availability
-[**GetRoomsNotificationSettings**](SettingsNotificationsAPI.md#GetRoomsNotificationSettings) | **Get** /api/2.0/settings/notification/rooms | Get room notification settings
-[**SetNotificationSettings**](SettingsNotificationsAPI.md#SetNotificationSettings) | **Post** /api/2.0/settings/notification | Enable notifications
-[**SetRoomsNotificationStatus**](SettingsNotificationsAPI.md#SetRoomsNotificationStatus) | **Post** /api/2.0/settings/notification/rooms | Set room notification status
+[**GetRoomsNotificationSettings**](SettingsNotificationsAPI.md#GetRoomsNotificationSettings) | **Get** /api/2.0/settings/notification/rooms | Get muted rooms
+[**SetNotificationSettings**](SettingsNotificationsAPI.md#SetNotificationSettings) | **Post** /api/2.0/settings/notification | Set notification status
+[**SetRoomsNotificationStatus**](SettingsNotificationsAPI.md#SetRoomsNotificationStatus) | **Post** /api/2.0/settings/notification/rooms | Mute or unmute a room
 
 
 
@@ -98,7 +98,7 @@ import (
 )
 
 func main() {
-	type_ := openapiclient.NotificationType(0) // NotificationType | The type of notification to query, specified in the route.
+	type_ := openapiclient.NotificationType(0) // NotificationType | The kind of notification being asked about. A value outside the defined set fails the call rather than  falling back to a default.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -118,7 +118,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**type_** | [**NotificationType**](.md) | The type of notification to query, specified in the route. | 
+**type_** | [**NotificationType**](.md) | The kind of notification being asked about. A value outside the defined set fails the call rather than  falling back to a default. | 
 
 ### Other Parameters
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 > RoomsNotificationSettingsWrapper GetRoomsNotificationSettings(ctx).Execute()
 
-Get room notification settings
+Get muted rooms
 
 
 
@@ -214,7 +214,7 @@ Other parameters are passed through a pointer to a apiGetRoomsNotificationSettin
 
 > NotificationSettingsWrapper SetNotificationSettings(ctx).NotificationSettingsRequestsDto(notificationSettingsRequestsDto).Execute()
 
-Enable notifications
+Set notification status
 
 
 
@@ -282,7 +282,7 @@ Name | Type | Description  | Notes
 
 > RoomsNotificationSettingsWrapper SetRoomsNotificationStatus(ctx).RoomsNotificationsSettingsRequestDto(roomsNotificationsSettingsRequestDto).Execute()
 
-Set room notification status
+Mute or unmute a room
 
 
 

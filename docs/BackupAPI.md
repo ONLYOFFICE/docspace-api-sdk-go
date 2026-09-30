@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelBackup**](BackupAPI.md#CancelBackup) | **Post** /api/2.0/backup/cancelbackup | Cancel current backup
+[**CancelBackup**](BackupAPI.md#CancelBackup) | **Post** /api/2.0/backup/cancelbackup | Cancel the running backup
 [**CreateBackupSchedule**](BackupAPI.md#CreateBackupSchedule) | **Post** /api/2.0/backup/createbackupschedule | Create the backup schedule
 [**DeleteBackup**](BackupAPI.md#DeleteBackup) | **Delete** /api/2.0/backup/deletebackup/{id} | Delete the backup
 [**DeleteBackupHistory**](BackupAPI.md#DeleteBackupHistory) | **Delete** /api/2.0/backup/deletebackuphistory | Delete the backup history
@@ -13,8 +13,8 @@ Method | HTTP request | Description
 [**GetBackupProgress**](BackupAPI.md#GetBackupProgress) | **Get** /api/2.0/backup/getbackupprogress | Get the backup progress
 [**GetBackupSchedule**](BackupAPI.md#GetBackupSchedule) | **Get** /api/2.0/backup/getbackupschedule | Get the backup schedule
 [**GetBackupsCount**](BackupAPI.md#GetBackupsCount) | **Get** /api/2.0/backup/getbackupscount | Get the number of backups
-[**GetBackupsCounts**](BackupAPI.md#GetBackupsCounts) | **Get** /api/2.0/backup/getbackupscountbypaid | Get the number of free and paid backups
-[**GetBackupsServiceState**](BackupAPI.md#GetBackupsServiceState) | **Get** /api/2.0/backup/getservicestate | Get the backup service state
+[**GetBackupsCounts**](BackupAPI.md#GetBackupsCounts) | **Get** /api/2.0/backup/getbackupscountbypaid | Get free and paid backup counts
+[**GetBackupsServiceState**](BackupAPI.md#GetBackupsServiceState) | **Get** /api/2.0/backup/getservicestate | Check whether backups are enabled
 [**GetRestoreProgress**](BackupAPI.md#GetRestoreProgress) | **Get** /api/2.0/backup/getrestoreprogress | Get the restoring progress
 [**StartBackup**](BackupAPI.md#StartBackup) | **Post** /api/2.0/backup/startbackup | Start the backup
 [**StartBackupRestore**](BackupAPI.md#StartBackupRestore) | **Post** /api/2.0/backup/startrestore | Start the restoring process
@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 > BooleanWrapper CancelBackup(ctx).Execute()
 
-Cancel current backup
+Cancel the running backup
 
 
 
@@ -175,7 +175,7 @@ import (
 )
 
 func main() {
-	id := "00000000-0000-0000-0000-000000000000" // string | The backup ID.
+	id := "11111111-1111-1111-1111-111111111111" // string | The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -195,7 +195,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The backup ID. | 
+**id** | **string** | The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. | 
 
 ### Other Parameters
 
@@ -247,7 +247,7 @@ import (
 )
 
 func main() {
-	dump := true // bool | Specifies if a dump will be created or not. (optional)
+	dump := false // bool | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -272,7 +272,7 @@ Other parameters are passed through a pointer to a apiDeleteBackupHistoryRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dump** | **bool** | Specifies if a dump will be created or not. | 
+ **dump** | **bool** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | 
 
 ### Return type
 
@@ -315,7 +315,7 @@ import (
 )
 
 func main() {
-	dump := true // bool | Specifies if a dump will be created or not. (optional)
+	dump := false // bool | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -340,7 +340,7 @@ Other parameters are passed through a pointer to a apiDeleteBackupScheduleReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dump** | **bool** | Specifies if a dump will be created or not. | 
+ **dump** | **bool** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | 
 
 ### Return type
 
@@ -383,7 +383,7 @@ import (
 )
 
 func main() {
-	dump := true // bool | Specifies if a dump will be created or not. (optional)
+	dump := false // bool | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -408,7 +408,7 @@ Other parameters are passed through a pointer to a apiGetBackupHistoryRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dump** | **bool** | Specifies if a dump will be created or not. | 
+ **dump** | **bool** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | 
 
 ### Return type
 
@@ -451,7 +451,7 @@ import (
 )
 
 func main() {
-	dump := true // bool | Specifies if a dump will be created or not. (optional)
+	dump := false // bool | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -476,7 +476,7 @@ Other parameters are passed through a pointer to a apiGetBackupProgressRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dump** | **bool** | Specifies if a dump will be created or not. | 
+ **dump** | **bool** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | 
 
 ### Return type
 
@@ -519,7 +519,7 @@ import (
 )
 
 func main() {
-	dump := true // bool | Specifies if a dump will be created or not. (optional)
+	dump := false // bool | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -544,7 +544,7 @@ Other parameters are passed through a pointer to a apiGetBackupScheduleRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dump** | **bool** | Specifies if a dump will be created or not. | 
+ **dump** | **bool** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | 
 
 ### Return type
 
@@ -588,9 +588,9 @@ import (
 )
 
 func main() {
-	from := time.Now() // time.Time | The from date. (optional)
-	to := time.Now() // time.Time | The to date. (optional)
-	paid := false // bool | Specifies if the backups are paid or not. (optional)
+	from := time.Now() // time.Time | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. (optional)
+	to := time.Now() // time.Time | The end of the period, in UTC and inclusive. It defaults to the moment of the call. (optional)
+	paid := false // bool | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -615,9 +615,9 @@ Other parameters are passed through a pointer to a apiGetBackupsCountRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **from** | **time.Time** | The from date. | 
- **to** | **time.Time** | The to date. | 
- **paid** | **bool** | Specifies if the backups are paid or not. | 
+ **from** | **time.Time** | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. | 
+ **to** | **time.Time** | The end of the period, in UTC and inclusive. It defaults to the moment of the call. | 
+ **paid** | **bool** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. | 
 
 ### Return type
 
@@ -641,7 +641,7 @@ Name | Type | Description  | Notes
 
 > BackupsCountResultWrapper GetBackupsCounts(ctx).From(from).To(to).Paid(paid).Execute()
 
-Get the number of free and paid backups
+Get free and paid backup counts
 
 
 
@@ -661,9 +661,9 @@ import (
 )
 
 func main() {
-	from := time.Now() // time.Time | The from date. (optional)
-	to := time.Now() // time.Time | The to date. (optional)
-	paid := false // bool | Specifies if the backups are paid or not. (optional)
+	from := time.Now() // time.Time | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. (optional)
+	to := time.Now() // time.Time | The end of the period, in UTC and inclusive. It defaults to the moment of the call. (optional)
+	paid := false // bool | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -688,9 +688,9 @@ Other parameters are passed through a pointer to a apiGetBackupsCountsRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **from** | **time.Time** | The from date. | 
- **to** | **time.Time** | The to date. | 
- **paid** | **bool** | Specifies if the backups are paid or not. | 
+ **from** | **time.Time** | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. | 
+ **to** | **time.Time** | The end of the period, in UTC and inclusive. It defaults to the moment of the call. | 
+ **paid** | **bool** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. | 
 
 ### Return type
 
@@ -714,7 +714,7 @@ Name | Type | Description  | Notes
 
 > BackupServiceStateWrapper GetBackupsServiceState(ctx).Execute()
 
-Get the backup service state
+Check whether backups are enabled
 
 
 
@@ -796,7 +796,7 @@ import (
 )
 
 func main() {
-	dump := false // bool | Specifies if a dump will be created or not. (optional)
+	dump := false // bool | Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -821,7 +821,7 @@ Other parameters are passed through a pointer to a apiGetRestoreProgressRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dump** | **bool** | Specifies if a dump will be created or not. | 
+ **dump** | **bool** | Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false. | 
 
 ### Return type
 
@@ -829,7 +829,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -932,7 +932,7 @@ import (
 )
 
 func main() {
-	backupRestoreDto := *openapiclient.NewBackupRestoreDto("00000000-0000-0000-0000-000000000000") // BackupRestoreDto |  (optional)
+	backupRestoreDto := *openapiclient.NewBackupRestoreDto("11111111-1111-1111-1111-111111111111") // BackupRestoreDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

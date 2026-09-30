@@ -4,10 +4,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetThirdPartyAuthProviders**](PeopleThirdPartyAccountsAPI.md#GetThirdPartyAuthProviders) | **Get** /api/2.0/people/thirdparty/providers | Get third-party accounts
-[**LinkThirdPartyAccount**](PeopleThirdPartyAccountsAPI.md#LinkThirdPartyAccount) | **Put** /api/2.0/people/thirdparty/linkaccount | Link a third-pary account
-[**SignupThirdPartyAccount**](PeopleThirdPartyAccountsAPI.md#SignupThirdPartyAccount) | **Post** /api/2.0/people/thirdparty/signup | Create a third-pary account
-[**UnlinkThirdPartyAccount**](PeopleThirdPartyAccountsAPI.md#UnlinkThirdPartyAccount) | **Delete** /api/2.0/people/thirdparty/unlinkaccount | Unlink a third-pary account
+[**GetThirdPartyAuthProviders**](PeopleThirdPartyAccountsAPI.md#GetThirdPartyAuthProviders) | **Get** /api/2.0/people/thirdparty/providers | Get third-party providers
+[**LinkThirdPartyAccount**](PeopleThirdPartyAccountsAPI.md#LinkThirdPartyAccount) | **Put** /api/2.0/people/thirdparty/linkaccount | Link a third-party account
+[**SignupThirdPartyAccount**](PeopleThirdPartyAccountsAPI.md#SignupThirdPartyAccount) | **Post** /api/2.0/people/thirdparty/signup | Sign up with a provider
+[**UnlinkThirdPartyAccount**](PeopleThirdPartyAccountsAPI.md#UnlinkThirdPartyAccount) | **Delete** /api/2.0/people/thirdparty/unlinkaccount | Unlink a third-party account
 
 
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 > AccountInfoArrayWrapper GetThirdPartyAuthProviders(ctx).InviteView(inviteView).SettingsView(settingsView).ClientCallback(clientCallback).FromOnly(fromOnly).Execute()
 
-Get third-party accounts
+Get third-party providers
 
 
 
@@ -34,10 +34,10 @@ import (
 )
 
 func main() {
-	inviteView := false // bool | Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers. (optional)
-	settingsView := false // bool | Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false). (optional)
-	clientCallback := "onAuthCallback" // string | The method that is called after authentication. (optional)
-	fromOnly := "Google" // string | The provider name if a response is required only from this provider. (optional)
+	inviteView := false // bool | Set it to true when the list is rendered on an invitation page: the providers that cannot be used to accept an  invitation, `twitter` and `appleid`, are then left out. It defaults to false, which returns every enabled  provider. (optional)
+	settingsView := false // bool | Set it to true when the list is rendered on a settings page, to get login URLs that open in a popup window.  With the default false the URL still opens in a popup for a desktop browser, and switches to a redirect only  for a mobile browser or for the DocSpace desktop application. (optional)
+	clientCallback := "onAuthCallback" // string | The name of the client-side function the popup calls back when the provider authorization finishes. It is  placed into the returned URLs as they are, and it is only used by the popup mode. (optional)
+	fromOnly := "google" // string | Keeps only the named provider, compared case-insensitively against the lowercase provider names such as  `google` or `microsoft`; the special value `openid` selects `google`. Omit it to get every enabled provider. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -62,10 +62,10 @@ Other parameters are passed through a pointer to a apiGetThirdPartyAuthProviders
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **inviteView** | **bool** | Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers. | 
- **settingsView** | **bool** | Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false). | 
- **clientCallback** | **string** | The method that is called after authentication. | 
- **fromOnly** | **string** | The provider name if a response is required only from this provider. | 
+ **inviteView** | **bool** | Set it to true when the list is rendered on an invitation page: the providers that cannot be used to accept an  invitation, `twitter` and `appleid`, are then left out. It defaults to false, which returns every enabled  provider. | 
+ **settingsView** | **bool** | Set it to true when the list is rendered on a settings page, to get login URLs that open in a popup window.  With the default false the URL still opens in a popup for a desktop browser, and switches to a redirect only  for a mobile browser or for the DocSpace desktop application. | 
+ **clientCallback** | **string** | The name of the client-side function the popup calls back when the provider authorization finishes. It is  placed into the returned URLs as they are, and it is only used by the popup mode. | 
+ **fromOnly** | **string** | Keeps only the named provider, compared case-insensitively against the lowercase provider names such as  `google` or `microsoft`; the special value `openid` selects `google`. Omit it to get every enabled provider. | 
 
 ### Return type
 
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -89,7 +89,7 @@ No authorization required
 
 > LinkThirdPartyAccount(ctx).LinkAccountRequestDto(linkAccountRequestDto).Execute()
 
-Link a third-pary account
+Link a third-party account
 
 
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 > EmployeeWrapper SignupThirdPartyAccount(ctx).SignupAccountRequestDto(signupAccountRequestDto).Execute()
 
-Create a third-pary account
+Sign up with a provider
 
 
 
@@ -174,7 +174,7 @@ import (
 )
 
 func main() {
-	signupAccountRequestDto := *openapiclient.NewSignupAccountRequestDto("invite_key_123456", "{\"provider\":\"Google\",\"id\":\"123456\"}") // SignupAccountRequestDto |  (optional)
+	signupAccountRequestDto := *openapiclient.NewSignupAccountRequestDto("invite_key_123456", "{\"provider\":\"google\",\"id\":\"123456\"}") // SignupAccountRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -223,7 +223,7 @@ No authorization required
 
 > UnlinkThirdPartyAccount(ctx).Provider(provider).Execute()
 
-Unlink a third-pary account
+Unlink a third-party account
 
 
 
@@ -242,7 +242,7 @@ import (
 )
 
 func main() {
-	provider := "Google" // string | The provider name. (optional)
+	provider := "google" // string | The name of the provider to unlink, in the lowercase form `GET api/2.0/people/thirdparty/providers` returns,  such as `google` or `microsoft`. A name that is not linked to the calling profile is accepted and changes  nothing. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -265,7 +265,7 @@ Other parameters are passed through a pointer to a apiUnlinkThirdPartyAccountReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **provider** | **string** | The provider name. | 
+ **provider** | **string** | The name of the provider to unlink, in the lowercase form `GET api/2.0/people/thirdparty/providers` returns,  such as `google` or `microsoft`. A name that is not linked to the calling profile is accepted and changes  nothing. | 
 
 ### Return type
 

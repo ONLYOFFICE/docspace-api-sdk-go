@@ -25,7 +25,7 @@ var _ MappedNullable = &SetManagerRequest{}
 
 // SetManagerRequest The request for setting a group manager.
 type SetManagerRequest struct {
-	// The user ID.
+	// The account to make the manager. It has to exist, otherwise the operation answers 404, and it is added to the  group at the same time, so it does not have to be a member beforehand.
 	UserId string `json:"userId"`
 }
 

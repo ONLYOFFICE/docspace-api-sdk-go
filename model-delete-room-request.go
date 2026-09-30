@@ -21,9 +21,9 @@ import (
 // checks if the DeleteRoomRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeleteRoomRequest{}
 
-// DeleteRoomRequest The parameters for deleting a room.
+// DeleteRoomRequest The body of a room deletion request.
 type DeleteRoomRequest struct {
-	// Specifies whether to delete a room after the editing session is finished or not.
+	// Carried by the contract but not acted upon: the deletion behaves the same either way, and the record of the  finished job is kept until it is read once.
 	DeleteAfter *bool `json:"deleteAfter,omitempty"`
 }
 

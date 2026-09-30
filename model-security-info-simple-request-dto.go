@@ -21,13 +21,13 @@ import (
 // checks if the SecurityInfoSimpleRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SecurityInfoSimpleRequestDto{}
 
-// SecurityInfoSimpleRequestDto The parameters of the security information request.
+// SecurityInfoSimpleRequestDto The rights to apply to a single file or folder, and how to announce them.
 type SecurityInfoSimpleRequestDto struct {
-	// The collection of sharing parameters.
+	// One record per account or group whose rights are being set, each naming the subject and the level it gets; a  level of `None` takes the access away. An empty collection makes the call change nothing.
 	Share []FileShareParams `json:"share,omitempty"`
-	// Specifies whether to notify users about the shared file or not.
+	// Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone.
 	Notify *bool `json:"notify,omitempty"`
-	// The message to send when notifying about the shared file.
+	// The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives.
 	SharingMessage NullableString `json:"sharingMessage,omitempty"`
 }
 

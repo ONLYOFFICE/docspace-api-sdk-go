@@ -5,10 +5,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateApiKey**](ApiKeysAPI.md#CreateApiKey) | **Post** /api/2.0/keys | Create a user API key
-[**DeleteApiKey**](ApiKeysAPI.md#DeleteApiKey) | **Delete** /api/2.0/keys/{keyId} | Delete a user API key
+[**DeleteApiKey**](ApiKeysAPI.md#DeleteApiKey) | **Delete** /api/2.0/keys/{keyId} | Delete an API key
 [**GetAllPermissions**](ApiKeysAPI.md#GetAllPermissions) | **Get** /api/2.0/keys/permissions | Get API key permissions
-[**GetApiKey**](ApiKeysAPI.md#GetApiKey) | **Get** /api/2.0/keys/@self | Get current user's API key
-[**GetApiKeys**](ApiKeysAPI.md#GetApiKeys) | **Get** /api/2.0/keys | Get current user's API keys
+[**GetApiKey**](ApiKeysAPI.md#GetApiKey) | **Get** /api/2.0/keys/@self | Get the current API key
+[**GetApiKeys**](ApiKeysAPI.md#GetApiKeys) | **Get** /api/2.0/keys | Get the API keys
 [**UpdateApiKey**](ApiKeysAPI.md#UpdateApiKey) | **Put** /api/2.0/keys/{keyId} | Update an API key
 
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper DeleteApiKey(ctx, keyId).Execute()
 
-Delete a user API key
+Delete an API key
 
 
 
@@ -104,7 +104,7 @@ import (
 )
 
 func main() {
-	keyId := "00000000-0000-0000-0000-000000000000" // string | The API key ID.
+	keyId := "00000000-0000-0000-0000-000000000000" // string | The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -124,7 +124,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**keyId** | **string** | The API key ID. | 
+**keyId** | **string** | The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. | 
 
 ### Other Parameters
 
@@ -220,7 +220,7 @@ Other parameters are passed through a pointer to a apiGetAllPermissionsRequest s
 
 > ApiKeyResponseWrapper GetApiKey(ctx).Execute()
 
-Get current user's API key
+Get the current API key
 
 
 
@@ -283,7 +283,7 @@ Other parameters are passed through a pointer to a apiGetApiKeyRequest struct vi
 
 > ApiKeyResponseArrayWrapper GetApiKeys(ctx).Execute()
 
-Get current user's API keys
+Get the API keys
 
 
 
@@ -365,8 +365,8 @@ import (
 )
 
 func main() {
-	keyId := "00000000-0000-0000-0000-000000000000" // string | The unique identifier of the API key to update.
-	updateApiKeyRequest := *openapiclient.NewUpdateApiKeyRequest() // UpdateApiKeyRequest | The request parameters for updating an existing API key.
+	keyId := "00000000-0000-0000-0000-000000000000" // string | The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.
+	updateApiKeyRequest := *openapiclient.NewUpdateApiKeyRequest() // UpdateApiKeyRequest | The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -386,7 +386,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**keyId** | **string** | The unique identifier of the API key to update. | 
+**keyId** | **string** | The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. | 
 
 ### Other Parameters
 
@@ -396,7 +396,7 @@ Other parameters are passed through a pointer to a apiUpdateApiKeyRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateApiKeyRequest** | [**UpdateApiKeyRequest**](UpdateApiKeyRequest.md) | The request parameters for updating an existing API key. | 
+ **updateApiKeyRequest** | [**UpdateApiKeyRequest**](UpdateApiKeyRequest.md) | The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. | 
 
 ### Return type
 

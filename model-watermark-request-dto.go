@@ -21,23 +21,23 @@ import (
 // checks if the WatermarkRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WatermarkRequestDto{}
 
-// WatermarkRequestDto The request parameters for adding watermarks.
+// WatermarkRequestDto The watermark drawn over the documents of a room.
 type WatermarkRequestDto struct {
-	// Specifies whether watermarks are on or off.
+	// Whether the room draws a watermark at all. Sending the object with this turned off removes the watermark the  room has, and the rest of the fields are then irrelevant.
 	Enabled NullableBool `json:"enabled,omitempty"`
-	// Specifies whether to display the following addditional information or not: username, user email, user IP address, current date and room name.
+	// Which details of the reader and of the room are stamped into the watermark alongside the text. The values  combine, so several of them can be added together to stamp more than one.
 	Additions *WatermarkAdditions `json:"additions,omitempty"`
-	// The watermark text.
+	// The fixed line drawn over the document, shown before the details selected alongside it. It is the whole  watermark when no details are added.
 	Text NullableString `json:"text,omitempty"`
-	// The watermark text and image rotate angle.
+	// How far the watermark is turned, in degrees, with negative values turning it anticlockwise. Zero draws it  horizontally across the page.
 	Rotate *int32 `json:"rotate,omitempty"`
-	// The watermark image scale.
+	// How large the watermark image is drawn, as a percentage of its own size. It applies to the image form of the  watermark only.
 	ImageScale *int32 `json:"imageScale,omitempty"`
-	// The path to the temporary image file.
+	// The picture to use instead of a text watermark, named by the path that `POST api/2.0/files/logos` returned for  an image uploaded beforehand. The portal copies it into the room when the setting is saved.
 	ImageUrl NullableString `json:"imageUrl,omitempty"`
-	// The watermark image height.
+	// The height the watermark image is drawn with, in pixels, used together with the width to keep its proportions.
 	ImageHeight *float64 `json:"imageHeight,omitempty"`
-	// The watermark image width.
+	// The width the watermark image is drawn with, in pixels, used together with the height to keep its proportions.
 	ImageWidth *float64 `json:"imageWidth,omitempty"`
 }
 

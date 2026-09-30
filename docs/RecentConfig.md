@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Folder** | Pointer to **NullableString** | The folder where the document is stored. | [optional] 
-**Title** | Pointer to **NullableString** | The document title that will be displayed in the Open Recent... menu option. | [optional] 
-**Url** | Pointer to **NullableString** | The absolute URL to the document where it is stored. | [optional] 
+**Folder** | Pointer to **NullableString** | The folder shown next to the entry, as a readable name rather than an id. | [optional] 
+**Title** | Pointer to **NullableString** | The name shown for the entry. | [optional] 
+**Url** | Pointer to **NullableString** | Where the entry opens. | [optional] 
 
 ## Methods
 

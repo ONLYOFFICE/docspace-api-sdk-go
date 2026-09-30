@@ -4,15 +4,15 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetThirdPartyCode**](ThirdPartyAPI.md#GetThirdPartyCode) | **Get** /api/2.0/thirdparty/{provider} | Get the code request
+[**GetThirdPartyCode**](ThirdPartyAPI.md#GetThirdPartyCode) | **Get** /api/2.0/thirdparty/{provider} | Get provider consent URL
 
 
 
 ## GetThirdPartyCode
 
-> ObjectWrapper GetThirdPartyCode(ctx, provider).Execute()
+> StringWrapper GetThirdPartyCode(ctx, provider).Execute()
 
-Get the code request
+Get provider consent URL
 
 
 
@@ -31,7 +31,7 @@ import (
 )
 
 func main() {
-	provider := openapiclient.LoginProvider(0) // LoginProvider | The identity provider used for authentication.
+	provider := openapiclient.LoginProvider(0) // LoginProvider | The provider whose consent screen is wanted. Only Google, Dropbox, Docusign, Box, OneDrive, Wordpress and  Github produce a URL; any other provider is answered with 200 and no URL rather than an error. The provider  credentials have to be saved with `POST api/2.0/settings/authservice` first, or the URL comes back without a  client identifier and the provider refuses it.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -40,7 +40,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ThirdPartyAPI.GetThirdPartyCode``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetThirdPartyCode`: ObjectWrapper
+	// response from `GetThirdPartyCode`: StringWrapper
 	fmt.Fprintf(os.Stdout, "Response from `ThirdPartyAPI.GetThirdPartyCode`: %v\n", resp)
 }
 ```
@@ -51,7 +51,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**provider** | [**LoginProvider**](.md) | The identity provider used for authentication. | 
+**provider** | [**LoginProvider**](.md) | The provider whose consent screen is wanted. Only Google, Dropbox, Docusign, Box, OneDrive, Wordpress and  Github produce a URL; any other provider is answered with 200 and no URL rather than an error. The provider  credentials have to be saved with `POST api/2.0/settings/authservice` first, or the URL comes back without a  client identifier and the provider refuses it. | 
 
 ### Other Parameters
 
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**StringWrapper**](StringWrapper.md)
 
 ### Authorization
 

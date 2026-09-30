@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Tools** | Pointer to [**[]AiTMCPItem**](AiTMCPItem.md) | Extra tools offered to the model for this request. | [optional] 
-**IsReasoning** | Pointer to **bool** | Enable extended thinking / reasoning for this request. | [optional] 
+**IsReasoning** | Pointer to **bool** | Legacy extended-thinking switch; stands for `medium`. `reasoningLevel` wins when both are set. | [optional] 
+**ReasoningLevel** | Pointer to [**AiAiReasoningLevel**](AiAiReasoningLevel.md) | Depth of extended thinking for the round; providers clamp it to what the model accepts. | [optional] 
 **Prompt** | Pointer to [**AiAiActionArgsPrompt**](AiAiActionArgsPrompt.md) |  | [optional] 
 
 ## Methods
@@ -76,6 +77,31 @@ SetIsReasoning sets IsReasoning field to given value.
 `func (o *AiAiActionArgs) HasIsReasoning() bool`
 
 HasIsReasoning returns a boolean if a field has been set.
+
+### GetReasoningLevel
+
+`func (o *AiAiActionArgs) GetReasoningLevel() AiAiReasoningLevel`
+
+GetReasoningLevel returns the ReasoningLevel field if non-nil, zero value otherwise.
+
+### GetReasoningLevelOk
+
+`func (o *AiAiActionArgs) GetReasoningLevelOk() (*AiAiReasoningLevel, bool)`
+
+GetReasoningLevelOk returns a tuple with the ReasoningLevel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasoningLevel
+
+`func (o *AiAiActionArgs) SetReasoningLevel(v AiAiReasoningLevel)`
+
+SetReasoningLevel sets ReasoningLevel field to given value.
+
+### HasReasoningLevel
+
+`func (o *AiAiActionArgs) HasReasoningLevel() bool`
+
+HasReasoningLevel returns a boolean if a field has been set.
 
 ### GetPrompt
 

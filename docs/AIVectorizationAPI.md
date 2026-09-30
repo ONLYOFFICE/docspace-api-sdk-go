@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## AiVectorizationStartTask
 
-> AiSuccessResponse AiVectorizationStartTask(ctx).RequestBody(requestBody).Execute()
+> AiVectorizationStartTask200Response AiVectorizationStartTask(ctx).AiVectorizationStartTaskRequest(aiVectorizationStartTaskRequest).Execute()
 
 Start a vectorization task
 
@@ -31,16 +31,16 @@ import (
 )
 
 func main() {
-	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
+	aiVectorizationStartTaskRequest := *openapiclient.NewAiVectorizationStartTaskRequest([]int32{int32(123)}) // AiVectorizationStartTaskRequest | The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIVectorizationAPI.AiVectorizationStartTask(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AIVectorizationAPI.AiVectorizationStartTask(context.Background()).AiVectorizationStartTaskRequest(aiVectorizationStartTaskRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIVectorizationAPI.AiVectorizationStartTask``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiVectorizationStartTask`: AiSuccessResponse
+	// response from `AiVectorizationStartTask`: AiVectorizationStartTask200Response
 	fmt.Fprintf(os.Stdout, "Response from `AIVectorizationAPI.AiVectorizationStartTask`: %v\n", resp)
 }
 ```
@@ -56,15 +56,15 @@ Other parameters are passed through a pointer to a apiAiVectorizationStartTaskRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]interface{}** |  | 
+ **aiVectorizationStartTaskRequest** | [**AiVectorizationStartTaskRequest**](AiVectorizationStartTaskRequest.md) | The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape. | 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**AiVectorizationStartTask200Response**](AiVectorizationStartTask200Response.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

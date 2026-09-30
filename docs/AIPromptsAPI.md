@@ -4,19 +4,19 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AiPromptsCreate**](AIPromptsAPI.md#AiPromptsCreate) | **Post** /api/2.0/ai/prompts/create | Create
+[**AiPromptsCreate**](AIPromptsAPI.md#AiPromptsCreate) | **Post** /api/2.0/ai/prompts/create | Save a prompt
 [**AiPromptsCreateFolder**](AIPromptsAPI.md#AiPromptsCreateFolder) | **Post** /api/2.0/ai/prompts/create-folder | Create folder
-[**AiPromptsDelete**](AIPromptsAPI.md#AiPromptsDelete) | **Delete** /api/2.0/ai/prompts/delete | Delete
+[**AiPromptsDelete**](AIPromptsAPI.md#AiPromptsDelete) | **Delete** /api/2.0/ai/prompts/delete | Delete a saved prompt
 [**AiPromptsDeleteFolder**](AIPromptsAPI.md#AiPromptsDeleteFolder) | **Delete** /api/2.0/ai/prompts/delete-folder | Delete folder
-[**AiPromptsExport**](AIPromptsAPI.md#AiPromptsExport) | **Get** /api/2.0/ai/prompts/export | Export
-[**AiPromptsGetById**](AIPromptsAPI.md#AiPromptsGetById) | **Get** /api/2.0/ai/prompts/get-by-id | Get by id
-[**AiPromptsGetFolderById**](AIPromptsAPI.md#AiPromptsGetFolderById) | **Get** /api/2.0/ai/prompts/get-folder-by-id | Get folder by id
+[**AiPromptsExport**](AIPromptsAPI.md#AiPromptsExport) | **Get** /api/2.0/ai/prompts/export | Export the prompt library
+[**AiPromptsGetById**](AIPromptsAPI.md#AiPromptsGetById) | **Get** /api/2.0/ai/prompts/get-by-id | Get a saved prompt
+[**AiPromptsGetFolderById**](AIPromptsAPI.md#AiPromptsGetFolderById) | **Get** /api/2.0/ai/prompts/get-folder-by-id | Get a prompt folder
 [**AiPromptsImportBundle**](AIPromptsAPI.md#AiPromptsImportBundle) | **Post** /api/2.0/ai/prompts/import-bundle | Import bundle
-[**AiPromptsList**](AIPromptsAPI.md#AiPromptsList) | **Get** /api/2.0/ai/prompts/list | List
+[**AiPromptsList**](AIPromptsAPI.md#AiPromptsList) | **Get** /api/2.0/ai/prompts/list | List saved prompts
 [**AiPromptsListFolders**](AIPromptsAPI.md#AiPromptsListFolders) | **Get** /api/2.0/ai/prompts/list-folders | List folders
-[**AiPromptsMove**](AIPromptsAPI.md#AiPromptsMove) | **Put** /api/2.0/ai/prompts/move | Move
+[**AiPromptsMove**](AIPromptsAPI.md#AiPromptsMove) | **Put** /api/2.0/ai/prompts/move | Move a prompt to a folder
 [**AiPromptsRenameFolder**](AIPromptsAPI.md#AiPromptsRenameFolder) | **Put** /api/2.0/ai/prompts/rename-folder | Rename folder
-[**AiPromptsUpdate**](AIPromptsAPI.md#AiPromptsUpdate) | **Put** /api/2.0/ai/prompts/update | Update
+[**AiPromptsUpdate**](AIPromptsAPI.md#AiPromptsUpdate) | **Put** /api/2.0/ai/prompts/update | Update a saved prompt
 
 
 
@@ -24,7 +24,7 @@ Method | HTTP request | Description
 
 > AiPromptMutationResult AiPromptsCreate(ctx).AiCreatePromptInput(aiCreatePromptInput).Execute()
 
-Create
+Save a prompt
 
 
 
@@ -43,7 +43,7 @@ import (
 )
 
 func main() {
-	aiCreatePromptInput := *openapiclient.NewAiCreatePromptInput("Name_example", "Text_example") // AiCreatePromptInput | 
+	aiCreatePromptInput := *openapiclient.NewAiCreatePromptInput("Contract summary", "Summarise the key obligations and dates in the attached contract.") // AiCreatePromptInput | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -111,7 +111,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | The name of the folder to create, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -136,7 +136,7 @@ Other parameters are passed through a pointer to a apiAiPromptsCreateFolderReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | The name of the folder to create, as a bare JSON string. | 
 
 ### Return type
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -160,7 +160,7 @@ No authorization required
 
 > AiSuccessResponse AiPromptsDelete(ctx).Body(body).Execute()
 
-Delete
+Delete a saved prompt
 
 
 
@@ -179,7 +179,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | The ID of the prompt to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -204,7 +204,7 @@ Other parameters are passed through a pointer to a apiAiPromptsDeleteRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | The ID of the prompt to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -247,7 +247,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | The ID of the folder to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -272,7 +272,7 @@ Other parameters are passed through a pointer to a apiAiPromptsDeleteFolderReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | The ID of the folder to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -280,7 +280,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -296,7 +296,7 @@ No authorization required
 
 > AiPromptBundle AiPromptsExport(ctx).Execute()
 
-Export
+Export the prompt library
 
 
 
@@ -343,7 +343,7 @@ Other parameters are passed through a pointer to a apiAiPromptsExportRequest str
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -359,7 +359,7 @@ No authorization required
 
 > AiPrompt AiPromptsGetById(ctx).Id(id).Execute()
 
-Get by id
+Get a saved prompt
 
 
 
@@ -378,7 +378,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | The saved prompt identifier.
+	id := "33333333-3333-3333-3333-333333333333" // string | The saved prompt identifier.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -411,7 +411,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -427,7 +427,7 @@ No authorization required
 
 > AiPromptFolder AiPromptsGetFolderById(ctx).Id(id).Execute()
 
-Get folder by id
+Get a prompt folder
 
 
 
@@ -446,7 +446,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | The prompt folder identifier.
+	id := "44444444-4444-4444-4444-444444444444" // string | The prompt folder identifier.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -479,7 +479,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -514,7 +514,7 @@ import (
 )
 
 func main() {
-	aiPromptsImportBundleRequest := *openapiclient.NewAiPromptsImportBundleRequest(*openapiclient.NewAiPromptBundle(float32(123), []openapiclient.AiPromptFolder{*openapiclient.NewAiPromptFolder("Id_example", "Name_example", float32(123), float32(123))}, []openapiclient.AiPrompt{*openapiclient.NewAiPrompt("Id_example", "Name_example", "Text_example", float32(123), float32(123))})) // AiPromptsImportBundleRequest | 
+	aiPromptsImportBundleRequest := *openapiclient.NewAiPromptsImportBundleRequest(*openapiclient.NewAiPromptBundle(float32(1), []openapiclient.AiPromptFolder{*openapiclient.NewAiPromptFolder("44444444-4444-4444-4444-444444444444", "Contract review", float32(1767225600000), float32(1767225600000))}, []openapiclient.AiPrompt{*openapiclient.NewAiPrompt("33333333-3333-3333-3333-333333333333", "Contract summary", "Summarise the key obligations and dates in the attached contract.", float32(1767225600000), float32(1767225600000))})) // AiPromptsImportBundleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -547,7 +547,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -563,7 +563,7 @@ No authorization required
 
 > []AiPrompt AiPromptsList(ctx).FolderId(folderId).Execute()
 
-List
+List saved prompts
 
 
 
@@ -582,7 +582,7 @@ import (
 )
 
 func main() {
-	folderId := "folderId_example" // string | The prompt folder identifier. Omit to list the prompts that sit outside any folder. (optional)
+	folderId := "44444444-4444-4444-4444-444444444444" // string | The prompt folder identifier. Omit to list the prompts that sit outside any folder. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -615,7 +615,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -678,7 +678,7 @@ Other parameters are passed through a pointer to a apiAiPromptsListFoldersReques
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -694,7 +694,7 @@ No authorization required
 
 > AiPromptMutationResult AiPromptsMove(ctx).AiPromptsMoveRequest(aiPromptsMoveRequest).Execute()
 
-Move
+Move a prompt to a folder
 
 
 
@@ -746,7 +746,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -814,7 +814,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -830,7 +830,7 @@ No authorization required
 
 > AiPromptMutationResult AiPromptsUpdate(ctx).AiPromptsUpdateRequest(aiPromptsUpdateRequest).Execute()
 
-Update
+Update a saved prompt
 
 
 
@@ -882,7 +882,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

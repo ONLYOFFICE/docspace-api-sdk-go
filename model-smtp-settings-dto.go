@@ -21,27 +21,27 @@ import (
 // checks if the SmtpSettingsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SmtpSettingsDto{}
 
-// SmtpSettingsDto The SMTP settings parameters.
+// SmtpSettingsDto The mail server the portal sends its letters through.
 type SmtpSettingsDto struct {
-	// The SMTP host.
+	// The host name or address of the mail server. On a cloud portal that has saved no relay of its own every  field of this object comes back empty, because the installation's own server is not disclosed - only  `isDefaultSettings` is set there.
 	Host NullableString `json:"host,omitempty"`
-	// The SMTP port.
+	// The port the mail server is reached on - conventionally 25 or 587 without encryption from the start, 465  with it. It is empty when no port was stored, in which case the portal falls back to its own default.
 	Port NullableInt32 `json:"port,omitempty"`
-	// The sender address.
+	// The address the letters are sent from, which appears in the From header and is what a reply goes to.
 	SenderAddress NullableString `json:"senderAddress,omitempty"`
-	// The sender display name.
+	// The name shown beside that address in a recipient's mailbox.
 	SenderDisplayName NullableString `json:"senderDisplayName,omitempty"`
-	// The credentials username.
+	// The account the portal signs in to the mail server as, meaningful only while `enableAuth` is `true`.
 	CredentialsUserName NullableString `json:"credentialsUserName,omitempty"`
-	// The credentials user password.
+	// Always empty here: the stored password is never returned, so a client that sends these settings back has  to supply it again rather than echoing what it read.
 	CredentialsUserPassword NullableString `json:"credentialsUserPassword,omitempty"`
-	// Specifies whether the SSL is enabled or not.
+	// Whether the connection to the mail server is encrypted.
 	EnableSSL *bool `json:"enableSSL,omitempty"`
-	// Specifies whether the authentication is enabled or not.
+	// Whether the portal signs in to the mail server at all. While it is `false` the credentials above are  ignored and the server is expected to accept mail unauthenticated.
 	EnableAuth *bool `json:"enableAuth,omitempty"`
-	// Specifies whether to use NTLM or not.
+	// Always `false` here: the flag is accepted when settings are saved but is not stored, so it never comes  back set and says nothing about how the portal authenticates.
 	UseNtlm *bool `json:"useNtlm,omitempty"`
-	// Specifies if the current settings are default or not.
+	// Whether the portal is still on the mail configuration of the installation rather than on a relay of its  own. `DELETE api/2.0/smtpsettings/smtp` puts it back to `true`, and while it is `true` on a cloud portal  the fields above are blank rather than showing the installation's server.
 	IsDefaultSettings *bool `json:"isDefaultSettings,omitempty"`
 }
 

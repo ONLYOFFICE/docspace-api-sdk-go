@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ProviderType** | [**AiProviderType**](AiProviderType.md) | Provider whose catalog to list. | 
 **BaseUrl** | **string** | Provider API base URL. | 
-**ApiKey** | **string** | Provider API key. | 
+**ApiKey** | Pointer to **string** | Provider API key. Omit it for a provider that needs none; the request is then made without one. | [optional] 
 
 ## Methods
 
 ### NewAiProfilesListProviderModelsRequest
 
-`func NewAiProfilesListProviderModelsRequest(providerType AiProviderType, baseUrl string, apiKey string, ) *AiProfilesListProviderModelsRequest`
+`func NewAiProfilesListProviderModelsRequest(providerType AiProviderType, baseUrl string, ) *AiProfilesListProviderModelsRequest`
 
 NewAiProfilesListProviderModelsRequest instantiates a new AiProfilesListProviderModelsRequest object
 This constructor will assign default values to properties that have it defined,
@@ -86,6 +86,11 @@ and a boolean to check if the value has been set.
 
 SetApiKey sets ApiKey field to given value.
 
+### HasApiKey
+
+`func (o *AiProfilesListProviderModelsRequest) HasApiKey() bool`
+
+HasApiKey returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

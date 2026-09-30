@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to **map[string]interface{}** | The paginated modification data. | [optional] 
-**Limit** | Pointer to **int32** | The maximum number of results returned per page. | [optional] 
-**LastModifiedOn** | Pointer to **time.Time** | The date when the user consent was last modified. | [optional] 
+**Data** | Pointer to **interface{}** |  | [optional] 
+**Limit** | Pointer to **int32** | The page size that was applied to this request, between 1 and 50. | [optional] 
+**LastModifiedOn** | Pointer to **time.Time** | The cursor to send back as last_modified_on to ask for the next page. It is null when the page is empty. | [optional] 
 
 ## Methods
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *PageableModificationResponse) GetData() map[string]interface{}`
+`func (o *PageableModificationResponse) GetData() interface{}`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *PageableModificationResponse) GetDataOk() (*map[string]interface{}, bool)`
+`func (o *PageableModificationResponse) GetDataOk() (*interface{}, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *PageableModificationResponse) SetData(v map[string]interface{})`
+`func (o *PageableModificationResponse) SetData(v interface{})`
 
 SetData sets Data field to given value.
 
@@ -52,6 +52,16 @@ SetData sets Data field to given value.
 
 HasData returns a boolean if a field has been set.
 
+### SetDataNil
+
+`func (o *PageableModificationResponse) SetDataNil(b bool)`
+
+ SetDataNil sets the value for Data to be an explicit nil
+
+### UnsetData
+`func (o *PageableModificationResponse) UnsetData()`
+
+UnsetData ensures that no value is present for Data, not even an explicit nil
 ### GetLimit
 
 `func (o *PageableModificationResponse) GetLimit() int32`

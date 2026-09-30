@@ -31,18 +31,19 @@ type ApiAiOpenaiChatCompletionsRequest struct {
 	ctx context.Context
 	ApiService *AIOpenAIPassthroughAPIService
 	profileId string
-	requestBody *map[string]interface{}
+	requestBody *map[string]*interface{}
 }
 
-func (r ApiAiOpenaiChatCompletionsRequest) RequestBody(requestBody map[string]interface{}) ApiAiOpenaiChatCompletionsRequest {	r.requestBody = &requestBody
+// An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here.
+func (r ApiAiOpenaiChatCompletionsRequest) RequestBody(requestBody map[string]*interface{}) ApiAiOpenaiChatCompletionsRequest {	r.requestBody = &requestBody
 	return r
 }
 
-func (r ApiAiOpenaiChatCompletionsRequest) Execute() (*AiSuccessResponse, *http.Response, error) {
+func (r ApiAiOpenaiChatCompletionsRequest) Execute() (map[string]*interface{}, *http.Response, error) {
 	return r.ApiService.AiOpenaiChatCompletionsExecute(r)
 }
 
-// AiOpenaiChatCompletions OpenAI-compatible chat completions proxied to the profile's provider
+// AiOpenaiChatCompletions OpenAI chat completions passthrough
 //
 // OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin's SDK on one end and the provider on the other. A client disconnect cancels the provider call.
 //
@@ -60,13 +61,13 @@ func (a *AIOpenAIPassthroughAPIService) AiOpenaiChatCompletions(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return AiSuccessResponse
-func (a *AIOpenAIPassthroughAPIService) AiOpenaiChatCompletionsExecute(r ApiAiOpenaiChatCompletionsRequest) (*AiSuccessResponse, *http.Response, error) {
+//  @return map[string]*interface{}
+func (a *AIOpenAIPassthroughAPIService) AiOpenaiChatCompletionsExecute(r ApiAiOpenaiChatCompletionsRequest) (map[string]*interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiSuccessResponse
+		localVarReturnValue  map[string]*interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIOpenAIPassthroughAPIService.AiOpenaiChatCompletions")
@@ -134,6 +135,72 @@ func (a *AIOpenAIPassthroughAPIService) AiOpenaiChatCompletionsExecute(r ApiAiOp
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -154,20 +221,21 @@ type ApiAiOpenaiImagesGenerationsRequest struct {
 	ctx context.Context
 	ApiService *AIOpenAIPassthroughAPIService
 	profileId string
-	requestBody *map[string]interface{}
+	requestBody *map[string]*interface{}
 }
 
-func (r ApiAiOpenaiImagesGenerationsRequest) RequestBody(requestBody map[string]interface{}) ApiAiOpenaiImagesGenerationsRequest {	r.requestBody = &requestBody
+// An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path.
+func (r ApiAiOpenaiImagesGenerationsRequest) RequestBody(requestBody map[string]*interface{}) ApiAiOpenaiImagesGenerationsRequest {	r.requestBody = &requestBody
 	return r
 }
 
-func (r ApiAiOpenaiImagesGenerationsRequest) Execute() (*AiSuccessResponse, *http.Response, error) {
+func (r ApiAiOpenaiImagesGenerationsRequest) Execute() (map[string]*interface{}, *http.Response, error) {
 	return r.ApiService.AiOpenaiImagesGenerationsExecute(r)
 }
 
-// AiOpenaiImagesGenerations OpenAI-compatible image generation proxied to the profile's provider
+// AiOpenaiImagesGenerations OpenAI image generation passthrough
 //
-// OpenAI-compatible image generation for the document editor's AI plugin. As with the chat-completions passthrough, the profile's credentials are attached server-side and the body reaches the provider unchanged.
+// OpenAI-compatible image generation for the document editor's AI plugin, working exactly as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider unchanged. The provider's status and body are relayed verbatim, so its 429 and its own error envelope surface as they stand. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-openai-images-generations/
 //
@@ -183,13 +251,13 @@ func (a *AIOpenAIPassthroughAPIService) AiOpenaiImagesGenerations(ctx context.Co
 }
 
 // Execute executes the request
-//  @return AiSuccessResponse
-func (a *AIOpenAIPassthroughAPIService) AiOpenaiImagesGenerationsExecute(r ApiAiOpenaiImagesGenerationsRequest) (*AiSuccessResponse, *http.Response, error) {
+//  @return map[string]*interface{}
+func (a *AIOpenAIPassthroughAPIService) AiOpenaiImagesGenerationsExecute(r ApiAiOpenaiImagesGenerationsRequest) (map[string]*interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiSuccessResponse
+		localVarReturnValue  map[string]*interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIOpenAIPassthroughAPIService.AiOpenaiImagesGenerations")
@@ -250,6 +318,72 @@ func (a *AIOpenAIPassthroughAPIService) AiOpenaiImagesGenerationsExecute(r ApiAi
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v AiOpenaiChatCompletions403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v AiOpenaiChatCompletions403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

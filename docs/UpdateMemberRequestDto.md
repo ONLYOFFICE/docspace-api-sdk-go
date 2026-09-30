@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **NullableString** | The user ID. | [optional] 
-**Disable** | Pointer to **NullableBool** | Specifies whether to disable a user or not. | [optional] 
-**Email** | Pointer to **NullableString** | The user email address. | [optional] 
-**IsUser** | Pointer to **NullableBool** | Specifies if this is a guest or a user. | [optional] 
-**FirstName** | Pointer to **NullableString** | The user first name. | [optional] 
-**LastName** | Pointer to **NullableString** | The user last name. | [optional] 
-**Department** | Pointer to **[]string** | The list of the user departments. | [optional] 
-**Location** | Pointer to **NullableString** | The user location. | [optional] 
-**Comment** | Pointer to **NullableString** | The user comment. | [optional] 
-**Contacts** | Pointer to [**[]Contact**](Contact.md) | The list of the user contacts. | [optional] 
-**Files** | Pointer to **NullableString** | The user avatar photo URL. | [optional] 
-**Spam** | Pointer to **NullableBool** | Specifies if tips, updates and offers are allowed to be sent to the user or not. | [optional] 
+**UserId** | Pointer to **NullableString** | The account the change applies to. It is read from this body by `POST api/2.0/people/email`, while  `PUT api/2.0/people/{userid}` takes the account from the route and ignores this field. | [optional] 
+**Disable** | Pointer to **NullableBool** | Set it to true to give the account the `Terminated` status and end every session it has, and to false to  bring it back. It is applied only when the caller edits somebody else, and omitting it keeps the current  status. | [optional] 
+**Email** | Pointer to **NullableString** | The new email address, up to 255 characters. It is read only by `POST api/2.0/people/email`, which either  mails a confirmation letter or, for an administrator acting on somebody else, applies the address at once;  `PUT api/2.0/people/{userid}` ignores it. | [optional] 
+**IsUser** | Pointer to **NullableBool** | Set it to true to turn the account into a guest and to false to turn it back into a member. Either direction  takes a seat and can answer 402, it is applied only when the caller edits somebody else, and a request to  make the portal owner, a DocSpace administrator or a module administrator a guest is ignored. | [optional] 
+**FirstName** | Pointer to **NullableString** | The new first name, up to 255 characters. It is applied only to the caller's own profile, is left alone on an  LDAP or SSO account, and a pair the portal does not accept as a name answers 400. | [optional] 
+**LastName** | Pointer to **NullableString** | The new last name, up to 255 characters. It is applied only to the caller's own profile, is left alone on an  LDAP or SSO account, and a pair the portal does not accept as a name answers 400. | [optional] 
+**Department** | Pointer to **[]string** | The groups the profile should belong to, by group ID, replacing the current ones. It is applied only to the  caller's own profile. | [optional] 
+**Location** | Pointer to **NullableString** | The new free-text location shown on the profile. It is applied only to the caller's own profile and is left  alone on an LDAP or SSO account. | [optional] 
+**Comment** | Pointer to **NullableString** | The new free-text note kept with the profile. It is applied only to the caller's own profile. | [optional] 
+**Contacts** | Pointer to [**[]Contact**](Contact.md) | The additional ways to reach the person, replacing the current ones. Each entry is a free-text type such as  `email`, `phone`, `skype` or `telegram` and its value, an entry with an empty value is dropped, and the field  is applied only to the caller's own profile. | [optional] 
+**Files** | Pointer to **NullableString** | The address the portal downloads the new avatar from. It is applied only to the caller's own profile, has to  use HTTPS unless the request itself came over HTTP, and passing the address the profile already uses  downloads nothing. | [optional] 
+**Spam** | Pointer to **NullableBool** | Whether the account agrees to receive tips, updates and offers. It is applied only to the caller's own  profile, and omitting it on such a request stores false rather than keeping the current value. | [optional] 
 
 ## Methods
 

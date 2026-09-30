@@ -21,7 +21,7 @@ import (
 // checks if the AiThreadsOpenOrCreateRequestEntityMeta type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiThreadsOpenOrCreateRequestEntityMeta{}
 
-// AiThreadsOpenOrCreateRequestEntityMeta Optional entity hint (lib 0.5.64): only `entityId` is read; the pair is re-resolved server-side before reaching the provider as metadata.
+// AiThreadsOpenOrCreateRequestEntityMeta Optional entity hint (lib 0.5.64): only `entityId` is read; the source (`source_id` / `source_type` / `source_title`) is re-resolved server-side before reaching the provider as metadata.
 type AiThreadsOpenOrCreateRequestEntityMeta struct {
 	EntityId *string `json:"entityId,omitempty"`
 	EntityTitle *string `json:"entityTitle,omitempty"`

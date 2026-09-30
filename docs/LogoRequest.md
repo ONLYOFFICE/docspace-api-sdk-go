@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TmpFile** | **string** | The path to the temporary image file. | 
-**X** | Pointer to **int32** | The X coordinate of the rectangle starting point. | [optional] 
-**Y** | Pointer to **int32** | The Y coordinate of the rectangle starting point. | [optional] 
-**Width** | Pointer to **int32** | The rectangle width. | [optional] 
-**Height** | Pointer to **int32** | The rectangle height. | [optional] 
+**TmpFile** | **string** | The picture to cut the logo out of, named by the path that `POST api/2.0/files/logos` returned for it. The  path may be used once and only by the account that uploaded it. | 
+**X** | Pointer to **int32** | The left edge of the rectangle cut out of the uploaded picture, counted in pixels from its left side. The  picture itself was already scaled down to fit 1280 by 1280 pixels when it was uploaded. | [optional] 
+**Y** | Pointer to **int32** | The top edge of the rectangle cut out of the uploaded picture, counted in pixels from its top. | [optional] 
+**Width** | Pointer to **int32** | How wide a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the height,  and the portal builds the four logo sizes out of the piece. | [optional] 
+**Height** | Pointer to **int32** | How tall a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the width. | [optional] 
 
 ## Methods
 

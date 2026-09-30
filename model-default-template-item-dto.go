@@ -24,19 +24,19 @@ import (
 // checks if the DefaultTemplateItemDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DefaultTemplateItemDto{}
 
-// DefaultTemplateItemDto Default template setting
+// DefaultTemplateItemDto The blank document configured for one extension.
 type DefaultTemplateItemDto struct {
-	// File id to use as a default template
+	// The copy stored in the portal that serves as the blank for this extension. A null means no custom blank has  been chosen and new documents start from the portal's built-in one; the other fields of the entry are then  empty as well.
 	SelectedFile NullableInt32 `json:"selectedFile,omitempty"`
-	// Extension of a default template
+	// The extension the entry describes, in lower case with the leading dot. It is the value to send back when this  blank is replaced or reset.
 	FileExtension NullableString `json:"fileExtension"`
-	// Title of a default template
+	// The name the custom blank was copied under, useful for showing which document was chosen. Empty while the  built-in blank is in use.
 	FileTitle NullableString `json:"fileTitle,omitempty"`
-	// Last modified date of a default template
+	// When the custom blank was last changed, in the time zone of the portal. Null while the built-in blank is in  use.
 	LastModified NullableTime `json:"lastModified,omitempty"`
-	// Filesize (in bytes) of a default template
+	// The size of the custom blank in bytes. Null while the built-in blank is in use.
 	FileSize NullableInt64 `json:"fileSize,omitempty"`
-	// View url of a default template
+	// The address the custom blank can be downloaded from, already carrying the access key of the calling account.  Empty while the built-in blank is in use.
 	ViewUrl NullableString `json:"viewUrl,omitempty"`
 }
 

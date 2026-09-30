@@ -21,9 +21,9 @@ import (
 // checks if the AiChatSettingsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiChatSettingsDto{}
 
-// AiChatSettingsDto The chat settings parameters.
+// AiChatSettingsDto The chat configuration of an AI room.
 type AiChatSettingsDto struct {
-	// The system prompt for the chat.
+	// The instruction put in front of every conversation held in the room, which sets the role the assistant takes  and the way it answers. Empty when the room was left on the behaviour the portal provides by default.
 	Prompt NullableString `json:"prompt,omitempty"`
 }
 

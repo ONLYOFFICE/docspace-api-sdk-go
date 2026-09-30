@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The unique identifier of the shared link. | [optional] 
-**Title** | Pointer to **NullableString** | The title of the shared content. | [optional] 
-**ShareLink** | Pointer to **NullableString** | The URL for accessing the shared content. | [optional] 
-**ExpirationDate** | Pointer to **NullableTime** | The date when the shared link expires. | [optional] 
-**LinkType** | Pointer to [**LinkType**](LinkType.md) | The sharing link type (e.g., Invitation). | [optional] 
-**Password** | Pointer to **NullableString** | The password protection for accessing the shared content. | [optional] 
-**DenyDownload** | Pointer to **NullableBool** | Indicates whether downloading of the shared content is prohibited. | [optional] 
-**IsExpired** | Pointer to **NullableBool** | Indicates whether the shared link has expired. | [optional] 
-**Primary** | Pointer to **bool** | Indicates whether this is the primary shared link. | [optional] 
-**Internal** | Pointer to **NullableBool** | Indicates whether the link is for the internal sharing only. | [optional] 
-**RequestToken** | Pointer to **NullableString** | The token for validating access requests. | [optional] 
-**MaxUseCount** | Pointer to **NullableInt32** | The maximum number of times the invitation link can be used. | [optional] 
-**CurrentUseCount** | Pointer to **NullableInt32** | The current number of times the invitation link has been used. | [optional] 
+**Id** | Pointer to **string** | The identifier of the link, the one to send back as `linkId` to change or delete it. | [optional] 
+**Title** | Pointer to **NullableString** | The name the link is listed under, which its author is free to choose and to leave empty. | [optional] 
+**ShareLink** | Pointer to **NullableString** | The shortened address to hand out. Opening it is what turns the link into access; the address stays the same  while the link exists. | [optional] 
+**ExpirationDate** | Pointer to [**ApiDateTime**](ApiDateTime.md) | The moment the link stops working, written with the offset of the portal time zone. Null when the link was  left without an end. | [optional] 
+**LinkType** | Pointer to [**LinkType**](LinkType.md) | Which of the two jobs the link does: letting somebody into the room as a member, or handing out the entry  itself. The counters of uses are filled in for the first kind only. | [optional] 
+**Password** | Pointer to **NullableString** | The password a visitor has to send before the link resolves, readable only by those who may manage the link.  Empty when the link asks for none. | [optional] 
+**DenyDownload** | Pointer to **NullableBool** | Whether visitors coming through this link may only read the entry in the editor and not download or print it. | [optional] 
+**IsExpired** | Pointer to **NullableBool** | Whether the moment in `expirationDate` has already passed, which leaves the link in place but refuses  everybody who opens it. | [optional] 
+**Primary** | Pointer to **bool** | Whether this is the one link the entry always keeps: a public or a form-filling room is given it at creation,  and deleting it there only makes a new one. | [optional] 
+**Internal** | Pointer to **NullableBool** | Whether the visitor has to sign in to the portal before the link resolves, as opposed to it being open to  anybody who has the address. | [optional] 
+**RequestToken** | Pointer to **NullableString** | The key that stands for this link in the calls that resolve it, such as `GET api/2.0/files/share/{key}`. It is  filled in for links that hand out the entry, and empty for the ones that invite into a room. | [optional] 
+**MaxUseCount** | Pointer to **NullableInt32** | How many accounts may still join the room through this invitation link in total. Null on a link that hands out  the entry, where nothing is counted. | [optional] 
+**CurrentUseCount** | Pointer to **NullableInt32** | How many accounts have already joined through this invitation link. Once it reaches `maxUseCount` the link  stops letting anybody else in. Null on a link that hands out the entry. | [optional] 
 
 ## Methods
 
@@ -134,20 +134,20 @@ HasShareLink returns a boolean if a field has been set.
 UnsetShareLink ensures that no value is present for ShareLink, not even an explicit nil
 ### GetExpirationDate
 
-`func (o *FileShareLink) GetExpirationDate() time.Time`
+`func (o *FileShareLink) GetExpirationDate() ApiDateTime`
 
 GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
 
 ### GetExpirationDateOk
 
-`func (o *FileShareLink) GetExpirationDateOk() (*time.Time, bool)`
+`func (o *FileShareLink) GetExpirationDateOk() (*ApiDateTime, bool)`
 
 GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpirationDate
 
-`func (o *FileShareLink) SetExpirationDate(v time.Time)`
+`func (o *FileShareLink) SetExpirationDate(v ApiDateTime)`
 
 SetExpirationDate sets ExpirationDate field to given value.
 
@@ -157,16 +157,6 @@ SetExpirationDate sets ExpirationDate field to given value.
 
 HasExpirationDate returns a boolean if a field has been set.
 
-### SetExpirationDateNil
-
-`func (o *FileShareLink) SetExpirationDateNil(b bool)`
-
- SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-
-### UnsetExpirationDate
-`func (o *FileShareLink) UnsetExpirationDate()`
-
-UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
 ### GetLinkType
 
 `func (o *FileShareLink) GetLinkType() LinkType`

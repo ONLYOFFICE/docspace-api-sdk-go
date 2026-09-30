@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ReturnSingleOperation** | Pointer to **bool** | Specifies whether to return only the current operation | [optional] 
-**DeleteAfter** | Pointer to **bool** | Specifies whether to delete a file after the editing session is finished or not. | [optional] 
-**FileId** | **int32** | The file ID to delete. | 
-**Versions** | **[]int32** | The collection of file versions to be deleted. | 
+**ReturnSingleOperation** | Pointer to **bool** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] 
+**DeleteAfter** | Pointer to **bool** | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It does not postpone the deletion and does not delete anything of its own. | [optional] 
+**FileId** | **int32** | The file whose history the versions are taken from; only files stored in the portal itself are addressed here. | 
+**Versions** | **[]int32** | The version numbers to remove, as reported by `GET api/2.0/files/file/{fileId}/history`. At least one number  has to be sent: an empty list removes the file itself instead of one of its versions. The number of the  current version is refused outright, while a number that no longer exists is passed over without a complaint. | 
 
 ## Methods
 

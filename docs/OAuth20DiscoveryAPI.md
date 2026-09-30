@@ -4,13 +4,15 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**HandleOptions**](OAuth20DiscoveryAPI.md#HandleOptions) | **Options** /.well-known/oauth-authorization-server | 
+[**HandleOptions**](OAuth20DiscoveryAPI.md#HandleOptions) | **Options** /.well-known/oauth-authorization-server | Probe the discovery endpoint
 
 
 
 ## HandleOptions
 
-> map[string]interface{} HandleOptions(ctx).Execute()
+> HandleOptions(ctx).Execute()
+
+Probe the discovery endpoint
 
 
 
@@ -32,13 +34,11 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OAuth20DiscoveryAPI.HandleOptions(context.Background()).Execute()
+	r, err := apiClient.OAuth20DiscoveryAPI.HandleOptions(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OAuth20DiscoveryAPI.HandleOptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `HandleOptions`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `OAuth20DiscoveryAPI.HandleOptions`: %v\n", resp)
 }
 ```
 
@@ -53,7 +53,7 @@ Other parameters are passed through a pointer to a apiHandleOptionsRequest struc
 
 ### Return type
 
-**map[string]interface{}**
+ (empty response body)
 
 ### Authorization
 
@@ -62,7 +62,7 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

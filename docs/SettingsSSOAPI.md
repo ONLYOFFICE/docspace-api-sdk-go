@@ -126,7 +126,7 @@ Other parameters are passed through a pointer to a apiGetSsoSettingsV2Request st
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -140,7 +140,7 @@ No authorization required
 
 ## GetSsoSettingsV2Constants
 
-> ObjectWrapper GetSsoSettingsV2Constants(ctx).Execute()
+> SsoSettingsV2ConstantsWrapper GetSsoSettingsV2Constants(ctx).Execute()
 
 Get the SSO settings constants
 
@@ -169,7 +169,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSSOAPI.GetSsoSettingsV2Constants``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSsoSettingsV2Constants`: ObjectWrapper
+	// response from `GetSsoSettingsV2Constants`: SsoSettingsV2ConstantsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsSSOAPI.GetSsoSettingsV2Constants`: %v\n", resp)
 }
 ```
@@ -185,7 +185,7 @@ Other parameters are passed through a pointer to a apiGetSsoSettingsV2ConstantsR
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**SsoSettingsV2ConstantsWrapper**](SsoSettingsV2ConstantsWrapper.md)
 
 ### Authorization
 

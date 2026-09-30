@@ -21,7 +21,7 @@ import (
 // checks if the DocsCloudQuota type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudQuota{}
 
-// DocsCloudQuota Represents the current user quota of a DocsCloud tenant.
+// DocsCloudQuota Represents the current user quota of a Docs Connect tenant.
 type DocsCloudQuota struct {
 	// The editor users.
 	Users []DocsCloudQuotaUser `json:"users,omitempty"`

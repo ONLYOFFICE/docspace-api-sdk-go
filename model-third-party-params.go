@@ -21,19 +21,19 @@ import (
 // checks if the ThirdPartyParams type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ThirdPartyParams{}
 
-// ThirdPartyParams The third-party account parameters.
+// ThirdPartyParams A third-party storage account connected to the portal.
 type ThirdPartyParams struct {
-	// The authentication data.
+	// The stored credentials of the account. They are not filled in here: the portal does not give back credentials  once an account is saved.
 	AuthData *AuthData `json:"auth_data,omitempty"`
-	// Specifies if this is a corporate account or not.
+	// Whether the account is attached to the legacy Common section, which is the case only for accounts inherited  from an older portal.
 	Corporate *bool `json:"corporate,omitempty"`
-	// Specifies if this is a room storage or not.
+	// Whether the account is attached to the Rooms section, room templates and the archive counted in. This is where  `POST api/2.0/files/thirdparty` puts every account it connects.
 	RoomsStorage *bool `json:"roomsStorage,omitempty"`
-	// The customer title.
+	// The name the account is shown under in the portal, as it was saved when the account was connected.
 	CustomerTitle NullableString `json:"customer_title,omitempty"`
-	// The provider ID.
+	// The account ID to send to `DELETE api/2.0/files/thirdparty/{providerId}`, or as `providerId` to  re-authenticate the account.
 	ProviderId NullableInt32 `json:"provider_id,omitempty"`
-	// The provider key.
+	// The storage service behind the account. `WebDav` stands for every WebDAV preset, so it does not tell which of  them was chosen when the account was connected.
 	ProviderKey NullableString `json:"provider_key,omitempty"`
 }
 

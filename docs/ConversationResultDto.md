@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **NullableString** | The conversion operation ID. | 
-**Operation** | [**FileOperationType**](FileOperationType.md) | The conversion operation type. | 
-**Progress** | **int32** | The conversion operation progress. | 
-**Source** | Pointer to **NullableString** | The source file for the conversion. | [optional] 
+**Id** | **NullableString** | The identifier of the conversion entry. The portal leaves it empty for file conversions, so a caller follows  its own conversion by the file it queued rather than by this value. | 
+**Operation** | [**FileOperationType**](FileOperationType.md) | Tells which kind of file operation the entry describes, so that a conversion can be told apart from the copy,  move and download entries that share this envelope. A conversion entry reports the conversion type. | 
+**Progress** | **int32** | How far the conversion has got, counted in percent from 0 while it is only queued to 100 once it is over -  whether it ended with a converted file or with an error. 100 is the value a polling caller waits for. | 
+**Source** | Pointer to **NullableString** | Describes what is being converted: the identifier of the source file, the version that was taken and whether  an existing result may be overwritten, packed as a JSON object inside a string. It is what identifies the  entry when several conversions of the same caller are in flight. | [optional] 
 **Result** | Pointer to **interface{}** |  | [optional] 
-**Error** | Pointer to **NullableString** | The conversion operation error message. | [optional] 
-**Processed** | Pointer to **NullableString** | Specifies if the conversion operation is processed or not. | [optional] 
+**Error** | Pointer to **NullableString** | The reason the conversion stopped, in the language of the caller, and empty while it is running and after it  has succeeded. `progress` reaches 100 for a failure as well, so this field is what separates a converted file  from a broken conversion; a conversion still unfinished after ten minutes ends with a timeout reported here. | [optional] 
+**Processed** | Pointer to **NullableString** | Reports whether the portal has taken the entry as far as it goes: `1` once the conversion has finished or  failed, and empty while it is still queued or still being converted. It is the bookkeeping of the conversion  queue rather than a result - what happened is in `progress`, `error` and `result`. | [optional] 
 
 ## Methods
 

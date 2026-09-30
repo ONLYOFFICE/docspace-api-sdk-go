@@ -4,8 +4,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DocRegisterPusnNotificationDevice**](SecurityFirebaseAPI.md#DocRegisterPusnNotificationDevice) | **Post** /api/2.0/settings/push/docregisterdevice | Save the Documents Firebase device token
-[**SubscribeDocumentsPushNotification**](SecurityFirebaseAPI.md#SubscribeDocumentsPushNotification) | **Put** /api/2.0/settings/push/docsubscribe | Subscribe to Documents push notification
+[**DocRegisterPusnNotificationDevice**](SecurityFirebaseAPI.md#DocRegisterPusnNotificationDevice) | **Post** /api/2.0/settings/push/docregisterdevice | Register a push device
+[**SubscribeDocumentsPushNotification**](SecurityFirebaseAPI.md#SubscribeDocumentsPushNotification) | **Put** /api/2.0/settings/push/docsubscribe | Set push subscription
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > FireBaseUserWrapper DocRegisterPusnNotificationDevice(ctx).FirebaseRequestsDto(firebaseRequestsDto).Execute()
 
-Save the Documents Firebase device token
+Register a push device
 
 
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 > FireBaseUserWrapper SubscribeDocumentsPushNotification(ctx).FirebaseRequestsDto(firebaseRequestsDto).Execute()
 
-Subscribe to Documents push notification
+Set push subscription
 
 
 

@@ -23,21 +23,21 @@ import (
 // checks if the AdditionalWhiteLabelSettingsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AdditionalWhiteLabelSettingsDto{}
 
-// AdditionalWhiteLabelSettingsDto The additional white label settings parameters.
+// AdditionalWhiteLabelSettingsDto Which of the ONLYOFFICE help and community entries the interface may offer, installation-wide.
 type AdditionalWhiteLabelSettingsDto struct {
-	// Specifies if the sample documents are displayed or hidden.
+	// Whether the sample documents that ONLYOFFICE ships may be placed in a new user's Documents. Unlike the link  flags below it depends on nothing that has to be configured, so its built-in value is always `true`.
 	StartDocsEnabled bool `json:"startDocsEnabled"`
-	// Specifies if the Help Center link is available or not.
+	// Whether the interface may offer the Help Center entry. It is `false` both when the entry was switched off  for the installation and when the installation configures no Help Center address at all; the addresses  themselves are not part of this answer and arrive in `externalResources` of `GET api/2.0/settings`.
 	HelpCenterEnabled bool `json:"helpCenterEnabled"`
-	// Specifies if the Feedback & Support link is available or not.
+	// Whether the interface may offer the Feedback and Support entry, `false` for the same two reasons as  `helpCenterEnabled`.
 	FeedbackAndSupportEnabled bool `json:"feedbackAndSupportEnabled"`
-	// Specifies if the user forum is available or not.
+	// Whether the interface may offer the user forum entry, `false` for the same two reasons as  `helpCenterEnabled`.
 	UserForumEnabled bool `json:"userForumEnabled"`
-	// Specifies if the Video Guides link is available or not.
+	// Whether the interface may offer the Video Guides entry, `false` for the same two reasons as  `helpCenterEnabled`.
 	VideoGuidesEnabled bool `json:"videoGuidesEnabled"`
-	// Specifies if the License Agreements link is available or not.
+	// Whether the interface may offer the License Agreements entry, `false` for the same two reasons as  `helpCenterEnabled`.
 	LicenseAgreementsEnabled bool `json:"licenseAgreementsEnabled"`
-	// Specifies if the additional white label settings are default or not.
+	// Whether all six flags still hold the values the installation starts out with. It turns `false` as soon as  one of them is saved differently and `true` again after `DELETE api/2.0/settings/rebranding/additional`.  Because a link flag starts out off when no address is configured for it, `true` does not mean every entry  is on.
 	IsDefault bool `json:"isDefault"`
 }
 

@@ -16,7 +16,6 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the EmployeeFullDto type satisfies the MappedNullable interface at compile time
@@ -59,7 +58,7 @@ type EmployeeFullDto struct {
 	// The user activation status.
 	ActivationStatus *EmployeeActivationStatus `json:"activationStatus,omitempty"`
 	// The date when the user account was terminated.
-	Terminated NullableTime `json:"terminated,omitempty"`
+	Terminated *ApiDateTime `json:"terminated,omitempty"`
 	// The user department.
 	Department NullableString `json:"department,omitempty"`
 	// The list of user groups.
@@ -107,7 +106,7 @@ type EmployeeFullDto struct {
 	// The user who created the current user.
 	CreatedBy *EmployeeDto `json:"createdBy,omitempty"`
 	// The user registration date.
-	RegistrationDate NullableTime `json:"registrationDate,omitempty"`
+	RegistrationDate *ApiDateTime `json:"registrationDate,omitempty"`
 	// Specifies if the user has a personal folder or not.
 	HasPersonalFolder NullableBool `json:"hasPersonalFolder,omitempty"`
 	// Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app.
@@ -716,46 +715,36 @@ func (o *EmployeeFullDto) SetActivationStatus(v EmployeeActivationStatus) {
 	o.ActivationStatus = &v
 }
 
-// GetTerminated returns the Terminated field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EmployeeFullDto) GetTerminated() time.Time {
-	if o == nil || IsNil(o.Terminated.Get()) {
-		var ret time.Time
+// GetTerminated returns the Terminated field value if set, zero value otherwise.
+func (o *EmployeeFullDto) GetTerminated() ApiDateTime {
+	if o == nil || IsNil(o.Terminated) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.Terminated.Get()
+	return *o.Terminated
 }
 
 // GetTerminatedOk returns a tuple with the Terminated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EmployeeFullDto) GetTerminatedOk() (*time.Time, bool) {
-	if o == nil {
+func (o *EmployeeFullDto) GetTerminatedOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Terminated) {
 		return nil, false
 	}
-	return o.Terminated.Get(), o.Terminated.IsSet()
+	return o.Terminated, true
 }
 
 // HasTerminated returns a boolean if a field has been set.
 func (o *EmployeeFullDto) IsTerminatedSet() bool {
-	if o != nil && o.Terminated.IsSet() {
+	if o != nil && !IsNil(o.Terminated) {
 		return true
 	}
 
 	return false
 }
 
-// SetTerminated gets a reference to the given NullableTime and assigns it to the Terminated field.
-func (o *EmployeeFullDto) SetTerminated(v time.Time) {
-	o.Terminated.Set(&v)
-}
-// SetTerminatedNil sets the value for Terminated to be an explicit nil
-func (o *EmployeeFullDto) SetTerminatedNil() {
-	o.Terminated.Set(nil)
-}
-
-// UnsetTerminated ensures that no value is present for Terminated, not even an explicit nil
-func (o *EmployeeFullDto) UnsetTerminated() {
-	o.Terminated.Unset()
+// SetTerminated gets a reference to the given ApiDateTime and assigns it to the Terminated field.
+func (o *EmployeeFullDto) SetTerminated(v ApiDateTime) {
+	o.Terminated = &v
 }
 
 // GetDepartment returns the Department field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1606,46 +1595,36 @@ func (o *EmployeeFullDto) SetCreatedBy(v EmployeeDto) {
 	o.CreatedBy = &v
 }
 
-// GetRegistrationDate returns the RegistrationDate field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EmployeeFullDto) GetRegistrationDate() time.Time {
-	if o == nil || IsNil(o.RegistrationDate.Get()) {
-		var ret time.Time
+// GetRegistrationDate returns the RegistrationDate field value if set, zero value otherwise.
+func (o *EmployeeFullDto) GetRegistrationDate() ApiDateTime {
+	if o == nil || IsNil(o.RegistrationDate) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.RegistrationDate.Get()
+	return *o.RegistrationDate
 }
 
 // GetRegistrationDateOk returns a tuple with the RegistrationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EmployeeFullDto) GetRegistrationDateOk() (*time.Time, bool) {
-	if o == nil {
+func (o *EmployeeFullDto) GetRegistrationDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.RegistrationDate) {
 		return nil, false
 	}
-	return o.RegistrationDate.Get(), o.RegistrationDate.IsSet()
+	return o.RegistrationDate, true
 }
 
 // HasRegistrationDate returns a boolean if a field has been set.
 func (o *EmployeeFullDto) IsRegistrationDateSet() bool {
-	if o != nil && o.RegistrationDate.IsSet() {
+	if o != nil && !IsNil(o.RegistrationDate) {
 		return true
 	}
 
 	return false
 }
 
-// SetRegistrationDate gets a reference to the given NullableTime and assigns it to the RegistrationDate field.
-func (o *EmployeeFullDto) SetRegistrationDate(v time.Time) {
-	o.RegistrationDate.Set(&v)
-}
-// SetRegistrationDateNil sets the value for RegistrationDate to be an explicit nil
-func (o *EmployeeFullDto) SetRegistrationDateNil() {
-	o.RegistrationDate.Set(nil)
-}
-
-// UnsetRegistrationDate ensures that no value is present for RegistrationDate, not even an explicit nil
-func (o *EmployeeFullDto) UnsetRegistrationDate() {
-	o.RegistrationDate.Unset()
+// SetRegistrationDate gets a reference to the given ApiDateTime and assigns it to the RegistrationDate field.
+func (o *EmployeeFullDto) SetRegistrationDate(v ApiDateTime) {
+	o.RegistrationDate = &v
 }
 
 // GetHasPersonalFolder returns the HasPersonalFolder field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1793,8 +1772,8 @@ func (o EmployeeFullDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ActivationStatus) {
 		toSerialize["activationStatus"] = o.ActivationStatus
 	}
-	if o.Terminated.IsSet() {
-		toSerialize["terminated"] = o.Terminated.Get()
+	if !IsNil(o.Terminated) {
+		toSerialize["terminated"] = o.Terminated
 	}
 	if o.Department.IsSet() {
 		toSerialize["department"] = o.Department.Get()
@@ -1865,8 +1844,8 @@ func (o EmployeeFullDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedBy) {
 		toSerialize["createdBy"] = o.CreatedBy
 	}
-	if o.RegistrationDate.IsSet() {
-		toSerialize["registrationDate"] = o.RegistrationDate.Get()
+	if !IsNil(o.RegistrationDate) {
+		toSerialize["registrationDate"] = o.RegistrationDate
 	}
 	if o.HasPersonalFolder.IsSet() {
 		toSerialize["hasPersonalFolder"] = o.HasPersonalFolder.Get()

@@ -4,24 +4,24 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetEnabledModules**](SettingsSecurityAPI.md#GetEnabledModules) | **Get** /api/2.0/settings/security/modules | Get the enabled modules
-[**GetIsProductAdministrator**](SettingsSecurityAPI.md#GetIsProductAdministrator) | **Get** /api/2.0/settings/security/administrator | Check a product administrator
-[**GetPasswordSettings**](SettingsSecurityAPI.md#GetPasswordSettings) | **Get** /api/2.0/settings/security/password | Get the password settings
-[**GetProductAdministrators**](SettingsSecurityAPI.md#GetProductAdministrators) | **Get** /api/2.0/settings/security/administrator/{productid} | Get the product administrators
-[**GetWebItemSecurityInfo**](SettingsSecurityAPI.md#GetWebItemSecurityInfo) | **Get** /api/2.0/settings/security/{id} | Get the module availability
-[**GetWebItemSettingsSecurityInfo**](SettingsSecurityAPI.md#GetWebItemSettingsSecurityInfo) | **Get** /api/2.0/settings/security | Get the security settings
-[**SetAccessToWebItems**](SettingsSecurityAPI.md#SetAccessToWebItems) | **Put** /api/2.0/settings/security/access | Set the security settings to modules
-[**SetProductAdministrator**](SettingsSecurityAPI.md#SetProductAdministrator) | **Put** /api/2.0/settings/security/administrator | Set a product administrator
-[**SetWebItemSecurity**](SettingsSecurityAPI.md#SetWebItemSecurity) | **Put** /api/2.0/settings/security | Set the module security settings
-[**UpdatePasswordSettings**](SettingsSecurityAPI.md#UpdatePasswordSettings) | **Put** /api/2.0/settings/security/password | Set the password settings
+[**GetEnabledModules**](SettingsSecurityAPI.md#GetEnabledModules) | **Get** /api/2.0/settings/security/modules | Get enabled modules
+[**GetIsProductAdministrator**](SettingsSecurityAPI.md#GetIsProductAdministrator) | **Get** /api/2.0/settings/security/administrator | Check product administrator
+[**GetPasswordSettings**](SettingsSecurityAPI.md#GetPasswordSettings) | **Get** /api/2.0/settings/security/password | Get password settings
+[**GetProductAdministrators**](SettingsSecurityAPI.md#GetProductAdministrators) | **Get** /api/2.0/settings/security/administrator/{productid} | Get product administrators
+[**GetWebItemSecurityInfo**](SettingsSecurityAPI.md#GetWebItemSecurityInfo) | **Get** /api/2.0/settings/security/{id} | Check module availability
+[**GetWebItemSettingsSecurityInfo**](SettingsSecurityAPI.md#GetWebItemSettingsSecurityInfo) | **Get** /api/2.0/settings/security | Get module access settings
+[**SetAccessToWebItems**](SettingsSecurityAPI.md#SetAccessToWebItems) | **Put** /api/2.0/settings/security/access | Set access to modules in bulk
+[**SetProductAdministrator**](SettingsSecurityAPI.md#SetProductAdministrator) | **Put** /api/2.0/settings/security/administrator | Set product administrator
+[**SetWebItemSecurity**](SettingsSecurityAPI.md#SetWebItemSecurity) | **Put** /api/2.0/settings/security | Set module access
+[**UpdatePasswordSettings**](SettingsSecurityAPI.md#UpdatePasswordSettings) | **Put** /api/2.0/settings/security/password | Update password settings
 
 
 
 ## GetEnabledModules
 
-> ObjectWrapper GetEnabledModules(ctx).Execute()
+> EnabledModuleArrayWrapper GetEnabledModules(ctx).Execute()
 
-Get the enabled modules
+Get enabled modules
 
 
 
@@ -48,7 +48,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSecurityAPI.GetEnabledModules``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetEnabledModules`: ObjectWrapper
+	// response from `GetEnabledModules`: EnabledModuleArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsSecurityAPI.GetEnabledModules`: %v\n", resp)
 }
 ```
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiGetEnabledModulesRequest s
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**EnabledModuleArrayWrapper**](EnabledModuleArrayWrapper.md)
 
 ### Authorization
 
@@ -84,7 +84,7 @@ Other parameters are passed through a pointer to a apiGetEnabledModulesRequest s
 
 > ProductAdministratorWrapper GetIsProductAdministrator(ctx).Productid(productid).Userid(userid).Execute()
 
-Check a product administrator
+Check product administrator
 
 
 
@@ -103,8 +103,8 @@ import (
 )
 
 func main() {
-	productid := "00000000-0000-0000-0000-000000000000" // string | The ID of the product extracted from the query parameters.
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID extracted from the query parameters.
+	productid := "00000000-0000-0000-0000-000000000000" // string | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -129,8 +129,8 @@ Other parameters are passed through a pointer to a apiGetIsProductAdministratorR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **productid** | **string** | The ID of the product extracted from the query parameters. | 
- **userid** | **string** | The user ID extracted from the query parameters. | 
+ **productid** | **string** | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | 
+ **userid** | **string** | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | 
 
 ### Return type
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 > PasswordSettingsWrapper GetPasswordSettings(ctx).Execute()
 
-Get the password settings
+Get password settings
 
 
 
@@ -217,7 +217,7 @@ Other parameters are passed through a pointer to a apiGetPasswordSettingsRequest
 
 > EmployeeArrayWrapper GetProductAdministrators(ctx, productid).Execute()
 
-Get the product administrators
+Get product administrators
 
 
 
@@ -236,7 +236,7 @@ import (
 )
 
 func main() {
-	productid := "00000000-0000-0000-0000-000000000000" // string | The ID of the product extracted from the route parameters.
+	productid := "00000000-0000-0000-0000-000000000000" // string | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -256,7 +256,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**productid** | **string** | The ID of the product extracted from the route parameters. | 
+**productid** | **string** | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | 
 
 ### Other Parameters
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper GetWebItemSecurityInfo(ctx, id).Execute()
 
-Get the module availability
+Check module availability
 
 
 
@@ -308,7 +308,7 @@ import (
 )
 
 func main() {
-	id := "1" // string | The ID extracted from the route parameters.
+	id := "1" // string | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -328,7 +328,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The ID extracted from the route parameters. | 
+**id** | **string** | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | 
 
 ### Other Parameters
 
@@ -361,7 +361,7 @@ Name | Type | Description  | Notes
 
 > SecurityArrayWrapper GetWebItemSettingsSecurityInfo(ctx).Ids(ids).Execute()
 
-Get the security settings
+Get module access settings
 
 
 
@@ -380,7 +380,7 @@ import (
 )
 
 func main() {
-	ids := []string{"Inner_example"} // []string | The list of module identifiers for which to retrieve the security settings. (optional)
+	ids := []string{"Inner_example"} // []string | The modules to report on, each given as a GUID and sent as a repeated query value. An entry that is not a  GUID fails the whole request as invalid. Leaving the list out asks about every module registered in the  portal, which on a DocSpace installation is none, so the answer is then empty rather than complete. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -405,7 +405,7 @@ Other parameters are passed through a pointer to a apiGetWebItemSettingsSecurity
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ids** | **[]string** | The list of module identifiers for which to retrieve the security settings. | 
+ **ids** | **[]string** | The modules to report on, each given as a GUID and sent as a repeated query value. An entry that is not a  GUID fails the whole request as invalid. Leaving the list out asks about every module registered in the  portal, which on a DocSpace installation is none, so the answer is then empty rather than complete. | 
 
 ### Return type
 
@@ -429,7 +429,7 @@ Name | Type | Description  | Notes
 
 > SecurityArrayWrapper SetAccessToWebItems(ctx).WebItemsSecurityRequestsDto(webItemsSecurityRequestsDto).Execute()
 
-Set the security settings to modules
+Set access to modules in bulk
 
 
 
@@ -497,7 +497,7 @@ Name | Type | Description  | Notes
 
 > ProductAdministratorWrapper SetProductAdministrator(ctx).SecurityRequestsDto(securityRequestsDto).Execute()
 
-Set a product administrator
+Set product administrator
 
 
 
@@ -565,7 +565,7 @@ Name | Type | Description  | Notes
 
 > SecurityArrayWrapper SetWebItemSecurity(ctx).WebItemSecurityRequestsDto(webItemSecurityRequestsDto).Execute()
 
-Set the module security settings
+Set module access
 
 
 
@@ -633,7 +633,7 @@ Name | Type | Description  | Notes
 
 > PasswordSettingsWrapper UpdatePasswordSettings(ctx).PasswordSettingsRequestsDto(passwordSettingsRequestsDto).Execute()
 
-Set the password settings
+Update password settings
 
 
 

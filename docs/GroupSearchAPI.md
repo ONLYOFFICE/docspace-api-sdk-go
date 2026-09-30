@@ -4,9 +4,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetGroupsWithFilesShared**](GroupSearchAPI.md#GetGroupsWithFilesShared) | **Get** /api/2.0/group/file/{id} | Get groups with file sharing settings
-[**GetGroupsWithFoldersShared**](GroupSearchAPI.md#GetGroupsWithFoldersShared) | **Get** /api/2.0/group/folder/{id} | Get groups with folder sharing settings
-[**GetGroupsWithRoomsShared**](GroupSearchAPI.md#GetGroupsWithRoomsShared) | **Get** /api/2.0/group/room/{id} | Get groups with room sharing settings
+[**GetGroupsWithFilesShared**](GroupSearchAPI.md#GetGroupsWithFilesShared) | **Get** /api/2.0/group/file/{id} | Search groups for a file
+[**GetGroupsWithFoldersShared**](GroupSearchAPI.md#GetGroupsWithFoldersShared) | **Get** /api/2.0/group/folder/{id} | Search groups for a folder
+[**GetGroupsWithRoomsShared**](GroupSearchAPI.md#GetGroupsWithRoomsShared) | **Get** /api/2.0/group/room/{id} | Search groups for a room
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > GroupArrayWrapper GetGroupsWithFilesShared(ctx, id).ExcludeShared(excludeShared).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
 
-Get groups with file sharing settings
+Search groups for a file
 
 
 
@@ -33,11 +33,11 @@ import (
 )
 
 func main() {
-	id := int32(00000000-0000-0000-0000-000000000000) // int32 | The group ID.
-	excludeShared := false // bool | Specifies whether to exclude the group sharing settings from the response. (optional)
-	count := int32(25) // int32 | The number of groups to retrieve in the request. (optional)
-	startIndex := int32(0) // int32 | The starting index from which to begin retrieving groups with their sharing settings. (optional)
-	filterValue := "John" // string | The text used as a filter for retrieving groups with their sharing settings. (optional)
+	id := int32(1234) // int32 | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+	excludeShared := false // bool | Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart. (optional)
+	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
+	startIndex := int32(0) // int32 | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. (optional)
+	filterValue := "Marketing" // string | The text to match against the group name. Omit it to get every group the caller may grant access to. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -57,7 +57,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The group ID. | 
+**id** | **int32** | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | 
 
 ### Other Parameters
 
@@ -67,10 +67,10 @@ Other parameters are passed through a pointer to a apiGetGroupsWithFilesSharedRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **excludeShared** | **bool** | Specifies whether to exclude the group sharing settings from the response. | 
- **count** | **int32** | The number of groups to retrieve in the request. | 
- **startIndex** | **int32** | The starting index from which to begin retrieving groups with their sharing settings. | 
- **filterValue** | **string** | The text used as a filter for retrieving groups with their sharing settings. | 
+ **excludeShared** | **bool** | Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart. | 
+ **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
+ **startIndex** | **int32** | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. | 
+ **filterValue** | **string** | The text to match against the group name. Omit it to get every group the caller may grant access to. | 
 
 ### Return type
 
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 > GroupArrayWrapper GetGroupsWithFoldersShared(ctx, id).ExcludeShared(excludeShared).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
 
-Get groups with folder sharing settings
+Search groups for a folder
 
 
 
@@ -113,11 +113,11 @@ import (
 )
 
 func main() {
-	id := int32(00000000-0000-0000-0000-000000000000) // int32 | The group ID.
-	excludeShared := false // bool | Specifies whether to exclude the group sharing settings from the response. (optional)
-	count := int32(25) // int32 | The number of groups to retrieve in the request. (optional)
-	startIndex := int32(0) // int32 | The starting index from which to begin retrieving groups with their sharing settings. (optional)
-	filterValue := "John" // string | The text used as a filter for retrieving groups with their sharing settings. (optional)
+	id := int32(1234) // int32 | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+	excludeShared := false // bool | Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart. (optional)
+	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
+	startIndex := int32(0) // int32 | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. (optional)
+	filterValue := "Marketing" // string | The text to match against the group name. Omit it to get every group the caller may grant access to. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -137,7 +137,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The group ID. | 
+**id** | **int32** | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | 
 
 ### Other Parameters
 
@@ -147,10 +147,10 @@ Other parameters are passed through a pointer to a apiGetGroupsWithFoldersShared
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **excludeShared** | **bool** | Specifies whether to exclude the group sharing settings from the response. | 
- **count** | **int32** | The number of groups to retrieve in the request. | 
- **startIndex** | **int32** | The starting index from which to begin retrieving groups with their sharing settings. | 
- **filterValue** | **string** | The text used as a filter for retrieving groups with their sharing settings. | 
+ **excludeShared** | **bool** | Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart. | 
+ **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
+ **startIndex** | **int32** | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. | 
+ **filterValue** | **string** | The text to match against the group name. Omit it to get every group the caller may grant access to. | 
 
 ### Return type
 
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
 
 > GroupArrayWrapper GetGroupsWithRoomsShared(ctx, id).ExcludeShared(excludeShared).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
 
-Get groups with room sharing settings
+Search groups for a room
 
 
 
@@ -193,11 +193,11 @@ import (
 )
 
 func main() {
-	id := int32(00000000-0000-0000-0000-000000000000) // int32 | The group ID.
-	excludeShared := false // bool | Specifies whether to exclude the group sharing settings from the response. (optional)
-	count := int32(25) // int32 | The number of groups to retrieve in the request. (optional)
-	startIndex := int32(0) // int32 | The starting index from which to begin retrieving groups with their sharing settings. (optional)
-	filterValue := "John" // string | The text used as a filter for retrieving groups with their sharing settings. (optional)
+	id := int32(1234) // int32 | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+	excludeShared := false // bool | Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart. (optional)
+	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
+	startIndex := int32(0) // int32 | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. (optional)
+	filterValue := "Marketing" // string | The text to match against the group name. Omit it to get every group the caller may grant access to. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -217,7 +217,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The group ID. | 
+**id** | **int32** | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | 
 
 ### Other Parameters
 
@@ -227,10 +227,10 @@ Other parameters are passed through a pointer to a apiGetGroupsWithRoomsSharedRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **excludeShared** | **bool** | Specifies whether to exclude the group sharing settings from the response. | 
- **count** | **int32** | The number of groups to retrieve in the request. | 
- **startIndex** | **int32** | The starting index from which to begin retrieving groups with their sharing settings. | 
- **filterValue** | **string** | The text used as a filter for retrieving groups with their sharing settings. | 
+ **excludeShared** | **bool** | Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart. | 
+ **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
+ **startIndex** | **int32** | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. | 
+ **filterValue** | **string** | The text to match against the group name. Omit it to get every group the caller may grant access to. | 
 
 ### Return type
 

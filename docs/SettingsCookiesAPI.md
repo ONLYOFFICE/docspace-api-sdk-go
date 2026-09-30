@@ -4,8 +4,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetCookieSettings**](SettingsCookiesAPI.md#GetCookieSettings) | **Get** /api/2.0/settings/cookiesettings | Get cookies lifetime
-[**UpdateCookieSettings**](SettingsCookiesAPI.md#UpdateCookieSettings) | **Put** /api/2.0/settings/cookiesettings | Update cookies lifetime
+[**GetCookieSettings**](SettingsCookiesAPI.md#GetCookieSettings) | **Get** /api/2.0/settings/cookiesettings | Get the cookie lifetime settings
+[**UpdateCookieSettings**](SettingsCookiesAPI.md#UpdateCookieSettings) | **Put** /api/2.0/settings/cookiesettings | Update the cookie lifetime settings
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > CookieSettingsWrapper GetCookieSettings(ctx).Execute()
 
-Get cookies lifetime
+Get the cookie lifetime settings
 
 
 
@@ -76,7 +76,7 @@ Other parameters are passed through a pointer to a apiGetCookieSettingsRequest s
 
 > StringWrapper UpdateCookieSettings(ctx).CookieSettingsRequestsDto(cookieSettingsRequestsDto).Execute()
 
-Update cookies lifetime
+Update the cookie lifetime settings
 
 
 

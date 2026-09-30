@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetStorageEncryptionProgress**](SettingsEncryptionAPI.md#GetStorageEncryptionProgress) | **Get** /api/2.0/settings/encryption/progress | Get the storage encryption progress
 [**GetStorageEncryptionSettings**](SettingsEncryptionAPI.md#GetStorageEncryptionSettings) | **Get** /api/2.0/settings/encryption/settings | Get the storage encryption settings
-[**StartStorageEncryption**](SettingsEncryptionAPI.md#StartStorageEncryption) | **Post** /api/2.0/settings/encryption/start | Start the storage encryption process
+[**StartStorageEncryption**](SettingsEncryptionAPI.md#StartStorageEncryption) | **Post** /api/2.0/settings/encryption/start | Start the storage encryption
 
 
 
@@ -140,7 +140,7 @@ Other parameters are passed through a pointer to a apiGetStorageEncryptionSettin
 
 > BooleanWrapper StartStorageEncryption(ctx).StorageEncryptionRequestsDto(storageEncryptionRequestsDto).Execute()
 
-Start the storage encryption process
+Start the storage encryption
 
 
 

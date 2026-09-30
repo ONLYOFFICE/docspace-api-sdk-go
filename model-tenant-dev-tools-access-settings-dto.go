@@ -21,9 +21,9 @@ import (
 // checks if the TenantDevToolsAccessSettingsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantDevToolsAccessSettingsDto{}
 
-// TenantDevToolsAccessSettingsDto The request parameters for managing the Developer Tools access settings for the current tenant.
+// TenantDevToolsAccessSettingsDto Whether the `User` role is barred from the portal developer tools.
 type TenantDevToolsAccessSettingsDto struct {
-	// Determines if users have restricted access to the Developer Tools.
+	// Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way.
 	LimitedAccessForUsers *bool `json:"limitedAccessForUsers,omitempty"`
 }
 

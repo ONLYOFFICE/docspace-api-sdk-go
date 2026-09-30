@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Service** | Pointer to **NullableString** | The name of the service. | [optional] 
-**ServiceUnit** | Pointer to **NullableString** | The unit of measurement for the service. | [optional] 
-**Subscription** | Pointer to **bool** | Indicates whether the service is subscription-based. | [optional] 
-**Title** | Pointer to **NullableString** | The title of the service. | [optional] 
-**Limit** | Pointer to **NullableInt32** | The service limit. Populated only for the subscription-based services. | [optional] 
-**Used** | Pointer to **NullableInt32** | The current service usage. Populated only for the subscription-based services. | [optional] 
+**Service** | Pointer to **NullableString** | The stable key of the service, which is what `POST api/2.0/portal/payment/servicestate` takes to switch  it off again. | [optional] 
+**ServiceUnit** | Pointer to **NullableString** | What `limit` and `used` count, in the portal language - gigabytes, editor seats, credits. | [optional] 
+**Subscription** | Pointer to **bool** | Whether the service is billed as a standing subscription rather than per unit consumed. Only a  subscription can carry `limit` and `used`. | [optional] 
+**Title** | Pointer to **NullableString** | The service name in the portal language, for printing rather than matching. | [optional] 
+**Limit** | Pointer to **NullableInt32** | How much of the service the portal is entitled to. It is empty for a service whose consumption is not  counted this way, which is not the same as a service without a limit. | [optional] 
+**Used** | Pointer to **NullableInt32** | How much of that allowance is in use - the editors currently active for the cloud editors, the units  already consumed for disk storage. Empty under the same conditions as `limit`. | [optional] 
 
 ## Methods
 

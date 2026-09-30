@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to **map[string]interface{}** | The paginated data. | [optional] 
-**Limit** | Pointer to **int32** | The maximum number of results returned per page. | [optional] 
-**LastClientId** | Pointer to **string** | The identifier of the last retrieved client. | [optional] 
-**LastCreatedOn** | Pointer to **time.Time** | The creation date of the last retrieved client. | [optional] 
+**Data** | Pointer to **interface{}** |  | [optional] 
+**Limit** | Pointer to **int32** | The page size that was applied to this request, between 1 and 50. | [optional] 
+**LastClientId** | Pointer to **string** | The cursor to send back as last_client_id to ask for the next page, together with last_created_on. It is null when the page is empty. | [optional] 
+**LastCreatedOn** | Pointer to **time.Time** | The cursor to send back as last_created_on to ask for the next page, together with last_client_id. It is null when the page is empty. | [optional] 
 
 ## Methods
 
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *PageableResponse) GetData() map[string]interface{}`
+`func (o *PageableResponse) GetData() interface{}`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *PageableResponse) GetDataOk() (*map[string]interface{}, bool)`
+`func (o *PageableResponse) GetDataOk() (*interface{}, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *PageableResponse) SetData(v map[string]interface{})`
+`func (o *PageableResponse) SetData(v interface{})`
 
 SetData sets Data field to given value.
 
@@ -53,6 +53,16 @@ SetData sets Data field to given value.
 
 HasData returns a boolean if a field has been set.
 
+### SetDataNil
+
+`func (o *PageableResponse) SetDataNil(b bool)`
+
+ SetDataNil sets the value for Data to be an explicit nil
+
+### UnsetData
+`func (o *PageableResponse) UnsetData()`
+
+UnsetData ensures that no value is present for Data, not even an explicit nil
 ### GetLimit
 
 `func (o *PageableResponse) GetLimit() int32`

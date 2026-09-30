@@ -9,9 +9,9 @@ Method | HTTP request | Description
 [**FinishMigration**](MigrationAPI.md#FinishMigration) | **Post** /api/2.0/migration/finish | Finish migration
 [**GetMigrationLogs**](MigrationAPI.md#GetMigrationLogs) | **Get** /api/2.0/migration/logs | Get migration logs
 [**GetMigrationStatus**](MigrationAPI.md#GetMigrationStatus) | **Get** /api/2.0/migration/status | Get migration status
-[**ListMigrations**](MigrationAPI.md#ListMigrations) | **Get** /api/2.0/migration/list | Get migrations
+[**ListMigrations**](MigrationAPI.md#ListMigrations) | **Get** /api/2.0/migration/list | Get available migrators
 [**StartMigration**](MigrationAPI.md#StartMigration) | **Post** /api/2.0/migration/migrate | Start migration
-[**UploadAndInitializeMigration**](MigrationAPI.md#UploadAndInitializeMigration) | **Post** /api/2.0/migration/init/{migratorName} | Upload and initialize migration
+[**UploadAndInitializeMigration**](MigrationAPI.md#UploadAndInitializeMigration) | **Post** /api/2.0/migration/init/{migratorName} | Parse migration archive
 
 
 
@@ -331,7 +331,7 @@ Other parameters are passed through a pointer to a apiGetMigrationStatusRequest 
 
 > STRINGArrayWrapper ListMigrations(ctx).Execute()
 
-Get migrations
+Get available migrators
 
 
 
@@ -460,7 +460,7 @@ Name | Type | Description  | Notes
 
 > UploadAndInitializeMigration(ctx, migratorName).Execute()
 
-Upload and initialize migration
+Parse migration archive
 
 
 
@@ -479,7 +479,7 @@ import (
 )
 
 func main() {
-	migratorName := "GoogleWorkspace" // string | The migrator name extracted from the route parameters.
+	migratorName := "GoogleWorkspace" // string | The migrator that knows the format of the uploaded backup. It has to be one of the names  `GET api/2.0/migration/list` reports for this installation, spelled exactly as listed.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -497,7 +497,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**migratorName** | **string** | The migrator name extracted from the route parameters. | 
+**migratorName** | **string** | The migrator that knows the format of the uploaded backup. It has to be one of the names  `GET api/2.0/migration/list` reports for this installation, spelled exactly as listed. | 
 
 ### Other Parameters
 

@@ -24,13 +24,13 @@ import (
 // checks if the InvitationLinkCreateRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InvitationLinkCreateRequestDto{}
 
-// InvitationLinkCreateRequestDto The request parameters for creating an invitation link.
+// InvitationLinkCreateRequestDto The role a new invitation link grants, and the limits placed on it.
 type InvitationLinkCreateRequestDto struct {
-	// The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).
+	// The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` are accepted, and  the role cannot be changed afterwards - delete the link and create one for the other role instead.
 	EmployeeType EmployeeType `json:"employeeType"`
-	// The expiration date of the invitation link.
+	// When the link stops letting anyone in, read in the portal time zone. It has to lie in the future; leaving it  out creates a link with no deadline at all.
 	Expiration NullableTime `json:"expiration,omitempty"`
-	// The maximum number of times the invitation link can be used.
+	// How many accounts may join through the link in total. Leaving it out creates a link with no use limit; the  uses spent so far are reported as `currentUseCount`.
 	MaxUseCount NullableInt32 `json:"maxUseCount,omitempty"`
 }
 

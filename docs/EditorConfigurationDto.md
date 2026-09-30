@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CallbackUrl** | Pointer to **NullableString** | The callback URL of the editor. | [optional] 
-**CoEditing** | Pointer to [**CoEditingConfig**](CoEditingConfig.md) | The co-editing configuration parameters. | [optional] 
-**CreateUrl** | Pointer to **NullableString** | The creation URL of the editor. | [optional] 
-**Customization** | Pointer to [**CustomizationConfigDto**](CustomizationConfigDto.md) | The customization configuration. | [optional] 
-**Embedded** | Pointer to [**EmbeddedConfig**](EmbeddedConfig.md) | The embedded configuration parameters for embedded documents. | [optional] 
-**EncryptionKeys** | Pointer to [**[]EncryptionKeyDto**](EncryptionKeyDto.md) | The encryption keys of the editor configuration. | [optional] 
-**Lang** | **NullableString** | The language of the editor configuration. | 
-**Mode** | **NullableString** | The mode of the editor configuration. | 
-**ModeWrite** | Pointer to **bool** | Specifies if the mode is write of the editor configuration. | [optional] 
-**Plugins** | Pointer to [**PluginsConfig**](PluginsConfig.md) | The plugins configuration. | [optional] 
-**Recent** | Pointer to [**[]RecentConfig**](RecentConfig.md) | The recent configuration of the editor. | [optional] 
-**Templates** | Pointer to [**[]TemplatesConfig**](TemplatesConfig.md) | The templates of the editor configuration. | [optional] 
-**User** | Pointer to [**UserConfig**](UserConfig.md) | The user configuration of the editor. | [optional] 
+**CallbackUrl** | Pointer to **NullableString** | Where the editors post the document back to when they save it. A client must not call it itself; it is the  address the document service uses. | [optional] 
+**CoEditing** | Pointer to [**CoEditingConfig**](CoEditingConfig.md) | How co-editing starts out for this session and whether the user may switch it in the interface. | [optional] 
+**CreateUrl** | Pointer to **NullableString** | Where the editor sends the user when they ask for a new document of the same type. It is empty when creating  one is not offered here. | [optional] 
+**Customization** | Pointer to [**CustomizationConfigDto**](CustomizationConfigDto.md) | How the editor interface is dressed for this portal, this document and this layout. | [optional] 
+**Embedded** | Pointer to [**EmbeddedConfig**](EmbeddedConfig.md) | The addresses the framed viewer needs. It is filled in only for the embedded layout. | [optional] 
+**EncryptionKeys** | Pointer to [**[]EncryptionKeyDto**](EncryptionKeyDto.md) | The caller's end-to-end encryption keys, added only when the document lies in a private room, so that the  editors can decrypt it in the browser. It is empty everywhere else. | [optional] 
+**Lang** | **NullableString** | The culture the editor interface is shown in, taken from the profile of the caller. | 
+**Mode** | **NullableString** | `edit` when this session may write the document, `view` when it may only read it. | 
+**ModeWrite** | Pointer to **bool** | Whether this session may write; it is what the mode above says in one word. | [optional] 
+**Plugins** | Pointer to [**PluginsConfig**](PluginsConfig.md) | Which editor plugins are offered. The portal currently offers none, so the list inside comes back empty. | [optional] 
+**Recent** | Pointer to [**[]RecentConfig**](RecentConfig.md) | The documents offered in the editor's recent list. It is left out altogether when there is nothing to offer. | [optional] 
+**Templates** | Pointer to [**[]TemplatesConfig**](TemplatesConfig.md) | Always empty: the portal no longer passes creation templates through the editor configuration. | [optional] 
+**User** | Pointer to [**UserConfig**](UserConfig.md) | The account the editors attribute changes to. It is empty for an anonymous session opened through an external  link, and the editors then ask for a name themselves. | [optional] 
 
 ## Methods
 

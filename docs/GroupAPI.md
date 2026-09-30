@@ -109,8 +109,8 @@ import (
 )
 
 func main() {
-	id := "00000000-0000-0000-0000-000000000000" // string | The group ID.
-	membersRequest := *openapiclient.NewMembersRequest() // MembersRequest | The member request.
+	id := "00000000-0000-0000-0000-000000000000" // string | The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+	membersRequest := *openapiclient.NewMembersRequest() // MembersRequest | The accounts to add, replace with, or remove.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -130,7 +130,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The group ID. | 
+**id** | **string** | The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. | 
 
 ### Other Parameters
 
@@ -140,7 +140,7 @@ Other parameters are passed through a pointer to a apiAddMembersToRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **membersRequest** | [**MembersRequest**](MembersRequest.md) | The member request. | 
+ **membersRequest** | [**MembersRequest**](MembersRequest.md) | The accounts to add, replace with, or remove. | 
 
 ### Return type
 
@@ -183,7 +183,7 @@ import (
 )
 
 func main() {
-	id := "00000000-0000-0000-0000-000000000000" // string | The group ID.
+	id := "00000000-0000-0000-0000-000000000000" // string | The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -201,7 +201,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The group ID. | 
+**id** | **string** | The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404. | 
 
 ### Other Parameters
 
@@ -253,8 +253,8 @@ import (
 )
 
 func main() {
-	id := "00000000-0000-0000-0000-000000000000" // string | The group ID.
-	includeMembers := true // bool | Specifies whether to include the group members or not. (optional)
+	id := "00000000-0000-0000-0000-000000000000" // string | The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404.
+	includeMembers := true // bool | Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -274,7 +274,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The group ID. | 
+**id** | **string** | The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404. | 
 
 ### Other Parameters
 
@@ -284,7 +284,7 @@ Other parameters are passed through a pointer to a apiGetGroupRequest struct via
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **includeMembers** | **bool** | Specifies whether to include the group members or not. | 
+ **includeMembers** | **bool** | Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large. | 
 
 ### Return type
 
@@ -327,7 +327,7 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
+	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -347,7 +347,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userid** | **string** | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. | 
 
 ### Other Parameters
 
@@ -399,13 +399,13 @@ import (
 )
 
 func main() {
-	userId := "00000000-0000-0000-0000-000000000000" // string | The user ID. (optional)
-	manager := false // bool | Specifies if the user is a manager or not. (optional)
-	count := int32(25) // int32 | The number of records to retrieve. (optional)
-	startIndex := int32(0) // int32 | The starting index for paginated results. (optional)
-	sortBy := "displayName" // string | Specifies the property used to sort the query results. (optional)
-	sortOrder := openapiclient.SortOrder(0) // SortOrder | The order in which the results are sorted. (optional)
-	filterValue := "John" // string | The text used for filtering or searching group data. (optional)
+	userId := "00000000-0000-0000-0000-000000000000" // string | Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal. (optional)
+	manager := false // bool | Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false. (optional)
+	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
+	startIndex := int32(0) // int32 | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. (optional)
+	sortBy := "Title" // string | What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title. (optional)
+	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction of the ordering: `Ascending`, which is the default, or `Descending`. (optional)
+	filterValue := "Marketing" // string | The text to match against the group name. Omit it to get every group. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -430,13 +430,13 @@ Other parameters are passed through a pointer to a apiGetGroupsRequest struct vi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **string** | The user ID. | 
- **manager** | **bool** | Specifies if the user is a manager or not. | 
- **count** | **int32** | The number of records to retrieve. | 
- **startIndex** | **int32** | The starting index for paginated results. | 
- **sortBy** | **string** | Specifies the property used to sort the query results. | 
- **sortOrder** | [**SortOrder**](SortOrder.md) | The order in which the results are sorted. | 
- **filterValue** | **string** | The text used for filtering or searching group data. | 
+ **userId** | **string** | Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal. | 
+ **manager** | **bool** | Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false. | 
+ **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
+ **startIndex** | **int32** | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. | 
+ **sortBy** | **string** | What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title. | 
+ **sortOrder** | [**SortOrder**](SortOrder.md) | The direction of the ordering: `Ascending`, which is the default, or `Descending`. | 
+ **filterValue** | **string** | The text to match against the group name. Omit it to get every group. | 
 
 ### Return type
 
@@ -479,8 +479,8 @@ import (
 )
 
 func main() {
-	fromId := "00000000-0000-0000-0000-000000000000" // string | The group ID to move from.
-	toId := "11111111-1111-1111-1111-111111111111" // string | The group ID to move to.
+	fromId := "00000000-0000-0000-0000-000000000000" // string | The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already.
+	toId := "11111111-1111-1111-1111-111111111111" // string | The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -500,8 +500,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fromId** | **string** | The group ID to move from. | 
-**toId** | **string** | The group ID to move to. | 
+**fromId** | **string** | The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already. | 
+**toId** | **string** | The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already. | 
 
 ### Other Parameters
 
@@ -554,8 +554,8 @@ import (
 )
 
 func main() {
-	id := "00000000-0000-0000-0000-000000000000" // string | The group ID.
-	membersRequest := *openapiclient.NewMembersRequest() // MembersRequest | The member request.
+	id := "00000000-0000-0000-0000-000000000000" // string | The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+	membersRequest := *openapiclient.NewMembersRequest() // MembersRequest | The accounts to add, replace with, or remove.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -575,7 +575,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The group ID. | 
+**id** | **string** | The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. | 
 
 ### Other Parameters
 
@@ -585,7 +585,7 @@ Other parameters are passed through a pointer to a apiRemoveMembersFromRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **membersRequest** | [**MembersRequest**](MembersRequest.md) | The member request. | 
+ **membersRequest** | [**MembersRequest**](MembersRequest.md) | The accounts to add, replace with, or remove. | 
 
 ### Return type
 
@@ -628,8 +628,8 @@ import (
 )
 
 func main() {
-	id := "00000000-0000-0000-0000-000000000000" // string | The group ID.
-	setManagerRequest := *openapiclient.NewSetManagerRequest("00000000-0000-0000-0000-000000000000") // SetManagerRequest | The request for setting a group manager.
+	id := "00000000-0000-0000-0000-000000000000" // string | The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+	setManagerRequest := *openapiclient.NewSetManagerRequest("00000000-0000-0000-0000-000000000000") // SetManagerRequest | The account to make the manager of the group.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -649,7 +649,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The group ID. | 
+**id** | **string** | The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. | 
 
 ### Other Parameters
 
@@ -659,7 +659,7 @@ Other parameters are passed through a pointer to a apiSetGroupManagerRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **setManagerRequest** | [**SetManagerRequest**](SetManagerRequest.md) | The request for setting a group manager. | 
+ **setManagerRequest** | [**SetManagerRequest**](SetManagerRequest.md) | The account to make the manager of the group. | 
 
 ### Return type
 
@@ -702,8 +702,8 @@ import (
 )
 
 func main() {
-	id := "00000000-0000-0000-0000-000000000000" // string | The group ID.
-	membersRequest := *openapiclient.NewMembersRequest() // MembersRequest | The member request.
+	id := "00000000-0000-0000-0000-000000000000" // string | The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+	membersRequest := *openapiclient.NewMembersRequest() // MembersRequest | The accounts to add, replace with, or remove.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -723,7 +723,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The group ID. | 
+**id** | **string** | The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. | 
 
 ### Other Parameters
 
@@ -733,7 +733,7 @@ Other parameters are passed through a pointer to a apiSetMembersToRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **membersRequest** | [**MembersRequest**](MembersRequest.md) | The member request. | 
+ **membersRequest** | [**MembersRequest**](MembersRequest.md) | The accounts to add, replace with, or remove. | 
 
 ### Return type
 
@@ -776,8 +776,8 @@ import (
 )
 
 func main() {
-	id := "00000000-0000-0000-0000-000000000000" // string | The group ID.
-	updateGroupRequest := *openapiclient.NewUpdateGroupRequest() // UpdateGroupRequest | The request for updating a group.
+	id := "00000000-0000-0000-0000-000000000000" // string | The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404.
+	updateGroupRequest := *openapiclient.NewUpdateGroupRequest() // UpdateGroupRequest | The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -797,7 +797,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The group ID. | 
+**id** | **string** | The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404. | 
 
 ### Other Parameters
 
@@ -807,7 +807,7 @@ Other parameters are passed through a pointer to a apiUpdateGroupRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateGroupRequest** | [**UpdateGroupRequest**](UpdateGroupRequest.md) | The request for updating a group. | 
+ **updateGroupRequest** | [**UpdateGroupRequest**](UpdateGroupRequest.md) | The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. | 
 
 ### Return type
 

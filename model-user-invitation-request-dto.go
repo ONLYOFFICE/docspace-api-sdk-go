@@ -23,7 +23,7 @@ var _ MappedNullable = &UserInvitationRequestDto{}
 
 // UserInvitationRequestDto The user invitation parameters.
 type UserInvitationRequestDto struct {
-	// The email address.
+	// The address of somebody who has no portal account yet. An invitation is sent to it and an account is created  once it is accepted, so this is the field to use instead of an account identifier when the person is new to  the portal.
 	Email *string `json:"email,omitempty"`
 	// The user type.
 	Type *EmployeeType `json:"type,omitempty"`

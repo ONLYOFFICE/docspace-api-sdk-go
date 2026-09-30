@@ -4,10 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PortalId** | Pointer to **NullableString** | The portal ID. | [optional] [readonly] 
-**PaymentMethodStatus** | Pointer to [**PaymentMethodStatus**](PaymentMethodStatus.md) | The customer's payment method. | [optional] 
-**Email** | Pointer to **NullableString** | The customer email address. | [optional] [readonly] 
-**Payer** | Pointer to [**EmployeeDto**](EmployeeDto.md) | The paying user. | [optional] 
+**PortalId** | Pointer to **NullableString** | The portal's identifier in the billing system, which is what support and invoices refer to. It is not the  portal alias. | [optional] [readonly] 
+**PaymentMethodStatus** | Pointer to [**PaymentMethodStatus**](PaymentMethodStatus.md) | Whether a payment method is stored for the account and usable. Without one the portal can hold a wallet  balance but cannot be charged automatically. | [optional] 
+**PaymentMethodType** | Pointer to **NullableString** | The customer's payment method type. | [optional] [readonly] 
+**IsDelayedPaymentMethod** | Pointer to **bool** | Indicates whether the customer's payment method is delayed, i.e. the money reaches the wallet only after  the transfer settles rather than immediately. | [optional] [readonly] 
+**Email** | Pointer to **NullableString** | The address the billing account is registered to, lower-cased. It need not belong to a portal member,  which is exactly when `payer` stays empty. | [optional] [readonly] 
+**Payer** | Pointer to [**EmployeeDto**](EmployeeDto.md) | The portal member whose account is behind the billing address. It is empty when `email` matches no member  of this portal, and while it is empty every operation of this group that only the payer may call is out  of reach for everybody. | [optional] 
 
 ## Methods
 
@@ -87,6 +89,66 @@ SetPaymentMethodStatus sets PaymentMethodStatus field to given value.
 `func (o *CustomerInfoDto) HasPaymentMethodStatus() bool`
 
 HasPaymentMethodStatus returns a boolean if a field has been set.
+
+### GetPaymentMethodType
+
+`func (o *CustomerInfoDto) GetPaymentMethodType() string`
+
+GetPaymentMethodType returns the PaymentMethodType field if non-nil, zero value otherwise.
+
+### GetPaymentMethodTypeOk
+
+`func (o *CustomerInfoDto) GetPaymentMethodTypeOk() (*string, bool)`
+
+GetPaymentMethodTypeOk returns a tuple with the PaymentMethodType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMethodType
+
+`func (o *CustomerInfoDto) SetPaymentMethodType(v string)`
+
+SetPaymentMethodType sets PaymentMethodType field to given value.
+
+### HasPaymentMethodType
+
+`func (o *CustomerInfoDto) HasPaymentMethodType() bool`
+
+HasPaymentMethodType returns a boolean if a field has been set.
+
+### SetPaymentMethodTypeNil
+
+`func (o *CustomerInfoDto) SetPaymentMethodTypeNil(b bool)`
+
+ SetPaymentMethodTypeNil sets the value for PaymentMethodType to be an explicit nil
+
+### UnsetPaymentMethodType
+`func (o *CustomerInfoDto) UnsetPaymentMethodType()`
+
+UnsetPaymentMethodType ensures that no value is present for PaymentMethodType, not even an explicit nil
+### GetIsDelayedPaymentMethod
+
+`func (o *CustomerInfoDto) GetIsDelayedPaymentMethod() bool`
+
+GetIsDelayedPaymentMethod returns the IsDelayedPaymentMethod field if non-nil, zero value otherwise.
+
+### GetIsDelayedPaymentMethodOk
+
+`func (o *CustomerInfoDto) GetIsDelayedPaymentMethodOk() (*bool, bool)`
+
+GetIsDelayedPaymentMethodOk returns a tuple with the IsDelayedPaymentMethod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDelayedPaymentMethod
+
+`func (o *CustomerInfoDto) SetIsDelayedPaymentMethod(v bool)`
+
+SetIsDelayedPaymentMethod sets IsDelayedPaymentMethod field to given value.
+
+### HasIsDelayedPaymentMethod
+
+`func (o *CustomerInfoDto) HasIsDelayedPaymentMethod() bool`
+
+HasIsDelayedPaymentMethod returns a boolean if a field has been set.
 
 ### GetEmail
 

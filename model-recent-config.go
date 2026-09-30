@@ -21,13 +21,13 @@ import (
 // checks if the RecentConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RecentConfig{}
 
-// RecentConfig The presence or absence of the documents in the Open Recent... menu option.
+// RecentConfig One entry of the recent-documents list the editor offers.
 type RecentConfig struct {
-	// The folder where the document is stored.
+	// The folder shown next to the entry, as a readable name rather than an id.
 	Folder NullableString `json:"folder,omitempty"`
-	// The document title that will be displayed in the Open Recent... menu option.
+	// The name shown for the entry.
 	Title NullableString `json:"title,omitempty"`
-	// The absolute URL to the document where it is stored.
+	// Where the entry opens.
 	Url NullableString `json:"url,omitempty"`
 }
 

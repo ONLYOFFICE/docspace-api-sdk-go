@@ -7,28 +7,29 @@ Method | HTTP request | Description
 [**ChangeAccessToThirdparty**](FilesSettingsAPI.md#ChangeAccessToThirdparty) | **Put** /api/2.0/files/thirdparty | Change the third-party settings access
 [**ChangeAutomaticallyCleanUp**](FilesSettingsAPI.md#ChangeAutomaticallyCleanUp) | **Put** /api/2.0/files/settings/autocleanup | Update the trash bin auto-clearing setting
 [**ChangeDefaultAccessRights**](FilesSettingsAPI.md#ChangeDefaultAccessRights) | **Put** /api/2.0/files/settings/dafaultaccessrights | Change the default access rights
-[**ChangeDeleteConfirm**](FilesSettingsAPI.md#ChangeDeleteConfirm) | **Put** /api/2.0/files/changedeleteconfrim | Confirm the file deletion
-[**ChangeDownloadZip**](FilesSettingsAPI.md#ChangeDownloadZip) | **Put** /api/2.0/files/settings/downloadtargz | Change the archive format (using body parameters)
-[**ChangeExternalSharingSettings**](FilesSettingsAPI.md#ChangeExternalSharingSettings) | **Put** /api/2.0/files/settings/externalsharingsettings | Change the Access Control external sharing settings
-[**CheckDocServiceUrl**](FilesSettingsAPI.md#CheckDocServiceUrl) | **Put** /api/2.0/files/docservice | Check the document service URL
+[**ChangeDeleteConfirm**](FilesSettingsAPI.md#ChangeDeleteConfirm) | **Put** /api/2.0/files/changedeleteconfrim | Ask for delete confirmation
+[**ChangeDownloadZip**](FilesSettingsAPI.md#ChangeDownloadZip) | **Put** /api/2.0/files/settings/downloadtargz | Change the download archive format
+[**ChangeExternalSharingSettings**](FilesSettingsAPI.md#ChangeExternalSharingSettings) | **Put** /api/2.0/files/settings/externalsharingsettings | Configure external sharing
+[**CheckDocServiceUrl**](FilesSettingsAPI.md#CheckDocServiceUrl) | **Put** /api/2.0/files/docservice | Set the document service address
 [**DisplayFileExtension**](FilesSettingsAPI.md#DisplayFileExtension) | **Put** /api/2.0/files/displayfileextension | Display a file extension
-[**DisplayRecent**](FilesSettingsAPI.md#DisplayRecent) | **Put** /api/2.0/files/displayrecent | Display the Recent folder
+[**DisplayRecent**](FilesSettingsAPI.md#DisplayRecent) | **Put** /api/2.0/files/displayrecent | Show the Recent section
 [**ExternalShare**](FilesSettingsAPI.md#ExternalShare) | **Put** /api/2.0/files/settings/external | Change the external sharing ability
 [**ExternalShareSocialMedia**](FilesSettingsAPI.md#ExternalShareSocialMedia) | **Put** /api/2.0/files/settings/externalsocialmedia | Change the external sharing ability on social networks
 [**Forcesave**](FilesSettingsAPI.md#Forcesave) | **Put** /api/2.0/files/forcesave | Change the forcesaving ability
 [**GetAutomaticallyCleanUp**](FilesSettingsAPI.md#GetAutomaticallyCleanUp) | **Get** /api/2.0/files/settings/autocleanup | Get the trash bin auto-clearing setting
 [**GetDefaultTemplates**](FilesSettingsAPI.md#GetDefaultTemplates) | **Get** /api/2.0/files/settings/defaulttemplate | Get the default template setting
-[**GetDocServiceUrl**](FilesSettingsAPI.md#GetDocServiceUrl) | **Get** /api/2.0/files/docservice | Get the document service URL
-[**GetFilesModule**](FilesSettingsAPI.md#GetFilesModule) | **Get** /api/2.0/files/info | Get the Documents information
+[**GetDocServiceUrl**](FilesSettingsAPI.md#GetDocServiceUrl) | **Get** /api/2.0/files/docservice | Get the document service address
+[**GetFilesModule**](FilesSettingsAPI.md#GetFilesModule) | **Get** /api/2.0/files/info | Get the Documents module information
 [**GetFilesSettings**](FilesSettingsAPI.md#GetFilesSettings) | **Get** /api/2.0/files/settings | Get file settings
 [**HideConfirmCancelOperation**](FilesSettingsAPI.md#HideConfirmCancelOperation) | **Put** /api/2.0/files/hideconfirmcanceloperation | Hide confirmation dialog when canceling operations
 [**HideConfirmConvert**](FilesSettingsAPI.md#HideConfirmConvert) | **Put** /api/2.0/files/hideconfirmconvert | Hide the confirmation dialog when converting
 [**HideConfirmRoomLifetime**](FilesSettingsAPI.md#HideConfirmRoomLifetime) | **Put** /api/2.0/files/hideconfirmroomlifetime | Hide confirmation dialog when changing room lifetime settings
-[**KeepNewFileName**](FilesSettingsAPI.md#KeepNewFileName) | **Put** /api/2.0/files/keepnewfilename | Ask a new file name
+[**KeepNewFileName**](FilesSettingsAPI.md#KeepNewFileName) | **Put** /api/2.0/files/keepnewfilename | Keep the default file name
 [**ResetDefaultTemplate**](FilesSettingsAPI.md#ResetDefaultTemplate) | **Delete** /api/2.0/files/settings/defaulttemplate | Reset the default template setting
 [**SetDefaultTemplate**](FilesSettingsAPI.md#SetDefaultTemplate) | **Put** /api/2.0/files/settings/defaulttemplate | Change the default template setting
 [**SetOpenEditorInSameTab**](FilesSettingsAPI.md#SetOpenEditorInSameTab) | **Put** /api/2.0/files/settings/openeditorinsametab | Open document in the same browser tab
 [**SetOrganizeRoomsGrouping**](FilesSettingsAPI.md#SetOrganizeRoomsGrouping) | **Put** /api/2.0/files/settings/organizegrouping | Organize rooms grouping
+[**ShowQuickActions**](FilesSettingsAPI.md#ShowQuickActions) | **Put** /api/2.0/files/showquickactions | Display quick actions
 [**StoreForcesave**](FilesSettingsAPI.md#StoreForcesave) | **Put** /api/2.0/files/storeforcesave | Change the ability to store the forcesaved files
 [**StoreOriginal**](FilesSettingsAPI.md#StoreOriginal) | **Put** /api/2.0/files/storeoriginal | Change the ability to upload original formats
 [**UpdateFileIfExist**](FilesSettingsAPI.md#UpdateFileIfExist) | **Put** /api/2.0/files/updateifexist | Update a file version if it exists
@@ -195,7 +196,7 @@ import (
 )
 
 func main() {
-	requestBody := []int32{int32(0)} // []int32 | Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator). (optional)
+	requestBody := []int32{int32(0)} // []int32 | The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -220,7 +221,7 @@ Other parameters are passed through a pointer to a apiChangeDefaultAccessRightsR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **[]int32** | Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator). | 
+ **requestBody** | **[]int32** | The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request. | 
 
 ### Return type
 
@@ -244,7 +245,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper ChangeDeleteConfirm(ctx).SettingsRequestDto(settingsRequestDto).Execute()
 
-Confirm the file deletion
+Ask for delete confirmation
 
 
 
@@ -312,7 +313,7 @@ Name | Type | Description  | Notes
 
 > ICompressWrapper ChangeDownloadZip(ctx).DisplayRequestDto(displayRequestDto).Execute()
 
-Change the archive format (using body parameters)
+Change the download archive format
 
 
 
@@ -380,7 +381,7 @@ Name | Type | Description  | Notes
 
 > ExternalSharingSettingsWrapper ChangeExternalSharingSettings(ctx).ExternalSharingSettingsRequestDto(externalSharingSettingsRequestDto).Execute()
 
-Change the Access Control external sharing settings
+Configure external sharing
 
 
 
@@ -448,7 +449,7 @@ Name | Type | Description  | Notes
 
 > DocServiceUrlWrapper CheckDocServiceUrl(ctx).CheckDocServiceUrlRequestDto(checkDocServiceUrlRequestDto).Execute()
 
-Check the document service URL
+Set the document service address
 
 
 
@@ -584,7 +585,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper DisplayRecent(ctx).DisplayRequestDto(displayRequestDto).Execute()
 
-Display the Recent folder
+Show the Recent section
 
 
 
@@ -977,7 +978,7 @@ Other parameters are passed through a pointer to a apiGetDefaultTemplatesRequest
 
 > DocServiceUrlWrapper GetDocServiceUrl(ctx).Version(version).Execute()
 
-Get the document service URL
+Get the document service address
 
 
 
@@ -996,7 +997,7 @@ import (
 )
 
 func main() {
-	version := true // bool | Specifies whether to return the editor version or not. (optional)
+	version := true // bool | Whether the running Document Server is asked for its editor version so that `version` can report it. Left off,  the portal answers from its own settings without contacting the Document Server and `version` comes back  empty. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1021,7 +1022,7 @@ Other parameters are passed through a pointer to a apiGetDocServiceUrlRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **version** | **bool** | Specifies whether to return the editor version or not. | 
+ **version** | **bool** | Whether the running Document Server is asked for its editor version so that `version` can report it. Left off,  the portal answers from its own settings without contacting the Document Server and `version` comes back  empty. | 
 
 ### Return type
 
@@ -1029,7 +1030,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1045,7 +1046,7 @@ No authorization required
 
 > ModuleWrapper GetFilesModule(ctx).Execute()
 
-Get the Documents information
+Get the Documents module information
 
 
 
@@ -1155,7 +1156,7 @@ Other parameters are passed through a pointer to a apiGetFilesSettingsRequest st
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1375,7 +1376,7 @@ Name | Type | Description  | Notes
 
 > BooleanWrapper KeepNewFileName(ctx).SettingsRequestDto(settingsRequestDto).Execute()
 
-Ask a new file name
+Keep the default file name
 
 
 
@@ -1711,6 +1712,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ShowQuickActions
+
+> BooleanWrapper ShowQuickActions(ctx).SettingsRequestDto(settingsRequestDto).Execute()
+
+Display quick actions
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/show-quick-actions/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	settingsRequestDto := *openapiclient.NewSettingsRequestDto() // SettingsRequestDto |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FilesSettingsAPI.ShowQuickActions(context.Background()).SettingsRequestDto(settingsRequestDto).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesSettingsAPI.ShowQuickActions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ShowQuickActions`: BooleanWrapper
+	fmt.Fprintf(os.Stdout, "Response from `FilesSettingsAPI.ShowQuickActions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiShowQuickActionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **settingsRequestDto** | [**SettingsRequestDto**](SettingsRequestDto.md) |  | 
+
+### Return type
+
+[**BooleanWrapper**](BooleanWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## StoreForcesave
 
 > BooleanWrapper StoreForcesave(ctx).Execute()
@@ -1933,8 +2002,8 @@ import (
 )
 
 func main() {
-	fileExtension := ".docx" // string | File extension of a template to replace
-	file := os.NewFile(1234, "some_file") // *os.File | File to replace template with
+	fileExtension := ".docx" // string | The extension the uploaded blank is set for, written in lower case with the leading dot, and travelling in the  query string rather than in the form. It must match the extension of the uploaded file name. Only the  extensions the portal's built-in template set covers are accepted, and  `GET api/2.0/files/settings/defaulttemplate` returns exactly that list; an extension outside it leaves the  settings unchanged instead of failing.
+	file := os.NewFile(1234, "some_file") // *os.File | The template document itself. Its file name must end with the extension named above, a PDF must be a fillable  form, and the body is capped at 100 MB - a larger one is refused while it is still streaming in.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1959,8 +2028,8 @@ Other parameters are passed through a pointer to a apiUploadDefaultTemplateReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fileExtension** | **string** | File extension of a template to replace | 
- **file** | ***os.File** | File to replace template with | 
+ **fileExtension** | **string** | The extension the uploaded blank is set for, written in lower case with the leading dot, and travelling in the  query string rather than in the form. It must match the extension of the uploaded file name. Only the  extensions the portal's built-in template set covers are accepted, and  `GET api/2.0/files/settings/defaulttemplate` returns exactly that list; an extension outside it leaves the  settings unchanged instead of failing. | 
+ **file** | ***os.File** | The template document itself. Its file name must end with the extension named above, a PDF must be a fillable  form, and the body is capped at 100 MB - a larger one is refused while it is still streaming in. | 
 
 ### Return type
 

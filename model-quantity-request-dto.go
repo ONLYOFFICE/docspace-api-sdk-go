@@ -23,9 +23,9 @@ import (
 // checks if the QuantityRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuantityRequestDto{}
 
-// QuantityRequestDto The request parameters for specifying payment quantity.
+// QuantityRequestDto The new size of the portal subscription.
 type QuantityRequestDto struct {
-	// The mapping of item identifiers to their respective quantities in the payment.
+	// The plan and the number of units it is to cover, as a single pair. While the portal is on a priced plan the  key has to be the `name` of that same plan, which `GET api/2.0/portal/payment/quota` reports, because the  subscription is resized rather than swapped; the value is the total the subscription is to have afterwards,  not the difference. Exactly one pair is accepted, and a value that is already in effect is refused with 400.
 	Quantity map[string]int32 `json:"quantity"`
 }
 

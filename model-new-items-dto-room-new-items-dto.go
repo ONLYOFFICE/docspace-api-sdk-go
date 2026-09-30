@@ -16,7 +16,6 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 	"bytes"
 	"fmt"
 )
@@ -24,11 +23,11 @@ import (
 // checks if the NewItemsDtoRoomNewItemsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NewItemsDtoRoomNewItemsDto{}
 
-// NewItemsDtoRoomNewItemsDto The new item parameters.
+// NewItemsDtoRoomNewItemsDto One day of the entries the caller has not opened yet, the groups running from the most recent day backwards.
 type NewItemsDtoRoomNewItemsDto struct {
-	// The date and time when the new item was created.
-	Date NullableTime `json:"date"`
-	// The list of items.
+	// The day the grouped entries were last changed, written with the offset of the portal time zone. The time part  is the moment of the newest entry of the group.
+	Date ApiDateTime `json:"date"`
+	// What changed on that day, the most recent first. Folders are left out of it, so an entry here is always a file  or a room that holds them.
 	Items []RoomNewItemsDto `json:"items"`
 }
 
@@ -38,7 +37,7 @@ type _NewItemsDtoRoomNewItemsDto NewItemsDtoRoomNewItemsDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNewItemsDtoRoomNewItemsDto(date NullableTime, items []RoomNewItemsDto) *NewItemsDtoRoomNewItemsDto {
+func NewNewItemsDtoRoomNewItemsDto(date ApiDateTime, items []RoomNewItemsDto) *NewItemsDtoRoomNewItemsDto {
 	this := NewItemsDtoRoomNewItemsDto{}
 	this.Date = date
 	this.Items = items
@@ -54,29 +53,27 @@ func NewNewItemsDtoRoomNewItemsDtoWithDefaults() *NewItemsDtoRoomNewItemsDto {
 }
 
 // GetDate returns the Date field value
-// If the value is explicit nil, the zero value for time.Time will be returned
-func (o *NewItemsDtoRoomNewItemsDto) GetDate() time.Time {
-	if o == nil || o.Date.Get() == nil {
-		var ret time.Time
+func (o *NewItemsDtoRoomNewItemsDto) GetDate() ApiDateTime {
+	if o == nil {
+		var ret ApiDateTime
 		return ret
 	}
 
-	return *o.Date.Get()
+	return o.Date
 }
 
 // GetDateOk returns a tuple with the Date field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NewItemsDtoRoomNewItemsDto) GetDateOk() (*time.Time, bool) {
+func (o *NewItemsDtoRoomNewItemsDto) GetDateOk() (*ApiDateTime, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Date.Get(), o.Date.IsSet()
+	return &o.Date, true
 }
 
 // SetDate sets field value
-func (o *NewItemsDtoRoomNewItemsDto) SetDate(v time.Time) {
-	o.Date.Set(&v)
+func (o *NewItemsDtoRoomNewItemsDto) SetDate(v ApiDateTime) {
+	o.Date = v
 }
 
 // GetItems returns the Items field value
@@ -115,7 +112,7 @@ func (o NewItemsDtoRoomNewItemsDto) MarshalJSON() ([]byte, error) {
 
 func (o NewItemsDtoRoomNewItemsDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["date"] = o.Date.Get()
+	toSerialize["date"] = o.Date
 	if o.Items != nil {
 		toSerialize["items"] = o.Items
 	}

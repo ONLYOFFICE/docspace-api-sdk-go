@@ -4,8 +4,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SendOwnerChangeInstructions**](SettingsOwnerAPI.md#SendOwnerChangeInstructions) | **Post** /api/2.0/settings/owner | Send the owner change instructions
-[**UpdatePortalOwner**](SettingsOwnerAPI.md#UpdatePortalOwner) | **Put** /api/2.0/settings/owner | Update the portal owner
+[**SendOwnerChangeInstructions**](SettingsOwnerAPI.md#SendOwnerChangeInstructions) | **Post** /api/2.0/settings/owner | Start the portal owner change
+[**UpdatePortalOwner**](SettingsOwnerAPI.md#UpdatePortalOwner) | **Put** /api/2.0/settings/owner | Confirm the portal owner change
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > OwnerChangeInstructionsWrapper SendOwnerChangeInstructions(ctx).OwnerIdSettingsRequestDto(ownerIdSettingsRequestDto).Execute()
 
-Send the owner change instructions
+Start the portal owner change
 
 
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 > UpdatePortalOwner(ctx).OwnerIdSettingsRequestDto(ownerIdSettingsRequestDto).Execute()
 
-Update the portal owner
+Confirm the portal owner change
 
 
 

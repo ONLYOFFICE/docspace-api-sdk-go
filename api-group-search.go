@@ -30,29 +30,29 @@ type GroupSearchAPIService service
 type ApiGetGroupsWithFilesSharedRequest struct {
 	ctx context.Context
 	ApiService *GroupSearchAPIService
-	id int32
+	id interface{}
 	excludeShared *bool
 	count *int32
 	startIndex *int32
 	filterValue *string
 }
 
-// Specifies whether to exclude the group sharing settings from the response.
+// Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
 func (r ApiGetGroupsWithFilesSharedRequest) ExcludeShared(excludeShared bool) ApiGetGroupsWithFilesSharedRequest {	r.excludeShared = &excludeShared
 	return r
 }
 
-// The number of groups to retrieve in the request.
+// The size of the page. It defaults to 100, which is also the largest value the operation accepts.
 func (r ApiGetGroupsWithFilesSharedRequest) Count(count int32) ApiGetGroupsWithFilesSharedRequest {	r.count = &count
 	return r
 }
 
-// The starting index from which to begin retrieving groups with their sharing settings.
+// The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
 func (r ApiGetGroupsWithFilesSharedRequest) StartIndex(startIndex int32) ApiGetGroupsWithFilesSharedRequest {	r.startIndex = &startIndex
 	return r
 }
 
-// The text used as a filter for retrieving groups with their sharing settings.
+// The text to match against the group name. Omit it to get every group the caller may grant access to.
 func (r ApiGetGroupsWithFilesSharedRequest) FilterValue(filterValue string) ApiGetGroupsWithFilesSharedRequest {	r.filterValue = &filterValue
 	return r
 }
@@ -61,16 +61,16 @@ func (r ApiGetGroupsWithFilesSharedRequest) Execute() (*GroupArrayWrapper, *http
 	return r.ApiService.GetGroupsWithFilesSharedExecute(r)
 }
 
-// GetGroupsWithFilesShared Get groups with file sharing settings
+// GetGroupsWithFilesShared Search groups for a file
 //
-// Returns groups with their sharing settings for a file with the ID specified in request.
+// Returns the groups that can be given access to the file with the ID given in the route, and reports for each  of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the file yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/file/{id}/search`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-files-shared/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The group ID.
+// @param id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
 // @return ApiGetGroupsWithFilesSharedRequest
-func (a *GroupSearchAPIService) GetGroupsWithFilesShared(ctx context.Context, id int32) ApiGetGroupsWithFilesSharedRequest {
+func (a *GroupSearchAPIService) GetGroupsWithFilesShared(ctx context.Context, id interface{}) ApiGetGroupsWithFilesSharedRequest {
 	return ApiGetGroupsWithFilesSharedRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -227,29 +227,29 @@ func (a *GroupSearchAPIService) GetGroupsWithFilesSharedExecute(r ApiGetGroupsWi
 type ApiGetGroupsWithFoldersSharedRequest struct {
 	ctx context.Context
 	ApiService *GroupSearchAPIService
-	id int32
+	id interface{}
 	excludeShared *bool
 	count *int32
 	startIndex *int32
 	filterValue *string
 }
 
-// Specifies whether to exclude the group sharing settings from the response.
+// Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
 func (r ApiGetGroupsWithFoldersSharedRequest) ExcludeShared(excludeShared bool) ApiGetGroupsWithFoldersSharedRequest {	r.excludeShared = &excludeShared
 	return r
 }
 
-// The number of groups to retrieve in the request.
+// The size of the page. It defaults to 100, which is also the largest value the operation accepts.
 func (r ApiGetGroupsWithFoldersSharedRequest) Count(count int32) ApiGetGroupsWithFoldersSharedRequest {	r.count = &count
 	return r
 }
 
-// The starting index from which to begin retrieving groups with their sharing settings.
+// The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
 func (r ApiGetGroupsWithFoldersSharedRequest) StartIndex(startIndex int32) ApiGetGroupsWithFoldersSharedRequest {	r.startIndex = &startIndex
 	return r
 }
 
-// The text used as a filter for retrieving groups with their sharing settings.
+// The text to match against the group name. Omit it to get every group the caller may grant access to.
 func (r ApiGetGroupsWithFoldersSharedRequest) FilterValue(filterValue string) ApiGetGroupsWithFoldersSharedRequest {	r.filterValue = &filterValue
 	return r
 }
@@ -258,16 +258,16 @@ func (r ApiGetGroupsWithFoldersSharedRequest) Execute() (*GroupArrayWrapper, *ht
 	return r.ApiService.GetGroupsWithFoldersSharedExecute(r)
 }
 
-// GetGroupsWithFoldersShared Get groups with folder sharing settings
+// GetGroupsWithFoldersShared Search groups for a folder
 //
-// Returns groups with their sharing settings in a folder with the ID specified in request.
+// Returns the groups that can be given access to the folder with the ID given in the route, and reports for  each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the folder yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/folder/{id}/search`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-folders-shared/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The group ID.
+// @param id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
 // @return ApiGetGroupsWithFoldersSharedRequest
-func (a *GroupSearchAPIService) GetGroupsWithFoldersShared(ctx context.Context, id int32) ApiGetGroupsWithFoldersSharedRequest {
+func (a *GroupSearchAPIService) GetGroupsWithFoldersShared(ctx context.Context, id interface{}) ApiGetGroupsWithFoldersSharedRequest {
 	return ApiGetGroupsWithFoldersSharedRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -424,29 +424,29 @@ func (a *GroupSearchAPIService) GetGroupsWithFoldersSharedExecute(r ApiGetGroups
 type ApiGetGroupsWithRoomsSharedRequest struct {
 	ctx context.Context
 	ApiService *GroupSearchAPIService
-	id int32
+	id interface{}
 	excludeShared *bool
 	count *int32
 	startIndex *int32
 	filterValue *string
 }
 
-// Specifies whether to exclude the group sharing settings from the response.
+// Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
 func (r ApiGetGroupsWithRoomsSharedRequest) ExcludeShared(excludeShared bool) ApiGetGroupsWithRoomsSharedRequest {	r.excludeShared = &excludeShared
 	return r
 }
 
-// The number of groups to retrieve in the request.
+// The size of the page. It defaults to 100, which is also the largest value the operation accepts.
 func (r ApiGetGroupsWithRoomsSharedRequest) Count(count int32) ApiGetGroupsWithRoomsSharedRequest {	r.count = &count
 	return r
 }
 
-// The starting index from which to begin retrieving groups with their sharing settings.
+// The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
 func (r ApiGetGroupsWithRoomsSharedRequest) StartIndex(startIndex int32) ApiGetGroupsWithRoomsSharedRequest {	r.startIndex = &startIndex
 	return r
 }
 
-// The text used as a filter for retrieving groups with their sharing settings.
+// The text to match against the group name. Omit it to get every group the caller may grant access to.
 func (r ApiGetGroupsWithRoomsSharedRequest) FilterValue(filterValue string) ApiGetGroupsWithRoomsSharedRequest {	r.filterValue = &filterValue
 	return r
 }
@@ -455,16 +455,16 @@ func (r ApiGetGroupsWithRoomsSharedRequest) Execute() (*GroupArrayWrapper, *http
 	return r.ApiService.GetGroupsWithRoomsSharedExecute(r)
 }
 
-// GetGroupsWithRoomsShared Get groups with room sharing settings
+// GetGroupsWithRoomsShared Search groups for a room
 //
-// Returns groups with their sharing settings in a room with the ID specified in request.
+// Returns the groups that can be given access to the room with the ID given in the route, and reports for each  of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the room yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/room/{id}/search`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-rooms-shared/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param id The group ID.
+// @param id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
 // @return ApiGetGroupsWithRoomsSharedRequest
-func (a *GroupSearchAPIService) GetGroupsWithRoomsShared(ctx context.Context, id int32) ApiGetGroupsWithRoomsSharedRequest {
+func (a *GroupSearchAPIService) GetGroupsWithRoomsShared(ctx context.Context, id interface{}) ApiGetGroupsWithRoomsSharedRequest {
 	return ApiGetGroupsWithRoomsSharedRequest{
 		ApiService: a,
 		ctx: ctx,

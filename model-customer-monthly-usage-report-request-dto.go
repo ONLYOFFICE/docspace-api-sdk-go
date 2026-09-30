@@ -22,11 +22,11 @@ import (
 // checks if the CustomerMonthlyUsageReportRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomerMonthlyUsageReportRequestDto{}
 
-// CustomerMonthlyUsageReportRequestDto The request parameters for generating a customer monthly usage report.
+// CustomerMonthlyUsageReportRequestDto The period covered by the monthly wallet spending report.
 type CustomerMonthlyUsageReportRequestDto struct {
-	// The report start date.
+	// The beginning of the reported period, inclusive. The months are cut in the portal time zone rather than in  UTC, so spending at the turn of a month falls where the portal sees it; defaults to the portal creation date.
 	StartDate NullableTime `json:"startDate,omitempty"`
-	// The report end date.
+	// The end of the reported period, inclusive. Cut in the portal time zone in the same way as `startDate`, and  defaults to the moment the call is made.
 	EndDate NullableTime `json:"endDate,omitempty"`
 }
 

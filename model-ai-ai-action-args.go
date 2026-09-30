@@ -21,12 +21,14 @@ import (
 // checks if the AiAiActionArgs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiAiActionArgs{}
 
-// AiAiActionArgs Wire-serializable subset of the engine's `ActionArgs` — drops the engine-injected `signal`/`fetch`; `profile`/`messages` are owned by the engine and never sent by the caller.
+// AiAiActionArgs struct for AiAiActionArgs
 type AiAiActionArgs struct {
 	// Extra tools offered to the model for this request.
 	Tools []AiTMCPItem `json:"tools,omitempty"`
-	// Enable extended thinking / reasoning for this request.
+	// Legacy extended-thinking switch; stands for `medium`. `reasoningLevel` wins when both are set.
 	IsReasoning *bool `json:"isReasoning,omitempty"`
+	// Depth of extended thinking for the round; providers clamp it to what the model accepts.
+	ReasoningLevel *AiAiReasoningLevel `json:"reasoningLevel,omitempty"`
 	Prompt *AiAiActionArgsPrompt `json:"prompt,omitempty"`
 }
 
@@ -111,6 +113,38 @@ func (o *AiAiActionArgs) SetIsReasoning(v bool) {
 	o.IsReasoning = &v
 }
 
+// GetReasoningLevel returns the ReasoningLevel field value if set, zero value otherwise.
+func (o *AiAiActionArgs) GetReasoningLevel() AiAiReasoningLevel {
+	if o == nil || IsNil(o.ReasoningLevel) {
+		var ret AiAiReasoningLevel
+		return ret
+	}
+	return *o.ReasoningLevel
+}
+
+// GetReasoningLevelOk returns a tuple with the ReasoningLevel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiAiActionArgs) GetReasoningLevelOk() (*AiAiReasoningLevel, bool) {
+	if o == nil || IsNil(o.ReasoningLevel) {
+		return nil, false
+	}
+	return o.ReasoningLevel, true
+}
+
+// HasReasoningLevel returns a boolean if a field has been set.
+func (o *AiAiActionArgs) IsReasoningLevelSet() bool {
+	if o != nil && !IsNil(o.ReasoningLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetReasoningLevel gets a reference to the given AiAiReasoningLevel and assigns it to the ReasoningLevel field.
+func (o *AiAiActionArgs) SetReasoningLevel(v AiAiReasoningLevel) {
+	o.ReasoningLevel = &v
+}
+
 // GetPrompt returns the Prompt field value if set, zero value otherwise.
 func (o *AiAiActionArgs) GetPrompt() AiAiActionArgsPrompt {
 	if o == nil || IsNil(o.Prompt) {
@@ -158,6 +192,9 @@ func (o AiAiActionArgs) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsReasoning) {
 		toSerialize["isReasoning"] = o.IsReasoning
+	}
+	if !IsNil(o.ReasoningLevel) {
+		toSerialize["reasoningLevel"] = o.ReasoningLevel
 	}
 	if !IsNil(o.Prompt) {
 		toSerialize["prompt"] = o.Prompt

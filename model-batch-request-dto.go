@@ -21,22 +21,22 @@ import (
 // checks if the BatchRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BatchRequestDto{}
 
-// BatchRequestDto The request parameters for copying/moving files.
+// BatchRequestDto The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
 type BatchRequestDto struct {
-	// Specifies whether to return only the current operation
+	// Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
 	ReturnSingleOperation *bool `json:"returnSingleOperation,omitempty"`
-	// The list of folder IDs to be copied/moved.
+	// The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
 	FolderIds []BatchRequestDtoAllOfFolderIds `json:"folderIds,omitempty"`
-	// The list of file IDs to be copied/moved.
+	// The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
 	FileIds []BatchRequestDtoAllOfFileIds `json:"fileIds,omitempty"`
 	DestFolderId *BatchRequestDtoAllOfDestFolderId `json:"destFolderId,omitempty"`
-	// The overwriting behavior of the file copying or moving.
+	// What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
 	ConflictResolveType *FileConflictResolveType `json:"conflictResolveType,omitempty"`
-	// Specifies whether to delete the source files/folders after they are moved or copied to the destination folder.
+	// Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
 	DeleteAfter *bool `json:"deleteAfter,omitempty"`
-	// Specifies whether to copy or move the folder content or not.
+	// What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
 	Content *bool `json:"content,omitempty"`
-	// Specifies whether the file is copied for filling out
+	// Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
 	ToFillOut *bool `json:"toFillOut,omitempty"`
 }
 

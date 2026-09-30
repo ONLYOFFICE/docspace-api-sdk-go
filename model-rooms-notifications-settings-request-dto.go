@@ -21,10 +21,10 @@ import (
 // checks if the RoomsNotificationsSettingsRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoomsNotificationsSettingsRequestDto{}
 
-// RoomsNotificationsSettingsRequestDto The request parameters for configuring notification settings for the chat or collaboration rooms.
+// RoomsNotificationsSettingsRequestDto Which single room the calling user silences, and which way.
 type RoomsNotificationsSettingsRequestDto struct {
 	RoomsId interface{} `json:"roomsId,omitempty"`
-	// Specifies whether the notifications will be delivered to the specified room or not.
+	// Which way the room goes: `true` adds it to the caller silenced list, `false` takes it off again. While a room  is silenced its activity is left out of the hourly and daily digests, the letters it would send at once are  not sent, and its new-item counters are hidden.
 	Mute *bool `json:"mute,omitempty"`
 }
 

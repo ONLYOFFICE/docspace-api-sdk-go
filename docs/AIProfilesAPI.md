@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AiProfilesCreate**](AIProfilesAPI.md#AiProfilesCreate) | **Post** /api/2.0/ai/profiles/create | Create
-[**AiProfilesDelete**](AIProfilesAPI.md#AiProfilesDelete) | **Delete** /api/2.0/ai/profiles/delete | Delete
-[**AiProfilesGetById**](AIProfilesAPI.md#AiProfilesGetById) | **Get** /api/2.0/ai/profiles/get-by-id | Get by id
-[**AiProfilesList**](AIProfilesAPI.md#AiProfilesList) | **Get** /api/2.0/ai/profiles/list | List
+[**AiProfilesCreate**](AIProfilesAPI.md#AiProfilesCreate) | **Post** /api/2.0/ai/profiles/create | Create a provider profile
+[**AiProfilesDelete**](AIProfilesAPI.md#AiProfilesDelete) | **Delete** /api/2.0/ai/profiles/delete | Delete a provider profile
+[**AiProfilesGetById**](AIProfilesAPI.md#AiProfilesGetById) | **Get** /api/2.0/ai/profiles/get-by-id | Get a provider profile
+[**AiProfilesList**](AIProfilesAPI.md#AiProfilesList) | **Get** /api/2.0/ai/profiles/list | List provider profiles
 [**AiProfilesListModels**](AIProfilesAPI.md#AiProfilesListModels) | **Get** /api/2.0/ai/profiles/list-models | List models
 [**AiProfilesListProviderModels**](AIProfilesAPI.md#AiProfilesListProviderModels) | **Post** /api/2.0/ai/profiles/list-provider-models | List provider models
-[**AiProfilesTestConnection**](AIProfilesAPI.md#AiProfilesTestConnection) | **Post** /api/2.0/ai/profiles/test-connection | Test connection
-[**AiProfilesUpdate**](AIProfilesAPI.md#AiProfilesUpdate) | **Put** /api/2.0/ai/profiles/update | Update
+[**AiProfilesTestConnection**](AIProfilesAPI.md#AiProfilesTestConnection) | **Post** /api/2.0/ai/profiles/test-connection | Test a profile's provider
+[**AiProfilesUpdate**](AIProfilesAPI.md#AiProfilesUpdate) | **Put** /api/2.0/ai/profiles/update | Update a provider profile
 
 
 
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 > AiProfileMutationResult AiProfilesCreate(ctx).AiCreateProfileInput(aiCreateProfileInput).Execute()
 
-Create
+Create a provider profile
 
 
 
@@ -38,7 +38,7 @@ import (
 )
 
 func main() {
-	aiCreateProfileInput := *openapiclient.NewAiCreateProfileInput("Name_example", *openapiclient.NewAiProviderType(), "BaseUrl_example", "ModelId_example") // AiCreateProfileInput | 
+	aiCreateProfileInput := *openapiclient.NewAiCreateProfileInput("OpenAI GPT-4o", *openapiclient.NewAiProviderType(), "https://api.openai.com/v1", "gpt-4o") // AiCreateProfileInput | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -87,7 +87,7 @@ No authorization required
 
 > AiSuccessResponse AiProfilesDelete(ctx).Body(body).Execute()
 
-Delete
+Delete a provider profile
 
 
 
@@ -106,7 +106,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | The ID of the profile to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -131,7 +131,7 @@ Other parameters are passed through a pointer to a apiAiProfilesDeleteRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | The ID of the profile to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -155,7 +155,7 @@ No authorization required
 
 > AiProfilesGetById200Response AiProfilesGetById(ctx).Id(id).Execute()
 
-Get by id
+Get a provider profile
 
 
 
@@ -174,7 +174,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | The AI provider profile identifier.
+	id := "00000000-0000-0000-0000-000000000000" // string | The AI provider profile identifier.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -223,7 +223,7 @@ No authorization required
 
 > []AiProfile AiProfilesList(ctx).Execute()
 
-List
+List provider profiles
 
 
 
@@ -270,7 +270,7 @@ Other parameters are passed through a pointer to a apiAiProfilesListRequest stru
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -305,7 +305,7 @@ import (
 )
 
 func main() {
-	profileId := "profileId_example" // string | The AI provider profile identifier.
+	profileId := "00000000-0000-0000-0000-000000000000" // string | The AI provider profile identifier.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -338,7 +338,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -373,7 +373,7 @@ import (
 )
 
 func main() {
-	aiProfilesListProviderModelsRequest := *openapiclient.NewAiProfilesListProviderModelsRequest(*openapiclient.NewAiProviderType(), "BaseUrl_example", "ApiKey_example") // AiProfilesListProviderModelsRequest | 
+	aiProfilesListProviderModelsRequest := *openapiclient.NewAiProfilesListProviderModelsRequest(*openapiclient.NewAiProviderType(), "https://api.openai.com/v1") // AiProfilesListProviderModelsRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -406,7 +406,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -422,7 +422,7 @@ No authorization required
 
 > AiProfilesTestConnection200Response AiProfilesTestConnection(ctx).Body(body).Execute()
 
-Test connection
+Test a profile's provider
 
 
 
@@ -441,7 +441,7 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | 
+	body := "body_example" // string | The ID of the profile to probe, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -466,7 +466,7 @@ Other parameters are passed through a pointer to a apiAiProfilesTestConnectionRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **body** | **string** | The ID of the profile to probe, as a bare JSON string. | 
 
 ### Return type
 
@@ -474,7 +474,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -490,7 +490,7 @@ No authorization required
 
 > AiProfileMutationResult AiProfilesUpdate(ctx).AiProfile(aiProfile).Execute()
 
-Update
+Update a provider profile
 
 
 
@@ -509,7 +509,7 @@ import (
 )
 
 func main() {
-	aiProfile := *openapiclient.NewAiProfile("Id_example", "Name_example", *openapiclient.NewAiProviderType(), "BaseUrl_example", "ModelId_example") // AiProfile | 
+	aiProfile := *openapiclient.NewAiProfile("00000000-0000-0000-0000-000000000000", "OpenAI GPT-4o", *openapiclient.NewAiProviderType(), "https://api.openai.com/v1", "gpt-4o") // AiProfile | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -542,7 +542,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

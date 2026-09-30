@@ -23,11 +23,11 @@ var _ MappedNullable = &UpdateApiKeyRequest{}
 
 // UpdateApiKeyRequest The request parameters for updating an existing API key.
 type UpdateApiKeyRequest struct {
-	// The new name for the API key.
+	// The new label of the key, up to 30 characters. Omit it to keep the current name.
 	Name NullableString `json:"name,omitempty"`
-	// The new list of permissions for the API key.
+	// The scopes that replace the current ones. Every value has to come from `GET api/2.0/keys/permissions`, an  unknown value or an empty array is rejected, and omitting the field keeps the current scopes.
 	Permissions []string `json:"permissions,omitempty"`
-	// Indicates whether the API key should be active or not.
+	// Whether the key may authenticate requests. Set it to false to stop the key without deleting it and to true to  let it work again; omit it to keep the current state.
 	IsActive NullableBool `json:"isActive,omitempty"`
 }
 

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Date** | **NullableTime** | The date and time when the new item was created. | 
-**Items** | [**[]AiAgentNewItemsDto**](AiAgentNewItemsDto.md) | The list of items. | 
+**Date** | [**AiApiDateTime**](AiApiDateTime.md) | The day the grouped entries were last changed, written with the offset of the portal time zone. The time part  is the moment of the newest entry of the group. | 
+**Items** | [**[]AiAgentNewItemsDto**](AiAgentNewItemsDto.md) | What changed on that day, the most recent first. Folders are left out of it, so an entry here is always a file  or a room that holds them. | 
 
 ## Methods
 
 ### NewAiNewItemsDtoAgentNewItemsDto
 
-`func NewAiNewItemsDtoAgentNewItemsDto(date NullableTime, items []AiAgentNewItemsDto, ) *AiNewItemsDtoAgentNewItemsDto`
+`func NewAiNewItemsDtoAgentNewItemsDto(date AiApiDateTime, items []AiAgentNewItemsDto, ) *AiNewItemsDtoAgentNewItemsDto`
 
 NewAiNewItemsDtoAgentNewItemsDto instantiates a new AiNewItemsDtoAgentNewItemsDto object
 This constructor will assign default values to properties that have it defined,
@@ -28,34 +28,24 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDate
 
-`func (o *AiNewItemsDtoAgentNewItemsDto) GetDate() time.Time`
+`func (o *AiNewItemsDtoAgentNewItemsDto) GetDate() AiApiDateTime`
 
 GetDate returns the Date field if non-nil, zero value otherwise.
 
 ### GetDateOk
 
-`func (o *AiNewItemsDtoAgentNewItemsDto) GetDateOk() (*time.Time, bool)`
+`func (o *AiNewItemsDtoAgentNewItemsDto) GetDateOk() (*AiApiDateTime, bool)`
 
 GetDateOk returns a tuple with the Date field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDate
 
-`func (o *AiNewItemsDtoAgentNewItemsDto) SetDate(v time.Time)`
+`func (o *AiNewItemsDtoAgentNewItemsDto) SetDate(v AiApiDateTime)`
 
 SetDate sets Date field to given value.
 
 
-### SetDateNil
-
-`func (o *AiNewItemsDtoAgentNewItemsDto) SetDateNil(b bool)`
-
- SetDateNil sets the value for Date to be an explicit nil
-
-### UnsetDate
-`func (o *AiNewItemsDtoAgentNewItemsDto) UnsetDate()`
-
-UnsetDate ensures that no value is present for Date, not even an explicit nil
 ### GetItems
 
 `func (o *AiNewItemsDtoAgentNewItemsDto) GetItems() []AiAgentNewItemsDto`

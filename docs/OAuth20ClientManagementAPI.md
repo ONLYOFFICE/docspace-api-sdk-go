@@ -4,20 +4,20 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ChangeActivation**](OAuth20ClientManagementAPI.md#ChangeActivation) | **Patch** /api/2.0/clients/{clientId}/activation | Change client activation status
-[**CreateClient**](OAuth20ClientManagementAPI.md#CreateClient) | **Post** /api/2.0/clients | Create a new OAuth2 client
-[**DeleteClient**](OAuth20ClientManagementAPI.md#DeleteClient) | **Delete** /api/2.0/clients/{clientId} | Delete an OAuth2 client
-[**DeleteTenantClients**](OAuth20ClientManagementAPI.md#DeleteTenantClients) | **Delete** /api/2.0/clients/tenant | Delete all tenant OAuth2 clients
-[**DeleteUserClients**](OAuth20ClientManagementAPI.md#DeleteUserClients) | **Delete** /api/2.0/clients | Delete all user OAuth2 clients
-[**RegenerateSecret**](OAuth20ClientManagementAPI.md#RegenerateSecret) | **Patch** /api/2.0/clients/{clientId}/regenerate | Regenerate client secret
-[**RevokeUserClient**](OAuth20ClientManagementAPI.md#RevokeUserClient) | **Delete** /api/2.0/clients/{clientId}/revoke | Revoke client consent
-[**UpdateClient**](OAuth20ClientManagementAPI.md#UpdateClient) | **Put** /api/2.0/clients/{clientId} | Update an existing OAuth2 client
+[**ChangeActivation**](OAuth20ClientManagementAPI.md#ChangeActivation) | **Patch** /api/2.0/oauth2/clients/{clientId}/activation | Change client activation status
+[**CreateClient**](OAuth20ClientManagementAPI.md#CreateClient) | **Post** /api/2.0/oauth2/clients | Create a new OAuth2 client
+[**DeleteClient**](OAuth20ClientManagementAPI.md#DeleteClient) | **Delete** /api/2.0/oauth2/clients/{clientId} | Delete an OAuth2 client
+[**DeleteTenantClients**](OAuth20ClientManagementAPI.md#DeleteTenantClients) | **Delete** /api/2.0/oauth2/clients/tenant | Delete all tenant OAuth2 clients
+[**DeleteUserClients**](OAuth20ClientManagementAPI.md#DeleteUserClients) | **Delete** /api/2.0/oauth2/clients | Delete all user OAuth2 clients
+[**RegenerateSecret**](OAuth20ClientManagementAPI.md#RegenerateSecret) | **Patch** /api/2.0/oauth2/clients/{clientId}/regenerate | Regenerate client secret
+[**RevokeUserClient**](OAuth20ClientManagementAPI.md#RevokeUserClient) | **Delete** /api/2.0/oauth2/clients/{clientId}/revoke | Revoke client consent
+[**UpdateClient**](OAuth20ClientManagementAPI.md#UpdateClient) | **Put** /api/2.0/oauth2/clients/{clientId} | Update an existing OAuth2 client
 
 
 
 ## ChangeActivation
 
-> map[string]interface{} ChangeActivation(ctx, clientId).ChangeClientActivationRequest(changeClientActivationRequest).Execute()
+> ChangeActivation(ctx, clientId).ChangeClientActivationRequest(changeClientActivationRequest).Execute()
 
 Change client activation status
 
@@ -43,13 +43,11 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OAuth20ClientManagementAPI.ChangeActivation(context.Background(), clientId).ChangeClientActivationRequest(changeClientActivationRequest).Execute()
+	r, err := apiClient.OAuth20ClientManagementAPI.ChangeActivation(context.Background(), clientId).ChangeClientActivationRequest(changeClientActivationRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OAuth20ClientManagementAPI.ChangeActivation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ChangeActivation`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `OAuth20ClientManagementAPI.ChangeActivation`: %v\n", resp)
 }
 ```
 
@@ -73,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]interface{}**
+ (empty response body)
 
 ### Authorization
 
@@ -112,7 +110,7 @@ import (
 )
 
 func main() {
-	createClientRequest := *openapiclient.NewCreateClientRequest([]string{"[\"http://example.com/redirect\"]"}, []string{"[\"http://example.com\"]"}) // CreateClientRequest | 
+	createClientRequest := *openapiclient.NewCreateClientRequest("Example Client", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", []string{"files:read"}, "http://example.com", "http://example.com/terms", "http://example.com/policy", []string{"http://example.com/redirect"}, []string{"http://example.com"}, "http://example.com/logout") // CreateClientRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -159,7 +157,7 @@ Name | Type | Description  | Notes
 
 ## DeleteClient
 
-> map[string]interface{} DeleteClient(ctx, clientId).Execute()
+> DeleteClient(ctx, clientId).Execute()
 
 Delete an OAuth2 client
 
@@ -184,13 +182,11 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OAuth20ClientManagementAPI.DeleteClient(context.Background(), clientId).Execute()
+	r, err := apiClient.OAuth20ClientManagementAPI.DeleteClient(context.Background(), clientId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OAuth20ClientManagementAPI.DeleteClient``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteClient`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `OAuth20ClientManagementAPI.DeleteClient`: %v\n", resp)
 }
 ```
 
@@ -213,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]interface{}**
+ (empty response body)
 
 ### Authorization
 
@@ -231,7 +227,7 @@ Name | Type | Description  | Notes
 
 ## DeleteTenantClients
 
-> map[string]interface{} DeleteTenantClients(ctx).Execute()
+> DeleteTenantClients(ctx).Execute()
 
 Delete all tenant OAuth2 clients
 
@@ -255,13 +251,11 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OAuth20ClientManagementAPI.DeleteTenantClients(context.Background()).Execute()
+	r, err := apiClient.OAuth20ClientManagementAPI.DeleteTenantClients(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OAuth20ClientManagementAPI.DeleteTenantClients``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteTenantClients`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `OAuth20ClientManagementAPI.DeleteTenantClients`: %v\n", resp)
 }
 ```
 
@@ -276,7 +270,7 @@ Other parameters are passed through a pointer to a apiDeleteTenantClientsRequest
 
 ### Return type
 
-**map[string]interface{}**
+ (empty response body)
 
 ### Authorization
 
@@ -294,7 +288,7 @@ Other parameters are passed through a pointer to a apiDeleteTenantClientsRequest
 
 ## DeleteUserClients
 
-> map[string]interface{} DeleteUserClients(ctx).Execute()
+> DeleteUserClients(ctx).Execute()
 
 Delete all user OAuth2 clients
 
@@ -318,13 +312,11 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OAuth20ClientManagementAPI.DeleteUserClients(context.Background()).Execute()
+	r, err := apiClient.OAuth20ClientManagementAPI.DeleteUserClients(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OAuth20ClientManagementAPI.DeleteUserClients``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteUserClients`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `OAuth20ClientManagementAPI.DeleteUserClients`: %v\n", resp)
 }
 ```
 
@@ -339,7 +331,7 @@ Other parameters are passed through a pointer to a apiDeleteUserClientsRequest s
 
 ### Return type
 
-**map[string]interface{}**
+ (empty response body)
 
 ### Authorization
 
@@ -429,7 +421,7 @@ Name | Type | Description  | Notes
 
 ## RevokeUserClient
 
-> map[string]interface{} RevokeUserClient(ctx, clientId).Execute()
+> RevokeUserClient(ctx, clientId).Execute()
 
 Revoke client consent
 
@@ -454,13 +446,11 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OAuth20ClientManagementAPI.RevokeUserClient(context.Background(), clientId).Execute()
+	r, err := apiClient.OAuth20ClientManagementAPI.RevokeUserClient(context.Background(), clientId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OAuth20ClientManagementAPI.RevokeUserClient``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RevokeUserClient`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `OAuth20ClientManagementAPI.RevokeUserClient`: %v\n", resp)
 }
 ```
 
@@ -483,7 +473,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]interface{}**
+ (empty response body)
 
 ### Authorization
 
@@ -501,7 +491,7 @@ Name | Type | Description  | Notes
 
 ## UpdateClient
 
-> map[string]interface{} UpdateClient(ctx, clientId).UpdateClientRequest(updateClientRequest).Execute()
+> UpdateClient(ctx, clientId).UpdateClientRequest(updateClientRequest).Execute()
 
 Update an existing OAuth2 client
 
@@ -523,17 +513,15 @@ import (
 
 func main() {
 	clientId := "6c7cf17b-1bd3-47d5-94c6-be2d3570e168" // string | ID of the client to update
-	updateClientRequest := *openapiclient.NewUpdateClientRequest() // UpdateClientRequest | 
+	updateClientRequest := *openapiclient.NewUpdateClientRequest("Updated Client", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", []string{"files:read"}, []string{"http://example.com"}, []string{"https://example.com/callback"}) // UpdateClientRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OAuth20ClientManagementAPI.UpdateClient(context.Background(), clientId).UpdateClientRequest(updateClientRequest).Execute()
+	r, err := apiClient.OAuth20ClientManagementAPI.UpdateClient(context.Background(), clientId).UpdateClientRequest(updateClientRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OAuth20ClientManagementAPI.UpdateClient``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateClient`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `OAuth20ClientManagementAPI.UpdateClient`: %v\n", resp)
 }
 ```
 
@@ -557,7 +545,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]interface{}**
+ (empty response body)
 
 ### Authorization
 

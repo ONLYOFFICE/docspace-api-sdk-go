@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The identifier of the key pair. | [optional] 
-**PublicKey** | Pointer to **NullableString** | The public key of the pair, used to encrypt the file keys. | [optional] 
-**PrivateKeyEnc** | Pointer to **NullableString** | The private key of the pair, encrypted with the user password. | [optional] 
+**Id** | Pointer to **string** | Names the pair inside the caller's own key set. The client generates it, and leaving it out means the all-zero  GUID, which is the pair a client that never sends an identifier keeps working with. | [optional] 
+**PublicKey** | Pointer to **NullableString** | The public half of the pair, as the client's crypto engine produced it and stored verbatim. This is the half  handed to the other members of a private room so that they can encrypt file keys for this user. | [optional] 
+**PrivateKeyEnc** | Pointer to **NullableString** | The private half of the pair, encrypted on the client with the user's password before it is sent. The portal  stores it as opaque text and cannot decrypt it, so material lost on the client cannot be recovered from here. | [optional] 
 
 ## Methods
 

@@ -4,12 +4,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetClient**](OAuth20ClientQueryingAPI.md#GetClient) | **Get** /api/2.0/clients/{clientId} | Get client details
-[**GetClientInfo**](OAuth20ClientQueryingAPI.md#GetClientInfo) | **Get** /api/2.0/clients/{clientId}/info | Retrieves detailed information for a specific client
-[**GetClients**](OAuth20ClientQueryingAPI.md#GetClients) | **Get** /api/2.0/clients | List clients
-[**GetClientsInfo**](OAuth20ClientQueryingAPI.md#GetClientsInfo) | **Get** /api/2.0/clients/info | Retrieves a pageable list of client information
-[**GetConsents**](OAuth20ClientQueryingAPI.md#GetConsents) | **Get** /api/2.0/clients/consents | Retrieves a pageable list of consents
-[**GetPublicClientInfo**](OAuth20ClientQueryingAPI.md#GetPublicClientInfo) | **Get** /api/2.0/clients/{clientId}/public/info | Handles the GET request for public client information
+[**GetClient**](OAuth20ClientQueryingAPI.md#GetClient) | **Get** /api/2.0/oauth2/clients/{clientId} | Get client details
+[**GetClientInfo**](OAuth20ClientQueryingAPI.md#GetClientInfo) | **Get** /api/2.0/oauth2/clients/{clientId}/info | Get client info
+[**GetClients**](OAuth20ClientQueryingAPI.md#GetClients) | **Get** /api/2.0/oauth2/clients | List clients
+[**GetClientsInfo**](OAuth20ClientQueryingAPI.md#GetClientsInfo) | **Get** /api/2.0/oauth2/clients/info | List client info
+[**GetConsents**](OAuth20ClientQueryingAPI.md#GetConsents) | **Get** /api/2.0/oauth2/clients/consents | List user consents
+[**GetPublicClientInfo**](OAuth20ClientQueryingAPI.md#GetPublicClientInfo) | **Get** /api/2.0/oauth2/clients/{clientId}/public/info | Get public client info
 
 
 
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 > ClientInfoResponse GetClientInfo(ctx, clientId).Execute()
 
-Retrieves detailed information for a specific client
+Get client info
 
 
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## GetClients
 
-> PageableResponse GetClients(ctx).Limit(limit).LastClientId(lastClientId).LastCreatedOn(lastCreatedOn).Execute()
+> PageableClientResponse GetClients(ctx).Limit(limit).LastClientId(lastClientId).LastCreatedOn(lastCreatedOn).Execute()
 
 List clients
 
@@ -181,7 +181,7 @@ import (
 )
 
 func main() {
-	limit := int32(1) // int32 | Pagination limit (default to 30)
+	limit := int32(30) // int32 | How many entries to return, between 1 and 50. Defaults to 30 when omitted. (optional) (default to 30)
 	lastClientId := "6c7cf17b-1bd3-47d5-94c6-be2d3570e168" // string | ID of the last retrieved client (optional)
 	lastCreatedOn := time.Now() // time.Time | Date of the last retrieved client (optional)
 
@@ -192,7 +192,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OAuth20ClientQueryingAPI.GetClients``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetClients`: PageableResponse
+	// response from `GetClients`: PageableClientResponse
 	fmt.Fprintf(os.Stdout, "Response from `OAuth20ClientQueryingAPI.GetClients`: %v\n", resp)
 }
 ```
@@ -208,13 +208,13 @@ Other parameters are passed through a pointer to a apiGetClientsRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int32** | Pagination limit | [default to 30]
+ **limit** | **int32** | How many entries to return, between 1 and 50. Defaults to 30 when omitted. | [default to 30]
  **lastClientId** | **string** | ID of the last retrieved client | 
  **lastCreatedOn** | **time.Time** | Date of the last retrieved client | 
 
 ### Return type
 
-[**PageableResponse**](PageableResponse.md)
+[**PageableClientResponse**](PageableClientResponse.md)
 
 ### Authorization
 
@@ -232,9 +232,9 @@ Name | Type | Description  | Notes
 
 ## GetClientsInfo
 
-> PageableResponseClientInfoResponse GetClientsInfo(ctx).Limit(limit).LastClientId(lastClientId).LastCreatedOn(lastCreatedOn).Execute()
+> PageableClientInfoResponse GetClientsInfo(ctx).Limit(limit).LastClientId(lastClientId).LastCreatedOn(lastCreatedOn).Execute()
 
-Retrieves a pageable list of client information
+List client info
 
 
 
@@ -254,7 +254,7 @@ import (
 )
 
 func main() {
-	limit := int32(1) // int32 | Pagination limit
+	limit := int32(30) // int32 | How many entries to return, between 1 and 50. It has no default and has to be sent on every call.
 	lastClientId := "6c7cf17b-1bd3-47d5-94c6-be2d3570e168" // string | ID of the last retrieved client (optional)
 	lastCreatedOn := time.Now() // time.Time | Date of the last retrieved client (optional)
 
@@ -265,7 +265,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OAuth20ClientQueryingAPI.GetClientsInfo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetClientsInfo`: PageableResponseClientInfoResponse
+	// response from `GetClientsInfo`: PageableClientInfoResponse
 	fmt.Fprintf(os.Stdout, "Response from `OAuth20ClientQueryingAPI.GetClientsInfo`: %v\n", resp)
 }
 ```
@@ -281,13 +281,13 @@ Other parameters are passed through a pointer to a apiGetClientsInfoRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int32** | Pagination limit | 
+ **limit** | **int32** | How many entries to return, between 1 and 50. It has no default and has to be sent on every call. | 
  **lastClientId** | **string** | ID of the last retrieved client | 
  **lastCreatedOn** | **time.Time** | Date of the last retrieved client | 
 
 ### Return type
 
-[**PageableResponseClientInfoResponse**](PageableResponseClientInfoResponse.md)
+[**PageableClientInfoResponse**](PageableClientInfoResponse.md)
 
 ### Authorization
 
@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 
 > PageableModificationResponse GetConsents(ctx).Limit(limit).LastModifiedOn(lastModifiedOn).Execute()
 
-Retrieves a pageable list of consents
+List user consents
 
 
 
@@ -327,7 +327,7 @@ import (
 )
 
 func main() {
-	limit := int32(1) // int32 | Pagination limit
+	limit := int32(30) // int32 | How many entries to return, between 1 and 50. It has no default and has to be sent on every call.
 	lastModifiedOn := time.Now() // time.Time | Date of the last retrieved consent (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -353,7 +353,7 @@ Other parameters are passed through a pointer to a apiGetConsentsRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int32** | Pagination limit | 
+ **limit** | **int32** | How many entries to return, between 1 and 50. It has no default and has to be sent on every call. | 
  **lastModifiedOn** | **time.Time** | Date of the last retrieved consent | 
 
 ### Return type
@@ -378,7 +378,9 @@ Name | Type | Description  | Notes
 
 > ClientInfoResponse GetPublicClientInfo(ctx, clientId).Execute()
 
-Handles the GET request for public client information
+Get public client info
+
+
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-public-client-info/).
 

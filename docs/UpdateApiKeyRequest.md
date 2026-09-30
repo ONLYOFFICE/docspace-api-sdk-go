@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **NullableString** | The new name for the API key. | [optional] 
-**Permissions** | Pointer to **[]string** | The new list of permissions for the API key. | [optional] 
-**IsActive** | Pointer to **NullableBool** | Indicates whether the API key should be active or not. | [optional] 
+**Name** | Pointer to **NullableString** | The new label of the key, up to 30 characters. Omit it to keep the current name. | [optional] 
+**Permissions** | Pointer to **[]string** | The scopes that replace the current ones. Every value has to come from `GET api/2.0/keys/permissions`, an  unknown value or an empty array is rejected, and omitting the field keeps the current scopes. | [optional] 
+**IsActive** | Pointer to **NullableBool** | Whether the key may authenticate requests. Set it to false to stop the key without deleting it and to true to  let it work again; omit it to keep the current state. | [optional] 
 
 ## Methods
 

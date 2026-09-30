@@ -21,134 +21,136 @@ import (
 // checks if the FilesSettingsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilesSettingsDto{}
 
-// FilesSettingsDto The file settings parameters.
+// FilesSettingsDto Everything a client needs to work with documents in this portal: the format tables, the address templates, the  upload limits, the portal-wide switches and the preferences of the calling account.
 type FilesSettingsDto struct {
-	// The list of extensions of the viewed images.
+	// Images the portal can show in its own viewer. Anything outside the list has to be downloaded to be seen.
 	ExtsImagePreviewed []string `json:"extsImagePreviewed,omitempty"`
-	// The list of extensions of the viewed media files.
+	// Audio and video the portal can play in its own player.
 	ExtsMediaPreviewed []string `json:"extsMediaPreviewed,omitempty"`
-	// The list of extensions of the viewed files.
+	// Documents the editor can open read-only. A format that is here but not in the edited list can be viewed and  not changed.
 	ExtsWebPreviewed []string `json:"extsWebPreviewed,omitempty"`
-	// The list of extensions of the edited files.
+	// Documents the editor can open for editing. Uploading a format outside this list and outside the convertible  list leaves a file that can only be downloaded.
 	ExtsWebEdited []string `json:"extsWebEdited,omitempty"`
-	// The list of extensions of the encrypted files.
+	// Documents that can be edited inside a private room, where the content is encrypted on the client.
 	ExtsWebEncrypt []string `json:"extsWebEncrypt,omitempty"`
-	// The list of extensions of the reviewed files.
+	// Documents that support the reviewing mode, so that granting review access to them is meaningful.
 	ExtsWebReviewed []string `json:"extsWebReviewed,omitempty"`
-	// The list of extensions of the custom filter files.
+	// Spreadsheets that support the custom filter mode, where a filter applied by one editor does not disturb the  others.
 	ExtsWebCustomFilterEditing []string `json:"extsWebCustomFilterEditing,omitempty"`
-	// The list of extensions of the files that are restricted for editing.
+	// Documents that can only be filled in or commented on rather than edited freely, whatever access the caller  holds.
 	ExtsWebRestrictedEditing []string `json:"extsWebRestrictedEditing,omitempty"`
-	// The list of extensions of the commented files.
+	// Documents that support comments, so that granting comment access to them is meaningful.
 	ExtsWebCommented []string `json:"extsWebCommented,omitempty"`
-	// The list of extensions of the template files.
+	// Documents the portal treats as templates to create new files from.
 	ExtsWebTemplate []string `json:"extsWebTemplate,omitempty"`
-	// The list of extensions of the files that must be converted.
+	// Formats that cannot be edited as they are and are converted on upload or on first opening. Which target each  one has is in the convertible table below.
 	ExtsMustConvert []string `json:"extsMustConvert,omitempty"`
-	// The list of the convertible extensions.
+	// The conversion map of the portal: for each source extension, the extensions it can be converted into. Use it  to fill the target format of a conversion request instead of guessing one.
 	ExtsConvertible map[string][]string `json:"extsConvertible,omitempty"`
-	// The list of the uploadable extensions.
+	// Formats the portal offers to create and upload as documents. It is not an upload filter: files of other  formats are stored as they are.
 	ExtsUploadable []string `json:"extsUploadable,omitempty"`
-	// The list of extensions of the archive files.
+	// Formats recognised as archives, which is what decides the archive icon and the offer to unpack.
 	ExtsArchive []string `json:"extsArchive,omitempty"`
-	// The list of the video extensions.
+	// Formats classified as video. The classification lists drive icons and the media filters of the listing  operations, and are wider than what the built-in player can show.
 	ExtsVideo []string `json:"extsVideo,omitempty"`
-	// The list of the audio extensions.
+	// Formats classified as audio.
 	ExtsAudio []string `json:"extsAudio,omitempty"`
-	// The list of the image extensions.
+	// Formats classified as images.
 	ExtsImage []string `json:"extsImage,omitempty"`
-	// The list of the spreadsheet extensions.
+	// Formats classified as spreadsheets.
 	ExtsSpreadsheet []string `json:"extsSpreadsheet,omitempty"`
-	// The list of the presentation extensions.
+	// Formats classified as presentations.
 	ExtsPresentation []string `json:"extsPresentation,omitempty"`
-	// The list of the text document extensions.
+	// Formats classified as text documents.
 	ExtsDocument []string `json:"extsDocument,omitempty"`
-	// The list of the diagram extensions.
+	// Formats classified as diagrams.
 	ExtsDiagram []string `json:"extsDiagram,omitempty"`
 	InternalFormats NullableFilesSettingsDtoInternalFormats `json:"internalFormats,omitempty"`
-	// The master form extension.
+	// The extension of a fillable form template in this portal. It is configurable, so read it rather than assuming  the product default.
 	MasterFormExtension NullableString `json:"masterFormExtension,omitempty"`
-	// The URL parameter which specifies the file version.
+	// The name of the query parameter that pins a document address to one version. Append it to the addresses below  instead of composing a version address by hand.
 	ParamVersion NullableString `json:"paramVersion,omitempty"`
-	// The URL parameter which specifies the output type of the converted file.
+	// The name of the query parameter that asks a download address for a converted copy in another format.
 	ParamOutType NullableString `json:"paramOutType,omitempty"`
-	// The URL to download a file.
+	// The template of the address a file is downloaded from: substitute the file identifier for the `{0}`  placeholder. Add the version and output-type parameters named above for a particular version or format.
 	FileDownloadUrlString NullableString `json:"fileDownloadUrlString,omitempty"`
-	// The URL to the file web viewer.
+	// The template of the address that opens a file in the viewer inside the portal, with `{0}` for the file  identifier. It is a portal-relative address, meant to be opened in a browser rather than called as an API.
 	FileWebViewerUrlString NullableString `json:"fileWebViewerUrlString,omitempty"`
-	// The external URL to the file web viewer.
+	// The same viewer address as an absolute one, for a message or a page outside the portal.
 	FileWebViewerExternalUrlString NullableString `json:"fileWebViewerExternalUrlString,omitempty"`
-	// The URL to the file web editor.
+	// The template of the address that opens a file for editing inside the portal, with `{0}` for the file  identifier. Whether the session really becomes editable still depends on the access the caller holds.
 	FileWebEditorUrlString NullableString `json:"fileWebEditorUrlString,omitempty"`
-	// The external URL to the file web editor.
+	// The same editing address as an absolute one, for use outside the portal.
 	FileWebEditorExternalUrlString NullableString `json:"fileWebEditorExternalUrlString,omitempty"`
-	// The redirect URL to the file viewer.
+	// The template of the address that sends the browser on to whichever viewer or editor suits the file, with `{0}`  for the file identifier. Use it when the kind of the file is not known in advance.
 	FileRedirectPreviewUrlString NullableString `json:"fileRedirectPreviewUrlString,omitempty"`
-	// The URL to the file thumbnail.
+	// The template of the address a file thumbnail is fetched from, with `{0}` for the file identifier. A thumbnail  is built in the background, so the address can answer with nothing for a while after the file appears.
 	FileThumbnailUrlString NullableString `json:"fileThumbnailUrlString,omitempty"`
-	// Specifies whether to confirm the file deletion or not.
+	// Whether the caller asked to be prompted before a deletion. Written by `PUT api/2.0/files/changedeleteconfrim`.
 	ConfirmDelete *bool `json:"confirmDelete,omitempty"`
-	// Specifies whether to allow users to connect the third-party storages.
+	// Whether this portal allows third-party storages to be connected at all. It is set portal-wide by an  administrator, so a member sees it as read-only.
 	EnableThirdParty *bool `json:"enableThirdParty,omitempty"`
-	// Specifies whether to enable sharing external links to the files.
+	// Whether links that open an entry without a portal account may be created in this portal. Set portal-wide by an  administrator.
 	ExternalShare *bool `json:"externalShare,omitempty"`
-	// Specifies whether to enable sharing files on social media.
+	// Whether the share-to-network buttons are offered next to an external link. It is reported as false whenever  external sharing itself is off.
 	ExternalShareSocialMedia *bool `json:"externalShareSocialMedia,omitempty"`
-	// Specifies whether to enable storing original files.
+	// Whether the caller's uploads keep the original file when the portal converts them. With false the conversion  replaces the uploaded file with a new version of it.
 	StoreOriginalFiles *bool `json:"storeOriginalFiles,omitempty"`
-	// Specifies whether to keep the new file name.
+	// Whether the caller asked for new documents to be created with the default name instead of being prompted for  one.
 	KeepNewFileName *bool `json:"keepNewFileName,omitempty"`
-	// Specifies whether to display the file extension.
+	// Whether the caller asked to see extensions in file titles. Stored titles always carry the extension whatever  this says.
 	DisplayFileExtension *bool `json:"displayFileExtension,omitempty"`
-	// Specifies whether to display the conversion notification.
+	// Specifies whether to display the quick action buttons.
+	ShowQuickActions *bool `json:"showQuickActions,omitempty"`
+	// Whether the caller is told about the result of a conversion. There is no operation in this document that  writes it.
 	ConvertNotify *bool `json:"convertNotify,omitempty"`
-	// Specifies whether to hide the confirmation dialog for the cancel operation.
+	// Whether the prompt shown before a running operation is abandoned is hidden for the caller.
 	HideConfirmCancelOperation *bool `json:"hideConfirmCancelOperation,omitempty"`
-	// Specifies whether to hide the confirmation dialog  for saving the file copy in the original format when converting a file.
+	// Whether the prompt that offers to keep a copy in the original format on conversion is hidden for the caller.  Once true it cannot be turned back through the API.
 	HideConfirmConvertSave *bool `json:"hideConfirmConvertSave,omitempty"`
-	// Specifies whether to hide the confirmation dialog  for opening the conversion result.
+	// Whether the prompt that offers to open the conversion result is hidden for the caller. Once true it cannot be  turned back through the API.
 	HideConfirmConvertOpen *bool `json:"hideConfirmConvertOpen,omitempty"`
-	// Specifies whether to hide the confirmation dialog about the file lifetime in the room.
+	// Whether the warning shown before the lifetime settings of a room are changed is hidden for the caller.
 	HideConfirmRoomLifetime *bool `json:"hideConfirmRoomLifetime,omitempty"`
-	// The default order of files.
+	// The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used.
 	DefaultOrder *OrderBy `json:"defaultOrder,omitempty"`
-	// Specifies whether to forcesave the files or not.
+	// Whether the editor writes a document back to storage while the session is still open. It is on for every  portal and cannot be switched off.
 	Forcesave *bool `json:"forcesave,omitempty"`
-	// Specifies whether to store the forcesaved file versions or not.
+	// Whether those intermediate saves are kept as separate versions. They are not, in any portal: they update the  current version instead.
 	StoreForcesave *bool `json:"storeForcesave,omitempty"`
-	// Specifies if the Recent section is displayed or not.
+	// Whether the Recent section is offered to the caller among the section roots.
 	RecentSection *bool `json:"recentSection,omitempty"`
-	// Specifies if the Favorites section is displayed or not.
+	// Whether the Favorites section is offered to the caller among the section roots.
 	FavoritesSection *bool `json:"favoritesSection,omitempty"`
-	// Specifies if the Templates section is displayed or not.
+	// Whether the Templates section is offered to the caller among the section roots.
 	TemplatesSection *bool `json:"templatesSection,omitempty"`
-	// Specifies whether to download the .tar.gz files or not.
+	// The archive format the caller's multi-item downloads are packed into: true for `.tar.gz`, false for `.zip`.
 	DownloadTarGz *bool `json:"downloadTarGz,omitempty"`
-	// The auto-clearing setting parameters.
+	// The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns.
 	AutomaticallyCleanUp *AutoCleanUpData `json:"automaticallyCleanUp,omitempty"`
-	// Specifies whether the file can be searched by its content or not.
+	// Whether documents in this portal can be searched by what is inside them and not only by title. It depends on  the full-text search service being configured and having indexed the portal.
 	CanSearchByContent *bool `json:"canSearchByContent,omitempty"`
-	// The default access rights in sharing settings.
+	// The access rights the sharing dialog offers the caller by default. The portal normalises the set it stores, so  this can be shorter than what was last sent.
 	DefaultSharingAccessRights []int32 `json:"defaultSharingAccessRights,omitempty"`
-	// The maximum number of upload threads.
+	// How many upload requests the portal accepts from one account at a time. Sending more than this in parallel  gets the extra ones refused rather than queued.
 	MaxUploadThreadCount *int32 `json:"maxUploadThreadCount,omitempty"`
-	// The size of a large file that is uploaded in chunks.
+	// The size in bytes of one chunk of a chunked upload. Split a large file exactly along this size: a chunk that  does not match is refused by the upload session.
 	ChunkUploadSize *int64 `json:"chunkUploadSize,omitempty"`
-	// Specifies whether to open the editor in the same tab or not.
+	// Whether the caller asked for documents to open in the current browser tab.
 	OpenEditorInSameTab *bool `json:"openEditorInSameTab,omitempty"`
-	// Specifies whether the grouping of rooms is enabled or not.
+	// Whether the caller asked to see rooms arranged by the groups they belong to.
 	OrganizeRoomsGrouping *bool `json:"organizeRoomsGrouping,omitempty"`
-	// Specifies the default sharing link type: true = DocSpace users only (internal), false = Anyone with the link.
+	// The kind of external link this portal offers first: true for a link only its own accounts can open, false for  one anyone holding it can open.
 	DefaultShareLinkInternal *bool `json:"defaultShareLinkInternal,omitempty"`
-	// When external sharing is restricted, specifies whether the restriction applies to the My Documents section.
+	// Whether the external sharing restriction covers personal documents. It matters only while external sharing is  off.
 	ExternalShareApplyToDocuments *bool `json:"externalShareApplyToDocuments,omitempty"`
-	// When external sharing is restricted, specifies whether the restriction applies to the Rooms section.
+	// Whether the external sharing restriction covers rooms, including making a new one public. It matters only  while external sharing is off.
 	ExternalShareApplyToRooms *bool `json:"externalShareApplyToRooms,omitempty"`
-	// When external sharing is restricted, specifies whether existing public links are blocked immediately.
+	// Whether links created before the restriction stop opening as well, rather than only new ones being refused.
 	BlockExistingLinksOnRestrict *bool `json:"blockExistingLinksOnRestrict,omitempty"`
-	// List of extensions available for vectorization
+	// Formats whose content can be indexed for the AI features of the portal. A file outside the list is left out of  that index.
 	ExtsFilesVectorized []string `json:"extsFilesVectorized,omitempty"`
-	// The maximum file size for vectorization
+	// The largest file size in bytes that is indexed for the AI features. A larger file is skipped even when its  format is listed above.
 	MaxVectorizationFileSize *int64 `json:"maxVectorizationFileSize,omitempty"`
 }
 
@@ -1547,6 +1549,38 @@ func (o *FilesSettingsDto) SetDisplayFileExtension(v bool) {
 	o.DisplayFileExtension = &v
 }
 
+// GetShowQuickActions returns the ShowQuickActions field value if set, zero value otherwise.
+func (o *FilesSettingsDto) GetShowQuickActions() bool {
+	if o == nil || IsNil(o.ShowQuickActions) {
+		var ret bool
+		return ret
+	}
+	return *o.ShowQuickActions
+}
+
+// GetShowQuickActionsOk returns a tuple with the ShowQuickActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilesSettingsDto) GetShowQuickActionsOk() (*bool, bool) {
+	if o == nil || IsNil(o.ShowQuickActions) {
+		return nil, false
+	}
+	return o.ShowQuickActions, true
+}
+
+// HasShowQuickActions returns a boolean if a field has been set.
+func (o *FilesSettingsDto) IsShowQuickActionsSet() bool {
+	if o != nil && !IsNil(o.ShowQuickActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowQuickActions gets a reference to the given bool and assigns it to the ShowQuickActions field.
+func (o *FilesSettingsDto) SetShowQuickActions(v bool) {
+	o.ShowQuickActions = &v
+}
+
 // GetConvertNotify returns the ConvertNotify field value if set, zero value otherwise.
 func (o *FilesSettingsDto) GetConvertNotify() bool {
 	if o == nil || IsNil(o.ConvertNotify) {
@@ -2475,6 +2509,9 @@ func (o FilesSettingsDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DisplayFileExtension) {
 		toSerialize["displayFileExtension"] = o.DisplayFileExtension
+	}
+	if !IsNil(o.ShowQuickActions) {
+		toSerialize["showQuickActions"] = o.ShowQuickActions
 	}
 	if !IsNil(o.ConvertNotify) {
 		toSerialize["convertNotify"] = o.ConvertNotify

@@ -4,21 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | The client name. | [optional] 
-**Description** | Pointer to **string** | The client description. | [optional] 
-**Scopes** | Pointer to **[]string** | The client scopes. | [optional] 
-**Public** | Pointer to **bool** |  | [optional] 
-**ClientId** | Pointer to **string** | The client ID. | [optional] 
-**WebsiteUrl** | Pointer to **string** | The URL to the client's website | [optional] 
-**TermsUrl** | Pointer to **string** | The URL to the client's terms of service. | [optional] 
-**PolicyUrl** | Pointer to **string** | The URL to the client's privacy policy. | [optional] 
-**Logo** | Pointer to **string** | The client logo in base64 format. | [optional] 
-**AuthenticationMethods** | Pointer to **[]string** | The authentication methods supported by the client. | [optional] 
-**IsPublic** | Pointer to **bool** | Indicates whether the client is accessible by third-party tenants. | [optional] 
-**CreatedOn** | Pointer to **time.Time** | The date and time when the client was created. | [optional] 
-**CreatedBy** | Pointer to **string** | The user who created the client. | [optional] 
-**ModifiedOn** | Pointer to **time.Time** | The date and time when the client was last modified. | [optional] 
-**ModifiedBy** | Pointer to **string** | The user who last modified the client. | [optional] 
+**Name** | Pointer to **string** | The display name shown to the user on the consent screen, between 3 and 256 characters. | [optional] 
+**Description** | Pointer to **string** | The free-text description shown next to the name on the consent screen, at most 255 characters. | [optional] 
+**Scopes** | Pointer to **[]string** | The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here. | [optional] 
+**ClientId** | Pointer to **string** | The generated identifier of the client, sent as client_id in every OAuth2 request. It is assigned when the client is registered and never changes afterwards. | [optional] 
+**WebsiteUrl** | Pointer to **string** | The URL of the client home page, offered to the user before they consent. | [optional] 
+**TermsUrl** | Pointer to **string** | The URL of the client terms of service, linked from the consent screen. | [optional] 
+**PolicyUrl** | Pointer to **string** | The URL of the client privacy policy, linked from the consent screen. | [optional] 
+**Logo** | Pointer to **string** | The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted, the whole string may not exceed 2000000 characters and the decoded image may not exceed 256000 bytes. | [optional] 
+**AuthenticationMethods** | Pointer to **[]string** | How the client authenticates itself at the token endpoint: client_secret_post for a confidential client that sends its secret, none for a public client that proves itself with PKCE instead. | [optional] 
+**CreatedOn** | Pointer to **time.Time** | When the client was registered, as an ISO-8601 timestamp with a zone offset. | [optional] 
+**CreatedBy** | Pointer to **string** | The identifier of the user who registered the client. A plain user may read and change only the clients where this is their own identifier. | [optional] 
+**ModifiedOn** | Pointer to **time.Time** | When the client was last changed, as an ISO-8601 timestamp with a zone offset. | [optional] 
+**ModifiedBy** | Pointer to **string** | The identifier of the user who last changed the client. | [optional] 
+**IsPublic** | Pointer to **bool** | Whether the client is offered to third-party tenants rather than only to the tenant that registered it. | [optional] 
 
 ## Methods
 
@@ -113,31 +112,6 @@ SetScopes sets Scopes field to given value.
 `func (o *ClientInfoResponse) HasScopes() bool`
 
 HasScopes returns a boolean if a field has been set.
-
-### GetPublic
-
-`func (o *ClientInfoResponse) GetPublic() bool`
-
-GetPublic returns the Public field if non-nil, zero value otherwise.
-
-### GetPublicOk
-
-`func (o *ClientInfoResponse) GetPublicOk() (*bool, bool)`
-
-GetPublicOk returns a tuple with the Public field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPublic
-
-`func (o *ClientInfoResponse) SetPublic(v bool)`
-
-SetPublic sets Public field to given value.
-
-### HasPublic
-
-`func (o *ClientInfoResponse) HasPublic() bool`
-
-HasPublic returns a boolean if a field has been set.
 
 ### GetClientId
 
@@ -289,31 +263,6 @@ SetAuthenticationMethods sets AuthenticationMethods field to given value.
 
 HasAuthenticationMethods returns a boolean if a field has been set.
 
-### GetIsPublic
-
-`func (o *ClientInfoResponse) GetIsPublic() bool`
-
-GetIsPublic returns the IsPublic field if non-nil, zero value otherwise.
-
-### GetIsPublicOk
-
-`func (o *ClientInfoResponse) GetIsPublicOk() (*bool, bool)`
-
-GetIsPublicOk returns a tuple with the IsPublic field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsPublic
-
-`func (o *ClientInfoResponse) SetIsPublic(v bool)`
-
-SetIsPublic sets IsPublic field to given value.
-
-### HasIsPublic
-
-`func (o *ClientInfoResponse) HasIsPublic() bool`
-
-HasIsPublic returns a boolean if a field has been set.
-
 ### GetCreatedOn
 
 `func (o *ClientInfoResponse) GetCreatedOn() time.Time`
@@ -413,6 +362,31 @@ SetModifiedBy sets ModifiedBy field to given value.
 `func (o *ClientInfoResponse) HasModifiedBy() bool`
 
 HasModifiedBy returns a boolean if a field has been set.
+
+### GetIsPublic
+
+`func (o *ClientInfoResponse) GetIsPublic() bool`
+
+GetIsPublic returns the IsPublic field if non-nil, zero value otherwise.
+
+### GetIsPublicOk
+
+`func (o *ClientInfoResponse) GetIsPublicOk() (*bool, bool)`
+
+GetIsPublicOk returns a tuple with the IsPublic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPublic
+
+`func (o *ClientInfoResponse) SetIsPublic(v bool)`
+
+SetIsPublic sets IsPublic field to given value.
+
+### HasIsPublic
+
+`func (o *ClientInfoResponse) HasIsPublic() bool`
+
+HasIsPublic returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

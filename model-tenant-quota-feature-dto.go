@@ -21,20 +21,20 @@ import (
 // checks if the TenantQuotaFeatureDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantQuotaFeatureDto{}
 
-// TenantQuotaFeatureDto The tenant quota feature parameters.
+// TenantQuotaFeatureDto One feature a quota switches on, with the limit it grants and how much of that limit is used.
 type TenantQuotaFeatureDto struct {
-	// The ID of the tenant quota feature.
+	// The stable key of the feature - `total_size`, `manager`, `room`, `backup` and so on. It is the value to  branch on, since `title` is prose in the portal language.
 	Id NullableString `json:"id,omitempty"`
-	// The title of the tenant quota feature.
+	// The feature described in the portal language, with its limit already substituted into the sentence, so it  can be printed as it is. It is empty when this build ships no wording for the feature.
 	Title NullableString `json:"title,omitempty"`
-	// The image URL of the tenant quota feature.
+	// The feature's icon as SVG markup to render inline - not a URL to fetch. It is filled in only when the  quota comes from the catalogue, and left empty on the quota the portal is actually on, on a feature that  this quota switches off, and on a feature that ships no icon.
 	Image NullableString `json:"image,omitempty"`
 	Value interface{} `json:"value,omitempty"`
-	// The type of the tenant quota feature.
+	// How to read `value` and `used`: `size` for bytes, `count` for a number of things, `flag` for a feature  that is merely on or off.
 	Type NullableString `json:"type,omitempty"`
-	// The used space parameters of the tenant quota feature.
+	// How much of the limit is already used. It is present only on the quota the portal is actually on, and  only for a feature whose consumption is counted; a guest is shown none of these figures and a plain member  only the one for total size, so an absent value can mean the caller may not see it rather than that  nothing is used.
 	Used *FeatureUsedDto `json:"used,omitempty"`
-	// The price title of the tenant quota feature.
+	// What the feature is charged as, in the portal language - for instance the per-unit price of an add-on. It  is filled in only for a feature that costs money on top of the plan.
 	PriceTitle NullableString `json:"priceTitle,omitempty"`
 }
 

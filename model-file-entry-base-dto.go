@@ -16,57 +16,56 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the FileEntryBaseDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FileEntryBaseDto{}
 
-// FileEntryBaseDto The file entry information.
+// FileEntryBaseDto What every file and folder in an answer has in common; the concrete shape is a file or a folder, told apart by the  entry type.
 type FileEntryBaseDto struct {
-	// The file entry title.
+	// The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name.
 	Title NullableString `json:"title,omitempty"`
-	// The access rights to the file entry.
+	// The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that.
 	Access *FileShare `json:"access,omitempty"`
-	// Provides information about the employee who shared the file or folder.
+	// Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account.
 	SharedBy *EmployeeDto `json:"sharedBy,omitempty"`
-	// The information about the employee who owns the file entry.
+	// Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account.
 	OwnedBy *EmployeeDto `json:"ownedBy,omitempty"`
-	// Specifies if the file entry is shared via link or not.
+	// Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below.
 	Shared *bool `json:"shared,omitempty"`
-	// Specifies if the file entry is shared for user or not.
+	// Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it.
 	SharedForUser *bool `json:"sharedForUser,omitempty"`
-	// Specifies if the file entry is shared via a public (non-internal) external link.
+	// Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside.
 	SharedExternal *bool `json:"sharedExternal,omitempty"`
-	// Indicates whether the parent entity is shared.
+	// Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope.
 	ParentShared *bool `json:"parentShared,omitempty"`
-	// The short Web URL.
+	// A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms.
 	ShortWebUrl NullableString `json:"shortWebUrl,omitempty"`
-	// The creation date and time of the file entry.
-	Created NullableTime `json:"created,omitempty"`
-	// The file entry author.
+	// When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared.
+	Created *ApiDateTime `json:"created,omitempty"`
+	// Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members.
 	CreatedBy *EmployeeDto `json:"createdBy,omitempty"`
-	// The last date and time when the file entry was updated.
-	Updated NullableTime `json:"updated,omitempty"`
-	// The date and time when the file entry will be automatically deleted.
-	AutoDelete NullableTime `json:"autoDelete,omitempty"`
-	// The root folder type of the file entry.
+	// When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely.
+	Updated *ApiDateTime `json:"updated,omitempty"`
+	// When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent.
+	AutoDelete *ApiDateTime `json:"autoDelete,omitempty"`
+	// The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive.
 	RootFolderType *FolderType `json:"rootFolderType,omitempty"`
-	// The parent room type of the file entry.
+	// The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all.
 	ParentRoomType *FolderType `json:"parentRoomType,omitempty"`
-	// The user who updated the file entry.
+	// Who changed the entry last. It is null for a caller without an account.
 	UpdatedBy *EmployeeDto `json:"updatedBy,omitempty"`
-	// Specifies if the file entry provider is specified or not.
+	// Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it.
 	ProviderItem NullableBool `json:"providerItem,omitempty"`
-	// The provider key of the file entry.
+	// Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal.
 	ProviderKey NullableString `json:"providerKey,omitempty"`
-	// The provider ID of the file entry.
+	// The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal.
 	ProviderId NullableInt32 `json:"providerId,omitempty"`
-	// The order of the file entry.
+	// The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged.
 	Order NullableString `json:"order,omitempty"`
-	// Specifies if the file is a favorite or not.
+	// Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false.
 	IsFavorite NullableBool `json:"isFavorite,omitempty"`
-	// The file entry type.
+	// Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here.
 	FileEntryType *FileEntryType `json:"fileEntryType,omitempty"`
 }
 
@@ -395,46 +394,36 @@ func (o *FileEntryBaseDto) UnsetShortWebUrl() {
 	o.ShortWebUrl.Unset()
 }
 
-// GetCreated returns the Created field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FileEntryBaseDto) GetCreated() time.Time {
-	if o == nil || IsNil(o.Created.Get()) {
-		var ret time.Time
+// GetCreated returns the Created field value if set, zero value otherwise.
+func (o *FileEntryBaseDto) GetCreated() ApiDateTime {
+	if o == nil || IsNil(o.Created) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.Created.Get()
+	return *o.Created
 }
 
 // GetCreatedOk returns a tuple with the Created field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FileEntryBaseDto) GetCreatedOk() (*time.Time, bool) {
-	if o == nil {
+func (o *FileEntryBaseDto) GetCreatedOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Created) {
 		return nil, false
 	}
-	return o.Created.Get(), o.Created.IsSet()
+	return o.Created, true
 }
 
 // HasCreated returns a boolean if a field has been set.
 func (o *FileEntryBaseDto) IsCreatedSet() bool {
-	if o != nil && o.Created.IsSet() {
+	if o != nil && !IsNil(o.Created) {
 		return true
 	}
 
 	return false
 }
 
-// SetCreated gets a reference to the given NullableTime and assigns it to the Created field.
-func (o *FileEntryBaseDto) SetCreated(v time.Time) {
-	o.Created.Set(&v)
-}
-// SetCreatedNil sets the value for Created to be an explicit nil
-func (o *FileEntryBaseDto) SetCreatedNil() {
-	o.Created.Set(nil)
-}
-
-// UnsetCreated ensures that no value is present for Created, not even an explicit nil
-func (o *FileEntryBaseDto) UnsetCreated() {
-	o.Created.Unset()
+// SetCreated gets a reference to the given ApiDateTime and assigns it to the Created field.
+func (o *FileEntryBaseDto) SetCreated(v ApiDateTime) {
+	o.Created = &v
 }
 
 // GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
@@ -469,88 +458,68 @@ func (o *FileEntryBaseDto) SetCreatedBy(v EmployeeDto) {
 	o.CreatedBy = &v
 }
 
-// GetUpdated returns the Updated field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FileEntryBaseDto) GetUpdated() time.Time {
-	if o == nil || IsNil(o.Updated.Get()) {
-		var ret time.Time
+// GetUpdated returns the Updated field value if set, zero value otherwise.
+func (o *FileEntryBaseDto) GetUpdated() ApiDateTime {
+	if o == nil || IsNil(o.Updated) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.Updated.Get()
+	return *o.Updated
 }
 
 // GetUpdatedOk returns a tuple with the Updated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FileEntryBaseDto) GetUpdatedOk() (*time.Time, bool) {
-	if o == nil {
+func (o *FileEntryBaseDto) GetUpdatedOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Updated) {
 		return nil, false
 	}
-	return o.Updated.Get(), o.Updated.IsSet()
+	return o.Updated, true
 }
 
 // HasUpdated returns a boolean if a field has been set.
 func (o *FileEntryBaseDto) IsUpdatedSet() bool {
-	if o != nil && o.Updated.IsSet() {
+	if o != nil && !IsNil(o.Updated) {
 		return true
 	}
 
 	return false
 }
 
-// SetUpdated gets a reference to the given NullableTime and assigns it to the Updated field.
-func (o *FileEntryBaseDto) SetUpdated(v time.Time) {
-	o.Updated.Set(&v)
-}
-// SetUpdatedNil sets the value for Updated to be an explicit nil
-func (o *FileEntryBaseDto) SetUpdatedNil() {
-	o.Updated.Set(nil)
+// SetUpdated gets a reference to the given ApiDateTime and assigns it to the Updated field.
+func (o *FileEntryBaseDto) SetUpdated(v ApiDateTime) {
+	o.Updated = &v
 }
 
-// UnsetUpdated ensures that no value is present for Updated, not even an explicit nil
-func (o *FileEntryBaseDto) UnsetUpdated() {
-	o.Updated.Unset()
-}
-
-// GetAutoDelete returns the AutoDelete field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FileEntryBaseDto) GetAutoDelete() time.Time {
-	if o == nil || IsNil(o.AutoDelete.Get()) {
-		var ret time.Time
+// GetAutoDelete returns the AutoDelete field value if set, zero value otherwise.
+func (o *FileEntryBaseDto) GetAutoDelete() ApiDateTime {
+	if o == nil || IsNil(o.AutoDelete) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.AutoDelete.Get()
+	return *o.AutoDelete
 }
 
 // GetAutoDeleteOk returns a tuple with the AutoDelete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FileEntryBaseDto) GetAutoDeleteOk() (*time.Time, bool) {
-	if o == nil {
+func (o *FileEntryBaseDto) GetAutoDeleteOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.AutoDelete) {
 		return nil, false
 	}
-	return o.AutoDelete.Get(), o.AutoDelete.IsSet()
+	return o.AutoDelete, true
 }
 
 // HasAutoDelete returns a boolean if a field has been set.
 func (o *FileEntryBaseDto) IsAutoDeleteSet() bool {
-	if o != nil && o.AutoDelete.IsSet() {
+	if o != nil && !IsNil(o.AutoDelete) {
 		return true
 	}
 
 	return false
 }
 
-// SetAutoDelete gets a reference to the given NullableTime and assigns it to the AutoDelete field.
-func (o *FileEntryBaseDto) SetAutoDelete(v time.Time) {
-	o.AutoDelete.Set(&v)
-}
-// SetAutoDeleteNil sets the value for AutoDelete to be an explicit nil
-func (o *FileEntryBaseDto) SetAutoDeleteNil() {
-	o.AutoDelete.Set(nil)
-}
-
-// UnsetAutoDelete ensures that no value is present for AutoDelete, not even an explicit nil
-func (o *FileEntryBaseDto) UnsetAutoDelete() {
-	o.AutoDelete.Unset()
+// SetAutoDelete gets a reference to the given ApiDateTime and assigns it to the AutoDelete field.
+func (o *FileEntryBaseDto) SetAutoDelete(v ApiDateTime) {
+	o.AutoDelete = &v
 }
 
 // GetRootFolderType returns the RootFolderType field value if set, zero value otherwise.
@@ -928,17 +897,17 @@ func (o FileEntryBaseDto) ToMap() (map[string]interface{}, error) {
 	if o.ShortWebUrl.IsSet() {
 		toSerialize["shortWebUrl"] = o.ShortWebUrl.Get()
 	}
-	if o.Created.IsSet() {
-		toSerialize["created"] = o.Created.Get()
+	if !IsNil(o.Created) {
+		toSerialize["created"] = o.Created
 	}
 	if !IsNil(o.CreatedBy) {
 		toSerialize["createdBy"] = o.CreatedBy
 	}
-	if o.Updated.IsSet() {
-		toSerialize["updated"] = o.Updated.Get()
+	if !IsNil(o.Updated) {
+		toSerialize["updated"] = o.Updated
 	}
-	if o.AutoDelete.IsSet() {
-		toSerialize["autoDelete"] = o.AutoDelete.Get()
+	if !IsNil(o.AutoDelete) {
+		toSerialize["autoDelete"] = o.AutoDelete
 	}
 	if !IsNil(o.RootFolderType) {
 		toSerialize["rootFolderType"] = o.RootFolderType

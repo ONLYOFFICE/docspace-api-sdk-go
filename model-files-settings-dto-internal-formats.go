@@ -21,7 +21,7 @@ import (
 // checks if the FilesSettingsDtoInternalFormats type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilesSettingsDtoInternalFormats{}
 
-// FilesSettingsDtoInternalFormats The internal file formats.
+// FilesSettingsDtoInternalFormats The extension the portal creates for each kind of document, keyed by that kind. This is what a new empty  document gets when no extension is asked for.
 type FilesSettingsDtoInternalFormats struct {
 	Unknown *string `json:"Unknown,omitempty"`
 	Archive *string `json:"Archive,omitempty"`

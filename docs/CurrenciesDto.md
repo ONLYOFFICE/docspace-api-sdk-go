@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IsoCountryCode** | Pointer to **NullableString** | The ISO country code. | [optional] 
-**IsoCurrencySymbol** | Pointer to **NullableString** | The ISO currency symbol. | [optional] 
-**CurrencyNativeName** | Pointer to **NullableString** | The currency native name. | [optional] 
+**IsoCountryCode** | Pointer to **NullableString** | The two-letter ISO code of the country the currency is that of, which is the region the price list was  picked for rather than the country of the caller. | [optional] 
+**IsoCurrencySymbol** | Pointer to **NullableString** | The three-letter ISO 4217 code of the currency. On the first item of the answer it is the currency the  amounts from `GET api/2.0/portal/payment/prices` are expressed in. | [optional] 
+**CurrencyNativeName** | Pointer to **NullableString** | The currency name in the language of its own region - not in the portal language, and not a symbol. | [optional] 
 
 ## Methods
 

@@ -24,21 +24,21 @@ var _ MappedNullable = &OAuth20Token{}
 
 // OAuth20Token The OAuth 2.0 token issued by a third-party provider.
 type OAuth20Token struct {
-	// Access token
+	// The token sent to the provider with every request made on behalf of the account.
 	AccessToken NullableString `json:"access_token,omitempty"`
-	// Refresh token
+	// The token used to obtain a new access token when the current one expires. A provider that issues no refresh  token leaves it empty, and the account then has to be connected again to keep working.
 	RefreshToken NullableString `json:"refresh_token,omitempty"`
-	// Expires in
+	// How long the access token stays usable, in seconds counted from `timestamp`. Zero means the provider did not  say, and the token is then treated as expired.
 	ExpiresIn *int64 `json:"expires_in,omitempty"`
-	// Client id
+	// The OAuth 2.0 client ID of the application the token was issued to.
 	ClientId NullableString `json:"client_id,omitempty"`
-	// Client secret
+	// The client secret of the application the token was issued to, needed when the token is refreshed.
 	ClientSecret NullableString `json:"client_secret,omitempty"`
-	// Redirect uri
+	// The redirect URL the authorization code behind this token was obtained with; providers require the same value  again when the token is refreshed.
 	RedirectUri NullableString `json:"redirect_uri,omitempty"`
-	// Timestamp
+	// When the token was issued, in UTC. This is the point `expires_in` is counted from.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
-	// Is expired
+	// Whether the access token can no longer be used and has to be refreshed. It is also true when the provider did  not say how long the token lives.
 	IsExpired *bool `json:"isExpired,omitempty"`
 }
 

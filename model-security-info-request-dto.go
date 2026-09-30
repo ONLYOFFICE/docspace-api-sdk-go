@@ -21,17 +21,17 @@ import (
 // checks if the SecurityInfoRequestDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SecurityInfoRequestDto{}
 
-// SecurityInfoRequestDto The security information request parameters.
+// SecurityInfoRequestDto The entries whose sharing rights are being changed, and the rights to apply to them.
 type SecurityInfoRequestDto struct {
-	// The list of the shared folder IDs.
+	// The folders and rooms whose rights are being changed, identified as a listing operation returns them - a  number on the portal, a string on a connected third-party account.
 	FolderIds []DuplicateRequestDtoAllOfFileIds `json:"folderIds,omitempty"`
-	// The list of the shared file IDs.
+	// The files whose rights are being changed, identified as a listing operation returns them - a number on the  portal, a string on a connected third-party account.
 	FileIds []DuplicateRequestDtoAllOfFileIds `json:"fileIds,omitempty"`
-	// The collection of sharing parameters.
+	// One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of `None` takes the access away. An empty collection makes the call change  nothing.
 	Share []FileShareParams `json:"share,omitempty"`
-	// Specifies whether to notify users about the shared file or not.
+	// Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone.
 	Notify *bool `json:"notify,omitempty"`
-	// The message to send when notifying about the shared file.
+	// The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives.
 	SharingMessage NullableString `json:"sharingMessage,omitempty"`
 }
 

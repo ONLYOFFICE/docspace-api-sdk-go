@@ -4,9 +4,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AuthorizeOAuth**](OAuth20AuthorizationAPI.md#AuthorizeOAuth) | **Get** /oauth2/authorize | OAuth2 Authorization Endpoint
-[**ExchangeToken**](OAuth20AuthorizationAPI.md#ExchangeToken) | **Post** /oauth2/token | OAuth2 Token Endpoint
-[**SubmitConsent**](OAuth20AuthorizationAPI.md#SubmitConsent) | **Post** /oauth2/authorize | OAuth2 consent endpoint
+[**AuthorizeOAuth**](OAuth20AuthorizationAPI.md#AuthorizeOAuth) | **Get** /oauth2/authorize | Start the authorization flow
+[**ExchangeToken**](OAuth20AuthorizationAPI.md#ExchangeToken) | **Post** /oauth2/token | Exchange the authorization code
+[**SubmitConsent**](OAuth20AuthorizationAPI.md#SubmitConsent) | **Post** /oauth2/authorize | Submit the consent decision
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > AuthorizeOAuth(ctx).ResponseType(responseType).ClientId(clientId).RedirectUri(redirectUri).Scope(scope).Execute()
 
-OAuth2 Authorization Endpoint
+Start the authorization flow
 
 
 
@@ -33,10 +33,10 @@ import (
 )
 
 func main() {
-	responseType := "code" // string | The OAuth 2.0 response type, must be 'code' for authorization code flow.
-	clientId := "6c7cf17b-1bd3-47d5-94c6-be2d3570e168" // string | The client identifier issued to the client during registration.
-	redirectUri := "https://example.com" // string | The URL to redirect to after authorization is complete.
-	scope := "files:read" // string | The space-separated list of requested scope permissions.
+	responseType := "code" // string | The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint.
+	clientId := "6c7cf17b-1bd3-47d5-94c6-be2d3570e168" // string | The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against.
+	redirectUri := "https://example.com" // string | Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused.
+	scope := "files:read" // string | The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -59,10 +59,10 @@ Other parameters are passed through a pointer to a apiAuthorizeOAuthRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **responseType** | **string** | The OAuth 2.0 response type, must be 'code' for authorization code flow. | 
- **clientId** | **string** | The client identifier issued to the client during registration. | 
- **redirectUri** | **string** | The URL to redirect to after authorization is complete. | 
- **scope** | **string** | The space-separated list of requested scope permissions. | 
+ **responseType** | **string** | The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint. | 
+ **clientId** | **string** | The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against. | 
+ **redirectUri** | **string** | Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused. | 
+ **scope** | **string** | The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these. | 
 
 ### Return type
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 > ExchangeToken200Response ExchangeToken(ctx).GrantType(grantType).Code(code).RedirectUri(redirectUri).ClientId(clientId).ClientSecret(clientSecret).Execute()
 
-OAuth2 Token Endpoint
+Exchange the authorization code
 
 
 
@@ -105,11 +105,11 @@ import (
 )
 
 func main() {
-	grantType := "grantType_example" // string | The OAuth2 grant type, must be 'authorization_code' for the authorization code flow. (optional)
-	code := "code_example" // string | A temporary authorization code that is sent to the client to be exchanged for a token. (optional)
-	redirectUri := "redirectUri_example" // string | The URL where the user will be redirected after successful or unsuccessful authentication. (optional)
-	clientId := "clientId_example" // string | The client identifier issued to the client during registration. (optional)
-	clientSecret := "clientSecret_example" // string | The client secret issued to the client during registration. (optional)
+	grantType := "grantType_example" // string | Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token. (optional)
+	code := "code_example" // string | The authorization code returned by the authorization endpoint. It may be redeemed once. (optional)
+	redirectUri := "redirectUri_example" // string | The same redirect URI that was used to obtain the code. The exchange fails when it differs. (optional)
+	clientId := "clientId_example" // string | The identifier of the client redeeming the code. (optional)
+	clientSecret := "clientSecret_example" // string | The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -134,11 +134,11 @@ Other parameters are passed through a pointer to a apiExchangeTokenRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **grantType** | **string** | The OAuth2 grant type, must be 'authorization_code' for the authorization code flow. | 
- **code** | **string** | A temporary authorization code that is sent to the client to be exchanged for a token. | 
- **redirectUri** | **string** | The URL where the user will be redirected after successful or unsuccessful authentication. | 
- **clientId** | **string** | The client identifier issued to the client during registration. | 
- **clientSecret** | **string** | The client secret issued to the client during registration. | 
+ **grantType** | **string** | Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token. | 
+ **code** | **string** | The authorization code returned by the authorization endpoint. It may be redeemed once. | 
+ **redirectUri** | **string** | The same redirect URI that was used to obtain the code. The exchange fails when it differs. | 
+ **clientId** | **string** | The identifier of the client redeeming the code. | 
+ **clientSecret** | **string** | The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead. | 
 
 ### Return type
 
@@ -162,7 +162,7 @@ No authorization required
 
 > SubmitConsent(ctx).ClientId(clientId).State(state).Scope(scope).Execute()
 
-OAuth2 consent endpoint
+Submit the consent decision
 
 
 
@@ -181,9 +181,9 @@ import (
 )
 
 func main() {
-	clientId := "clientId_example" // string | The client identifier issued to the client during registration. (optional)
-	state := "state_example" // string | The random string used to solve the CSRF vulnerability problem. (optional)
-	scope := "scope_example" // string | The space-separated list of requested scope permissions. (optional)
+	clientId := "clientId_example" // string | The client the consent is being given to. It has to be the same client the authorization request named. (optional)
+	state := "state_example" // string | The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request. (optional)
+	scope := "scope_example" // string | The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -206,9 +206,9 @@ Other parameters are passed through a pointer to a apiSubmitConsentRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **clientId** | **string** | The client identifier issued to the client during registration. | 
- **state** | **string** | The random string used to solve the CSRF vulnerability problem. | 
- **scope** | **string** | The space-separated list of requested scope permissions. | 
+ **clientId** | **string** | The client the consent is being given to. It has to be the same client the authorization request named. | 
+ **state** | **string** | The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request. | 
+ **scope** | **string** | The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested. | 
 
 ### Return type
 

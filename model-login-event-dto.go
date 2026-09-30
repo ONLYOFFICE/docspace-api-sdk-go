@@ -16,39 +16,38 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the LoginEventDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LoginEventDto{}
 
-// LoginEventDto The login event parameters.
+// LoginEventDto One entry of the portal login history: a sign-in, a sign-out or a failed attempt, and where it came from.
 type LoginEventDto struct {
-	// The login event ID.
+	// The ID of the recorded sign-in. When the entry is a successful sign-in that is still open, this is also  the value `GET api/2.0/security/activeconnections` reports as the connection's `id`.
 	Id *int32 `json:"id,omitempty"`
-	// The login event date.
-	Date NullableTime `json:"date,omitempty"`
-	// The user name of the login event.
+	// When the attempt was made, in the portal time zone. The `from` and `to` filters are read as UTC instants,  so the two do not line up on a portal that is not on UTC.
+	Date *ApiDateTime `json:"date,omitempty"`
+	// The display name of the account the attempt was made against, taken from the account as it stands now  rather than as it stood at the time. A localised placeholder stands in when there is no account to read,  which is the usual case for a failed attempt on an address nobody owns.
 	User NullableString `json:"user,omitempty"`
-	// The user ID of the login event.
+	// The ID of that account, which is what the `userId` filter of this operation matches on. It is the empty  GUID when the attempt could not be tied to an account.
 	UserId *string `json:"userId,omitempty"`
-	// The user login of the login event.
+	// The login string as it was typed - normally the email address. It is the only field that survives a failed  attempt against an unknown account, which makes it the one to read when `user` is a placeholder.
 	Login NullableString `json:"login,omitempty"`
-	// The login event action.
+	// The event as a readable sentence in the portal language. On `GET api/2.0/security/audit/login/last` each  substituted value is cut to 50 characters; the filtered operation substitutes them in full.
 	Action NullableString `json:"action,omitempty"`
-	// The login-related action to filter events by.
+	// What happened, as the `action` filter of this operation spells it: a successful sign-in, a failed one, a  sign-out. Use this rather than parsing `action`, which is prose and changes with the portal language.
 	ActionId *MessageAction `json:"actionId,omitempty"`
-	// The login event IP.
+	// The IP address the attempt came from, with the port stripped off.
 	Ip NullableString `json:"ip,omitempty"`
-	// The login event country.
+	// The English name of the country the IP address is located in, empty when the address cannot be located -  the normal outcome for private and loopback addresses.
 	Country NullableString `json:"country,omitempty"`
-	// The login event city.
+	// The city the IP address is located in, empty under the same conditions as `country`.
 	City NullableString `json:"city,omitempty"`
-	// The login event browser.
+	// The browser and its version as parsed from the user agent of the attempt, empty when the client sent none  that could be parsed.
 	Browser NullableString `json:"browser,omitempty"`
-	// The login event platform.
+	// The operating system as parsed from the same user agent, empty under the same conditions as `browser`.
 	Platform NullableString `json:"platform,omitempty"`
-	// The login event page.
+	// Where in the portal the attempt was made from: the referrer of the request, or that request's own path  when it carried no referrer. Long values are cut off at 512 characters.
 	Page NullableString `json:"page,omitempty"`
 }
 
@@ -101,46 +100,36 @@ func (o *LoginEventDto) SetId(v int32) {
 	o.Id = &v
 }
 
-// GetDate returns the Date field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LoginEventDto) GetDate() time.Time {
-	if o == nil || IsNil(o.Date.Get()) {
-		var ret time.Time
+// GetDate returns the Date field value if set, zero value otherwise.
+func (o *LoginEventDto) GetDate() ApiDateTime {
+	if o == nil || IsNil(o.Date) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.Date.Get()
+	return *o.Date
 }
 
 // GetDateOk returns a tuple with the Date field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoginEventDto) GetDateOk() (*time.Time, bool) {
-	if o == nil {
+func (o *LoginEventDto) GetDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Date) {
 		return nil, false
 	}
-	return o.Date.Get(), o.Date.IsSet()
+	return o.Date, true
 }
 
 // HasDate returns a boolean if a field has been set.
 func (o *LoginEventDto) IsDateSet() bool {
-	if o != nil && o.Date.IsSet() {
+	if o != nil && !IsNil(o.Date) {
 		return true
 	}
 
 	return false
 }
 
-// SetDate gets a reference to the given NullableTime and assigns it to the Date field.
-func (o *LoginEventDto) SetDate(v time.Time) {
-	o.Date.Set(&v)
-}
-// SetDateNil sets the value for Date to be an explicit nil
-func (o *LoginEventDto) SetDateNil() {
-	o.Date.Set(nil)
-}
-
-// UnsetDate ensures that no value is present for Date, not even an explicit nil
-func (o *LoginEventDto) UnsetDate() {
-	o.Date.Unset()
+// SetDate gets a reference to the given ApiDateTime and assigns it to the Date field.
+func (o *LoginEventDto) SetDate(v ApiDateTime) {
+	o.Date = &v
 }
 
 // GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -598,8 +587,8 @@ func (o LoginEventDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Date.IsSet() {
-		toSerialize["date"] = o.Date.Get()
+	if !IsNil(o.Date) {
+		toSerialize["date"] = o.Date
 	}
 	if o.User.IsSet() {
 		toSerialize["user"] = o.User.Get()

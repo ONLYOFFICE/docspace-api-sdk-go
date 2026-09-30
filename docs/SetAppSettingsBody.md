@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Settings** | Pointer to [**SetAppSettingsBodySettings**](SetAppSettingsBodySettings.md) |  | [optional] 
+**Settings** | Pointer to **interface{}** |  | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetSettings
 
-`func (o *SetAppSettingsBody) GetSettings() SetAppSettingsBodySettings`
+`func (o *SetAppSettingsBody) GetSettings() interface{}`
 
 GetSettings returns the Settings field if non-nil, zero value otherwise.
 
 ### GetSettingsOk
 
-`func (o *SetAppSettingsBody) GetSettingsOk() (*SetAppSettingsBodySettings, bool)`
+`func (o *SetAppSettingsBody) GetSettingsOk() (*interface{}, bool)`
 
 GetSettingsOk returns a tuple with the Settings field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSettings
 
-`func (o *SetAppSettingsBody) SetSettings(v SetAppSettingsBodySettings)`
+`func (o *SetAppSettingsBody) SetSettings(v interface{})`
 
 SetSettings sets Settings field to given value.
 
@@ -50,6 +50,16 @@ SetSettings sets Settings field to given value.
 
 HasSettings returns a boolean if a field has been set.
 
+### SetSettingsNil
+
+`func (o *SetAppSettingsBody) SetSettingsNil(b bool)`
+
+ SetSettingsNil sets the value for Settings to be an explicit nil
+
+### UnsetSettings
+`func (o *SetAppSettingsBody) UnsetSettings()`
+
+UnsetSettings ensures that no value is present for Settings, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

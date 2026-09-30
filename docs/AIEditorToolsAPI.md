@@ -4,16 +4,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AiEditorToolsCall**](AIEditorToolsAPI.md#AiEditorToolsCall) | **Post** /api/2.0/ai/editor-tools/call | Execute a DocSpace tool on behalf of the editor AI plugin
-[**AiEditorToolsList**](AIEditorToolsAPI.md#AiEditorToolsList) | **Get** /api/2.0/ai/editor-tools/list | Sanitized DocSpace tool catalog for the editor AI plugin
+[**AiEditorToolsCall**](AIEditorToolsAPI.md#AiEditorToolsCall) | **Post** /api/2.0/ai/editor-tools/call | Call an editor tool
+[**AiEditorToolsList**](AIEditorToolsAPI.md#AiEditorToolsList) | **Get** /api/2.0/ai/editor-tools/list | List editor tools
 
 
 
 ## AiEditorToolsCall
 
-> AiSuccessResponse AiEditorToolsCall(ctx).RequestBody(requestBody).Execute()
+> AiEditorToolsCall200Response AiEditorToolsCall(ctx).AiEditorToolsCallRequest(aiEditorToolsCallRequest).Execute()
 
-Execute a DocSpace tool on behalf of the editor AI plugin
+Call an editor tool
 
 
 
@@ -32,16 +32,16 @@ import (
 )
 
 func main() {
-	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
+	aiEditorToolsCallRequest := *openapiclient.NewAiEditorToolsCallRequest("docspace_get_folder") // AiEditorToolsCallRequest | The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIEditorToolsAPI.AiEditorToolsCall(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AIEditorToolsAPI.AiEditorToolsCall(context.Background()).AiEditorToolsCallRequest(aiEditorToolsCallRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIEditorToolsAPI.AiEditorToolsCall``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiEditorToolsCall`: AiSuccessResponse
+	// response from `AiEditorToolsCall`: AiEditorToolsCall200Response
 	fmt.Fprintf(os.Stdout, "Response from `AIEditorToolsAPI.AiEditorToolsCall`: %v\n", resp)
 }
 ```
@@ -57,15 +57,15 @@ Other parameters are passed through a pointer to a apiAiEditorToolsCallRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]interface{}** |  | 
+ **aiEditorToolsCallRequest** | [**AiEditorToolsCallRequest**](AiEditorToolsCallRequest.md) | The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in. | 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**AiEditorToolsCall200Response**](AiEditorToolsCall200Response.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -79,9 +79,9 @@ No authorization required
 
 ## AiEditorToolsList
 
-> AiSuccessResponse AiEditorToolsList(ctx).Execute()
+> AiEditorToolsList200Response AiEditorToolsList(ctx).Execute()
 
-Sanitized DocSpace tool catalog for the editor AI plugin
+List editor tools
 
 
 
@@ -108,7 +108,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIEditorToolsAPI.AiEditorToolsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiEditorToolsList`: AiSuccessResponse
+	// response from `AiEditorToolsList`: AiEditorToolsList200Response
 	fmt.Fprintf(os.Stdout, "Response from `AIEditorToolsAPI.AiEditorToolsList`: %v\n", resp)
 }
 ```
@@ -124,11 +124,11 @@ Other parameters are passed through a pointer to a apiAiEditorToolsListRequest s
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**AiEditorToolsList200Response**](AiEditorToolsList200Response.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

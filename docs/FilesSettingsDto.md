@@ -4,70 +4,71 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExtsImagePreviewed** | Pointer to **[]string** | The list of extensions of the viewed images. | [optional] 
-**ExtsMediaPreviewed** | Pointer to **[]string** | The list of extensions of the viewed media files. | [optional] 
-**ExtsWebPreviewed** | Pointer to **[]string** | The list of extensions of the viewed files. | [optional] 
-**ExtsWebEdited** | Pointer to **[]string** | The list of extensions of the edited files. | [optional] 
-**ExtsWebEncrypt** | Pointer to **[]string** | The list of extensions of the encrypted files. | [optional] 
-**ExtsWebReviewed** | Pointer to **[]string** | The list of extensions of the reviewed files. | [optional] 
-**ExtsWebCustomFilterEditing** | Pointer to **[]string** | The list of extensions of the custom filter files. | [optional] 
-**ExtsWebRestrictedEditing** | Pointer to **[]string** | The list of extensions of the files that are restricted for editing. | [optional] 
-**ExtsWebCommented** | Pointer to **[]string** | The list of extensions of the commented files. | [optional] 
-**ExtsWebTemplate** | Pointer to **[]string** | The list of extensions of the template files. | [optional] 
-**ExtsMustConvert** | Pointer to **[]string** | The list of extensions of the files that must be converted. | [optional] 
-**ExtsConvertible** | Pointer to **map[string][]string** | The list of the convertible extensions. | [optional] 
-**ExtsUploadable** | Pointer to **[]string** | The list of the uploadable extensions. | [optional] 
-**ExtsArchive** | Pointer to **[]string** | The list of extensions of the archive files. | [optional] 
-**ExtsVideo** | Pointer to **[]string** | The list of the video extensions. | [optional] 
-**ExtsAudio** | Pointer to **[]string** | The list of the audio extensions. | [optional] 
-**ExtsImage** | Pointer to **[]string** | The list of the image extensions. | [optional] 
-**ExtsSpreadsheet** | Pointer to **[]string** | The list of the spreadsheet extensions. | [optional] 
-**ExtsPresentation** | Pointer to **[]string** | The list of the presentation extensions. | [optional] 
-**ExtsDocument** | Pointer to **[]string** | The list of the text document extensions. | [optional] 
-**ExtsDiagram** | Pointer to **[]string** | The list of the diagram extensions. | [optional] 
+**ExtsImagePreviewed** | Pointer to **[]string** | Images the portal can show in its own viewer. Anything outside the list has to be downloaded to be seen. | [optional] 
+**ExtsMediaPreviewed** | Pointer to **[]string** | Audio and video the portal can play in its own player. | [optional] 
+**ExtsWebPreviewed** | Pointer to **[]string** | Documents the editor can open read-only. A format that is here but not in the edited list can be viewed and  not changed. | [optional] 
+**ExtsWebEdited** | Pointer to **[]string** | Documents the editor can open for editing. Uploading a format outside this list and outside the convertible  list leaves a file that can only be downloaded. | [optional] 
+**ExtsWebEncrypt** | Pointer to **[]string** | Documents that can be edited inside a private room, where the content is encrypted on the client. | [optional] 
+**ExtsWebReviewed** | Pointer to **[]string** | Documents that support the reviewing mode, so that granting review access to them is meaningful. | [optional] 
+**ExtsWebCustomFilterEditing** | Pointer to **[]string** | Spreadsheets that support the custom filter mode, where a filter applied by one editor does not disturb the  others. | [optional] 
+**ExtsWebRestrictedEditing** | Pointer to **[]string** | Documents that can only be filled in or commented on rather than edited freely, whatever access the caller  holds. | [optional] 
+**ExtsWebCommented** | Pointer to **[]string** | Documents that support comments, so that granting comment access to them is meaningful. | [optional] 
+**ExtsWebTemplate** | Pointer to **[]string** | Documents the portal treats as templates to create new files from. | [optional] 
+**ExtsMustConvert** | Pointer to **[]string** | Formats that cannot be edited as they are and are converted on upload or on first opening. Which target each  one has is in the convertible table below. | [optional] 
+**ExtsConvertible** | Pointer to **map[string][]string** | The conversion map of the portal: for each source extension, the extensions it can be converted into. Use it  to fill the target format of a conversion request instead of guessing one. | [optional] 
+**ExtsUploadable** | Pointer to **[]string** | Formats the portal offers to create and upload as documents. It is not an upload filter: files of other  formats are stored as they are. | [optional] 
+**ExtsArchive** | Pointer to **[]string** | Formats recognised as archives, which is what decides the archive icon and the offer to unpack. | [optional] 
+**ExtsVideo** | Pointer to **[]string** | Formats classified as video. The classification lists drive icons and the media filters of the listing  operations, and are wider than what the built-in player can show. | [optional] 
+**ExtsAudio** | Pointer to **[]string** | Formats classified as audio. | [optional] 
+**ExtsImage** | Pointer to **[]string** | Formats classified as images. | [optional] 
+**ExtsSpreadsheet** | Pointer to **[]string** | Formats classified as spreadsheets. | [optional] 
+**ExtsPresentation** | Pointer to **[]string** | Formats classified as presentations. | [optional] 
+**ExtsDocument** | Pointer to **[]string** | Formats classified as text documents. | [optional] 
+**ExtsDiagram** | Pointer to **[]string** | Formats classified as diagrams. | [optional] 
 **InternalFormats** | Pointer to [**NullableFilesSettingsDtoInternalFormats**](FilesSettingsDtoInternalFormats.md) |  | [optional] 
-**MasterFormExtension** | Pointer to **NullableString** | The master form extension. | [optional] 
-**ParamVersion** | Pointer to **NullableString** | The URL parameter which specifies the file version. | [optional] 
-**ParamOutType** | Pointer to **NullableString** | The URL parameter which specifies the output type of the converted file. | [optional] 
-**FileDownloadUrlString** | Pointer to **NullableString** | The URL to download a file. | [optional] 
-**FileWebViewerUrlString** | Pointer to **NullableString** | The URL to the file web viewer. | [optional] 
-**FileWebViewerExternalUrlString** | Pointer to **NullableString** | The external URL to the file web viewer. | [optional] 
-**FileWebEditorUrlString** | Pointer to **NullableString** | The URL to the file web editor. | [optional] 
-**FileWebEditorExternalUrlString** | Pointer to **NullableString** | The external URL to the file web editor. | [optional] 
-**FileRedirectPreviewUrlString** | Pointer to **NullableString** | The redirect URL to the file viewer. | [optional] 
-**FileThumbnailUrlString** | Pointer to **NullableString** | The URL to the file thumbnail. | [optional] 
-**ConfirmDelete** | Pointer to **bool** | Specifies whether to confirm the file deletion or not. | [optional] 
-**EnableThirdParty** | Pointer to **bool** | Specifies whether to allow users to connect the third-party storages. | [optional] 
-**ExternalShare** | Pointer to **bool** | Specifies whether to enable sharing external links to the files. | [optional] 
-**ExternalShareSocialMedia** | Pointer to **bool** | Specifies whether to enable sharing files on social media. | [optional] 
-**StoreOriginalFiles** | Pointer to **bool** | Specifies whether to enable storing original files. | [optional] 
-**KeepNewFileName** | Pointer to **bool** | Specifies whether to keep the new file name. | [optional] 
-**DisplayFileExtension** | Pointer to **bool** | Specifies whether to display the file extension. | [optional] 
-**ConvertNotify** | Pointer to **bool** | Specifies whether to display the conversion notification. | [optional] 
-**HideConfirmCancelOperation** | Pointer to **bool** | Specifies whether to hide the confirmation dialog for the cancel operation. | [optional] 
-**HideConfirmConvertSave** | Pointer to **bool** | Specifies whether to hide the confirmation dialog  for saving the file copy in the original format when converting a file. | [optional] 
-**HideConfirmConvertOpen** | Pointer to **bool** | Specifies whether to hide the confirmation dialog  for opening the conversion result. | [optional] 
-**HideConfirmRoomLifetime** | Pointer to **bool** | Specifies whether to hide the confirmation dialog about the file lifetime in the room. | [optional] 
-**DefaultOrder** | Pointer to [**OrderBy**](OrderBy.md) | The default order of files. | [optional] 
-**Forcesave** | Pointer to **bool** | Specifies whether to forcesave the files or not. | [optional] 
-**StoreForcesave** | Pointer to **bool** | Specifies whether to store the forcesaved file versions or not. | [optional] 
-**RecentSection** | Pointer to **bool** | Specifies if the Recent section is displayed or not. | [optional] 
-**FavoritesSection** | Pointer to **bool** | Specifies if the Favorites section is displayed or not. | [optional] 
-**TemplatesSection** | Pointer to **bool** | Specifies if the Templates section is displayed or not. | [optional] 
-**DownloadTarGz** | Pointer to **bool** | Specifies whether to download the .tar.gz files or not. | [optional] 
-**AutomaticallyCleanUp** | Pointer to [**AutoCleanUpData**](AutoCleanUpData.md) | The auto-clearing setting parameters. | [optional] 
-**CanSearchByContent** | Pointer to **bool** | Specifies whether the file can be searched by its content or not. | [optional] 
-**DefaultSharingAccessRights** | Pointer to **[]int32** | The default access rights in sharing settings. | [optional] 
-**MaxUploadThreadCount** | Pointer to **int32** | The maximum number of upload threads. | [optional] 
-**ChunkUploadSize** | Pointer to **int64** | The size of a large file that is uploaded in chunks. | [optional] 
-**OpenEditorInSameTab** | Pointer to **bool** | Specifies whether to open the editor in the same tab or not. | [optional] 
-**OrganizeRoomsGrouping** | Pointer to **bool** | Specifies whether the grouping of rooms is enabled or not. | [optional] 
-**DefaultShareLinkInternal** | Pointer to **bool** | Specifies the default sharing link type: true = DocSpace users only (internal), false = Anyone with the link. | [optional] 
-**ExternalShareApplyToDocuments** | Pointer to **bool** | When external sharing is restricted, specifies whether the restriction applies to the My Documents section. | [optional] 
-**ExternalShareApplyToRooms** | Pointer to **bool** | When external sharing is restricted, specifies whether the restriction applies to the Rooms section. | [optional] 
-**BlockExistingLinksOnRestrict** | Pointer to **bool** | When external sharing is restricted, specifies whether existing public links are blocked immediately. | [optional] 
-**ExtsFilesVectorized** | Pointer to **[]string** | List of extensions available for vectorization | [optional] 
-**MaxVectorizationFileSize** | Pointer to **int64** | The maximum file size for vectorization | [optional] 
+**MasterFormExtension** | Pointer to **NullableString** | The extension of a fillable form template in this portal. It is configurable, so read it rather than assuming  the product default. | [optional] 
+**ParamVersion** | Pointer to **NullableString** | The name of the query parameter that pins a document address to one version. Append it to the addresses below  instead of composing a version address by hand. | [optional] 
+**ParamOutType** | Pointer to **NullableString** | The name of the query parameter that asks a download address for a converted copy in another format. | [optional] 
+**FileDownloadUrlString** | Pointer to **NullableString** | The template of the address a file is downloaded from: substitute the file identifier for the `{0}`  placeholder. Add the version and output-type parameters named above for a particular version or format. | [optional] 
+**FileWebViewerUrlString** | Pointer to **NullableString** | The template of the address that opens a file in the viewer inside the portal, with `{0}` for the file  identifier. It is a portal-relative address, meant to be opened in a browser rather than called as an API. | [optional] 
+**FileWebViewerExternalUrlString** | Pointer to **NullableString** | The same viewer address as an absolute one, for a message or a page outside the portal. | [optional] 
+**FileWebEditorUrlString** | Pointer to **NullableString** | The template of the address that opens a file for editing inside the portal, with `{0}` for the file  identifier. Whether the session really becomes editable still depends on the access the caller holds. | [optional] 
+**FileWebEditorExternalUrlString** | Pointer to **NullableString** | The same editing address as an absolute one, for use outside the portal. | [optional] 
+**FileRedirectPreviewUrlString** | Pointer to **NullableString** | The template of the address that sends the browser on to whichever viewer or editor suits the file, with `{0}`  for the file identifier. Use it when the kind of the file is not known in advance. | [optional] 
+**FileThumbnailUrlString** | Pointer to **NullableString** | The template of the address a file thumbnail is fetched from, with `{0}` for the file identifier. A thumbnail  is built in the background, so the address can answer with nothing for a while after the file appears. | [optional] 
+**ConfirmDelete** | Pointer to **bool** | Whether the caller asked to be prompted before a deletion. Written by `PUT api/2.0/files/changedeleteconfrim`. | [optional] 
+**EnableThirdParty** | Pointer to **bool** | Whether this portal allows third-party storages to be connected at all. It is set portal-wide by an  administrator, so a member sees it as read-only. | [optional] 
+**ExternalShare** | Pointer to **bool** | Whether links that open an entry without a portal account may be created in this portal. Set portal-wide by an  administrator. | [optional] 
+**ExternalShareSocialMedia** | Pointer to **bool** | Whether the share-to-network buttons are offered next to an external link. It is reported as false whenever  external sharing itself is off. | [optional] 
+**StoreOriginalFiles** | Pointer to **bool** | Whether the caller's uploads keep the original file when the portal converts them. With false the conversion  replaces the uploaded file with a new version of it. | [optional] 
+**KeepNewFileName** | Pointer to **bool** | Whether the caller asked for new documents to be created with the default name instead of being prompted for  one. | [optional] 
+**DisplayFileExtension** | Pointer to **bool** | Whether the caller asked to see extensions in file titles. Stored titles always carry the extension whatever  this says. | [optional] 
+**ShowQuickActions** | Pointer to **bool** | Specifies whether to display the quick action buttons. | [optional] 
+**ConvertNotify** | Pointer to **bool** | Whether the caller is told about the result of a conversion. There is no operation in this document that  writes it. | [optional] 
+**HideConfirmCancelOperation** | Pointer to **bool** | Whether the prompt shown before a running operation is abandoned is hidden for the caller. | [optional] 
+**HideConfirmConvertSave** | Pointer to **bool** | Whether the prompt that offers to keep a copy in the original format on conversion is hidden for the caller.  Once true it cannot be turned back through the API. | [optional] 
+**HideConfirmConvertOpen** | Pointer to **bool** | Whether the prompt that offers to open the conversion result is hidden for the caller. Once true it cannot be  turned back through the API. | [optional] 
+**HideConfirmRoomLifetime** | Pointer to **bool** | Whether the warning shown before the lifetime settings of a room are changed is hidden for the caller. | [optional] 
+**DefaultOrder** | Pointer to [**OrderBy**](OrderBy.md) | The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used. | [optional] 
+**Forcesave** | Pointer to **bool** | Whether the editor writes a document back to storage while the session is still open. It is on for every  portal and cannot be switched off. | [optional] 
+**StoreForcesave** | Pointer to **bool** | Whether those intermediate saves are kept as separate versions. They are not, in any portal: they update the  current version instead. | [optional] 
+**RecentSection** | Pointer to **bool** | Whether the Recent section is offered to the caller among the section roots. | [optional] 
+**FavoritesSection** | Pointer to **bool** | Whether the Favorites section is offered to the caller among the section roots. | [optional] 
+**TemplatesSection** | Pointer to **bool** | Whether the Templates section is offered to the caller among the section roots. | [optional] 
+**DownloadTarGz** | Pointer to **bool** | The archive format the caller's multi-item downloads are packed into: true for `.tar.gz`, false for `.zip`. | [optional] 
+**AutomaticallyCleanUp** | Pointer to [**AutoCleanUpData**](AutoCleanUpData.md) | The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns. | [optional] 
+**CanSearchByContent** | Pointer to **bool** | Whether documents in this portal can be searched by what is inside them and not only by title. It depends on  the full-text search service being configured and having indexed the portal. | [optional] 
+**DefaultSharingAccessRights** | Pointer to **[]int32** | The access rights the sharing dialog offers the caller by default. The portal normalises the set it stores, so  this can be shorter than what was last sent. | [optional] 
+**MaxUploadThreadCount** | Pointer to **int32** | How many upload requests the portal accepts from one account at a time. Sending more than this in parallel  gets the extra ones refused rather than queued. | [optional] 
+**ChunkUploadSize** | Pointer to **int64** | The size in bytes of one chunk of a chunked upload. Split a large file exactly along this size: a chunk that  does not match is refused by the upload session. | [optional] 
+**OpenEditorInSameTab** | Pointer to **bool** | Whether the caller asked for documents to open in the current browser tab. | [optional] 
+**OrganizeRoomsGrouping** | Pointer to **bool** | Whether the caller asked to see rooms arranged by the groups they belong to. | [optional] 
+**DefaultShareLinkInternal** | Pointer to **bool** | The kind of external link this portal offers first: true for a link only its own accounts can open, false for  one anyone holding it can open. | [optional] 
+**ExternalShareApplyToDocuments** | Pointer to **bool** | Whether the external sharing restriction covers personal documents. It matters only while external sharing is  off. | [optional] 
+**ExternalShareApplyToRooms** | Pointer to **bool** | Whether the external sharing restriction covers rooms, including making a new one public. It matters only  while external sharing is off. | [optional] 
+**BlockExistingLinksOnRestrict** | Pointer to **bool** | Whether links created before the restriction stop opening as well, rather than only new ones being refused. | [optional] 
+**ExtsFilesVectorized** | Pointer to **[]string** | Formats whose content can be indexed for the AI features of the portal. A file outside the list is left out of  that index. | [optional] 
+**MaxVectorizationFileSize** | Pointer to **int64** | The largest file size in bytes that is indexed for the AI features. A larger file is skipped even when its  format is listed above. | [optional] 
 
 ## Methods
 
@@ -1372,6 +1373,31 @@ SetDisplayFileExtension sets DisplayFileExtension field to given value.
 `func (o *FilesSettingsDto) HasDisplayFileExtension() bool`
 
 HasDisplayFileExtension returns a boolean if a field has been set.
+
+### GetShowQuickActions
+
+`func (o *FilesSettingsDto) GetShowQuickActions() bool`
+
+GetShowQuickActions returns the ShowQuickActions field if non-nil, zero value otherwise.
+
+### GetShowQuickActionsOk
+
+`func (o *FilesSettingsDto) GetShowQuickActionsOk() (*bool, bool)`
+
+GetShowQuickActionsOk returns a tuple with the ShowQuickActions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowQuickActions
+
+`func (o *FilesSettingsDto) SetShowQuickActions(v bool)`
+
+SetShowQuickActions sets ShowQuickActions field to given value.
+
+### HasShowQuickActions
+
+`func (o *FilesSettingsDto) HasShowQuickActions() bool`
+
+HasShowQuickActions returns a boolean if a field has been set.
 
 ### GetConvertNotify
 

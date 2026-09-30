@@ -21,19 +21,19 @@ import (
 // checks if the AuthData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AuthData{}
 
-// AuthData The authentication data.
+// AuthData The credentials of a third-party storage account. The portal takes them when an account is connected and does not  give them back afterwards.
 type AuthData struct {
-	// The authentication login.
+	// The account name at the storage service.
 	Login NullableString `json:"login,omitempty"`
-	// The authentication password.
+	// The password of the account at the storage service.
 	Password NullableString `json:"password,omitempty"`
-	// The authentication raw token.
+	// The token of the account, kept as the raw JSON document the storage service issued it in.
 	RawToken NullableString `json:"rawToken,omitempty"`
-	// The authentication URL.
+	// The address of the storage server the account lives on.
 	Url NullableString `json:"url,omitempty"`
-	// The authentication provider.
+	// The storage service the credentials belong to, as the provider key the account was connected with.
 	Provider NullableString `json:"provider,omitempty"`
-	// The authentication token.
+	// The same token as in `rawToken`, parsed into its OAuth 2.0 fields.
 	Token *OAuth20Token `json:"token,omitempty"`
 }
 

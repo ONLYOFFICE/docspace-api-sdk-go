@@ -16,7 +16,6 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
-	"time"
 	"bytes"
 	"fmt"
 )
@@ -24,29 +23,29 @@ import (
 // checks if the ActiveConnectionsItemDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActiveConnectionsItemDto{}
 
-// ActiveConnectionsItemDto The active connection item parameters.
+// ActiveConnectionsItemDto One open connection of a user: where the sign-in behind it came from, and the ID it can be closed by.
 type ActiveConnectionsItemDto struct {
-	// The active connection ID.
+	// The ID of the sign-in this connection was opened by. Pass it as `loginEventId` to  `PUT api/2.0/security/activeconnections/logout/{loginEventId}` to end this one connection; the item whose  value equals `loginEvent` is the connection the current request uses.
 	Id int32 `json:"id"`
-	// The tenant ID.
+	// The portal the sign-in was made on. The operation never crosses portals, so it is the current one on every  item.
 	TenantId int32 `json:"tenantId"`
-	// The user ID.
+	// The user the connection belongs to, which is the calling user on every item - the operation cannot report  anyone else's connections.
 	UserId string `json:"userId"`
-	// Specifies if the active connection has a mobile phone or not.
+	// Whether the sign-in came from a mobile client. No mobile marker is stored with a connection, so the value  is `false` on every item and tells a caller nothing about the device.
 	Mobile *bool `json:"mobile,omitempty"`
-	// The IP address of the active connection.
+	// The IP address the sign-in came from, with the port stripped off. On the item that matches `loginEvent` it  is taken from the address the current request arrives from instead of the one stored at sign-in.
 	Ip NullableString `json:"ip,omitempty"`
-	// The active connection country.
+	// The English name of the country the IP address is located in. It is empty when the address cannot be  located, which is the normal outcome for private and loopback addresses.
 	Country NullableString `json:"country,omitempty"`
-	// The active connection city.
+	// The city the IP address is located in, empty under the same conditions as `country`.
 	City NullableString `json:"city,omitempty"`
-	// The active connection browser.
+	// The browser and its version as parsed from the user agent of the sign-in, empty when the client sent no  recognisable one. It is refreshed from the current request on the item that matches `loginEvent`.
 	Browser NullableString `json:"browser,omitempty"`
-	// The active connection platform.
+	// The operating system as parsed from the user agent of the sign-in, refreshed and left empty under the same  conditions as `browser`.
 	Platform NullableString `json:"platform,omitempty"`
-	// The active connection date.
-	Date NullableTime `json:"date,omitempty"`
-	// The active connection page.
+	// When the sign-in happened, in the portal time zone rather than in UTC.
+	Date *ApiDateTime `json:"date,omitempty"`
+	// Where in the portal the sign-in was made from: the referrer of the request that created it, or that  request's own path when it carried no referrer. Long values are cut off at 512 characters.
 	Page NullableString `json:"page,omitempty"`
 }
 
@@ -386,46 +385,36 @@ func (o *ActiveConnectionsItemDto) UnsetPlatform() {
 	o.Platform.Unset()
 }
 
-// GetDate returns the Date field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ActiveConnectionsItemDto) GetDate() time.Time {
-	if o == nil || IsNil(o.Date.Get()) {
-		var ret time.Time
+// GetDate returns the Date field value if set, zero value otherwise.
+func (o *ActiveConnectionsItemDto) GetDate() ApiDateTime {
+	if o == nil || IsNil(o.Date) {
+		var ret ApiDateTime
 		return ret
 	}
-	return *o.Date.Get()
+	return *o.Date
 }
 
 // GetDateOk returns a tuple with the Date field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ActiveConnectionsItemDto) GetDateOk() (*time.Time, bool) {
-	if o == nil {
+func (o *ActiveConnectionsItemDto) GetDateOk() (*ApiDateTime, bool) {
+	if o == nil || IsNil(o.Date) {
 		return nil, false
 	}
-	return o.Date.Get(), o.Date.IsSet()
+	return o.Date, true
 }
 
 // HasDate returns a boolean if a field has been set.
 func (o *ActiveConnectionsItemDto) IsDateSet() bool {
-	if o != nil && o.Date.IsSet() {
+	if o != nil && !IsNil(o.Date) {
 		return true
 	}
 
 	return false
 }
 
-// SetDate gets a reference to the given NullableTime and assigns it to the Date field.
-func (o *ActiveConnectionsItemDto) SetDate(v time.Time) {
-	o.Date.Set(&v)
-}
-// SetDateNil sets the value for Date to be an explicit nil
-func (o *ActiveConnectionsItemDto) SetDateNil() {
-	o.Date.Set(nil)
-}
-
-// UnsetDate ensures that no value is present for Date, not even an explicit nil
-func (o *ActiveConnectionsItemDto) UnsetDate() {
-	o.Date.Unset()
+// SetDate gets a reference to the given ApiDateTime and assigns it to the Date field.
+func (o *ActiveConnectionsItemDto) SetDate(v ApiDateTime) {
+	o.Date = &v
 }
 
 // GetPage returns the Page field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -501,8 +490,8 @@ func (o ActiveConnectionsItemDto) ToMap() (map[string]interface{}, error) {
 	if o.Platform.IsSet() {
 		toSerialize["platform"] = o.Platform.Get()
 	}
-	if o.Date.IsSet() {
-		toSerialize["date"] = o.Date.Get()
+	if !IsNil(o.Date) {
+		toSerialize["date"] = o.Date
 	}
 	if o.Page.IsSet() {
 		toSerialize["page"] = o.Page.Get()

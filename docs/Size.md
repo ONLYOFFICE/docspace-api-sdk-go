@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Height** | Pointer to **int32** | Gets or sets the height dimension of an object, typically measured in pixels or other unit.  It defines the vertical size of the object. | [optional] 
-**Width** | Pointer to **int32** | Gets or sets the width dimension of an object, typically measured in pixels or other unit. | [optional] 
+**Height** | Pointer to **int32** | The height of the image in pixels, read from the stored file rather than from any display setting. | [optional] 
+**Width** | Pointer to **int32** | The width of the image in pixels, read from the stored file rather than from any display setting. | [optional] 
 
 ## Methods
 

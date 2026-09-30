@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int32** | The active connection ID. | 
-**TenantId** | **int32** | The tenant ID. | 
-**UserId** | **string** | The user ID. | 
-**Mobile** | Pointer to **bool** | Specifies if the active connection has a mobile phone or not. | [optional] 
-**Ip** | Pointer to **NullableString** | The IP address of the active connection. | [optional] 
-**Country** | Pointer to **NullableString** | The active connection country. | [optional] 
-**City** | Pointer to **NullableString** | The active connection city. | [optional] 
-**Browser** | Pointer to **NullableString** | The active connection browser. | [optional] 
-**Platform** | Pointer to **NullableString** | The active connection platform. | [optional] 
-**Date** | Pointer to **NullableTime** | The active connection date. | [optional] 
-**Page** | Pointer to **NullableString** | The active connection page. | [optional] 
+**Id** | **int32** | The ID of the sign-in this connection was opened by. Pass it as `loginEventId` to  `PUT api/2.0/security/activeconnections/logout/{loginEventId}` to end this one connection; the item whose  value equals `loginEvent` is the connection the current request uses. | 
+**TenantId** | **int32** | The portal the sign-in was made on. The operation never crosses portals, so it is the current one on every  item. | 
+**UserId** | **string** | The user the connection belongs to, which is the calling user on every item - the operation cannot report  anyone else's connections. | 
+**Mobile** | Pointer to **bool** | Whether the sign-in came from a mobile client. No mobile marker is stored with a connection, so the value  is `false` on every item and tells a caller nothing about the device. | [optional] 
+**Ip** | Pointer to **NullableString** | The IP address the sign-in came from, with the port stripped off. On the item that matches `loginEvent` it  is taken from the address the current request arrives from instead of the one stored at sign-in. | [optional] 
+**Country** | Pointer to **NullableString** | The English name of the country the IP address is located in. It is empty when the address cannot be  located, which is the normal outcome for private and loopback addresses. | [optional] 
+**City** | Pointer to **NullableString** | The city the IP address is located in, empty under the same conditions as `country`. | [optional] 
+**Browser** | Pointer to **NullableString** | The browser and its version as parsed from the user agent of the sign-in, empty when the client sent no  recognisable one. It is refreshed from the current request on the item that matches `loginEvent`. | [optional] 
+**Platform** | Pointer to **NullableString** | The operating system as parsed from the user agent of the sign-in, refreshed and left empty under the same  conditions as `browser`. | [optional] 
+**Date** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the sign-in happened, in the portal time zone rather than in UTC. | [optional] 
+**Page** | Pointer to **NullableString** | Where in the portal the sign-in was made from: the referrer of the request that created it, or that  request's own path when it carried no referrer. Long values are cut off at 512 characters. | [optional] 
 
 ## Methods
 
@@ -297,20 +297,20 @@ HasPlatform returns a boolean if a field has been set.
 UnsetPlatform ensures that no value is present for Platform, not even an explicit nil
 ### GetDate
 
-`func (o *ActiveConnectionsItemDto) GetDate() time.Time`
+`func (o *ActiveConnectionsItemDto) GetDate() ApiDateTime`
 
 GetDate returns the Date field if non-nil, zero value otherwise.
 
 ### GetDateOk
 
-`func (o *ActiveConnectionsItemDto) GetDateOk() (*time.Time, bool)`
+`func (o *ActiveConnectionsItemDto) GetDateOk() (*ApiDateTime, bool)`
 
 GetDateOk returns a tuple with the Date field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDate
 
-`func (o *ActiveConnectionsItemDto) SetDate(v time.Time)`
+`func (o *ActiveConnectionsItemDto) SetDate(v ApiDateTime)`
 
 SetDate sets Date field to given value.
 
@@ -320,16 +320,6 @@ SetDate sets Date field to given value.
 
 HasDate returns a boolean if a field has been set.
 
-### SetDateNil
-
-`func (o *ActiveConnectionsItemDto) SetDateNil(b bool)`
-
- SetDateNil sets the value for Date to be an explicit nil
-
-### UnsetDate
-`func (o *ActiveConnectionsItemDto) UnsetDate()`
-
-UnsetDate ensures that no value is present for Date, not even an explicit nil
 ### GetPage
 
 `func (o *ActiveConnectionsItemDto) GetPage() string`

@@ -23,10 +23,10 @@ import (
 // checks if the FeatureUsedDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FeatureUsedDto{}
 
-// FeatureUsedDto The used space parameters of the tenant quota feature.
+// FeatureUsedDto How much of one quota feature the portal has already consumed.
 type FeatureUsedDto struct {
 	Value interface{} `json:"value"`
-	// The used space title.
+	// The same figure as a sentence in the portal language, ready to print. It is empty when this build ships no  wording for the feature.
 	Title NullableString `json:"title,omitempty"`
 }
 
