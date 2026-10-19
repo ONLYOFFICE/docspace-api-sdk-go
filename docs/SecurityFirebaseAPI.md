@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## DocRegisterPusnNotificationDevice
 
-> FireBaseUserWrapper DocRegisterPusnNotificationDevice(ctx).FirebaseRequestsDto(firebaseRequestsDto).Execute()
+> FirebaseDeviceWrapper DocRegisterPusnNotificationDevice(ctx).FirebaseRequestDto(firebaseRequestDto).Execute()
 
 Register a push device
 
@@ -32,16 +32,16 @@ import (
 )
 
 func main() {
-	firebaseRequestsDto := *openapiclient.NewFirebaseRequestsDto() // FirebaseRequestsDto |  (optional)
+	firebaseRequestDto := *openapiclient.NewFirebaseRequestDto() // FirebaseRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecurityFirebaseAPI.DocRegisterPusnNotificationDevice(context.Background()).FirebaseRequestsDto(firebaseRequestsDto).Execute()
+	resp, r, err := apiClient.SecurityFirebaseAPI.DocRegisterPusnNotificationDevice(context.Background()).FirebaseRequestDto(firebaseRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityFirebaseAPI.DocRegisterPusnNotificationDevice``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DocRegisterPusnNotificationDevice`: FireBaseUserWrapper
+	// response from `DocRegisterPusnNotificationDevice`: FirebaseDeviceWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SecurityFirebaseAPI.DocRegisterPusnNotificationDevice`: %v\n", resp)
 }
 ```
@@ -57,11 +57,11 @@ Other parameters are passed through a pointer to a apiDocRegisterPusnNotificatio
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **firebaseRequestsDto** | [**FirebaseRequestsDto**](FirebaseRequestsDto.md) |  | 
+ **firebaseRequestDto** | [**FirebaseRequestDto**](FirebaseRequestDto.md) |  | 
 
 ### Return type
 
-[**FireBaseUserWrapper**](FireBaseUserWrapper.md)
+[**FirebaseDeviceWrapper**](FirebaseDeviceWrapper.md)
 
 ### Authorization
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## SubscribeDocumentsPushNotification
 
-> FireBaseUserWrapper SubscribeDocumentsPushNotification(ctx).FirebaseRequestsDto(firebaseRequestsDto).Execute()
+> FirebaseDeviceWrapper SubscribeDocumentsPushNotification(ctx).FirebaseRequestDto(firebaseRequestDto).Execute()
 
 Set push subscription
 
@@ -100,16 +100,16 @@ import (
 )
 
 func main() {
-	firebaseRequestsDto := *openapiclient.NewFirebaseRequestsDto() // FirebaseRequestsDto |  (optional)
+	firebaseRequestDto := *openapiclient.NewFirebaseRequestDto() // FirebaseRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecurityFirebaseAPI.SubscribeDocumentsPushNotification(context.Background()).FirebaseRequestsDto(firebaseRequestsDto).Execute()
+	resp, r, err := apiClient.SecurityFirebaseAPI.SubscribeDocumentsPushNotification(context.Background()).FirebaseRequestDto(firebaseRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityFirebaseAPI.SubscribeDocumentsPushNotification``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SubscribeDocumentsPushNotification`: FireBaseUserWrapper
+	// response from `SubscribeDocumentsPushNotification`: FirebaseDeviceWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SecurityFirebaseAPI.SubscribeDocumentsPushNotification`: %v\n", resp)
 }
 ```
@@ -125,11 +125,11 @@ Other parameters are passed through a pointer to a apiSubscribeDocumentsPushNoti
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **firebaseRequestsDto** | [**FirebaseRequestsDto**](FirebaseRequestsDto.md) |  | 
+ **firebaseRequestDto** | [**FirebaseRequestDto**](FirebaseRequestDto.md) |  | 
 
 ### Return type
 
-[**FireBaseUserWrapper**](FireBaseUserWrapper.md)
+[**FirebaseDeviceWrapper**](FirebaseDeviceWrapper.md)
 
 ### Authorization
 

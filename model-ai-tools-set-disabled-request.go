@@ -29,6 +29,8 @@ type AiToolsSetDisabledRequest struct {
 	// Tool names to disable.
 	ToolNames []string `json:"toolNames"`
 	EntityId *string `json:"entityId,omitempty"`
+	// The list the write lands in; omitted means the caller's own.
+	Scope *AiChatToolPrefsScope `json:"scope,omitempty"`
 }
 
 type _AiToolsSetDisabledRequest AiToolsSetDisabledRequest
@@ -132,6 +134,38 @@ func (o *AiToolsSetDisabledRequest) SetEntityId(v string) {
 	o.EntityId = &v
 }
 
+// GetScope returns the Scope field value if set, zero value otherwise.
+func (o *AiToolsSetDisabledRequest) GetScope() AiChatToolPrefsScope {
+	if o == nil || IsNil(o.Scope) {
+		var ret AiChatToolPrefsScope
+		return ret
+	}
+	return *o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiToolsSetDisabledRequest) GetScopeOk() (*AiChatToolPrefsScope, bool) {
+	if o == nil || IsNil(o.Scope) {
+		return nil, false
+	}
+	return o.Scope, true
+}
+
+// HasScope returns a boolean if a field has been set.
+func (o *AiToolsSetDisabledRequest) IsScopeSet() bool {
+	if o != nil && !IsNil(o.Scope) {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given AiChatToolPrefsScope and assigns it to the Scope field.
+func (o *AiToolsSetDisabledRequest) SetScope(v AiChatToolPrefsScope) {
+	o.Scope = &v
+}
+
 func (o AiToolsSetDisabledRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -146,6 +180,9 @@ func (o AiToolsSetDisabledRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["toolNames"] = o.ToolNames
 	if !IsNil(o.EntityId) {
 		toSerialize["entityId"] = o.EntityId
+	}
+	if !IsNil(o.Scope) {
+		toSerialize["scope"] = o.Scope
 	}
 	return toSerialize, nil
 }

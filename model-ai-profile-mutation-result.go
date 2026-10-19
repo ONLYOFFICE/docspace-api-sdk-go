@@ -30,7 +30,7 @@ type AiProfileMutationResult struct {
 	// The persisted profile. Present on success.
 	Profile *AiProfile `json:"profile,omitempty"`
 	// Why the profile was rejected - the name check or the provider credential check. Present on failure.
-	Error *AiTErrorData `json:"error,omitempty"`
+	Error *AiErrorData `json:"error,omitempty"`
 }
 
 type _AiProfileMutationResult AiProfileMutationResult
@@ -110,9 +110,9 @@ func (o *AiProfileMutationResult) SetProfile(v AiProfile) {
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *AiProfileMutationResult) GetError() AiTErrorData {
+func (o *AiProfileMutationResult) GetError() AiErrorData {
 	if o == nil || IsNil(o.Error) {
-		var ret AiTErrorData
+		var ret AiErrorData
 		return ret
 	}
 	return *o.Error
@@ -120,7 +120,7 @@ func (o *AiProfileMutationResult) GetError() AiTErrorData {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiProfileMutationResult) GetErrorOk() (*AiTErrorData, bool) {
+func (o *AiProfileMutationResult) GetErrorOk() (*AiErrorData, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -136,8 +136,8 @@ func (o *AiProfileMutationResult) IsErrorSet() bool {
 	return false
 }
 
-// SetError gets a reference to the given AiTErrorData and assigns it to the Error field.
-func (o *AiProfileMutationResult) SetError(v AiTErrorData) {
+// SetError gets a reference to the given AiErrorData and assigns it to the Error field.
+func (o *AiProfileMutationResult) SetError(v AiErrorData) {
 	o.Error = &v
 }
 

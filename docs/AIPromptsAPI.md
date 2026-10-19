@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 ## AiPromptsCreateFolder
 
-> AiFolderMutationResult AiPromptsCreateFolder(ctx).Body(body).Execute()
+> AiFolderMutationResult AiPromptsCreateFolder(ctx).AiPromptsCreateFolderRequest(aiPromptsCreateFolderRequest).Execute()
 
 Create folder
 
@@ -111,11 +111,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | The name of the folder to create, as a bare JSON string.
+	aiPromptsCreateFolderRequest := "aiPromptsCreateFolderRequest_example" // string | The name of the folder to create, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIPromptsAPI.AiPromptsCreateFolder(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIPromptsAPI.AiPromptsCreateFolder(context.Background()).AiPromptsCreateFolderRequest(aiPromptsCreateFolderRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIPromptsAPI.AiPromptsCreateFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -136,7 +136,7 @@ Other parameters are passed through a pointer to a apiAiPromptsCreateFolderReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | The name of the folder to create, as a bare JSON string. | 
+ **aiPromptsCreateFolderRequest** | **string** | The name of the folder to create, as a bare JSON string. | 
 
 ### Return type
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 ## AiPromptsDelete
 
-> AiSuccessResponse AiPromptsDelete(ctx).Body(body).Execute()
+> AiSuccessResponse AiPromptsDelete(ctx).AiPromptsDeleteRequest(aiPromptsDeleteRequest).Execute()
 
 Delete a saved prompt
 
@@ -179,11 +179,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | The ID of the prompt to delete, as a bare JSON string.
+	aiPromptsDeleteRequest := "aiPromptsDeleteRequest_example" // string | The ID of the prompt to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIPromptsAPI.AiPromptsDelete(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIPromptsAPI.AiPromptsDelete(context.Background()).AiPromptsDeleteRequest(aiPromptsDeleteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIPromptsAPI.AiPromptsDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -204,7 +204,7 @@ Other parameters are passed through a pointer to a apiAiPromptsDeleteRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | The ID of the prompt to delete, as a bare JSON string. | 
+ **aiPromptsDeleteRequest** | **string** | The ID of the prompt to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 
 ## AiPromptsDeleteFolder
 
-> AiSuccessResponse AiPromptsDeleteFolder(ctx).Body(body).Execute()
+> AiSuccessResponse AiPromptsDeleteFolder(ctx).AiPromptsDeleteFolderRequest(aiPromptsDeleteFolderRequest).Execute()
 
 Delete folder
 
@@ -247,11 +247,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | The ID of the folder to delete, as a bare JSON string.
+	aiPromptsDeleteFolderRequest := "aiPromptsDeleteFolderRequest_example" // string | The ID of the folder to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIPromptsAPI.AiPromptsDeleteFolder(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIPromptsAPI.AiPromptsDeleteFolder(context.Background()).AiPromptsDeleteFolderRequest(aiPromptsDeleteFolderRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIPromptsAPI.AiPromptsDeleteFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -272,7 +272,7 @@ Other parameters are passed through a pointer to a apiAiPromptsDeleteFolderReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | The ID of the folder to delete, as a bare JSON string. | 
+ **aiPromptsDeleteFolderRequest** | **string** | The ID of the folder to delete, as a bare JSON string. | 
 
 ### Return type
 

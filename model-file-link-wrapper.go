@@ -21,10 +21,10 @@ import (
 // checks if the FileLinkWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FileLinkWrapper{}
 
-// FileLinkWrapper The successful API response containing the FileLink object.
+// FileLinkWrapper The successful API response containing the FileLinkDto object.
 type FileLinkWrapper struct {
-	// The FileLink object returned by the operation.
-	Response *FileLink `json:"response,omitempty"`
+	// The FileLinkDto object returned by the operation.
+	Response *FileLinkDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewFileLinkWrapperWithDefaults() *FileLinkWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *FileLinkWrapper) GetResponse() FileLink {
+func (o *FileLinkWrapper) GetResponse() FileLinkDto {
 	if o == nil || IsNil(o.Response) {
-		var ret FileLink
+		var ret FileLinkDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *FileLinkWrapper) GetResponse() FileLink {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileLinkWrapper) GetResponseOk() (*FileLink, bool) {
+func (o *FileLinkWrapper) GetResponseOk() (*FileLinkDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *FileLinkWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given FileLink and assigns it to the Response field.
-func (o *FileLinkWrapper) SetResponse(v FileLink) {
+// SetResponse gets a reference to the given FileLinkDto and assigns it to the Response field.
+func (o *FileLinkWrapper) SetResponse(v FileLinkDto) {
 	o.Response = &v
 }
 

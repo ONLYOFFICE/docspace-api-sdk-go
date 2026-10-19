@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ## SetEnabled
 
-> AppWrapper SetEnabled(ctx, id).SetAppEnabledBody(setAppEnabledBody).Execute()
+> AppWrapper SetEnabled(ctx, id).SetAppEnabledRequest(setAppEnabledRequest).Execute()
 
 Enable or disable an app
 
@@ -243,11 +243,11 @@ import (
 
 func main() {
 	id := "ai-room" // string | The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything.
-	setAppEnabledBody := *openapiclient.NewSetAppEnabledBody() // SetAppEnabledBody | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
+	setAppEnabledRequest := *openapiclient.NewSetAppEnabledRequest(true) // SetAppEnabledRequest | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AppsAPI.SetEnabled(context.Background(), id).SetAppEnabledBody(setAppEnabledBody).Execute()
+	resp, r, err := apiClient.AppsAPI.SetEnabled(context.Background(), id).SetAppEnabledRequest(setAppEnabledRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.SetEnabled``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -273,7 +273,7 @@ Other parameters are passed through a pointer to a apiSetEnabledRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **setAppEnabledBody** | [**SetAppEnabledBody**](SetAppEnabledBody.md) | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. | 
+ **setAppEnabledRequest** | [**SetAppEnabledRequest**](SetAppEnabledRequest.md) | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. | 
 
 ### Return type
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 
 ## SetSettings
 
-> AppWrapper SetSettings(ctx, id).SetAppSettingsBody(setAppSettingsBody).Execute()
+> AppWrapper SetSettings(ctx, id).SetAppSettingsRequest(setAppSettingsRequest).Execute()
 
 Save app settings
 
@@ -317,11 +317,11 @@ import (
 
 func main() {
 	id := "ai-room" // string | The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404.
-	setAppSettingsBody := *openapiclient.NewSetAppSettingsBody() // SetAppSettingsBody | The configuration to store for this portal, replacing whatever was stored before.
+	setAppSettingsRequest := *openapiclient.NewSetAppSettingsRequest() // SetAppSettingsRequest | The configuration to store for this portal, replacing whatever was stored before.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AppsAPI.SetSettings(context.Background(), id).SetAppSettingsBody(setAppSettingsBody).Execute()
+	resp, r, err := apiClient.AppsAPI.SetSettings(context.Background(), id).SetAppSettingsRequest(setAppSettingsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.SetSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -347,7 +347,7 @@ Other parameters are passed through a pointer to a apiSetSettingsRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **setAppSettingsBody** | [**SetAppSettingsBody**](SetAppSettingsBody.md) | The configuration to store for this portal, replacing whatever was stored before. | 
+ **setAppSettingsRequest** | [**SetAppSettingsRequest**](SetAppSettingsRequest.md) | The configuration to store for this portal, replacing whatever was stored before. | 
 
 ### Return type
 

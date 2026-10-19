@@ -39,7 +39,7 @@ func (r ApiDeleteThirdPartyRequest) Execute() (*StringWrapper, *http.Response, e
 
 // DeleteThirdParty Remove a third-party account
 //
-// Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member's request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal's link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
+// Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member's request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal's link to them together with the stored credentials, the sharing records and the tags  kept for its entries. An account a room was created on is refused with 403 while the room exists: delete the  room instead, which disconnects the account along with it. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-third-party/
 //
@@ -797,7 +797,7 @@ type ApiGetThirdPartyAccountsRequest struct {
 	ApiService *FilesThirdPartyIntegrationAPIService
 }
 
-func (r ApiGetThirdPartyAccountsRequest) Execute() (*ThirdPartyParamsArrayWrapper, *http.Response, error) {
+func (r ApiGetThirdPartyAccountsRequest) Execute() (*ThirdPartyAccountArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetThirdPartyAccountsExecute(r)
 }
 
@@ -817,13 +817,13 @@ func (a *FilesThirdPartyIntegrationAPIService) GetThirdPartyAccounts(ctx context
 }
 
 // Execute executes the request
-//  @return ThirdPartyParamsArrayWrapper
-func (a *FilesThirdPartyIntegrationAPIService) GetThirdPartyAccountsExecute(r ApiGetThirdPartyAccountsRequest) (*ThirdPartyParamsArrayWrapper, *http.Response, error) {
+//  @return ThirdPartyAccountArrayWrapper
+func (a *FilesThirdPartyIntegrationAPIService) GetThirdPartyAccountsExecute(r ApiGetThirdPartyAccountsRequest) (*ThirdPartyAccountArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ThirdPartyParamsArrayWrapper
+		localVarReturnValue  *ThirdPartyAccountArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesThirdPartyIntegrationAPIService.GetThirdPartyAccounts")
@@ -1065,28 +1065,6 @@ func (a *FilesThirdPartyIntegrationAPIService) SaveThirdPartyExecute(r ApiSaveTh
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1219,28 +1197,6 @@ func (a *FilesThirdPartyIntegrationAPIService) SaveThirdPartyBackupExecute(r Api
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

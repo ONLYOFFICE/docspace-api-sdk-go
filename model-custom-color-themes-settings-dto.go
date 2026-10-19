@@ -24,7 +24,7 @@ var _ MappedNullable = &CustomColorThemesSettingsDto{}
 // CustomColorThemesSettingsDto The colour themes the portal offers, which of them is applied, and how many the plan allows.
 type CustomColorThemesSettingsDto struct {
 	// Every theme the portal can apply, ordered by ID, with the built-in ones first because they were created  first. It is never empty - the built-in themes cannot be deleted - and a custom theme is one whose ID is  higher than the built-in ones.
-	Themes []CustomColorThemesSettingsItem `json:"themes,omitempty"`
+	Themes []CustomColorThemeDto `json:"themes,omitempty"`
 	// The ID of the theme in `themes` that is currently applied to the whole portal. Deleting the applied theme  moves it to the lowest remaining ID, so it can change without anyone having chosen a new one.
 	Selected *int32 `json:"selected,omitempty"`
 	// How many entries `themes` may hold in total, built-in ones included; `0` means the plan caps nothing. Once  the cap is reached `PUT api/2.0/settings/colortheme` drops a new theme silently instead of failing, so  compare this with the length of `themes` to tell whether a save took effect.
@@ -49,9 +49,9 @@ func NewCustomColorThemesSettingsDtoWithDefaults() *CustomColorThemesSettingsDto
 }
 
 // GetThemes returns the Themes field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CustomColorThemesSettingsDto) GetThemes() []CustomColorThemesSettingsItem {
+func (o *CustomColorThemesSettingsDto) GetThemes() []CustomColorThemeDto {
 	if o == nil {
-		var ret []CustomColorThemesSettingsItem
+		var ret []CustomColorThemeDto
 		return ret
 	}
 	return o.Themes
@@ -60,7 +60,7 @@ func (o *CustomColorThemesSettingsDto) GetThemes() []CustomColorThemesSettingsIt
 // GetThemesOk returns a tuple with the Themes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CustomColorThemesSettingsDto) GetThemesOk() ([]CustomColorThemesSettingsItem, bool) {
+func (o *CustomColorThemesSettingsDto) GetThemesOk() ([]CustomColorThemeDto, bool) {
 	if o == nil || IsNil(o.Themes) {
 		return nil, false
 	}
@@ -76,8 +76,8 @@ func (o *CustomColorThemesSettingsDto) IsThemesSet() bool {
 	return false
 }
 
-// SetThemes gets a reference to the given []CustomColorThemesSettingsItem and assigns it to the Themes field.
-func (o *CustomColorThemesSettingsDto) SetThemes(v []CustomColorThemesSettingsItem) {
+// SetThemes gets a reference to the given []CustomColorThemeDto and assigns it to the Themes field.
+func (o *CustomColorThemesSettingsDto) SetThemes(v []CustomColorThemeDto) {
 	o.Themes = v
 }
 

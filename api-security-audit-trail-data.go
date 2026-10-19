@@ -31,10 +31,22 @@ type ApiCreateAuditTrailReportRequest struct {
 	ctx context.Context
 	ApiService *SecurityAuditTrailDataAPIService
 	format *AuditReportFormat
+	from *time.Time
+	to *time.Time
 }
 
-// The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
+// The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.
 func (r ApiCreateAuditTrailReportRequest) Format(format AuditReportFormat) ApiCreateAuditTrailReportRequest {	r.format = &format
+	return r
+}
+
+// The earliest moment a reported event may have been recorded at, read as a UTC instant.
+func (r ApiCreateAuditTrailReportRequest) From(from time.Time) ApiCreateAuditTrailReportRequest {	r.from = &from
+	return r
+}
+
+// The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.
+func (r ApiCreateAuditTrailReportRequest) To(to time.Time) ApiCreateAuditTrailReportRequest {	r.to = &to
 	return r
 }
 
@@ -44,7 +56,7 @@ func (r ApiCreateAuditTrailReportRequest) Execute() (*DocumentBuilderTaskWrapper
 
 // CreateAuditTrailReport Start audit trail report
 //
-// Queues a report of the portal's audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller's My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+// Queues a report of the portal's audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal's pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller's My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/
 //
@@ -80,6 +92,12 @@ func (a *SecurityAuditTrailDataAPIService) CreateAuditTrailReportExecute(r ApiCr
 
 	if r.format != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+	}
+	if r.from != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
+	}
+	if r.to != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -157,17 +175,6 @@ func (a *SecurityAuditTrailDataAPIService) CreateAuditTrailReportExecute(r ApiCr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -414,17 +421,6 @@ func (a *SecurityAuditTrailDataAPIService) GetAuditEventsByFilterExecute(r ApiGe
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -445,7 +441,7 @@ type ApiGetAuditSettingsRequest struct {
 	ApiService *SecurityAuditTrailDataAPIService
 }
 
-func (r ApiGetAuditSettingsRequest) Execute() (*TenantAuditSettingsResponseWrapper, *http.Response, error) {
+func (r ApiGetAuditSettingsRequest) Execute() (*TenantAuditSettingsWrapper, *http.Response, error) {
 	return r.ApiService.GetAuditSettingsExecute(r)
 }
 
@@ -465,13 +461,13 @@ func (a *SecurityAuditTrailDataAPIService) GetAuditSettings(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return TenantAuditSettingsResponseWrapper
-func (a *SecurityAuditTrailDataAPIService) GetAuditSettingsExecute(r ApiGetAuditSettingsRequest) (*TenantAuditSettingsResponseWrapper, *http.Response, error) {
+//  @return TenantAuditSettingsWrapper
+func (a *SecurityAuditTrailDataAPIService) GetAuditSettingsExecute(r ApiGetAuditSettingsRequest) (*TenantAuditSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TenantAuditSettingsResponseWrapper
+		localVarReturnValue  *TenantAuditSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecurityAuditTrailDataAPIService.GetAuditSettings")
@@ -603,7 +599,7 @@ func (r ApiGetAuditTrailMappersRequest) ModuleType(moduleType LocationType) ApiG
 	return r
 }
 
-func (r ApiGetAuditTrailMappersRequest) Execute() (*AuditTrailProductMapperArrayWrapper, *http.Response, error) {
+func (r ApiGetAuditTrailMappersRequest) Execute() (*AuditTrailProductArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetAuditTrailMappersExecute(r)
 }
 
@@ -623,13 +619,13 @@ func (a *SecurityAuditTrailDataAPIService) GetAuditTrailMappers(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return AuditTrailProductMapperArrayWrapper
-func (a *SecurityAuditTrailDataAPIService) GetAuditTrailMappersExecute(r ApiGetAuditTrailMappersRequest) (*AuditTrailProductMapperArrayWrapper, *http.Response, error) {
+//  @return AuditTrailProductArrayWrapper
+func (a *SecurityAuditTrailDataAPIService) GetAuditTrailMappersExecute(r ApiGetAuditTrailMappersRequest) (*AuditTrailProductArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AuditTrailProductMapperArrayWrapper
+		localVarReturnValue  *AuditTrailProductArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecurityAuditTrailDataAPIService.GetAuditTrailMappers")
@@ -772,7 +768,7 @@ func (r ApiGetAuditTrailReportRequest) Execute() (*DocumentBuilderTaskWrapper, *
 
 // GetAuditTrailReport Get audit trail report status
 //
-// Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator's report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+// Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator's report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-report/
 //
@@ -1202,14 +1198,14 @@ func (a *SecurityAuditTrailDataAPIService) GetLastAuditEventsExecute(r ApiGetLas
 type ApiSetAuditSettingsRequest struct {
 	ctx context.Context
 	ApiService *SecurityAuditTrailDataAPIService
-	tenantAuditSettingsWrapper *TenantAuditSettingsWrapper
+	tenantAuditSettingsRequestDto *TenantAuditSettingsRequestDto
 }
 
-func (r ApiSetAuditSettingsRequest) TenantAuditSettingsWrapper(tenantAuditSettingsWrapper TenantAuditSettingsWrapper) ApiSetAuditSettingsRequest {	r.tenantAuditSettingsWrapper = &tenantAuditSettingsWrapper
+func (r ApiSetAuditSettingsRequest) TenantAuditSettingsRequestDto(tenantAuditSettingsRequestDto TenantAuditSettingsRequestDto) ApiSetAuditSettingsRequest {	r.tenantAuditSettingsRequestDto = &tenantAuditSettingsRequestDto
 	return r
 }
 
-func (r ApiSetAuditSettingsRequest) Execute() (*TenantAuditSettingsResponseWrapper, *http.Response, error) {
+func (r ApiSetAuditSettingsRequest) Execute() (*TenantAuditSettingsWrapper, *http.Response, error) {
 	return r.ApiService.SetAuditSettingsExecute(r)
 }
 
@@ -1229,13 +1225,13 @@ func (a *SecurityAuditTrailDataAPIService) SetAuditSettings(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return TenantAuditSettingsResponseWrapper
-func (a *SecurityAuditTrailDataAPIService) SetAuditSettingsExecute(r ApiSetAuditSettingsRequest) (*TenantAuditSettingsResponseWrapper, *http.Response, error) {
+//  @return TenantAuditSettingsWrapper
+func (a *SecurityAuditTrailDataAPIService) SetAuditSettingsExecute(r ApiSetAuditSettingsRequest) (*TenantAuditSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TenantAuditSettingsResponseWrapper
+		localVarReturnValue  *TenantAuditSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecurityAuditTrailDataAPIService.SetAuditSettings")
@@ -1267,7 +1263,7 @@ func (a *SecurityAuditTrailDataAPIService) SetAuditSettingsExecute(r ApiSetAudit
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tenantAuditSettingsWrapper
+	localVarPostBody = r.tenantAuditSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## CreateAuditTrailReport
 
-> DocumentBuilderTaskWrapper CreateAuditTrailReport(ctx).Format(format).Execute()
+> DocumentBuilderTaskWrapper CreateAuditTrailReport(ctx).Format(format).From(from).To(to).Execute()
 
 Start audit trail report
 
@@ -35,15 +35,18 @@ import (
 	"context"
 	"fmt"
 	"os"
+    "time"
 	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-	format := openapiclient.AuditReportFormat(0) // AuditReportFormat | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. (optional)
+	format := openapiclient.AuditReportFormat(0) // AuditReportFormat | The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file. (optional)
+	from := time.Now() // time.Time | The earliest moment a reported event may have been recorded at, read as a UTC instant. (optional)
+	to := time.Now() // time.Time | The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecurityAuditTrailDataAPI.CreateAuditTrailReport(context.Background()).Format(format).Execute()
+	resp, r, err := apiClient.SecurityAuditTrailDataAPI.CreateAuditTrailReport(context.Background()).Format(format).From(from).To(to).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityAuditTrailDataAPI.CreateAuditTrailReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,7 +67,9 @@ Other parameters are passed through a pointer to a apiCreateAuditTrailReportRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **format** | [**AuditReportFormat**](AuditReportFormat.md) | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. | 
+ **format** | [**AuditReportFormat**](AuditReportFormat.md) | The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file. | 
+ **from** | **time.Time** | The earliest moment a reported event may have been recorded at, read as a UTC instant. | 
+ **to** | **time.Time** | The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`. | 
 
 ### Return type
 
@@ -173,7 +178,7 @@ Name | Type | Description  | Notes
 
 ## GetAuditSettings
 
-> TenantAuditSettingsResponseWrapper GetAuditSettings(ctx).Execute()
+> TenantAuditSettingsWrapper GetAuditSettings(ctx).Execute()
 
 Get audit lifetime settings
 
@@ -202,7 +207,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityAuditTrailDataAPI.GetAuditSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAuditSettings`: TenantAuditSettingsResponseWrapper
+	// response from `GetAuditSettings`: TenantAuditSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SecurityAuditTrailDataAPI.GetAuditSettings`: %v\n", resp)
 }
 ```
@@ -218,7 +223,7 @@ Other parameters are passed through a pointer to a apiGetAuditSettingsRequest st
 
 ### Return type
 
-[**TenantAuditSettingsResponseWrapper**](TenantAuditSettingsResponseWrapper.md)
+[**TenantAuditSettingsWrapper**](TenantAuditSettingsWrapper.md)
 
 ### Authorization
 
@@ -236,7 +241,7 @@ Other parameters are passed through a pointer to a apiGetAuditSettingsRequest st
 
 ## GetAuditTrailMappers
 
-> AuditTrailProductMapperArrayWrapper GetAuditTrailMappers(ctx).ProductType(productType).ModuleType(moduleType).Execute()
+> AuditTrailProductArrayWrapper GetAuditTrailMappers(ctx).ProductType(productType).ModuleType(moduleType).Execute()
 
 Get audit trail mappers
 
@@ -267,7 +272,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityAuditTrailDataAPI.GetAuditTrailMappers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAuditTrailMappers`: AuditTrailProductMapperArrayWrapper
+	// response from `GetAuditTrailMappers`: AuditTrailProductArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SecurityAuditTrailDataAPI.GetAuditTrailMappers`: %v\n", resp)
 }
 ```
@@ -288,7 +293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AuditTrailProductMapperArrayWrapper**](AuditTrailProductMapperArrayWrapper.md)
+[**AuditTrailProductArrayWrapper**](AuditTrailProductArrayWrapper.md)
 
 ### Authorization
 
@@ -495,7 +500,7 @@ Other parameters are passed through a pointer to a apiGetLastAuditEventsRequest 
 
 ## SetAuditSettings
 
-> TenantAuditSettingsResponseWrapper SetAuditSettings(ctx).TenantAuditSettingsWrapper(tenantAuditSettingsWrapper).Execute()
+> TenantAuditSettingsWrapper SetAuditSettings(ctx).TenantAuditSettingsRequestDto(tenantAuditSettingsRequestDto).Execute()
 
 Set audit lifetime settings
 
@@ -516,16 +521,16 @@ import (
 )
 
 func main() {
-	tenantAuditSettingsWrapper := *openapiclient.NewTenantAuditSettingsWrapper() // TenantAuditSettingsWrapper |  (optional)
+	tenantAuditSettingsRequestDto := *openapiclient.NewTenantAuditSettingsRequestDto() // TenantAuditSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecurityAuditTrailDataAPI.SetAuditSettings(context.Background()).TenantAuditSettingsWrapper(tenantAuditSettingsWrapper).Execute()
+	resp, r, err := apiClient.SecurityAuditTrailDataAPI.SetAuditSettings(context.Background()).TenantAuditSettingsRequestDto(tenantAuditSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityAuditTrailDataAPI.SetAuditSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SetAuditSettings`: TenantAuditSettingsResponseWrapper
+	// response from `SetAuditSettings`: TenantAuditSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SecurityAuditTrailDataAPI.SetAuditSettings`: %v\n", resp)
 }
 ```
@@ -541,11 +546,11 @@ Other parameters are passed through a pointer to a apiSetAuditSettingsRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenantAuditSettingsWrapper** | [**TenantAuditSettingsWrapper**](TenantAuditSettingsWrapper.md) |  | 
+ **tenantAuditSettingsRequestDto** | [**TenantAuditSettingsRequestDto**](TenantAuditSettingsRequestDto.md) |  | 
 
 ### Return type
 
-[**TenantAuditSettingsResponseWrapper**](TenantAuditSettingsResponseWrapper.md)
+[**TenantAuditSettingsWrapper**](TenantAuditSettingsWrapper.md)
 
 ### Authorization
 

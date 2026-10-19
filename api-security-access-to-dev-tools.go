@@ -29,10 +29,10 @@ type SecurityAccessToDevToolsAPIService service
 type ApiSetTenantDevToolsAccessSettingsRequest struct {
 	ctx context.Context
 	ApiService *SecurityAccessToDevToolsAPIService
-	tenantDevToolsAccessSettingsDto *TenantDevToolsAccessSettingsDto
+	tenantDevToolsAccessSettingsRequestDto *TenantDevToolsAccessSettingsRequestDto
 }
 
-func (r ApiSetTenantDevToolsAccessSettingsRequest) TenantDevToolsAccessSettingsDto(tenantDevToolsAccessSettingsDto TenantDevToolsAccessSettingsDto) ApiSetTenantDevToolsAccessSettingsRequest {	r.tenantDevToolsAccessSettingsDto = &tenantDevToolsAccessSettingsDto
+func (r ApiSetTenantDevToolsAccessSettingsRequest) TenantDevToolsAccessSettingsRequestDto(tenantDevToolsAccessSettingsRequestDto TenantDevToolsAccessSettingsRequestDto) ApiSetTenantDevToolsAccessSettingsRequest {	r.tenantDevToolsAccessSettingsRequestDto = &tenantDevToolsAccessSettingsRequestDto
 	return r
 }
 
@@ -94,7 +94,7 @@ func (a *SecurityAccessToDevToolsAPIService) SetTenantDevToolsAccessSettingsExec
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tenantDevToolsAccessSettingsDto
+	localVarPostBody = r.tenantDevToolsAccessSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

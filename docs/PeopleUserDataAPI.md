@@ -5,8 +5,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetDeletePersonalFolderProgress**](PeopleUserDataAPI.md#GetDeletePersonalFolderProgress) | **Get** /api/2.0/people/delete/personal/progress | Get the personal folder deletion progress
-[**GetReassignProgress**](PeopleUserDataAPI.md#GetReassignProgress) | **Get** /api/2.0/people/reassign/progress/{userid} | Get the reassignment progress
-[**GetRemoveProgress**](PeopleUserDataAPI.md#GetRemoveProgress) | **Get** /api/2.0/people/remove/progress/{userid} | Get the deletion progress
+[**GetReassignProgress**](PeopleUserDataAPI.md#GetReassignProgress) | **Get** /api/2.0/people/reassign/progress/{userId} | Get the reassignment progress
+[**GetRemoveProgress**](PeopleUserDataAPI.md#GetRemoveProgress) | **Get** /api/2.0/people/remove/progress/{userId} | Get the deletion progress
 [**NecessaryReassign**](PeopleUserDataAPI.md#NecessaryReassign) | **Get** /api/2.0/people/reassign/necessary | Check data for reassignment need
 [**SendInstructionsToDelete**](PeopleUserDataAPI.md#SendInstructionsToDelete) | **Put** /api/2.0/people/self/delete | Send the deletion instructions
 [**StartDeletePersonalFolder**](PeopleUserDataAPI.md#StartDeletePersonalFolder) | **Post** /api/2.0/people/delete/personal/start | Delete the personal folder
@@ -82,7 +82,7 @@ Other parameters are passed through a pointer to a apiGetDeletePersonalFolderPro
 
 ## GetReassignProgress
 
-> TaskProgressResponseWrapper GetReassignProgress(ctx, userid).Execute()
+> TaskProgressResponseWrapper GetReassignProgress(ctx, userId).Execute()
 
 Get the reassignment progress
 
@@ -103,11 +103,11 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeopleUserDataAPI.GetReassignProgress(context.Background(), userid).Execute()
+	resp, r, err := apiClient.PeopleUserDataAPI.GetReassignProgress(context.Background(), userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleUserDataAPI.GetReassignProgress``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -123,7 +123,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
+**userId** | **string** | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
 
 ### Other Parameters
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 ## GetRemoveProgress
 
-> TaskProgressResponseWrapper GetRemoveProgress(ctx, userid).Execute()
+> TaskProgressResponseWrapper GetRemoveProgress(ctx, userId).Execute()
 
 Get the deletion progress
 
@@ -175,11 +175,11 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeopleUserDataAPI.GetRemoveProgress(context.Background(), userid).Execute()
+	resp, r, err := apiClient.PeopleUserDataAPI.GetRemoveProgress(context.Background(), userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleUserDataAPI.GetRemoveProgress``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -195,7 +195,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
+**userId** | **string** | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
 
 ### Other Parameters
 

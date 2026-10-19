@@ -27,7 +27,7 @@ type FormResultsDto struct {
 	// When the portal recorded this copy, in UTC: the moment the filled copy was completed and its data indexed, not  the moment the form itself was made.
 	CreateOn *time.Time `json:"createOn,omitempty"`
 	// The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank.
-	FormsData []FormsItemData `json:"formsData,omitempty"`
+	FormsData []FormsItemDataDto `json:"formsData,omitempty"`
 }
 
 // NewFormResultsDto instantiates a new FormResultsDto object
@@ -80,9 +80,9 @@ func (o *FormResultsDto) SetCreateOn(v time.Time) {
 }
 
 // GetFormsData returns the FormsData field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FormResultsDto) GetFormsData() []FormsItemData {
+func (o *FormResultsDto) GetFormsData() []FormsItemDataDto {
 	if o == nil {
-		var ret []FormsItemData
+		var ret []FormsItemDataDto
 		return ret
 	}
 	return o.FormsData
@@ -91,7 +91,7 @@ func (o *FormResultsDto) GetFormsData() []FormsItemData {
 // GetFormsDataOk returns a tuple with the FormsData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FormResultsDto) GetFormsDataOk() ([]FormsItemData, bool) {
+func (o *FormResultsDto) GetFormsDataOk() ([]FormsItemDataDto, bool) {
 	if o == nil || IsNil(o.FormsData) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *FormResultsDto) IsFormsDataSet() bool {
 	return false
 }
 
-// SetFormsData gets a reference to the given []FormsItemData and assigns it to the FormsData field.
-func (o *FormResultsDto) SetFormsData(v []FormsItemData) {
+// SetFormsData gets a reference to the given []FormsItemDataDto and assigns it to the FormsData field.
+func (o *FormResultsDto) SetFormsData(v []FormsItemDataDto) {
 	o.FormsData = v
 }
 

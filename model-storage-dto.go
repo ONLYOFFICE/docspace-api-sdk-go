@@ -30,7 +30,7 @@ type StorageDto struct {
 	// The provider name in the portal language, falling back to `id` when this build ships no wording for it.
 	Title NullableString `json:"title"`
 	// The settings the provider expects, each with its key, its localised label and the value the server  currently holds. For the entry marked `current` the values come from the portal's saved storage settings  and for the others from the installation configuration, so a setting nobody has configured comes back with  an empty value rather than being left out.
-	Properties []AuthKey `json:"properties,omitempty"`
+	Properties []AuthKeyDto `json:"properties,omitempty"`
 	// Whether the portal is using this provider right now. At most one entry of a listing has it set.
 	Current bool `json:"current"`
 	// Whether the provider's keys are already filled in on the server, so it could be switched to without  sending credentials. It says nothing about whether the credentials still work.
@@ -113,9 +113,9 @@ func (o *StorageDto) SetTitle(v string) {
 }
 
 // GetProperties returns the Properties field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *StorageDto) GetProperties() []AuthKey {
+func (o *StorageDto) GetProperties() []AuthKeyDto {
 	if o == nil {
-		var ret []AuthKey
+		var ret []AuthKeyDto
 		return ret
 	}
 	return o.Properties
@@ -124,7 +124,7 @@ func (o *StorageDto) GetProperties() []AuthKey {
 // GetPropertiesOk returns a tuple with the Properties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageDto) GetPropertiesOk() ([]AuthKey, bool) {
+func (o *StorageDto) GetPropertiesOk() ([]AuthKeyDto, bool) {
 	if o == nil || IsNil(o.Properties) {
 		return nil, false
 	}
@@ -140,8 +140,8 @@ func (o *StorageDto) IsPropertiesSet() bool {
 	return false
 }
 
-// SetProperties gets a reference to the given []AuthKey and assigns it to the Properties field.
-func (o *StorageDto) SetProperties(v []AuthKey) {
+// SetProperties gets a reference to the given []AuthKeyDto and assigns it to the Properties field.
+func (o *StorageDto) SetProperties(v []AuthKeyDto) {
 	o.Properties = v
 }
 

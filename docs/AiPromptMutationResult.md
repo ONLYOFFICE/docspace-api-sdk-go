@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Success** | **bool** | True when the prompt was persisted. | 
 **Prompt** | Pointer to [**AiPrompt**](AiPrompt.md) | The persisted prompt. Present on success. | [optional] 
-**Error** | Pointer to [**AiTErrorData**](AiTErrorData.md) | Why the prompt was rejected. Present on failure. | [optional] 
+**Error** | Pointer to [**AiErrorData**](AiErrorData.md) | Why the prompt was rejected. Present on failure. | [optional] 
 
 ## Methods
 
@@ -74,20 +74,20 @@ HasPrompt returns a boolean if a field has been set.
 
 ### GetError
 
-`func (o *AiPromptMutationResult) GetError() AiTErrorData`
+`func (o *AiPromptMutationResult) GetError() AiErrorData`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *AiPromptMutationResult) GetErrorOk() (*AiTErrorData, bool)`
+`func (o *AiPromptMutationResult) GetErrorOk() (*AiErrorData, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *AiPromptMutationResult) SetError(v AiTErrorData)`
+`func (o *AiPromptMutationResult) SetError(v AiErrorData)`
 
 SetError sets Error field to given value.
 

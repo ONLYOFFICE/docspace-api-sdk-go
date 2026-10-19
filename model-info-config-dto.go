@@ -30,7 +30,7 @@ type InfoConfigDto struct {
 	// The display name of the owner of the document. It is empty for an anonymous session.
 	Owner NullableString `json:"owner,omitempty"`
 	// Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner.
-	SharingSettings []AceShortWrapper `json:"sharingSettings,omitempty"`
+	SharingSettings []AceShortDto `json:"sharingSettings,omitempty"`
 	// The layout the information panel is rendered for.
 	Type *EditorType `json:"type,omitempty"`
 	// When the document was created on the portal, already formatted for reading in the culture of the caller rather  than as a machine timestamp.
@@ -181,9 +181,9 @@ func (o *InfoConfigDto) UnsetOwner() {
 }
 
 // GetSharingSettings returns the SharingSettings field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InfoConfigDto) GetSharingSettings() []AceShortWrapper {
+func (o *InfoConfigDto) GetSharingSettings() []AceShortDto {
 	if o == nil {
-		var ret []AceShortWrapper
+		var ret []AceShortDto
 		return ret
 	}
 	return o.SharingSettings
@@ -192,7 +192,7 @@ func (o *InfoConfigDto) GetSharingSettings() []AceShortWrapper {
 // GetSharingSettingsOk returns a tuple with the SharingSettings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InfoConfigDto) GetSharingSettingsOk() ([]AceShortWrapper, bool) {
+func (o *InfoConfigDto) GetSharingSettingsOk() ([]AceShortDto, bool) {
 	if o == nil || IsNil(o.SharingSettings) {
 		return nil, false
 	}
@@ -208,8 +208,8 @@ func (o *InfoConfigDto) IsSharingSettingsSet() bool {
 	return false
 }
 
-// SetSharingSettings gets a reference to the given []AceShortWrapper and assigns it to the SharingSettings field.
-func (o *InfoConfigDto) SetSharingSettings(v []AceShortWrapper) {
+// SetSharingSettings gets a reference to the given []AceShortDto and assigns it to the SharingSettings field.
+func (o *InfoConfigDto) SetSharingSettings(v []AceShortDto) {
 	o.SharingSettings = v
 }
 

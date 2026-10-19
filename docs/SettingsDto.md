@@ -21,17 +21,17 @@ Name | Type | Description | Notes
 **IsAmi** | Pointer to **bool** | Whether the installation runs from an Amazon machine image, which is a server installation that can read  its own instance metadata. It is `false` on every cloud portal. | [optional] 
 **BaseDomain** | **NullableString** | The domain new portals of this installation are created under, which is what a portal name is checked  against and appended to. It is empty on an installation that serves a single portal on a fixed address. | 
 **WizardToken** | Pointer to **NullableString** | The token that authorizes the first-run setup wizard. It is handed out to anonymous callers only, and only  while the wizard has not been completed; once it has, the field stays empty for good. | [optional] 
-**PasswordHash** | Pointer to [**PasswordHasher**](PasswordHasher.md) | The parameters for hashing a password in the client before it is sent - the salt, the iteration count and  the hash size. It is filled in for an anonymous caller and, for a signed-in one, only when  `withPassword=true` is asked for. Hash with exactly these parameters and send the result as  `passwordHash`, since the portal cannot reproduce the hash from a different set. | [optional] 
+**PasswordHash** | Pointer to [**PasswordHashSettingsDto**](PasswordHashSettingsDto.md) | The parameters for hashing a password in the client before it is sent - the salt, the iteration count and  the hash size. It is filled in for an anonymous caller and, for a signed-in one, only when  `withPassword=true` is asked for. Hash with exactly these parameters and send the result as  `passwordHash`, since the portal cannot reproduce the hash from a different set. | [optional] 
 **Firebase** | Pointer to [**FirebaseDto**](FirebaseDto.md) | The Firebase project a mobile or web client sends push registrations to. Filled in for a signed-in caller  only, and its own fields are empty strings on an installation that configures no Firebase project. | [optional] 
 **Version** | Pointer to **NullableString** | The product version of the portal, empty when the installation does not publish one. It is the version of  the server, not of this API, whose own version is fixed at 2.0. | [optional] 
 **RecaptchaType** | Pointer to [**RecaptchaType**](RecaptchaType.md) | Which CAPTCHA the login form has to render, decided by the installation's configuration. Computed for an  anonymous caller only. | [optional] 
 **RecaptchaPublicKey** | Pointer to **NullableString** | The site key for the CAPTCHA named by `recaptchaType`, safe to embed in a page. It is empty when the  installation configures no CAPTCHA, in which case the login form asks for none. | [optional] 
 **DebugInfo** | Pointer to **bool** | Whether the client may collect and send diagnostic information. Filled in for a signed-in caller only, and  `false` unless the installation switched it on. | [optional] 
 **SocketUrl** | Pointer to **NullableString** | The address of the socket service that pushes live updates to a client. It is filled in for a signed-in  caller and for an anonymous one who arrives with an external sharing link, and is empty when the  installation runs no socket service - a client then has to poll. | [optional] 
-**TenantStatus** | Pointer to [**TenantStatus**](TenantStatus.md) | The lifecycle state of the portal. Anything other than active means most operations are refused for the  moment, because the portal is being transferred, restored, encrypted or removed. | [optional] 
+**TenantStatus** | Pointer to [**TenantStatus**](TenantStatus.md) | The lifecycle state of the portal. Anything other than active means most operations are refused: the  portal is being transferred, restored, encrypted or removed, its owner has deactivated it, or the  retention policy has blocked it after a long period without use. | [optional] 
 **TenantAlias** | Pointer to **NullableString** | The portal's own name within the installation, which together with `baseDomain` forms the address it is  reached at. `PUT api/2.0/portal/portalrename` changes it. | [optional] 
 **DisplayAbout** | Pointer to **bool** | Whether the interface may show the About page. A cloud portal always may; a server installation may unless  its plan includes branding and the vendor details hide the page. | [optional] 
-**DomainValidator** | Pointer to [**TenantDomainValidator**](TenantDomainValidator.md) | The rules a portal name is checked against - its length limits and the pattern it has to match - so a  client can validate a rename before sending it. Filled in for a signed-in caller only. | [optional] 
+**DomainValidator** | Pointer to [**DomainNameRulesDto**](DomainNameRulesDto.md) | The rules a portal name is checked against - its length limits and the pattern it has to match - so a  client can validate a rename before sending it. Filled in for a signed-in caller only. | [optional] 
 **ZendeskKey** | Pointer to **NullableString** | The key that lets the client open the vendor's support chat, empty when the installation configures none.  Filled in for a signed-in caller only. | [optional] 
 **TagManagerId** | Pointer to **NullableString** | The Google Tag Manager container the client should load, empty when the installation configures none.  Filled in for a signed-in caller only. | [optional] 
 **CookieSettingsEnabled** | **bool** | Whether the portal limits how long an authentication session stays valid. The limit itself is read with  `GET api/2.0/settings/cookiesettings`; while this is `false` a session is honoured for a year. | 
@@ -47,7 +47,7 @@ Name | Type | Description | Notes
 **FormGallery** | Pointer to [**FormGalleryDto**](FormGalleryDto.md) | Where the ready-made form templates are served from and which extension they carry. Filled in for a  signed-in caller only. | [optional] 
 **MaxImageUploadSize** | Pointer to **int64** | The largest image the portal accepts as a logo or an avatar, in bytes. Filled in for a signed-in caller  only, and a larger upload is refused rather than resized. | [optional] 
 **LogoText** | Pointer to **NullableString** | The wordmark to print next to the portal logo. It falls back to the built-in one while the portal has  stored no text of its own, so it is never empty. | [optional] 
-**ExternalResources** | Pointer to [**CultureSpecificExternalResources**](CultureSpecificExternalResources.md) | The addresses of the vendor's help, support, forum and video resources, already picked for the portal  language. An entry is missing when the installation configures no address for it or the resource is  switched off, which `GET api/2.0/settings/rebranding/additional` reports flag by flag. | [optional] 
+**ExternalResources** | Pointer to [**ExternalResourcesDto**](ExternalResourcesDto.md) | The addresses of the vendor's help, support, forum and video resources, already picked for the portal  language. An entry is missing when the installation configures no address for it or the resource is  switched off, which `GET api/2.0/settings/rebranding/additional` reports flag by flag. | [optional] 
 **DefaultFolderType** | Pointer to [**FolderType**](FolderType.md) | The section the client should open after sign-in, which is the caller's own preference rather than a  portal-wide one. Filled in for a signed-in caller only. | [optional] 
 **ExternalDbEnabled** | Pointer to **bool** | Whether the installation has an external database wired up for form results, without which the operations  that write form results there are refused. Filled in for a signed-in caller only. | [optional] 
 
@@ -587,20 +587,20 @@ HasWizardToken returns a boolean if a field has been set.
 UnsetWizardToken ensures that no value is present for WizardToken, not even an explicit nil
 ### GetPasswordHash
 
-`func (o *SettingsDto) GetPasswordHash() PasswordHasher`
+`func (o *SettingsDto) GetPasswordHash() PasswordHashSettingsDto`
 
 GetPasswordHash returns the PasswordHash field if non-nil, zero value otherwise.
 
 ### GetPasswordHashOk
 
-`func (o *SettingsDto) GetPasswordHashOk() (*PasswordHasher, bool)`
+`func (o *SettingsDto) GetPasswordHashOk() (*PasswordHashSettingsDto, bool)`
 
 GetPasswordHashOk returns a tuple with the PasswordHash field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPasswordHash
 
-`func (o *SettingsDto) SetPasswordHash(v PasswordHasher)`
+`func (o *SettingsDto) SetPasswordHash(v PasswordHashSettingsDto)`
 
 SetPasswordHash sets PasswordHash field to given value.
 
@@ -877,20 +877,20 @@ HasDisplayAbout returns a boolean if a field has been set.
 
 ### GetDomainValidator
 
-`func (o *SettingsDto) GetDomainValidator() TenantDomainValidator`
+`func (o *SettingsDto) GetDomainValidator() DomainNameRulesDto`
 
 GetDomainValidator returns the DomainValidator field if non-nil, zero value otherwise.
 
 ### GetDomainValidatorOk
 
-`func (o *SettingsDto) GetDomainValidatorOk() (*TenantDomainValidator, bool)`
+`func (o *SettingsDto) GetDomainValidatorOk() (*DomainNameRulesDto, bool)`
 
 GetDomainValidatorOk returns a tuple with the DomainValidator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDomainValidator
 
-`func (o *SettingsDto) SetDomainValidator(v TenantDomainValidator)`
+`func (o *SettingsDto) SetDomainValidator(v DomainNameRulesDto)`
 
 SetDomainValidator sets DomainValidator field to given value.
 
@@ -1327,20 +1327,20 @@ HasLogoText returns a boolean if a field has been set.
 UnsetLogoText ensures that no value is present for LogoText, not even an explicit nil
 ### GetExternalResources
 
-`func (o *SettingsDto) GetExternalResources() CultureSpecificExternalResources`
+`func (o *SettingsDto) GetExternalResources() ExternalResourcesDto`
 
 GetExternalResources returns the ExternalResources field if non-nil, zero value otherwise.
 
 ### GetExternalResourcesOk
 
-`func (o *SettingsDto) GetExternalResourcesOk() (*CultureSpecificExternalResources, bool)`
+`func (o *SettingsDto) GetExternalResourcesOk() (*ExternalResourcesDto, bool)`
 
 GetExternalResourcesOk returns a tuple with the ExternalResources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExternalResources
 
-`func (o *SettingsDto) SetExternalResources(v CultureSpecificExternalResources)`
+`func (o *SettingsDto) SetExternalResources(v ExternalResourcesDto)`
 
 SetExternalResources sets ExternalResources field to given value.
 

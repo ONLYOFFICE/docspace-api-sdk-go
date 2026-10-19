@@ -21,10 +21,10 @@ import (
 // checks if the DocsCloudTenantWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudTenantWrapper{}
 
-// DocsCloudTenantWrapper The successful API response containing the DocsCloudTenant object.
+// DocsCloudTenantWrapper The successful API response containing the DocsCloudTenantDto object.
 type DocsCloudTenantWrapper struct {
-	// The DocsCloudTenant object returned by the operation.
-	Response *DocsCloudTenant `json:"response,omitempty"`
+	// The DocsCloudTenantDto object returned by the operation.
+	Response *DocsCloudTenantDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewDocsCloudTenantWrapperWithDefaults() *DocsCloudTenantWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *DocsCloudTenantWrapper) GetResponse() DocsCloudTenant {
+func (o *DocsCloudTenantWrapper) GetResponse() DocsCloudTenantDto {
 	if o == nil || IsNil(o.Response) {
-		var ret DocsCloudTenant
+		var ret DocsCloudTenantDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *DocsCloudTenantWrapper) GetResponse() DocsCloudTenant {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DocsCloudTenantWrapper) GetResponseOk() (*DocsCloudTenant, bool) {
+func (o *DocsCloudTenantWrapper) GetResponseOk() (*DocsCloudTenantDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *DocsCloudTenantWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given DocsCloudTenant and assigns it to the Response field.
-func (o *DocsCloudTenantWrapper) SetResponse(v DocsCloudTenant) {
+// SetResponse gets a reference to the given DocsCloudTenantDto and assigns it to the Response field.
+func (o *DocsCloudTenantWrapper) SetResponse(v DocsCloudTenantDto) {
 	o.Response = &v
 }
 

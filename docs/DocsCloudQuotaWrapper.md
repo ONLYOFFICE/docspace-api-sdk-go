@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Response** | Pointer to [**DocsCloudQuota**](DocsCloudQuota.md) | The DocsCloudQuota object returned by the operation. | [optional] 
+**Response** | Pointer to [**DocsCloudQuotaDto**](DocsCloudQuotaDto.md) | The DocsCloudQuotaDto object returned by the operation. | [optional] 
 **Count** | Pointer to **int32** | The total number of items in the response | [optional] 
 **Links** | Pointer to [**[]GetPortalPrices200ResponseLinksInner**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **Status** | Pointer to **int32** | HTTP status code of the response | [optional] 
@@ -31,20 +31,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetResponse
 
-`func (o *DocsCloudQuotaWrapper) GetResponse() DocsCloudQuota`
+`func (o *DocsCloudQuotaWrapper) GetResponse() DocsCloudQuotaDto`
 
 GetResponse returns the Response field if non-nil, zero value otherwise.
 
 ### GetResponseOk
 
-`func (o *DocsCloudQuotaWrapper) GetResponseOk() (*DocsCloudQuota, bool)`
+`func (o *DocsCloudQuotaWrapper) GetResponseOk() (*DocsCloudQuotaDto, bool)`
 
 GetResponseOk returns a tuple with the Response field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResponse
 
-`func (o *DocsCloudQuotaWrapper) SetResponse(v DocsCloudQuota)`
+`func (o *DocsCloudQuotaWrapper) SetResponse(v DocsCloudQuotaDto)`
 
 SetResponse sets Response field to given value.
 

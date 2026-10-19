@@ -30,7 +30,7 @@ type PeopleEmailAPIService service
 type ApiChangeUserEmailRequest struct {
 	ctx context.Context
 	ApiService *PeopleEmailAPIService
-	userid string
+	userId string
 	changeEmailRequest *ChangeEmailRequest
 }
 
@@ -50,13 +50,13 @@ func (r ApiChangeUserEmailRequest) Execute() (*EmployeeFullWrapper, *http.Respon
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-email/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param userid The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+// @param userId The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
 // @return ApiChangeUserEmailRequest
-func (a *PeopleEmailAPIService) ChangeUserEmail(ctx context.Context, userid string) ApiChangeUserEmailRequest {
+func (a *PeopleEmailAPIService) ChangeUserEmail(ctx context.Context, userId string) ApiChangeUserEmailRequest {
 	return ApiChangeUserEmailRequest{
 		ApiService: a,
 		ctx: ctx,
-		userid: userid,
+		userId: userId,
 	}
 }
 
@@ -75,8 +75,8 @@ func (a *PeopleEmailAPIService) ChangeUserEmailExecute(r ApiChangeUserEmailReque
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/2.0/people/{userid}/email"
-	localVarPath = strings.Replace(localVarPath, "{"+"userid"+"}", url.PathEscape(parameterValueToString(r.userid, "userid")), -1)
+	localVarPath := localBasePath + "/api/2.0/people/{userId}/email"
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -204,7 +204,7 @@ func (r ApiSendEmailChangeInstructionsRequest) Execute() (*StringWrapper, *http.
 
 // SendEmailChangeInstructions Send instructions to change email
 //
-// Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userid}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner's address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
+// Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userId}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner's address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/
 //

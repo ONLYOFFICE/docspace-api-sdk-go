@@ -31,7 +31,7 @@ type ApiGetAuthServicesRequest struct {
 	ApiService *SettingsAuthorizationAPIService
 }
 
-func (r ApiGetAuthServicesRequest) Execute() (*AuthServiceRequestsArrayWrapper, *http.Response, error) {
+func (r ApiGetAuthServicesRequest) Execute() (*AuthServiceArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetAuthServicesExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *SettingsAuthorizationAPIService) GetAuthServices(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return AuthServiceRequestsArrayWrapper
-func (a *SettingsAuthorizationAPIService) GetAuthServicesExecute(r ApiGetAuthServicesRequest) (*AuthServiceRequestsArrayWrapper, *http.Response, error) {
+//  @return AuthServiceArrayWrapper
+func (a *SettingsAuthorizationAPIService) GetAuthServicesExecute(r ApiGetAuthServicesRequest) (*AuthServiceArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AuthServiceRequestsArrayWrapper
+		localVarReturnValue  *AuthServiceArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsAuthorizationAPIService.GetAuthServices")
@@ -175,10 +175,10 @@ func (a *SettingsAuthorizationAPIService) GetAuthServicesExecute(r ApiGetAuthSer
 type ApiSaveAuthKeysRequest struct {
 	ctx context.Context
 	ApiService *SettingsAuthorizationAPIService
-	authServiceRequestsDto *AuthServiceRequestsDto
+	saveAuthKeysRequestDto *SaveAuthKeysRequestDto
 }
 
-func (r ApiSaveAuthKeysRequest) AuthServiceRequestsDto(authServiceRequestsDto AuthServiceRequestsDto) ApiSaveAuthKeysRequest {	r.authServiceRequestsDto = &authServiceRequestsDto
+func (r ApiSaveAuthKeysRequest) SaveAuthKeysRequestDto(saveAuthKeysRequestDto SaveAuthKeysRequestDto) ApiSaveAuthKeysRequest {	r.saveAuthKeysRequestDto = &saveAuthKeysRequestDto
 	return r
 }
 
@@ -240,7 +240,7 @@ func (a *SettingsAuthorizationAPIService) SaveAuthKeysExecute(r ApiSaveAuthKeysR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.authServiceRequestsDto
+	localVarPostBody = r.saveAuthKeysRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -328,10 +328,10 @@ func (a *SettingsAuthorizationAPIService) SaveAuthKeysExecute(r ApiSaveAuthKeysR
 type ApiTestExternalDatabaseConnectionRequest struct {
 	ctx context.Context
 	ApiService *SettingsAuthorizationAPIService
-	externalDatabaseSettings *ExternalDatabaseSettings
+	externalDatabaseConnectionRequestDto *ExternalDatabaseConnectionRequestDto
 }
 
-func (r ApiTestExternalDatabaseConnectionRequest) ExternalDatabaseSettings(externalDatabaseSettings ExternalDatabaseSettings) ApiTestExternalDatabaseConnectionRequest {	r.externalDatabaseSettings = &externalDatabaseSettings
+func (r ApiTestExternalDatabaseConnectionRequest) ExternalDatabaseConnectionRequestDto(externalDatabaseConnectionRequestDto ExternalDatabaseConnectionRequestDto) ApiTestExternalDatabaseConnectionRequest {	r.externalDatabaseConnectionRequestDto = &externalDatabaseConnectionRequestDto
 	return r
 }
 
@@ -393,7 +393,7 @@ func (a *SettingsAuthorizationAPIService) TestExternalDatabaseConnectionExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.externalDatabaseSettings
+	localVarPostBody = r.externalDatabaseConnectionRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

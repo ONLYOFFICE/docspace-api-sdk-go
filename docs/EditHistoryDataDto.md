@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ChangesUrl** | Pointer to **NullableString** | The address the editor downloads the recorded changes of this revision from. It is filled in only when the  portal has a change record for the revision; without it the revision can be shown as a whole document but not  as a set of changes. | [optional] 
 **Key** | **NullableString** | The document key of the revision being shown, which the editing service uses to identify it and to reuse the  copy it has cached. | 
-**Previous** | Pointer to [**EditHistoryUrl**](EditHistoryUrl.md) | The revision this one is compared against. It arrives together with `changesUrl`, and when the revision shown  is the first one the file ever had, it points at the blank template the file was created from instead of at an  earlier revision. | [optional] 
+**Previous** | Pointer to [**EditHistoryUrlDto**](EditHistoryUrlDto.md) | The revision this one is compared against. It arrives together with `changesUrl`, and when the revision shown  is the first one the file ever had, it points at the blank template the file was created from instead of at an  earlier revision. | [optional] 
 **Token** | Pointer to **NullableString** | The signature over the whole answer, as a JSON Web Token that the editing service verifies before it accepts  the addresses in it. Empty when the portal runs without a document-service secret. | [optional] 
 **Url** | **NullableString** | The address the content of this revision is served from. It is meant for the editing service and carries its  own key, which is valid for a limited time. | 
 **Version** | **int32** | Echoes the revision that was asked for, so it reports 0 when the request named no version and the current  revision was taken. | 
@@ -98,20 +98,20 @@ SetKey sets Key field to given value.
 UnsetKey ensures that no value is present for Key, not even an explicit nil
 ### GetPrevious
 
-`func (o *EditHistoryDataDto) GetPrevious() EditHistoryUrl`
+`func (o *EditHistoryDataDto) GetPrevious() EditHistoryUrlDto`
 
 GetPrevious returns the Previous field if non-nil, zero value otherwise.
 
 ### GetPreviousOk
 
-`func (o *EditHistoryDataDto) GetPreviousOk() (*EditHistoryUrl, bool)`
+`func (o *EditHistoryDataDto) GetPreviousOk() (*EditHistoryUrlDto, bool)`
 
 GetPreviousOk returns a tuple with the Previous field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrevious
 
-`func (o *EditHistoryDataDto) SetPrevious(v EditHistoryUrl)`
+`func (o *EditHistoryDataDto) SetPrevious(v EditHistoryUrlDto)`
 
 SetPrevious sets Previous field to given value.
 

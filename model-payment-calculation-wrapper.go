@@ -21,10 +21,10 @@ import (
 // checks if the PaymentCalculationWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PaymentCalculationWrapper{}
 
-// PaymentCalculationWrapper The successful API response containing the PaymentCalculation object.
+// PaymentCalculationWrapper The successful API response containing the PaymentCalculationDto object.
 type PaymentCalculationWrapper struct {
-	// The PaymentCalculation object returned by the operation.
-	Response *PaymentCalculation `json:"response,omitempty"`
+	// The PaymentCalculationDto object returned by the operation.
+	Response *PaymentCalculationDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewPaymentCalculationWrapperWithDefaults() *PaymentCalculationWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *PaymentCalculationWrapper) GetResponse() PaymentCalculation {
+func (o *PaymentCalculationWrapper) GetResponse() PaymentCalculationDto {
 	if o == nil || IsNil(o.Response) {
-		var ret PaymentCalculation
+		var ret PaymentCalculationDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *PaymentCalculationWrapper) GetResponse() PaymentCalculation {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentCalculationWrapper) GetResponseOk() (*PaymentCalculation, bool) {
+func (o *PaymentCalculationWrapper) GetResponseOk() (*PaymentCalculationDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *PaymentCalculationWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given PaymentCalculation and assigns it to the Response field.
-func (o *PaymentCalculationWrapper) SetResponse(v PaymentCalculation) {
+// SetResponse gets a reference to the given PaymentCalculationDto and assigns it to the Response field.
+func (o *PaymentCalculationWrapper) SetResponse(v PaymentCalculationDto) {
 	o.Response = &v
 }
 

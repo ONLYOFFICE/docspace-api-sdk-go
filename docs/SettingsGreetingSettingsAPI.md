@@ -202,7 +202,7 @@ Other parameters are passed through a pointer to a apiRestoreGreetingSettingsReq
 
 ## SaveGreetingSettings
 
-> StringWrapper SaveGreetingSettings(ctx).GreetingSettingsRequestsDto(greetingSettingsRequestsDto).Execute()
+> StringWrapper SaveGreetingSettings(ctx).GreetingSettingsRequestDto(greetingSettingsRequestDto).Execute()
 
 Save the greeting settings
 
@@ -223,11 +223,11 @@ import (
 )
 
 func main() {
-	greetingSettingsRequestsDto := *openapiclient.NewGreetingSettingsRequestsDto("Welcome to Our Portal") // GreetingSettingsRequestsDto |  (optional)
+	greetingSettingsRequestDto := *openapiclient.NewGreetingSettingsRequestDto("Welcome to Our Portal") // GreetingSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsGreetingSettingsAPI.SaveGreetingSettings(context.Background()).GreetingSettingsRequestsDto(greetingSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsGreetingSettingsAPI.SaveGreetingSettings(context.Background()).GreetingSettingsRequestDto(greetingSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsGreetingSettingsAPI.SaveGreetingSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -248,7 +248,7 @@ Other parameters are passed through a pointer to a apiSaveGreetingSettingsReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **greetingSettingsRequestsDto** | [**GreetingSettingsRequestsDto**](GreetingSettingsRequestsDto.md) |  | 
+ **greetingSettingsRequestDto** | [**GreetingSettingsRequestDto**](GreetingSettingsRequestDto.md) |  | 
 
 ### Return type
 

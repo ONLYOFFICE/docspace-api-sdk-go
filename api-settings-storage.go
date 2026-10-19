@@ -78,7 +78,7 @@ func (a *SettingsStorageAPIService) GetAllBackupStoragesExecute(r ApiGetAllBacku
 	localVarFormParams := url.Values{}
 
 	if r.dump != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Dump", r.dump, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dump", r.dump, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1049,14 +1049,14 @@ func (a *SettingsStorageAPIService) ResetStorageToDefaultExecute(r ApiResetStora
 type ApiUpdateCdnStorageRequest struct {
 	ctx context.Context
 	ApiService *SettingsStorageAPIService
-	storageRequestsDto *StorageRequestsDto
+	storageRequestDto *StorageRequestDto
 }
 
-func (r ApiUpdateCdnStorageRequest) StorageRequestsDto(storageRequestsDto StorageRequestsDto) ApiUpdateCdnStorageRequest {	r.storageRequestsDto = &storageRequestsDto
+func (r ApiUpdateCdnStorageRequest) StorageRequestDto(storageRequestDto StorageRequestDto) ApiUpdateCdnStorageRequest {	r.storageRequestDto = &storageRequestDto
 	return r
 }
 
-func (r ApiUpdateCdnStorageRequest) Execute() (*CdnStorageSettingsWrapper, *http.Response, error) {
+func (r ApiUpdateCdnStorageRequest) Execute() (*StorageSettingsWrapper, *http.Response, error) {
 	return r.ApiService.UpdateCdnStorageExecute(r)
 }
 
@@ -1076,13 +1076,13 @@ func (a *SettingsStorageAPIService) UpdateCdnStorage(ctx context.Context) ApiUpd
 }
 
 // Execute executes the request
-//  @return CdnStorageSettingsWrapper
-func (a *SettingsStorageAPIService) UpdateCdnStorageExecute(r ApiUpdateCdnStorageRequest) (*CdnStorageSettingsWrapper, *http.Response, error) {
+//  @return StorageSettingsWrapper
+func (a *SettingsStorageAPIService) UpdateCdnStorageExecute(r ApiUpdateCdnStorageRequest) (*StorageSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CdnStorageSettingsWrapper
+		localVarReturnValue  *StorageSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsStorageAPIService.UpdateCdnStorage")
@@ -1114,7 +1114,7 @@ func (a *SettingsStorageAPIService) UpdateCdnStorageExecute(r ApiUpdateCdnStorag
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.storageRequestsDto
+	localVarPostBody = r.storageRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1202,10 +1202,10 @@ func (a *SettingsStorageAPIService) UpdateCdnStorageExecute(r ApiUpdateCdnStorag
 type ApiUpdateStorageRequest struct {
 	ctx context.Context
 	ApiService *SettingsStorageAPIService
-	storageRequestsDto *StorageRequestsDto
+	storageRequestDto *StorageRequestDto
 }
 
-func (r ApiUpdateStorageRequest) StorageRequestsDto(storageRequestsDto StorageRequestsDto) ApiUpdateStorageRequest {	r.storageRequestsDto = &storageRequestsDto
+func (r ApiUpdateStorageRequest) StorageRequestDto(storageRequestDto StorageRequestDto) ApiUpdateStorageRequest {	r.storageRequestDto = &storageRequestDto
 	return r
 }
 
@@ -1267,7 +1267,7 @@ func (a *SettingsStorageAPIService) UpdateStorageExecute(r ApiUpdateStorageReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.storageRequestsDto
+	localVarPostBody = r.storageRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

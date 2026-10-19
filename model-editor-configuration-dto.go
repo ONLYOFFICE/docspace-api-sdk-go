@@ -28,13 +28,13 @@ type EditorConfigurationDto struct {
 	// Where the editors post the document back to when they save it. A client must not call it itself; it is the  address the document service uses.
 	CallbackUrl NullableString `json:"callbackUrl,omitempty"`
 	// How co-editing starts out for this session and whether the user may switch it in the interface.
-	CoEditing *CoEditingConfig `json:"coEditing,omitempty"`
+	CoEditing *CoEditingConfigDto `json:"coEditing,omitempty"`
 	// Where the editor sends the user when they ask for a new document of the same type. It is empty when creating  one is not offered here.
 	CreateUrl NullableString `json:"createUrl,omitempty"`
 	// How the editor interface is dressed for this portal, this document and this layout.
 	Customization *CustomizationConfigDto `json:"customization,omitempty"`
 	// The addresses the framed viewer needs. It is filled in only for the embedded layout.
-	Embedded *EmbeddedConfig `json:"embedded,omitempty"`
+	Embedded *EmbeddedConfigDto `json:"embedded,omitempty"`
 	// The caller's end-to-end encryption keys, added only when the document lies in a private room, so that the  editors can decrypt it in the browser. It is empty everywhere else.
 	EncryptionKeys []EncryptionKeyDto `json:"encryptionKeys,omitempty"`
 	// The culture the editor interface is shown in, taken from the profile of the caller.
@@ -44,13 +44,13 @@ type EditorConfigurationDto struct {
 	// Whether this session may write; it is what the mode above says in one word.
 	ModeWrite *bool `json:"modeWrite,omitempty"`
 	// Which editor plugins are offered. The portal currently offers none, so the list inside comes back empty.
-	Plugins *PluginsConfig `json:"plugins,omitempty"`
+	Plugins *PluginsConfigDto `json:"plugins,omitempty"`
 	// The documents offered in the editor's recent list. It is left out altogether when there is nothing to offer.
-	Recent []RecentConfig `json:"recent,omitempty"`
+	Recent []RecentConfigDto `json:"recent,omitempty"`
 	// Always empty: the portal no longer passes creation templates through the editor configuration.
-	Templates []TemplatesConfig `json:"templates,omitempty"`
+	Templates []TemplatesConfigDto `json:"templates,omitempty"`
 	// The account the editors attribute changes to. It is empty for an anonymous session opened through an external  link, and the editors then ask for a name themselves.
-	User *UserConfig `json:"user,omitempty"`
+	User *UserConfigDto `json:"user,omitempty"`
 }
 
 type _EditorConfigurationDto EditorConfigurationDto
@@ -117,9 +117,9 @@ func (o *EditorConfigurationDto) UnsetCallbackUrl() {
 }
 
 // GetCoEditing returns the CoEditing field value if set, zero value otherwise.
-func (o *EditorConfigurationDto) GetCoEditing() CoEditingConfig {
+func (o *EditorConfigurationDto) GetCoEditing() CoEditingConfigDto {
 	if o == nil || IsNil(o.CoEditing) {
-		var ret CoEditingConfig
+		var ret CoEditingConfigDto
 		return ret
 	}
 	return *o.CoEditing
@@ -127,7 +127,7 @@ func (o *EditorConfigurationDto) GetCoEditing() CoEditingConfig {
 
 // GetCoEditingOk returns a tuple with the CoEditing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EditorConfigurationDto) GetCoEditingOk() (*CoEditingConfig, bool) {
+func (o *EditorConfigurationDto) GetCoEditingOk() (*CoEditingConfigDto, bool) {
 	if o == nil || IsNil(o.CoEditing) {
 		return nil, false
 	}
@@ -143,8 +143,8 @@ func (o *EditorConfigurationDto) IsCoEditingSet() bool {
 	return false
 }
 
-// SetCoEditing gets a reference to the given CoEditingConfig and assigns it to the CoEditing field.
-func (o *EditorConfigurationDto) SetCoEditing(v CoEditingConfig) {
+// SetCoEditing gets a reference to the given CoEditingConfigDto and assigns it to the CoEditing field.
+func (o *EditorConfigurationDto) SetCoEditing(v CoEditingConfigDto) {
 	o.CoEditing = &v
 }
 
@@ -223,9 +223,9 @@ func (o *EditorConfigurationDto) SetCustomization(v CustomizationConfigDto) {
 }
 
 // GetEmbedded returns the Embedded field value if set, zero value otherwise.
-func (o *EditorConfigurationDto) GetEmbedded() EmbeddedConfig {
+func (o *EditorConfigurationDto) GetEmbedded() EmbeddedConfigDto {
 	if o == nil || IsNil(o.Embedded) {
-		var ret EmbeddedConfig
+		var ret EmbeddedConfigDto
 		return ret
 	}
 	return *o.Embedded
@@ -233,7 +233,7 @@ func (o *EditorConfigurationDto) GetEmbedded() EmbeddedConfig {
 
 // GetEmbeddedOk returns a tuple with the Embedded field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EditorConfigurationDto) GetEmbeddedOk() (*EmbeddedConfig, bool) {
+func (o *EditorConfigurationDto) GetEmbeddedOk() (*EmbeddedConfigDto, bool) {
 	if o == nil || IsNil(o.Embedded) {
 		return nil, false
 	}
@@ -249,8 +249,8 @@ func (o *EditorConfigurationDto) IsEmbeddedSet() bool {
 	return false
 }
 
-// SetEmbedded gets a reference to the given EmbeddedConfig and assigns it to the Embedded field.
-func (o *EditorConfigurationDto) SetEmbedded(v EmbeddedConfig) {
+// SetEmbedded gets a reference to the given EmbeddedConfigDto and assigns it to the Embedded field.
+func (o *EditorConfigurationDto) SetEmbedded(v EmbeddedConfigDto) {
 	o.Embedded = &v
 }
 
@@ -372,9 +372,9 @@ func (o *EditorConfigurationDto) SetModeWrite(v bool) {
 }
 
 // GetPlugins returns the Plugins field value if set, zero value otherwise.
-func (o *EditorConfigurationDto) GetPlugins() PluginsConfig {
+func (o *EditorConfigurationDto) GetPlugins() PluginsConfigDto {
 	if o == nil || IsNil(o.Plugins) {
-		var ret PluginsConfig
+		var ret PluginsConfigDto
 		return ret
 	}
 	return *o.Plugins
@@ -382,7 +382,7 @@ func (o *EditorConfigurationDto) GetPlugins() PluginsConfig {
 
 // GetPluginsOk returns a tuple with the Plugins field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EditorConfigurationDto) GetPluginsOk() (*PluginsConfig, bool) {
+func (o *EditorConfigurationDto) GetPluginsOk() (*PluginsConfigDto, bool) {
 	if o == nil || IsNil(o.Plugins) {
 		return nil, false
 	}
@@ -398,15 +398,15 @@ func (o *EditorConfigurationDto) IsPluginsSet() bool {
 	return false
 }
 
-// SetPlugins gets a reference to the given PluginsConfig and assigns it to the Plugins field.
-func (o *EditorConfigurationDto) SetPlugins(v PluginsConfig) {
+// SetPlugins gets a reference to the given PluginsConfigDto and assigns it to the Plugins field.
+func (o *EditorConfigurationDto) SetPlugins(v PluginsConfigDto) {
 	o.Plugins = &v
 }
 
 // GetRecent returns the Recent field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EditorConfigurationDto) GetRecent() []RecentConfig {
+func (o *EditorConfigurationDto) GetRecent() []RecentConfigDto {
 	if o == nil {
-		var ret []RecentConfig
+		var ret []RecentConfigDto
 		return ret
 	}
 	return o.Recent
@@ -415,7 +415,7 @@ func (o *EditorConfigurationDto) GetRecent() []RecentConfig {
 // GetRecentOk returns a tuple with the Recent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EditorConfigurationDto) GetRecentOk() ([]RecentConfig, bool) {
+func (o *EditorConfigurationDto) GetRecentOk() ([]RecentConfigDto, bool) {
 	if o == nil || IsNil(o.Recent) {
 		return nil, false
 	}
@@ -431,15 +431,15 @@ func (o *EditorConfigurationDto) IsRecentSet() bool {
 	return false
 }
 
-// SetRecent gets a reference to the given []RecentConfig and assigns it to the Recent field.
-func (o *EditorConfigurationDto) SetRecent(v []RecentConfig) {
+// SetRecent gets a reference to the given []RecentConfigDto and assigns it to the Recent field.
+func (o *EditorConfigurationDto) SetRecent(v []RecentConfigDto) {
 	o.Recent = v
 }
 
 // GetTemplates returns the Templates field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EditorConfigurationDto) GetTemplates() []TemplatesConfig {
+func (o *EditorConfigurationDto) GetTemplates() []TemplatesConfigDto {
 	if o == nil {
-		var ret []TemplatesConfig
+		var ret []TemplatesConfigDto
 		return ret
 	}
 	return o.Templates
@@ -448,7 +448,7 @@ func (o *EditorConfigurationDto) GetTemplates() []TemplatesConfig {
 // GetTemplatesOk returns a tuple with the Templates field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EditorConfigurationDto) GetTemplatesOk() ([]TemplatesConfig, bool) {
+func (o *EditorConfigurationDto) GetTemplatesOk() ([]TemplatesConfigDto, bool) {
 	if o == nil || IsNil(o.Templates) {
 		return nil, false
 	}
@@ -464,15 +464,15 @@ func (o *EditorConfigurationDto) IsTemplatesSet() bool {
 	return false
 }
 
-// SetTemplates gets a reference to the given []TemplatesConfig and assigns it to the Templates field.
-func (o *EditorConfigurationDto) SetTemplates(v []TemplatesConfig) {
+// SetTemplates gets a reference to the given []TemplatesConfigDto and assigns it to the Templates field.
+func (o *EditorConfigurationDto) SetTemplates(v []TemplatesConfigDto) {
 	o.Templates = v
 }
 
 // GetUser returns the User field value if set, zero value otherwise.
-func (o *EditorConfigurationDto) GetUser() UserConfig {
+func (o *EditorConfigurationDto) GetUser() UserConfigDto {
 	if o == nil || IsNil(o.User) {
-		var ret UserConfig
+		var ret UserConfigDto
 		return ret
 	}
 	return *o.User
@@ -480,7 +480,7 @@ func (o *EditorConfigurationDto) GetUser() UserConfig {
 
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EditorConfigurationDto) GetUserOk() (*UserConfig, bool) {
+func (o *EditorConfigurationDto) GetUserOk() (*UserConfigDto, bool) {
 	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
@@ -496,8 +496,8 @@ func (o *EditorConfigurationDto) IsUserSet() bool {
 	return false
 }
 
-// SetUser gets a reference to the given UserConfig and assigns it to the User field.
-func (o *EditorConfigurationDto) SetUser(v UserConfig) {
+// SetUser gets a reference to the given UserConfigDto and assigns it to the User field.
+func (o *EditorConfigurationDto) SetUser(v UserConfigDto) {
 	o.User = &v
 }
 

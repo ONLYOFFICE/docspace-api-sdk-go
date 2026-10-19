@@ -21,10 +21,10 @@ import (
 // checks if the DocsCloudConfigWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudConfigWrapper{}
 
-// DocsCloudConfigWrapper The successful API response containing the DocsCloudConfig object.
+// DocsCloudConfigWrapper The successful API response containing the DocsCloudConfigDto object.
 type DocsCloudConfigWrapper struct {
-	// The DocsCloudConfig object returned by the operation.
-	Response *DocsCloudConfig `json:"response,omitempty"`
+	// The DocsCloudConfigDto object returned by the operation.
+	Response *DocsCloudConfigDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewDocsCloudConfigWrapperWithDefaults() *DocsCloudConfigWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *DocsCloudConfigWrapper) GetResponse() DocsCloudConfig {
+func (o *DocsCloudConfigWrapper) GetResponse() DocsCloudConfigDto {
 	if o == nil || IsNil(o.Response) {
-		var ret DocsCloudConfig
+		var ret DocsCloudConfigDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *DocsCloudConfigWrapper) GetResponse() DocsCloudConfig {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DocsCloudConfigWrapper) GetResponseOk() (*DocsCloudConfig, bool) {
+func (o *DocsCloudConfigWrapper) GetResponseOk() (*DocsCloudConfigDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *DocsCloudConfigWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given DocsCloudConfig and assigns it to the Response field.
-func (o *DocsCloudConfigWrapper) SetResponse(v DocsCloudConfig) {
+// SetResponse gets a reference to the given DocsCloudConfigDto and assigns it to the Response field.
+func (o *DocsCloudConfigWrapper) SetResponse(v DocsCloudConfigDto) {
 	o.Response = &v
 }
 

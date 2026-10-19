@@ -6,18 +6,18 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddMember**](PeopleProfilesAPI.md#AddMember) | **Post** /api/2.0/people | Add a user
 [**CheckUserExistsByEmail**](PeopleProfilesAPI.md#CheckUserExistsByEmail) | **Get** /api/2.0/people/exists | Check whether an email is taken
-[**DeleteMember**](PeopleProfilesAPI.md#DeleteMember) | **Delete** /api/2.0/people/{userid} | Delete a user
+[**DeleteMember**](PeopleProfilesAPI.md#DeleteMember) | **Delete** /api/2.0/people/{userId} | Delete a user
 [**DeleteProfile**](PeopleProfilesAPI.md#DeleteProfile) | **Delete** /api/2.0/people/@self | Close my own profile
 [**GetAllProfiles**](PeopleProfilesAPI.md#GetAllProfiles) | **Get** /api/2.0/people | Get the active profiles
 [**GetClaims**](PeopleProfilesAPI.md#GetClaims) | **Get** /api/2.0/people/tokendiagnostics | Get user claims
 [**GetProfileByEmail**](PeopleProfilesAPI.md#GetProfileByEmail) | **Get** /api/2.0/people/email | Get a profile by user email
-[**GetProfileByUserId**](PeopleProfilesAPI.md#GetProfileByUserId) | **Get** /api/2.0/people/{userid} | Get a profile by user ID
+[**GetProfileByUserId**](PeopleProfilesAPI.md#GetProfileByUserId) | **Get** /api/2.0/people/{userId} | Get a profile by user ID
 [**GetSelfProfile**](PeopleProfilesAPI.md#GetSelfProfile) | **Get** /api/2.0/people/@self | Get my profile
 [**InviteUsers**](PeopleProfilesAPI.md#InviteUsers) | **Post** /api/2.0/people/invite | Invite users
 [**RemoveUsers**](PeopleProfilesAPI.md#RemoveUsers) | **Put** /api/2.0/people/delete | Delete users
 [**ResendUserInvites**](PeopleProfilesAPI.md#ResendUserInvites) | **Put** /api/2.0/people/invite | Resend activation emails
-[**UpdateMember**](PeopleProfilesAPI.md#UpdateMember) | **Put** /api/2.0/people/{userid} | Update a user
-[**UpdateMemberCulture**](PeopleProfilesAPI.md#UpdateMemberCulture) | **Put** /api/2.0/people/{userid}/culture | Update a user culture
+[**UpdateMember**](PeopleProfilesAPI.md#UpdateMember) | **Put** /api/2.0/people/{userId} | Update a user
+[**UpdateMemberCulture**](PeopleProfilesAPI.md#UpdateMemberCulture) | **Put** /api/2.0/people/{userId}/culture | Update a user culture
 
 
 
@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 
 ## DeleteMember
 
-> EmployeeFullWrapper DeleteMember(ctx, userid).Execute()
+> EmployeeFullWrapper DeleteMember(ctx, userId).Execute()
 
 Delete a user
 
@@ -184,11 +184,11 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The user ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeopleProfilesAPI.DeleteMember(context.Background(), userid).Execute()
+	resp, r, err := apiClient.PeopleProfilesAPI.DeleteMember(context.Background(), userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleProfilesAPI.DeleteMember``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -204,7 +204,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userId** | **string** | The user ID. | 
 
 ### Other Parameters
 
@@ -513,7 +513,7 @@ Name | Type | Description  | Notes
 
 ## GetProfileByUserId
 
-> EmployeeFullWrapper GetProfileByUserId(ctx, userid).Execute()
+> EmployeeFullWrapper GetProfileByUserId(ctx, userId).Execute()
 
 Get a profile by user ID
 
@@ -534,11 +534,11 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The user ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeopleProfilesAPI.GetProfileByUserId(context.Background(), userid).Execute()
+	resp, r, err := apiClient.PeopleProfilesAPI.GetProfileByUserId(context.Background(), userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleProfilesAPI.GetProfileByUserId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -554,7 +554,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userId** | **string** | The user ID. | 
 
 ### Other Parameters
 
@@ -852,7 +852,7 @@ Name | Type | Description  | Notes
 
 ## UpdateMember
 
-> EmployeeFullWrapper UpdateMember(ctx, userid).UpdateMemberRequestDto(updateMemberRequestDto).Execute()
+> EmployeeFullWrapper UpdateMember(ctx, userId).UpdateMemberRequestDto(updateMemberRequestDto).Execute()
 
 Update a user
 
@@ -873,12 +873,12 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The user ID.
 	updateMemberRequestDto := *openapiclient.NewUpdateMemberRequestDto() // UpdateMemberRequestDto | The request parameters for updating the user information.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeopleProfilesAPI.UpdateMember(context.Background(), userid).UpdateMemberRequestDto(updateMemberRequestDto).Execute()
+	resp, r, err := apiClient.PeopleProfilesAPI.UpdateMember(context.Background(), userId).UpdateMemberRequestDto(updateMemberRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleProfilesAPI.UpdateMember``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -894,7 +894,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userId** | **string** | The user ID. | 
 
 ### Other Parameters
 
@@ -926,7 +926,7 @@ Name | Type | Description  | Notes
 
 ## UpdateMemberCulture
 
-> EmployeeFullWrapper UpdateMemberCulture(ctx, userid).Culture(culture).Execute()
+> EmployeeFullWrapper UpdateMemberCulture(ctx, userId).UpdateMemberCultureRequest(updateMemberCultureRequest).Execute()
 
 Update a user culture
 
@@ -947,12 +947,12 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The user ID.
-	culture := *openapiclient.NewCulture("en-US") // Culture | The culture name parameters. (optional)
+	userId := "00000000-0000-0000-0000-000000000000" // string | The user ID.
+	updateMemberCultureRequest := *openapiclient.NewUpdateMemberCultureRequest("en-US") // UpdateMemberCultureRequest | The culture name parameters. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeopleProfilesAPI.UpdateMemberCulture(context.Background(), userid).Culture(culture).Execute()
+	resp, r, err := apiClient.PeopleProfilesAPI.UpdateMemberCulture(context.Background(), userId).UpdateMemberCultureRequest(updateMemberCultureRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleProfilesAPI.UpdateMemberCulture``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -968,7 +968,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The user ID. | 
+**userId** | **string** | The user ID. | 
 
 ### Other Parameters
 
@@ -978,7 +978,7 @@ Other parameters are passed through a pointer to a apiUpdateMemberCultureRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **culture** | [**Culture**](Culture.md) | The culture name parameters. | 
+ **updateMemberCultureRequest** | [**UpdateMemberCultureRequest**](UpdateMemberCultureRequest.md) | The culture name parameters. | 
 
 ### Return type
 

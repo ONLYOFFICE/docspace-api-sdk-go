@@ -30,6 +30,7 @@ Method | HTTP request | Description
 [**InsertFile**](FilesFoldersAPI.md#InsertFile) | **Post** /api/2.0/files/{folderId}/insert | Insert a file
 [**InsertFileToMyFromBody**](FilesFoldersAPI.md#InsertFileToMyFromBody) | **Post** /api/2.0/files/@my/insert | Insert a file into My documents
 [**RenameFolder**](FilesFoldersAPI.md#RenameFolder) | **Put** /api/2.0/files/folder/{folderId} | Rename a folder
+[**SearchFolder**](FilesFoldersAPI.md#SearchFolder) | **Post** /api/2.0/files/{folderId}/search | Search a folder by metadata
 [**SetFolderOrder**](FilesFoldersAPI.md#SetFolderOrder) | **Put** /api/2.0/files/folder/{folderId}/order | Set folder order
 [**SetFolderPrimaryExternalLink**](FilesFoldersAPI.md#SetFolderPrimaryExternalLink) | **Put** /api/2.0/files/folder/{id}/links | Set the folder external link
 [**TerminateReportFolderHistory**](FilesFoldersAPI.md#TerminateReportFolderHistory) | **Delete** /api/2.0/files/folder/{folderId}/log/report | Terminate the folder history report generation
@@ -40,7 +41,7 @@ Method | HTTP request | Description
 
 ## CheckUpload
 
-> STRINGArrayWrapper CheckUpload(ctx, folderId).CheckUploadRequest(checkUploadRequest).Execute()
+> StringArrayWrapper CheckUpload(ctx, folderId).CheckUploadRequest(checkUploadRequest).Execute()
 
 Check for upload conflicts
 
@@ -71,7 +72,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.CheckUpload``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CheckUpload`: STRINGArrayWrapper
+	// response from `CheckUpload`: StringArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFoldersAPI.CheckUpload`: %v\n", resp)
 }
 ```
@@ -96,7 +97,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**STRINGArrayWrapper**](STRINGArrayWrapper.md)
+[**StringArrayWrapper**](StringArrayWrapper.md)
 
 ### Authorization
 
@@ -114,7 +115,7 @@ Name | Type | Description  | Notes
 
 ## CreateFolder
 
-> FolderWrapper CreateFolder(ctx, folderId).CreateFolder(createFolder).Execute()
+> FolderWrapper CreateFolder(ctx, folderId).CreateFolderRequest(createFolderRequest).Execute()
 
 Create a folder
 
@@ -136,11 +137,11 @@ import (
 
 func main() {
 	folderId := int32(1) // int32 | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
-	createFolder := *openapiclient.NewCreateFolder("New Folder") // CreateFolder | The title carried by the request body.
+	createFolderRequest := *openapiclient.NewCreateFolderRequest("New Folder") // CreateFolderRequest | The title carried by the request body.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.CreateFolder(context.Background(), folderId).CreateFolder(createFolder).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.CreateFolder(context.Background(), folderId).CreateFolderRequest(createFolderRequest).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// folderId := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFoldersAPI.CreateFolder(context.Background(), folderId).ExecuteThirdParty()
@@ -169,7 +170,7 @@ Other parameters are passed through a pointer to a apiCreateFolderRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createFolder** | [**CreateFolder**](CreateFolder.md) | The title carried by the request body. | 
+ **createFolderRequest** | [**CreateFolderRequest**](CreateFolderRequest.md) | The title carried by the request body. | 
 
 ### Return type
 
@@ -288,7 +289,7 @@ import (
 
 func main() {
 	folderId := int32(1) // int32 | The folder whose history is exported; the report covers the folder itself and the entries inside it.
-	format := openapiclient.AuditReportFormat(0) // AuditReportFormat | The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. (optional)
+	format := openapiclient.AuditReportFormat(0) // AuditReportFormat | The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents. (optional)
 	from := time.Now() // time.Time | The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps. (optional)
 	to := time.Now() // time.Time | The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry. (optional)
 
@@ -320,7 +321,7 @@ Other parameters are passed through a pointer to a apiCreateReportFolderHistoryR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **format** | [**AuditReportFormat**](AuditReportFormat.md) | The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. | 
+ **format** | [**AuditReportFormat**](AuditReportFormat.md) | The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents. | 
  **from** | **time.Time** | The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps. | 
  **to** | **time.Time** | The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry. | 
 
@@ -344,7 +345,7 @@ Name | Type | Description  | Notes
 
 ## DeleteFolder
 
-> FileOperationArrayWrapper DeleteFolder(ctx, folderId).DeleteFolder(deleteFolder).Execute()
+> FileOperationArrayWrapper DeleteFolder(ctx, folderId).DeleteFolderRequest(deleteFolderRequest).Execute()
 
 Delete a folder
 
@@ -366,11 +367,11 @@ import (
 
 func main() {
 	folderId := int32(10) // int32 | The folder to delete, together with everything it holds.
-	deleteFolder := *openapiclient.NewDeleteFolder() // DeleteFolder | How the deletion is to be carried out.
+	deleteFolderRequest := *openapiclient.NewDeleteFolderRequest() // DeleteFolderRequest | How the deletion is to be carried out.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.DeleteFolder(context.Background(), folderId).DeleteFolder(deleteFolder).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.DeleteFolder(context.Background(), folderId).DeleteFolderRequest(deleteFolderRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.DeleteFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -396,7 +397,7 @@ Other parameters are passed through a pointer to a apiDeleteFolderRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **deleteFolder** | [**DeleteFolder**](DeleteFolder.md) | How the deletion is to be carried out. | 
+ **deleteFolderRequest** | [**DeleteFolderRequest**](DeleteFolderRequest.md) | How the deletion is to be carried out. | 
 
 ### Return type
 
@@ -490,7 +491,7 @@ Name | Type | Description  | Notes
 
 ## GetFavoritesFolder
 
-> FolderContentWrapper GetFavoritesFolder(ctx).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+> FolderContentWrapper GetFavoritesFolder(ctx).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 
 Get the Favorites section
 
@@ -518,10 +519,13 @@ func main() {
 	sortBy := "DateAndTime" // string | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional)
 	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional)
 	filterValue := "My Document" // string | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. (optional)
+	metadataTemplateId := int32(1) // int32 | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. (optional)
+	metadataFilters := "[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]" // string | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional)
+	includeHiddenMetadata := false // bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.GetFavoritesFolder(context.Background()).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.GetFavoritesFolder(context.Background()).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.GetFavoritesFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -549,6 +553,9 @@ Name | Type | Description  | Notes
  **sortBy** | **string** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | 
  **sortOrder** | [**SortOrder**](SortOrder.md) | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | 
  **filterValue** | **string** | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | 
+ **metadataTemplateId** | **int32** | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. | 
+ **metadataFilters** | **string** | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | 
+ **includeHiddenMetadata** | **bool** | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | 
 
 ### Return type
 
@@ -705,7 +712,7 @@ Name | Type | Description  | Notes
 
 ## GetFolderByFolderId
 
-> FolderContentWrapper GetFolderByFolderId(ctx, folderId).UserIdOrGroupId(userIdOrGroupId).SharedBy(sharedBy).FilterType(filterType).RoomId(roomId).FolderType(folderType).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).WithSubFolders(withSubFolders).Extension(extension).SearchArea(searchArea).FormsItemKey(formsItemKey).FormsItemType(formsItemType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Location(location).Execute()
+> FolderContentWrapper GetFolderByFolderId(ctx, folderId).UserIdOrGroupId(userIdOrGroupId).SharedBy(sharedBy).FilterType(filterType).RoomId(roomId).FolderType(folderType).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).WithSubFolders(withSubFolders).Extension(extension).SearchArea(searchArea).FormsItemKey(formsItemKey).FormsItemType(formsItemType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Location(location).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 
 Get a folder by ID
 
@@ -744,11 +751,14 @@ func main() {
 	sortBy := "DateAndTime" // string | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional)
 	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional)
 	filterValue := "My Document" // string | The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. (optional)
-	location := openapiclient.Location(1) // Location | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. (optional)
+	location := openapiclient.RequestLocation(1) // RequestLocation | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. (optional)
+	metadataTemplateId := int32(1) // int32 | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400. (optional)
+	metadataFilters := "[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]" // string | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search. (optional)
+	includeHiddenMetadata := false // bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.GetFolderByFolderId(context.Background(), folderId).UserIdOrGroupId(userIdOrGroupId).SharedBy(sharedBy).FilterType(filterType).RoomId(roomId).FolderType(folderType).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).WithSubFolders(withSubFolders).Extension(extension).SearchArea(searchArea).FormsItemKey(formsItemKey).FormsItemType(formsItemType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Location(location).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.GetFolderByFolderId(context.Background(), folderId).UserIdOrGroupId(userIdOrGroupId).SharedBy(sharedBy).FilterType(filterType).RoomId(roomId).FolderType(folderType).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).WithSubFolders(withSubFolders).Extension(extension).SearchArea(searchArea).FormsItemKey(formsItemKey).FormsItemType(formsItemType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Location(location).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// folderId := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFoldersAPI.GetFolderByFolderId(context.Background(), folderId).ExecuteThirdParty()
@@ -794,7 +804,10 @@ Name | Type | Description  | Notes
  **sortBy** | **string** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | 
  **sortOrder** | [**SortOrder**](SortOrder.md) | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | 
  **filterValue** | **string** | The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. | 
- **location** | [**Location**](Location.md) | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | 
+ **location** | [**RequestLocation**](RequestLocation.md) | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | 
+ **metadataTemplateId** | **int32** | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400. | 
+ **metadataFilters** | **string** | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search. | 
+ **includeHiddenMetadata** | **bool** | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | 
 
 ### Return type
 
@@ -1264,7 +1277,7 @@ Name | Type | Description  | Notes
 
 ## GetFormsFolder
 
-> FolderContentWrapper GetFormsFolder(ctx).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+> FolderContentWrapper GetFormsFolder(ctx).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 
 Get the Forms section
 
@@ -1292,10 +1305,13 @@ func main() {
 	sortBy := "DateAndTime" // string | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional)
 	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional)
 	filterValue := "My Document" // string | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. (optional)
+	metadataTemplateId := int32(1) // int32 | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. (optional)
+	metadataFilters := "[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]" // string | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional)
+	includeHiddenMetadata := false // bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.GetFormsFolder(context.Background()).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.GetFormsFolder(context.Background()).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.GetFormsFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1323,6 +1339,9 @@ Name | Type | Description  | Notes
  **sortBy** | **string** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | 
  **sortOrder** | [**SortOrder**](SortOrder.md) | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | 
  **filterValue** | **string** | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | 
+ **metadataTemplateId** | **int32** | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. | 
+ **metadataFilters** | **string** | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | 
+ **includeHiddenMetadata** | **bool** | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | 
 
 ### Return type
 
@@ -1344,7 +1363,7 @@ Name | Type | Description  | Notes
 
 ## GetMyFolder
 
-> FolderContentWrapper GetMyFolder(ctx).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ApplyFilterOption(applyFilterOption).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+> FolderContentWrapper GetMyFolder(ctx).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ApplyFilterOption(applyFilterOption).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 
 Get the My documents section
 
@@ -1373,10 +1392,13 @@ func main() {
 	sortBy := "DateAndTime" // string | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional)
 	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional)
 	filterValue := "My Document" // string | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. (optional)
+	metadataTemplateId := int32(1) // int32 | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. (optional)
+	metadataFilters := "[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]" // string | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional)
+	includeHiddenMetadata := false // bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.GetMyFolder(context.Background()).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ApplyFilterOption(applyFilterOption).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.GetMyFolder(context.Background()).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ApplyFilterOption(applyFilterOption).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.GetMyFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1405,6 +1427,9 @@ Name | Type | Description  | Notes
  **sortBy** | **string** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | 
  **sortOrder** | [**SortOrder**](SortOrder.md) | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | 
  **filterValue** | **string** | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. | 
+ **metadataTemplateId** | **int32** | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. | 
+ **metadataFilters** | **string** | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | 
+ **includeHiddenMetadata** | **bool** | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | 
 
 ### Return type
 
@@ -1498,7 +1523,7 @@ Name | Type | Description  | Notes
 
 ## GetRecentFolder
 
-> FolderContentWrapper GetRecentFolder(ctx).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).SearchArea(searchArea).Extension(extension).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+> FolderContentWrapper GetRecentFolder(ctx).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).SearchArea(searchArea).Extension(extension).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 
 Get the Recent section
 
@@ -1530,10 +1555,13 @@ func main() {
 	sortBy := "DateAndTime" // string | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing. (optional)
 	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing. (optional)
 	filterValue := "My Document" // string | The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history. (optional)
+	metadataTemplateId := int32(1) // int32 | The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set. (optional)
+	metadataFilters := "[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]" // string | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional)
+	includeHiddenMetadata := false // bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.GetRecentFolder(context.Background()).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).SearchArea(searchArea).Extension(extension).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.GetRecentFolder(context.Background()).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ExcludeSubject(excludeSubject).ApplyFilterOption(applyFilterOption).SearchArea(searchArea).Extension(extension).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.GetRecentFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1565,6 +1593,9 @@ Name | Type | Description  | Notes
  **sortBy** | **string** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing. | 
  **sortOrder** | [**SortOrder**](SortOrder.md) | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing. | 
  **filterValue** | **string** | The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history. | 
+ **metadataTemplateId** | **int32** | The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set. | 
+ **metadataFilters** | **string** | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | 
+ **includeHiddenMetadata** | **bool** | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | 
 
 ### Return type
 
@@ -1740,7 +1771,7 @@ Name | Type | Description  | Notes
 
 ## GetTrashFolder
 
-> FolderContentWrapper GetTrashFolder(ctx).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ApplyFilterOption(applyFilterOption).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+> FolderContentWrapper GetTrashFolder(ctx).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ApplyFilterOption(applyFilterOption).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 
 Get the Trash section
 
@@ -1769,10 +1800,13 @@ func main() {
 	sortBy := "DateAndTime" // string | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional)
 	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional)
 	filterValue := "My Document" // string | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. (optional)
+	metadataTemplateId := int32(1) // int32 | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. (optional)
+	metadataFilters := "[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]" // string | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional)
+	includeHiddenMetadata := false // bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.GetTrashFolder(context.Background()).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ApplyFilterOption(applyFilterOption).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.GetTrashFolder(context.Background()).UserIdOrGroupId(userIdOrGroupId).FilterType(filterType).ApplyFilterOption(applyFilterOption).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.GetTrashFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1801,6 +1835,9 @@ Name | Type | Description  | Notes
  **sortBy** | **string** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | 
  **sortOrder** | [**SortOrder**](SortOrder.md) | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | 
  **filterValue** | **string** | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. | 
+ **metadataTemplateId** | **int32** | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. | 
+ **metadataFilters** | **string** | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | 
+ **includeHiddenMetadata** | **bool** | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | 
 
 ### Return type
 
@@ -2011,7 +2048,7 @@ Name | Type | Description  | Notes
 
 ## RenameFolder
 
-> FolderWrapper RenameFolder(ctx, folderId).CreateFolder(createFolder).Execute()
+> FolderWrapper RenameFolder(ctx, folderId).CreateFolderRequest(createFolderRequest).Execute()
 
 Rename a folder
 
@@ -2033,11 +2070,11 @@ import (
 
 func main() {
 	folderId := int32(1) // int32 | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
-	createFolder := *openapiclient.NewCreateFolder("New Folder") // CreateFolder | The title carried by the request body.
+	createFolderRequest := *openapiclient.NewCreateFolderRequest("New Folder") // CreateFolderRequest | The title carried by the request body.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFoldersAPI.RenameFolder(context.Background(), folderId).CreateFolder(createFolder).Execute()
+	resp, r, err := apiClient.FilesFoldersAPI.RenameFolder(context.Background(), folderId).CreateFolderRequest(createFolderRequest).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// folderId := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFoldersAPI.RenameFolder(context.Background(), folderId).ExecuteThirdParty()
@@ -2066,11 +2103,88 @@ Other parameters are passed through a pointer to a apiRenameFolderRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createFolder** | [**CreateFolder**](CreateFolder.md) | The title carried by the request body. | 
+ **createFolderRequest** | [**CreateFolderRequest**](CreateFolderRequest.md) | The title carried by the request body. | 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SearchFolder
+
+> FolderContentWrapper SearchFolder(ctx, folderId).FolderMetadataSearch(folderMetadataSearch).Execute()
+
+Search a folder by metadata
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/search-folder/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	folderId := int32(1) // int32 | The folder ID.
+	folderMetadataSearch := *openapiclient.NewFolderMetadataSearch() // FolderMetadataSearch | The search parameters.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FilesFoldersAPI.SearchFolder(context.Background(), folderId).FolderMetadataSearch(folderMetadataSearch).Execute()
+	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
+	// folderId := "sbox-42"
+	// thirdPartyResp, r, err := apiClient.FilesFoldersAPI.SearchFolder(context.Background(), folderId).ExecuteThirdParty()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesFoldersAPI.SearchFolder``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SearchFolder`: FolderContentWrapper
+	fmt.Fprintf(os.Stdout, "Response from `FilesFoldersAPI.SearchFolder`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**folderId** | **int32** | The folder ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSearchFolderRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **folderMetadataSearch** | [**FolderMetadataSearch**](FolderMetadataSearch.md) | The search parameters. | 
+
+### Return type
+
+[**FolderContentWrapper**](FolderContentWrapper.md)
 
 ### Authorization
 

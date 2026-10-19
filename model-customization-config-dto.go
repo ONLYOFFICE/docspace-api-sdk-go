@@ -30,23 +30,23 @@ type CustomizationConfigDto struct {
 	// How an anonymous participant is treated in this session.
 	Anonymous *AnonymousConfigDto `json:"anonymous,omitempty"`
 	// The support link the editor offers behind its feedback button.
-	Feedback *FeedbackConfig `json:"feedback,omitempty"`
+	Feedback *FeedbackConfigDto `json:"feedback,omitempty"`
 	// Whether the editors write intermediate revisions while the document stays open. It is empty when the portal  leaves the decision to the editors themselves.
 	Forcesave NullableBool `json:"forcesave,omitempty"`
 	// Where the editor returns the user to when they leave the document. It is empty when there is nowhere to go  back to, as in an embedded opening.
-	Goback *GobackConfig `json:"goback,omitempty"`
+	Goback *GobackConfigDto `json:"goback,omitempty"`
 	// How tracked changes are displayed when the document opens; it depends on whether this session may write.
-	Review *ReviewConfig `json:"review,omitempty"`
+	Review *ReviewConfigDto `json:"review,omitempty"`
 	// The logo the editor shows, in the variants the current layout and file type need.
 	Logo *LogoConfigDto `json:"logo,omitempty"`
 	// Whether mentioning a user who cannot yet open the document offers to share it with them, instead of silently  notifying nobody.
 	MentionShare *bool `json:"mentionShare,omitempty"`
 	// The submit button of a form: whether it is shown and what it says.
-	SubmitForm *SubmitForm `json:"submitForm,omitempty"`
+	SubmitForm *SubmitFormDto `json:"submitForm,omitempty"`
 	// The button that starts filling out the form. It is empty when this opening offers no such button.
 	StartFillingForm *StartFillingForm `json:"startFillingForm,omitempty"`
 	// The AI configuration settings.
-	Ai *AIConfig `json:"ai,omitempty"`
+	Ai *AiConfigDto `json:"ai,omitempty"`
 }
 
 // NewCustomizationConfigDto instantiates a new CustomizationConfigDto object
@@ -163,9 +163,9 @@ func (o *CustomizationConfigDto) SetAnonymous(v AnonymousConfigDto) {
 }
 
 // GetFeedback returns the Feedback field value if set, zero value otherwise.
-func (o *CustomizationConfigDto) GetFeedback() FeedbackConfig {
+func (o *CustomizationConfigDto) GetFeedback() FeedbackConfigDto {
 	if o == nil || IsNil(o.Feedback) {
-		var ret FeedbackConfig
+		var ret FeedbackConfigDto
 		return ret
 	}
 	return *o.Feedback
@@ -173,7 +173,7 @@ func (o *CustomizationConfigDto) GetFeedback() FeedbackConfig {
 
 // GetFeedbackOk returns a tuple with the Feedback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomizationConfigDto) GetFeedbackOk() (*FeedbackConfig, bool) {
+func (o *CustomizationConfigDto) GetFeedbackOk() (*FeedbackConfigDto, bool) {
 	if o == nil || IsNil(o.Feedback) {
 		return nil, false
 	}
@@ -189,8 +189,8 @@ func (o *CustomizationConfigDto) IsFeedbackSet() bool {
 	return false
 }
 
-// SetFeedback gets a reference to the given FeedbackConfig and assigns it to the Feedback field.
-func (o *CustomizationConfigDto) SetFeedback(v FeedbackConfig) {
+// SetFeedback gets a reference to the given FeedbackConfigDto and assigns it to the Feedback field.
+func (o *CustomizationConfigDto) SetFeedback(v FeedbackConfigDto) {
 	o.Feedback = &v
 }
 
@@ -237,9 +237,9 @@ func (o *CustomizationConfigDto) UnsetForcesave() {
 }
 
 // GetGoback returns the Goback field value if set, zero value otherwise.
-func (o *CustomizationConfigDto) GetGoback() GobackConfig {
+func (o *CustomizationConfigDto) GetGoback() GobackConfigDto {
 	if o == nil || IsNil(o.Goback) {
-		var ret GobackConfig
+		var ret GobackConfigDto
 		return ret
 	}
 	return *o.Goback
@@ -247,7 +247,7 @@ func (o *CustomizationConfigDto) GetGoback() GobackConfig {
 
 // GetGobackOk returns a tuple with the Goback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomizationConfigDto) GetGobackOk() (*GobackConfig, bool) {
+func (o *CustomizationConfigDto) GetGobackOk() (*GobackConfigDto, bool) {
 	if o == nil || IsNil(o.Goback) {
 		return nil, false
 	}
@@ -263,15 +263,15 @@ func (o *CustomizationConfigDto) IsGobackSet() bool {
 	return false
 }
 
-// SetGoback gets a reference to the given GobackConfig and assigns it to the Goback field.
-func (o *CustomizationConfigDto) SetGoback(v GobackConfig) {
+// SetGoback gets a reference to the given GobackConfigDto and assigns it to the Goback field.
+func (o *CustomizationConfigDto) SetGoback(v GobackConfigDto) {
 	o.Goback = &v
 }
 
 // GetReview returns the Review field value if set, zero value otherwise.
-func (o *CustomizationConfigDto) GetReview() ReviewConfig {
+func (o *CustomizationConfigDto) GetReview() ReviewConfigDto {
 	if o == nil || IsNil(o.Review) {
-		var ret ReviewConfig
+		var ret ReviewConfigDto
 		return ret
 	}
 	return *o.Review
@@ -279,7 +279,7 @@ func (o *CustomizationConfigDto) GetReview() ReviewConfig {
 
 // GetReviewOk returns a tuple with the Review field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomizationConfigDto) GetReviewOk() (*ReviewConfig, bool) {
+func (o *CustomizationConfigDto) GetReviewOk() (*ReviewConfigDto, bool) {
 	if o == nil || IsNil(o.Review) {
 		return nil, false
 	}
@@ -295,8 +295,8 @@ func (o *CustomizationConfigDto) IsReviewSet() bool {
 	return false
 }
 
-// SetReview gets a reference to the given ReviewConfig and assigns it to the Review field.
-func (o *CustomizationConfigDto) SetReview(v ReviewConfig) {
+// SetReview gets a reference to the given ReviewConfigDto and assigns it to the Review field.
+func (o *CustomizationConfigDto) SetReview(v ReviewConfigDto) {
 	o.Review = &v
 }
 
@@ -365,9 +365,9 @@ func (o *CustomizationConfigDto) SetMentionShare(v bool) {
 }
 
 // GetSubmitForm returns the SubmitForm field value if set, zero value otherwise.
-func (o *CustomizationConfigDto) GetSubmitForm() SubmitForm {
+func (o *CustomizationConfigDto) GetSubmitForm() SubmitFormDto {
 	if o == nil || IsNil(o.SubmitForm) {
-		var ret SubmitForm
+		var ret SubmitFormDto
 		return ret
 	}
 	return *o.SubmitForm
@@ -375,7 +375,7 @@ func (o *CustomizationConfigDto) GetSubmitForm() SubmitForm {
 
 // GetSubmitFormOk returns a tuple with the SubmitForm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomizationConfigDto) GetSubmitFormOk() (*SubmitForm, bool) {
+func (o *CustomizationConfigDto) GetSubmitFormOk() (*SubmitFormDto, bool) {
 	if o == nil || IsNil(o.SubmitForm) {
 		return nil, false
 	}
@@ -391,8 +391,8 @@ func (o *CustomizationConfigDto) IsSubmitFormSet() bool {
 	return false
 }
 
-// SetSubmitForm gets a reference to the given SubmitForm and assigns it to the SubmitForm field.
-func (o *CustomizationConfigDto) SetSubmitForm(v SubmitForm) {
+// SetSubmitForm gets a reference to the given SubmitFormDto and assigns it to the SubmitForm field.
+func (o *CustomizationConfigDto) SetSubmitForm(v SubmitFormDto) {
 	o.SubmitForm = &v
 }
 
@@ -429,9 +429,9 @@ func (o *CustomizationConfigDto) SetStartFillingForm(v StartFillingForm) {
 }
 
 // GetAi returns the Ai field value if set, zero value otherwise.
-func (o *CustomizationConfigDto) GetAi() AIConfig {
+func (o *CustomizationConfigDto) GetAi() AiConfigDto {
 	if o == nil || IsNil(o.Ai) {
-		var ret AIConfig
+		var ret AiConfigDto
 		return ret
 	}
 	return *o.Ai
@@ -439,7 +439,7 @@ func (o *CustomizationConfigDto) GetAi() AIConfig {
 
 // GetAiOk returns a tuple with the Ai field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomizationConfigDto) GetAiOk() (*AIConfig, bool) {
+func (o *CustomizationConfigDto) GetAiOk() (*AiConfigDto, bool) {
 	if o == nil || IsNil(o.Ai) {
 		return nil, false
 	}
@@ -455,8 +455,8 @@ func (o *CustomizationConfigDto) IsAiSet() bool {
 	return false
 }
 
-// SetAi gets a reference to the given AIConfig and assigns it to the Ai field.
-func (o *CustomizationConfigDto) SetAi(v AIConfig) {
+// SetAi gets a reference to the given AiConfigDto and assigns it to the Ai field.
+func (o *CustomizationConfigDto) SetAi(v AiConfigDto) {
 	o.Ai = &v
 }
 

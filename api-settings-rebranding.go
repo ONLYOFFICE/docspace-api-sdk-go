@@ -31,13 +31,13 @@ type ApiDeleteAdditionalWhiteLabelSettingsRequest struct {
 	ApiService *SettingsRebrandingAPIService
 }
 
-func (r ApiDeleteAdditionalWhiteLabelSettingsRequest) Execute() (*AdditionalWhiteLabelSettingsResponseWrapper, *http.Response, error) {
+func (r ApiDeleteAdditionalWhiteLabelSettingsRequest) Execute() (*AdditionalResourcesWrapper, *http.Response, error) {
 	return r.ApiService.DeleteAdditionalWhiteLabelSettingsExecute(r)
 }
 
 // DeleteAdditionalWhiteLabelSettings Delete the additional white label settings
 //
-// Discards the resource flags stored for the installation and brings back the built-in set, so the sample  documents, the Help Center link, the Feedback and Support link, the user forum, the video guides and the  license agreements are offered as they are out of the box. Requires a DocSpace administrator and a server  installation with unrestricted space access; on a SaaS portal the call is refused. Unlike  `POST api/2.0/settings/rebranding/additional` it does not need a plan that includes branding, so an  installation whose subscription no longer covers it can still be reset. The call is destructive for the stored  flags, which have to be set again to come back, and it is idempotent. Instead of a flag it answers the set  that is now in effect, so no follow-up read is needed. The reset is installation-wide and reaches every  portal, and it leaves the visibility of the About page alone. The company details are reset separately by  `DELETE api/2.0/settings/rebranding/company`.
+// Discards the resource flags stored for the installation and brings back the built-in set, so the sample  documents, the Help Center link, the Feedback and Support link, the user forum, the video guides and the  license agreements are offered as they are out of the box. Requires a DocSpace administrator and a server  installation with unrestricted space access; on a SaaS portal the call is refused. Unlike  `POST api/2.0/settings/rebranding/additional` it does not need a plan that includes customization, so an  installation whose subscription no longer covers it can still be reset. The call is destructive for the stored  flags, which have to be set again to come back, and it is idempotent. Instead of a flag it answers the set  that is now in effect, so no follow-up read is needed. The reset is installation-wide and reaches every  portal, and it leaves the visibility of the About page alone. The company details are reset separately by  `DELETE api/2.0/settings/rebranding/company`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-additional-white-label-settings/
 //
@@ -51,13 +51,13 @@ func (a *SettingsRebrandingAPIService) DeleteAdditionalWhiteLabelSettings(ctx co
 }
 
 // Execute executes the request
-//  @return AdditionalWhiteLabelSettingsResponseWrapper
-func (a *SettingsRebrandingAPIService) DeleteAdditionalWhiteLabelSettingsExecute(r ApiDeleteAdditionalWhiteLabelSettingsRequest) (*AdditionalWhiteLabelSettingsResponseWrapper, *http.Response, error) {
+//  @return AdditionalResourcesWrapper
+func (a *SettingsRebrandingAPIService) DeleteAdditionalWhiteLabelSettingsExecute(r ApiDeleteAdditionalWhiteLabelSettingsRequest) (*AdditionalResourcesWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AdditionalWhiteLabelSettingsResponseWrapper
+		localVarReturnValue  *AdditionalResourcesWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsRebrandingAPIService.DeleteAdditionalWhiteLabelSettings")
@@ -177,13 +177,13 @@ type ApiDeleteCompanyWhiteLabelSettingsRequest struct {
 	ApiService *SettingsRebrandingAPIService
 }
 
-func (r ApiDeleteCompanyWhiteLabelSettingsRequest) Execute() (*CompanyWhiteLabelSettingsResponseWrapper, *http.Response, error) {
+func (r ApiDeleteCompanyWhiteLabelSettingsRequest) Execute() (*LicensorDetailsWrapper, *http.Response, error) {
 	return r.ApiService.DeleteCompanyWhiteLabelSettingsExecute(r)
 }
 
 // DeleteCompanyWhiteLabelSettings Delete the company white label settings
 //
-// Discards the company details stored for the installation and brings back the built-in ONLYOFFICE name, site,  email, address and phone, so the About page and the notification letters print the original vendor again.  Requires a DocSpace administrator and a server installation with unrestricted space access; on a SaaS portal  the call is refused. Unlike `POST api/2.0/settings/rebranding/company` it does not need a plan that includes  branding, so an installation whose subscription no longer covers it can still be reset. The call is  destructive: the previous details are not kept anywhere and have to be entered again to come back. It is  idempotent, and instead of a flag it answers the details that are now in effect, so no follow-up read is  needed. The reset is installation-wide and reaches every portal. The help and support links are reset  separately by `DELETE api/2.0/settings/rebranding/additional`, and the logos and the wordmark of a single  portal by the restore operations under `api/2.0/settings/whitelabel`.
+// Discards the company details stored for the installation and brings back the built-in ONLYOFFICE name, site,  email, address and phone, so the About page and the notification letters print the original vendor again.  Requires a DocSpace administrator and a server installation with unrestricted space access; on a SaaS portal  the call is refused. Unlike `POST api/2.0/settings/rebranding/company` it does not need a plan that includes  customization, so an installation whose subscription no longer covers it can still be reset. The call is  destructive: the previous details are not kept anywhere and have to be entered again to come back. It is  idempotent, and instead of a flag it answers the details that are now in effect, so no follow-up read is  needed. The reset is installation-wide and reaches every portal. The help and support links are reset  separately by `DELETE api/2.0/settings/rebranding/additional`, and the logos and the wordmark of a single  portal by the restore operations under `api/2.0/settings/whitelabel`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-company-white-label-settings/
 //
@@ -197,13 +197,13 @@ func (a *SettingsRebrandingAPIService) DeleteCompanyWhiteLabelSettings(ctx conte
 }
 
 // Execute executes the request
-//  @return CompanyWhiteLabelSettingsResponseWrapper
-func (a *SettingsRebrandingAPIService) DeleteCompanyWhiteLabelSettingsExecute(r ApiDeleteCompanyWhiteLabelSettingsRequest) (*CompanyWhiteLabelSettingsResponseWrapper, *http.Response, error) {
+//  @return LicensorDetailsWrapper
+func (a *SettingsRebrandingAPIService) DeleteCompanyWhiteLabelSettingsExecute(r ApiDeleteCompanyWhiteLabelSettingsRequest) (*LicensorDetailsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CompanyWhiteLabelSettingsResponseWrapper
+		localVarReturnValue  *LicensorDetailsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsRebrandingAPIService.DeleteCompanyWhiteLabelSettings")
@@ -323,7 +323,7 @@ type ApiGetAdditionalWhiteLabelSettingsRequest struct {
 	ApiService *SettingsRebrandingAPIService
 }
 
-func (r ApiGetAdditionalWhiteLabelSettingsRequest) Execute() (*AdditionalWhiteLabelSettingsDtoWrapper, *http.Response, error) {
+func (r ApiGetAdditionalWhiteLabelSettingsRequest) Execute() (*AdditionalWhiteLabelSettingsWrapper, *http.Response, error) {
 	return r.ApiService.GetAdditionalWhiteLabelSettingsExecute(r)
 }
 
@@ -343,13 +343,13 @@ func (a *SettingsRebrandingAPIService) GetAdditionalWhiteLabelSettings(ctx conte
 }
 
 // Execute executes the request
-//  @return AdditionalWhiteLabelSettingsDtoWrapper
-func (a *SettingsRebrandingAPIService) GetAdditionalWhiteLabelSettingsExecute(r ApiGetAdditionalWhiteLabelSettingsRequest) (*AdditionalWhiteLabelSettingsDtoWrapper, *http.Response, error) {
+//  @return AdditionalWhiteLabelSettingsWrapper
+func (a *SettingsRebrandingAPIService) GetAdditionalWhiteLabelSettingsExecute(r ApiGetAdditionalWhiteLabelSettingsRequest) (*AdditionalWhiteLabelSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AdditionalWhiteLabelSettingsDtoWrapper
+		localVarReturnValue  *AdditionalWhiteLabelSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsRebrandingAPIService.GetAdditionalWhiteLabelSettings")
@@ -469,7 +469,7 @@ type ApiGetCompanyWhiteLabelSettingsRequest struct {
 	ApiService *SettingsRebrandingAPIService
 }
 
-func (r ApiGetCompanyWhiteLabelSettingsRequest) Execute() (*CompanyWhiteLabelSettingsDtoWrapper, *http.Response, error) {
+func (r ApiGetCompanyWhiteLabelSettingsRequest) Execute() (*CompanyWhiteLabelSettingsWrapper, *http.Response, error) {
 	return r.ApiService.GetCompanyWhiteLabelSettingsExecute(r)
 }
 
@@ -489,13 +489,13 @@ func (a *SettingsRebrandingAPIService) GetCompanyWhiteLabelSettings(ctx context.
 }
 
 // Execute executes the request
-//  @return CompanyWhiteLabelSettingsDtoWrapper
-func (a *SettingsRebrandingAPIService) GetCompanyWhiteLabelSettingsExecute(r ApiGetCompanyWhiteLabelSettingsRequest) (*CompanyWhiteLabelSettingsDtoWrapper, *http.Response, error) {
+//  @return CompanyWhiteLabelSettingsWrapper
+func (a *SettingsRebrandingAPIService) GetCompanyWhiteLabelSettingsExecute(r ApiGetCompanyWhiteLabelSettingsRequest) (*CompanyWhiteLabelSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CompanyWhiteLabelSettingsDtoWrapper
+		localVarReturnValue  *CompanyWhiteLabelSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsRebrandingAPIService.GetCompanyWhiteLabelSettings")
@@ -621,7 +621,7 @@ func (r ApiGetEnableWhitelabelRequest) Execute() (*BooleanWrapper, *http.Respons
 
 // GetEnableWhitelabel Check the white label availability
 //
-// Reports whether branding may be configured for the current portal at all, which is the check to make before  offering the rebranding interface or calling any of the save operations under `api/2.0/settings/whitelabel`.  Requires a DocSpace administrator. The call is read-only and idempotent. The answer is `true` only when both  conditions hold: the branding section is not switched off in the installation configuration, and the portal's  current plan includes customization. It comes back as `false` on a plan without branding, which is exactly the  case in which `POST api/2.0/settings/whitelabel/logos/save`,  `POST api/2.0/settings/whitelabel/logos/savefromfiles` and `POST api/2.0/settings/whitelabel/logotext/save`  are refused as payment required. The restore operations do not depend on this flag and stay available, so a  portal that loses branding can still be reset to the built-in logos and wordmark. The flag says nothing about  the installation-wide default branding, which additionally needs a server installation with unrestricted space  access, and nothing about the company details and help links under `api/2.0/settings/rebranding`.
+// Reports whether branding may be configured for the current portal at all, which is the check to make before  offering the rebranding interface or calling any of the save operations under `api/2.0/settings/whitelabel`.  Requires a DocSpace administrator. The call is read-only and idempotent. The answer is `true` only when both  conditions hold: the branding section is not switched off in the installation configuration, and the portal's  current plan includes customization. It comes back as `false` on a plan without customization, which is  exactly the case in which `POST api/2.0/settings/whitelabel/logos/save`,  `POST api/2.0/settings/whitelabel/logos/savefromfiles` and `POST api/2.0/settings/whitelabel/logotext/save`  are refused as payment required. The restore operations do not depend on this flag and stay available, so a  portal that loses branding can still be reset to the built-in logos and wordmark. The flag says nothing about  the installation-wide default branding, which additionally needs a server installation with unrestricted space  access, and nothing about the company details and help links under `api/2.0/settings/rebranding`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-enable-whitelabel/
 //
@@ -814,10 +814,10 @@ func (a *SettingsRebrandingAPIService) GetIsDefaultWhiteLabelLogoTextExecute(r A
 	localVarFormParams := url.Values{}
 
 	if r.isDark != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDark", r.isDark, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDark", r.isDark, "form", "")
 	}
 	if r.isDefault != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDefault", r.isDefault, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDefault", r.isDefault, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -989,10 +989,10 @@ func (a *SettingsRebrandingAPIService) GetIsDefaultWhiteLabelLogosExecute(r ApiG
 	localVarFormParams := url.Values{}
 
 	if r.isDark != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDark", r.isDark, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDark", r.isDark, "form", "")
 	}
 	if r.isDefault != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDefault", r.isDefault, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDefault", r.isDefault, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1111,7 +1111,7 @@ type ApiGetLicensorDataRequest struct {
 	ApiService *SettingsRebrandingAPIService
 }
 
-func (r ApiGetLicensorDataRequest) Execute() (*CompanyWhiteLabelSettingsArrayWrapper, *http.Response, error) {
+func (r ApiGetLicensorDataRequest) Execute() (*LicensorDetailsArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetLicensorDataExecute(r)
 }
 
@@ -1131,13 +1131,13 @@ func (a *SettingsRebrandingAPIService) GetLicensorData(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return CompanyWhiteLabelSettingsArrayWrapper
-func (a *SettingsRebrandingAPIService) GetLicensorDataExecute(r ApiGetLicensorDataRequest) (*CompanyWhiteLabelSettingsArrayWrapper, *http.Response, error) {
+//  @return LicensorDetailsArrayWrapper
+func (a *SettingsRebrandingAPIService) GetLicensorDataExecute(r ApiGetLicensorDataRequest) (*LicensorDetailsArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CompanyWhiteLabelSettingsArrayWrapper
+		localVarReturnValue  *LicensorDetailsArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsRebrandingAPIService.GetLicensorData")
@@ -1310,10 +1310,10 @@ func (a *SettingsRebrandingAPIService) GetWhiteLabelLogoTextExecute(r ApiGetWhit
 	localVarFormParams := url.Values{}
 
 	if r.isDark != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDark", r.isDark, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDark", r.isDark, "form", "")
 	}
 	if r.isDefault != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDefault", r.isDefault, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDefault", r.isDefault, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1485,10 +1485,10 @@ func (a *SettingsRebrandingAPIService) GetWhiteLabelLogosExecute(r ApiGetWhiteLa
 	localVarFormParams := url.Values{}
 
 	if r.isDark != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDark", r.isDark, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDark", r.isDark, "form", "")
 	}
 	if r.isDefault != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDefault", r.isDefault, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDefault", r.isDefault, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1614,7 +1614,7 @@ func (r ApiRestoreWhiteLabelLogoTextRequest) Execute() (*BooleanWrapper, *http.R
 
 // RestoreWhiteLabelLogoText Restore the white label logo text
 //
-// Clears the wordmark stored for the current portal, so the built-in `ONLYOFFICE` is printed again next to or  instead of the logo images. Requires a DocSpace administrator. Unlike  `POST api/2.0/settings/whitelabel/logotext/save` it does not need a plan that includes branding, so a portal  whose subscription no longer covers branding can still be reset. The call is destructive for the stored text,  which is not kept anywhere and has to be typed again to come back, and it is idempotent: `true` comes back  both when a text was cleared and when there was none. Logo images are left untouched and have their own  `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to reset the installation-wide default  wordmark instead of this portal's, which only a server installation allows. After the call  `GET api/2.0/settings/whitelabel/logotext` reports `ONLYOFFICE` and  `GET api/2.0/settings/whitelabel/logotext/isdefault` reports `default` as `true`. The wordmark is the only  setting this operation touches, so the company details and the help links of the installation are left as they  are.
+// Clears the wordmark stored for the current portal, so the built-in `ONLYOFFICE` is printed again next to or  instead of the logo images. Requires a DocSpace administrator. Unlike  `POST api/2.0/settings/whitelabel/logotext/save` it does not need a plan that includes customization, so a  portal whose subscription no longer covers customization can still be reset. The call is destructive for the  stored text, which is not kept anywhere and has to be typed again to come back, and it is idempotent: `true`  comes back both when a text was cleared and when there was none. Logo images are left untouched and have their  own `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to reset the installation-wide  default wordmark instead of this portal's, which only a server installation allows. After the call  `GET api/2.0/settings/whitelabel/logotext` reports `ONLYOFFICE` and  `GET api/2.0/settings/whitelabel/logotext/isdefault` reports `default` as `true`. The wordmark is the only  setting this operation touches, so the company details and the help links of the installation are left as they  are.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logo-text/
 //
@@ -1649,10 +1649,10 @@ func (a *SettingsRebrandingAPIService) RestoreWhiteLabelLogoTextExecute(r ApiRes
 	localVarFormParams := url.Values{}
 
 	if r.isDark != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDark", r.isDark, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDark", r.isDark, "form", "")
 	}
 	if r.isDefault != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDefault", r.isDefault, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDefault", r.isDefault, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1789,7 +1789,7 @@ func (r ApiRestoreWhiteLabelLogosRequest) Execute() (*BooleanWrapper, *http.Resp
 
 // RestoreWhiteLabelLogos Restore the white label logos
 //
-// Drops every logo uploaded for the current portal and brings back the built-in images, so the portal looks  unbranded again on the login page, in the left menu, in the editors and in letters. Requires a DocSpace  administrator. Unlike the two save operations it does not need a plan that includes branding, so a portal  whose subscription no longer covers it can still be reset. The call is destructive: the stored image files are  deleted and cannot be recovered from the portal, only re-uploaded with  `POST api/2.0/settings/whitelabel/logos/save`. It is idempotent and answers `true` both when logos were  removed and when there was nothing to remove. All slots are reset together; there is no way to restore a  single one. For this portal the picture kept for the older mail templates is reset along with the logos, while  the logo text is left as it is and has its own `PUT api/2.0/settings/whitelabel/logotext/restore`. Pass  `isDefault=true` to reset the installation-wide default branding instead, which only a server installation  allows. Confirm the result with `GET api/2.0/settings/whitelabel/logos/isdefault`.
+// Drops every logo uploaded for the current portal and brings back the built-in images, so the portal looks  unbranded again on the login page, in the left menu, in the editors and in letters. Requires a DocSpace  administrator. Unlike the two save operations it does not need a plan that includes customization, so a portal  whose subscription no longer covers it can still be reset. The call is destructive: the stored image files are  deleted and cannot be recovered from the portal, only re-uploaded with  `POST api/2.0/settings/whitelabel/logos/save`. It is idempotent and answers `true` both when logos were  removed and when there was nothing to remove. All slots are reset together; there is no way to restore a  single one. For this portal the picture kept for the older mail templates is reset along with the logos, while  the logo text is left as it is and has its own `PUT api/2.0/settings/whitelabel/logotext/restore`. Pass  `isDefault=true` to reset the installation-wide default branding instead, which only a server installation  allows. Confirm the result with `GET api/2.0/settings/whitelabel/logos/isdefault`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logos/
 //
@@ -1824,10 +1824,10 @@ func (a *SettingsRebrandingAPIService) RestoreWhiteLabelLogosExecute(r ApiRestor
 	localVarFormParams := url.Values{}
 
 	if r.isDark != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDark", r.isDark, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDark", r.isDark, "form", "")
 	}
 	if r.isDefault != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDefault", r.isDefault, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDefault", r.isDefault, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1944,10 +1944,10 @@ func (a *SettingsRebrandingAPIService) RestoreWhiteLabelLogosExecute(r ApiRestor
 type ApiSaveAdditionalWhiteLabelSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsRebrandingAPIService
-	additionalWhiteLabelSettingsWrapper *AdditionalWhiteLabelSettingsWrapper
+	additionalWhiteLabelSettingsRequestDto *AdditionalWhiteLabelSettingsRequestDto
 }
 
-func (r ApiSaveAdditionalWhiteLabelSettingsRequest) AdditionalWhiteLabelSettingsWrapper(additionalWhiteLabelSettingsWrapper AdditionalWhiteLabelSettingsWrapper) ApiSaveAdditionalWhiteLabelSettingsRequest {	r.additionalWhiteLabelSettingsWrapper = &additionalWhiteLabelSettingsWrapper
+func (r ApiSaveAdditionalWhiteLabelSettingsRequest) AdditionalWhiteLabelSettingsRequestDto(additionalWhiteLabelSettingsRequestDto AdditionalWhiteLabelSettingsRequestDto) ApiSaveAdditionalWhiteLabelSettingsRequest {	r.additionalWhiteLabelSettingsRequestDto = &additionalWhiteLabelSettingsRequestDto
 	return r
 }
 
@@ -1957,7 +1957,7 @@ func (r ApiSaveAdditionalWhiteLabelSettingsRequest) Execute() (*BooleanWrapper, 
 
 // SaveAdditionalWhiteLabelSettings Save the additional white label settings
 //
-// Stores which of the ONLYOFFICE help and community resources the interface offers: the sample documents, the  Help Center link, the Feedback and Support link, the user forum, the video guides and the license agreements.  The whole set is replaced by the `settings` object of the request, so send every flag, not only the changed  ones - a flag left out is stored as off. A request without that object is rejected as an invalid request.  Requires a DocSpace administrator, a server installation with unrestricted space access and a plan that  includes branding, which `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is  refused. The flags are installation-wide, so the change reaches every portal of that installation. The call is  mutating and idempotent, and answers `true`. Only the visibility of these entries is controlled here, not the  addresses behind them. Read the result back with `GET api/2.0/settings/rebranding/additional` and undo it with  `DELETE api/2.0/settings/rebranding/additional`.
+// Stores which of the ONLYOFFICE help and community resources the interface offers: the sample documents, the  Help Center link, the Feedback and Support link, the user forum, the video guides and the license agreements.  The whole set is replaced by the `settings` object of the request, so send every flag, not only the changed  ones - a flag left out is stored as off. A request without that object is rejected as an invalid request.  Requires a DocSpace administrator, a server installation with unrestricted space access and a plan that  includes customization, which `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is  refused. The flags are installation-wide, so the change reaches every portal of that installation. The call is  mutating and idempotent, and answers `true`. Only the visibility of these entries is controlled here, not the  addresses behind them. Read the result back with `GET api/2.0/settings/rebranding/additional` and undo it with  `DELETE api/2.0/settings/rebranding/additional`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-additional-white-label-settings/
 //
@@ -2009,7 +2009,7 @@ func (a *SettingsRebrandingAPIService) SaveAdditionalWhiteLabelSettingsExecute(r
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.additionalWhiteLabelSettingsWrapper
+	localVarPostBody = r.additionalWhiteLabelSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2097,10 +2097,10 @@ func (a *SettingsRebrandingAPIService) SaveAdditionalWhiteLabelSettingsExecute(r
 type ApiSaveCompanyWhiteLabelSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsRebrandingAPIService
-	companyWhiteLabelSettingsWrapper *CompanyWhiteLabelSettingsWrapper
+	companyWhiteLabelSettingsRequestDto *CompanyWhiteLabelSettingsRequestDto
 }
 
-func (r ApiSaveCompanyWhiteLabelSettingsRequest) CompanyWhiteLabelSettingsWrapper(companyWhiteLabelSettingsWrapper CompanyWhiteLabelSettingsWrapper) ApiSaveCompanyWhiteLabelSettingsRequest {	r.companyWhiteLabelSettingsWrapper = &companyWhiteLabelSettingsWrapper
+func (r ApiSaveCompanyWhiteLabelSettingsRequest) CompanyWhiteLabelSettingsRequestDto(companyWhiteLabelSettingsRequestDto CompanyWhiteLabelSettingsRequestDto) ApiSaveCompanyWhiteLabelSettingsRequest {	r.companyWhiteLabelSettingsRequestDto = &companyWhiteLabelSettingsRequestDto
 	return r
 }
 
@@ -2110,7 +2110,7 @@ func (r ApiSaveCompanyWhiteLabelSettingsRequest) Execute() (*BooleanWrapper, *ht
 
 // SaveCompanyWhiteLabelSettings Save the company white label settings
 //
-// Stores the company details - name, site, support email, postal address and phone - that the About page and the  notification letters print as the vendor. The whole set is replaced by the `settings` object of the request,  so send every field, not only the changed ones; a request without that object, or with an email or a site that  is not a valid value, is rejected as an invalid request. Requires a DocSpace administrator, a server  installation with unrestricted space access and a plan that includes branding, which  `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is refused. The values are  installation-wide, so the change reaches every portal of that installation. Two fields are not taken from the  request: the licensor flag is always stored as `false`, and hiding the About page is silently kept off unless  the plan allows it. The call is mutating and idempotent, and answers `true`. Read the result back with  `GET api/2.0/settings/rebranding/company` and undo it with `DELETE api/2.0/settings/rebranding/company`.
+// Stores the company details - name, site, support email, postal address and phone - that the About page and the  notification letters print as the vendor. The whole set is replaced by the `settings` object of the request,  so send every field, not only the changed ones; a request without that object, or with an email or a site that  is not a valid value, is rejected as an invalid request. Requires a DocSpace administrator, a server  installation with unrestricted space access and a plan that includes customization, which  `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is refused. The values are  installation-wide, so the change reaches every portal of that installation. Two fields are not taken from the  request: the licensor flag is always stored as `false`, and hiding the About page is silently kept off unless  the plan allows it. The call is mutating and idempotent, and answers `true`. Read the result back with  `GET api/2.0/settings/rebranding/company` and undo it with `DELETE api/2.0/settings/rebranding/company`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-company-white-label-settings/
 //
@@ -2162,7 +2162,7 @@ func (a *SettingsRebrandingAPIService) SaveCompanyWhiteLabelSettingsExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.companyWhiteLabelSettingsWrapper
+	localVarPostBody = r.companyWhiteLabelSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2252,7 +2252,7 @@ type ApiSaveWhiteLabelLogoTextRequest struct {
 	ApiService *SettingsRebrandingAPIService
 	isDark *bool
 	isDefault *bool
-	whiteLabelRequestsDto *WhiteLabelRequestsDto
+	whiteLabelRequestDto *WhiteLabelRequestDto
 }
 
 // Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
@@ -2265,7 +2265,7 @@ func (r ApiSaveWhiteLabelLogoTextRequest) IsDefault(isDefault bool) ApiSaveWhite
 	return r
 }
 
-func (r ApiSaveWhiteLabelLogoTextRequest) WhiteLabelRequestsDto(whiteLabelRequestsDto WhiteLabelRequestsDto) ApiSaveWhiteLabelLogoTextRequest {	r.whiteLabelRequestsDto = &whiteLabelRequestsDto
+func (r ApiSaveWhiteLabelLogoTextRequest) WhiteLabelRequestDto(whiteLabelRequestDto WhiteLabelRequestDto) ApiSaveWhiteLabelLogoTextRequest {	r.whiteLabelRequestDto = &whiteLabelRequestDto
 	return r
 }
 
@@ -2275,7 +2275,7 @@ func (r ApiSaveWhiteLabelLogoTextRequest) Execute() (*BooleanWrapper, *http.Resp
 
 // SaveWhiteLabelLogoText Save the white label logo text
 //
-// Sets the wordmark that the portal prints next to or instead of a logo image, on the login page, in the editors  and in notification letters. Only `logoText` from the request body is used here, and it is limited to 40  characters; a longer value is rejected as an invalid request. Sending an empty or blank text, or exactly the  built-in `ONLYOFFICE`, clears the setting instead of storing it, which has the same effect as  `PUT api/2.0/settings/whitelabel/logotext/restore`. Requires a DocSpace administrator and a plan that includes  branding, which `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment  required. The call is mutating and idempotent: the previous text is overwritten and `true` comes back. Logo  images are not touched - they are saved by `POST api/2.0/settings/whitelabel/logos/save` - and the text is not  rendered into them. Pass `isDefault=true` to write the installation-wide default wordmark instead of this  portal's, which only a server installation allows. Read the stored value back with  `GET api/2.0/settings/whitelabel/logotext`.
+// Sets the wordmark that the portal prints next to or instead of a logo image, on the login page, in the editors  and in notification letters. Only `logoText` from the request body is used here, and it is limited to 40  characters; a longer value is rejected as an invalid request. Sending an empty or blank text, or exactly the  built-in `ONLYOFFICE`, clears the setting instead of storing it, which has the same effect as  `PUT api/2.0/settings/whitelabel/logotext/restore`. Requires a DocSpace administrator and a plan that includes  customization, which `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment  required. The call is mutating and idempotent: the previous text is overwritten and `true` comes back. Logo  images are not touched - they are saved by `POST api/2.0/settings/whitelabel/logos/save` - and the text is not  rendered into them. Pass `isDefault=true` to write the installation-wide default wordmark instead of this  portal's, which only a server installation allows. Read the stored value back with  `GET api/2.0/settings/whitelabel/logotext`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-logo-text/
 //
@@ -2310,10 +2310,10 @@ func (a *SettingsRebrandingAPIService) SaveWhiteLabelLogoTextExecute(r ApiSaveWh
 	localVarFormParams := url.Values{}
 
 	if r.isDark != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDark", r.isDark, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDark", r.isDark, "form", "")
 	}
 	if r.isDefault != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDefault", r.isDefault, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDefault", r.isDefault, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -2333,7 +2333,7 @@ func (a *SettingsRebrandingAPIService) SaveWhiteLabelLogoTextExecute(r ApiSaveWh
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.whiteLabelRequestsDto
+	localVarPostBody = r.whiteLabelRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2403,17 +2403,6 @@ func (a *SettingsRebrandingAPIService) SaveWhiteLabelLogoTextExecute(r ApiSaveWh
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2434,7 +2423,7 @@ type ApiSaveWhiteLabelSettingsRequest struct {
 	ApiService *SettingsRebrandingAPIService
 	isDark *bool
 	isDefault *bool
-	whiteLabelRequestsDto *WhiteLabelRequestsDto
+	whiteLabelRequestDto *WhiteLabelRequestDto
 }
 
 // Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
@@ -2447,7 +2436,7 @@ func (r ApiSaveWhiteLabelSettingsRequest) IsDefault(isDefault bool) ApiSaveWhite
 	return r
 }
 
-func (r ApiSaveWhiteLabelSettingsRequest) WhiteLabelRequestsDto(whiteLabelRequestsDto WhiteLabelRequestsDto) ApiSaveWhiteLabelSettingsRequest {	r.whiteLabelRequestsDto = &whiteLabelRequestsDto
+func (r ApiSaveWhiteLabelSettingsRequest) WhiteLabelRequestDto(whiteLabelRequestDto WhiteLabelRequestDto) ApiSaveWhiteLabelSettingsRequest {	r.whiteLabelRequestDto = &whiteLabelRequestDto
 	return r
 }
 
@@ -2457,7 +2446,7 @@ func (r ApiSaveWhiteLabelSettingsRequest) Execute() (*BooleanWrapper, *http.Resp
 
 // SaveWhiteLabelSettings Save the white label logos
 //
-// Replaces the branding images of the current portal with the ones sent in the request, so that the logos on the  login page, in the left menu, in the editors and in letters come from this portal. Every entry of `logo` names  a logo slot in its `key` - the numeric type published by `GET api/2.0/settings/whitelabel/logos` - and carries  the light-theme and the dark-theme image in `light` and `dark`. An image is either a  `data:image/png;base64,...` payload (`png`, `jpg` and `svg` are accepted) or the name of a file already  uploaded to the temporary store; a slot left out of the request keeps its image. The dark image is stored only  for the slots that have a dark variant, that is `1`, `2`, `6`, `7` and `8`, and is ignored for the favicon and  the editor logos; saving slot `2` also rebuilds the notification logo `8` from it. Requires a DocSpace  administrator and a plan that includes branding, which `GET api/2.0/settings/enablewhitelabel` reports;  otherwise the call is refused as payment required. It answers `true` and is undone by  `PUT api/2.0/settings/whitelabel/logos/restore`. With `isDefault=true` it writes the installation-wide default  branding instead, which only a server installation allows. Uploaded files go to  `POST api/2.0/settings/whitelabel/logos/savefromfiles`.
+// Replaces the branding images of the current portal with the ones sent in the request, so that the logos on the  login page, in the left menu, in the editors and in letters come from this portal. Every entry of `logo` names  a logo slot in its `key` - the numeric type published by `GET api/2.0/settings/whitelabel/logos` - and carries  the light-theme and the dark-theme image in `light` and `dark`. An image is either a  `data:image/png;base64,...` payload (`png`, `jpg` and `svg` are accepted) or the name of a file already  uploaded to the temporary store; a slot left out of the request keeps its image. The dark image is stored only  for the slots that have a dark variant, that is `1`, `2`, `6`, `7` and `8`, and is ignored for the favicon and  the editor logos; saving slot `2` also rebuilds the notification logo `8` from it. Requires a DocSpace  administrator and a plan that includes customization, which `GET api/2.0/settings/enablewhitelabel` reports;  otherwise the call is refused as payment required. It answers `true` and is undone by  `PUT api/2.0/settings/whitelabel/logos/restore`. With `isDefault=true` it writes the installation-wide default  branding instead, which only a server installation allows. Uploaded files go to  `POST api/2.0/settings/whitelabel/logos/savefromfiles`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings/
 //
@@ -2492,10 +2481,10 @@ func (a *SettingsRebrandingAPIService) SaveWhiteLabelSettingsExecute(r ApiSaveWh
 	localVarFormParams := url.Values{}
 
 	if r.isDark != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDark", r.isDark, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDark", r.isDark, "form", "")
 	}
 	if r.isDefault != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDefault", r.isDefault, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDefault", r.isDefault, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -2515,7 +2504,7 @@ func (a *SettingsRebrandingAPIService) SaveWhiteLabelSettingsExecute(r ApiSaveWh
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.whiteLabelRequestsDto
+	localVarPostBody = r.whiteLabelRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2575,17 +2564,6 @@ func (a *SettingsRebrandingAPIService) SaveWhiteLabelSettingsExecute(r ApiSaveWh
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2634,7 +2612,7 @@ func (r ApiSaveWhiteLabelSettingsFromFilesRequest) Execute() (*BooleanWrapper, *
 
 // SaveWhiteLabelSettingsFromFiles Save the logos from files
 //
-// Replaces the branding images of the current portal with the files sent as `multipart/form-data`, which is the  way to upload image files directly instead of embedding them as base64 in  `POST api/2.0/settings/whitelabel/logos/save`. The form field names are not used: each file is routed by its  own name, which has to start with the numeric logo slot published by `GET api/2.0/settings/whitelabel/logos`  and end with the image extension, as in `2.png`; a name that also contains `dark`, as in `2.dark.png`, is  stored as the dark-theme image of that slot. Slots that get no file keep the image they have, and a dark file  is ignored for the favicon and the editor logos, which have no dark variant. A request that carries no file at  all is rejected. Requires a DocSpace administrator and a plan that includes branding, which  `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment required. It answers  `true`, overwrites in place and is undone by `PUT api/2.0/settings/whitelabel/logos/restore`. With  `isDefault=true` it writes the installation-wide default branding, which only a server installation allows.
+// Replaces the branding images of the current portal with the files sent as `multipart/form-data`, which is the  way to upload image files directly instead of embedding them as base64 in  `POST api/2.0/settings/whitelabel/logos/save`. The form field names are not used: each file is routed by its  own name, which has to start with the numeric logo slot published by `GET api/2.0/settings/whitelabel/logos`  and end with the image extension, as in `2.png`; a name that also contains `dark`, as in `2.dark.png`, is  stored as the dark-theme image of that slot. Slots that get no file keep the image they have, and a dark file  is ignored for the favicon and the editor logos, which have no dark variant. A request that carries no file at  all is rejected. Requires a DocSpace administrator and a plan that includes customization, which  `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment required. It answers  `true`, overwrites in place and is undone by `PUT api/2.0/settings/whitelabel/logos/restore`. With  `isDefault=true` it writes the installation-wide default branding, which only a server installation allows.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings-from-files/
 //
@@ -2669,10 +2647,10 @@ func (a *SettingsRebrandingAPIService) SaveWhiteLabelSettingsFromFilesExecute(r 
 	localVarFormParams := url.Values{}
 
 	if r.isDark != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDark", r.isDark, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDark", r.isDark, "form", "")
 	}
 	if r.isDefault != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "IsDefault", r.isDefault, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDefault", r.isDefault, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

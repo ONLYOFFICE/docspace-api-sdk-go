@@ -21,10 +21,10 @@ import (
 // checks if the StudioDefaultPageSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StudioDefaultPageSettingsWrapper{}
 
-// StudioDefaultPageSettingsWrapper The successful API response containing the StudioDefaultPageSettings object.
+// StudioDefaultPageSettingsWrapper The successful API response containing the StudioDefaultPageSettingsDto object.
 type StudioDefaultPageSettingsWrapper struct {
-	// The StudioDefaultPageSettings object returned by the operation.
-	Response *StudioDefaultPageSettings `json:"response,omitempty"`
+	// The StudioDefaultPageSettingsDto object returned by the operation.
+	Response *StudioDefaultPageSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewStudioDefaultPageSettingsWrapperWithDefaults() *StudioDefaultPageSetting
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *StudioDefaultPageSettingsWrapper) GetResponse() StudioDefaultPageSettings {
+func (o *StudioDefaultPageSettingsWrapper) GetResponse() StudioDefaultPageSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret StudioDefaultPageSettings
+		var ret StudioDefaultPageSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *StudioDefaultPageSettingsWrapper) GetResponse() StudioDefaultPageSettin
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StudioDefaultPageSettingsWrapper) GetResponseOk() (*StudioDefaultPageSettings, bool) {
+func (o *StudioDefaultPageSettingsWrapper) GetResponseOk() (*StudioDefaultPageSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *StudioDefaultPageSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given StudioDefaultPageSettings and assigns it to the Response field.
-func (o *StudioDefaultPageSettingsWrapper) SetResponse(v StudioDefaultPageSettings) {
+// SetResponse gets a reference to the given StudioDefaultPageSettingsDto and assigns it to the Response field.
+func (o *StudioDefaultPageSettingsWrapper) SetResponse(v StudioDefaultPageSettingsDto) {
 	o.Response = &v
 }
 

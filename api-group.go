@@ -675,7 +675,7 @@ func (a *GroupAPIService) GetGroupExecute(r ApiGetGroupRequest) (*GroupWrapper, 
 type ApiGetGroupByUserIdRequest struct {
 	ctx context.Context
 	ApiService *GroupAPIService
-	userid string
+	userId string
 }
 
 func (r ApiGetGroupByUserIdRequest) Execute() (*GroupSummaryArrayWrapper, *http.Response, error) {
@@ -689,13 +689,13 @@ func (r ApiGetGroupByUserIdRequest) Execute() (*GroupSummaryArrayWrapper, *http.
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group-by-user-id/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param userid The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
+// @param userId The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
 // @return ApiGetGroupByUserIdRequest
-func (a *GroupAPIService) GetGroupByUserId(ctx context.Context, userid string) ApiGetGroupByUserIdRequest {
+func (a *GroupAPIService) GetGroupByUserId(ctx context.Context, userId string) ApiGetGroupByUserIdRequest {
 	return ApiGetGroupByUserIdRequest{
 		ApiService: a,
 		ctx: ctx,
-		userid: userid,
+		userId: userId,
 	}
 }
 
@@ -714,8 +714,8 @@ func (a *GroupAPIService) GetGroupByUserIdExecute(r ApiGetGroupByUserIdRequest) 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/2.0/group/user/{userid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"userid"+"}", url.PathEscape(parameterValueToString(r.userid, "userid")), -1)
+	localVarPath := localBasePath + "/api/2.0/group/user/{userId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -886,7 +886,7 @@ func (r ApiGetGroupsRequest) Execute() (*GroupArrayWrapper, *http.Response, erro
 
 // GetGroups Get groups
 //
-// Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+// Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/
 //
@@ -1017,17 +1017,6 @@ func (a *GroupAPIService) GetGroupsExecute(r ApiGetGroupsRequest) (*GroupArrayWr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1536,17 +1525,6 @@ func (a *GroupAPIService) SetGroupManagerExecute(r ApiSetGroupManagerRequest) (*
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1859,17 +1837,6 @@ func (a *GroupAPIService) UpdateGroupExecute(r ApiUpdateGroupRequest) (*GroupWra
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

@@ -29,10 +29,10 @@ type SecurityBannersVisibilityAPIService service
 type ApiSetTenantBannerSettingsRequest struct {
 	ctx context.Context
 	ApiService *SecurityBannersVisibilityAPIService
-	tenantBannerSettingsDto *TenantBannerSettingsDto
+	tenantBannerSettingsRequestDto *TenantBannerSettingsRequestDto
 }
 
-func (r ApiSetTenantBannerSettingsRequest) TenantBannerSettingsDto(tenantBannerSettingsDto TenantBannerSettingsDto) ApiSetTenantBannerSettingsRequest {	r.tenantBannerSettingsDto = &tenantBannerSettingsDto
+func (r ApiSetTenantBannerSettingsRequest) TenantBannerSettingsRequestDto(tenantBannerSettingsRequestDto TenantBannerSettingsRequestDto) ApiSetTenantBannerSettingsRequest {	r.tenantBannerSettingsRequestDto = &tenantBannerSettingsRequestDto
 	return r
 }
 
@@ -94,7 +94,7 @@ func (a *SecurityBannersVisibilityAPIService) SetTenantBannerSettingsExecute(r A
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tenantBannerSettingsDto
+	localVarPostBody = r.tenantBannerSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

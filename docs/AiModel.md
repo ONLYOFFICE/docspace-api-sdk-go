@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Reasoning** | Pointer to **bool** | Whether this model supports extended thinking / chain-of-thought reasoning. | [optional] 
 **ReasoningSupport** | Pointer to [**AiReasoningSupport**](AiReasoningSupport.md) | What the model can do with extended thinking, when the provider's catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider's id-based table. | [optional] 
 **Capabilities** | Pointer to **float32** | Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`. | [optional] 
+**Created** | Pointer to **float32** | Release date as a Unix timestamp in **seconds**, when the provider's catalogue reports one (OpenAI-shaped `/models` responses and OpenRouter carry `created`; Anthropic carries an ISO `created_at`). The model picker sorts on it so the newest releases come first; entries without it fall back to alphabetical order. | [optional] 
 
 ## Methods
 
@@ -164,6 +165,31 @@ SetCapabilities sets Capabilities field to given value.
 `func (o *AiModel) HasCapabilities() bool`
 
 HasCapabilities returns a boolean if a field has been set.
+
+### GetCreated
+
+`func (o *AiModel) GetCreated() float32`
+
+GetCreated returns the Created field if non-nil, zero value otherwise.
+
+### GetCreatedOk
+
+`func (o *AiModel) GetCreatedOk() (*float32, bool)`
+
+GetCreatedOk returns a tuple with the Created field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreated
+
+`func (o *AiModel) SetCreated(v float32)`
+
+SetCreated sets Created field to given value.
+
+### HasCreated
+
+`func (o *AiModel) HasCreated() bool`
+
+HasCreated returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

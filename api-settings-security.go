@@ -177,17 +177,17 @@ func (a *SettingsSecurityAPIService) GetEnabledModulesExecute(r ApiGetEnabledMod
 type ApiGetIsProductAdministratorRequest struct {
 	ctx context.Context
 	ApiService *SettingsSecurityAPIService
-	productid *string
-	userid *string
+	productId *string
+	userId *string
 }
 
 // The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
-func (r ApiGetIsProductAdministratorRequest) Productid(productid string) ApiGetIsProductAdministratorRequest {	r.productid = &productid
+func (r ApiGetIsProductAdministratorRequest) ProductId(productId string) ApiGetIsProductAdministratorRequest {	r.productId = &productId
 	return r
 }
 
 // The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
-func (r ApiGetIsProductAdministratorRequest) Userid(userid string) ApiGetIsProductAdministratorRequest {	r.userid = &userid
+func (r ApiGetIsProductAdministratorRequest) UserId(userId string) ApiGetIsProductAdministratorRequest {	r.userId = &userId
 	return r
 }
 
@@ -197,7 +197,7 @@ func (r ApiGetIsProductAdministratorRequest) Execute() (*ProductAdministratorWra
 
 // GetIsProductAdministrator Check product administrator
 //
-// Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module's own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productid}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
+// Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module's own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator/
 //
@@ -230,15 +230,15 @@ func (a *SettingsSecurityAPIService) GetIsProductAdministratorExecute(r ApiGetIs
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.productid == nil {
-		return localVarReturnValue, nil, reportError("productid is required and must be specified")
+	if r.productId == nil {
+		return localVarReturnValue, nil, reportError("productId is required and must be specified")
 	}
-	if r.userid == nil {
-		return localVarReturnValue, nil, reportError("userid is required and must be specified")
+	if r.userId == nil {
+		return localVarReturnValue, nil, reportError("userId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "productid", r.productid, "form", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "userid", r.userid, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "productId", r.productId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -500,7 +500,7 @@ func (a *SettingsSecurityAPIService) GetPasswordSettingsExecute(r ApiGetPassword
 type ApiGetProductAdministratorsRequest struct {
 	ctx context.Context
 	ApiService *SettingsSecurityAPIService
-	productid string
+	productId string
 }
 
 func (r ApiGetProductAdministratorsRequest) Execute() (*EmployeeArrayWrapper, *http.Response, error) {
@@ -514,13 +514,13 @@ func (r ApiGetProductAdministratorsRequest) Execute() (*EmployeeArrayWrapper, *h
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-product-administrators/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param productid The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
+// @param productId The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
 // @return ApiGetProductAdministratorsRequest
-func (a *SettingsSecurityAPIService) GetProductAdministrators(ctx context.Context, productid string) ApiGetProductAdministratorsRequest {
+func (a *SettingsSecurityAPIService) GetProductAdministrators(ctx context.Context, productId string) ApiGetProductAdministratorsRequest {
 	return ApiGetProductAdministratorsRequest{
 		ApiService: a,
 		ctx: ctx,
-		productid: productid,
+		productId: productId,
 	}
 }
 
@@ -539,8 +539,8 @@ func (a *SettingsSecurityAPIService) GetProductAdministratorsExecute(r ApiGetPro
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/2.0/settings/security/administrator/{productid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"productid"+"}", url.PathEscape(parameterValueToString(r.productid, "productid")), -1)
+	localVarPath := localBasePath + "/api/2.0/settings/security/administrator/{productId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"productId"+"}", url.PathEscape(parameterValueToString(r.productId, "productId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -967,17 +967,6 @@ func (a *SettingsSecurityAPIService) GetWebItemSettingsSecurityInfoExecute(r Api
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -996,10 +985,10 @@ func (a *SettingsSecurityAPIService) GetWebItemSettingsSecurityInfoExecute(r Api
 type ApiSetAccessToWebItemsRequest struct {
 	ctx context.Context
 	ApiService *SettingsSecurityAPIService
-	webItemsSecurityRequestsDto *WebItemsSecurityRequestsDto
+	webItemsSecurityRequestDto *WebItemsSecurityRequestDto
 }
 
-func (r ApiSetAccessToWebItemsRequest) WebItemsSecurityRequestsDto(webItemsSecurityRequestsDto WebItemsSecurityRequestsDto) ApiSetAccessToWebItemsRequest {	r.webItemsSecurityRequestsDto = &webItemsSecurityRequestsDto
+func (r ApiSetAccessToWebItemsRequest) WebItemsSecurityRequestDto(webItemsSecurityRequestDto WebItemsSecurityRequestDto) ApiSetAccessToWebItemsRequest {	r.webItemsSecurityRequestDto = &webItemsSecurityRequestDto
 	return r
 }
 
@@ -1061,7 +1050,7 @@ func (a *SettingsSecurityAPIService) SetAccessToWebItemsExecute(r ApiSetAccessTo
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.webItemsSecurityRequestsDto
+	localVarPostBody = r.webItemsSecurityRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1131,17 +1120,6 @@ func (a *SettingsSecurityAPIService) SetAccessToWebItemsExecute(r ApiSetAccessTo
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1160,10 +1138,10 @@ func (a *SettingsSecurityAPIService) SetAccessToWebItemsExecute(r ApiSetAccessTo
 type ApiSetProductAdministratorRequest struct {
 	ctx context.Context
 	ApiService *SettingsSecurityAPIService
-	securityRequestsDto *SecurityRequestsDto
+	securityRequestDto *SecurityRequestDto
 }
 
-func (r ApiSetProductAdministratorRequest) SecurityRequestsDto(securityRequestsDto SecurityRequestsDto) ApiSetProductAdministratorRequest {	r.securityRequestsDto = &securityRequestsDto
+func (r ApiSetProductAdministratorRequest) SecurityRequestDto(securityRequestDto SecurityRequestDto) ApiSetProductAdministratorRequest {	r.securityRequestDto = &securityRequestDto
 	return r
 }
 
@@ -1225,7 +1203,7 @@ func (a *SettingsSecurityAPIService) SetProductAdministratorExecute(r ApiSetProd
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.securityRequestsDto
+	localVarPostBody = r.securityRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1295,17 +1273,6 @@ func (a *SettingsSecurityAPIService) SetProductAdministratorExecute(r ApiSetProd
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1324,10 +1291,10 @@ func (a *SettingsSecurityAPIService) SetProductAdministratorExecute(r ApiSetProd
 type ApiSetWebItemSecurityRequest struct {
 	ctx context.Context
 	ApiService *SettingsSecurityAPIService
-	webItemSecurityRequestsDto *WebItemSecurityRequestsDto
+	webItemSecurityRequestDto *WebItemSecurityRequestDto
 }
 
-func (r ApiSetWebItemSecurityRequest) WebItemSecurityRequestsDto(webItemSecurityRequestsDto WebItemSecurityRequestsDto) ApiSetWebItemSecurityRequest {	r.webItemSecurityRequestsDto = &webItemSecurityRequestsDto
+func (r ApiSetWebItemSecurityRequest) WebItemSecurityRequestDto(webItemSecurityRequestDto WebItemSecurityRequestDto) ApiSetWebItemSecurityRequest {	r.webItemSecurityRequestDto = &webItemSecurityRequestDto
 	return r
 }
 
@@ -1389,7 +1356,7 @@ func (a *SettingsSecurityAPIService) SetWebItemSecurityExecute(r ApiSetWebItemSe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.webItemSecurityRequestsDto
+	localVarPostBody = r.webItemSecurityRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1459,17 +1426,6 @@ func (a *SettingsSecurityAPIService) SetWebItemSecurityExecute(r ApiSetWebItemSe
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1488,10 +1444,10 @@ func (a *SettingsSecurityAPIService) SetWebItemSecurityExecute(r ApiSetWebItemSe
 type ApiUpdatePasswordSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsSecurityAPIService
-	passwordSettingsRequestsDto *PasswordSettingsRequestsDto
+	passwordSettingsRequestDto *PasswordSettingsRequestDto
 }
 
-func (r ApiUpdatePasswordSettingsRequest) PasswordSettingsRequestsDto(passwordSettingsRequestsDto PasswordSettingsRequestsDto) ApiUpdatePasswordSettingsRequest {	r.passwordSettingsRequestsDto = &passwordSettingsRequestsDto
+func (r ApiUpdatePasswordSettingsRequest) PasswordSettingsRequestDto(passwordSettingsRequestDto PasswordSettingsRequestDto) ApiUpdatePasswordSettingsRequest {	r.passwordSettingsRequestDto = &passwordSettingsRequestDto
 	return r
 }
 
@@ -1553,7 +1509,7 @@ func (a *SettingsSecurityAPIService) UpdatePasswordSettingsExecute(r ApiUpdatePa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.passwordSettingsRequestsDto
+	localVarPostBody = r.passwordSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

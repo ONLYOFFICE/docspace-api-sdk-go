@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## GetIpRestrictions
 
-> IPRestrictionArrayWrapper GetIpRestrictions(ctx).Execute()
+> IpRestrictionArrayWrapper GetIpRestrictions(ctx).Execute()
 
 Get IP restrictions
 
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsIPRestrictionsAPI.GetIpRestrictions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIpRestrictions`: IPRestrictionArrayWrapper
+	// response from `GetIpRestrictions`: IpRestrictionArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsIPRestrictionsAPI.GetIpRestrictions`: %v\n", resp)
 }
 ```
@@ -58,7 +58,7 @@ Other parameters are passed through a pointer to a apiGetIpRestrictionsRequest s
 
 ### Return type
 
-[**IPRestrictionArrayWrapper**](IPRestrictionArrayWrapper.md)
+[**IpRestrictionArrayWrapper**](IpRestrictionArrayWrapper.md)
 
 ### Authorization
 
@@ -76,7 +76,7 @@ Other parameters are passed through a pointer to a apiGetIpRestrictionsRequest s
 
 ## ReadIpRestrictionsSettings
 
-> IPRestrictionsSettingsWrapper ReadIpRestrictionsSettings(ctx).Execute()
+> IpRestrictionsSettingsWrapper ReadIpRestrictionsSettings(ctx).Execute()
 
 Get IP restriction settings
 
@@ -105,7 +105,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsIPRestrictionsAPI.ReadIpRestrictionsSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ReadIpRestrictionsSettings`: IPRestrictionsSettingsWrapper
+	// response from `ReadIpRestrictionsSettings`: IpRestrictionsSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsIPRestrictionsAPI.ReadIpRestrictionsSettings`: %v\n", resp)
 }
 ```
@@ -121,7 +121,7 @@ Other parameters are passed through a pointer to a apiReadIpRestrictionsSettings
 
 ### Return type
 
-[**IPRestrictionsSettingsWrapper**](IPRestrictionsSettingsWrapper.md)
+[**IpRestrictionsSettingsWrapper**](IpRestrictionsSettingsWrapper.md)
 
 ### Authorization
 
@@ -160,7 +160,7 @@ import (
 )
 
 func main() {
-	ipRestrictionsDto := *openapiclient.NewIpRestrictionsDto([]openapiclient.IpRestrictionBase{*openapiclient.NewIpRestrictionBase("192.0.2.1")}) // IpRestrictionsDto |  (optional)
+	ipRestrictionsDto := *openapiclient.NewIpRestrictionsDto([]openapiclient.IpRestrictionEntryDto{*openapiclient.NewIpRestrictionEntryDto("192.0.2.1")}) // IpRestrictionsDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -228,7 +228,7 @@ import (
 )
 
 func main() {
-	ipRestrictionsDto := *openapiclient.NewIpRestrictionsDto([]openapiclient.IpRestrictionBase{*openapiclient.NewIpRestrictionBase("192.0.2.1")}) // IpRestrictionsDto |  (optional)
+	ipRestrictionsDto := *openapiclient.NewIpRestrictionsDto([]openapiclient.IpRestrictionEntryDto{*openapiclient.NewIpRestrictionEntryDto("192.0.2.1")}) // IpRestrictionsDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

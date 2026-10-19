@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | [**Status**](Status.md) | How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty. | 
+**Status** | [**ExternalShareStatus**](ExternalShareStatus.md) | How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty. | 
 **Id** | Pointer to **NullableString** | The identifier of the room, folder or file the link points at, always rendered as a string even where the  portal stores it as a number. It is null when the link could not be resolved. | [optional] 
 **Title** | Pointer to **NullableString** | The title of the entry the link points at, suitable for showing to the visitor before they are let in. It is  null when the link could not be resolved. | [optional] 
 **Type** | Pointer to [**FileEntryType**](FileEntryType.md) | Whether the link points at a folder - a room counts as one - or at a single file. It is null when the link  could not be resolved. | [optional] 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewExternalShareDto
 
-`func NewExternalShareDto(status Status, tenantId int32, shared bool, linkId string, isAuthenticated bool, ) *ExternalShareDto`
+`func NewExternalShareDto(status ExternalShareStatus, tenantId int32, shared bool, linkId string, isAuthenticated bool, ) *ExternalShareDto`
 
 NewExternalShareDto instantiates a new ExternalShareDto object
 This constructor will assign default values to properties that have it defined,
@@ -39,20 +39,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetStatus
 
-`func (o *ExternalShareDto) GetStatus() Status`
+`func (o *ExternalShareDto) GetStatus() ExternalShareStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ExternalShareDto) GetStatusOk() (*Status, bool)`
+`func (o *ExternalShareDto) GetStatusOk() (*ExternalShareStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ExternalShareDto) SetStatus(v Status)`
+`func (o *ExternalShareDto) SetStatus(v ExternalShareStatus)`
 
 SetStatus sets Status field to given value.
 

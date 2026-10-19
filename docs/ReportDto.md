@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Collection** | Pointer to [**[]OperationDto**](OperationDto.md) | The movements on this page - top-ups, charges, refunds and corrections alike, newest first. It is empty  for a page past the end of the report as well as for a period in which nothing happened. | [optional] 
 **Offset** | Pointer to **int32** | How many movements were skipped before this page, echoed from the request so a client need not remember  what it asked for. | [optional] 
 **Limit** | Pointer to **int32** | How many movements one page may hold, echoed from the request; it is 25 unless another value was asked  for. A full page is not proof that more exist - compare `currentPage` with `totalPage`. | [optional] 
-**TotalQuantity** | Pointer to **int64** | How many movements match the filters in total, across every page. | [optional] 
+**TotalQuantity** | Pointer to **int32** | How many movements match the filters in total, across every page. | [optional] 
 **TotalPage** | Pointer to **int32** | How many pages those movements come to at the current `limit`. | [optional] 
 **CurrentPage** | Pointer to **int32** | Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument. | [optional] 
 
@@ -117,20 +117,20 @@ HasLimit returns a boolean if a field has been set.
 
 ### GetTotalQuantity
 
-`func (o *ReportDto) GetTotalQuantity() int64`
+`func (o *ReportDto) GetTotalQuantity() int32`
 
 GetTotalQuantity returns the TotalQuantity field if non-nil, zero value otherwise.
 
 ### GetTotalQuantityOk
 
-`func (o *ReportDto) GetTotalQuantityOk() (*int64, bool)`
+`func (o *ReportDto) GetTotalQuantityOk() (*int32, bool)`
 
 GetTotalQuantityOk returns a tuple with the TotalQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalQuantity
 
-`func (o *ReportDto) SetTotalQuantity(v int64)`
+`func (o *ReportDto) SetTotalQuantity(v int32)`
 
 SetTotalQuantity sets TotalQuantity field to given value.
 

@@ -30,7 +30,7 @@ type PeopleUserTypeAPIService service
 type ApiGetUserTypeUpdateProgressRequest struct {
 	ctx context.Context
 	ApiService *PeopleUserTypeAPIService
-	userid string
+	userId string
 }
 
 func (r ApiGetUserTypeUpdateProgressRequest) Execute() (*TaskProgressResponseWrapper, *http.Response, error) {
@@ -44,13 +44,13 @@ func (r ApiGetUserTypeUpdateProgressRequest) Execute() (*TaskProgressResponseWra
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-type-update-progress/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param userid The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
+// @param userId The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
 // @return ApiGetUserTypeUpdateProgressRequest
-func (a *PeopleUserTypeAPIService) GetUserTypeUpdateProgress(ctx context.Context, userid string) ApiGetUserTypeUpdateProgressRequest {
+func (a *PeopleUserTypeAPIService) GetUserTypeUpdateProgress(ctx context.Context, userId string) ApiGetUserTypeUpdateProgressRequest {
 	return ApiGetUserTypeUpdateProgressRequest{
 		ApiService: a,
 		ctx: ctx,
-		userid: userid,
+		userId: userId,
 	}
 }
 
@@ -69,8 +69,8 @@ func (a *PeopleUserTypeAPIService) GetUserTypeUpdateProgressExecute(r ApiGetUser
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/2.0/people/type/progress/{userid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"userid"+"}", url.PathEscape(parameterValueToString(r.userid, "userid")), -1)
+	localVarPath := localBasePath + "/api/2.0/people/type/progress/{userId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -204,7 +204,7 @@ func (r ApiStartUserTypeUpdateRequest) Execute() (*TaskProgressResponseWrapper, 
 
 // StartUserTypeUpdate Start updating user type
 //
-// Queues an asynchronous job that converts one account to `Guest` or `User` and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only `Guest` and `User` are accepted here, because they are the types that cannot own rooms; for any other  type use `PUT api/2.0/people/type/{type}`, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userid}` with the  converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.  A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
+// Queues an asynchronous job that converts one account to `Guest` or `User` and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only `Guest` and `User` are accepted here, because they are the types that cannot own rooms; for any other  type use `PUT api/2.0/people/type/{type}`, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userId}` with the  converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.  A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-user-type-update/
 //
@@ -479,17 +479,6 @@ func (a *PeopleUserTypeAPIService) TerminateUserTypeUpdateExecute(r ApiTerminate
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -641,17 +630,6 @@ func (a *PeopleUserTypeAPIService) UpdateUserTypeExecute(r ApiUpdateUserTypeRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

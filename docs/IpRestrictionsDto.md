@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IpRestrictions** | [**[]IpRestrictionBase**](IpRestrictionBase.md) | The allowed addresses, each entry pairing a single IPv4 or IPv6 address with the flag that limits it to  administrators. This is the whole list that is to hold afterwards: entries not repeated here are deleted.  Ranges written as `from-to` and CIDR blocks are refused with 400, even though the portal matches such forms  when they are already stored. Enforcement spares only the portal owner and the installation own networks, so  a list without the caller address locks the remaining administrators out. | 
+**IpRestrictions** | [**[]IpRestrictionEntryDto**](IpRestrictionEntryDto.md) | The allowed addresses, each entry pairing a single IPv4 or IPv6 address with the flag that limits it to  administrators. This is the whole list that is to hold afterwards: entries not repeated here are deleted.  Ranges written as `from-to` and CIDR blocks are refused with 400, even though the portal matches such forms  when they are already stored. Enforcement spares only the portal owner and the installation own networks, so  a list without the caller address locks the remaining administrators out. | 
 **Enable** | Pointer to **NullableBool** | Whether the list is enforced. Leaving it out follows the list - on when addresses are sent, off when the list  is empty - and sending `true` with an empty list is refused with 400, since that would admit nobody. | [optional] 
 
 ## Methods
 
 ### NewIpRestrictionsDto
 
-`func NewIpRestrictionsDto(ipRestrictions []IpRestrictionBase, ) *IpRestrictionsDto`
+`func NewIpRestrictionsDto(ipRestrictions []IpRestrictionEntryDto, ) *IpRestrictionsDto`
 
 NewIpRestrictionsDto instantiates a new IpRestrictionsDto object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetIpRestrictions
 
-`func (o *IpRestrictionsDto) GetIpRestrictions() []IpRestrictionBase`
+`func (o *IpRestrictionsDto) GetIpRestrictions() []IpRestrictionEntryDto`
 
 GetIpRestrictions returns the IpRestrictions field if non-nil, zero value otherwise.
 
 ### GetIpRestrictionsOk
 
-`func (o *IpRestrictionsDto) GetIpRestrictionsOk() (*[]IpRestrictionBase, bool)`
+`func (o *IpRestrictionsDto) GetIpRestrictionsOk() (*[]IpRestrictionEntryDto, bool)`
 
 GetIpRestrictionsOk returns a tuple with the IpRestrictions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIpRestrictions
 
-`func (o *IpRestrictionsDto) SetIpRestrictions(v []IpRestrictionBase)`
+`func (o *IpRestrictionsDto) SetIpRestrictions(v []IpRestrictionEntryDto)`
 
 SetIpRestrictions sets IpRestrictions field to given value.
 

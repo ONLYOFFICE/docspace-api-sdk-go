@@ -92,6 +92,10 @@ type ThirdPartyFileEntryDto struct {
 	ExpirationDate *ApiDateTime `json:"expirationDate,omitempty"`
 	// Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved.
 	IsLinkExpired NullableBool `json:"isLinkExpired,omitempty"`
+	// The IDs of the metadata templates assigned to the file entry.
+	AssignedMetadataTemplates []int32 `json:"assignedMetadataTemplates,omitempty"`
+	// Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.
+	MetadataMatches []MetadataMatchDto `json:"metadataMatches,omitempty"`
 }
 
 // NewThirdPartyFileEntryDto instantiates a new ThirdPartyFileEntryDto object
@@ -1383,6 +1387,72 @@ func (o *ThirdPartyFileEntryDto) UnsetIsLinkExpired() {
 	o.IsLinkExpired.Unset()
 }
 
+// GetAssignedMetadataTemplates returns the AssignedMetadataTemplates field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ThirdPartyFileEntryDto) GetAssignedMetadataTemplates() []int32 {
+	if o == nil {
+		var ret []int32
+		return ret
+	}
+	return o.AssignedMetadataTemplates
+}
+
+// GetAssignedMetadataTemplatesOk returns a tuple with the AssignedMetadataTemplates field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ThirdPartyFileEntryDto) GetAssignedMetadataTemplatesOk() ([]int32, bool) {
+	if o == nil || IsNil(o.AssignedMetadataTemplates) {
+		return nil, false
+	}
+	return o.AssignedMetadataTemplates, true
+}
+
+// HasAssignedMetadataTemplates returns a boolean if a field has been set.
+func (o *ThirdPartyFileEntryDto) IsAssignedMetadataTemplatesSet() bool {
+	if o != nil && !IsNil(o.AssignedMetadataTemplates) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedMetadataTemplates gets a reference to the given []int32 and assigns it to the AssignedMetadataTemplates field.
+func (o *ThirdPartyFileEntryDto) SetAssignedMetadataTemplates(v []int32) {
+	o.AssignedMetadataTemplates = v
+}
+
+// GetMetadataMatches returns the MetadataMatches field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ThirdPartyFileEntryDto) GetMetadataMatches() []MetadataMatchDto {
+	if o == nil {
+		var ret []MetadataMatchDto
+		return ret
+	}
+	return o.MetadataMatches
+}
+
+// GetMetadataMatchesOk returns a tuple with the MetadataMatches field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ThirdPartyFileEntryDto) GetMetadataMatchesOk() ([]MetadataMatchDto, bool) {
+	if o == nil || IsNil(o.MetadataMatches) {
+		return nil, false
+	}
+	return o.MetadataMatches, true
+}
+
+// HasMetadataMatches returns a boolean if a field has been set.
+func (o *ThirdPartyFileEntryDto) IsMetadataMatchesSet() bool {
+	if o != nil && !IsNil(o.MetadataMatches) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadataMatches gets a reference to the given []MetadataMatchDto and assigns it to the MetadataMatches field.
+func (o *ThirdPartyFileEntryDto) SetMetadataMatches(v []MetadataMatchDto) {
+	o.MetadataMatches = v
+}
+
 func (o ThirdPartyFileEntryDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1500,6 +1570,12 @@ func (o ThirdPartyFileEntryDto) ToMap() (map[string]interface{}, error) {
 	}
 	if o.IsLinkExpired.IsSet() {
 		toSerialize["isLinkExpired"] = o.IsLinkExpired.Get()
+	}
+	if o.AssignedMetadataTemplates != nil {
+		toSerialize["assignedMetadataTemplates"] = o.AssignedMetadataTemplates
+	}
+	if o.MetadataMatches != nil {
+		toSerialize["metadataMatches"] = o.MetadataMatches
 	}
 	return toSerialize, nil
 }

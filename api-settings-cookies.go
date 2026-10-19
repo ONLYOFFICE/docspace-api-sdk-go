@@ -175,10 +175,10 @@ func (a *SettingsCookiesAPIService) GetCookieSettingsExecute(r ApiGetCookieSetti
 type ApiUpdateCookieSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsCookiesAPIService
-	cookieSettingsRequestsDto *CookieSettingsRequestsDto
+	cookieSettingsRequestDto *CookieSettingsRequestDto
 }
 
-func (r ApiUpdateCookieSettingsRequest) CookieSettingsRequestsDto(cookieSettingsRequestsDto CookieSettingsRequestsDto) ApiUpdateCookieSettingsRequest {	r.cookieSettingsRequestsDto = &cookieSettingsRequestsDto
+func (r ApiUpdateCookieSettingsRequest) CookieSettingsRequestDto(cookieSettingsRequestDto CookieSettingsRequestDto) ApiUpdateCookieSettingsRequest {	r.cookieSettingsRequestDto = &cookieSettingsRequestDto
 	return r
 }
 
@@ -240,7 +240,7 @@ func (a *SettingsCookiesAPIService) UpdateCookieSettingsExecute(r ApiUpdateCooki
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.cookieSettingsRequestsDto
+	localVarPostBody = r.cookieSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

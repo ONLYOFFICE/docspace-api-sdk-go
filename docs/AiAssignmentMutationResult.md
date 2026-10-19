@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Success** | **bool** | True when the assignment was persisted. | 
-**Error** | Pointer to [**AiTErrorData**](AiTErrorData.md) | Why the assignment was rejected. Present on failure. | [optional] 
+**Error** | Pointer to [**AiErrorData**](AiErrorData.md) | Why the assignment was rejected. Present on failure. | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetSuccess sets Success field to given value.
 
 ### GetError
 
-`func (o *AiAssignmentMutationResult) GetError() AiTErrorData`
+`func (o *AiAssignmentMutationResult) GetError() AiErrorData`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *AiAssignmentMutationResult) GetErrorOk() (*AiTErrorData, bool)`
+`func (o *AiAssignmentMutationResult) GetErrorOk() (*AiErrorData, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *AiAssignmentMutationResult) SetError(v AiTErrorData)`
+`func (o *AiAssignmentMutationResult) SetError(v AiErrorData)`
 
 SetError sets Error field to given value.
 

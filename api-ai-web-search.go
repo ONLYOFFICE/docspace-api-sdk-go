@@ -29,11 +29,11 @@ type AIWebSearchAPIService service
 type ApiAiWebSearchClearRequest struct {
 	ctx context.Context
 	ApiService *AIWebSearchAPIService
-	body *string
+	aiWebSearchClearRequest *string
 }
 
 // Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
-func (r ApiAiWebSearchClearRequest) Body(body string) ApiAiWebSearchClearRequest {	r.body = &body
+func (r ApiAiWebSearchClearRequest) AiWebSearchClearRequest(aiWebSearchClearRequest string) ApiAiWebSearchClearRequest {	r.aiWebSearchClearRequest = &aiWebSearchClearRequest
 	return r
 }
 
@@ -76,8 +76,8 @@ func (a *AIWebSearchAPIService) AiWebSearchClearExecute(r ApiAiWebSearchClearReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.aiWebSearchClearRequest == nil {
+		return localVarReturnValue, nil, reportError("aiWebSearchClearRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -98,7 +98,7 @@ func (a *AIWebSearchAPIService) AiWebSearchClearExecute(r ApiAiWebSearchClearReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.aiWebSearchClearRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -274,7 +274,7 @@ func (a *AIWebSearchAPIService) AiWebSearchConfigureExecute(r ApiAiWebSearchConf
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v AiErrorResponse
+			var v AiWebSearchConfigure400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -680,11 +680,11 @@ func (a *AIWebSearchAPIService) AiWebSearchIsConfiguredExecute(r ApiAiWebSearchI
 type ApiAiWebSearchPassthroughContentsRequest struct {
 	ctx context.Context
 	ApiService *AIWebSearchAPIService
-	requestBody *map[string]*interface{}
+	aiWebSearchPassthroughContentsRequest *map[string]*interface{}
 }
 
-// A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
-func (r ApiAiWebSearchPassthroughContentsRequest) RequestBody(requestBody map[string]*interface{}) ApiAiWebSearchPassthroughContentsRequest {	r.requestBody = &requestBody
+// A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.
+func (r ApiAiWebSearchPassthroughContentsRequest) AiWebSearchPassthroughContentsRequest(aiWebSearchPassthroughContentsRequest map[string]*interface{}) ApiAiWebSearchPassthroughContentsRequest {	r.aiWebSearchPassthroughContentsRequest = &aiWebSearchPassthroughContentsRequest
 	return r
 }
 
@@ -694,7 +694,7 @@ func (r ApiAiWebSearchPassthroughContentsRequest) Execute() (map[string]interfac
 
 // AiWebSearchPassthroughContents Web page contents passthrough
 //
-// Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+// Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider's 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-contents/
 //
@@ -727,8 +727,8 @@ func (a *AIWebSearchAPIService) AiWebSearchPassthroughContentsExecute(r ApiAiWeb
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.requestBody == nil {
-		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
+	if r.aiWebSearchPassthroughContentsRequest == nil {
+		return localVarReturnValue, nil, reportError("aiWebSearchPassthroughContentsRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -749,7 +749,7 @@ func (a *AIWebSearchAPIService) AiWebSearchPassthroughContentsExecute(r ApiAiWeb
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.aiWebSearchPassthroughContentsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -771,6 +771,17 @@ func (a *AIWebSearchAPIService) AiWebSearchPassthroughContentsExecute(r ApiAiWeb
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
@@ -866,21 +877,21 @@ func (a *AIWebSearchAPIService) AiWebSearchPassthroughContentsExecute(r ApiAiWeb
 type ApiAiWebSearchPassthroughSearchRequest struct {
 	ctx context.Context
 	ApiService *AIWebSearchAPIService
-	requestBody *map[string]*interface{}
+	aiWebSearchPassthroughSearchRequest *map[string]*interface{}
 }
 
-// A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
-func (r ApiAiWebSearchPassthroughSearchRequest) RequestBody(requestBody map[string]*interface{}) ApiAiWebSearchPassthroughSearchRequest {	r.requestBody = &requestBody
+// A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.
+func (r ApiAiWebSearchPassthroughSearchRequest) AiWebSearchPassthroughSearchRequest(aiWebSearchPassthroughSearchRequest map[string]*interface{}) ApiAiWebSearchPassthroughSearchRequest {	r.aiWebSearchPassthroughSearchRequest = &aiWebSearchPassthroughSearchRequest
 	return r
 }
 
-func (r ApiAiWebSearchPassthroughSearchRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiAiWebSearchPassthroughSearchRequest) Execute() (map[string]*interface{}, *http.Response, error) {
 	return r.ApiService.AiWebSearchPassthroughSearchExecute(r)
 }
 
 // AiWebSearchPassthroughSearch Web search passthrough
 //
-// Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+// Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider's own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search/
 //
@@ -894,13 +905,13 @@ func (a *AIWebSearchAPIService) AiWebSearchPassthroughSearch(ctx context.Context
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
-func (a *AIWebSearchAPIService) AiWebSearchPassthroughSearchExecute(r ApiAiWebSearchPassthroughSearchRequest) (map[string]interface{}, *http.Response, error) {
+//  @return map[string]*interface{}
+func (a *AIWebSearchAPIService) AiWebSearchPassthroughSearchExecute(r ApiAiWebSearchPassthroughSearchRequest) (map[string]*interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarReturnValue  map[string]*interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIWebSearchAPIService.AiWebSearchPassthroughSearch")
@@ -913,8 +924,8 @@ func (a *AIWebSearchAPIService) AiWebSearchPassthroughSearchExecute(r ApiAiWebSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.requestBody == nil {
-		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
+	if r.aiWebSearchPassthroughSearchRequest == nil {
+		return localVarReturnValue, nil, reportError("aiWebSearchPassthroughSearchRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -935,7 +946,7 @@ func (a *AIWebSearchAPIService) AiWebSearchPassthroughSearchExecute(r ApiAiWebSe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.aiWebSearchPassthroughSearchRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -957,6 +968,17 @@ func (a *AIWebSearchAPIService) AiWebSearchPassthroughSearchExecute(r ApiAiWebSe
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
@@ -1052,10 +1074,10 @@ func (a *AIWebSearchAPIService) AiWebSearchPassthroughSearchExecute(r ApiAiWebSe
 type ApiAiWebSearchSetActiveConfigRequest struct {
 	ctx context.Context
 	ApiService *AIWebSearchAPIService
-	aiWebSearchConfigureRequest *AiWebSearchConfigureRequest
+	aiWebSearchSetActiveConfigRequest *AiWebSearchSetActiveConfigRequest
 }
 
-func (r ApiAiWebSearchSetActiveConfigRequest) AiWebSearchConfigureRequest(aiWebSearchConfigureRequest AiWebSearchConfigureRequest) ApiAiWebSearchSetActiveConfigRequest {	r.aiWebSearchConfigureRequest = &aiWebSearchConfigureRequest
+func (r ApiAiWebSearchSetActiveConfigRequest) AiWebSearchSetActiveConfigRequest(aiWebSearchSetActiveConfigRequest AiWebSearchSetActiveConfigRequest) ApiAiWebSearchSetActiveConfigRequest {	r.aiWebSearchSetActiveConfigRequest = &aiWebSearchSetActiveConfigRequest
 	return r
 }
 
@@ -1098,8 +1120,8 @@ func (a *AIWebSearchAPIService) AiWebSearchSetActiveConfigExecute(r ApiAiWebSear
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.aiWebSearchConfigureRequest == nil {
-		return localVarReturnValue, nil, reportError("aiWebSearchConfigureRequest is required and must be specified")
+	if r.aiWebSearchSetActiveConfigRequest == nil {
+		return localVarReturnValue, nil, reportError("aiWebSearchSetActiveConfigRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1120,7 +1142,7 @@ func (a *AIWebSearchAPIService) AiWebSearchSetActiveConfigExecute(r ApiAiWebSear
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiWebSearchConfigureRequest
+	localVarPostBody = r.aiWebSearchSetActiveConfigRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

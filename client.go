@@ -62,6 +62,8 @@ type APIClient struct {
 
 	AIAttachmentsAPI *AIAttachmentsAPIService
 
+	AIContextAPI *AIContextAPIService
+
 	AIEditorToolsAPI *AIEditorToolsAPIService
 
 	AIExportAPI *AIExportAPIService
@@ -94,9 +96,13 @@ type APIClient struct {
 
 	CapabilitiesAPI *CapabilitiesAPIService
 
+	DocsAPI *DocsAPIService
+
 	FilesFilesAPI *FilesFilesAPIService
 
 	FilesFoldersAPI *FilesFoldersAPIService
+
+	FilesMetadataAPI *FilesMetadataAPIService
 
 	FilesOperationsAPI *FilesOperationsAPIService
 
@@ -253,6 +259,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AIAgentsAPI = (*AIAgentsAPIService)(&c.common)
 	c.AIAssignmentsAPI = (*AIAssignmentsAPIService)(&c.common)
 	c.AIAttachmentsAPI = (*AIAttachmentsAPIService)(&c.common)
+	c.AIContextAPI = (*AIContextAPIService)(&c.common)
 	c.AIEditorToolsAPI = (*AIEditorToolsAPIService)(&c.common)
 	c.AIExportAPI = (*AIExportAPIService)(&c.common)
 	c.AIOpenAIPassthroughAPI = (*AIOpenAIPassthroughAPIService)(&c.common)
@@ -269,8 +276,10 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AuthenticationAPI = (*AuthenticationAPIService)(&c.common)
 	c.BackupAPI = (*BackupAPIService)(&c.common)
 	c.CapabilitiesAPI = (*CapabilitiesAPIService)(&c.common)
+	c.DocsAPI = (*DocsAPIService)(&c.common)
 	c.FilesFilesAPI = (*FilesFilesAPIService)(&c.common)
 	c.FilesFoldersAPI = (*FilesFoldersAPIService)(&c.common)
+	c.FilesMetadataAPI = (*FilesMetadataAPIService)(&c.common)
 	c.FilesOperationsAPI = (*FilesOperationsAPIService)(&c.common)
 	c.FilesQuotaAPI = (*FilesQuotaAPIService)(&c.common)
 	c.FilesSettingsAPI = (*FilesSettingsAPIService)(&c.common)

@@ -16,15 +16,18 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // checks if the TenantBannerSettingsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantBannerSettingsDto{}
 
-// TenantBannerSettingsDto Whether the portal promotional banners are hidden.
+// TenantBannerSettingsDto Whether the portal hides its promotional banners.
 type TenantBannerSettingsDto struct {
-	// Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here.
+	// The banners visibility flag.
 	Hidden *bool `json:"hidden,omitempty"`
+	// The timestamp indicating when the settings were last modified.
+	LastModified *time.Time `json:"lastModified,omitempty"`
 }
 
 // NewTenantBannerSettingsDto instantiates a new TenantBannerSettingsDto object
@@ -76,6 +79,38 @@ func (o *TenantBannerSettingsDto) SetHidden(v bool) {
 	o.Hidden = &v
 }
 
+// GetLastModified returns the LastModified field value if set, zero value otherwise.
+func (o *TenantBannerSettingsDto) GetLastModified() time.Time {
+	if o == nil || IsNil(o.LastModified) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastModified
+}
+
+// GetLastModifiedOk returns a tuple with the LastModified field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantBannerSettingsDto) GetLastModifiedOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.LastModified) {
+		return nil, false
+	}
+	return o.LastModified, true
+}
+
+// HasLastModified returns a boolean if a field has been set.
+func (o *TenantBannerSettingsDto) IsLastModifiedSet() bool {
+	if o != nil && !IsNil(o.LastModified) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastModified gets a reference to the given time.Time and assigns it to the LastModified field.
+func (o *TenantBannerSettingsDto) SetLastModified(v time.Time) {
+	o.LastModified = &v
+}
+
 func (o TenantBannerSettingsDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -88,6 +123,9 @@ func (o TenantBannerSettingsDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Hidden) {
 		toSerialize["hidden"] = o.Hidden
+	}
+	if !IsNil(o.LastModified) {
+		toSerialize["lastModified"] = o.LastModified
 	}
 	return toSerialize, nil
 }

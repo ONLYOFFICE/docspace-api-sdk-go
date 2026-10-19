@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Response** | Pointer to [**EmailActivationSettings**](EmailActivationSettings.md) | The EmailActivationSettings object returned by the operation. | [optional] 
+**Response** | Pointer to [**EmailActivationSettingsDto**](EmailActivationSettingsDto.md) | The EmailActivationSettingsDto object returned by the operation. | [optional] 
 **Count** | Pointer to **int32** | The total number of items in the response | [optional] 
 **Links** | Pointer to [**[]GetPortalPrices200ResponseLinksInner**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **Status** | Pointer to **int32** | HTTP status code of the response | [optional] 
@@ -31,20 +31,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetResponse
 
-`func (o *EmailActivationSettingsWrapper) GetResponse() EmailActivationSettings`
+`func (o *EmailActivationSettingsWrapper) GetResponse() EmailActivationSettingsDto`
 
 GetResponse returns the Response field if non-nil, zero value otherwise.
 
 ### GetResponseOk
 
-`func (o *EmailActivationSettingsWrapper) GetResponseOk() (*EmailActivationSettings, bool)`
+`func (o *EmailActivationSettingsWrapper) GetResponseOk() (*EmailActivationSettingsDto, bool)`
 
 GetResponseOk returns a tuple with the Response field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResponse
 
-`func (o *EmailActivationSettingsWrapper) SetResponse(v EmailActivationSettings)`
+`func (o *EmailActivationSettingsWrapper) SetResponse(v EmailActivationSettingsDto)`
 
 SetResponse sets Response field to given value.
 

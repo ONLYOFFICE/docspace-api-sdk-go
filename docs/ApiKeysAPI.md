@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetAllPermissions
 
-> STRINGArrayWrapper GetAllPermissions(ctx).Execute()
+> StringArrayWrapper GetAllPermissions(ctx).Execute()
 
 Get API key permissions
 
@@ -184,7 +184,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ApiKeysAPI.GetAllPermissions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAllPermissions`: STRINGArrayWrapper
+	// response from `GetAllPermissions`: StringArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `ApiKeysAPI.GetAllPermissions`: %v\n", resp)
 }
 ```
@@ -200,7 +200,7 @@ Other parameters are passed through a pointer to a apiGetAllPermissionsRequest s
 
 ### Return type
 
-[**STRINGArrayWrapper**](STRINGArrayWrapper.md)
+[**StringArrayWrapper**](StringArrayWrapper.md)
 
 ### Authorization
 

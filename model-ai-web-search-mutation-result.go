@@ -30,7 +30,7 @@ type AiWebSearchMutationResult struct {
 	// The persisted web-search configuration. Present on success.
 	Config *AiWebSearchConfig `json:"config,omitempty"`
 	// Why the configuration was rejected. Present on failure.
-	Error *AiTErrorData `json:"error,omitempty"`
+	Error *AiErrorData `json:"error,omitempty"`
 }
 
 type _AiWebSearchMutationResult AiWebSearchMutationResult
@@ -110,9 +110,9 @@ func (o *AiWebSearchMutationResult) SetConfig(v AiWebSearchConfig) {
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *AiWebSearchMutationResult) GetError() AiTErrorData {
+func (o *AiWebSearchMutationResult) GetError() AiErrorData {
 	if o == nil || IsNil(o.Error) {
-		var ret AiTErrorData
+		var ret AiErrorData
 		return ret
 	}
 	return *o.Error
@@ -120,7 +120,7 @@ func (o *AiWebSearchMutationResult) GetError() AiTErrorData {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiWebSearchMutationResult) GetErrorOk() (*AiTErrorData, bool) {
+func (o *AiWebSearchMutationResult) GetErrorOk() (*AiErrorData, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -136,8 +136,8 @@ func (o *AiWebSearchMutationResult) IsErrorSet() bool {
 	return false
 }
 
-// SetError gets a reference to the given AiTErrorData and assigns it to the Error field.
-func (o *AiWebSearchMutationResult) SetError(v AiTErrorData) {
+// SetError gets a reference to the given AiErrorData and assigns it to the Error field.
+func (o *AiWebSearchMutationResult) SetError(v AiErrorData) {
 	o.Error = &v
 }
 

@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## AiAssignmentsBulkAssign
 
-> AiBulkAssignmentResult AiAssignmentsBulkAssign(ctx).RequestBody(requestBody).Execute()
+> AiBulkAssignmentResult AiAssignmentsBulkAssign(ctx).AiAssignmentsBulkAssignRequest(aiAssignmentsBulkAssignRequest).Execute()
 
 Bulk assign
 
@@ -106,11 +106,11 @@ import (
 )
 
 func main() {
-	requestBody := map[string]string{"key": "Inner_example"} // map[string]string | A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
+	aiAssignmentsBulkAssignRequest := map[string]string{"key": "Inner_example"} // map[string]string | A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIAssignmentsAPI.AiAssignmentsBulkAssign(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AIAssignmentsAPI.AiAssignmentsBulkAssign(context.Background()).AiAssignmentsBulkAssignRequest(aiAssignmentsBulkAssignRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAssignmentsAPI.AiAssignmentsBulkAssign``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -131,7 +131,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsBulkAssignReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]string** | A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. | 
+ **aiAssignmentsBulkAssignRequest** | **map[string]string** | A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. | 
 
 ### Return type
 
@@ -497,7 +497,7 @@ Name | Type | Description  | Notes
 
 ## AiAssignmentsUnassign
 
-> AiSuccessResponse AiAssignmentsUnassign(ctx).Body(body).Execute()
+> AiSuccessResponse AiAssignmentsUnassign(ctx).AiActionType(aiActionType).Execute()
 
 Clear an action's profile
 
@@ -518,11 +518,11 @@ import (
 )
 
 func main() {
-	body := string(987) // string | 
+	aiActionType := string(987) // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIAssignmentsAPI.AiAssignmentsUnassign(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIAssignmentsAPI.AiAssignmentsUnassign(context.Background()).AiActionType(aiActionType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAssignmentsAPI.AiAssignmentsUnassign``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -543,7 +543,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsUnassignReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** |  | 
+ **aiActionType** | **string** |  | 
 
 ### Return type
 

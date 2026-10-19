@@ -177,10 +177,10 @@ func (a *BackupAPIService) CancelBackupExecute(r ApiCancelBackupRequest) (*Boole
 type ApiCreateBackupScheduleRequest struct {
 	ctx context.Context
 	ApiService *BackupAPIService
-	backupScheduleDto *BackupScheduleDto
+	createBackupScheduleRequestDto *CreateBackupScheduleRequestDto
 }
 
-func (r ApiCreateBackupScheduleRequest) BackupScheduleDto(backupScheduleDto BackupScheduleDto) ApiCreateBackupScheduleRequest {	r.backupScheduleDto = &backupScheduleDto
+func (r ApiCreateBackupScheduleRequest) CreateBackupScheduleRequestDto(createBackupScheduleRequestDto CreateBackupScheduleRequestDto) ApiCreateBackupScheduleRequest {	r.createBackupScheduleRequestDto = &createBackupScheduleRequestDto
 	return r
 }
 
@@ -190,7 +190,7 @@ func (r ApiCreateBackupScheduleRequest) Execute() (*BooleanWrapper, *http.Respon
 
 // CreateBackupSchedule Create the backup schedule
 //
-// Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
+// Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling  back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-backup-schedule/
 //
@@ -242,7 +242,7 @@ func (a *BackupAPIService) CreateBackupScheduleExecute(r ApiCreateBackupSchedule
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.backupScheduleDto
+	localVarPostBody = r.createBackupScheduleRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -301,17 +301,6 @@ func (a *BackupAPIService) CreateBackupScheduleExecute(r ApiCreateBackupSchedule
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -339,7 +328,7 @@ func (r ApiDeleteBackupRequest) Execute() (*BooleanWrapper, *http.Response, erro
 
 // DeleteBackup Delete the backup
 //
-// Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
+// Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup/
 //
@@ -540,7 +529,7 @@ func (a *BackupAPIService) DeleteBackupHistoryExecute(r ApiDeleteBackupHistoryRe
 	localVarFormParams := url.Values{}
 
 	if r.dump != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Dump", r.dump, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dump", r.dump, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -706,7 +695,7 @@ func (a *BackupAPIService) DeleteBackupScheduleExecute(r ApiDeleteBackupSchedule
 	localVarFormParams := url.Values{}
 
 	if r.dump != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Dump", r.dump, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dump", r.dump, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -872,7 +861,7 @@ func (a *BackupAPIService) GetBackupHistoryExecute(r ApiGetBackupHistoryRequest)
 	localVarFormParams := url.Values{}
 
 	if r.dump != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Dump", r.dump, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dump", r.dump, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1038,7 +1027,7 @@ func (a *BackupAPIService) GetBackupProgressExecute(r ApiGetBackupProgressReques
 	localVarFormParams := url.Values{}
 
 	if r.dump != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Dump", r.dump, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dump", r.dump, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1204,7 +1193,7 @@ func (a *BackupAPIService) GetBackupScheduleExecute(r ApiGetBackupScheduleReques
 	localVarFormParams := url.Values{}
 
 	if r.dump != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Dump", r.dump, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dump", r.dump, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1862,7 +1851,7 @@ func (a *BackupAPIService) GetRestoreProgressExecute(r ApiGetRestoreProgressRequ
 	localVarFormParams := url.Values{}
 
 	if r.dump != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Dump", r.dump, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dump", r.dump, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1968,10 +1957,10 @@ func (a *BackupAPIService) GetRestoreProgressExecute(r ApiGetRestoreProgressRequ
 type ApiStartBackupRequest struct {
 	ctx context.Context
 	ApiService *BackupAPIService
-	backupDto *BackupDto
+	startBackupRequestDto *StartBackupRequestDto
 }
 
-func (r ApiStartBackupRequest) BackupDto(backupDto BackupDto) ApiStartBackupRequest {	r.backupDto = &backupDto
+func (r ApiStartBackupRequest) StartBackupRequestDto(startBackupRequestDto StartBackupRequestDto) ApiStartBackupRequest {	r.startBackupRequestDto = &startBackupRequestDto
 	return r
 }
 
@@ -2033,7 +2022,7 @@ func (a *BackupAPIService) StartBackupExecute(r ApiStartBackupRequest) (*BackupP
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.backupDto
+	localVarPostBody = r.startBackupRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2092,17 +2081,6 @@ func (a *BackupAPIService) StartBackupExecute(r ApiStartBackupRequest) (*BackupP
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2121,10 +2099,10 @@ func (a *BackupAPIService) StartBackupExecute(r ApiStartBackupRequest) (*BackupP
 type ApiStartBackupRestoreRequest struct {
 	ctx context.Context
 	ApiService *BackupAPIService
-	backupRestoreDto *BackupRestoreDto
+	startBackupRestoreRequestDto *StartBackupRestoreRequestDto
 }
 
-func (r ApiStartBackupRestoreRequest) BackupRestoreDto(backupRestoreDto BackupRestoreDto) ApiStartBackupRestoreRequest {	r.backupRestoreDto = &backupRestoreDto
+func (r ApiStartBackupRestoreRequest) StartBackupRestoreRequestDto(startBackupRestoreRequestDto StartBackupRestoreRequestDto) ApiStartBackupRestoreRequest {	r.startBackupRestoreRequestDto = &startBackupRestoreRequestDto
 	return r
 }
 
@@ -2186,7 +2164,7 @@ func (a *BackupAPIService) StartBackupRestoreExecute(r ApiStartBackupRestoreRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.backupRestoreDto
+	localVarPostBody = r.startBackupRestoreRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2246,17 +2224,6 @@ func (a *BackupAPIService) StartBackupRestoreExecute(r ApiStartBackupRestoreRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

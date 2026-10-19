@@ -460,7 +460,7 @@ Other parameters are passed through a pointer to a apiResetStorageToDefaultReque
 
 ## UpdateCdnStorage
 
-> CdnStorageSettingsWrapper UpdateCdnStorage(ctx).StorageRequestsDto(storageRequestsDto).Execute()
+> StorageSettingsWrapper UpdateCdnStorage(ctx).StorageRequestDto(storageRequestDto).Execute()
 
 Update the CDN storage
 
@@ -481,16 +481,16 @@ import (
 )
 
 func main() {
-	storageRequestsDto := *openapiclient.NewStorageRequestsDto("default") // StorageRequestsDto |  (optional)
+	storageRequestDto := *openapiclient.NewStorageRequestDto("default") // StorageRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsStorageAPI.UpdateCdnStorage(context.Background()).StorageRequestsDto(storageRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsStorageAPI.UpdateCdnStorage(context.Background()).StorageRequestDto(storageRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsStorageAPI.UpdateCdnStorage``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateCdnStorage`: CdnStorageSettingsWrapper
+	// response from `UpdateCdnStorage`: StorageSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsStorageAPI.UpdateCdnStorage`: %v\n", resp)
 }
 ```
@@ -506,11 +506,11 @@ Other parameters are passed through a pointer to a apiUpdateCdnStorageRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storageRequestsDto** | [**StorageRequestsDto**](StorageRequestsDto.md) |  | 
+ **storageRequestDto** | [**StorageRequestDto**](StorageRequestDto.md) |  | 
 
 ### Return type
 
-[**CdnStorageSettingsWrapper**](CdnStorageSettingsWrapper.md)
+[**StorageSettingsWrapper**](StorageSettingsWrapper.md)
 
 ### Authorization
 
@@ -528,7 +528,7 @@ Name | Type | Description  | Notes
 
 ## UpdateStorage
 
-> StorageSettingsWrapper UpdateStorage(ctx).StorageRequestsDto(storageRequestsDto).Execute()
+> StorageSettingsWrapper UpdateStorage(ctx).StorageRequestDto(storageRequestDto).Execute()
 
 Switch the portal storage
 
@@ -549,11 +549,11 @@ import (
 )
 
 func main() {
-	storageRequestsDto := *openapiclient.NewStorageRequestsDto("default") // StorageRequestsDto |  (optional)
+	storageRequestDto := *openapiclient.NewStorageRequestDto("default") // StorageRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsStorageAPI.UpdateStorage(context.Background()).StorageRequestsDto(storageRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsStorageAPI.UpdateStorage(context.Background()).StorageRequestDto(storageRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsStorageAPI.UpdateStorage``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -574,7 +574,7 @@ Other parameters are passed through a pointer to a apiUpdateStorageRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storageRequestsDto** | [**StorageRequestsDto**](StorageRequestsDto.md) |  | 
+ **storageRequestDto** | [**StorageRequestDto**](StorageRequestDto.md) |  | 
 
 ### Return type
 

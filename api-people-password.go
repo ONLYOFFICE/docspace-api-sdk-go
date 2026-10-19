@@ -30,7 +30,7 @@ type PeoplePasswordAPIService service
 type ApiChangeUserPasswordRequest struct {
 	ctx context.Context
 	ApiService *PeoplePasswordAPIService
-	userid string
+	userId string
 	changePasswordRequest *ChangePasswordRequest
 }
 
@@ -50,13 +50,13 @@ func (r ApiChangeUserPasswordRequest) Execute() (*EmployeeFullWrapper, *http.Res
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param userid The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+// @param userId The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
 // @return ApiChangeUserPasswordRequest
-func (a *PeoplePasswordAPIService) ChangeUserPassword(ctx context.Context, userid string) ApiChangeUserPasswordRequest {
+func (a *PeoplePasswordAPIService) ChangeUserPassword(ctx context.Context, userId string) ApiChangeUserPasswordRequest {
 	return ApiChangeUserPasswordRequest{
 		ApiService: a,
 		ctx: ctx,
-		userid: userid,
+		userId: userId,
 	}
 }
 
@@ -75,8 +75,8 @@ func (a *PeoplePasswordAPIService) ChangeUserPasswordExecute(r ApiChangeUserPass
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/2.0/people/{userid}/password"
-	localVarPath = strings.Replace(localVarPath, "{"+"userid"+"}", url.PathEscape(parameterValueToString(r.userid, "userid")), -1)
+	localVarPath := localBasePath + "/api/2.0/people/{userId}/password"
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -204,7 +204,7 @@ func (r ApiSendUserPasswordRequest) Execute() (*StringWrapper, *http.Response, e
 
 // SendUserPassword Remind a user password
 //
-// Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner's password can be asked for by the owner alone and another  administrator's only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userid}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
+// Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner's password can be asked for by the owner alone and another  administrator's only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userId}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-user-password/
 //
@@ -305,17 +305,6 @@ func (a *PeoplePasswordAPIService) SendUserPasswordExecute(r ApiSendUserPassword
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

@@ -239,8 +239,7 @@ func (o *AiOpenaiChatCompletions403ResponseError) UnmarshalJSON(data []byte) (er
 
 	varAiOpenaiChatCompletions403ResponseError := _AiOpenaiChatCompletions403ResponseError{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varAiOpenaiChatCompletions403ResponseError)
+	err = json.Unmarshal(data, &varAiOpenaiChatCompletions403ResponseError)
 
 	if err != nil {
 		return err

@@ -29,10 +29,10 @@ type SecurityCSPAPIService service
 type ApiConfigureCspRequest struct {
 	ctx context.Context
 	ApiService *SecurityCSPAPIService
-	cspRequestsDto *CspRequestsDto
+	cspRequestDto *CspRequestDto
 }
 
-func (r ApiConfigureCspRequest) CspRequestsDto(cspRequestsDto CspRequestsDto) ApiConfigureCspRequest {	r.cspRequestsDto = &cspRequestsDto
+func (r ApiConfigureCspRequest) CspRequestDto(cspRequestDto CspRequestDto) ApiConfigureCspRequest {	r.cspRequestDto = &cspRequestDto
 	return r
 }
 
@@ -94,7 +94,7 @@ func (a *SecurityCSPAPIService) ConfigureCspExecute(r ApiConfigureCspRequest) (*
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.cspRequestsDto
+	localVarPostBody = r.cspRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -143,17 +143,6 @@ func (a *SecurityCSPAPIService) ConfigureCspExecute(r ApiConfigureCspRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

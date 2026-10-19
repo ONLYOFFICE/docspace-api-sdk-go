@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 ## GetAccountsEntriesWithFilesShared
 
-> IAccountEntryArrayWrapper GetAccountsEntriesWithFilesShared(ctx, id).EmployeeStatus(employeeStatus).ActivationStatus(activationStatus).ExcludeShared(excludeShared).IncludeShared(includeShared).InvitedByMe(invitedByMe).InviterId(inviterId).Area(area).EmployeeTypes(employeeTypes).Count(count).StartIndex(startIndex).FilterSeparator(filterSeparator).FilterValue(filterValue).Execute()
+> AccountEntryArrayWrapper GetAccountsEntriesWithFilesShared(ctx, id).EmployeeStatus(employeeStatus).ActivationStatus(activationStatus).ExcludeShared(excludeShared).IncludeShared(includeShared).InvitedByMe(invitedByMe).InviterId(inviterId).Area(area).EmployeeTypes(employeeTypes).Count(count).StartIndex(startIndex).FilterSeparator(filterSeparator).FilterValue(filterValue).Execute()
 
 Search accounts for a file
 
@@ -48,7 +48,7 @@ func main() {
 	includeShared := false // bool | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. (optional)
 	invitedByMe := false // bool | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. (optional)
 	inviterId := "00000000-0000-0000-0000-000000000000" // string | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional)
-	area := openapiclient.Area(0) // Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
+	area := openapiclient.AccountSearchArea(0) // AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
 	employeeTypes := []openapiclient.EmployeeType{openapiclient.EmployeeType("All")} // []EmployeeType | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional)
 	count := int32(25) // int32 | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. (optional)
 	startIndex := int32(0) // int32 | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. (optional)
@@ -62,7 +62,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleSearchAPI.GetAccountsEntriesWithFilesShared``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAccountsEntriesWithFilesShared`: IAccountEntryArrayWrapper
+	// response from `GetAccountsEntriesWithFilesShared`: AccountEntryArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PeopleSearchAPI.GetAccountsEntriesWithFilesShared`: %v\n", resp)
 }
 ```
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
  **includeShared** | **bool** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. | 
  **invitedByMe** | **bool** | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. | 
  **inviterId** | **string** | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | 
- **area** | [**Area**](Area.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
+ **area** | [**AccountSearchArea**](AccountSearchArea.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
  **employeeTypes** | [**[]EmployeeType**](EmployeeType.md) | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | 
  **count** | **int32** | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. | 
  **startIndex** | **int32** | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. | 
@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IAccountEntryArrayWrapper**](IAccountEntryArrayWrapper.md)
+[**AccountEntryArrayWrapper**](AccountEntryArrayWrapper.md)
 
 ### Authorization
 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 ## GetAccountsEntriesWithFoldersShared
 
-> IAccountEntryArrayWrapper GetAccountsEntriesWithFoldersShared(ctx, id).EmployeeStatus(employeeStatus).ActivationStatus(activationStatus).ExcludeShared(excludeShared).IncludeShared(includeShared).InvitedByMe(invitedByMe).InviterId(inviterId).Area(area).EmployeeTypes(employeeTypes).Count(count).StartIndex(startIndex).FilterSeparator(filterSeparator).FilterValue(filterValue).Execute()
+> AccountEntryArrayWrapper GetAccountsEntriesWithFoldersShared(ctx, id).EmployeeStatus(employeeStatus).ActivationStatus(activationStatus).ExcludeShared(excludeShared).IncludeShared(includeShared).InvitedByMe(invitedByMe).InviterId(inviterId).Area(area).EmployeeTypes(employeeTypes).Count(count).StartIndex(startIndex).FilterSeparator(filterSeparator).FilterValue(filterValue).Execute()
 
 Search accounts for a folder
 
@@ -144,7 +144,7 @@ func main() {
 	includeShared := false // bool | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. (optional)
 	invitedByMe := false // bool | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. (optional)
 	inviterId := "00000000-0000-0000-0000-000000000000" // string | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional)
-	area := openapiclient.Area(0) // Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
+	area := openapiclient.AccountSearchArea(0) // AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
 	employeeTypes := []openapiclient.EmployeeType{openapiclient.EmployeeType("All")} // []EmployeeType | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional)
 	count := int32(25) // int32 | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. (optional)
 	startIndex := int32(0) // int32 | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. (optional)
@@ -158,7 +158,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleSearchAPI.GetAccountsEntriesWithFoldersShared``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAccountsEntriesWithFoldersShared`: IAccountEntryArrayWrapper
+	// response from `GetAccountsEntriesWithFoldersShared`: AccountEntryArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PeopleSearchAPI.GetAccountsEntriesWithFoldersShared`: %v\n", resp)
 }
 ```
@@ -185,7 +185,7 @@ Name | Type | Description  | Notes
  **includeShared** | **bool** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. | 
  **invitedByMe** | **bool** | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. | 
  **inviterId** | **string** | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | 
- **area** | [**Area**](Area.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
+ **area** | [**AccountSearchArea**](AccountSearchArea.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
  **employeeTypes** | [**[]EmployeeType**](EmployeeType.md) | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | 
  **count** | **int32** | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. | 
  **startIndex** | **int32** | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. | 
@@ -194,7 +194,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IAccountEntryArrayWrapper**](IAccountEntryArrayWrapper.md)
+[**AccountEntryArrayWrapper**](AccountEntryArrayWrapper.md)
 
 ### Authorization
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ## GetAccountsEntriesWithRoomsShared
 
-> IAccountEntryArrayWrapper GetAccountsEntriesWithRoomsShared(ctx, id).EmployeeStatus(employeeStatus).ActivationStatus(activationStatus).ExcludeShared(excludeShared).IncludeShared(includeShared).InvitedByMe(invitedByMe).InviterId(inviterId).Area(area).EmployeeTypes(employeeTypes).Count(count).StartIndex(startIndex).FilterSeparator(filterSeparator).FilterValue(filterValue).Execute()
+> AccountEntryArrayWrapper GetAccountsEntriesWithRoomsShared(ctx, id).EmployeeStatus(employeeStatus).ActivationStatus(activationStatus).ExcludeShared(excludeShared).IncludeShared(includeShared).InvitedByMe(invitedByMe).InviterId(inviterId).Area(area).EmployeeTypes(employeeTypes).Count(count).StartIndex(startIndex).FilterSeparator(filterSeparator).FilterValue(filterValue).Execute()
 
 Search accounts for a room
 
@@ -240,7 +240,7 @@ func main() {
 	includeShared := false // bool | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. (optional)
 	invitedByMe := false // bool | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. (optional)
 	inviterId := "00000000-0000-0000-0000-000000000000" // string | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional)
-	area := openapiclient.Area(0) // Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
+	area := openapiclient.AccountSearchArea(0) // AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
 	employeeTypes := []openapiclient.EmployeeType{openapiclient.EmployeeType("All")} // []EmployeeType | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional)
 	count := int32(25) // int32 | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. (optional)
 	startIndex := int32(0) // int32 | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. (optional)
@@ -254,7 +254,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleSearchAPI.GetAccountsEntriesWithRoomsShared``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAccountsEntriesWithRoomsShared`: IAccountEntryArrayWrapper
+	// response from `GetAccountsEntriesWithRoomsShared`: AccountEntryArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PeopleSearchAPI.GetAccountsEntriesWithRoomsShared`: %v\n", resp)
 }
 ```
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
  **includeShared** | **bool** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. | 
  **invitedByMe** | **bool** | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. | 
  **inviterId** | **string** | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | 
- **area** | [**Area**](Area.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
+ **area** | [**AccountSearchArea**](AccountSearchArea.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
  **employeeTypes** | [**[]EmployeeType**](EmployeeType.md) | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | 
  **count** | **int32** | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. | 
  **startIndex** | **int32** | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. | 
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IAccountEntryArrayWrapper**](IAccountEntryArrayWrapper.md)
+[**AccountEntryArrayWrapper**](AccountEntryArrayWrapper.md)
 
 ### Authorization
 
@@ -418,7 +418,7 @@ func main() {
 	excludeGroup := false // bool | Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`. (optional)
 	invitedByMe := false // bool | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. (optional)
 	inviterId := "00000000-0000-0000-0000-000000000000" // string | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional)
-	area := openapiclient.Area(0) // Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. (optional)
+	area := openapiclient.AccountSearchArea(0) // AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. (optional)
 	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
 	startIndex := int32(0) // int32 | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional)
 	sortBy := "DisplayName" // string | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. (optional)
@@ -462,7 +462,7 @@ Name | Type | Description  | Notes
  **excludeGroup** | **bool** | Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`. | 
  **invitedByMe** | **bool** | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | 
  **inviterId** | **string** | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | 
- **area** | [**Area**](Area.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | 
+ **area** | [**AccountSearchArea**](AccountSearchArea.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | 
  **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
  **startIndex** | **int32** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | 
  **sortBy** | **string** | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. | 
@@ -518,7 +518,7 @@ func main() {
 	includeShared := false // bool | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. (optional)
 	invitedByMe := false // bool | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. (optional)
 	inviterId := "00000000-0000-0000-0000-000000000000" // string | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional)
-	area := openapiclient.Area(0) // Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
+	area := openapiclient.AccountSearchArea(0) // AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
 	employeeTypes := []openapiclient.EmployeeType{openapiclient.EmployeeType("All")} // []EmployeeType | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional)
 	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
 	startIndex := int32(0) // int32 | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional)
@@ -559,7 +559,7 @@ Name | Type | Description  | Notes
  **includeShared** | **bool** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. | 
  **invitedByMe** | **bool** | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | 
  **inviterId** | **string** | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | 
- **area** | [**Area**](Area.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
+ **area** | [**AccountSearchArea**](AccountSearchArea.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
  **employeeTypes** | [**[]EmployeeType**](EmployeeType.md) | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | 
  **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
  **startIndex** | **int32** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | 
@@ -614,7 +614,7 @@ func main() {
 	includeShared := false // bool | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. (optional)
 	invitedByMe := false // bool | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. (optional)
 	inviterId := "00000000-0000-0000-0000-000000000000" // string | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional)
-	area := openapiclient.Area(0) // Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
+	area := openapiclient.AccountSearchArea(0) // AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
 	employeeTypes := []openapiclient.EmployeeType{openapiclient.EmployeeType("All")} // []EmployeeType | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional)
 	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
 	startIndex := int32(0) // int32 | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional)
@@ -655,7 +655,7 @@ Name | Type | Description  | Notes
  **includeShared** | **bool** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. | 
  **invitedByMe** | **bool** | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | 
  **inviterId** | **string** | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | 
- **area** | [**Area**](Area.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
+ **area** | [**AccountSearchArea**](AccountSearchArea.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
  **employeeTypes** | [**[]EmployeeType**](EmployeeType.md) | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | 
  **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
  **startIndex** | **int32** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | 
@@ -710,7 +710,7 @@ func main() {
 	includeShared := false // bool | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. (optional)
 	invitedByMe := false // bool | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. (optional)
 	inviterId := "00000000-0000-0000-0000-000000000000" // string | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional)
-	area := openapiclient.Area(0) // Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
+	area := openapiclient.AccountSearchArea(0) // AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional)
 	employeeTypes := []openapiclient.EmployeeType{openapiclient.EmployeeType("All")} // []EmployeeType | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional)
 	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
 	startIndex := int32(0) // int32 | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional)
@@ -751,7 +751,7 @@ Name | Type | Description  | Notes
  **includeShared** | **bool** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. | 
  **invitedByMe** | **bool** | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | 
  **inviterId** | **string** | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | 
- **area** | [**Area**](Area.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
+ **area** | [**AccountSearchArea**](AccountSearchArea.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | 
  **employeeTypes** | [**[]EmployeeType**](EmployeeType.md) | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | 
  **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
  **startIndex** | **int32** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | 
@@ -812,7 +812,7 @@ func main() {
 	excludeGroup := false // bool | Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`. (optional)
 	invitedByMe := false // bool | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. (optional)
 	inviterId := "00000000-0000-0000-0000-000000000000" // string | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional)
-	area := openapiclient.Area(0) // Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. (optional)
+	area := openapiclient.AccountSearchArea(0) // AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. (optional)
 	count := int32(25) // int32 | The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional)
 	startIndex := int32(0) // int32 | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional)
 	sortBy := "DisplayName" // string | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. (optional)
@@ -856,7 +856,7 @@ Name | Type | Description  | Notes
  **excludeGroup** | **bool** | Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`. | 
  **invitedByMe** | **bool** | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | 
  **inviterId** | **string** | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | 
- **area** | [**Area**](Area.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | 
+ **area** | [**AccountSearchArea**](AccountSearchArea.md) | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | 
  **count** | **int32** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | 
  **startIndex** | **int32** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | 
  **sortBy** | **string** | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. | 

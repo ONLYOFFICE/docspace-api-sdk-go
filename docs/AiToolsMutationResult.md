@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Success** | **bool** | True when the MCP server was persisted. | 
-**Error** | Pointer to [**AiTErrorData**](AiTErrorData.md) | Why the MCP server was rejected. Present on failure. | [optional] 
+**Error** | Pointer to [**AiErrorData**](AiErrorData.md) | Why the MCP server was rejected. Present on failure. | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetSuccess sets Success field to given value.
 
 ### GetError
 
-`func (o *AiToolsMutationResult) GetError() AiTErrorData`
+`func (o *AiToolsMutationResult) GetError() AiErrorData`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *AiToolsMutationResult) GetErrorOk() (*AiTErrorData, bool)`
+`func (o *AiToolsMutationResult) GetErrorOk() (*AiErrorData, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *AiToolsMutationResult) SetError(v AiTErrorData)`
+`func (o *AiToolsMutationResult) SetError(v AiErrorData)`
 
 SetError sets Error field to given value.
 

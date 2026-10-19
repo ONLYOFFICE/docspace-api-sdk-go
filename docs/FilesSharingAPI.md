@@ -466,7 +466,7 @@ Name | Type | Description  | Notes
 
 ## GetGroupsMembersWithFileSecurity
 
-> GroupMemberSecurityRequestArrayWrapper GetGroupsMembersWithFileSecurity(ctx, fileId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
+> GroupMemberSecurityArrayWrapper GetGroupsMembersWithFileSecurity(ctx, fileId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
 
 Get file access of group members
 
@@ -500,7 +500,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.GetGroupsMembersWithFileSecurity``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetGroupsMembersWithFileSecurity`: GroupMemberSecurityRequestArrayWrapper
+	// response from `GetGroupsMembersWithFileSecurity`: GroupMemberSecurityArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.GetGroupsMembersWithFileSecurity`: %v\n", resp)
 }
 ```
@@ -529,7 +529,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GroupMemberSecurityRequestArrayWrapper**](GroupMemberSecurityRequestArrayWrapper.md)
+[**GroupMemberSecurityArrayWrapper**](GroupMemberSecurityArrayWrapper.md)
 
 ### Authorization
 
@@ -547,7 +547,7 @@ Name | Type | Description  | Notes
 
 ## GetGroupsMembersWithFolderSecurity
 
-> GroupMemberSecurityRequestArrayWrapper GetGroupsMembersWithFolderSecurity(ctx, folderId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
+> GroupMemberSecurityArrayWrapper GetGroupsMembersWithFolderSecurity(ctx, folderId, groupId).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
 
 Get folder access of group members
 
@@ -581,7 +581,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.GetGroupsMembersWithFolderSecurity``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetGroupsMembersWithFolderSecurity`: GroupMemberSecurityRequestArrayWrapper
+	// response from `GetGroupsMembersWithFolderSecurity`: GroupMemberSecurityArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.GetGroupsMembersWithFolderSecurity`: %v\n", resp)
 }
 ```
@@ -610,7 +610,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GroupMemberSecurityRequestArrayWrapper**](GroupMemberSecurityRequestArrayWrapper.md)
+[**GroupMemberSecurityArrayWrapper**](GroupMemberSecurityArrayWrapper.md)
 
 ### Authorization
 
@@ -696,7 +696,7 @@ Name | Type | Description  | Notes
 
 ## GetSharedUsers
 
-> MentionWrapperArrayWrapper GetSharedUsers(ctx, fileId).Execute()
+> MentionArrayWrapper GetSharedUsers(ctx, fileId).Execute()
 
 Get users to mention in a file
 
@@ -726,7 +726,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.GetSharedUsers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSharedUsers`: MentionWrapperArrayWrapper
+	// response from `GetSharedUsers`: MentionArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.GetSharedUsers`: %v\n", resp)
 }
 ```
@@ -750,7 +750,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
+[**MentionArrayWrapper**](MentionArrayWrapper.md)
 
 ### Authorization
 
@@ -836,7 +836,7 @@ Name | Type | Description  | Notes
 
 ## SendEditorNotify
 
-> AceShortWrapperArrayWrapper SendEditorNotify(ctx, fileId).MentionMessageWrapper(mentionMessageWrapper).Execute()
+> AceShortArrayWrapper SendEditorNotify(ctx, fileId).MentionMessageRequest(mentionMessageRequest).Execute()
 
 Notify mentioned users
 
@@ -858,16 +858,16 @@ import (
 
 func main() {
 	fileId := int32(10) // int32 | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-	mentionMessageWrapper := *openapiclient.NewMentionMessageWrapper() // MentionMessageWrapper | The notification to send. (optional)
+	mentionMessageRequest := *openapiclient.NewMentionMessageRequest() // MentionMessageRequest | The notification to send. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSharingAPI.SendEditorNotify(context.Background(), fileId).MentionMessageWrapper(mentionMessageWrapper).Execute()
+	resp, r, err := apiClient.FilesSharingAPI.SendEditorNotify(context.Background(), fileId).MentionMessageRequest(mentionMessageRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesSharingAPI.SendEditorNotify``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SendEditorNotify`: AceShortWrapperArrayWrapper
+	// response from `SendEditorNotify`: AceShortArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesSharingAPI.SendEditorNotify`: %v\n", resp)
 }
 ```
@@ -888,11 +888,11 @@ Other parameters are passed through a pointer to a apiSendEditorNotifyRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **mentionMessageWrapper** | [**MentionMessageWrapper**](MentionMessageWrapper.md) | The notification to send. | 
+ **mentionMessageRequest** | [**MentionMessageRequest**](MentionMessageRequest.md) | The notification to send. | 
 
 ### Return type
 
-[**AceShortWrapperArrayWrapper**](AceShortWrapperArrayWrapper.md)
+[**AceShortArrayWrapper**](AceShortArrayWrapper.md)
 
 ### Authorization
 

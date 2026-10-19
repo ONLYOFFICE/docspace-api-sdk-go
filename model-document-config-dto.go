@@ -32,13 +32,13 @@ type DocumentConfigDto struct {
 	// Identifies the exact revision to the editors: everyone who receives the same key joins the same co-editing  session, and the key changes as soon as the document is saved.
 	Key NullableString `json:"key,omitempty"`
 	// What this caller may do inside the editor - edit, comment, review, fill, download, print, copy and chat.
-	Permissions *PermissionsConfig `json:"permissions,omitempty"`
+	Permissions *PermissionsConfigDto `json:"permissions,omitempty"`
 	// The name of the query parameter that carries the external share key. It is set only when the document was  opened through an external link.
 	SharedLinkParam NullableString `json:"sharedLinkParam,omitempty"`
 	// The external share key this opening runs under, empty when the caller opened the document as a portal member.  The editors pass it back on every request they make for the document.
 	SharedLinkKey NullableString `json:"sharedLinkKey,omitempty"`
 	// How another spreadsheet names this document in a formula. Pass it to `POST api/2.0/files/file/referencedata`  to resolve such a reference.
-	ReferenceData *FileReferenceData `json:"referenceData,omitempty"`
+	ReferenceData *FileReferenceDataDto `json:"referenceData,omitempty"`
 	// The name the editors display. When a past version was opened, the moment that version was created is appended  to it in brackets.
 	Title NullableString `json:"title,omitempty"`
 	// Where the editors fetch the content. It is addressed to the host the document service can reach, which is not  necessarily the address a browser should follow.
@@ -46,7 +46,7 @@ type DocumentConfigDto struct {
 	// Whether the document is a fillable PDF form. A PDF that the portal has never classified is inspected while the  configuration is built, so the answer is trustworthy even for a freshly uploaded file.
 	IsForm *bool `json:"isForm,omitempty"`
 	// Extra instructions for the editors, currently the watermark to draw over the document. It is empty when the  room sets no watermark.
-	Options *Options `json:"options,omitempty"`
+	Options *DocumentOptionsDto `json:"options,omitempty"`
 }
 
 // NewDocumentConfigDto instantiates a new DocumentConfigDto object
@@ -215,9 +215,9 @@ func (o *DocumentConfigDto) UnsetKey() {
 }
 
 // GetPermissions returns the Permissions field value if set, zero value otherwise.
-func (o *DocumentConfigDto) GetPermissions() PermissionsConfig {
+func (o *DocumentConfigDto) GetPermissions() PermissionsConfigDto {
 	if o == nil || IsNil(o.Permissions) {
-		var ret PermissionsConfig
+		var ret PermissionsConfigDto
 		return ret
 	}
 	return *o.Permissions
@@ -225,7 +225,7 @@ func (o *DocumentConfigDto) GetPermissions() PermissionsConfig {
 
 // GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DocumentConfigDto) GetPermissionsOk() (*PermissionsConfig, bool) {
+func (o *DocumentConfigDto) GetPermissionsOk() (*PermissionsConfigDto, bool) {
 	if o == nil || IsNil(o.Permissions) {
 		return nil, false
 	}
@@ -241,8 +241,8 @@ func (o *DocumentConfigDto) IsPermissionsSet() bool {
 	return false
 }
 
-// SetPermissions gets a reference to the given PermissionsConfig and assigns it to the Permissions field.
-func (o *DocumentConfigDto) SetPermissions(v PermissionsConfig) {
+// SetPermissions gets a reference to the given PermissionsConfigDto and assigns it to the Permissions field.
+func (o *DocumentConfigDto) SetPermissions(v PermissionsConfigDto) {
 	o.Permissions = &v
 }
 
@@ -331,9 +331,9 @@ func (o *DocumentConfigDto) UnsetSharedLinkKey() {
 }
 
 // GetReferenceData returns the ReferenceData field value if set, zero value otherwise.
-func (o *DocumentConfigDto) GetReferenceData() FileReferenceData {
+func (o *DocumentConfigDto) GetReferenceData() FileReferenceDataDto {
 	if o == nil || IsNil(o.ReferenceData) {
-		var ret FileReferenceData
+		var ret FileReferenceDataDto
 		return ret
 	}
 	return *o.ReferenceData
@@ -341,7 +341,7 @@ func (o *DocumentConfigDto) GetReferenceData() FileReferenceData {
 
 // GetReferenceDataOk returns a tuple with the ReferenceData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DocumentConfigDto) GetReferenceDataOk() (*FileReferenceData, bool) {
+func (o *DocumentConfigDto) GetReferenceDataOk() (*FileReferenceDataDto, bool) {
 	if o == nil || IsNil(o.ReferenceData) {
 		return nil, false
 	}
@@ -357,8 +357,8 @@ func (o *DocumentConfigDto) IsReferenceDataSet() bool {
 	return false
 }
 
-// SetReferenceData gets a reference to the given FileReferenceData and assigns it to the ReferenceData field.
-func (o *DocumentConfigDto) SetReferenceData(v FileReferenceData) {
+// SetReferenceData gets a reference to the given FileReferenceDataDto and assigns it to the ReferenceData field.
+func (o *DocumentConfigDto) SetReferenceData(v FileReferenceDataDto) {
 	o.ReferenceData = &v
 }
 
@@ -479,9 +479,9 @@ func (o *DocumentConfigDto) SetIsForm(v bool) {
 }
 
 // GetOptions returns the Options field value if set, zero value otherwise.
-func (o *DocumentConfigDto) GetOptions() Options {
+func (o *DocumentConfigDto) GetOptions() DocumentOptionsDto {
 	if o == nil || IsNil(o.Options) {
-		var ret Options
+		var ret DocumentOptionsDto
 		return ret
 	}
 	return *o.Options
@@ -489,7 +489,7 @@ func (o *DocumentConfigDto) GetOptions() Options {
 
 // GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DocumentConfigDto) GetOptionsOk() (*Options, bool) {
+func (o *DocumentConfigDto) GetOptionsOk() (*DocumentOptionsDto, bool) {
 	if o == nil || IsNil(o.Options) {
 		return nil, false
 	}
@@ -505,8 +505,8 @@ func (o *DocumentConfigDto) IsOptionsSet() bool {
 	return false
 }
 
-// SetOptions gets a reference to the given Options and assigns it to the Options field.
-func (o *DocumentConfigDto) SetOptions(v Options) {
+// SetOptions gets a reference to the given DocumentOptionsDto and assigns it to the Options field.
+func (o *DocumentConfigDto) SetOptions(v DocumentOptionsDto) {
 	o.Options = &v
 }
 

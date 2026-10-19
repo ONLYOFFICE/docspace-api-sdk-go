@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## SetTenantDevToolsAccessSettings
 
-> TenantDevToolsAccessSettingsWrapper SetTenantDevToolsAccessSettings(ctx).TenantDevToolsAccessSettingsDto(tenantDevToolsAccessSettingsDto).Execute()
+> TenantDevToolsAccessSettingsWrapper SetTenantDevToolsAccessSettings(ctx).TenantDevToolsAccessSettingsRequestDto(tenantDevToolsAccessSettingsRequestDto).Execute()
 
 Set the Developer Tools access settings
 
@@ -31,11 +31,11 @@ import (
 )
 
 func main() {
-	tenantDevToolsAccessSettingsDto := *openapiclient.NewTenantDevToolsAccessSettingsDto() // TenantDevToolsAccessSettingsDto |  (optional)
+	tenantDevToolsAccessSettingsRequestDto := *openapiclient.NewTenantDevToolsAccessSettingsRequestDto() // TenantDevToolsAccessSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecurityAccessToDevToolsAPI.SetTenantDevToolsAccessSettings(context.Background()).TenantDevToolsAccessSettingsDto(tenantDevToolsAccessSettingsDto).Execute()
+	resp, r, err := apiClient.SecurityAccessToDevToolsAPI.SetTenantDevToolsAccessSettings(context.Background()).TenantDevToolsAccessSettingsRequestDto(tenantDevToolsAccessSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityAccessToDevToolsAPI.SetTenantDevToolsAccessSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -56,7 +56,7 @@ Other parameters are passed through a pointer to a apiSetTenantDevToolsAccessSet
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenantDevToolsAccessSettingsDto** | [**TenantDevToolsAccessSettingsDto**](TenantDevToolsAccessSettingsDto.md) |  | 
+ **tenantDevToolsAccessSettingsRequestDto** | [**TenantDevToolsAccessSettingsRequestDto**](TenantDevToolsAccessSettingsRequestDto.md) |  | 
 
 ### Return type
 

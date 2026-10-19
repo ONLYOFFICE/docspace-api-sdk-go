@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**SendDeleteInstructions**](PortalSettingsAPI.md#SendDeleteInstructions) | **Post** /api/2.0/portal/delete | Send removal instructions
 [**SendSuspendInstructions**](PortalSettingsAPI.md#SendSuspendInstructions) | **Post** /api/2.0/portal/suspend | Send suspension instructions
 [**SuspendPortal**](PortalSettingsAPI.md#SuspendPortal) | **Put** /api/2.0/portal/suspend | Deactivate a portal
+[**UnblockPortal**](PortalSettingsAPI.md#UnblockPortal) | **Put** /api/2.0/portal/unblock | Unblock a portal
 
 
 
@@ -432,6 +433,67 @@ This endpoint does not need any parameter.
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSuspendPortalRequest struct via the builder pattern
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UnblockPortal
+
+> UnblockPortal(ctx).Execute()
+
+Unblock a portal
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/unblock-portal/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PortalSettingsAPI.UnblockPortal(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalSettingsAPI.UnblockPortal``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUnblockPortalRequest struct via the builder pattern
 
 
 ### Return type

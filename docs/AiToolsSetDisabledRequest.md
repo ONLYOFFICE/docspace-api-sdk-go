@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ServerType** | **string** |  | 
 **ToolNames** | **[]string** | Tool names to disable. | 
 **EntityId** | Pointer to **string** |  | [optional] 
+**Scope** | Pointer to [**AiChatToolPrefsScope**](AiChatToolPrefsScope.md) | The list the write lands in; omitted means the caller's own. | [optional] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetEntityId sets EntityId field to given value.
 `func (o *AiToolsSetDisabledRequest) HasEntityId() bool`
 
 HasEntityId returns a boolean if a field has been set.
+
+### GetScope
+
+`func (o *AiToolsSetDisabledRequest) GetScope() AiChatToolPrefsScope`
+
+GetScope returns the Scope field if non-nil, zero value otherwise.
+
+### GetScopeOk
+
+`func (o *AiToolsSetDisabledRequest) GetScopeOk() (*AiChatToolPrefsScope, bool)`
+
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScope
+
+`func (o *AiToolsSetDisabledRequest) SetScope(v AiChatToolPrefsScope)`
+
+SetScope sets Scope field to given value.
+
+### HasScope
+
+`func (o *AiToolsSetDisabledRequest) HasScope() bool`
+
+HasScope returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

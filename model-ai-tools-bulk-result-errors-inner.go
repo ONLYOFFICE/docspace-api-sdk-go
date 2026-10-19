@@ -26,7 +26,7 @@ var _ MappedNullable = &AiToolsBulkResultErrorsInner{}
 // AiToolsBulkResultErrorsInner struct for AiToolsBulkResultErrorsInner
 type AiToolsBulkResultErrorsInner struct {
 	Name string `json:"name"`
-	Error AiTErrorData `json:"error"`
+	Error AiErrorData `json:"error"`
 }
 
 type _AiToolsBulkResultErrorsInner AiToolsBulkResultErrorsInner
@@ -35,7 +35,7 @@ type _AiToolsBulkResultErrorsInner AiToolsBulkResultErrorsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiToolsBulkResultErrorsInner(name string, error_ AiTErrorData) *AiToolsBulkResultErrorsInner {
+func NewAiToolsBulkResultErrorsInner(name string, error_ AiErrorData) *AiToolsBulkResultErrorsInner {
 	this := AiToolsBulkResultErrorsInner{}
 	this.Name = name
 	this.Error = error_
@@ -75,9 +75,9 @@ func (o *AiToolsBulkResultErrorsInner) SetName(v string) {
 }
 
 // GetError returns the Error field value
-func (o *AiToolsBulkResultErrorsInner) GetError() AiTErrorData {
+func (o *AiToolsBulkResultErrorsInner) GetError() AiErrorData {
 	if o == nil {
-		var ret AiTErrorData
+		var ret AiErrorData
 		return ret
 	}
 
@@ -86,7 +86,7 @@ func (o *AiToolsBulkResultErrorsInner) GetError() AiTErrorData {
 
 // GetErrorOk returns a tuple with the Error field value
 // and a boolean to check if the value has been set.
-func (o *AiToolsBulkResultErrorsInner) GetErrorOk() (*AiTErrorData, bool) {
+func (o *AiToolsBulkResultErrorsInner) GetErrorOk() (*AiErrorData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *AiToolsBulkResultErrorsInner) GetErrorOk() (*AiTErrorData, bool) {
 }
 
 // SetError sets field value
-func (o *AiToolsBulkResultErrorsInner) SetError(v AiTErrorData) {
+func (o *AiToolsBulkResultErrorsInner) SetError(v AiErrorData) {
 	o.Error = v
 }
 

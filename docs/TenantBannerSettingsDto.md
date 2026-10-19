@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Hidden** | Pointer to **bool** | Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here. | [optional] 
+**Hidden** | Pointer to **bool** | The banners visibility flag. | [optional] 
+**LastModified** | Pointer to **time.Time** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetHidden sets Hidden field to given value.
 `func (o *TenantBannerSettingsDto) HasHidden() bool`
 
 HasHidden returns a boolean if a field has been set.
+
+### GetLastModified
+
+`func (o *TenantBannerSettingsDto) GetLastModified() time.Time`
+
+GetLastModified returns the LastModified field if non-nil, zero value otherwise.
+
+### GetLastModifiedOk
+
+`func (o *TenantBannerSettingsDto) GetLastModifiedOk() (*time.Time, bool)`
+
+GetLastModifiedOk returns a tuple with the LastModified field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastModified
+
+`func (o *TenantBannerSettingsDto) SetLastModified(v time.Time)`
+
+SetLastModified sets LastModified field to given value.
+
+### HasLastModified
+
+`func (o *TenantBannerSettingsDto) HasLastModified() bool`
+
+HasLastModified returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

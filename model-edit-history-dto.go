@@ -32,13 +32,13 @@ type EditHistoryDto struct {
 	// Groups the revisions written by one editing session: entries sharing this number were saved while the same  session was open, which is how a client collapses a long list of revisions into the versions a person would  recognise.
 	VersionGroup *int32 `json:"versionGroup,omitempty"`
 	// The account that saved the revision. A revision saved by an account that no longer exists, or through an  anonymous link, is reported as a guest.
-	User *EditHistoryAuthor `json:"user,omitempty"`
+	User *EditHistoryAuthorDto `json:"user,omitempty"`
 	// When the revision was saved, written with the offset of the portal's time zone rather than as plain UTC. The  times of one history are consistent with each other, so order and display the revisions by them.
 	Created *ApiDateTime `json:"created,omitempty"`
 	// The change record the editing service stored for this revision, as the raw JSON it was written in, and empty  for a revision the portal has no record for - one uploaded as a whole file, for instance. `changes` is the  same record already parsed.
 	ChangesHistory NullableString `json:"changesHistory,omitempty"`
 	// The single changes this revision introduced - who made each of them and when - taken from the stored change  record. It comes back empty both for a revision whose changes were never recorded and for one whose record is  in a format the portal no longer reads, so an empty list is not proof that nothing changed.
-	Changes []EditHistoryChangesWrapper `json:"changes,omitempty"`
+	Changes []EditHistoryChangesDto `json:"changes,omitempty"`
 	// The build of the editing service that wrote the change record of this revision, taken from the record itself;  empty when the portal holds no record for the revision.
 	ServerVersion NullableString `json:"serverVersion,omitempty"`
 }
@@ -199,9 +199,9 @@ func (o *EditHistoryDto) SetVersionGroup(v int32) {
 }
 
 // GetUser returns the User field value if set, zero value otherwise.
-func (o *EditHistoryDto) GetUser() EditHistoryAuthor {
+func (o *EditHistoryDto) GetUser() EditHistoryAuthorDto {
 	if o == nil || IsNil(o.User) {
-		var ret EditHistoryAuthor
+		var ret EditHistoryAuthorDto
 		return ret
 	}
 	return *o.User
@@ -209,7 +209,7 @@ func (o *EditHistoryDto) GetUser() EditHistoryAuthor {
 
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EditHistoryDto) GetUserOk() (*EditHistoryAuthor, bool) {
+func (o *EditHistoryDto) GetUserOk() (*EditHistoryAuthorDto, bool) {
 	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
@@ -225,8 +225,8 @@ func (o *EditHistoryDto) IsUserSet() bool {
 	return false
 }
 
-// SetUser gets a reference to the given EditHistoryAuthor and assigns it to the User field.
-func (o *EditHistoryDto) SetUser(v EditHistoryAuthor) {
+// SetUser gets a reference to the given EditHistoryAuthorDto and assigns it to the User field.
+func (o *EditHistoryDto) SetUser(v EditHistoryAuthorDto) {
 	o.User = &v
 }
 
@@ -305,9 +305,9 @@ func (o *EditHistoryDto) UnsetChangesHistory() {
 }
 
 // GetChanges returns the Changes field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EditHistoryDto) GetChanges() []EditHistoryChangesWrapper {
+func (o *EditHistoryDto) GetChanges() []EditHistoryChangesDto {
 	if o == nil {
-		var ret []EditHistoryChangesWrapper
+		var ret []EditHistoryChangesDto
 		return ret
 	}
 	return o.Changes
@@ -316,7 +316,7 @@ func (o *EditHistoryDto) GetChanges() []EditHistoryChangesWrapper {
 // GetChangesOk returns a tuple with the Changes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EditHistoryDto) GetChangesOk() ([]EditHistoryChangesWrapper, bool) {
+func (o *EditHistoryDto) GetChangesOk() ([]EditHistoryChangesDto, bool) {
 	if o == nil || IsNil(o.Changes) {
 		return nil, false
 	}
@@ -332,8 +332,8 @@ func (o *EditHistoryDto) IsChangesSet() bool {
 	return false
 }
 
-// SetChanges gets a reference to the given []EditHistoryChangesWrapper and assigns it to the Changes field.
-func (o *EditHistoryDto) SetChanges(v []EditHistoryChangesWrapper) {
+// SetChanges gets a reference to the given []EditHistoryChangesDto and assigns it to the Changes field.
+func (o *EditHistoryDto) SetChanges(v []EditHistoryChangesDto) {
 	o.Changes = v
 }
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Collection** | Pointer to [**[]CustomerServiceUsageDto**](CustomerServiceUsageDto.md) | The services on this page, one entry per service rather than per charge. It is empty for a period in  which nothing was consumed as well as for a page past the end of the report. | [optional] 
 **Offset** | Pointer to **int32** | How many entries were skipped before this page, echoed from the request. | [optional] 
 **Limit** | Pointer to **int32** | How many entries one page may hold, echoed from the request; it is 25 unless another value was asked for. | [optional] 
-**TotalQuantity** | Pointer to **int64** | How many services match the filters in total, across every page - services, not charges. | [optional] 
+**TotalQuantity** | Pointer to **int32** | How many services match the filters in total, across every page - services, not charges. | [optional] 
 **TotalPage** | Pointer to **int32** | How many pages those entries come to at the current `limit`. | [optional] 
 **CurrentPage** | Pointer to **int32** | Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument. | [optional] 
 
@@ -117,20 +117,20 @@ HasLimit returns a boolean if a field has been set.
 
 ### GetTotalQuantity
 
-`func (o *CustomerServiceUsageReportDto) GetTotalQuantity() int64`
+`func (o *CustomerServiceUsageReportDto) GetTotalQuantity() int32`
 
 GetTotalQuantity returns the TotalQuantity field if non-nil, zero value otherwise.
 
 ### GetTotalQuantityOk
 
-`func (o *CustomerServiceUsageReportDto) GetTotalQuantityOk() (*int64, bool)`
+`func (o *CustomerServiceUsageReportDto) GetTotalQuantityOk() (*int32, bool)`
 
 GetTotalQuantityOk returns a tuple with the TotalQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalQuantity
 
-`func (o *CustomerServiceUsageReportDto) SetTotalQuantity(v int64)`
+`func (o *CustomerServiceUsageReportDto) SetTotalQuantity(v int32)`
 
 SetTotalQuantity sets TotalQuantity field to given value.
 

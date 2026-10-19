@@ -30,10 +30,10 @@ type AuthenticationAPIService service
 type ApiAuthenticateMeRequest struct {
 	ctx context.Context
 	ApiService *AuthenticationAPIService
-	authRequestsDto *AuthRequestsDto
+	authRequestDto *AuthRequestDto
 }
 
-func (r ApiAuthenticateMeRequest) AuthRequestsDto(authRequestsDto AuthRequestsDto) ApiAuthenticateMeRequest {	r.authRequestsDto = &authRequestsDto
+func (r ApiAuthenticateMeRequest) AuthRequestDto(authRequestDto AuthRequestDto) ApiAuthenticateMeRequest {	r.authRequestDto = &authRequestDto
 	return r
 }
 
@@ -95,7 +95,7 @@ func (a *AuthenticationAPIService) AuthenticateMeExecute(r ApiAuthenticateMeRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.authRequestsDto
+	localVarPostBody = r.authRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -173,10 +173,10 @@ type ApiAuthenticateMeFromBodyWithCodeRequest struct {
 	ctx context.Context
 	ApiService *AuthenticationAPIService
 	code string
-	authWithCodeRequestsDto *AuthWithCodeRequestsDto
+	authWithCodeRequestDto *AuthWithCodeRequestDto
 }
 
-func (r ApiAuthenticateMeFromBodyWithCodeRequest) AuthWithCodeRequestsDto(authWithCodeRequestsDto AuthWithCodeRequestsDto) ApiAuthenticateMeFromBodyWithCodeRequest {	r.authWithCodeRequestsDto = &authWithCodeRequestsDto
+func (r ApiAuthenticateMeFromBodyWithCodeRequest) AuthWithCodeRequestDto(authWithCodeRequestDto AuthWithCodeRequestDto) ApiAuthenticateMeFromBodyWithCodeRequest {	r.authWithCodeRequestDto = &authWithCodeRequestDto
 	return r
 }
 
@@ -241,7 +241,7 @@ func (a *AuthenticationAPIService) AuthenticateMeFromBodyWithCodeExecute(r ApiAu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.authWithCodeRequestsDto
+	localVarPostBody = r.authWithCodeRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -318,10 +318,10 @@ func (a *AuthenticationAPIService) AuthenticateMeFromBodyWithCodeExecute(r ApiAu
 type ApiCheckConfirmRequest struct {
 	ctx context.Context
 	ApiService *AuthenticationAPIService
-	emailValidationKeyModel *EmailValidationKeyModel
+	checkConfirmRequestDto *CheckConfirmRequestDto
 }
 
-func (r ApiCheckConfirmRequest) EmailValidationKeyModel(emailValidationKeyModel EmailValidationKeyModel) ApiCheckConfirmRequest {	r.emailValidationKeyModel = &emailValidationKeyModel
+func (r ApiCheckConfirmRequest) CheckConfirmRequestDto(checkConfirmRequestDto CheckConfirmRequestDto) ApiCheckConfirmRequest {	r.checkConfirmRequestDto = &checkConfirmRequestDto
 	return r
 }
 
@@ -383,7 +383,7 @@ func (a *AuthenticationAPIService) CheckConfirmExecute(r ApiCheckConfirmRequest)
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.emailValidationKeyModel
+	localVarPostBody = r.checkConfirmRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -432,17 +432,6 @@ func (a *AuthenticationAPIService) CheckConfirmExecute(r ApiCheckConfirmRequest)
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -741,10 +730,10 @@ func (a *AuthenticationAPIService) LogoutExecute(r ApiLogoutRequest) (*StringWra
 type ApiSaveMobilePhoneRequest struct {
 	ctx context.Context
 	ApiService *AuthenticationAPIService
-	mobileRequestsDto *MobileRequestsDto
+	mobileRequestDto *MobileRequestDto
 }
 
-func (r ApiSaveMobilePhoneRequest) MobileRequestsDto(mobileRequestsDto MobileRequestsDto) ApiSaveMobilePhoneRequest {	r.mobileRequestsDto = &mobileRequestsDto
+func (r ApiSaveMobilePhoneRequest) MobileRequestDto(mobileRequestDto MobileRequestDto) ApiSaveMobilePhoneRequest {	r.mobileRequestDto = &mobileRequestDto
 	return r
 }
 
@@ -806,7 +795,7 @@ func (a *AuthenticationAPIService) SaveMobilePhoneExecute(r ApiSaveMobilePhoneRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.mobileRequestsDto
+	localVarPostBody = r.mobileRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -905,10 +894,10 @@ func (a *AuthenticationAPIService) SaveMobilePhoneExecute(r ApiSaveMobilePhoneRe
 type ApiSendSmsCodeRequest struct {
 	ctx context.Context
 	ApiService *AuthenticationAPIService
-	authRequestsDto *AuthRequestsDto
+	authRequestDto *AuthRequestDto
 }
 
-func (r ApiSendSmsCodeRequest) AuthRequestsDto(authRequestsDto AuthRequestsDto) ApiSendSmsCodeRequest {	r.authRequestsDto = &authRequestsDto
+func (r ApiSendSmsCodeRequest) AuthRequestDto(authRequestDto AuthRequestDto) ApiSendSmsCodeRequest {	r.authRequestDto = &authRequestDto
 	return r
 }
 
@@ -970,7 +959,7 @@ func (a *AuthenticationAPIService) SendSmsCodeExecute(r ApiSendSmsCodeRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.authRequestsDto
+	localVarPostBody = r.authRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

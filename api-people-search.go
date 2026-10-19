@@ -38,7 +38,7 @@ type ApiGetAccountsEntriesWithFilesSharedRequest struct {
 	includeShared *bool
 	invitedByMe *bool
 	inviterId *string
-	area *Area
+	area *AccountSearchArea
 	employeeTypes *[]EmployeeType
 	count *int32
 	startIndex *int32
@@ -77,7 +77,7 @@ func (r ApiGetAccountsEntriesWithFilesSharedRequest) InviterId(inviterId string)
 }
 
 // The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-func (r ApiGetAccountsEntriesWithFilesSharedRequest) Area(area Area) ApiGetAccountsEntriesWithFilesSharedRequest {	r.area = &area
+func (r ApiGetAccountsEntriesWithFilesSharedRequest) Area(area AccountSearchArea) ApiGetAccountsEntriesWithFilesSharedRequest {	r.area = &area
 	return r
 }
 
@@ -106,7 +106,7 @@ func (r ApiGetAccountsEntriesWithFilesSharedRequest) FilterValue(filterValue str
 	return r
 }
 
-func (r ApiGetAccountsEntriesWithFilesSharedRequest) Execute() (*IAccountEntryArrayWrapper, *http.Response, error) {
+func (r ApiGetAccountsEntriesWithFilesSharedRequest) Execute() (*AccountEntryArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetAccountsEntriesWithFilesSharedExecute(r)
 }
 
@@ -128,13 +128,13 @@ func (a *PeopleSearchAPIService) GetAccountsEntriesWithFilesShared(ctx context.C
 }
 
 // Execute executes the request
-//  @return IAccountEntryArrayWrapper
-func (a *PeopleSearchAPIService) GetAccountsEntriesWithFilesSharedExecute(r ApiGetAccountsEntriesWithFilesSharedRequest) (*IAccountEntryArrayWrapper, *http.Response, error) {
+//  @return AccountEntryArrayWrapper
+func (a *PeopleSearchAPIService) GetAccountsEntriesWithFilesSharedExecute(r ApiGetAccountsEntriesWithFilesSharedRequest) (*AccountEntryArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *IAccountEntryArrayWrapper
+		localVarReturnValue  *AccountEntryArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PeopleSearchAPIService.GetAccountsEntriesWithFilesShared")
@@ -279,17 +279,6 @@ func (a *PeopleSearchAPIService) GetAccountsEntriesWithFilesSharedExecute(r ApiG
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -315,7 +304,7 @@ type ApiGetAccountsEntriesWithFoldersSharedRequest struct {
 	includeShared *bool
 	invitedByMe *bool
 	inviterId *string
-	area *Area
+	area *AccountSearchArea
 	employeeTypes *[]EmployeeType
 	count *int32
 	startIndex *int32
@@ -354,7 +343,7 @@ func (r ApiGetAccountsEntriesWithFoldersSharedRequest) InviterId(inviterId strin
 }
 
 // The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-func (r ApiGetAccountsEntriesWithFoldersSharedRequest) Area(area Area) ApiGetAccountsEntriesWithFoldersSharedRequest {	r.area = &area
+func (r ApiGetAccountsEntriesWithFoldersSharedRequest) Area(area AccountSearchArea) ApiGetAccountsEntriesWithFoldersSharedRequest {	r.area = &area
 	return r
 }
 
@@ -383,7 +372,7 @@ func (r ApiGetAccountsEntriesWithFoldersSharedRequest) FilterValue(filterValue s
 	return r
 }
 
-func (r ApiGetAccountsEntriesWithFoldersSharedRequest) Execute() (*IAccountEntryArrayWrapper, *http.Response, error) {
+func (r ApiGetAccountsEntriesWithFoldersSharedRequest) Execute() (*AccountEntryArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetAccountsEntriesWithFoldersSharedExecute(r)
 }
 
@@ -405,13 +394,13 @@ func (a *PeopleSearchAPIService) GetAccountsEntriesWithFoldersShared(ctx context
 }
 
 // Execute executes the request
-//  @return IAccountEntryArrayWrapper
-func (a *PeopleSearchAPIService) GetAccountsEntriesWithFoldersSharedExecute(r ApiGetAccountsEntriesWithFoldersSharedRequest) (*IAccountEntryArrayWrapper, *http.Response, error) {
+//  @return AccountEntryArrayWrapper
+func (a *PeopleSearchAPIService) GetAccountsEntriesWithFoldersSharedExecute(r ApiGetAccountsEntriesWithFoldersSharedRequest) (*AccountEntryArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *IAccountEntryArrayWrapper
+		localVarReturnValue  *AccountEntryArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PeopleSearchAPIService.GetAccountsEntriesWithFoldersShared")
@@ -556,17 +545,6 @@ func (a *PeopleSearchAPIService) GetAccountsEntriesWithFoldersSharedExecute(r Ap
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -592,7 +570,7 @@ type ApiGetAccountsEntriesWithRoomsSharedRequest struct {
 	includeShared *bool
 	invitedByMe *bool
 	inviterId *string
-	area *Area
+	area *AccountSearchArea
 	employeeTypes *[]EmployeeType
 	count *int32
 	startIndex *int32
@@ -631,7 +609,7 @@ func (r ApiGetAccountsEntriesWithRoomsSharedRequest) InviterId(inviterId string)
 }
 
 // The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-func (r ApiGetAccountsEntriesWithRoomsSharedRequest) Area(area Area) ApiGetAccountsEntriesWithRoomsSharedRequest {	r.area = &area
+func (r ApiGetAccountsEntriesWithRoomsSharedRequest) Area(area AccountSearchArea) ApiGetAccountsEntriesWithRoomsSharedRequest {	r.area = &area
 	return r
 }
 
@@ -660,7 +638,7 @@ func (r ApiGetAccountsEntriesWithRoomsSharedRequest) FilterValue(filterValue str
 	return r
 }
 
-func (r ApiGetAccountsEntriesWithRoomsSharedRequest) Execute() (*IAccountEntryArrayWrapper, *http.Response, error) {
+func (r ApiGetAccountsEntriesWithRoomsSharedRequest) Execute() (*AccountEntryArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetAccountsEntriesWithRoomsSharedExecute(r)
 }
 
@@ -682,13 +660,13 @@ func (a *PeopleSearchAPIService) GetAccountsEntriesWithRoomsShared(ctx context.C
 }
 
 // Execute executes the request
-//  @return IAccountEntryArrayWrapper
-func (a *PeopleSearchAPIService) GetAccountsEntriesWithRoomsSharedExecute(r ApiGetAccountsEntriesWithRoomsSharedRequest) (*IAccountEntryArrayWrapper, *http.Response, error) {
+//  @return AccountEntryArrayWrapper
+func (a *PeopleSearchAPIService) GetAccountsEntriesWithRoomsSharedExecute(r ApiGetAccountsEntriesWithRoomsSharedRequest) (*AccountEntryArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *IAccountEntryArrayWrapper
+		localVarReturnValue  *AccountEntryArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PeopleSearchAPIService.GetAccountsEntriesWithRoomsShared")
@@ -823,17 +801,6 @@ func (a *PeopleSearchAPIService) GetAccountsEntriesWithRoomsSharedExecute(r ApiG
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1054,7 +1021,7 @@ type ApiGetSimpleByFilterRequest struct {
 	excludeGroup *bool
 	invitedByMe *bool
 	inviterId *string
-	area *Area
+	area *AccountSearchArea
 	count *int32
 	startIndex *int32
 	sortBy *string
@@ -1129,7 +1096,7 @@ func (r ApiGetSimpleByFilterRequest) InviterId(inviterId string) ApiGetSimpleByF
 }
 
 // The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
-func (r ApiGetSimpleByFilterRequest) Area(area Area) ApiGetSimpleByFilterRequest {	r.area = &area
+func (r ApiGetSimpleByFilterRequest) Area(area AccountSearchArea) ApiGetSimpleByFilterRequest {	r.area = &area
 	return r
 }
 
@@ -1357,17 +1324,6 @@ func (a *PeopleSearchAPIService) GetSimpleByFilterExecute(r ApiGetSimpleByFilter
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1393,7 +1349,7 @@ type ApiGetUsersWithFilesSharedRequest struct {
 	includeShared *bool
 	invitedByMe *bool
 	inviterId *string
-	area *Area
+	area *AccountSearchArea
 	employeeTypes *[]EmployeeType
 	count *int32
 	startIndex *int32
@@ -1432,7 +1388,7 @@ func (r ApiGetUsersWithFilesSharedRequest) InviterId(inviterId string) ApiGetUse
 }
 
 // The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-func (r ApiGetUsersWithFilesSharedRequest) Area(area Area) ApiGetUsersWithFilesSharedRequest {	r.area = &area
+func (r ApiGetUsersWithFilesSharedRequest) Area(area AccountSearchArea) ApiGetUsersWithFilesSharedRequest {	r.area = &area
 	return r
 }
 
@@ -1634,17 +1590,6 @@ func (a *PeopleSearchAPIService) GetUsersWithFilesSharedExecute(r ApiGetUsersWit
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1670,7 +1615,7 @@ type ApiGetUsersWithFoldersSharedRequest struct {
 	includeShared *bool
 	invitedByMe *bool
 	inviterId *string
-	area *Area
+	area *AccountSearchArea
 	employeeTypes *[]EmployeeType
 	count *int32
 	startIndex *int32
@@ -1709,7 +1654,7 @@ func (r ApiGetUsersWithFoldersSharedRequest) InviterId(inviterId string) ApiGetU
 }
 
 // The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-func (r ApiGetUsersWithFoldersSharedRequest) Area(area Area) ApiGetUsersWithFoldersSharedRequest {	r.area = &area
+func (r ApiGetUsersWithFoldersSharedRequest) Area(area AccountSearchArea) ApiGetUsersWithFoldersSharedRequest {	r.area = &area
 	return r
 }
 
@@ -1911,17 +1856,6 @@ func (a *PeopleSearchAPIService) GetUsersWithFoldersSharedExecute(r ApiGetUsersW
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1947,7 +1881,7 @@ type ApiGetUsersWithRoomSharedRequest struct {
 	includeShared *bool
 	invitedByMe *bool
 	inviterId *string
-	area *Area
+	area *AccountSearchArea
 	employeeTypes *[]EmployeeType
 	count *int32
 	startIndex *int32
@@ -1986,7 +1920,7 @@ func (r ApiGetUsersWithRoomSharedRequest) InviterId(inviterId string) ApiGetUser
 }
 
 // The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-func (r ApiGetUsersWithRoomSharedRequest) Area(area Area) ApiGetUsersWithRoomSharedRequest {	r.area = &area
+func (r ApiGetUsersWithRoomSharedRequest) Area(area AccountSearchArea) ApiGetUsersWithRoomSharedRequest {	r.area = &area
 	return r
 }
 
@@ -2188,17 +2122,6 @@ func (a *PeopleSearchAPIService) GetUsersWithRoomSharedExecute(r ApiGetUsersWith
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2230,7 +2153,7 @@ type ApiSearchUsersByExtendedFilterRequest struct {
 	excludeGroup *bool
 	invitedByMe *bool
 	inviterId *string
-	area *Area
+	area *AccountSearchArea
 	count *int32
 	startIndex *int32
 	sortBy *string
@@ -2305,7 +2228,7 @@ func (r ApiSearchUsersByExtendedFilterRequest) InviterId(inviterId string) ApiSe
 }
 
 // The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
-func (r ApiSearchUsersByExtendedFilterRequest) Area(area Area) ApiSearchUsersByExtendedFilterRequest {	r.area = &area
+func (r ApiSearchUsersByExtendedFilterRequest) Area(area AccountSearchArea) ApiSearchUsersByExtendedFilterRequest {	r.area = &area
 	return r
 }
 
@@ -2523,17 +2446,6 @@ func (a *PeopleSearchAPIService) SearchUsersByExtendedFilterExecute(r ApiSearchU
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2866,28 +2778,6 @@ func (a *PeopleSearchAPIService) SearchUsersByStatusExecute(r ApiSearchUsersBySt
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

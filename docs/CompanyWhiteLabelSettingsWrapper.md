@@ -4,7 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Settings** | Pointer to [**CompanyWhiteLabelSettings**](CompanyWhiteLabelSettings.md) | The company white label settings. | [optional] 
+**Response** | Pointer to [**CompanyWhiteLabelSettingsDto**](CompanyWhiteLabelSettingsDto.md) | The CompanyWhiteLabelSettingsDto object returned by the operation. | [optional] 
+**Count** | Pointer to **int32** | The total number of items in the response | [optional] 
+**Links** | Pointer to [**[]GetPortalPrices200ResponseLinksInner**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
+**Status** | Pointer to **int32** | HTTP status code of the response | [optional] 
+**StatusCode** | Pointer to **int32** | HTTP status code of the response (duplicate of status) | [optional] 
 
 ## Methods
 
@@ -25,30 +29,130 @@ NewCompanyWhiteLabelSettingsWrapperWithDefaults instantiates a new CompanyWhiteL
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetSettings
+### GetResponse
 
-`func (o *CompanyWhiteLabelSettingsWrapper) GetSettings() CompanyWhiteLabelSettings`
+`func (o *CompanyWhiteLabelSettingsWrapper) GetResponse() CompanyWhiteLabelSettingsDto`
 
-GetSettings returns the Settings field if non-nil, zero value otherwise.
+GetResponse returns the Response field if non-nil, zero value otherwise.
 
-### GetSettingsOk
+### GetResponseOk
 
-`func (o *CompanyWhiteLabelSettingsWrapper) GetSettingsOk() (*CompanyWhiteLabelSettings, bool)`
+`func (o *CompanyWhiteLabelSettingsWrapper) GetResponseOk() (*CompanyWhiteLabelSettingsDto, bool)`
 
-GetSettingsOk returns a tuple with the Settings field if it's non-nil, zero value otherwise
+GetResponseOk returns a tuple with the Response field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSettings
+### SetResponse
 
-`func (o *CompanyWhiteLabelSettingsWrapper) SetSettings(v CompanyWhiteLabelSettings)`
+`func (o *CompanyWhiteLabelSettingsWrapper) SetResponse(v CompanyWhiteLabelSettingsDto)`
 
-SetSettings sets Settings field to given value.
+SetResponse sets Response field to given value.
 
-### HasSettings
+### HasResponse
 
-`func (o *CompanyWhiteLabelSettingsWrapper) HasSettings() bool`
+`func (o *CompanyWhiteLabelSettingsWrapper) HasResponse() bool`
 
-HasSettings returns a boolean if a field has been set.
+HasResponse returns a boolean if a field has been set.
+
+### GetCount
+
+`func (o *CompanyWhiteLabelSettingsWrapper) GetCount() int32`
+
+GetCount returns the Count field if non-nil, zero value otherwise.
+
+### GetCountOk
+
+`func (o *CompanyWhiteLabelSettingsWrapper) GetCountOk() (*int32, bool)`
+
+GetCountOk returns a tuple with the Count field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCount
+
+`func (o *CompanyWhiteLabelSettingsWrapper) SetCount(v int32)`
+
+SetCount sets Count field to given value.
+
+### HasCount
+
+`func (o *CompanyWhiteLabelSettingsWrapper) HasCount() bool`
+
+HasCount returns a boolean if a field has been set.
+
+### GetLinks
+
+`func (o *CompanyWhiteLabelSettingsWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner`
+
+GetLinks returns the Links field if non-nil, zero value otherwise.
+
+### GetLinksOk
+
+`func (o *CompanyWhiteLabelSettingsWrapper) GetLinksOk() (*[]GetPortalPrices200ResponseLinksInner, bool)`
+
+GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinks
+
+`func (o *CompanyWhiteLabelSettingsWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner)`
+
+SetLinks sets Links field to given value.
+
+### HasLinks
+
+`func (o *CompanyWhiteLabelSettingsWrapper) HasLinks() bool`
+
+HasLinks returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *CompanyWhiteLabelSettingsWrapper) GetStatus() int32`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *CompanyWhiteLabelSettingsWrapper) GetStatusOk() (*int32, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *CompanyWhiteLabelSettingsWrapper) SetStatus(v int32)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *CompanyWhiteLabelSettingsWrapper) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
+### GetStatusCode
+
+`func (o *CompanyWhiteLabelSettingsWrapper) GetStatusCode() int32`
+
+GetStatusCode returns the StatusCode field if non-nil, zero value otherwise.
+
+### GetStatusCodeOk
+
+`func (o *CompanyWhiteLabelSettingsWrapper) GetStatusCodeOk() (*int32, bool)`
+
+GetStatusCodeOk returns a tuple with the StatusCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatusCode
+
+`func (o *CompanyWhiteLabelSettingsWrapper) SetStatusCode(v int32)`
+
+SetStatusCode sets StatusCode field to given value.
+
+### HasStatusCode
+
+`func (o *CompanyWhiteLabelSettingsWrapper) HasStatusCode() bool`
+
+HasStatusCode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

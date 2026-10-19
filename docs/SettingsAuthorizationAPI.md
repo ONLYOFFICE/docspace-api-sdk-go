@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## GetAuthServices
 
-> AuthServiceRequestsArrayWrapper GetAuthServices(ctx).Execute()
+> AuthServiceArrayWrapper GetAuthServices(ctx).Execute()
 
 Get the authorization services
 
@@ -41,7 +41,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsAuthorizationAPI.GetAuthServices``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAuthServices`: AuthServiceRequestsArrayWrapper
+	// response from `GetAuthServices`: AuthServiceArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsAuthorizationAPI.GetAuthServices`: %v\n", resp)
 }
 ```
@@ -57,7 +57,7 @@ Other parameters are passed through a pointer to a apiGetAuthServicesRequest str
 
 ### Return type
 
-[**AuthServiceRequestsArrayWrapper**](AuthServiceRequestsArrayWrapper.md)
+[**AuthServiceArrayWrapper**](AuthServiceArrayWrapper.md)
 
 ### Authorization
 
@@ -75,7 +75,7 @@ Other parameters are passed through a pointer to a apiGetAuthServicesRequest str
 
 ## SaveAuthKeys
 
-> BooleanWrapper SaveAuthKeys(ctx).AuthServiceRequestsDto(authServiceRequestsDto).Execute()
+> BooleanWrapper SaveAuthKeys(ctx).SaveAuthKeysRequestDto(saveAuthKeysRequestDto).Execute()
 
 Save the authorization keys
 
@@ -96,11 +96,11 @@ import (
 )
 
 func main() {
-	authServiceRequestsDto := *openapiclient.NewAuthServiceRequestsDto() // AuthServiceRequestsDto |  (optional)
+	saveAuthKeysRequestDto := *openapiclient.NewSaveAuthKeysRequestDto() // SaveAuthKeysRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsAuthorizationAPI.SaveAuthKeys(context.Background()).AuthServiceRequestsDto(authServiceRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsAuthorizationAPI.SaveAuthKeys(context.Background()).SaveAuthKeysRequestDto(saveAuthKeysRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsAuthorizationAPI.SaveAuthKeys``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -121,7 +121,7 @@ Other parameters are passed through a pointer to a apiSaveAuthKeysRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authServiceRequestsDto** | [**AuthServiceRequestsDto**](AuthServiceRequestsDto.md) |  | 
+ **saveAuthKeysRequestDto** | [**SaveAuthKeysRequestDto**](SaveAuthKeysRequestDto.md) |  | 
 
 ### Return type
 
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ## TestExternalDatabaseConnection
 
-> ConnectionTestResultWrapper TestExternalDatabaseConnection(ctx).ExternalDatabaseSettings(externalDatabaseSettings).Execute()
+> ConnectionTestResultWrapper TestExternalDatabaseConnection(ctx).ExternalDatabaseConnectionRequestDto(externalDatabaseConnectionRequestDto).Execute()
 
 Test external database connection
 
@@ -164,11 +164,11 @@ import (
 )
 
 func main() {
-	externalDatabaseSettings := *openapiclient.NewExternalDatabaseSettings() // ExternalDatabaseSettings |  (optional)
+	externalDatabaseConnectionRequestDto := *openapiclient.NewExternalDatabaseConnectionRequestDto() // ExternalDatabaseConnectionRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsAuthorizationAPI.TestExternalDatabaseConnection(context.Background()).ExternalDatabaseSettings(externalDatabaseSettings).Execute()
+	resp, r, err := apiClient.SettingsAuthorizationAPI.TestExternalDatabaseConnection(context.Background()).ExternalDatabaseConnectionRequestDto(externalDatabaseConnectionRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsAuthorizationAPI.TestExternalDatabaseConnection``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -189,7 +189,7 @@ Other parameters are passed through a pointer to a apiTestExternalDatabaseConnec
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **externalDatabaseSettings** | [**ExternalDatabaseSettings**](ExternalDatabaseSettings.md) |  | 
+ **externalDatabaseConnectionRequestDto** | [**ExternalDatabaseConnectionRequestDto**](ExternalDatabaseConnectionRequestDto.md) |  | 
 
 ### Return type
 

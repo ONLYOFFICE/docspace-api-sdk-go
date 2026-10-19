@@ -310,28 +310,6 @@ func (a *FilesOperationsAPIService) AddFavoritesExecute(r ApiAddFavoritesRequest
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -453,28 +431,6 @@ func (a *FilesOperationsAPIService) BulkDownloadExecute(r ApiBulkDownloadRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -673,11 +629,53 @@ func (a *FilesOperationsAPIService) CheckConversionStatusExecute(r ApiCheckConve
 type ApiCheckMoveOrCopyBatchItemsRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
-	inDto *BatchRequestDto
+	returnSingleOperation *bool
+	folderIds *[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner
+	fileIds *[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner
+	destFolderId *CheckMoveOrCopyBatchItemsDestFolderIdParameter
+	conflictResolveType *FileConflictResolveType
+	deleteAfter *bool
+	content *bool
+	toFillOut *bool
 }
 
-// The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
-func (r ApiCheckMoveOrCopyBatchItemsRequest) InDto(inDto BatchRequestDto) ApiCheckMoveOrCopyBatchItemsRequest {	r.inDto = &inDto
+// Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+func (r ApiCheckMoveOrCopyBatchItemsRequest) ReturnSingleOperation(returnSingleOperation bool) ApiCheckMoveOrCopyBatchItemsRequest {	r.returnSingleOperation = &returnSingleOperation
+	return r
+}
+
+// The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+func (r ApiCheckMoveOrCopyBatchItemsRequest) FolderIds(folderIds []CheckMoveOrCopyBatchItemsFolderIdsParameterInner) ApiCheckMoveOrCopyBatchItemsRequest {	r.folderIds = &folderIds
+	return r
+}
+
+// The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+func (r ApiCheckMoveOrCopyBatchItemsRequest) FileIds(fileIds []CheckMoveOrCopyBatchItemsFolderIdsParameterInner) ApiCheckMoveOrCopyBatchItemsRequest {	r.fileIds = &fileIds
+	return r
+}
+
+// The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+func (r ApiCheckMoveOrCopyBatchItemsRequest) DestFolderId(destFolderId CheckMoveOrCopyBatchItemsDestFolderIdParameter) ApiCheckMoveOrCopyBatchItemsRequest {	r.destFolderId = &destFolderId
+	return r
+}
+
+// What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+func (r ApiCheckMoveOrCopyBatchItemsRequest) ConflictResolveType(conflictResolveType FileConflictResolveType) ApiCheckMoveOrCopyBatchItemsRequest {	r.conflictResolveType = &conflictResolveType
+	return r
+}
+
+// Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+func (r ApiCheckMoveOrCopyBatchItemsRequest) DeleteAfter(deleteAfter bool) ApiCheckMoveOrCopyBatchItemsRequest {	r.deleteAfter = &deleteAfter
+	return r
+}
+
+// What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+func (r ApiCheckMoveOrCopyBatchItemsRequest) Content(content bool) ApiCheckMoveOrCopyBatchItemsRequest {	r.content = &content
+	return r
+}
+
+// Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
+func (r ApiCheckMoveOrCopyBatchItemsRequest) ToFillOut(toFillOut bool) ApiCheckMoveOrCopyBatchItemsRequest {	r.toFillOut = &toFillOut
 	return r
 }
 
@@ -721,8 +719,45 @@ func (a *FilesOperationsAPIService) CheckMoveOrCopyBatchItemsExecute(r ApiCheckM
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.inDto != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "inDto", r.inDto, "form", "")
+	if r.returnSingleOperation != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "returnSingleOperation", r.returnSingleOperation, "form", "")
+	}
+	if r.folderIds != nil {
+		t := *r.folderIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "folderIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "folderIds", t, "form", "multi")
+		}
+	}
+	if r.fileIds != nil {
+		t := *r.fileIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "fileIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "fileIds", t, "form", "multi")
+		}
+	}
+	if r.destFolderId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "destFolderId", r.destFolderId, "form", "")
+	}
+	if r.conflictResolveType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "conflictResolveType", r.conflictResolveType, "form", "")
+	}
+	if r.deleteAfter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "deleteAfter", r.deleteAfter, "form", "")
+	}
+	if r.content != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "content", r.content, "form", "")
+	}
+	if r.toFillOut != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toFillOut", r.toFillOut, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -810,17 +845,6 @@ func (a *FilesOperationsAPIService) CheckMoveOrCopyBatchItemsExecute(r ApiCheckM
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -839,11 +863,53 @@ func (a *FilesOperationsAPIService) CheckMoveOrCopyBatchItemsExecute(r ApiCheckM
 type ApiCheckMoveOrCopyDestFolderRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
-	inDto *BatchRequestDto
+	returnSingleOperation *bool
+	folderIds *[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner
+	fileIds *[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner
+	destFolderId *CheckMoveOrCopyBatchItemsDestFolderIdParameter
+	conflictResolveType *FileConflictResolveType
+	deleteAfter *bool
+	content *bool
+	toFillOut *bool
 }
 
-// The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
-func (r ApiCheckMoveOrCopyDestFolderRequest) InDto(inDto BatchRequestDto) ApiCheckMoveOrCopyDestFolderRequest {	r.inDto = &inDto
+// Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+func (r ApiCheckMoveOrCopyDestFolderRequest) ReturnSingleOperation(returnSingleOperation bool) ApiCheckMoveOrCopyDestFolderRequest {	r.returnSingleOperation = &returnSingleOperation
+	return r
+}
+
+// The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+func (r ApiCheckMoveOrCopyDestFolderRequest) FolderIds(folderIds []CheckMoveOrCopyBatchItemsFolderIdsParameterInner) ApiCheckMoveOrCopyDestFolderRequest {	r.folderIds = &folderIds
+	return r
+}
+
+// The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+func (r ApiCheckMoveOrCopyDestFolderRequest) FileIds(fileIds []CheckMoveOrCopyBatchItemsFolderIdsParameterInner) ApiCheckMoveOrCopyDestFolderRequest {	r.fileIds = &fileIds
+	return r
+}
+
+// The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+func (r ApiCheckMoveOrCopyDestFolderRequest) DestFolderId(destFolderId CheckMoveOrCopyBatchItemsDestFolderIdParameter) ApiCheckMoveOrCopyDestFolderRequest {	r.destFolderId = &destFolderId
+	return r
+}
+
+// What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+func (r ApiCheckMoveOrCopyDestFolderRequest) ConflictResolveType(conflictResolveType FileConflictResolveType) ApiCheckMoveOrCopyDestFolderRequest {	r.conflictResolveType = &conflictResolveType
+	return r
+}
+
+// Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+func (r ApiCheckMoveOrCopyDestFolderRequest) DeleteAfter(deleteAfter bool) ApiCheckMoveOrCopyDestFolderRequest {	r.deleteAfter = &deleteAfter
+	return r
+}
+
+// What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+func (r ApiCheckMoveOrCopyDestFolderRequest) Content(content bool) ApiCheckMoveOrCopyDestFolderRequest {	r.content = &content
+	return r
+}
+
+// Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
+func (r ApiCheckMoveOrCopyDestFolderRequest) ToFillOut(toFillOut bool) ApiCheckMoveOrCopyDestFolderRequest {	r.toFillOut = &toFillOut
 	return r
 }
 
@@ -887,8 +953,45 @@ func (a *FilesOperationsAPIService) CheckMoveOrCopyDestFolderExecute(r ApiCheckM
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.inDto != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "inDto", r.inDto, "form", "")
+	if r.returnSingleOperation != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "returnSingleOperation", r.returnSingleOperation, "form", "")
+	}
+	if r.folderIds != nil {
+		t := *r.folderIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "folderIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "folderIds", t, "form", "multi")
+		}
+	}
+	if r.fileIds != nil {
+		t := *r.fileIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "fileIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "fileIds", t, "form", "multi")
+		}
+	}
+	if r.destFolderId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "destFolderId", r.destFolderId, "form", "")
+	}
+	if r.conflictResolveType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "conflictResolveType", r.conflictResolveType, "form", "")
+	}
+	if r.deleteAfter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "deleteAfter", r.deleteAfter, "form", "")
+	}
+	if r.content != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "content", r.content, "form", "")
+	}
+	if r.toFillOut != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toFillOut", r.toFillOut, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -955,28 +1058,6 @@ func (a *FilesOperationsAPIService) CheckMoveOrCopyDestFolderExecute(r ApiCheckM
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1129,17 +1210,6 @@ func (a *FilesOperationsAPIService) CopyBatchItemsExecute(r ApiCopyBatchItemsReq
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1178,13 +1248,13 @@ func (r ApiCreateUploadSessionRequest) SessionRequest(sessionRequest SessionRequ
 	return r
 }
 
-func (r ApiCreateUploadSessionRequest) Execute() (*ChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
+func (r ApiCreateUploadSessionRequest) Execute() (*ChunkedUploadSessionResultWrapper, *http.Response, error) {
 	return r.ApiService.CreateUploadSessionExecute(r)
 }
 
 // ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
 // identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
-func (r ApiCreateUploadSessionRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
+func (r ApiCreateUploadSessionRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionResultWrapper, *http.Response, error) {
 	return r.ApiService.CreateUploadSessionExecuteThirdParty(r)
 }
 
@@ -1208,14 +1278,14 @@ func (a *FilesOperationsAPIService) CreateUploadSession(ctx context.Context, fol
 }
 
 // Execute executes the request
-//  @return ChunkedUploadSessionResponseWrapperWrapper
+//  @return ChunkedUploadSessionResultWrapper
 // Deprecated
-func (a *FilesOperationsAPIService) CreateUploadSessionExecute(r ApiCreateUploadSessionRequest) (*ChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
+func (a *FilesOperationsAPIService) CreateUploadSessionExecute(r ApiCreateUploadSessionRequest) (*ChunkedUploadSessionResultWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ChunkedUploadSessionResponseWrapperWrapper
+		localVarReturnValue  *ChunkedUploadSessionResultWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.CreateUploadSession")
@@ -1321,17 +1391,6 @@ func (a *FilesOperationsAPIService) CreateUploadSessionExecute(r ApiCreateUpload
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1348,14 +1407,14 @@ func (a *FilesOperationsAPIService) CreateUploadSessionExecute(r ApiCreateUpload
 }
 
 // Execute executes the request
-//  @return ThirdPartyChunkedUploadSessionResponseWrapperWrapper
+//  @return ThirdPartyChunkedUploadSessionResultWrapper
 // Deprecated
-func (a *FilesOperationsAPIService) CreateUploadSessionExecuteThirdParty(r ApiCreateUploadSessionRequest) (*ThirdPartyChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
+func (a *FilesOperationsAPIService) CreateUploadSessionExecuteThirdParty(r ApiCreateUploadSessionRequest) (*ThirdPartyChunkedUploadSessionResultWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ThirdPartyChunkedUploadSessionResponseWrapperWrapper
+		localVarReturnValue  *ThirdPartyChunkedUploadSessionResultWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.CreateUploadSession")
@@ -1437,17 +1496,6 @@ func (a *FilesOperationsAPIService) CreateUploadSessionExecuteThirdParty(r ApiCr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1485,13 +1533,13 @@ func (r ApiCreateUploadSessionInFolderRequest) SessionRequest(sessionRequest Ses
 	return r
 }
 
-func (r ApiCreateUploadSessionInFolderRequest) Execute() (*ChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+func (r ApiCreateUploadSessionInFolderRequest) Execute() (*ChunkedUploadSessionWrapper, *http.Response, error) {
 	return r.ApiService.CreateUploadSessionInFolderExecute(r)
 }
 
 // ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
 // identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
-func (r ApiCreateUploadSessionInFolderRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+func (r ApiCreateUploadSessionInFolderRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionWrapper, *http.Response, error) {
 	return r.ApiService.CreateUploadSessionInFolderExecuteThirdParty(r)
 }
 
@@ -1513,13 +1561,13 @@ func (a *FilesOperationsAPIService) CreateUploadSessionInFolder(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return ChunkedUploadSessionResponseResponseWrapper
-func (a *FilesOperationsAPIService) CreateUploadSessionInFolderExecute(r ApiCreateUploadSessionInFolderRequest) (*ChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+//  @return ChunkedUploadSessionWrapper
+func (a *FilesOperationsAPIService) CreateUploadSessionInFolderExecute(r ApiCreateUploadSessionInFolderRequest) (*ChunkedUploadSessionWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ChunkedUploadSessionResponseResponseWrapper
+		localVarReturnValue  *ChunkedUploadSessionWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.CreateUploadSessionInFolder")
@@ -1625,17 +1673,6 @@ func (a *FilesOperationsAPIService) CreateUploadSessionInFolderExecute(r ApiCrea
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1652,13 +1689,13 @@ func (a *FilesOperationsAPIService) CreateUploadSessionInFolderExecute(r ApiCrea
 }
 
 // Execute executes the request
-//  @return ThirdPartyChunkedUploadSessionResponseResponseWrapper
-func (a *FilesOperationsAPIService) CreateUploadSessionInFolderExecuteThirdParty(r ApiCreateUploadSessionInFolderRequest) (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+//  @return ThirdPartyChunkedUploadSessionWrapper
+func (a *FilesOperationsAPIService) CreateUploadSessionInFolderExecuteThirdParty(r ApiCreateUploadSessionInFolderRequest) (*ThirdPartyChunkedUploadSessionWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ThirdPartyChunkedUploadSessionResponseResponseWrapper
+		localVarReturnValue  *ThirdPartyChunkedUploadSessionWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.CreateUploadSessionInFolder")
@@ -1740,17 +1777,6 @@ func (a *FilesOperationsAPIService) CreateUploadSessionInFolderExecuteThirdParty
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1893,17 +1919,6 @@ func (a *FilesOperationsAPIService) DeleteBatchItemsExecute(r ApiDeleteBatchItem
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2067,28 +2082,6 @@ func (a *FilesOperationsAPIService) DeleteFavoritesFromBodyExecute(r ApiDeleteFa
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2242,17 +2235,6 @@ func (a *FilesOperationsAPIService) DeleteFileVersionsExecute(r ApiDeleteFileVer
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2395,17 +2377,6 @@ func (a *FilesOperationsAPIService) DuplicateBatchItemsExecute(r ApiDuplicateBat
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -2490,7 +2461,7 @@ func (a *FilesOperationsAPIService) EmptyTrashExecute(r ApiEmptyTrashRequest) (*
 	localVarFormParams := url.Values{}
 
 	if r.single != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Single", r.single, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "single", r.single, "form", "")
 	}
 	if r.folderType != nil {
 		t := *r.folderType
@@ -2579,17 +2550,6 @@ func (a *FilesOperationsAPIService) EmptyTrashExecute(r ApiEmptyTrashRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2749,28 +2709,6 @@ func (a *FilesOperationsAPIService) FinalizeSessionExecute(r ApiFinalizeSessionR
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2870,28 +2808,6 @@ func (a *FilesOperationsAPIService) FinalizeSessionExecuteThirdParty(r ApiFinali
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2924,7 +2840,7 @@ func (r ApiGetOperationStatusesRequest) Execute() (*FileOperationArrayWrapper, *
 
 // GetOperationStatuses Get active file operations
 //
-// Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
+// Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads, mark-as-read  and builder runs. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses/
 //
@@ -3080,7 +2996,7 @@ func (r ApiGetOperationStatusesByTypeRequest) Execute() (*FileOperationArrayWrap
 
 // GetOperationStatusesByType Get file operations by type
 //
-// Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account's operations.
+// Returns the background file operations of the caller that are of one kind, named by the number in the route: `1`  for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read, `7` for a duplication and `8` for a  document builder run. The answer carries the same records as `GET api/2.0/files/fileops`, with the same rule  that a finished operation is reported once and then dropped, and `id` narrows it further to a single operation.  Moves, kind `0`, cannot be read through this route: the address `api/2.0/files/fileops/move` belongs to another  operation, so read moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind  that has no queue of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty  array, while a number outside the operation type is rejected as an invalid request. The call changes nothing and  never shows another account's operations.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses-by-type/
 //
@@ -3185,17 +3101,6 @@ func (a *FilesOperationsAPIService) GetOperationStatusesByTypeExecute(r ApiGetOp
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3338,17 +3243,6 @@ func (a *FilesOperationsAPIService) MarkAsReadExecute(r ApiMarkAsReadRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3502,17 +3396,6 @@ func (a *FilesOperationsAPIService) MoveBatchItemsExecute(r ApiMoveBatchItemsReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3877,11 +3760,11 @@ type ApiUpdateFileCommentRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
 	fileId interface{}
-	updateComment *UpdateComment
+	updateCommentRequest *UpdateCommentRequest
 }
 
 // The version and the comment to store on it.
-func (r ApiUpdateFileCommentRequest) UpdateComment(updateComment UpdateComment) ApiUpdateFileCommentRequest {	r.updateComment = &updateComment
+func (r ApiUpdateFileCommentRequest) UpdateCommentRequest(updateCommentRequest UpdateCommentRequest) ApiUpdateFileCommentRequest {	r.updateCommentRequest = &updateCommentRequest
 	return r
 }
 
@@ -3927,8 +3810,8 @@ func (a *FilesOperationsAPIService) UpdateFileCommentExecute(r ApiUpdateFileComm
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateComment == nil {
-		return localVarReturnValue, nil, reportError("updateComment is required and must be specified")
+	if r.updateCommentRequest == nil {
+		return localVarReturnValue, nil, reportError("updateCommentRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3949,7 +3832,7 @@ func (a *FilesOperationsAPIService) UpdateFileCommentExecute(r ApiUpdateFileComm
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateComment
+	localVarPostBody = r.updateCommentRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -4009,17 +3892,6 @@ func (a *FilesOperationsAPIService) UpdateFileCommentExecute(r ApiUpdateFileComm
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -4064,13 +3936,13 @@ func (r ApiUploadAsyncSessionRequest) File(file *os.File) ApiUploadAsyncSessionR
 	return r
 }
 
-func (r ApiUploadAsyncSessionRequest) Execute() (*ChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+func (r ApiUploadAsyncSessionRequest) Execute() (*ChunkedUploadSessionWrapper, *http.Response, error) {
 	return r.ApiService.UploadAsyncSessionExecute(r)
 }
 
 // ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
 // identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
-func (r ApiUploadAsyncSessionRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+func (r ApiUploadAsyncSessionRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionWrapper, *http.Response, error) {
 	return r.ApiService.UploadAsyncSessionExecuteThirdParty(r)
 }
 
@@ -4094,13 +3966,13 @@ func (a *FilesOperationsAPIService) UploadAsyncSession(ctx context.Context, fold
 }
 
 // Execute executes the request
-//  @return ChunkedUploadSessionResponseResponseWrapper
-func (a *FilesOperationsAPIService) UploadAsyncSessionExecute(r ApiUploadAsyncSessionRequest) (*ChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+//  @return ChunkedUploadSessionWrapper
+func (a *FilesOperationsAPIService) UploadAsyncSessionExecute(r ApiUploadAsyncSessionRequest) (*ChunkedUploadSessionWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ChunkedUploadSessionResponseResponseWrapper
+		localVarReturnValue  *ChunkedUploadSessionWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.UploadAsyncSession")
@@ -4117,7 +3989,7 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionExecute(r ApiUploadAsyncSe
 	localVarFormParams := url.Values{}
 
 	if r.chunkNumber != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ChunkNumber", r.chunkNumber, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "chunkNumber", r.chunkNumber, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -4140,7 +4012,7 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionExecute(r ApiUploadAsyncSe
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {
@@ -4209,17 +4081,6 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionExecute(r ApiUploadAsyncSe
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -4247,13 +4108,13 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionExecute(r ApiUploadAsyncSe
 }
 
 // Execute executes the request
-//  @return ThirdPartyChunkedUploadSessionResponseResponseWrapper
-func (a *FilesOperationsAPIService) UploadAsyncSessionExecuteThirdParty(r ApiUploadAsyncSessionRequest) (*ThirdPartyChunkedUploadSessionResponseResponseWrapper, *http.Response, error) {
+//  @return ThirdPartyChunkedUploadSessionWrapper
+func (a *FilesOperationsAPIService) UploadAsyncSessionExecuteThirdParty(r ApiUploadAsyncSessionRequest) (*ThirdPartyChunkedUploadSessionWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ThirdPartyChunkedUploadSessionResponseResponseWrapper
+		localVarReturnValue  *ThirdPartyChunkedUploadSessionWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesOperationsAPIService.UploadAsyncSession")
@@ -4270,7 +4131,7 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionExecuteThirdParty(r ApiUpl
 	localVarFormParams := url.Values{}
 
 	if r.chunkNumber != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ChunkNumber", r.chunkNumber, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "chunkNumber", r.chunkNumber, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -4293,7 +4154,7 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionExecuteThirdParty(r ApiUpl
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {
@@ -4338,17 +4199,6 @@ func (a *FilesOperationsAPIService) UploadAsyncSessionExecuteThirdParty(r ApiUpl
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -4471,7 +4321,7 @@ func (a *FilesOperationsAPIService) UploadSessionExecute(r ApiUploadSessionReque
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {
@@ -4530,17 +4380,6 @@ func (a *FilesOperationsAPIService) UploadSessionExecute(r ApiUploadSessionReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -4621,7 +4460,7 @@ func (a *FilesOperationsAPIService) UploadSessionExecuteThirdParty(r ApiUploadSe
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {
@@ -4666,17 +4505,6 @@ func (a *FilesOperationsAPIService) UploadSessionExecuteThirdParty(r ApiUploadSe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

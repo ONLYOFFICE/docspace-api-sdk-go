@@ -21,10 +21,10 @@ import (
 // checks if the TenantWalletServiceSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantWalletServiceSettingsWrapper{}
 
-// TenantWalletServiceSettingsWrapper The successful API response containing the TenantWalletServiceSettings object.
+// TenantWalletServiceSettingsWrapper The successful API response containing the TenantWalletServiceSettingsDto object.
 type TenantWalletServiceSettingsWrapper struct {
-	// The TenantWalletServiceSettings object returned by the operation.
-	Response *TenantWalletServiceSettings `json:"response,omitempty"`
+	// The TenantWalletServiceSettingsDto object returned by the operation.
+	Response *TenantWalletServiceSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewTenantWalletServiceSettingsWrapperWithDefaults() *TenantWalletServiceSet
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *TenantWalletServiceSettingsWrapper) GetResponse() TenantWalletServiceSettings {
+func (o *TenantWalletServiceSettingsWrapper) GetResponse() TenantWalletServiceSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret TenantWalletServiceSettings
+		var ret TenantWalletServiceSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *TenantWalletServiceSettingsWrapper) GetResponse() TenantWalletServiceSe
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TenantWalletServiceSettingsWrapper) GetResponseOk() (*TenantWalletServiceSettings, bool) {
+func (o *TenantWalletServiceSettingsWrapper) GetResponseOk() (*TenantWalletServiceSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *TenantWalletServiceSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given TenantWalletServiceSettings and assigns it to the Response field.
-func (o *TenantWalletServiceSettingsWrapper) SetResponse(v TenantWalletServiceSettings) {
+// SetResponse gets a reference to the given TenantWalletServiceSettingsDto and assigns it to the Response field.
+func (o *TenantWalletServiceSettingsWrapper) SetResponse(v TenantWalletServiceSettingsDto) {
 	o.Response = &v
 }
 

@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## GetDefaultSsoSettingsV2
 
-> SsoSettingsV2Wrapper GetDefaultSsoSettingsV2(ctx).Execute()
+> SsoSettingsWrapper GetDefaultSsoSettingsV2(ctx).Execute()
 
 Get the default SSO settings
 
@@ -43,7 +43,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSSOAPI.GetDefaultSsoSettingsV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetDefaultSsoSettingsV2`: SsoSettingsV2Wrapper
+	// response from `GetDefaultSsoSettingsV2`: SsoSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsSSOAPI.GetDefaultSsoSettingsV2`: %v\n", resp)
 }
 ```
@@ -59,7 +59,7 @@ Other parameters are passed through a pointer to a apiGetDefaultSsoSettingsV2Req
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 
@@ -77,7 +77,7 @@ Other parameters are passed through a pointer to a apiGetDefaultSsoSettingsV2Req
 
 ## GetSsoSettingsV2
 
-> SsoSettingsV2Wrapper GetSsoSettingsV2(ctx).Execute()
+> SsoSettingsWrapper GetSsoSettingsV2(ctx).Execute()
 
 Get the SSO settings
 
@@ -106,7 +106,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSSOAPI.GetSsoSettingsV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSsoSettingsV2`: SsoSettingsV2Wrapper
+	// response from `GetSsoSettingsV2`: SsoSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsSSOAPI.GetSsoSettingsV2`: %v\n", resp)
 }
 ```
@@ -122,7 +122,7 @@ Other parameters are passed through a pointer to a apiGetSsoSettingsV2Request st
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 
@@ -140,7 +140,7 @@ Other parameters are passed through a pointer to a apiGetSsoSettingsV2Request st
 
 ## GetSsoSettingsV2Constants
 
-> SsoSettingsV2ConstantsWrapper GetSsoSettingsV2Constants(ctx).Execute()
+> SsoSettingsConstantsWrapper GetSsoSettingsV2Constants(ctx).Execute()
 
 Get the SSO settings constants
 
@@ -169,7 +169,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSSOAPI.GetSsoSettingsV2Constants``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSsoSettingsV2Constants`: SsoSettingsV2ConstantsWrapper
+	// response from `GetSsoSettingsV2Constants`: SsoSettingsConstantsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsSSOAPI.GetSsoSettingsV2Constants`: %v\n", resp)
 }
 ```
@@ -185,7 +185,7 @@ Other parameters are passed through a pointer to a apiGetSsoSettingsV2ConstantsR
 
 ### Return type
 
-[**SsoSettingsV2ConstantsWrapper**](SsoSettingsV2ConstantsWrapper.md)
+[**SsoSettingsConstantsWrapper**](SsoSettingsConstantsWrapper.md)
 
 ### Authorization
 
@@ -203,7 +203,7 @@ Other parameters are passed through a pointer to a apiGetSsoSettingsV2ConstantsR
 
 ## ResetSsoSettingsV2
 
-> SsoSettingsV2Wrapper ResetSsoSettingsV2(ctx).Execute()
+> SsoSettingsWrapper ResetSsoSettingsV2(ctx).Execute()
 
 Reset the SSO settings
 
@@ -232,7 +232,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSSOAPI.ResetSsoSettingsV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ResetSsoSettingsV2`: SsoSettingsV2Wrapper
+	// response from `ResetSsoSettingsV2`: SsoSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsSSOAPI.ResetSsoSettingsV2`: %v\n", resp)
 }
 ```
@@ -248,7 +248,7 @@ Other parameters are passed through a pointer to a apiResetSsoSettingsV2Request 
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 
@@ -266,7 +266,7 @@ Other parameters are passed through a pointer to a apiResetSsoSettingsV2Request 
 
 ## SaveSsoSettingsV2
 
-> SsoSettingsV2Wrapper SaveSsoSettingsV2(ctx).SsoSettingsRequestsDto(ssoSettingsRequestsDto).Execute()
+> SsoSettingsWrapper SaveSsoSettingsV2(ctx).SsoSettingsRequestDto(ssoSettingsRequestDto).Execute()
 
 Save the SSO settings
 
@@ -287,16 +287,16 @@ import (
 )
 
 func main() {
-	ssoSettingsRequestsDto := *openapiclient.NewSsoSettingsRequestsDto("{\"enableSso\":true,\"idpSettings\":{\"entityId\":\"https://idp.example.com\"}}") // SsoSettingsRequestsDto |  (optional)
+	ssoSettingsRequestDto := *openapiclient.NewSsoSettingsRequestDto("{\"enableSso\":true,\"idpSettings\":{\"entityId\":\"https://idp.example.com\"}}") // SsoSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsSSOAPI.SaveSsoSettingsV2(context.Background()).SsoSettingsRequestsDto(ssoSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsSSOAPI.SaveSsoSettingsV2(context.Background()).SsoSettingsRequestDto(ssoSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSSOAPI.SaveSsoSettingsV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SaveSsoSettingsV2`: SsoSettingsV2Wrapper
+	// response from `SaveSsoSettingsV2`: SsoSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsSSOAPI.SaveSsoSettingsV2`: %v\n", resp)
 }
 ```
@@ -312,11 +312,11 @@ Other parameters are passed through a pointer to a apiSaveSsoSettingsV2Request s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ssoSettingsRequestsDto** | [**SsoSettingsRequestsDto**](SsoSettingsRequestsDto.md) |  | 
+ **ssoSettingsRequestDto** | [**SsoSettingsRequestDto**](SsoSettingsRequestDto.md) |  | 
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 

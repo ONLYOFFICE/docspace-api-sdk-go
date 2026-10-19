@@ -193,10 +193,10 @@ func (a *SettingsMessagesAPIService) EnableAdminMessageSettingsExecute(r ApiEnab
 type ApiSendAdminMailRequest struct {
 	ctx context.Context
 	ApiService *SettingsMessagesAPIService
-	adminMessageSettingsRequestsDto *AdminMessageSettingsRequestsDto
+	adminMessageSettingsRequestDto *AdminMessageSettingsRequestDto
 }
 
-func (r ApiSendAdminMailRequest) AdminMessageSettingsRequestsDto(adminMessageSettingsRequestsDto AdminMessageSettingsRequestsDto) ApiSendAdminMailRequest {	r.adminMessageSettingsRequestsDto = &adminMessageSettingsRequestsDto
+func (r ApiSendAdminMailRequest) AdminMessageSettingsRequestDto(adminMessageSettingsRequestDto AdminMessageSettingsRequestDto) ApiSendAdminMailRequest {	r.adminMessageSettingsRequestDto = &adminMessageSettingsRequestDto
 	return r
 }
 
@@ -258,7 +258,7 @@ func (a *SettingsMessagesAPIService) SendAdminMailExecute(r ApiSendAdminMailRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.adminMessageSettingsRequestsDto
+	localVarPostBody = r.adminMessageSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -306,17 +306,6 @@ func (a *SettingsMessagesAPIService) SendAdminMailExecute(r ApiSendAdminMailRequ
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -335,10 +324,10 @@ func (a *SettingsMessagesAPIService) SendAdminMailExecute(r ApiSendAdminMailRequ
 type ApiSendJoinInviteMailRequest struct {
 	ctx context.Context
 	ApiService *SettingsMessagesAPIService
-	adminMessageBaseSettingsRequestsDto *AdminMessageBaseSettingsRequestsDto
+	adminMessageBaseSettingsRequestDto *AdminMessageBaseSettingsRequestDto
 }
 
-func (r ApiSendJoinInviteMailRequest) AdminMessageBaseSettingsRequestsDto(adminMessageBaseSettingsRequestsDto AdminMessageBaseSettingsRequestsDto) ApiSendJoinInviteMailRequest {	r.adminMessageBaseSettingsRequestsDto = &adminMessageBaseSettingsRequestsDto
+func (r ApiSendJoinInviteMailRequest) AdminMessageBaseSettingsRequestDto(adminMessageBaseSettingsRequestDto AdminMessageBaseSettingsRequestDto) ApiSendJoinInviteMailRequest {	r.adminMessageBaseSettingsRequestDto = &adminMessageBaseSettingsRequestDto
 	return r
 }
 
@@ -400,7 +389,7 @@ func (a *SettingsMessagesAPIService) SendJoinInviteMailExecute(r ApiSendJoinInvi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.adminMessageBaseSettingsRequestsDto
+	localVarPostBody = r.adminMessageBaseSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -438,17 +427,6 @@ func (a *SettingsMessagesAPIService) SendJoinInviteMailExecute(r ApiSendJoinInvi
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

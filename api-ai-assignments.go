@@ -192,11 +192,11 @@ func (a *AIAssignmentsAPIService) AiAssignmentsAssignExecute(r ApiAiAssignmentsA
 type ApiAiAssignmentsBulkAssignRequest struct {
 	ctx context.Context
 	ApiService *AIAssignmentsAPIService
-	requestBody *map[string]string
+	aiAssignmentsBulkAssignRequest *map[string]string
 }
 
 // A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
-func (r ApiAiAssignmentsBulkAssignRequest) RequestBody(requestBody map[string]string) ApiAiAssignmentsBulkAssignRequest {	r.requestBody = &requestBody
+func (r ApiAiAssignmentsBulkAssignRequest) AiAssignmentsBulkAssignRequest(aiAssignmentsBulkAssignRequest map[string]string) ApiAiAssignmentsBulkAssignRequest {	r.aiAssignmentsBulkAssignRequest = &aiAssignmentsBulkAssignRequest
 	return r
 }
 
@@ -239,8 +239,8 @@ func (a *AIAssignmentsAPIService) AiAssignmentsBulkAssignExecute(r ApiAiAssignme
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.requestBody == nil {
-		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
+	if r.aiAssignmentsBulkAssignRequest == nil {
+		return localVarReturnValue, nil, reportError("aiAssignmentsBulkAssignRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -261,7 +261,7 @@ func (a *AIAssignmentsAPIService) AiAssignmentsBulkAssignExecute(r ApiAiAssignme
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.aiAssignmentsBulkAssignRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -843,7 +843,7 @@ func (r ApiAiAssignmentsResolveForActionRequest) Execute() (*AiResolvedAssignmen
 
 // AiAssignmentsResolveForAction Resolve for action
 //
-// Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
+// Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-resolve-for-action/
 //
@@ -956,6 +956,17 @@ func (a *AIAssignmentsAPIService) AiAssignmentsResolveForActionExecute(r ApiAiAs
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1004,7 +1015,7 @@ func (r ApiAiAssignmentsTryResolveForActionRequest) Execute() (*AiResolvedAssign
 
 // AiAssignmentsTryResolveForAction Try resolve for action
 //
-// Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+// Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-try-resolve-for-action/
 //
@@ -1117,6 +1128,17 @@ func (a *AIAssignmentsAPIService) AiAssignmentsTryResolveForActionExecute(r ApiA
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1145,10 +1167,10 @@ func (a *AIAssignmentsAPIService) AiAssignmentsTryResolveForActionExecute(r ApiA
 type ApiAiAssignmentsUnassignRequest struct {
 	ctx context.Context
 	ApiService *AIAssignmentsAPIService
-	body *string
+	aiActionType *string
 }
 
-func (r ApiAiAssignmentsUnassignRequest) Body(body string) ApiAiAssignmentsUnassignRequest {	r.body = &body
+func (r ApiAiAssignmentsUnassignRequest) AiActionType(aiActionType string) ApiAiAssignmentsUnassignRequest {	r.aiActionType = &aiActionType
 	return r
 }
 
@@ -1191,8 +1213,8 @@ func (a *AIAssignmentsAPIService) AiAssignmentsUnassignExecute(r ApiAiAssignment
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.aiActionType == nil {
+		return localVarReturnValue, nil, reportError("aiActionType is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1213,7 +1235,7 @@ func (a *AIAssignmentsAPIService) AiAssignmentsUnassignExecute(r ApiAiAssignment
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.aiActionType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

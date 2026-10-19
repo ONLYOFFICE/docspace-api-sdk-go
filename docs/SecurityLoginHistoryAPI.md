@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateLoginHistoryReport
 
-> DocumentBuilderTaskWrapper CreateLoginHistoryReport(ctx).Format(format).Execute()
+> DocumentBuilderTaskWrapper CreateLoginHistoryReport(ctx).Format(format).From(from).To(to).Execute()
 
 Start login history report
 
@@ -31,15 +31,18 @@ import (
 	"context"
 	"fmt"
 	"os"
+    "time"
 	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-	format := openapiclient.AuditReportFormat(0) // AuditReportFormat | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. (optional)
+	format := openapiclient.AuditReportFormat(0) // AuditReportFormat | The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file. (optional)
+	from := time.Now() // time.Time | The earliest moment a reported event may have been recorded at, read as a UTC instant. (optional)
+	to := time.Now() // time.Time | The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecurityLoginHistoryAPI.CreateLoginHistoryReport(context.Background()).Format(format).Execute()
+	resp, r, err := apiClient.SecurityLoginHistoryAPI.CreateLoginHistoryReport(context.Background()).Format(format).From(from).To(to).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityLoginHistoryAPI.CreateLoginHistoryReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,7 +63,9 @@ Other parameters are passed through a pointer to a apiCreateLoginHistoryReportRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **format** | [**AuditReportFormat**](AuditReportFormat.md) | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. | 
+ **format** | [**AuditReportFormat**](AuditReportFormat.md) | The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file. | 
+ **from** | **time.Time** | The earliest moment a reported event may have been recorded at, read as a UTC instant. | 
+ **to** | **time.Time** | The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`. | 
 
 ### Return type
 

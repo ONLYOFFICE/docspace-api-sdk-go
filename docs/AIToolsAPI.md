@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 ## AiToolsGetDisabled
 
-> map[string][]string AiToolsGetDisabled(ctx).EntityId(entityId).Execute()
+> map[string][]string AiToolsGetDisabled(ctx).Scope(scope).EntityId(entityId).Execute()
 
 Get disabled
 
@@ -249,11 +249,12 @@ import (
 )
 
 func main() {
+	scope := "scope_example" // string | 
 	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIToolsAPI.AiToolsGetDisabled(context.Background()).EntityId(entityId).Execute()
+	resp, r, err := apiClient.AIToolsAPI.AiToolsGetDisabled(context.Background()).Scope(scope).EntityId(entityId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIToolsAPI.AiToolsGetDisabled``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -274,6 +275,7 @@ Other parameters are passed through a pointer to a apiAiToolsGetDisabledRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **scope** | **string** |  | 
  **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
 
 ### Return type

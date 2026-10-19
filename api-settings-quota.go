@@ -31,7 +31,7 @@ type ApiGetUserQuotaSettingsRequest struct {
 	ApiService *SettingsQuotaAPIService
 }
 
-func (r ApiGetUserQuotaSettingsRequest) Execute() (*TenantUserQuotaSettingsWrapper, *http.Response, error) {
+func (r ApiGetUserQuotaSettingsRequest) Execute() (*EntityQuotaSettingsWrapper, *http.Response, error) {
 	return r.ApiService.GetUserQuotaSettingsExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *SettingsQuotaAPIService) GetUserQuotaSettings(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return TenantUserQuotaSettingsWrapper
-func (a *SettingsQuotaAPIService) GetUserQuotaSettingsExecute(r ApiGetUserQuotaSettingsRequest) (*TenantUserQuotaSettingsWrapper, *http.Response, error) {
+//  @return EntityQuotaSettingsWrapper
+func (a *SettingsQuotaAPIService) GetUserQuotaSettingsExecute(r ApiGetUserQuotaSettingsRequest) (*EntityQuotaSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TenantUserQuotaSettingsWrapper
+		localVarReturnValue  *EntityQuotaSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsQuotaAPIService.GetUserQuotaSettings")
@@ -175,14 +175,14 @@ func (a *SettingsQuotaAPIService) GetUserQuotaSettingsExecute(r ApiGetUserQuotaS
 type ApiSaveAiAgentQuotaSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsQuotaAPIService
-	quotaSettingsRequestsDto *QuotaSettingsRequestsDto
+	quotaSettingsRequestDto *QuotaSettingsRequestDto
 }
 
-func (r ApiSaveAiAgentQuotaSettingsRequest) QuotaSettingsRequestsDto(quotaSettingsRequestsDto QuotaSettingsRequestsDto) ApiSaveAiAgentQuotaSettingsRequest {	r.quotaSettingsRequestsDto = &quotaSettingsRequestsDto
+func (r ApiSaveAiAgentQuotaSettingsRequest) QuotaSettingsRequestDto(quotaSettingsRequestDto QuotaSettingsRequestDto) ApiSaveAiAgentQuotaSettingsRequest {	r.quotaSettingsRequestDto = &quotaSettingsRequestDto
 	return r
 }
 
-func (r ApiSaveAiAgentQuotaSettingsRequest) Execute() (*TenantAiAgentQuotaSettingsWrapper, *http.Response, error) {
+func (r ApiSaveAiAgentQuotaSettingsRequest) Execute() (*EntityQuotaSettingsWrapper, *http.Response, error) {
 	return r.ApiService.SaveAiAgentQuotaSettingsExecute(r)
 }
 
@@ -202,13 +202,13 @@ func (a *SettingsQuotaAPIService) SaveAiAgentQuotaSettings(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return TenantAiAgentQuotaSettingsWrapper
-func (a *SettingsQuotaAPIService) SaveAiAgentQuotaSettingsExecute(r ApiSaveAiAgentQuotaSettingsRequest) (*TenantAiAgentQuotaSettingsWrapper, *http.Response, error) {
+//  @return EntityQuotaSettingsWrapper
+func (a *SettingsQuotaAPIService) SaveAiAgentQuotaSettingsExecute(r ApiSaveAiAgentQuotaSettingsRequest) (*EntityQuotaSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TenantAiAgentQuotaSettingsWrapper
+		localVarReturnValue  *EntityQuotaSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsQuotaAPIService.SaveAiAgentQuotaSettings")
@@ -240,7 +240,7 @@ func (a *SettingsQuotaAPIService) SaveAiAgentQuotaSettingsExecute(r ApiSaveAiAge
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.quotaSettingsRequestsDto
+	localVarPostBody = r.quotaSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -299,28 +299,6 @@ func (a *SettingsQuotaAPIService) SaveAiAgentQuotaSettingsExecute(r ApiSaveAiAge
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -339,14 +317,14 @@ func (a *SettingsQuotaAPIService) SaveAiAgentQuotaSettingsExecute(r ApiSaveAiAge
 type ApiSaveRoomQuotaSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsQuotaAPIService
-	quotaSettingsRequestsDto *QuotaSettingsRequestsDto
+	quotaSettingsRequestDto *QuotaSettingsRequestDto
 }
 
-func (r ApiSaveRoomQuotaSettingsRequest) QuotaSettingsRequestsDto(quotaSettingsRequestsDto QuotaSettingsRequestsDto) ApiSaveRoomQuotaSettingsRequest {	r.quotaSettingsRequestsDto = &quotaSettingsRequestsDto
+func (r ApiSaveRoomQuotaSettingsRequest) QuotaSettingsRequestDto(quotaSettingsRequestDto QuotaSettingsRequestDto) ApiSaveRoomQuotaSettingsRequest {	r.quotaSettingsRequestDto = &quotaSettingsRequestDto
 	return r
 }
 
-func (r ApiSaveRoomQuotaSettingsRequest) Execute() (*TenantRoomQuotaSettingsWrapper, *http.Response, error) {
+func (r ApiSaveRoomQuotaSettingsRequest) Execute() (*EntityQuotaSettingsWrapper, *http.Response, error) {
 	return r.ApiService.SaveRoomQuotaSettingsExecute(r)
 }
 
@@ -366,13 +344,13 @@ func (a *SettingsQuotaAPIService) SaveRoomQuotaSettings(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return TenantRoomQuotaSettingsWrapper
-func (a *SettingsQuotaAPIService) SaveRoomQuotaSettingsExecute(r ApiSaveRoomQuotaSettingsRequest) (*TenantRoomQuotaSettingsWrapper, *http.Response, error) {
+//  @return EntityQuotaSettingsWrapper
+func (a *SettingsQuotaAPIService) SaveRoomQuotaSettingsExecute(r ApiSaveRoomQuotaSettingsRequest) (*EntityQuotaSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TenantRoomQuotaSettingsWrapper
+		localVarReturnValue  *EntityQuotaSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsQuotaAPIService.SaveRoomQuotaSettings")
@@ -404,7 +382,7 @@ func (a *SettingsQuotaAPIService) SaveRoomQuotaSettingsExecute(r ApiSaveRoomQuot
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.quotaSettingsRequestsDto
+	localVarPostBody = r.quotaSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -463,28 +441,6 @@ func (a *SettingsQuotaAPIService) SaveRoomQuotaSettingsExecute(r ApiSaveRoomQuot
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -503,10 +459,10 @@ func (a *SettingsQuotaAPIService) SaveRoomQuotaSettingsExecute(r ApiSaveRoomQuot
 type ApiSetTenantQuotaSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsQuotaAPIService
-	tenantQuotaSettingsRequestsDto *TenantQuotaSettingsRequestsDto
+	tenantQuotaSettingsRequestDto *TenantQuotaSettingsRequestDto
 }
 
-func (r ApiSetTenantQuotaSettingsRequest) TenantQuotaSettingsRequestsDto(tenantQuotaSettingsRequestsDto TenantQuotaSettingsRequestsDto) ApiSetTenantQuotaSettingsRequest {	r.tenantQuotaSettingsRequestsDto = &tenantQuotaSettingsRequestsDto
+func (r ApiSetTenantQuotaSettingsRequest) TenantQuotaSettingsRequestDto(tenantQuotaSettingsRequestDto TenantQuotaSettingsRequestDto) ApiSetTenantQuotaSettingsRequest {	r.tenantQuotaSettingsRequestDto = &tenantQuotaSettingsRequestDto
 	return r
 }
 
@@ -568,7 +524,7 @@ func (a *SettingsQuotaAPIService) SetTenantQuotaSettingsExecute(r ApiSetTenantQu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tenantQuotaSettingsRequestsDto
+	localVarPostBody = r.tenantQuotaSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -628,17 +584,6 @@ func (a *SettingsQuotaAPIService) SetTenantQuotaSettingsExecute(r ApiSetTenantQu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

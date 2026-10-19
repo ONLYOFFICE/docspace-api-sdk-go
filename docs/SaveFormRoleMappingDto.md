@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FormId** | **int32** | The PDF form the roles belong to. This is the value the operation reads, rather than the identifier in its  route, and the two are to be sent the same. | 
-**Roles** | [**[]FormRole**](FormRole.md) | The roles with the account taking each of them and the sequence number that decides the turn: the same number  means the roles may be filled in parallel, different ones make a queue. The whole set is replaced on every  call, and an empty set resets the filling. | 
+**Roles** | [**[]FormRoleRequest**](FormRoleRequest.md) | The roles with the account taking each of them and the sequence number that decides the turn: the same number  means the roles may be filled in parallel, different ones make a queue. The whole set is replaced on every  call, and an empty set resets the filling. | 
 
 ## Methods
 
 ### NewSaveFormRoleMappingDto
 
-`func NewSaveFormRoleMappingDto(formId int32, roles []FormRole, ) *SaveFormRoleMappingDto`
+`func NewSaveFormRoleMappingDto(formId int32, roles []FormRoleRequest, ) *SaveFormRoleMappingDto`
 
 NewSaveFormRoleMappingDto instantiates a new SaveFormRoleMappingDto object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetFormId sets FormId field to given value.
 
 ### GetRoles
 
-`func (o *SaveFormRoleMappingDto) GetRoles() []FormRole`
+`func (o *SaveFormRoleMappingDto) GetRoles() []FormRoleRequest`
 
 GetRoles returns the Roles field if non-nil, zero value otherwise.
 
 ### GetRolesOk
 
-`func (o *SaveFormRoleMappingDto) GetRolesOk() (*[]FormRole, bool)`
+`func (o *SaveFormRoleMappingDto) GetRolesOk() (*[]FormRoleRequest, bool)`
 
 GetRolesOk returns a tuple with the Roles field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRoles
 
-`func (o *SaveFormRoleMappingDto) SetRoles(v []FormRole)`
+`func (o *SaveFormRoleMappingDto) SetRoles(v []FormRoleRequest)`
 
 SetRoles sets Roles field to given value.
 

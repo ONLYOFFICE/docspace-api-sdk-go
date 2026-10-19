@@ -29,11 +29,11 @@ type AIAttachmentsAPIService service
 type ApiAiAttachmentsDeleteRequest struct {
 	ctx context.Context
 	ApiService *AIAttachmentsAPIService
-	body *string
+	aiAttachmentsDeleteRequest *string
 }
 
 // The ID of the attachment to delete, as a bare JSON string.
-func (r ApiAiAttachmentsDeleteRequest) Body(body string) ApiAiAttachmentsDeleteRequest {	r.body = &body
+func (r ApiAiAttachmentsDeleteRequest) AiAttachmentsDeleteRequest(aiAttachmentsDeleteRequest string) ApiAiAttachmentsDeleteRequest {	r.aiAttachmentsDeleteRequest = &aiAttachmentsDeleteRequest
 	return r
 }
 
@@ -76,8 +76,8 @@ func (a *AIAttachmentsAPIService) AiAttachmentsDeleteExecute(r ApiAiAttachmentsD
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.aiAttachmentsDeleteRequest == nil {
+		return localVarReturnValue, nil, reportError("aiAttachmentsDeleteRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -98,7 +98,7 @@ func (a *AIAttachmentsAPIService) AiAttachmentsDeleteExecute(r ApiAiAttachmentsD
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.aiAttachmentsDeleteRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -182,11 +182,11 @@ func (a *AIAttachmentsAPIService) AiAttachmentsDeleteExecute(r ApiAiAttachmentsD
 type ApiAiAttachmentsDeleteManyRequest struct {
 	ctx context.Context
 	ApiService *AIAttachmentsAPIService
-	requestBody *[]string
+	aiAttachmentsDeleteManyRequest *[]string
 }
 
 // The IDs of the attachments to delete, as a bare JSON array of strings.
-func (r ApiAiAttachmentsDeleteManyRequest) RequestBody(requestBody []string) ApiAiAttachmentsDeleteManyRequest {	r.requestBody = &requestBody
+func (r ApiAiAttachmentsDeleteManyRequest) AiAttachmentsDeleteManyRequest(aiAttachmentsDeleteManyRequest []string) ApiAiAttachmentsDeleteManyRequest {	r.aiAttachmentsDeleteManyRequest = &aiAttachmentsDeleteManyRequest
 	return r
 }
 
@@ -229,8 +229,8 @@ func (a *AIAttachmentsAPIService) AiAttachmentsDeleteManyExecute(r ApiAiAttachme
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.requestBody == nil {
-		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
+	if r.aiAttachmentsDeleteManyRequest == nil {
+		return localVarReturnValue, nil, reportError("aiAttachmentsDeleteManyRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -251,7 +251,7 @@ func (a *AIAttachmentsAPIService) AiAttachmentsDeleteManyExecute(r ApiAiAttachme
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.aiAttachmentsDeleteManyRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -335,11 +335,11 @@ func (a *AIAttachmentsAPIService) AiAttachmentsDeleteManyExecute(r ApiAiAttachme
 type ApiAiAttachmentsGetRequest struct {
 	ctx context.Context
 	ApiService *AIAttachmentsAPIService
-	body *string
+	aiAttachmentsGetRequest *string
 }
 
 // The ID of the attachment to read, as a bare JSON string.
-func (r ApiAiAttachmentsGetRequest) Body(body string) ApiAiAttachmentsGetRequest {	r.body = &body
+func (r ApiAiAttachmentsGetRequest) AiAttachmentsGetRequest(aiAttachmentsGetRequest string) ApiAiAttachmentsGetRequest {	r.aiAttachmentsGetRequest = &aiAttachmentsGetRequest
 	return r
 }
 
@@ -382,8 +382,8 @@ func (a *AIAttachmentsAPIService) AiAttachmentsGetExecute(r ApiAiAttachmentsGetR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.aiAttachmentsGetRequest == nil {
+		return localVarReturnValue, nil, reportError("aiAttachmentsGetRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -404,7 +404,7 @@ func (a *AIAttachmentsAPIService) AiAttachmentsGetExecute(r ApiAiAttachmentsGetR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.aiAttachmentsGetRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -499,11 +499,11 @@ func (a *AIAttachmentsAPIService) AiAttachmentsGetExecute(r ApiAiAttachmentsGetR
 type ApiAiAttachmentsGetManyRequest struct {
 	ctx context.Context
 	ApiService *AIAttachmentsAPIService
-	requestBody *[]string
+	aiAttachmentsGetManyRequest *[]string
 }
 
 // The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
-func (r ApiAiAttachmentsGetManyRequest) RequestBody(requestBody []string) ApiAiAttachmentsGetManyRequest {	r.requestBody = &requestBody
+func (r ApiAiAttachmentsGetManyRequest) AiAttachmentsGetManyRequest(aiAttachmentsGetManyRequest []string) ApiAiAttachmentsGetManyRequest {	r.aiAttachmentsGetManyRequest = &aiAttachmentsGetManyRequest
 	return r
 }
 
@@ -546,8 +546,8 @@ func (a *AIAttachmentsAPIService) AiAttachmentsGetManyExecute(r ApiAiAttachments
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.requestBody == nil {
-		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
+	if r.aiAttachmentsGetManyRequest == nil {
+		return localVarReturnValue, nil, reportError("aiAttachmentsGetManyRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -568,7 +568,7 @@ func (a *AIAttachmentsAPIService) AiAttachmentsGetManyExecute(r ApiAiAttachments
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.aiAttachmentsGetManyRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -663,10 +663,10 @@ func (a *AIAttachmentsAPIService) AiAttachmentsGetManyExecute(r ApiAiAttachments
 type ApiAiAttachmentsGetSuggestedQuestionsRequest struct {
 	ctx context.Context
 	ApiService *AIAttachmentsAPIService
-	requestBody *map[string]*interface{}
+	aiAttachmentsGetSuggestedQuestionsRequest *map[string]*interface{}
 }
 
-func (r ApiAiAttachmentsGetSuggestedQuestionsRequest) RequestBody(requestBody map[string]*interface{}) ApiAiAttachmentsGetSuggestedQuestionsRequest {	r.requestBody = &requestBody
+func (r ApiAiAttachmentsGetSuggestedQuestionsRequest) AiAttachmentsGetSuggestedQuestionsRequest(aiAttachmentsGetSuggestedQuestionsRequest map[string]*interface{}) ApiAiAttachmentsGetSuggestedQuestionsRequest {	r.aiAttachmentsGetSuggestedQuestionsRequest = &aiAttachmentsGetSuggestedQuestionsRequest
 	return r
 }
 
@@ -707,8 +707,8 @@ func (a *AIAttachmentsAPIService) AiAttachmentsGetSuggestedQuestionsExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.requestBody == nil {
-		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
+	if r.aiAttachmentsGetSuggestedQuestionsRequest == nil {
+		return localVarReturnValue, nil, reportError("aiAttachmentsGetSuggestedQuestionsRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -729,7 +729,7 @@ func (a *AIAttachmentsAPIService) AiAttachmentsGetSuggestedQuestionsExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.aiAttachmentsGetSuggestedQuestionsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

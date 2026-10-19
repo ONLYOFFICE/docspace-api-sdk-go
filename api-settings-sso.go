@@ -31,7 +31,7 @@ type ApiGetDefaultSsoSettingsV2Request struct {
 	ApiService *SettingsSSOAPIService
 }
 
-func (r ApiGetDefaultSsoSettingsV2Request) Execute() (*SsoSettingsV2Wrapper, *http.Response, error) {
+func (r ApiGetDefaultSsoSettingsV2Request) Execute() (*SsoSettingsWrapper, *http.Response, error) {
 	return r.ApiService.GetDefaultSsoSettingsV2Execute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *SettingsSSOAPIService) GetDefaultSsoSettingsV2(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return SsoSettingsV2Wrapper
-func (a *SettingsSSOAPIService) GetDefaultSsoSettingsV2Execute(r ApiGetDefaultSsoSettingsV2Request) (*SsoSettingsV2Wrapper, *http.Response, error) {
+//  @return SsoSettingsWrapper
+func (a *SettingsSSOAPIService) GetDefaultSsoSettingsV2Execute(r ApiGetDefaultSsoSettingsV2Request) (*SsoSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SsoSettingsV2Wrapper
+		localVarReturnValue  *SsoSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsSSOAPIService.GetDefaultSsoSettingsV2")
@@ -177,7 +177,7 @@ type ApiGetSsoSettingsV2Request struct {
 	ApiService *SettingsSSOAPIService
 }
 
-func (r ApiGetSsoSettingsV2Request) Execute() (*SsoSettingsV2Wrapper, *http.Response, error) {
+func (r ApiGetSsoSettingsV2Request) Execute() (*SsoSettingsWrapper, *http.Response, error) {
 	return r.ApiService.GetSsoSettingsV2Execute(r)
 }
 
@@ -197,13 +197,13 @@ func (a *SettingsSSOAPIService) GetSsoSettingsV2(ctx context.Context) ApiGetSsoS
 }
 
 // Execute executes the request
-//  @return SsoSettingsV2Wrapper
-func (a *SettingsSSOAPIService) GetSsoSettingsV2Execute(r ApiGetSsoSettingsV2Request) (*SsoSettingsV2Wrapper, *http.Response, error) {
+//  @return SsoSettingsWrapper
+func (a *SettingsSSOAPIService) GetSsoSettingsV2Execute(r ApiGetSsoSettingsV2Request) (*SsoSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SsoSettingsV2Wrapper
+		localVarReturnValue  *SsoSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsSSOAPIService.GetSsoSettingsV2")
@@ -312,7 +312,7 @@ type ApiGetSsoSettingsV2ConstantsRequest struct {
 	ApiService *SettingsSSOAPIService
 }
 
-func (r ApiGetSsoSettingsV2ConstantsRequest) Execute() (*SsoSettingsV2ConstantsWrapper, *http.Response, error) {
+func (r ApiGetSsoSettingsV2ConstantsRequest) Execute() (*SsoSettingsConstantsWrapper, *http.Response, error) {
 	return r.ApiService.GetSsoSettingsV2ConstantsExecute(r)
 }
 
@@ -332,13 +332,13 @@ func (a *SettingsSSOAPIService) GetSsoSettingsV2Constants(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return SsoSettingsV2ConstantsWrapper
-func (a *SettingsSSOAPIService) GetSsoSettingsV2ConstantsExecute(r ApiGetSsoSettingsV2ConstantsRequest) (*SsoSettingsV2ConstantsWrapper, *http.Response, error) {
+//  @return SsoSettingsConstantsWrapper
+func (a *SettingsSSOAPIService) GetSsoSettingsV2ConstantsExecute(r ApiGetSsoSettingsV2ConstantsRequest) (*SsoSettingsConstantsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SsoSettingsV2ConstantsWrapper
+		localVarReturnValue  *SsoSettingsConstantsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsSSOAPIService.GetSsoSettingsV2Constants")
@@ -458,7 +458,7 @@ type ApiResetSsoSettingsV2Request struct {
 	ApiService *SettingsSSOAPIService
 }
 
-func (r ApiResetSsoSettingsV2Request) Execute() (*SsoSettingsV2Wrapper, *http.Response, error) {
+func (r ApiResetSsoSettingsV2Request) Execute() (*SsoSettingsWrapper, *http.Response, error) {
 	return r.ApiService.ResetSsoSettingsV2Execute(r)
 }
 
@@ -478,13 +478,13 @@ func (a *SettingsSSOAPIService) ResetSsoSettingsV2(ctx context.Context) ApiReset
 }
 
 // Execute executes the request
-//  @return SsoSettingsV2Wrapper
-func (a *SettingsSSOAPIService) ResetSsoSettingsV2Execute(r ApiResetSsoSettingsV2Request) (*SsoSettingsV2Wrapper, *http.Response, error) {
+//  @return SsoSettingsWrapper
+func (a *SettingsSSOAPIService) ResetSsoSettingsV2Execute(r ApiResetSsoSettingsV2Request) (*SsoSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SsoSettingsV2Wrapper
+		localVarReturnValue  *SsoSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsSSOAPIService.ResetSsoSettingsV2")
@@ -602,14 +602,14 @@ func (a *SettingsSSOAPIService) ResetSsoSettingsV2Execute(r ApiResetSsoSettingsV
 type ApiSaveSsoSettingsV2Request struct {
 	ctx context.Context
 	ApiService *SettingsSSOAPIService
-	ssoSettingsRequestsDto *SsoSettingsRequestsDto
+	ssoSettingsRequestDto *SsoSettingsRequestDto
 }
 
-func (r ApiSaveSsoSettingsV2Request) SsoSettingsRequestsDto(ssoSettingsRequestsDto SsoSettingsRequestsDto) ApiSaveSsoSettingsV2Request {	r.ssoSettingsRequestsDto = &ssoSettingsRequestsDto
+func (r ApiSaveSsoSettingsV2Request) SsoSettingsRequestDto(ssoSettingsRequestDto SsoSettingsRequestDto) ApiSaveSsoSettingsV2Request {	r.ssoSettingsRequestDto = &ssoSettingsRequestDto
 	return r
 }
 
-func (r ApiSaveSsoSettingsV2Request) Execute() (*SsoSettingsV2Wrapper, *http.Response, error) {
+func (r ApiSaveSsoSettingsV2Request) Execute() (*SsoSettingsWrapper, *http.Response, error) {
 	return r.ApiService.SaveSsoSettingsV2Execute(r)
 }
 
@@ -629,13 +629,13 @@ func (a *SettingsSSOAPIService) SaveSsoSettingsV2(ctx context.Context) ApiSaveSs
 }
 
 // Execute executes the request
-//  @return SsoSettingsV2Wrapper
-func (a *SettingsSSOAPIService) SaveSsoSettingsV2Execute(r ApiSaveSsoSettingsV2Request) (*SsoSettingsV2Wrapper, *http.Response, error) {
+//  @return SsoSettingsWrapper
+func (a *SettingsSSOAPIService) SaveSsoSettingsV2Execute(r ApiSaveSsoSettingsV2Request) (*SsoSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SsoSettingsV2Wrapper
+		localVarReturnValue  *SsoSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsSSOAPIService.SaveSsoSettingsV2")
@@ -667,7 +667,7 @@ func (a *SettingsSSOAPIService) SaveSsoSettingsV2Execute(r ApiSaveSsoSettingsV2R
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.ssoSettingsRequestsDto
+	localVarPostBody = r.ssoSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -716,17 +716,6 @@ func (a *SettingsSSOAPIService) SaveSsoSettingsV2Execute(r ApiSaveSsoSettingsV2R
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

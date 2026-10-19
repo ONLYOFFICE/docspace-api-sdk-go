@@ -388,7 +388,7 @@ Name | Type | Description  | Notes
 
 ## GetAccountingServicePrices
 
-> ServicePriceInfoArrayWrapper GetAccountingServicePrices(ctx, serviceName).Active(active).Execute()
+> ServicePriceArrayWrapper GetAccountingServicePrices(ctx, serviceName).Active(active).Execute()
 
 Get the service prices from the accounting service
 
@@ -419,7 +419,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetAccountingServicePrices``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAccountingServicePrices`: ServicePriceInfoArrayWrapper
+	// response from `GetAccountingServicePrices`: ServicePriceArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetAccountingServicePrices`: %v\n", resp)
 }
 ```
@@ -444,7 +444,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServicePriceInfoArrayWrapper**](ServicePriceInfoArrayWrapper.md)
+[**ServicePriceArrayWrapper**](ServicePriceArrayWrapper.md)
 
 ### Authorization
 
@@ -1632,7 +1632,7 @@ Name | Type | Description  | Notes
 
 ## GetRestrictedAiModels
 
-> RestrictedModelsResponseWrapper GetRestrictedAiModels(ctx).Execute()
+> RestrictedAiModelsWrapper GetRestrictedAiModels(ctx).Execute()
 
 Get restricted AI models
 
@@ -1661,7 +1661,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetRestrictedAiModels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetRestrictedAiModels`: RestrictedModelsResponseWrapper
+	// response from `GetRestrictedAiModels`: RestrictedAiModelsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetRestrictedAiModels`: %v\n", resp)
 }
 ```
@@ -1677,7 +1677,7 @@ Other parameters are passed through a pointer to a apiGetRestrictedAiModelsReque
 
 ### Return type
 
-[**RestrictedModelsResponseWrapper**](RestrictedModelsResponseWrapper.md)
+[**RestrictedAiModelsWrapper**](RestrictedAiModelsWrapper.md)
 
 ### Authorization
 
@@ -1695,7 +1695,7 @@ Other parameters are passed through a pointer to a apiGetRestrictedAiModelsReque
 
 ## GetSubscriptionBalanceInfo
 
-> SubscriptionBalanceInfoWrapper GetSubscriptionBalanceInfo(ctx).Execute()
+> SubscriptionBalanceWrapper GetSubscriptionBalanceInfo(ctx).Execute()
 
 Get the subscription balance information
 
@@ -1724,7 +1724,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetSubscriptionBalanceInfo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSubscriptionBalanceInfo`: SubscriptionBalanceInfoWrapper
+	// response from `GetSubscriptionBalanceInfo`: SubscriptionBalanceWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetSubscriptionBalanceInfo`: %v\n", resp)
 }
 ```
@@ -1740,7 +1740,7 @@ Other parameters are passed through a pointer to a apiGetSubscriptionBalanceInfo
 
 ### Return type
 
-[**SubscriptionBalanceInfoWrapper**](SubscriptionBalanceInfoWrapper.md)
+[**SubscriptionBalanceWrapper**](SubscriptionBalanceWrapper.md)
 
 ### Authorization
 
@@ -1821,7 +1821,7 @@ Other parameters are passed through a pointer to a apiGetTenantWalletServiceSett
 
 ## GetTenantWalletSettings
 
-> TenantWalletSettingsResponseWrapper GetTenantWalletSettings(ctx).Execute()
+> TenantWalletSettingsWrapper GetTenantWalletSettings(ctx).Execute()
 
 Get the auto top-up settings
 
@@ -1850,7 +1850,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetTenantWalletSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTenantWalletSettings`: TenantWalletSettingsResponseWrapper
+	// response from `GetTenantWalletSettings`: TenantWalletSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetTenantWalletSettings`: %v\n", resp)
 }
 ```
@@ -1866,7 +1866,7 @@ Other parameters are passed through a pointer to a apiGetTenantWalletSettingsReq
 
 ### Return type
 
-[**TenantWalletSettingsResponseWrapper**](TenantWalletSettingsResponseWrapper.md)
+[**TenantWalletSettingsWrapper**](TenantWalletSettingsWrapper.md)
 
 ### Authorization
 
@@ -2083,7 +2083,7 @@ Name | Type | Description  | Notes
 
 ## SendPaymentRequest
 
-> SendPaymentRequest(ctx).SalesRequestsDto(salesRequestsDto).Execute()
+> SendPaymentRequest(ctx).SalesRequestDto(salesRequestDto).Execute()
 
 Contact the sales team
 
@@ -2104,11 +2104,11 @@ import (
 )
 
 func main() {
-	salesRequestsDto := *openapiclient.NewSalesRequestsDto("John Doe", "user@example.com", "I would like to inquire about pricing") // SalesRequestsDto |  (optional)
+	salesRequestDto := *openapiclient.NewSalesRequestDto("John Doe", "user@example.com", "I would like to inquire about pricing") // SalesRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PortalPaymentAPI.SendPaymentRequest(context.Background()).SalesRequestsDto(salesRequestsDto).Execute()
+	r, err := apiClient.PortalPaymentAPI.SendPaymentRequest(context.Background()).SalesRequestDto(salesRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.SendPaymentRequest``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2127,7 +2127,7 @@ Other parameters are passed through a pointer to a apiSendPaymentRequestRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **salesRequestsDto** | [**SalesRequestsDto**](SalesRequestsDto.md) |  | 
+ **salesRequestDto** | [**SalesRequestDto**](SalesRequestDto.md) |  | 
 
 ### Return type
 
@@ -2149,7 +2149,7 @@ Name | Type | Description  | Notes
 
 ## SetRestrictedAiModels
 
-> RestrictedModelsResponseWrapper SetRestrictedAiModels(ctx).SetRestrictedAiModelsRequestDto(setRestrictedAiModelsRequestDto).Execute()
+> RestrictedAiModelsWrapper SetRestrictedAiModels(ctx).SetRestrictedAiModelsRequestDto(setRestrictedAiModelsRequestDto).Execute()
 
 Set restricted AI models
 
@@ -2179,7 +2179,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.SetRestrictedAiModels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SetRestrictedAiModels`: RestrictedModelsResponseWrapper
+	// response from `SetRestrictedAiModels`: RestrictedAiModelsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.SetRestrictedAiModels`: %v\n", resp)
 }
 ```
@@ -2199,7 +2199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RestrictedModelsResponseWrapper**](RestrictedModelsResponseWrapper.md)
+[**RestrictedAiModelsWrapper**](RestrictedAiModelsWrapper.md)
 
 ### Authorization
 
@@ -2217,7 +2217,7 @@ Name | Type | Description  | Notes
 
 ## SetTenantWalletSettings
 
-> TenantWalletSettingsResponseWrapper SetTenantWalletSettings(ctx).TenantWalletSettingsWrapper(tenantWalletSettingsWrapper).Execute()
+> TenantWalletSettingsWrapper SetTenantWalletSettings(ctx).TenantWalletSettingsRequestDto(tenantWalletSettingsRequestDto).Execute()
 
 Set the auto top-up settings
 
@@ -2238,16 +2238,16 @@ import (
 )
 
 func main() {
-	tenantWalletSettingsWrapper := *openapiclient.NewTenantWalletSettingsWrapper() // TenantWalletSettingsWrapper |  (optional)
+	tenantWalletSettingsRequestDto := *openapiclient.NewTenantWalletSettingsRequestDto() // TenantWalletSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PortalPaymentAPI.SetTenantWalletSettings(context.Background()).TenantWalletSettingsWrapper(tenantWalletSettingsWrapper).Execute()
+	resp, r, err := apiClient.PortalPaymentAPI.SetTenantWalletSettings(context.Background()).TenantWalletSettingsRequestDto(tenantWalletSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.SetTenantWalletSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SetTenantWalletSettings`: TenantWalletSettingsResponseWrapper
+	// response from `SetTenantWalletSettings`: TenantWalletSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.SetTenantWalletSettings`: %v\n", resp)
 }
 ```
@@ -2263,11 +2263,11 @@ Other parameters are passed through a pointer to a apiSetTenantWalletSettingsReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenantWalletSettingsWrapper** | [**TenantWalletSettingsWrapper**](TenantWalletSettingsWrapper.md) |  | 
+ **tenantWalletSettingsRequestDto** | [**TenantWalletSettingsRequestDto**](TenantWalletSettingsRequestDto.md) |  | 
 
 ### Return type
 
-[**TenantWalletSettingsResponseWrapper**](TenantWalletSettingsResponseWrapper.md)
+[**TenantWalletSettingsWrapper**](TenantWalletSettingsWrapper.md)
 
 ### Authorization
 

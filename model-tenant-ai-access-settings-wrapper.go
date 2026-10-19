@@ -21,10 +21,10 @@ import (
 // checks if the TenantAiAccessSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantAiAccessSettingsWrapper{}
 
-// TenantAiAccessSettingsWrapper The successful API response containing the TenantAiAccessSettings object.
+// TenantAiAccessSettingsWrapper The successful API response containing the TenantAiAccessSettingsDto object.
 type TenantAiAccessSettingsWrapper struct {
-	// The TenantAiAccessSettings object returned by the operation.
-	Response *TenantAiAccessSettings `json:"response,omitempty"`
+	// The TenantAiAccessSettingsDto object returned by the operation.
+	Response *TenantAiAccessSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewTenantAiAccessSettingsWrapperWithDefaults() *TenantAiAccessSettingsWrapp
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *TenantAiAccessSettingsWrapper) GetResponse() TenantAiAccessSettings {
+func (o *TenantAiAccessSettingsWrapper) GetResponse() TenantAiAccessSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret TenantAiAccessSettings
+		var ret TenantAiAccessSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *TenantAiAccessSettingsWrapper) GetResponse() TenantAiAccessSettings {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TenantAiAccessSettingsWrapper) GetResponseOk() (*TenantAiAccessSettings, bool) {
+func (o *TenantAiAccessSettingsWrapper) GetResponseOk() (*TenantAiAccessSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *TenantAiAccessSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given TenantAiAccessSettings and assigns it to the Response field.
-func (o *TenantAiAccessSettingsWrapper) SetResponse(v TenantAiAccessSettings) {
+// SetResponse gets a reference to the given TenantAiAccessSettingsDto and assigns it to the Response field.
+func (o *TenantAiAccessSettingsWrapper) SetResponse(v TenantAiAccessSettingsDto) {
 	o.Response = &v
 }
 

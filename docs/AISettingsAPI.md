@@ -5,8 +5,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AiSettingsGet**](AISettingsAPI.md#AiSettingsGet) | **Get** /api/2.0/ai/config | Get AI settings
+[**AiSettingsGetToolMode**](AISettingsAPI.md#AiSettingsGetToolMode) | **Get** /api/2.0/ai/config/tool-mode | Get the tool permission mode
 [**AiSettingsGetUser**](AISettingsAPI.md#AiSettingsGetUser) | **Get** /api/2.0/ai/config/user | Get user AI settings
 [**AiSettingsGetVectorization**](AISettingsAPI.md#AiSettingsGetVectorization) | **Get** /api/2.0/ai/config/vectorization | Get vectorization settings
+[**AiSettingsSetToolMode**](AISettingsAPI.md#AiSettingsSetToolMode) | **Put** /api/2.0/ai/config/tool-mode | Set the tool permission mode
 [**AiSettingsSetUser**](AISettingsAPI.md#AiSettingsSetUser) | **Put** /api/2.0/ai/config/user | Update user AI settings
 [**AiSettingsSetVectorization**](AISettingsAPI.md#AiSettingsSetVectorization) | **Put** /api/2.0/ai/config/vectorization | Update vectorization settings
 
@@ -14,7 +16,7 @@ Method | HTTP request | Description
 
 ## AiSettingsGet
 
-> AiAiSettingsWrapper AiSettingsGet(ctx).Execute()
+> AiSettingsWrapper AiSettingsGet(ctx).Execute()
 
 Get AI settings
 
@@ -43,7 +45,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AISettingsAPI.AiSettingsGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiSettingsGet`: AiAiSettingsWrapper
+	// response from `AiSettingsGet`: AiSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AISettingsAPI.AiSettingsGet`: %v\n", resp)
 }
 ```
@@ -59,7 +61,70 @@ Other parameters are passed through a pointer to a apiAiSettingsGetRequest struc
 
 ### Return type
 
-[**AiAiSettingsWrapper**](AiAiSettingsWrapper.md)
+[**AiSettingsWrapper**](AiSettingsWrapper.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AiSettingsGetToolMode
+
+> AiSuccessResponse AiSettingsGetToolMode(ctx).Execute()
+
+Get the tool permission mode
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AISettingsAPI.AiSettingsGetToolMode(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AISettingsAPI.AiSettingsGetToolMode``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AiSettingsGetToolMode`: AiSuccessResponse
+	fmt.Fprintf(os.Stdout, "Response from `AISettingsAPI.AiSettingsGetToolMode`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAiSettingsGetToolModeRequest struct via the builder pattern
+
+
+### Return type
+
+[**AiSuccessResponse**](AiSuccessResponse.md)
 
 ### Authorization
 
@@ -77,7 +142,7 @@ Other parameters are passed through a pointer to a apiAiSettingsGetRequest struc
 
 ## AiSettingsGetUser
 
-> AiAiUserSettingsWrapper AiSettingsGetUser(ctx).Execute()
+> AiUserSettingsWrapper AiSettingsGetUser(ctx).Execute()
 
 Get user AI settings
 
@@ -106,7 +171,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AISettingsAPI.AiSettingsGetUser``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiSettingsGetUser`: AiAiUserSettingsWrapper
+	// response from `AiSettingsGetUser`: AiUserSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AISettingsAPI.AiSettingsGetUser`: %v\n", resp)
 }
 ```
@@ -122,7 +187,7 @@ Other parameters are passed through a pointer to a apiAiSettingsGetUserRequest s
 
 ### Return type
 
-[**AiAiUserSettingsWrapper**](AiAiUserSettingsWrapper.md)
+[**AiUserSettingsWrapper**](AiUserSettingsWrapper.md)
 
 ### Authorization
 
@@ -201,9 +266,77 @@ Other parameters are passed through a pointer to a apiAiSettingsGetVectorization
 [[Back to README]](../README.md)
 
 
+## AiSettingsSetToolMode
+
+> AiSuccessResponse AiSettingsSetToolMode(ctx).AiSettingsSetToolModeRequest(aiSettingsSetToolModeRequest).Execute()
+
+Set the tool permission mode
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	aiSettingsSetToolModeRequest := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AISettingsAPI.AiSettingsSetToolMode(context.Background()).AiSettingsSetToolModeRequest(aiSettingsSetToolModeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AISettingsAPI.AiSettingsSetToolMode``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AiSettingsSetToolMode`: AiSuccessResponse
+	fmt.Fprintf(os.Stdout, "Response from `AISettingsAPI.AiSettingsSetToolMode`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAiSettingsSetToolModeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **aiSettingsSetToolModeRequest** | **map[string]interface{}** | `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum. | 
+
+### Return type
+
+[**AiSuccessResponse**](AiSuccessResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## AiSettingsSetUser
 
-> AiAiUserSettingsWrapper AiSettingsSetUser(ctx).RequestBody(requestBody).Execute()
+> AiUserSettingsWrapper AiSettingsSetUser(ctx).AiSettingsSetUserRequest(aiSettingsSetUserRequest).Execute()
 
 Update user AI settings
 
@@ -224,16 +357,16 @@ import (
 )
 
 func main() {
-	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
+	aiSettingsSetUserRequest := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AISettingsAPI.AiSettingsSetUser(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AISettingsAPI.AiSettingsSetUser(context.Background()).AiSettingsSetUserRequest(aiSettingsSetUserRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AISettingsAPI.AiSettingsSetUser``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiSettingsSetUser`: AiAiUserSettingsWrapper
+	// response from `AiSettingsSetUser`: AiUserSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AISettingsAPI.AiSettingsSetUser`: %v\n", resp)
 }
 ```
@@ -249,11 +382,11 @@ Other parameters are passed through a pointer to a apiAiSettingsSetUserRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]interface{}** | The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. | 
+ **aiSettingsSetUserRequest** | **map[string]interface{}** | The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. | 
 
 ### Return type
 
-[**AiAiUserSettingsWrapper**](AiAiUserSettingsWrapper.md)
+[**AiUserSettingsWrapper**](AiUserSettingsWrapper.md)
 
 ### Authorization
 
@@ -271,7 +404,7 @@ Name | Type | Description  | Notes
 
 ## AiSettingsSetVectorization
 
-> AiVectorizationSettingsWrapper AiSettingsSetVectorization(ctx).RequestBody(requestBody).Execute()
+> AiVectorizationSettingsWrapper AiSettingsSetVectorization(ctx).AiSettingsSetVectorizationRequest(aiSettingsSetVectorizationRequest).Execute()
 
 Update vectorization settings
 
@@ -292,11 +425,11 @@ import (
 )
 
 func main() {
-	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
+	aiSettingsSetVectorizationRequest := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AISettingsAPI.AiSettingsSetVectorization(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AISettingsAPI.AiSettingsSetVectorization(context.Background()).AiSettingsSetVectorizationRequest(aiSettingsSetVectorizationRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AISettingsAPI.AiSettingsSetVectorization``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -317,7 +450,7 @@ Other parameters are passed through a pointer to a apiAiSettingsSetVectorization
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]interface{}** | The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. | 
+ **aiSettingsSetVectorizationRequest** | **map[string]interface{}** | The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. | 
 
 ### Return type
 

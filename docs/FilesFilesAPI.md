@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ## ChangeVersionHistory
 
-> FileArrayWrapper ChangeVersionHistory(ctx, fileId).ChangeHistory(changeHistory).Execute()
+> FileArrayWrapper ChangeVersionHistory(ctx, fileId).ChangeHistoryRequest(changeHistoryRequest).Execute()
 
 Change version history
 
@@ -226,11 +226,11 @@ import (
 
 func main() {
 	fileId := int32(1) // int32 | The file whose version history is changed.
-	changeHistory := *openapiclient.NewChangeHistory(int32(1)) // ChangeHistory | The change to make to the revision group.
+	changeHistoryRequest := *openapiclient.NewChangeHistoryRequest(int32(1)) // ChangeHistoryRequest | The change to make to the revision group.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.ChangeVersionHistory(context.Background(), fileId).ChangeHistory(changeHistory).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.ChangeVersionHistory(context.Background(), fileId).ChangeHistoryRequest(changeHistoryRequest).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// fileId := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.ChangeVersionHistory(context.Background(), fileId).ExecuteThirdParty()
@@ -259,7 +259,7 @@ Other parameters are passed through a pointer to a apiChangeVersionHistoryReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **changeHistory** | [**ChangeHistory**](ChangeHistory.md) | The change to make to the revision group. | 
+ **changeHistoryRequest** | [**ChangeHistoryRequest**](ChangeHistoryRequest.md) | The change to make to the revision group. | 
 
 ### Return type
 
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
 
 ## CheckFillFormDraft
 
-> StringWrapper CheckFillFormDraft(ctx, fileId).CheckFillFormDraft(checkFillFormDraft).Execute()
+> StringWrapper CheckFillFormDraft(ctx, fileId).CheckFillFormDraftRequest(checkFillFormDraftRequest).Execute()
 
 Open a form draft for filling
 
@@ -303,11 +303,11 @@ import (
 
 func main() {
 	fileId := int32(1) // int32 | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-	checkFillFormDraft := *openapiclient.NewCheckFillFormDraft(int32(0)) // CheckFillFormDraft | The revision of the form to open and what the caller intends to do with it.
+	checkFillFormDraftRequest := *openapiclient.NewCheckFillFormDraftRequest(int32(0)) // CheckFillFormDraftRequest | The revision of the form to open and what the caller intends to do with it.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.CheckFillFormDraft(context.Background(), fileId).CheckFillFormDraft(checkFillFormDraft).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.CheckFillFormDraft(context.Background(), fileId).CheckFillFormDraftRequest(checkFillFormDraftRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CheckFillFormDraft``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -333,7 +333,7 @@ Other parameters are passed through a pointer to a apiCheckFillFormDraftRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **checkFillFormDraft** | [**CheckFillFormDraft**](CheckFillFormDraft.md) | The revision of the form to open and what the caller intends to do with it. | 
+ **checkFillFormDraftRequest** | [**CheckFillFormDraftRequest**](CheckFillFormDraftRequest.md) | The revision of the form to open and what the caller intends to do with it. | 
 
 ### Return type
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ## CopyFileAs
 
-> FileEntryBaseWrapper CopyFileAs(ctx, fileId).CopyAsJsonElement(copyAsJsonElement).Execute()
+> FileEntryBaseWrapper CopyFileAs(ctx, fileId).CopyAsRequest(copyAsRequest).Execute()
 
 Copy a file
 
@@ -377,11 +377,11 @@ import (
 
 func main() {
 	fileId := int32(1) // int32 | The file to copy.
-	copyAsJsonElement := *openapiclient.NewCopyAsJsonElement("Document Copy.docx", openapiclient.CopyAsJsonElement_destFolderId{Int32: new(int32)}) // CopyAsJsonElement | The title, the destination and the conversion options of the copy.
+	copyAsRequest := *openapiclient.NewCopyAsRequest("Document Copy.docx", openapiclient.CopyAsRequest_destFolderId{Int32: new(int32)}) // CopyAsRequest | The title, the destination and the conversion options of the copy.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.CopyFileAs(context.Background(), fileId).CopyAsJsonElement(copyAsJsonElement).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.CopyFileAs(context.Background(), fileId).CopyAsRequest(copyAsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CopyFileAs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -407,7 +407,7 @@ Other parameters are passed through a pointer to a apiCopyFileAsRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **copyAsJsonElement** | [**CopyAsJsonElement**](CopyAsJsonElement.md) | The title, the destination and the conversion options of the copy. | 
+ **copyAsRequest** | [**CopyAsRequest**](CopyAsRequest.md) | The title, the destination and the conversion options of the copy. | 
 
 ### Return type
 
@@ -429,7 +429,7 @@ Name | Type | Description  | Notes
 
 ## CreateEditSession
 
-> ChunkedUploadSessionResponseWrapperWrapper CreateEditSession(ctx, fileId).FileSize(fileSize).Execute()
+> ChunkedUploadSessionResultWrapper CreateEditSession(ctx, fileId).FileSize(fileSize).Execute()
 
 Create the editing session
 
@@ -463,7 +463,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateEditSession``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateEditSession`: ChunkedUploadSessionResponseWrapperWrapper
+	// response from `CreateEditSession`: ChunkedUploadSessionResultWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.CreateEditSession`: %v\n", resp)
 }
 ```
@@ -488,7 +488,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChunkedUploadSessionResponseWrapperWrapper**](ChunkedUploadSessionResponseWrapperWrapper.md)
+[**ChunkedUploadSessionResultWrapper**](ChunkedUploadSessionResultWrapper.md)
 
 ### Authorization
 
@@ -506,7 +506,7 @@ Name | Type | Description  | Notes
 
 ## CreateFile
 
-> FileWrapper CreateFile(ctx, folderId).CreateFileJsonElement(createFileJsonElement).Execute()
+> FileWrapper CreateFile(ctx, folderId).CreateFileRequest(createFileRequest).Execute()
 
 Create a file
 
@@ -528,11 +528,11 @@ import (
 
 func main() {
 	folderId := int32(1) // int32 | The folder the file is created in.
-	createFileJsonElement := *openapiclient.NewCreateFileJsonElement("New Document.docx") // CreateFileJsonElement | The title of the new file and the source of its content.
+	createFileRequest := *openapiclient.NewCreateFileRequest("New Document.docx") // CreateFileRequest | The title of the new file and the source of its content.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.CreateFile(context.Background(), folderId).CreateFileJsonElement(createFileJsonElement).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.CreateFile(context.Background(), folderId).CreateFileRequest(createFileRequest).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// folderId := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.CreateFile(context.Background(), folderId).ExecuteThirdParty()
@@ -561,7 +561,7 @@ Other parameters are passed through a pointer to a apiCreateFileRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createFileJsonElement** | [**CreateFileJsonElement**](CreateFileJsonElement.md) | The title of the new file and the source of its content. | 
+ **createFileRequest** | [**CreateFileRequest**](CreateFileRequest.md) | The title of the new file and the source of its content. | 
 
 ### Return type
 
@@ -583,7 +583,7 @@ Name | Type | Description  | Notes
 
 ## CreateFileInMyDocuments
 
-> FileWrapper CreateFileInMyDocuments(ctx).CreateFileJsonElement(createFileJsonElement).Execute()
+> FileWrapper CreateFileInMyDocuments(ctx).CreateFileRequest(createFileRequest).Execute()
 
 Create a file in My documents
 
@@ -604,11 +604,11 @@ import (
 )
 
 func main() {
-	createFileJsonElement := *openapiclient.NewCreateFileJsonElement("New Document.docx") // CreateFileJsonElement |  (optional)
+	createFileRequest := *openapiclient.NewCreateFileRequest("New Document.docx") // CreateFileRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.CreateFileInMyDocuments(context.Background()).CreateFileJsonElement(createFileJsonElement).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.CreateFileInMyDocuments(context.Background()).CreateFileRequest(createFileRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateFileInMyDocuments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -629,7 +629,7 @@ Other parameters are passed through a pointer to a apiCreateFileInMyDocumentsReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createFileJsonElement** | [**CreateFileJsonElement**](CreateFileJsonElement.md) |  | 
+ **createFileRequest** | [**CreateFileRequest**](CreateFileRequest.md) |  | 
 
 ### Return type
 
@@ -725,7 +725,7 @@ Name | Type | Description  | Notes
 
 ## CreateHtmlFile
 
-> FileWrapper CreateHtmlFile(ctx, folderId).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+> FileWrapper CreateHtmlFile(ctx, folderId).CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest).Execute()
 
 Create an HTML file
 
@@ -747,11 +747,11 @@ import (
 
 func main() {
 	folderId := int32(1) // int32 | The folder the file is created in.
-	createTextOrHtmlFile := *openapiclient.NewCreateTextOrHtmlFile("Document.txt") // CreateTextOrHtmlFile | The title, the content and the collision behaviour of the new file.
+	createTextOrHtmlFileRequest := *openapiclient.NewCreateTextOrHtmlFileRequest("Document.txt") // CreateTextOrHtmlFileRequest | The title, the content and the collision behaviour of the new file.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.CreateHtmlFile(context.Background(), folderId).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.CreateHtmlFile(context.Background(), folderId).CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// folderId := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.CreateHtmlFile(context.Background(), folderId).ExecuteThirdParty()
@@ -780,7 +780,7 @@ Other parameters are passed through a pointer to a apiCreateHtmlFileRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createTextOrHtmlFile** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) | The title, the content and the collision behaviour of the new file. | 
+ **createTextOrHtmlFileRequest** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md) | The title, the content and the collision behaviour of the new file. | 
 
 ### Return type
 
@@ -802,7 +802,7 @@ Name | Type | Description  | Notes
 
 ## CreateHtmlFileInMyDocuments
 
-> FileWrapper CreateHtmlFileInMyDocuments(ctx).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+> FileWrapper CreateHtmlFileInMyDocuments(ctx).CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest).Execute()
 
 Create an HTML file in My documents
 
@@ -823,11 +823,11 @@ import (
 )
 
 func main() {
-	createTextOrHtmlFile := *openapiclient.NewCreateTextOrHtmlFile("Document.txt") // CreateTextOrHtmlFile |  (optional)
+	createTextOrHtmlFileRequest := *openapiclient.NewCreateTextOrHtmlFileRequest("Document.txt") // CreateTextOrHtmlFileRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.CreateHtmlFileInMyDocuments(context.Background()).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.CreateHtmlFileInMyDocuments(context.Background()).CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateHtmlFileInMyDocuments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -848,7 +848,7 @@ Other parameters are passed through a pointer to a apiCreateHtmlFileInMyDocument
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createTextOrHtmlFile** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) |  | 
+ **createTextOrHtmlFileRequest** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md) |  | 
 
 ### Return type
 
@@ -870,7 +870,7 @@ Name | Type | Description  | Notes
 
 ## CreateTextFile
 
-> FileWrapper CreateTextFile(ctx, folderId).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+> FileWrapper CreateTextFile(ctx, folderId).CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest).Execute()
 
 Create a text file
 
@@ -892,11 +892,11 @@ import (
 
 func main() {
 	folderId := int32(1) // int32 | The folder the file is created in.
-	createTextOrHtmlFile := *openapiclient.NewCreateTextOrHtmlFile("Document.txt") // CreateTextOrHtmlFile | The title, the content and the collision behaviour of the new file.
+	createTextOrHtmlFileRequest := *openapiclient.NewCreateTextOrHtmlFileRequest("Document.txt") // CreateTextOrHtmlFileRequest | The title, the content and the collision behaviour of the new file.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.CreateTextFile(context.Background(), folderId).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.CreateTextFile(context.Background(), folderId).CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// folderId := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.CreateTextFile(context.Background(), folderId).ExecuteThirdParty()
@@ -925,7 +925,7 @@ Other parameters are passed through a pointer to a apiCreateTextFileRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createTextOrHtmlFile** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) | The title, the content and the collision behaviour of the new file. | 
+ **createTextOrHtmlFileRequest** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md) | The title, the content and the collision behaviour of the new file. | 
 
 ### Return type
 
@@ -947,7 +947,7 @@ Name | Type | Description  | Notes
 
 ## CreateTextFileInMyDocuments
 
-> FileWrapper CreateTextFileInMyDocuments(ctx).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+> FileWrapper CreateTextFileInMyDocuments(ctx).CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest).Execute()
 
 Create a text file in My documents
 
@@ -968,11 +968,11 @@ import (
 )
 
 func main() {
-	createTextOrHtmlFile := *openapiclient.NewCreateTextOrHtmlFile("Document.txt") // CreateTextOrHtmlFile |  (optional)
+	createTextOrHtmlFileRequest := *openapiclient.NewCreateTextOrHtmlFileRequest("Document.txt") // CreateTextOrHtmlFileRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.CreateTextFileInMyDocuments(context.Background()).CreateTextOrHtmlFile(createTextOrHtmlFile).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.CreateTextFileInMyDocuments(context.Background()).CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.CreateTextFileInMyDocuments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -993,7 +993,7 @@ Other parameters are passed through a pointer to a apiCreateTextFileInMyDocument
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createTextOrHtmlFile** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) |  | 
+ **createTextOrHtmlFileRequest** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md) |  | 
 
 ### Return type
 
@@ -1083,7 +1083,7 @@ Name | Type | Description  | Notes
 
 ## DeleteFile
 
-> FileOperationArrayWrapper DeleteFile(ctx, fileId).Delete(delete).ReturnSingleOperation(returnSingleOperation).Execute()
+> FileOperationArrayWrapper DeleteFile(ctx, fileId).DeleteFileRequest(deleteFileRequest).ReturnSingleOperation(returnSingleOperation).Execute()
 
 Delete a file
 
@@ -1105,12 +1105,12 @@ import (
 
 func main() {
 	fileId := int32(1) // int32 | The file to delete.
-	delete := *openapiclient.NewDelete() // Delete | When and how the file is deleted.
+	deleteFileRequest := *openapiclient.NewDeleteFileRequest() // DeleteFileRequest | When and how the file is deleted.
 	returnSingleOperation := false // bool | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.DeleteFile(context.Background(), fileId).Delete(delete).ReturnSingleOperation(returnSingleOperation).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.DeleteFile(context.Background(), fileId).DeleteFileRequest(deleteFileRequest).ReturnSingleOperation(returnSingleOperation).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.DeleteFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1136,7 +1136,7 @@ Other parameters are passed through a pointer to a apiDeleteFileRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **delete** | [**Delete**](Delete.md) | When and how the file is deleted. | 
+ **deleteFileRequest** | [**DeleteFileRequest**](DeleteFileRequest.md) | When and how the file is deleted. | 
  **returnSingleOperation** | **bool** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | 
 
 ### Return type
@@ -1225,7 +1225,7 @@ Name | Type | Description  | Notes
 
 ## DeleteTemplates
 
-> BooleanWrapper DeleteTemplates(ctx).RequestBody(requestBody).Execute()
+> BooleanWrapper DeleteTemplates(ctx).DeleteTemplateFilesRequestDto(deleteTemplateFilesRequestDto).Execute()
 
 Delete template files
 
@@ -1246,11 +1246,11 @@ import (
 )
 
 func main() {
-	requestBody := []int32{int32(123)} // []int32 | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. (optional)
+	deleteTemplateFilesRequestDto := []int32{int32(123)} // []int32 | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.DeleteTemplates(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.DeleteTemplates(context.Background()).DeleteTemplateFilesRequestDto(deleteTemplateFilesRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.DeleteTemplates``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1271,7 +1271,7 @@ Other parameters are passed through a pointer to a apiDeleteTemplatesRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **[]int32** | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. | 
+ **deleteTemplateFilesRequestDto** | **[]int32** | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. | 
 
 ### Return type
 
@@ -2324,7 +2324,7 @@ Name | Type | Description  | Notes
 
 ## GetProtectedFileUsers
 
-> MentionWrapperArrayWrapper GetProtectedFileUsers(ctx, fileId).Execute()
+> MentionArrayWrapper GetProtectedFileUsers(ctx, fileId).Execute()
 
 Get users for document protection
 
@@ -2354,7 +2354,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.GetProtectedFileUsers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetProtectedFileUsers`: MentionWrapperArrayWrapper
+	// response from `GetProtectedFileUsers`: MentionArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesFilesAPI.GetProtectedFileUsers`: %v\n", resp)
 }
 ```
@@ -2378,7 +2378,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
+[**MentionArrayWrapper**](MentionArrayWrapper.md)
 
 ### Authorization
 
@@ -2608,7 +2608,7 @@ Name | Type | Description  | Notes
 
 ## LockFile
 
-> FileWrapper LockFile(ctx, fileId).LockFileParameters(lockFileParameters).Execute()
+> FileWrapper LockFile(ctx, fileId).LockFileRequest(lockFileRequest).Execute()
 
 Lock a file
 
@@ -2630,11 +2630,11 @@ import (
 
 func main() {
 	fileId := int32(1) // int32 | The file to lock or unlock.
-	lockFileParameters := *openapiclient.NewLockFileParameters() // LockFileParameters | The lock state to reach.
+	lockFileRequest := *openapiclient.NewLockFileRequest() // LockFileRequest | The lock state to reach.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.LockFile(context.Background(), fileId).LockFileParameters(lockFileParameters).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.LockFile(context.Background(), fileId).LockFileRequest(lockFileRequest).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// fileId := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.LockFile(context.Background(), fileId).ExecuteThirdParty()
@@ -2663,7 +2663,7 @@ Other parameters are passed through a pointer to a apiLockFileRequest struct via
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **lockFileParameters** | [**LockFileParameters**](LockFileParameters.md) | The lock state to reach. | 
+ **lockFileRequest** | [**LockFileRequest**](LockFileRequest.md) | The lock state to reach. | 
 
 ### Return type
 
@@ -3001,7 +3001,7 @@ Name | Type | Description  | Notes
 
 ## SaveFileAsPdf
 
-> FileWrapper SaveFileAsPdf(ctx, id).SaveAsPdf(saveAsPdf).Execute()
+> FileWrapper SaveFileAsPdf(ctx, id).SaveAsPdfRequest(saveAsPdfRequest).Execute()
 
 Save a file as PDF
 
@@ -3023,11 +3023,11 @@ import (
 
 func main() {
 	id := int32(1) // int32 | The file to convert; it is left untouched.
-	saveAsPdf := *openapiclient.NewSaveAsPdf(int32(1), "My Document") // SaveAsPdf | The destination folder and the name of the PDF.
+	saveAsPdfRequest := *openapiclient.NewSaveAsPdfRequest(int32(1), "My Document") // SaveAsPdfRequest | The destination folder and the name of the PDF.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.SaveFileAsPdf(context.Background(), id).SaveAsPdf(saveAsPdf).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.SaveFileAsPdf(context.Background(), id).SaveAsPdfRequest(saveAsPdfRequest).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// id := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.SaveFileAsPdf(context.Background(), id).ExecuteThirdParty()
@@ -3056,7 +3056,7 @@ Other parameters are passed through a pointer to a apiSaveFileAsPdfRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **saveAsPdf** | [**SaveAsPdf**](SaveAsPdf.md) | The destination folder and the name of the PDF. | 
+ **saveAsPdfRequest** | [**SaveAsPdfRequest**](SaveAsPdfRequest.md) | The destination folder and the name of the PDF. | 
 
 ### Return type
 
@@ -3100,7 +3100,7 @@ import (
 
 func main() {
 	fileId := "fileId_example" // string | The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads.
-	saveFormRoleMappingDto := *openapiclient.NewSaveFormRoleMappingDto(int32(1), []openapiclient.FormRole{*openapiclient.NewFormRole()}) // SaveFormRoleMappingDto |  (optional)
+	saveFormRoleMappingDto := *openapiclient.NewSaveFormRoleMappingDto(int32(1), []openapiclient.FormRoleRequest{*openapiclient.NewFormRoleRequest()}) // SaveFormRoleMappingDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3150,7 +3150,7 @@ Name | Type | Description  | Notes
 
 ## SetCustomFilterTag
 
-> FileWrapper SetCustomFilterTag(ctx, fileId).CustomFilterParameters(customFilterParameters).Execute()
+> FileWrapper SetCustomFilterTag(ctx, fileId).CustomFilterRequest(customFilterRequest).Execute()
 
 Set the Custom Filter editing mode
 
@@ -3172,11 +3172,11 @@ import (
 
 func main() {
 	fileId := int32(1) // int32 | The spreadsheet whose Custom Filter mode is switched.
-	customFilterParameters := *openapiclient.NewCustomFilterParameters() // CustomFilterParameters | The Custom Filter state to reach.
+	customFilterRequest := *openapiclient.NewCustomFilterRequest() // CustomFilterRequest | The Custom Filter state to reach.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.SetCustomFilterTag(context.Background(), fileId).CustomFilterParameters(customFilterParameters).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.SetCustomFilterTag(context.Background(), fileId).CustomFilterRequest(customFilterRequest).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// fileId := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.SetCustomFilterTag(context.Background(), fileId).ExecuteThirdParty()
@@ -3205,7 +3205,7 @@ Other parameters are passed through a pointer to a apiSetCustomFilterTagRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **customFilterParameters** | [**CustomFilterParameters**](CustomFilterParameters.md) | The Custom Filter state to reach. | 
+ **customFilterRequest** | [**CustomFilterRequest**](CustomFilterRequest.md) | The Custom Filter state to reach. | 
 
 ### Return type
 
@@ -3518,7 +3518,7 @@ Name | Type | Description  | Notes
 
 ## StartEditFile
 
-> StringWrapper StartEditFile(ctx, fileId).StartEdit(startEdit).Execute()
+> StringWrapper StartEditFile(ctx, fileId).StartEditRequest(startEditRequest).Execute()
 
 Open an editing session
 
@@ -3540,11 +3540,11 @@ import (
 
 func main() {
 	fileId := int32(1) // int32 | The file to open the editing session on. The caller needs edit access to it.
-	startEdit := *openapiclient.NewStartEdit() // StartEdit | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
+	startEditRequest := *openapiclient.NewStartEditRequest() // StartEditRequest | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.StartEditFile(context.Background(), fileId).StartEdit(startEdit).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.StartEditFile(context.Background(), fileId).StartEditRequest(startEditRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesFilesAPI.StartEditFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3570,7 +3570,7 @@ Other parameters are passed through a pointer to a apiStartEditFileRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **startEdit** | [**StartEdit**](StartEdit.md) | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | 
+ **startEditRequest** | [**StartEditRequest**](StartEditRequest.md) | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | 
 
 ### Return type
 
@@ -3819,7 +3819,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFile
 
-> FileWrapper UpdateFile(ctx, fileId).UpdateFile(updateFile).Execute()
+> FileWrapper UpdateFile(ctx, fileId).UpdateFileRequest(updateFileRequest).Execute()
 
 Update a file
 
@@ -3841,11 +3841,11 @@ import (
 
 func main() {
 	fileId := int32(1) // int32 | The file to update.
-	updateFile := *openapiclient.NewUpdateFile() // UpdateFile | The new title and the version to restore.
+	updateFileRequest := *openapiclient.NewUpdateFileRequest() // UpdateFileRequest | The new title and the version to restore.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesFilesAPI.UpdateFile(context.Background(), fileId).UpdateFile(updateFile).Execute()
+	resp, r, err := apiClient.FilesFilesAPI.UpdateFile(context.Background(), fileId).UpdateFileRequest(updateFileRequest).Execute()
 	// for an entry in a connected third-party storage (a string id such as "sbox-42"):
 	// fileId := "sbox-42"
 	// thirdPartyResp, r, err := apiClient.FilesFilesAPI.UpdateFile(context.Background(), fileId).ExecuteThirdParty()
@@ -3874,7 +3874,7 @@ Other parameters are passed through a pointer to a apiUpdateFileRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateFile** | [**UpdateFile**](UpdateFile.md) | The new title and the version to restore. | 
+ **updateFileRequest** | [**UpdateFileRequest**](UpdateFileRequest.md) | The new title and the version to restore. | 
 
 ### Return type
 

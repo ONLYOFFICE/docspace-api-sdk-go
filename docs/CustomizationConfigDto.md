@@ -7,15 +7,15 @@ Name | Type | Description | Notes
 **About** | Pointer to **bool** | Whether the About entry of the editor menu is shown. | [optional] 
 **Customer** | Pointer to [**CustomerConfigDto**](CustomerConfigDto.md) | The branding of the organization running the portal. It is filled in on a server installation only and is  empty in the cloud. | [optional] 
 **Anonymous** | Pointer to [**AnonymousConfigDto**](AnonymousConfigDto.md) | How an anonymous participant is treated in this session. | [optional] 
-**Feedback** | Pointer to [**FeedbackConfig**](FeedbackConfig.md) | The support link the editor offers behind its feedback button. | [optional] 
+**Feedback** | Pointer to [**FeedbackConfigDto**](FeedbackConfigDto.md) | The support link the editor offers behind its feedback button. | [optional] 
 **Forcesave** | Pointer to **NullableBool** | Whether the editors write intermediate revisions while the document stays open. It is empty when the portal  leaves the decision to the editors themselves. | [optional] 
-**Goback** | Pointer to [**GobackConfig**](GobackConfig.md) | Where the editor returns the user to when they leave the document. It is empty when there is nowhere to go  back to, as in an embedded opening. | [optional] 
-**Review** | Pointer to [**ReviewConfig**](ReviewConfig.md) | How tracked changes are displayed when the document opens; it depends on whether this session may write. | [optional] 
+**Goback** | Pointer to [**GobackConfigDto**](GobackConfigDto.md) | Where the editor returns the user to when they leave the document. It is empty when there is nowhere to go  back to, as in an embedded opening. | [optional] 
+**Review** | Pointer to [**ReviewConfigDto**](ReviewConfigDto.md) | How tracked changes are displayed when the document opens; it depends on whether this session may write. | [optional] 
 **Logo** | Pointer to [**LogoConfigDto**](LogoConfigDto.md) | The logo the editor shows, in the variants the current layout and file type need. | [optional] 
 **MentionShare** | Pointer to **bool** | Whether mentioning a user who cannot yet open the document offers to share it with them, instead of silently  notifying nobody. | [optional] 
-**SubmitForm** | Pointer to [**SubmitForm**](SubmitForm.md) | The submit button of a form: whether it is shown and what it says. | [optional] 
+**SubmitForm** | Pointer to [**SubmitFormDto**](SubmitFormDto.md) | The submit button of a form: whether it is shown and what it says. | [optional] 
 **StartFillingForm** | Pointer to [**StartFillingForm**](StartFillingForm.md) | The button that starts filling out the form. It is empty when this opening offers no such button. | [optional] 
-**Ai** | Pointer to [**AIConfig**](AIConfig.md) | The AI configuration settings. | [optional] 
+**Ai** | Pointer to [**AiConfigDto**](AiConfigDto.md) | The AI configuration settings. | [optional] 
 
 ## Methods
 
@@ -113,20 +113,20 @@ HasAnonymous returns a boolean if a field has been set.
 
 ### GetFeedback
 
-`func (o *CustomizationConfigDto) GetFeedback() FeedbackConfig`
+`func (o *CustomizationConfigDto) GetFeedback() FeedbackConfigDto`
 
 GetFeedback returns the Feedback field if non-nil, zero value otherwise.
 
 ### GetFeedbackOk
 
-`func (o *CustomizationConfigDto) GetFeedbackOk() (*FeedbackConfig, bool)`
+`func (o *CustomizationConfigDto) GetFeedbackOk() (*FeedbackConfigDto, bool)`
 
 GetFeedbackOk returns a tuple with the Feedback field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFeedback
 
-`func (o *CustomizationConfigDto) SetFeedback(v FeedbackConfig)`
+`func (o *CustomizationConfigDto) SetFeedback(v FeedbackConfigDto)`
 
 SetFeedback sets Feedback field to given value.
 
@@ -173,20 +173,20 @@ HasForcesave returns a boolean if a field has been set.
 UnsetForcesave ensures that no value is present for Forcesave, not even an explicit nil
 ### GetGoback
 
-`func (o *CustomizationConfigDto) GetGoback() GobackConfig`
+`func (o *CustomizationConfigDto) GetGoback() GobackConfigDto`
 
 GetGoback returns the Goback field if non-nil, zero value otherwise.
 
 ### GetGobackOk
 
-`func (o *CustomizationConfigDto) GetGobackOk() (*GobackConfig, bool)`
+`func (o *CustomizationConfigDto) GetGobackOk() (*GobackConfigDto, bool)`
 
 GetGobackOk returns a tuple with the Goback field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGoback
 
-`func (o *CustomizationConfigDto) SetGoback(v GobackConfig)`
+`func (o *CustomizationConfigDto) SetGoback(v GobackConfigDto)`
 
 SetGoback sets Goback field to given value.
 
@@ -198,20 +198,20 @@ HasGoback returns a boolean if a field has been set.
 
 ### GetReview
 
-`func (o *CustomizationConfigDto) GetReview() ReviewConfig`
+`func (o *CustomizationConfigDto) GetReview() ReviewConfigDto`
 
 GetReview returns the Review field if non-nil, zero value otherwise.
 
 ### GetReviewOk
 
-`func (o *CustomizationConfigDto) GetReviewOk() (*ReviewConfig, bool)`
+`func (o *CustomizationConfigDto) GetReviewOk() (*ReviewConfigDto, bool)`
 
 GetReviewOk returns a tuple with the Review field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReview
 
-`func (o *CustomizationConfigDto) SetReview(v ReviewConfig)`
+`func (o *CustomizationConfigDto) SetReview(v ReviewConfigDto)`
 
 SetReview sets Review field to given value.
 
@@ -273,20 +273,20 @@ HasMentionShare returns a boolean if a field has been set.
 
 ### GetSubmitForm
 
-`func (o *CustomizationConfigDto) GetSubmitForm() SubmitForm`
+`func (o *CustomizationConfigDto) GetSubmitForm() SubmitFormDto`
 
 GetSubmitForm returns the SubmitForm field if non-nil, zero value otherwise.
 
 ### GetSubmitFormOk
 
-`func (o *CustomizationConfigDto) GetSubmitFormOk() (*SubmitForm, bool)`
+`func (o *CustomizationConfigDto) GetSubmitFormOk() (*SubmitFormDto, bool)`
 
 GetSubmitFormOk returns a tuple with the SubmitForm field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSubmitForm
 
-`func (o *CustomizationConfigDto) SetSubmitForm(v SubmitForm)`
+`func (o *CustomizationConfigDto) SetSubmitForm(v SubmitFormDto)`
 
 SetSubmitForm sets SubmitForm field to given value.
 
@@ -323,20 +323,20 @@ HasStartFillingForm returns a boolean if a field has been set.
 
 ### GetAi
 
-`func (o *CustomizationConfigDto) GetAi() AIConfig`
+`func (o *CustomizationConfigDto) GetAi() AiConfigDto`
 
 GetAi returns the Ai field if non-nil, zero value otherwise.
 
 ### GetAiOk
 
-`func (o *CustomizationConfigDto) GetAiOk() (*AIConfig, bool)`
+`func (o *CustomizationConfigDto) GetAiOk() (*AiConfigDto, bool)`
 
 GetAiOk returns a tuple with the Ai field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAi
 
-`func (o *CustomizationConfigDto) SetAi(v AIConfig)`
+`func (o *CustomizationConfigDto) SetAi(v AiConfigDto)`
 
 SetAi sets Ai field to given value.
 

@@ -18,13 +18,13 @@ import (
 	"encoding/json"
 )
 
-// checks if the IPRestrictionArrayWrapper type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &IPRestrictionArrayWrapper{}
+// checks if the IpRestrictionArrayWrapper type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IpRestrictionArrayWrapper{}
 
-// IPRestrictionArrayWrapper The successful API response containing the list of IPRestriction objects.
-type IPRestrictionArrayWrapper struct {
-	// The list of IPRestriction objects returned by the operation.
-	Response []IPRestriction `json:"response,omitempty"`
+// IpRestrictionArrayWrapper The successful API response containing the list of IpRestrictionDto objects.
+type IpRestrictionArrayWrapper struct {
+	// The list of IpRestrictionDto objects returned by the operation.
+	Response []IpRestrictionDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -35,27 +35,27 @@ type IPRestrictionArrayWrapper struct {
 	StatusCode *int32 `json:"statusCode,omitempty"`
 }
 
-// NewIPRestrictionArrayWrapper instantiates a new IPRestrictionArrayWrapper object
+// NewIpRestrictionArrayWrapper instantiates a new IpRestrictionArrayWrapper object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIPRestrictionArrayWrapper() *IPRestrictionArrayWrapper {
-	this := IPRestrictionArrayWrapper{}
+func NewIpRestrictionArrayWrapper() *IpRestrictionArrayWrapper {
+	this := IpRestrictionArrayWrapper{}
 	return &this
 }
 
-// NewIPRestrictionArrayWrapperWithDefaults instantiates a new IPRestrictionArrayWrapper object
+// NewIpRestrictionArrayWrapperWithDefaults instantiates a new IpRestrictionArrayWrapper object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewIPRestrictionArrayWrapperWithDefaults() *IPRestrictionArrayWrapper {
-	this := IPRestrictionArrayWrapper{}
+func NewIpRestrictionArrayWrapperWithDefaults() *IpRestrictionArrayWrapper {
+	this := IpRestrictionArrayWrapper{}
 	return &this
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *IPRestrictionArrayWrapper) GetResponse() []IPRestriction {
+func (o *IpRestrictionArrayWrapper) GetResponse() []IpRestrictionDto {
 	if o == nil || IsNil(o.Response) {
-		var ret []IPRestriction
+		var ret []IpRestrictionDto
 		return ret
 	}
 	return o.Response
@@ -63,7 +63,7 @@ func (o *IPRestrictionArrayWrapper) GetResponse() []IPRestriction {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPRestrictionArrayWrapper) GetResponseOk() ([]IPRestriction, bool) {
+func (o *IpRestrictionArrayWrapper) GetResponseOk() ([]IpRestrictionDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -71,7 +71,7 @@ func (o *IPRestrictionArrayWrapper) GetResponseOk() ([]IPRestriction, bool) {
 }
 
 // HasResponse returns a boolean if a field has been set.
-func (o *IPRestrictionArrayWrapper) IsResponseSet() bool {
+func (o *IpRestrictionArrayWrapper) IsResponseSet() bool {
 	if o != nil && !IsNil(o.Response) {
 		return true
 	}
@@ -79,13 +79,13 @@ func (o *IPRestrictionArrayWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given []IPRestriction and assigns it to the Response field.
-func (o *IPRestrictionArrayWrapper) SetResponse(v []IPRestriction) {
+// SetResponse gets a reference to the given []IpRestrictionDto and assigns it to the Response field.
+func (o *IpRestrictionArrayWrapper) SetResponse(v []IpRestrictionDto) {
 	o.Response = v
 }
 
 // GetCount returns the Count field value if set, zero value otherwise.
-func (o *IPRestrictionArrayWrapper) GetCount() int32 {
+func (o *IpRestrictionArrayWrapper) GetCount() int32 {
 	if o == nil || IsNil(o.Count) {
 		var ret int32
 		return ret
@@ -95,7 +95,7 @@ func (o *IPRestrictionArrayWrapper) GetCount() int32 {
 
 // GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPRestrictionArrayWrapper) GetCountOk() (*int32, bool) {
+func (o *IpRestrictionArrayWrapper) GetCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *IPRestrictionArrayWrapper) GetCountOk() (*int32, bool) {
 }
 
 // HasCount returns a boolean if a field has been set.
-func (o *IPRestrictionArrayWrapper) IsCountSet() bool {
+func (o *IpRestrictionArrayWrapper) IsCountSet() bool {
 	if o != nil && !IsNil(o.Count) {
 		return true
 	}
@@ -112,12 +112,12 @@ func (o *IPRestrictionArrayWrapper) IsCountSet() bool {
 }
 
 // SetCount gets a reference to the given int32 and assigns it to the Count field.
-func (o *IPRestrictionArrayWrapper) SetCount(v int32) {
+func (o *IpRestrictionArrayWrapper) SetCount(v int32) {
 	o.Count = &v
 }
 
 // GetLinks returns the Links field value if set, zero value otherwise.
-func (o *IPRestrictionArrayWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner {
+func (o *IpRestrictionArrayWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner {
 	if o == nil || IsNil(o.Links) {
 		var ret []GetPortalPrices200ResponseLinksInner
 		return ret
@@ -127,7 +127,7 @@ func (o *IPRestrictionArrayWrapper) GetLinks() []GetPortalPrices200ResponseLinks
 
 // GetLinksOk returns a tuple with the Links field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPRestrictionArrayWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinksInner, bool) {
+func (o *IpRestrictionArrayWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinksInner, bool) {
 	if o == nil || IsNil(o.Links) {
 		return nil, false
 	}
@@ -135,7 +135,7 @@ func (o *IPRestrictionArrayWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLi
 }
 
 // HasLinks returns a boolean if a field has been set.
-func (o *IPRestrictionArrayWrapper) IsLinksSet() bool {
+func (o *IpRestrictionArrayWrapper) IsLinksSet() bool {
 	if o != nil && !IsNil(o.Links) {
 		return true
 	}
@@ -144,12 +144,12 @@ func (o *IPRestrictionArrayWrapper) IsLinksSet() bool {
 }
 
 // SetLinks gets a reference to the given []GetPortalPrices200ResponseLinksInner and assigns it to the Links field.
-func (o *IPRestrictionArrayWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner) {
+func (o *IpRestrictionArrayWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner) {
 	o.Links = v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *IPRestrictionArrayWrapper) GetStatus() int32 {
+func (o *IpRestrictionArrayWrapper) GetStatus() int32 {
 	if o == nil || IsNil(o.Status) {
 		var ret int32
 		return ret
@@ -159,7 +159,7 @@ func (o *IPRestrictionArrayWrapper) GetStatus() int32 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPRestrictionArrayWrapper) GetStatusOk() (*int32, bool) {
+func (o *IpRestrictionArrayWrapper) GetStatusOk() (*int32, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -167,7 +167,7 @@ func (o *IPRestrictionArrayWrapper) GetStatusOk() (*int32, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *IPRestrictionArrayWrapper) IsStatusSet() bool {
+func (o *IpRestrictionArrayWrapper) IsStatusSet() bool {
 	if o != nil && !IsNil(o.Status) {
 		return true
 	}
@@ -176,12 +176,12 @@ func (o *IPRestrictionArrayWrapper) IsStatusSet() bool {
 }
 
 // SetStatus gets a reference to the given int32 and assigns it to the Status field.
-func (o *IPRestrictionArrayWrapper) SetStatus(v int32) {
+func (o *IpRestrictionArrayWrapper) SetStatus(v int32) {
 	o.Status = &v
 }
 
 // GetStatusCode returns the StatusCode field value if set, zero value otherwise.
-func (o *IPRestrictionArrayWrapper) GetStatusCode() int32 {
+func (o *IpRestrictionArrayWrapper) GetStatusCode() int32 {
 	if o == nil || IsNil(o.StatusCode) {
 		var ret int32
 		return ret
@@ -191,7 +191,7 @@ func (o *IPRestrictionArrayWrapper) GetStatusCode() int32 {
 
 // GetStatusCodeOk returns a tuple with the StatusCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPRestrictionArrayWrapper) GetStatusCodeOk() (*int32, bool) {
+func (o *IpRestrictionArrayWrapper) GetStatusCodeOk() (*int32, bool) {
 	if o == nil || IsNil(o.StatusCode) {
 		return nil, false
 	}
@@ -199,7 +199,7 @@ func (o *IPRestrictionArrayWrapper) GetStatusCodeOk() (*int32, bool) {
 }
 
 // HasStatusCode returns a boolean if a field has been set.
-func (o *IPRestrictionArrayWrapper) IsStatusCodeSet() bool {
+func (o *IpRestrictionArrayWrapper) IsStatusCodeSet() bool {
 	if o != nil && !IsNil(o.StatusCode) {
 		return true
 	}
@@ -208,11 +208,11 @@ func (o *IPRestrictionArrayWrapper) IsStatusCodeSet() bool {
 }
 
 // SetStatusCode gets a reference to the given int32 and assigns it to the StatusCode field.
-func (o *IPRestrictionArrayWrapper) SetStatusCode(v int32) {
+func (o *IpRestrictionArrayWrapper) SetStatusCode(v int32) {
 	o.StatusCode = &v
 }
 
-func (o IPRestrictionArrayWrapper) MarshalJSON() ([]byte, error) {
+func (o IpRestrictionArrayWrapper) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -220,7 +220,7 @@ func (o IPRestrictionArrayWrapper) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o IPRestrictionArrayWrapper) ToMap() (map[string]interface{}, error) {
+func (o IpRestrictionArrayWrapper) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Response) {
 		toSerialize["response"] = o.Response
@@ -240,38 +240,38 @@ func (o IPRestrictionArrayWrapper) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableIPRestrictionArrayWrapper struct {
-	value *IPRestrictionArrayWrapper
+type NullableIpRestrictionArrayWrapper struct {
+	value *IpRestrictionArrayWrapper
 	isSet bool
 }
 
-func (v NullableIPRestrictionArrayWrapper) Get() *IPRestrictionArrayWrapper {
+func (v NullableIpRestrictionArrayWrapper) Get() *IpRestrictionArrayWrapper {
 	return v.value
 }
 
-func (v *NullableIPRestrictionArrayWrapper) Set(val *IPRestrictionArrayWrapper) {
+func (v *NullableIpRestrictionArrayWrapper) Set(val *IpRestrictionArrayWrapper) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableIPRestrictionArrayWrapper) IsSet() bool {
+func (v NullableIpRestrictionArrayWrapper) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableIPRestrictionArrayWrapper) Unset() {
+func (v *NullableIpRestrictionArrayWrapper) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableIPRestrictionArrayWrapper(val *IPRestrictionArrayWrapper) *NullableIPRestrictionArrayWrapper {
-	return &NullableIPRestrictionArrayWrapper{value: val, isSet: true}
+func NewNullableIpRestrictionArrayWrapper(val *IpRestrictionArrayWrapper) *NullableIpRestrictionArrayWrapper {
+	return &NullableIpRestrictionArrayWrapper{value: val, isSet: true}
 }
 
-func (v NullableIPRestrictionArrayWrapper) MarshalJSON() ([]byte, error) {
+func (v NullableIpRestrictionArrayWrapper) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableIPRestrictionArrayWrapper) UnmarshalJSON(src []byte) error {
+func (v *NullableIpRestrictionArrayWrapper) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -31,10 +31,10 @@ type SettingsWebhooksAPIService service
 type ApiCreateWebhookRequest struct {
 	ctx context.Context
 	ApiService *SettingsWebhooksAPIService
-	createWebhooksConfigRequestsDto *CreateWebhooksConfigRequestsDto
+	createWebhooksConfigRequestDto *CreateWebhooksConfigRequestDto
 }
 
-func (r ApiCreateWebhookRequest) CreateWebhooksConfigRequestsDto(createWebhooksConfigRequestsDto CreateWebhooksConfigRequestsDto) ApiCreateWebhookRequest {	r.createWebhooksConfigRequestsDto = &createWebhooksConfigRequestsDto
+func (r ApiCreateWebhookRequest) CreateWebhooksConfigRequestDto(createWebhooksConfigRequestDto CreateWebhooksConfigRequestDto) ApiCreateWebhookRequest {	r.createWebhooksConfigRequestDto = &createWebhooksConfigRequestDto
 	return r
 }
 
@@ -96,7 +96,7 @@ func (a *SettingsWebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createWebhooksConfigRequestsDto
+	localVarPostBody = r.createWebhooksConfigRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -155,17 +155,6 @@ func (a *SettingsWebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequ
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -184,10 +173,10 @@ func (a *SettingsWebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequ
 type ApiEnableWebhookRequest struct {
 	ctx context.Context
 	ApiService *SettingsWebhooksAPIService
-	updateWebhooksConfigRequestsDto *UpdateWebhooksConfigRequestsDto
+	updateWebhooksConfigRequestDto *UpdateWebhooksConfigRequestDto
 }
 
-func (r ApiEnableWebhookRequest) UpdateWebhooksConfigRequestsDto(updateWebhooksConfigRequestsDto UpdateWebhooksConfigRequestsDto) ApiEnableWebhookRequest {	r.updateWebhooksConfigRequestsDto = &updateWebhooksConfigRequestsDto
+func (r ApiEnableWebhookRequest) UpdateWebhooksConfigRequestDto(updateWebhooksConfigRequestDto UpdateWebhooksConfigRequestDto) ApiEnableWebhookRequest {	r.updateWebhooksConfigRequestDto = &updateWebhooksConfigRequestDto
 	return r
 }
 
@@ -249,7 +238,7 @@ func (a *SettingsWebhooksAPIService) EnableWebhookExecute(r ApiEnableWebhookRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateWebhooksConfigRequestsDto
+	localVarPostBody = r.updateWebhooksConfigRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -298,17 +287,6 @@ func (a *SettingsWebhooksAPIService) EnableWebhookExecute(r ApiEnableWebhookRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -847,17 +825,6 @@ func (a *SettingsWebhooksAPIService) GetWebhooksLogsExecute(r ApiGetWebhooksLogs
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1187,10 +1154,10 @@ func (a *SettingsWebhooksAPIService) RetryWebhookExecute(r ApiRetryWebhookReques
 type ApiRetryWebhooksRequest struct {
 	ctx context.Context
 	ApiService *SettingsWebhooksAPIService
-	webhookRetryRequestsDto *WebhookRetryRequestsDto
+	webhookRetryRequestDto *WebhookRetryRequestDto
 }
 
-func (r ApiRetryWebhooksRequest) WebhookRetryRequestsDto(webhookRetryRequestsDto WebhookRetryRequestsDto) ApiRetryWebhooksRequest {	r.webhookRetryRequestsDto = &webhookRetryRequestsDto
+func (r ApiRetryWebhooksRequest) WebhookRetryRequestDto(webhookRetryRequestDto WebhookRetryRequestDto) ApiRetryWebhooksRequest {	r.webhookRetryRequestDto = &webhookRetryRequestDto
 	return r
 }
 
@@ -1252,7 +1219,7 @@ func (a *SettingsWebhooksAPIService) RetryWebhooksExecute(r ApiRetryWebhooksRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.webhookRetryRequestsDto
+	localVarPostBody = r.webhookRetryRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1351,10 +1318,10 @@ func (a *SettingsWebhooksAPIService) RetryWebhooksExecute(r ApiRetryWebhooksRequ
 type ApiUpdateWebhookRequest struct {
 	ctx context.Context
 	ApiService *SettingsWebhooksAPIService
-	updateWebhooksConfigRequestsDto *UpdateWebhooksConfigRequestsDto
+	updateWebhooksConfigRequestDto *UpdateWebhooksConfigRequestDto
 }
 
-func (r ApiUpdateWebhookRequest) UpdateWebhooksConfigRequestsDto(updateWebhooksConfigRequestsDto UpdateWebhooksConfigRequestsDto) ApiUpdateWebhookRequest {	r.updateWebhooksConfigRequestsDto = &updateWebhooksConfigRequestsDto
+func (r ApiUpdateWebhookRequest) UpdateWebhooksConfigRequestDto(updateWebhooksConfigRequestDto UpdateWebhooksConfigRequestDto) ApiUpdateWebhookRequest {	r.updateWebhooksConfigRequestDto = &updateWebhooksConfigRequestDto
 	return r
 }
 
@@ -1416,7 +1383,7 @@ func (a *SettingsWebhooksAPIService) UpdateWebhookExecute(r ApiUpdateWebhookRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateWebhooksConfigRequestsDto
+	localVarPostBody = r.updateWebhooksConfigRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1465,17 +1432,6 @@ func (a *SettingsWebhooksAPIService) UpdateWebhookExecute(r ApiUpdateWebhookRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

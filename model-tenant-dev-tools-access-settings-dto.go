@@ -16,15 +16,18 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // checks if the TenantDevToolsAccessSettingsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantDevToolsAccessSettingsDto{}
 
-// TenantDevToolsAccessSettingsDto Whether the `User` role is barred from the portal developer tools.
+// TenantDevToolsAccessSettingsDto Whether the developer tools are closed to the portal's users with the `User` role.
 type TenantDevToolsAccessSettingsDto struct {
-	// Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way.
+	// Specifies if the Developer Tools access are limited for users or not.
 	LimitedAccessForUsers *bool `json:"limitedAccessForUsers,omitempty"`
+	// The timestamp indicating when the settings were last modified.
+	LastModified *time.Time `json:"lastModified,omitempty"`
 }
 
 // NewTenantDevToolsAccessSettingsDto instantiates a new TenantDevToolsAccessSettingsDto object
@@ -76,6 +79,38 @@ func (o *TenantDevToolsAccessSettingsDto) SetLimitedAccessForUsers(v bool) {
 	o.LimitedAccessForUsers = &v
 }
 
+// GetLastModified returns the LastModified field value if set, zero value otherwise.
+func (o *TenantDevToolsAccessSettingsDto) GetLastModified() time.Time {
+	if o == nil || IsNil(o.LastModified) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastModified
+}
+
+// GetLastModifiedOk returns a tuple with the LastModified field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantDevToolsAccessSettingsDto) GetLastModifiedOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.LastModified) {
+		return nil, false
+	}
+	return o.LastModified, true
+}
+
+// HasLastModified returns a boolean if a field has been set.
+func (o *TenantDevToolsAccessSettingsDto) IsLastModifiedSet() bool {
+	if o != nil && !IsNil(o.LastModified) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastModified gets a reference to the given time.Time and assigns it to the LastModified field.
+func (o *TenantDevToolsAccessSettingsDto) SetLastModified(v time.Time) {
+	o.LastModified = &v
+}
+
 func (o TenantDevToolsAccessSettingsDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -88,6 +123,9 @@ func (o TenantDevToolsAccessSettingsDto) ToMap() (map[string]interface{}, error)
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.LimitedAccessForUsers) {
 		toSerialize["limitedAccessForUsers"] = o.LimitedAccessForUsers
+	}
+	if !IsNil(o.LastModified) {
+		toSerialize["lastModified"] = o.LastModified
 	}
 	return toSerialize, nil
 }

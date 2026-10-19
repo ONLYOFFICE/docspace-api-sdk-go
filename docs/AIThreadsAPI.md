@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## AiThreadsClearMessages
 
-> AiSuccessResponse AiThreadsClearMessages(ctx).Body(body).Execute()
+> AiSuccessResponse AiThreadsClearMessages(ctx).AiThreadsClearMessagesRequest(aiThreadsClearMessagesRequest).Execute()
 
 Clear messages
 
@@ -112,11 +112,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | The ID of the thread to empty, as a bare JSON string.
+	aiThreadsClearMessagesRequest := "aiThreadsClearMessagesRequest_example" // string | The ID of the thread to empty, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIThreadsAPI.AiThreadsClearMessages(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIThreadsAPI.AiThreadsClearMessages(context.Background()).AiThreadsClearMessagesRequest(aiThreadsClearMessagesRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIThreadsAPI.AiThreadsClearMessages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -137,7 +137,7 @@ Other parameters are passed through a pointer to a apiAiThreadsClearMessagesRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | The ID of the thread to empty, as a bare JSON string. | 
+ **aiThreadsClearMessagesRequest** | **string** | The ID of the thread to empty, as a bare JSON string. | 
 
 ### Return type
 
@@ -227,7 +227,7 @@ Name | Type | Description  | Notes
 
 ## AiThreadsDelete
 
-> AiSuccessResponse AiThreadsDelete(ctx).Body(body).Execute()
+> AiSuccessResponse AiThreadsDelete(ctx).AiThreadsDeleteRequest(aiThreadsDeleteRequest).Execute()
 
 Delete a chat thread
 
@@ -248,11 +248,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | The ID of the thread to delete, as a bare JSON string.
+	aiThreadsDeleteRequest := "aiThreadsDeleteRequest_example" // string | The ID of the thread to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIThreadsAPI.AiThreadsDelete(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIThreadsAPI.AiThreadsDelete(context.Background()).AiThreadsDeleteRequest(aiThreadsDeleteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIThreadsAPI.AiThreadsDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -273,7 +273,7 @@ Other parameters are passed through a pointer to a apiAiThreadsDeleteRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | The ID of the thread to delete, as a bare JSON string. | 
+ **aiThreadsDeleteRequest** | **string** | The ID of the thread to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 
 ## AiThreadsDeleteMessage
 
-> AiSuccessResponse AiThreadsDeleteMessage(ctx).Body(body).Execute()
+> AiSuccessResponse AiThreadsDeleteMessage(ctx).AiThreadsDeleteMessageRequest(aiThreadsDeleteMessageRequest).Execute()
 
 Delete message
 
@@ -316,11 +316,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | The ID of the message to delete, as a bare JSON string.
+	aiThreadsDeleteMessageRequest := "aiThreadsDeleteMessageRequest_example" // string | The ID of the message to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIThreadsAPI.AiThreadsDeleteMessage(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIThreadsAPI.AiThreadsDeleteMessage(context.Background()).AiThreadsDeleteMessageRequest(aiThreadsDeleteMessageRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIThreadsAPI.AiThreadsDeleteMessage``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -341,7 +341,7 @@ Other parameters are passed through a pointer to a apiAiThreadsDeleteMessageRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | The ID of the message to delete, as a bare JSON string. | 
+ **aiThreadsDeleteMessageRequest** | **string** | The ID of the message to delete, as a bare JSON string. | 
 
 ### Return type
 

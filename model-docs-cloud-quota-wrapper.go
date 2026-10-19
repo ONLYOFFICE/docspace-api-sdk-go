@@ -21,10 +21,10 @@ import (
 // checks if the DocsCloudQuotaWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudQuotaWrapper{}
 
-// DocsCloudQuotaWrapper The successful API response containing the DocsCloudQuota object.
+// DocsCloudQuotaWrapper The successful API response containing the DocsCloudQuotaDto object.
 type DocsCloudQuotaWrapper struct {
-	// The DocsCloudQuota object returned by the operation.
-	Response *DocsCloudQuota `json:"response,omitempty"`
+	// The DocsCloudQuotaDto object returned by the operation.
+	Response *DocsCloudQuotaDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewDocsCloudQuotaWrapperWithDefaults() *DocsCloudQuotaWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *DocsCloudQuotaWrapper) GetResponse() DocsCloudQuota {
+func (o *DocsCloudQuotaWrapper) GetResponse() DocsCloudQuotaDto {
 	if o == nil || IsNil(o.Response) {
-		var ret DocsCloudQuota
+		var ret DocsCloudQuotaDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *DocsCloudQuotaWrapper) GetResponse() DocsCloudQuota {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DocsCloudQuotaWrapper) GetResponseOk() (*DocsCloudQuota, bool) {
+func (o *DocsCloudQuotaWrapper) GetResponseOk() (*DocsCloudQuotaDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *DocsCloudQuotaWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given DocsCloudQuota and assigns it to the Response field.
-func (o *DocsCloudQuotaWrapper) SetResponse(v DocsCloudQuota) {
+// SetResponse gets a reference to the given DocsCloudQuotaDto and assigns it to the Response field.
+func (o *DocsCloudQuotaWrapper) SetResponse(v DocsCloudQuotaDto) {
 	o.Response = &v
 }
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Groups** | [**map[string][]AiTMCPItem**](array.md) | Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope. | 
+**Groups** | [**map[string][]AiMCPItem**](array.md) | Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope. | 
 **Errors** | **map[string]string** | Why a registered custom server could not be reached, keyed by server name. A server that answered is absent from this map. | 
 **System** | **[]string** | Names of the host-configured system servers among the keys of `groups`; everything else there was registered as a custom server. | 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewAiToolsListSystemTools200Response
 
-`func NewAiToolsListSystemTools200Response(groups map[string][]AiTMCPItem, errors map[string]string, system []string, ) *AiToolsListSystemTools200Response`
+`func NewAiToolsListSystemTools200Response(groups map[string][]AiMCPItem, errors map[string]string, system []string, ) *AiToolsListSystemTools200Response`
 
 NewAiToolsListSystemTools200Response instantiates a new AiToolsListSystemTools200Response object
 This constructor will assign default values to properties that have it defined,
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetGroups
 
-`func (o *AiToolsListSystemTools200Response) GetGroups() map[string][]AiTMCPItem`
+`func (o *AiToolsListSystemTools200Response) GetGroups() map[string][]AiMCPItem`
 
 GetGroups returns the Groups field if non-nil, zero value otherwise.
 
 ### GetGroupsOk
 
-`func (o *AiToolsListSystemTools200Response) GetGroupsOk() (*map[string][]AiTMCPItem, bool)`
+`func (o *AiToolsListSystemTools200Response) GetGroupsOk() (*map[string][]AiMCPItem, bool)`
 
 GetGroupsOk returns a tuple with the Groups field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGroups
 
-`func (o *AiToolsListSystemTools200Response) SetGroups(v map[string][]AiTMCPItem)`
+`func (o *AiToolsListSystemTools200Response) SetGroups(v map[string][]AiMCPItem)`
 
 SetGroups sets Groups field to given value.
 

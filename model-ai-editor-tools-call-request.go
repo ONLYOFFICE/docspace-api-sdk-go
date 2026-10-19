@@ -28,7 +28,7 @@ type AiEditorToolsCallRequest struct {
 	// Name of the tool to run, as listed by the tools endpoint. A name that is unknown or excluded from the editor is rejected with 400.
 	Name string `json:"name"`
 	// Arguments for the tool, shaped by that tool's own input schema. Treated as empty when it is not an object.
-	Arguments map[string]*interface{} `json:"arguments,omitempty"`
+	Arguments map[string]interface{} `json:"arguments,omitempty"`
 	// Room the call is scoped to. Left out for a portal-wide call.
 	EntityId *string `json:"entityId,omitempty"`
 }
@@ -78,9 +78,9 @@ func (o *AiEditorToolsCallRequest) SetName(v string) {
 }
 
 // GetArguments returns the Arguments field value if set, zero value otherwise.
-func (o *AiEditorToolsCallRequest) GetArguments() map[string]*interface{} {
+func (o *AiEditorToolsCallRequest) GetArguments() map[string]interface{} {
 	if o == nil || IsNil(o.Arguments) {
-		var ret map[string]*interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return o.Arguments
@@ -88,9 +88,9 @@ func (o *AiEditorToolsCallRequest) GetArguments() map[string]*interface{} {
 
 // GetArgumentsOk returns a tuple with the Arguments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiEditorToolsCallRequest) GetArgumentsOk() (map[string]*interface{}, bool) {
+func (o *AiEditorToolsCallRequest) GetArgumentsOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Arguments) {
-		return map[string]*interface{}{}, false
+		return map[string]interface{}{}, false
 	}
 	return o.Arguments, true
 }
@@ -104,8 +104,8 @@ func (o *AiEditorToolsCallRequest) IsArgumentsSet() bool {
 	return false
 }
 
-// SetArguments gets a reference to the given map[string]*interface{} and assigns it to the Arguments field.
-func (o *AiEditorToolsCallRequest) SetArguments(v map[string]*interface{}) {
+// SetArguments gets a reference to the given map[string]interface{} and assigns it to the Arguments field.
+func (o *AiEditorToolsCallRequest) SetArguments(v map[string]interface{}) {
 	o.Arguments = v
 }
 

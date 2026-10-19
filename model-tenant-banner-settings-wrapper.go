@@ -21,10 +21,10 @@ import (
 // checks if the TenantBannerSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantBannerSettingsWrapper{}
 
-// TenantBannerSettingsWrapper The successful API response containing the TenantBannerSettings object.
+// TenantBannerSettingsWrapper The successful API response containing the TenantBannerSettingsDto object.
 type TenantBannerSettingsWrapper struct {
-	// The TenantBannerSettings object returned by the operation.
-	Response *TenantBannerSettings `json:"response,omitempty"`
+	// The TenantBannerSettingsDto object returned by the operation.
+	Response *TenantBannerSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewTenantBannerSettingsWrapperWithDefaults() *TenantBannerSettingsWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *TenantBannerSettingsWrapper) GetResponse() TenantBannerSettings {
+func (o *TenantBannerSettingsWrapper) GetResponse() TenantBannerSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret TenantBannerSettings
+		var ret TenantBannerSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *TenantBannerSettingsWrapper) GetResponse() TenantBannerSettings {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TenantBannerSettingsWrapper) GetResponseOk() (*TenantBannerSettings, bool) {
+func (o *TenantBannerSettingsWrapper) GetResponseOk() (*TenantBannerSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *TenantBannerSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given TenantBannerSettings and assigns it to the Response field.
-func (o *TenantBannerSettingsWrapper) SetResponse(v TenantBannerSettings) {
+// SetResponse gets a reference to the given TenantBannerSettingsDto and assigns it to the Response field.
+func (o *TenantBannerSettingsWrapper) SetResponse(v TenantBannerSettingsDto) {
 	o.Response = &v
 }
 

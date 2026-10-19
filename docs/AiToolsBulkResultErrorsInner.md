@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** |  | 
-**Error** | [**AiTErrorData**](AiTErrorData.md) |  | 
+**Error** | [**AiErrorData**](AiErrorData.md) |  | 
 
 ## Methods
 
 ### NewAiToolsBulkResultErrorsInner
 
-`func NewAiToolsBulkResultErrorsInner(name string, error_ AiTErrorData, ) *AiToolsBulkResultErrorsInner`
+`func NewAiToolsBulkResultErrorsInner(name string, error_ AiErrorData, ) *AiToolsBulkResultErrorsInner`
 
 NewAiToolsBulkResultErrorsInner instantiates a new AiToolsBulkResultErrorsInner object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetName sets Name field to given value.
 
 ### GetError
 
-`func (o *AiToolsBulkResultErrorsInner) GetError() AiTErrorData`
+`func (o *AiToolsBulkResultErrorsInner) GetError() AiErrorData`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *AiToolsBulkResultErrorsInner) GetErrorOk() (*AiTErrorData, bool)`
+`func (o *AiToolsBulkResultErrorsInner) GetErrorOk() (*AiErrorData, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *AiToolsBulkResultErrorsInner) SetError(v AiTErrorData)`
+`func (o *AiToolsBulkResultErrorsInner) SetError(v AiErrorData)`
 
 SetError sets Error field to given value.
 

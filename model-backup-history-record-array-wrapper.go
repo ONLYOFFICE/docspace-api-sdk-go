@@ -21,10 +21,10 @@ import (
 // checks if the BackupHistoryRecordArrayWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupHistoryRecordArrayWrapper{}
 
-// BackupHistoryRecordArrayWrapper The successful API response containing the list of BackupHistoryRecord objects.
+// BackupHistoryRecordArrayWrapper The successful API response containing the list of BackupHistoryRecordDto objects.
 type BackupHistoryRecordArrayWrapper struct {
-	// The list of BackupHistoryRecord objects returned by the operation.
-	Response []BackupHistoryRecord `json:"response,omitempty"`
+	// The list of BackupHistoryRecordDto objects returned by the operation.
+	Response []BackupHistoryRecordDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewBackupHistoryRecordArrayWrapperWithDefaults() *BackupHistoryRecordArrayW
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *BackupHistoryRecordArrayWrapper) GetResponse() []BackupHistoryRecord {
+func (o *BackupHistoryRecordArrayWrapper) GetResponse() []BackupHistoryRecordDto {
 	if o == nil || IsNil(o.Response) {
-		var ret []BackupHistoryRecord
+		var ret []BackupHistoryRecordDto
 		return ret
 	}
 	return o.Response
@@ -63,7 +63,7 @@ func (o *BackupHistoryRecordArrayWrapper) GetResponse() []BackupHistoryRecord {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BackupHistoryRecordArrayWrapper) GetResponseOk() ([]BackupHistoryRecord, bool) {
+func (o *BackupHistoryRecordArrayWrapper) GetResponseOk() ([]BackupHistoryRecordDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *BackupHistoryRecordArrayWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given []BackupHistoryRecord and assigns it to the Response field.
-func (o *BackupHistoryRecordArrayWrapper) SetResponse(v []BackupHistoryRecord) {
+// SetResponse gets a reference to the given []BackupHistoryRecordDto and assigns it to the Response field.
+func (o *BackupHistoryRecordArrayWrapper) SetResponse(v []BackupHistoryRecordDto) {
 	o.Response = v
 }
 

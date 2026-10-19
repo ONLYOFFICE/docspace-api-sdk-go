@@ -21,10 +21,10 @@ import (
 // checks if the TenantDeepLinkSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantDeepLinkSettingsWrapper{}
 
-// TenantDeepLinkSettingsWrapper The successful API response containing the TenantDeepLinkSettings object.
+// TenantDeepLinkSettingsWrapper The successful API response containing the TenantDeepLinkSettingsDto object.
 type TenantDeepLinkSettingsWrapper struct {
-	// The TenantDeepLinkSettings object returned by the operation.
-	Response *TenantDeepLinkSettings `json:"response,omitempty"`
+	// The TenantDeepLinkSettingsDto object returned by the operation.
+	Response *TenantDeepLinkSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewTenantDeepLinkSettingsWrapperWithDefaults() *TenantDeepLinkSettingsWrapp
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *TenantDeepLinkSettingsWrapper) GetResponse() TenantDeepLinkSettings {
+func (o *TenantDeepLinkSettingsWrapper) GetResponse() TenantDeepLinkSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret TenantDeepLinkSettings
+		var ret TenantDeepLinkSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *TenantDeepLinkSettingsWrapper) GetResponse() TenantDeepLinkSettings {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TenantDeepLinkSettingsWrapper) GetResponseOk() (*TenantDeepLinkSettings, bool) {
+func (o *TenantDeepLinkSettingsWrapper) GetResponseOk() (*TenantDeepLinkSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *TenantDeepLinkSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given TenantDeepLinkSettings and assigns it to the Response field.
-func (o *TenantDeepLinkSettingsWrapper) SetResponse(v TenantDeepLinkSettings) {
+// SetResponse gets a reference to the given TenantDeepLinkSettingsDto and assigns it to the Response field.
+func (o *TenantDeepLinkSettingsWrapper) SetResponse(v TenantDeepLinkSettingsDto) {
 	o.Response = &v
 }
 

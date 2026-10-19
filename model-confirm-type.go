@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// ConfirmType [EmpInvite - Emp invite, LinkInvite - Link invite, PortalSuspend - Portal suspend, PortalContinue - Portal continue, PortalRemove - Portal remove, DnsChange - Dns change, PortalOwnerChange - Portal owner change, Activation - Activation, EmailChange - Email change, EmailActivation - Email activation, PasswordChange - Password change, ProfileRemove - Profile remove, PhoneActivation - Phone activation, PhoneAuth - Phone auth, Auth - Auth, TfaActivation - Tfa activation, TfaAuth - Tfa auth, Wizard - Wizard, GuestShareLink - Guest share link]
+// ConfirmType [EmpInvite - Emp invite, LinkInvite - Link invite, PortalSuspend - Portal suspend, PortalContinue - Portal continue, PortalRemove - Portal remove, DnsChange - Dns change, PortalOwnerChange - Portal owner change, Activation - Activation, EmailChange - Email change, EmailActivation - Email activation, PasswordChange - Password change, ProfileRemove - Profile remove, PhoneActivation - Phone activation, PhoneAuth - Phone auth, Auth - Auth, TfaActivation - Tfa activation, TfaAuth - Tfa auth, Wizard - Wizard, GuestShareLink - Guest share link, PortalUnblock - Portal unblock]
 type ConfirmType string
 
 // List of ConfirmType
@@ -43,6 +43,7 @@ const (
 	CONFIRMTYPE_TFA_AUTH ConfirmType = "TfaAuth"
 	CONFIRMTYPE_WIZARD ConfirmType = "Wizard"
 	CONFIRMTYPE_GUEST_SHARE_LINK ConfirmType = "GuestShareLink"
+	CONFIRMTYPE_PORTAL_UNBLOCK ConfirmType = "PortalUnblock"
 )
 
 // All allowed values of ConfirmType enum
@@ -66,6 +67,7 @@ var AllowedConfirmTypeEnumValues = []ConfirmType{
 	"TfaAuth",
 	"Wizard",
 	"GuestShareLink",
+	"PortalUnblock",
 }
 
 func (v *ConfirmType) UnmarshalJSON(src []byte) error {

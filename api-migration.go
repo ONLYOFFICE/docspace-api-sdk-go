@@ -422,28 +422,6 @@ func (a *MigrationAPIService) FinishMigrationExecute(r ApiFinishMigrationRequest
 					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
 		return localVarHTTPResponse, newErr
 	}
 
@@ -736,7 +714,7 @@ type ApiListMigrationsRequest struct {
 	ApiService *MigrationAPIService
 }
 
-func (r ApiListMigrationsRequest) Execute() (*STRINGArrayWrapper, *http.Response, error) {
+func (r ApiListMigrationsRequest) Execute() (*StringArrayWrapper, *http.Response, error) {
 	return r.ApiService.ListMigrationsExecute(r)
 }
 
@@ -756,13 +734,13 @@ func (a *MigrationAPIService) ListMigrations(ctx context.Context) ApiListMigrati
 }
 
 // Execute executes the request
-//  @return STRINGArrayWrapper
-func (a *MigrationAPIService) ListMigrationsExecute(r ApiListMigrationsRequest) (*STRINGArrayWrapper, *http.Response, error) {
+//  @return StringArrayWrapper
+func (a *MigrationAPIService) ListMigrationsExecute(r ApiListMigrationsRequest) (*StringArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *STRINGArrayWrapper
+		localVarReturnValue  *StringArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MigrationAPIService.ListMigrations")

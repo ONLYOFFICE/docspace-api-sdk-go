@@ -21,10 +21,10 @@ import (
 // checks if the BackupProgressWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupProgressWrapper{}
 
-// BackupProgressWrapper The successful API response containing the BackupProgress object.
+// BackupProgressWrapper The successful API response containing the BackupProgressDto object.
 type BackupProgressWrapper struct {
-	// The BackupProgress object returned by the operation.
-	Response *BackupProgress `json:"response,omitempty"`
+	// The BackupProgressDto object returned by the operation.
+	Response *BackupProgressDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewBackupProgressWrapperWithDefaults() *BackupProgressWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *BackupProgressWrapper) GetResponse() BackupProgress {
+func (o *BackupProgressWrapper) GetResponse() BackupProgressDto {
 	if o == nil || IsNil(o.Response) {
-		var ret BackupProgress
+		var ret BackupProgressDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *BackupProgressWrapper) GetResponse() BackupProgress {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BackupProgressWrapper) GetResponseOk() (*BackupProgress, bool) {
+func (o *BackupProgressWrapper) GetResponseOk() (*BackupProgressDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *BackupProgressWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given BackupProgress and assigns it to the Response field.
-func (o *BackupProgressWrapper) SetResponse(v BackupProgress) {
+// SetResponse gets a reference to the given BackupProgressDto and assigns it to the Response field.
+func (o *BackupProgressWrapper) SetResponse(v BackupProgressDto) {
 	o.Response = &v
 }
 

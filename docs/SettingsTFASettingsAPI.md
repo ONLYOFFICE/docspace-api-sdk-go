@@ -270,7 +270,7 @@ Other parameters are passed through a pointer to a apiTfaAppGenerateSetupCodeReq
 
 ## TfaValidateAuthCode
 
-> BooleanWrapper TfaValidateAuthCode(ctx).TfaValidateRequestsDto(tfaValidateRequestsDto).Execute()
+> BooleanWrapper TfaValidateAuthCode(ctx).TfaValidateRequestDto(tfaValidateRequestDto).Execute()
 
 Validate the TFA code
 
@@ -291,11 +291,11 @@ import (
 )
 
 func main() {
-	tfaValidateRequestsDto := *openapiclient.NewTfaValidateRequestsDto("123456") // TfaValidateRequestsDto |  (optional)
+	tfaValidateRequestDto := *openapiclient.NewTfaValidateRequestDto("123456") // TfaValidateRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsTFASettingsAPI.TfaValidateAuthCode(context.Background()).TfaValidateRequestsDto(tfaValidateRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsTFASettingsAPI.TfaValidateAuthCode(context.Background()).TfaValidateRequestDto(tfaValidateRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsTFASettingsAPI.TfaValidateAuthCode``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -316,7 +316,7 @@ Other parameters are passed through a pointer to a apiTfaValidateAuthCodeRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tfaValidateRequestsDto** | [**TfaValidateRequestsDto**](TfaValidateRequestsDto.md) |  | 
+ **tfaValidateRequestDto** | [**TfaValidateRequestDto**](TfaValidateRequestDto.md) |  | 
 
 ### Return type
 
@@ -338,7 +338,7 @@ Name | Type | Description  | Notes
 
 ## UnlinkTfaApp
 
-> StringWrapper UnlinkTfaApp(ctx).TfaRequestsDto(tfaRequestsDto).Execute()
+> StringWrapper UnlinkTfaApp(ctx).TfaRequestDto(tfaRequestDto).Execute()
 
 Unlink the TFA application
 
@@ -359,11 +359,11 @@ import (
 )
 
 func main() {
-	tfaRequestsDto := *openapiclient.NewTfaRequestsDto() // TfaRequestsDto |  (optional)
+	tfaRequestDto := *openapiclient.NewTfaRequestDto() // TfaRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsTFASettingsAPI.UnlinkTfaApp(context.Background()).TfaRequestsDto(tfaRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsTFASettingsAPI.UnlinkTfaApp(context.Background()).TfaRequestDto(tfaRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsTFASettingsAPI.UnlinkTfaApp``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -384,7 +384,7 @@ Other parameters are passed through a pointer to a apiUnlinkTfaAppRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tfaRequestsDto** | [**TfaRequestsDto**](TfaRequestsDto.md) |  | 
+ **tfaRequestDto** | [**TfaRequestDto**](TfaRequestDto.md) |  | 
 
 ### Return type
 
@@ -469,7 +469,7 @@ Other parameters are passed through a pointer to a apiUpdateTfaAppCodesRequest s
 
 ## UpdateTfaSettings
 
-> BooleanWrapper UpdateTfaSettings(ctx).TfaRequestsDto(tfaRequestsDto).Execute()
+> BooleanWrapper UpdateTfaSettings(ctx).TfaRequestDto(tfaRequestDto).Execute()
 
 Update the TFA settings
 
@@ -490,11 +490,11 @@ import (
 )
 
 func main() {
-	tfaRequestsDto := *openapiclient.NewTfaRequestsDto() // TfaRequestsDto |  (optional)
+	tfaRequestDto := *openapiclient.NewTfaRequestDto() // TfaRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsTFASettingsAPI.UpdateTfaSettings(context.Background()).TfaRequestsDto(tfaRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsTFASettingsAPI.UpdateTfaSettings(context.Background()).TfaRequestDto(tfaRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsTFASettingsAPI.UpdateTfaSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -515,7 +515,7 @@ Other parameters are passed through a pointer to a apiUpdateTfaSettingsRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tfaRequestsDto** | [**TfaRequestsDto**](TfaRequestsDto.md) |  | 
+ **tfaRequestDto** | [**TfaRequestDto**](TfaRequestDto.md) |  | 
 
 ### Return type
 
@@ -537,7 +537,7 @@ Name | Type | Description  | Notes
 
 ## UpdateTfaSettingsLink
 
-> StringWrapper UpdateTfaSettingsLink(ctx).TfaRequestsDto(tfaRequestsDto).Execute()
+> StringWrapper UpdateTfaSettingsLink(ctx).TfaRequestDto(tfaRequestDto).Execute()
 
 Update TFA settings with a link
 
@@ -558,11 +558,11 @@ import (
 )
 
 func main() {
-	tfaRequestsDto := *openapiclient.NewTfaRequestsDto() // TfaRequestsDto |  (optional)
+	tfaRequestDto := *openapiclient.NewTfaRequestDto() // TfaRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsTFASettingsAPI.UpdateTfaSettingsLink(context.Background()).TfaRequestsDto(tfaRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsTFASettingsAPI.UpdateTfaSettingsLink(context.Background()).TfaRequestDto(tfaRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsTFASettingsAPI.UpdateTfaSettingsLink``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -583,7 +583,7 @@ Other parameters are passed through a pointer to a apiUpdateTfaSettingsLinkReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tfaRequestsDto** | [**TfaRequestsDto**](TfaRequestsDto.md) |  | 
+ **tfaRequestDto** | [**TfaRequestDto**](TfaRequestDto.md) |  | 
 
 ### Return type
 

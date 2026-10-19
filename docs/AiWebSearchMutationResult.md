@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Success** | **bool** | True when the configuration was persisted. | 
 **Config** | Pointer to [**AiWebSearchConfig**](AiWebSearchConfig.md) | The persisted web-search configuration. Present on success. | [optional] 
-**Error** | Pointer to [**AiTErrorData**](AiTErrorData.md) | Why the configuration was rejected. Present on failure. | [optional] 
+**Error** | Pointer to [**AiErrorData**](AiErrorData.md) | Why the configuration was rejected. Present on failure. | [optional] 
 
 ## Methods
 
@@ -74,20 +74,20 @@ HasConfig returns a boolean if a field has been set.
 
 ### GetError
 
-`func (o *AiWebSearchMutationResult) GetError() AiTErrorData`
+`func (o *AiWebSearchMutationResult) GetError() AiErrorData`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *AiWebSearchMutationResult) GetErrorOk() (*AiTErrorData, bool)`
+`func (o *AiWebSearchMutationResult) GetErrorOk() (*AiErrorData, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *AiWebSearchMutationResult) SetError(v AiTErrorData)`
+`func (o *AiWebSearchMutationResult) SetError(v AiErrorData)`
 
 SetError sets Error field to given value.
 

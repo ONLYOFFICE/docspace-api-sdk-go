@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## CreateWebhook
 
-> WebhooksConfigWrapper CreateWebhook(ctx).CreateWebhooksConfigRequestsDto(createWebhooksConfigRequestsDto).Execute()
+> WebhooksConfigWrapper CreateWebhook(ctx).CreateWebhooksConfigRequestDto(createWebhooksConfigRequestDto).Execute()
 
 Create a webhook
 
@@ -39,11 +39,11 @@ import (
 )
 
 func main() {
-	createWebhooksConfigRequestsDto := *openapiclient.NewCreateWebhooksConfigRequestsDto("Production Webhook", "https://example.com/webhook") // CreateWebhooksConfigRequestsDto |  (optional)
+	createWebhooksConfigRequestDto := *openapiclient.NewCreateWebhooksConfigRequestDto("Production Webhook", "https://example.com/webhook") // CreateWebhooksConfigRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsWebhooksAPI.CreateWebhook(context.Background()).CreateWebhooksConfigRequestsDto(createWebhooksConfigRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsWebhooksAPI.CreateWebhook(context.Background()).CreateWebhooksConfigRequestDto(createWebhooksConfigRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsWebhooksAPI.CreateWebhook``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiCreateWebhookRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createWebhooksConfigRequestsDto** | [**CreateWebhooksConfigRequestsDto**](CreateWebhooksConfigRequestsDto.md) |  | 
+ **createWebhooksConfigRequestDto** | [**CreateWebhooksConfigRequestDto**](CreateWebhooksConfigRequestDto.md) |  | 
 
 ### Return type
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## EnableWebhook
 
-> WebhooksConfigWrapper EnableWebhook(ctx).UpdateWebhooksConfigRequestsDto(updateWebhooksConfigRequestsDto).Execute()
+> WebhooksConfigWrapper EnableWebhook(ctx).UpdateWebhooksConfigRequestDto(updateWebhooksConfigRequestDto).Execute()
 
 Switch a webhook on or off
 
@@ -107,11 +107,11 @@ import (
 )
 
 func main() {
-	updateWebhooksConfigRequestsDto := *openapiclient.NewUpdateWebhooksConfigRequestsDto("Production Webhook", "https://example.com/webhook", int32(1)) // UpdateWebhooksConfigRequestsDto |  (optional)
+	updateWebhooksConfigRequestDto := *openapiclient.NewUpdateWebhooksConfigRequestDto("Production Webhook", "https://example.com/webhook", int32(1)) // UpdateWebhooksConfigRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsWebhooksAPI.EnableWebhook(context.Background()).UpdateWebhooksConfigRequestsDto(updateWebhooksConfigRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsWebhooksAPI.EnableWebhook(context.Background()).UpdateWebhooksConfigRequestDto(updateWebhooksConfigRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsWebhooksAPI.EnableWebhook``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -132,7 +132,7 @@ Other parameters are passed through a pointer to a apiEnableWebhookRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **updateWebhooksConfigRequestsDto** | [**UpdateWebhooksConfigRequestsDto**](UpdateWebhooksConfigRequestsDto.md) |  | 
+ **updateWebhooksConfigRequestDto** | [**UpdateWebhooksConfigRequestDto**](UpdateWebhooksConfigRequestDto.md) |  | 
 
 ### Return type
 
@@ -511,7 +511,7 @@ Name | Type | Description  | Notes
 
 ## RetryWebhooks
 
-> WebhooksLogArrayWrapper RetryWebhooks(ctx).WebhookRetryRequestsDto(webhookRetryRequestsDto).Execute()
+> WebhooksLogArrayWrapper RetryWebhooks(ctx).WebhookRetryRequestDto(webhookRetryRequestDto).Execute()
 
 Retry webhook deliveries
 
@@ -532,11 +532,11 @@ import (
 )
 
 func main() {
-	webhookRetryRequestsDto := *openapiclient.NewWebhookRetryRequestsDto() // WebhookRetryRequestsDto |  (optional)
+	webhookRetryRequestDto := *openapiclient.NewWebhookRetryRequestDto() // WebhookRetryRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsWebhooksAPI.RetryWebhooks(context.Background()).WebhookRetryRequestsDto(webhookRetryRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsWebhooksAPI.RetryWebhooks(context.Background()).WebhookRetryRequestDto(webhookRetryRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsWebhooksAPI.RetryWebhooks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -557,7 +557,7 @@ Other parameters are passed through a pointer to a apiRetryWebhooksRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webhookRetryRequestsDto** | [**WebhookRetryRequestsDto**](WebhookRetryRequestsDto.md) |  | 
+ **webhookRetryRequestDto** | [**WebhookRetryRequestDto**](WebhookRetryRequestDto.md) |  | 
 
 ### Return type
 
@@ -579,7 +579,7 @@ Name | Type | Description  | Notes
 
 ## UpdateWebhook
 
-> WebhooksConfigWrapper UpdateWebhook(ctx).UpdateWebhooksConfigRequestsDto(updateWebhooksConfigRequestsDto).Execute()
+> WebhooksConfigWrapper UpdateWebhook(ctx).UpdateWebhooksConfigRequestDto(updateWebhooksConfigRequestDto).Execute()
 
 Update a webhook
 
@@ -600,11 +600,11 @@ import (
 )
 
 func main() {
-	updateWebhooksConfigRequestsDto := *openapiclient.NewUpdateWebhooksConfigRequestsDto("Production Webhook", "https://example.com/webhook", int32(1)) // UpdateWebhooksConfigRequestsDto |  (optional)
+	updateWebhooksConfigRequestDto := *openapiclient.NewUpdateWebhooksConfigRequestDto("Production Webhook", "https://example.com/webhook", int32(1)) // UpdateWebhooksConfigRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsWebhooksAPI.UpdateWebhook(context.Background()).UpdateWebhooksConfigRequestsDto(updateWebhooksConfigRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsWebhooksAPI.UpdateWebhook(context.Background()).UpdateWebhooksConfigRequestDto(updateWebhooksConfigRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsWebhooksAPI.UpdateWebhook``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -625,7 +625,7 @@ Other parameters are passed through a pointer to a apiUpdateWebhookRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **updateWebhooksConfigRequestsDto** | [**UpdateWebhooksConfigRequestsDto**](UpdateWebhooksConfigRequestsDto.md) |  | 
+ **updateWebhooksConfigRequestDto** | [**UpdateWebhooksConfigRequestDto**](UpdateWebhooksConfigRequestDto.md) |  | 
 
 ### Return type
 

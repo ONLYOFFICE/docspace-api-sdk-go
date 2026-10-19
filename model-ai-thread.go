@@ -32,7 +32,7 @@ type AiThread struct {
 	// Timestamp (ms since epoch) of the last message in this thread. Used for sorting.
 	LastEditDate *float32 `json:"lastEditDate,omitempty"`
 	// Provider configuration at the time of last message. Used for thread-level provider display.
-	Provider *AiTProvider `json:"provider,omitempty"`
+	Provider *AiProvider `json:"provider,omitempty"`
 	// Model info at the time of last message.
 	Model *AiModel `json:"model,omitempty"`
 	// ID of the profile used for this thread. Links to `Profile.id`.
@@ -148,9 +148,9 @@ func (o *AiThread) SetLastEditDate(v float32) {
 }
 
 // GetProvider returns the Provider field value if set, zero value otherwise.
-func (o *AiThread) GetProvider() AiTProvider {
+func (o *AiThread) GetProvider() AiProvider {
 	if o == nil || IsNil(o.Provider) {
-		var ret AiTProvider
+		var ret AiProvider
 		return ret
 	}
 	return *o.Provider
@@ -158,7 +158,7 @@ func (o *AiThread) GetProvider() AiTProvider {
 
 // GetProviderOk returns a tuple with the Provider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiThread) GetProviderOk() (*AiTProvider, bool) {
+func (o *AiThread) GetProviderOk() (*AiProvider, bool) {
 	if o == nil || IsNil(o.Provider) {
 		return nil, false
 	}
@@ -174,8 +174,8 @@ func (o *AiThread) IsProviderSet() bool {
 	return false
 }
 
-// SetProvider gets a reference to the given AiTProvider and assigns it to the Provider field.
-func (o *AiThread) SetProvider(v AiTProvider) {
+// SetProvider gets a reference to the given AiProvider and assigns it to the Provider field.
+func (o *AiThread) SetProvider(v AiProvider) {
 	o.Provider = &v
 }
 

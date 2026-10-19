@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StorageType** | [**BackupStorageType**](BackupStorageType.md) | The storage the scheduled archives are written to, reported as a number rather than as the name the  schedule was created with. | 
 **StorageParams** | **map[string]string** | The settings of the storage, as an object keyed by parameter name - not as the array of key and value  pairs the schedule was created with, so it cannot be sent back unchanged. For every storage type  except `ThirdPartyConsumer` the `folderId` key is built from the stored base path. | 
-**CronParams** | [**CronParams**](CronParams.md) | When the backup runs, read back from the stored cron expression. `day` is 0 for a daily schedule,  because a daily one has no day. | 
+**CronParams** | [**CronParamsDto**](CronParamsDto.md) | When the backup runs, read back from the stored cron expression. `day` is 0 for a daily schedule,  because a daily one has no day. | 
 **BackupsStored** | Pointer to **NullableInt32** | The number of scheduled copies kept. It is null, not 0, when the schedule keeps an unlimited number. | [optional] 
 **LastBackupTime** | **time.Time** | The date and time the schedule last ran at. It is `0001-01-01T00:00:00` until the schedule has run  for the first time. | 
 **Dump** | **bool** | Specifies whether this schedule backs up the whole server instead of one portal. | 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewScheduleDto
 
-`func NewScheduleDto(storageType BackupStorageType, storageParams map[string]*string, cronParams CronParams, lastBackupTime time.Time, dump bool, ) *ScheduleDto`
+`func NewScheduleDto(storageType BackupStorageType, storageParams map[string]*string, cronParams CronParamsDto, lastBackupTime time.Time, dump bool, ) *ScheduleDto`
 
 NewScheduleDto instantiates a new ScheduleDto object
 This constructor will assign default values to properties that have it defined,
@@ -72,20 +72,20 @@ SetStorageParams sets StorageParams field to given value.
 
 ### GetCronParams
 
-`func (o *ScheduleDto) GetCronParams() CronParams`
+`func (o *ScheduleDto) GetCronParams() CronParamsDto`
 
 GetCronParams returns the CronParams field if non-nil, zero value otherwise.
 
 ### GetCronParamsOk
 
-`func (o *ScheduleDto) GetCronParamsOk() (*CronParams, bool)`
+`func (o *ScheduleDto) GetCronParamsOk() (*CronParamsDto, bool)`
 
 GetCronParamsOk returns a tuple with the CronParams field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCronParams
 
-`func (o *ScheduleDto) SetCronParams(v CronParams)`
+`func (o *ScheduleDto) SetCronParams(v CronParamsDto)`
 
 SetCronParams sets CronParams field to given value.
 

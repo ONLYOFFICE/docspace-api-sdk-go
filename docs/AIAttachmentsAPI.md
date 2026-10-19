@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## AiAttachmentsDelete
 
-> AiSuccessResponse AiAttachmentsDelete(ctx).Body(body).Execute()
+> AiSuccessResponse AiAttachmentsDelete(ctx).AiAttachmentsDeleteRequest(aiAttachmentsDeleteRequest).Execute()
 
 Delete one attachment
 
@@ -38,11 +38,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | The ID of the attachment to delete, as a bare JSON string.
+	aiAttachmentsDeleteRequest := "aiAttachmentsDeleteRequest_example" // string | The ID of the attachment to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsDelete(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsDelete(context.Background()).AiAttachmentsDeleteRequest(aiAttachmentsDeleteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAttachmentsAPI.AiAttachmentsDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiAiAttachmentsDeleteRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | The ID of the attachment to delete, as a bare JSON string. | 
+ **aiAttachmentsDeleteRequest** | **string** | The ID of the attachment to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## AiAttachmentsDeleteMany
 
-> AiSuccessResponse AiAttachmentsDeleteMany(ctx).RequestBody(requestBody).Execute()
+> AiSuccessResponse AiAttachmentsDeleteMany(ctx).AiAttachmentsDeleteManyRequest(aiAttachmentsDeleteManyRequest).Execute()
 
 Delete many
 
@@ -106,11 +106,11 @@ import (
 )
 
 func main() {
-	requestBody := []string{"Property_example"} // []string | The IDs of the attachments to delete, as a bare JSON array of strings.
+	aiAttachmentsDeleteManyRequest := []string{"Property_example"} // []string | The IDs of the attachments to delete, as a bare JSON array of strings.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsDeleteMany(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsDeleteMany(context.Background()).AiAttachmentsDeleteManyRequest(aiAttachmentsDeleteManyRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAttachmentsAPI.AiAttachmentsDeleteMany``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -131,7 +131,7 @@ Other parameters are passed through a pointer to a apiAiAttachmentsDeleteManyReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **[]string** | The IDs of the attachments to delete, as a bare JSON array of strings. | 
+ **aiAttachmentsDeleteManyRequest** | **[]string** | The IDs of the attachments to delete, as a bare JSON array of strings. | 
 
 ### Return type
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## AiAttachmentsGet
 
-> AiAttachment AiAttachmentsGet(ctx).Body(body).Execute()
+> AiAttachment AiAttachmentsGet(ctx).AiAttachmentsGetRequest(aiAttachmentsGetRequest).Execute()
 
 Get one attachment
 
@@ -174,11 +174,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | The ID of the attachment to read, as a bare JSON string.
+	aiAttachmentsGetRequest := "aiAttachmentsGetRequest_example" // string | The ID of the attachment to read, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsGet(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsGet(context.Background()).AiAttachmentsGetRequest(aiAttachmentsGetRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAttachmentsAPI.AiAttachmentsGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -199,7 +199,7 @@ Other parameters are passed through a pointer to a apiAiAttachmentsGetRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | The ID of the attachment to read, as a bare JSON string. | 
+ **aiAttachmentsGetRequest** | **string** | The ID of the attachment to read, as a bare JSON string. | 
 
 ### Return type
 
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ## AiAttachmentsGetMany
 
-> []*AiAttachment AiAttachmentsGetMany(ctx).RequestBody(requestBody).Execute()
+> []*AiAttachment AiAttachmentsGetMany(ctx).AiAttachmentsGetManyRequest(aiAttachmentsGetManyRequest).Execute()
 
 Get many
 
@@ -242,11 +242,11 @@ import (
 )
 
 func main() {
-	requestBody := []string{"Property_example"} // []string | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
+	aiAttachmentsGetManyRequest := []string{"Property_example"} // []string | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsGetMany(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsGetMany(context.Background()).AiAttachmentsGetManyRequest(aiAttachmentsGetManyRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAttachmentsAPI.AiAttachmentsGetMany``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -267,7 +267,7 @@ Other parameters are passed through a pointer to a apiAiAttachmentsGetManyReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **[]string** | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. | 
+ **aiAttachmentsGetManyRequest** | **[]string** | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. | 
 
 ### Return type
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 ## AiAttachmentsGetSuggestedQuestions
 
-> AiSuccessResponse AiAttachmentsGetSuggestedQuestions(ctx).RequestBody(requestBody).Execute()
+> AiSuccessResponse AiAttachmentsGetSuggestedQuestions(ctx).AiAttachmentsGetSuggestedQuestionsRequest(aiAttachmentsGetSuggestedQuestionsRequest).Execute()
 
 Get suggested questions
 
@@ -308,11 +308,11 @@ import (
 )
 
 func main() {
-	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | 
+	aiAttachmentsGetSuggestedQuestionsRequest := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsGetSuggestedQuestions(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AIAttachmentsAPI.AiAttachmentsGetSuggestedQuestions(context.Background()).AiAttachmentsGetSuggestedQuestionsRequest(aiAttachmentsGetSuggestedQuestionsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAttachmentsAPI.AiAttachmentsGetSuggestedQuestions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -333,7 +333,7 @@ Other parameters are passed through a pointer to a apiAiAttachmentsGetSuggestedQ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]interface{}** |  | 
+ **aiAttachmentsGetSuggestedQuestionsRequest** | **map[string]interface{}** |  | 
 
 ### Return type
 

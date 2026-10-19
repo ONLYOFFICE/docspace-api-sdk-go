@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## AiWebSearchClear
 
-> AiSuccessResponse AiWebSearchClear(ctx).Body(body).Execute()
+> AiSuccessResponse AiWebSearchClear(ctx).AiWebSearchClearRequest(aiWebSearchClearRequest).Execute()
 
 Clear the web-search configuration
 
@@ -38,11 +38,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
+	aiWebSearchClearRequest := "aiWebSearchClearRequest_example" // string | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIWebSearchAPI.AiWebSearchClear(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIWebSearchAPI.AiWebSearchClear(context.Background()).AiWebSearchClearRequest(aiWebSearchClearRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIWebSearchAPI.AiWebSearchClear``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiAiWebSearchClearRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. | 
+ **aiWebSearchClearRequest** | **string** | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. | 
 
 ### Return type
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 ## AiWebSearchPassthroughContents
 
-> map[string]interface{} AiWebSearchPassthroughContents(ctx).RequestBody(requestBody).Execute()
+> map[string]interface{} AiWebSearchPassthroughContents(ctx).AiWebSearchPassthroughContentsRequest(aiWebSearchPassthroughContentsRequest).Execute()
 
 Web page contents passthrough
 
@@ -310,11 +310,11 @@ import (
 )
 
 func main() {
-	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
+	aiWebSearchPassthroughContentsRequest := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIWebSearchAPI.AiWebSearchPassthroughContents(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AIWebSearchAPI.AiWebSearchPassthroughContents(context.Background()).AiWebSearchPassthroughContentsRequest(aiWebSearchPassthroughContentsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIWebSearchAPI.AiWebSearchPassthroughContents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -335,7 +335,7 @@ Other parameters are passed through a pointer to a apiAiWebSearchPassthroughCont
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]interface{}** | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration. | 
+ **aiWebSearchPassthroughContentsRequest** | **map[string]interface{}** | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration. | 
 
 ### Return type
 
@@ -357,7 +357,7 @@ Name | Type | Description  | Notes
 
 ## AiWebSearchPassthroughSearch
 
-> map[string]interface{} AiWebSearchPassthroughSearch(ctx).RequestBody(requestBody).Execute()
+> map[string]*interface{} AiWebSearchPassthroughSearch(ctx).AiWebSearchPassthroughSearchRequest(aiWebSearchPassthroughSearchRequest).Execute()
 
 Web search passthrough
 
@@ -378,16 +378,16 @@ import (
 )
 
 func main() {
-	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
+	aiWebSearchPassthroughSearchRequest := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIWebSearchAPI.AiWebSearchPassthroughSearch(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AIWebSearchAPI.AiWebSearchPassthroughSearch(context.Background()).AiWebSearchPassthroughSearchRequest(aiWebSearchPassthroughSearchRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIWebSearchAPI.AiWebSearchPassthroughSearch``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiWebSearchPassthroughSearch`: map[string]interface{}
+	// response from `AiWebSearchPassthroughSearch`: map[string]*interface{}
 	fmt.Fprintf(os.Stdout, "Response from `AIWebSearchAPI.AiWebSearchPassthroughSearch`: %v\n", resp)
 }
 ```
@@ -403,11 +403,11 @@ Other parameters are passed through a pointer to a apiAiWebSearchPassthroughSear
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]interface{}** | A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here. | 
+ **aiWebSearchPassthroughSearchRequest** | **map[string]interface{}** | A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here. | 
 
 ### Return type
 
-**map[string]interface{}**
+**map[string]*interface{}**
 
 ### Authorization
 
@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 
 ## AiWebSearchSetActiveConfig
 
-> AiSuccessResponse AiWebSearchSetActiveConfig(ctx).AiWebSearchConfigureRequest(aiWebSearchConfigureRequest).Execute()
+> AiSuccessResponse AiWebSearchSetActiveConfig(ctx).AiWebSearchSetActiveConfigRequest(aiWebSearchSetActiveConfigRequest).Execute()
 
 Set active config
 
@@ -446,11 +446,11 @@ import (
 )
 
 func main() {
-	aiWebSearchConfigureRequest := *openapiclient.NewAiWebSearchConfigureRequest(*openapiclient.NewAiWebSearchConfig("exa")) // AiWebSearchConfigureRequest | 
+	aiWebSearchSetActiveConfigRequest := *openapiclient.NewAiWebSearchSetActiveConfigRequest(*openapiclient.NewAiWebSearchConfig("exa")) // AiWebSearchSetActiveConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIWebSearchAPI.AiWebSearchSetActiveConfig(context.Background()).AiWebSearchConfigureRequest(aiWebSearchConfigureRequest).Execute()
+	resp, r, err := apiClient.AIWebSearchAPI.AiWebSearchSetActiveConfig(context.Background()).AiWebSearchSetActiveConfigRequest(aiWebSearchSetActiveConfigRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIWebSearchAPI.AiWebSearchSetActiveConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -471,7 +471,7 @@ Other parameters are passed through a pointer to a apiAiWebSearchSetActiveConfig
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **aiWebSearchConfigureRequest** | [**AiWebSearchConfigureRequest**](AiWebSearchConfigureRequest.md) |  | 
+ **aiWebSearchSetActiveConfigRequest** | [**AiWebSearchSetActiveConfigRequest**](AiWebSearchSetActiveConfigRequest.md) |  | 
 
 ### Return type
 

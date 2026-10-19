@@ -37,6 +37,8 @@ type AiModel struct {
 	ReasoningSupport *AiReasoningSupport `json:"reasoningSupport,omitempty"`
 	// Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`.
 	Capabilities *float32 `json:"capabilities,omitempty"`
+	// Release date as a Unix timestamp in **seconds**, when the provider's catalogue reports one (OpenAI-shaped `/models` responses and OpenRouter carry `created`; Anthropic carries an ISO `created_at`). The model picker sorts on it so the newest releases come first; entries without it fall back to alphabetical order.
+	Created *float32 `json:"created,omitempty"`
 }
 
 type _AiModel AiModel
@@ -229,6 +231,38 @@ func (o *AiModel) SetCapabilities(v float32) {
 	o.Capabilities = &v
 }
 
+// GetCreated returns the Created field value if set, zero value otherwise.
+func (o *AiModel) GetCreated() float32 {
+	if o == nil || IsNil(o.Created) {
+		var ret float32
+		return ret
+	}
+	return *o.Created
+}
+
+// GetCreatedOk returns a tuple with the Created field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiModel) GetCreatedOk() (*float32, bool) {
+	if o == nil || IsNil(o.Created) {
+		return nil, false
+	}
+	return o.Created, true
+}
+
+// HasCreated returns a boolean if a field has been set.
+func (o *AiModel) IsCreatedSet() bool {
+	if o != nil && !IsNil(o.Created) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreated gets a reference to the given float32 and assigns it to the Created field.
+func (o *AiModel) SetCreated(v float32) {
+	o.Created = &v
+}
+
 func (o AiModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -250,6 +284,9 @@ func (o AiModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Capabilities) {
 		toSerialize["capabilities"] = o.Capabilities
+	}
+	if !IsNil(o.Created) {
+		toSerialize["created"] = o.Created
 	}
 	return toSerialize, nil
 }

@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## GetSmtpOperationStatus
 
-> SmtpOperationStatusRequestsWrapper GetSmtpOperationStatus(ctx).Execute()
+> SmtpOperationStatusWrapper GetSmtpOperationStatus(ctx).Execute()
 
 Get SMTP test status
 
@@ -43,7 +43,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecuritySMTPSettingsAPI.GetSmtpOperationStatus``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSmtpOperationStatus`: SmtpOperationStatusRequestsWrapper
+	// response from `GetSmtpOperationStatus`: SmtpOperationStatusWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SecuritySMTPSettingsAPI.GetSmtpOperationStatus`: %v\n", resp)
 }
 ```
@@ -59,7 +59,7 @@ Other parameters are passed through a pointer to a apiGetSmtpOperationStatusRequ
 
 ### Return type
 
-[**SmtpOperationStatusRequestsWrapper**](SmtpOperationStatusRequestsWrapper.md)
+[**SmtpOperationStatusWrapper**](SmtpOperationStatusWrapper.md)
 
 ### Authorization
 
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 
 ## TestSmtpSettings
 
-> SmtpOperationStatusRequestsWrapper TestSmtpSettings(ctx).Execute()
+> SmtpOperationStatusWrapper TestSmtpSettings(ctx).Execute()
 
 Test SMTP settings
 
@@ -300,7 +300,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecuritySMTPSettingsAPI.TestSmtpSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `TestSmtpSettings`: SmtpOperationStatusRequestsWrapper
+	// response from `TestSmtpSettings`: SmtpOperationStatusWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SecuritySMTPSettingsAPI.TestSmtpSettings`: %v\n", resp)
 }
 ```
@@ -316,7 +316,7 @@ Other parameters are passed through a pointer to a apiTestSmtpSettingsRequest st
 
 ### Return type
 
-[**SmtpOperationStatusRequestsWrapper**](SmtpOperationStatusRequestsWrapper.md)
+[**SmtpOperationStatusWrapper**](SmtpOperationStatusWrapper.md)
 
 ### Authorization
 

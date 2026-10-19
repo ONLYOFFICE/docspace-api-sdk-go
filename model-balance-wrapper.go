@@ -21,10 +21,10 @@ import (
 // checks if the BalanceWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BalanceWrapper{}
 
-// BalanceWrapper The successful API response containing the Balance object.
+// BalanceWrapper The successful API response containing the BalanceDto object.
 type BalanceWrapper struct {
-	// The Balance object returned by the operation.
-	Response *Balance `json:"response,omitempty"`
+	// The BalanceDto object returned by the operation.
+	Response *BalanceDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewBalanceWrapperWithDefaults() *BalanceWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *BalanceWrapper) GetResponse() Balance {
+func (o *BalanceWrapper) GetResponse() BalanceDto {
 	if o == nil || IsNil(o.Response) {
-		var ret Balance
+		var ret BalanceDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *BalanceWrapper) GetResponse() Balance {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BalanceWrapper) GetResponseOk() (*Balance, bool) {
+func (o *BalanceWrapper) GetResponseOk() (*BalanceDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *BalanceWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given Balance and assigns it to the Response field.
-func (o *BalanceWrapper) SetResponse(v Balance) {
+// SetResponse gets a reference to the given BalanceDto and assigns it to the Response field.
+func (o *BalanceWrapper) SetResponse(v BalanceDto) {
 	o.Response = &v
 }
 

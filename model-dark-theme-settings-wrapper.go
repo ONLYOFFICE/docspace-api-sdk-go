@@ -21,10 +21,10 @@ import (
 // checks if the DarkThemeSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DarkThemeSettingsWrapper{}
 
-// DarkThemeSettingsWrapper The successful API response containing the DarkThemeSettings object.
+// DarkThemeSettingsWrapper The successful API response containing the DarkThemeSettingsDto object.
 type DarkThemeSettingsWrapper struct {
-	// The DarkThemeSettings object returned by the operation.
-	Response *DarkThemeSettings `json:"response,omitempty"`
+	// The DarkThemeSettingsDto object returned by the operation.
+	Response *DarkThemeSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewDarkThemeSettingsWrapperWithDefaults() *DarkThemeSettingsWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *DarkThemeSettingsWrapper) GetResponse() DarkThemeSettings {
+func (o *DarkThemeSettingsWrapper) GetResponse() DarkThemeSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret DarkThemeSettings
+		var ret DarkThemeSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *DarkThemeSettingsWrapper) GetResponse() DarkThemeSettings {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DarkThemeSettingsWrapper) GetResponseOk() (*DarkThemeSettings, bool) {
+func (o *DarkThemeSettingsWrapper) GetResponseOk() (*DarkThemeSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *DarkThemeSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given DarkThemeSettings and assigns it to the Response field.
-func (o *DarkThemeSettingsWrapper) SetResponse(v DarkThemeSettings) {
+// SetResponse gets a reference to the given DarkThemeSettingsDto and assigns it to the Response field.
+func (o *DarkThemeSettingsWrapper) SetResponse(v DarkThemeSettingsDto) {
 	o.Response = &v
 }
 

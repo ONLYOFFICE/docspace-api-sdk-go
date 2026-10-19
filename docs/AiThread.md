@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ThreadId** | **string** | Unique thread identifier (UUID). | 
 **Title** | Pointer to **string** | Optional thread title. Auto-generated from the first message if not set. | [optional] 
 **LastEditDate** | Pointer to **float32** | Timestamp (ms since epoch) of the last message in this thread. Used for sorting. | [optional] 
-**Provider** | Pointer to [**AiTProvider**](AiTProvider.md) | Provider configuration at the time of last message. Used for thread-level provider display. | [optional] 
+**Provider** | Pointer to [**AiProvider**](AiProvider.md) | Provider configuration at the time of last message. Used for thread-level provider display. | [optional] 
 **Model** | Pointer to [**AiModel**](AiModel.md) | Model info at the time of last message. | [optional] 
 **ProfileId** | Pointer to **string** | ID of the profile used for this thread. Links to `Profile.id`. | [optional] 
 
@@ -102,20 +102,20 @@ HasLastEditDate returns a boolean if a field has been set.
 
 ### GetProvider
 
-`func (o *AiThread) GetProvider() AiTProvider`
+`func (o *AiThread) GetProvider() AiProvider`
 
 GetProvider returns the Provider field if non-nil, zero value otherwise.
 
 ### GetProviderOk
 
-`func (o *AiThread) GetProviderOk() (*AiTProvider, bool)`
+`func (o *AiThread) GetProviderOk() (*AiProvider, bool)`
 
 GetProviderOk returns a tuple with the Provider field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProvider
 
-`func (o *AiThread) SetProvider(v AiTProvider)`
+`func (o *AiThread) SetProvider(v AiProvider)`
 
 SetProvider sets Provider field to given value.
 

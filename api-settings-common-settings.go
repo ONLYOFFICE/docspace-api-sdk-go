@@ -164,10 +164,10 @@ func (a *SettingsCommonSettingsAPIService) CloseAdminHelperExecute(r ApiCloseAdm
 type ApiCompleteWizardRequest struct {
 	ctx context.Context
 	ApiService *SettingsCommonSettingsAPIService
-	wizardRequestsDto *WizardRequestsDto
+	wizardRequestDto *WizardRequestDto
 }
 
-func (r ApiCompleteWizardRequest) WizardRequestsDto(wizardRequestsDto WizardRequestsDto) ApiCompleteWizardRequest {	r.wizardRequestsDto = &wizardRequestsDto
+func (r ApiCompleteWizardRequest) WizardRequestDto(wizardRequestDto WizardRequestDto) ApiCompleteWizardRequest {	r.wizardRequestDto = &wizardRequestDto
 	return r
 }
 
@@ -229,7 +229,7 @@ func (a *SettingsCommonSettingsAPIService) CompleteWizardExecute(r ApiCompleteWi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.wizardRequestsDto
+	localVarPostBody = r.wizardRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -288,17 +288,6 @@ func (a *SettingsCommonSettingsAPIService) CompleteWizardExecute(r ApiCompleteWi
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -317,10 +306,10 @@ func (a *SettingsCommonSettingsAPIService) CompleteWizardExecute(r ApiCompleteWi
 type ApiConfigureDeepLinkRequest struct {
 	ctx context.Context
 	ApiService *SettingsCommonSettingsAPIService
-	deepLinkConfigurationRequestsDto *DeepLinkConfigurationRequestsDto
+	deepLinkConfigurationRequestDto *DeepLinkConfigurationRequestDto
 }
 
-func (r ApiConfigureDeepLinkRequest) DeepLinkConfigurationRequestsDto(deepLinkConfigurationRequestsDto DeepLinkConfigurationRequestsDto) ApiConfigureDeepLinkRequest {	r.deepLinkConfigurationRequestsDto = &deepLinkConfigurationRequestsDto
+func (r ApiConfigureDeepLinkRequest) DeepLinkConfigurationRequestDto(deepLinkConfigurationRequestDto DeepLinkConfigurationRequestDto) ApiConfigureDeepLinkRequest {	r.deepLinkConfigurationRequestDto = &deepLinkConfigurationRequestDto
 	return r
 }
 
@@ -382,7 +371,7 @@ func (a *SettingsCommonSettingsAPIService) ConfigureDeepLinkExecute(r ApiConfigu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.deepLinkConfigurationRequestsDto
+	localVarPostBody = r.deepLinkConfigurationRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -431,17 +420,6 @@ func (a *SettingsCommonSettingsAPIService) ConfigureDeepLinkExecute(r ApiConfigu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1648,7 +1626,7 @@ type ApiGetSupportedCulturesRequest struct {
 	ApiService *SettingsCommonSettingsAPIService
 }
 
-func (r ApiGetSupportedCulturesRequest) Execute() (*STRINGArrayWrapper, *http.Response, error) {
+func (r ApiGetSupportedCulturesRequest) Execute() (*StringArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetSupportedCulturesExecute(r)
 }
 
@@ -1668,13 +1646,13 @@ func (a *SettingsCommonSettingsAPIService) GetSupportedCultures(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return STRINGArrayWrapper
-func (a *SettingsCommonSettingsAPIService) GetSupportedCulturesExecute(r ApiGetSupportedCulturesRequest) (*STRINGArrayWrapper, *http.Response, error) {
+//  @return StringArrayWrapper
+func (a *SettingsCommonSettingsAPIService) GetSupportedCulturesExecute(r ApiGetSupportedCulturesRequest) (*StringArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *STRINGArrayWrapper
+		localVarReturnValue  *StringArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsCommonSettingsAPIService.GetSupportedCultures")
@@ -2064,7 +2042,7 @@ type ApiGetTimeZonesRequest struct {
 	ApiService *SettingsCommonSettingsAPIService
 }
 
-func (r ApiGetTimeZonesRequest) Execute() (*TimezonesRequestsArrayWrapper, *http.Response, error) {
+func (r ApiGetTimeZonesRequest) Execute() (*TimezoneArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetTimeZonesExecute(r)
 }
 
@@ -2084,13 +2062,13 @@ func (a *SettingsCommonSettingsAPIService) GetTimeZones(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return TimezonesRequestsArrayWrapper
-func (a *SettingsCommonSettingsAPIService) GetTimeZonesExecute(r ApiGetTimeZonesRequest) (*TimezonesRequestsArrayWrapper, *http.Response, error) {
+//  @return TimezoneArrayWrapper
+func (a *SettingsCommonSettingsAPIService) GetTimeZonesExecute(r ApiGetTimeZonesRequest) (*TimezoneArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TimezonesRequestsArrayWrapper
+		localVarReturnValue  *TimezoneArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsCommonSettingsAPIService.GetTimeZones")
@@ -2343,17 +2321,6 @@ func (a *SettingsCommonSettingsAPIService) SaveDefaultFolderExecute(r ApiSaveDef
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2372,10 +2339,10 @@ func (a *SettingsCommonSettingsAPIService) SaveDefaultFolderExecute(r ApiSaveDef
 type ApiSaveDnsSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsCommonSettingsAPIService
-	dnsSettingsRequestsDto *DnsSettingsRequestsDto
+	dnsSettingsRequestDto *DnsSettingsRequestDto
 }
 
-func (r ApiSaveDnsSettingsRequest) DnsSettingsRequestsDto(dnsSettingsRequestsDto DnsSettingsRequestsDto) ApiSaveDnsSettingsRequest {	r.dnsSettingsRequestsDto = &dnsSettingsRequestsDto
+func (r ApiSaveDnsSettingsRequest) DnsSettingsRequestDto(dnsSettingsRequestDto DnsSettingsRequestDto) ApiSaveDnsSettingsRequest {	r.dnsSettingsRequestDto = &dnsSettingsRequestDto
 	return r
 }
 
@@ -2437,7 +2404,7 @@ func (a *SettingsCommonSettingsAPIService) SaveDnsSettingsExecute(r ApiSaveDnsSe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.dnsSettingsRequestsDto
+	localVarPostBody = r.dnsSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2496,7 +2463,7 @@ func (a *SettingsCommonSettingsAPIService) SaveDnsSettingsExecute(r ApiSaveDnsSe
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
+		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2525,10 +2492,10 @@ func (a *SettingsCommonSettingsAPIService) SaveDnsSettingsExecute(r ApiSaveDnsSe
 type ApiSaveMailDomainSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsCommonSettingsAPIService
-	mailDomainSettingsRequestsDto *MailDomainSettingsRequestsDto
+	mailDomainSettingsRequestDto *MailDomainSettingsRequestDto
 }
 
-func (r ApiSaveMailDomainSettingsRequest) MailDomainSettingsRequestsDto(mailDomainSettingsRequestsDto MailDomainSettingsRequestsDto) ApiSaveMailDomainSettingsRequest {	r.mailDomainSettingsRequestsDto = &mailDomainSettingsRequestsDto
+func (r ApiSaveMailDomainSettingsRequest) MailDomainSettingsRequestDto(mailDomainSettingsRequestDto MailDomainSettingsRequestDto) ApiSaveMailDomainSettingsRequest {	r.mailDomainSettingsRequestDto = &mailDomainSettingsRequestDto
 	return r
 }
 
@@ -2590,7 +2557,7 @@ func (a *SettingsCommonSettingsAPIService) SaveMailDomainSettingsExecute(r ApiSa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.mailDomainSettingsRequestsDto
+	localVarPostBody = r.mailDomainSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2660,17 +2627,6 @@ func (a *SettingsCommonSettingsAPIService) SaveMailDomainSettingsExecute(r ApiSa
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2689,10 +2645,10 @@ func (a *SettingsCommonSettingsAPIService) SaveMailDomainSettingsExecute(r ApiSa
 type ApiSavePortalColorThemeRequest struct {
 	ctx context.Context
 	ApiService *SettingsCommonSettingsAPIService
-	customColorThemesSettingsRequestsDto *CustomColorThemesSettingsRequestsDto
+	customColorThemesSettingsRequestDto *CustomColorThemesSettingsRequestDto
 }
 
-func (r ApiSavePortalColorThemeRequest) CustomColorThemesSettingsRequestsDto(customColorThemesSettingsRequestsDto CustomColorThemesSettingsRequestsDto) ApiSavePortalColorThemeRequest {	r.customColorThemesSettingsRequestsDto = &customColorThemesSettingsRequestsDto
+func (r ApiSavePortalColorThemeRequest) CustomColorThemesSettingsRequestDto(customColorThemesSettingsRequestDto CustomColorThemesSettingsRequestDto) ApiSavePortalColorThemeRequest {	r.customColorThemesSettingsRequestDto = &customColorThemesSettingsRequestDto
 	return r
 }
 
@@ -2754,7 +2710,7 @@ func (a *SettingsCommonSettingsAPIService) SavePortalColorThemeExecute(r ApiSave
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.customColorThemesSettingsRequestsDto
+	localVarPostBody = r.customColorThemesSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2853,10 +2809,10 @@ func (a *SettingsCommonSettingsAPIService) SavePortalColorThemeExecute(r ApiSave
 type ApiSetTenantAiAccessSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsCommonSettingsAPIService
-	tenantAiAccessSettingsDto *TenantAiAccessSettingsDto
+	tenantAiAccessSettingsRequestDto *TenantAiAccessSettingsRequestDto
 }
 
-func (r ApiSetTenantAiAccessSettingsRequest) TenantAiAccessSettingsDto(tenantAiAccessSettingsDto TenantAiAccessSettingsDto) ApiSetTenantAiAccessSettingsRequest {	r.tenantAiAccessSettingsDto = &tenantAiAccessSettingsDto
+func (r ApiSetTenantAiAccessSettingsRequest) TenantAiAccessSettingsRequestDto(tenantAiAccessSettingsRequestDto TenantAiAccessSettingsRequestDto) ApiSetTenantAiAccessSettingsRequest {	r.tenantAiAccessSettingsRequestDto = &tenantAiAccessSettingsRequestDto
 	return r
 }
 
@@ -2918,7 +2874,7 @@ func (a *SettingsCommonSettingsAPIService) SetTenantAiAccessSettingsExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tenantAiAccessSettingsDto
+	localVarPostBody = r.tenantAiAccessSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3017,10 +2973,10 @@ func (a *SettingsCommonSettingsAPIService) SetTenantAiAccessSettingsExecute(r Ap
 type ApiUpdateEmailActivationSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsCommonSettingsAPIService
-	emailActivationSettings *EmailActivationSettings
+	emailActivationSettingsRequestDto *EmailActivationSettingsRequestDto
 }
 
-func (r ApiUpdateEmailActivationSettingsRequest) EmailActivationSettings(emailActivationSettings EmailActivationSettings) ApiUpdateEmailActivationSettingsRequest {	r.emailActivationSettings = &emailActivationSettings
+func (r ApiUpdateEmailActivationSettingsRequest) EmailActivationSettingsRequestDto(emailActivationSettingsRequestDto EmailActivationSettingsRequestDto) ApiUpdateEmailActivationSettingsRequest {	r.emailActivationSettingsRequestDto = &emailActivationSettingsRequestDto
 	return r
 }
 
@@ -3082,7 +3038,7 @@ func (a *SettingsCommonSettingsAPIService) UpdateEmailActivationSettingsExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.emailActivationSettings
+	localVarPostBody = r.emailActivationSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

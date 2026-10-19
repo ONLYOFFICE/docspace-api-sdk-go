@@ -21,10 +21,10 @@ import (
 // checks if the WizardSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WizardSettingsWrapper{}
 
-// WizardSettingsWrapper The successful API response containing the WizardSettings object.
+// WizardSettingsWrapper The successful API response containing the WizardSettingsDto object.
 type WizardSettingsWrapper struct {
-	// The WizardSettings object returned by the operation.
-	Response *WizardSettings `json:"response,omitempty"`
+	// The WizardSettingsDto object returned by the operation.
+	Response *WizardSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewWizardSettingsWrapperWithDefaults() *WizardSettingsWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *WizardSettingsWrapper) GetResponse() WizardSettings {
+func (o *WizardSettingsWrapper) GetResponse() WizardSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret WizardSettings
+		var ret WizardSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *WizardSettingsWrapper) GetResponse() WizardSettings {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WizardSettingsWrapper) GetResponseOk() (*WizardSettings, bool) {
+func (o *WizardSettingsWrapper) GetResponseOk() (*WizardSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *WizardSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given WizardSettings and assigns it to the Response field.
-func (o *WizardSettingsWrapper) SetResponse(v WizardSettings) {
+// SetResponse gets a reference to the given WizardSettingsDto and assigns it to the Response field.
+func (o *WizardSettingsWrapper) SetResponse(v WizardSettingsDto) {
 	o.Response = &v
 }
 

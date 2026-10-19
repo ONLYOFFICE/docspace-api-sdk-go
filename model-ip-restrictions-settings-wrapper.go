@@ -18,13 +18,13 @@ import (
 	"encoding/json"
 )
 
-// checks if the IPRestrictionsSettingsWrapper type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &IPRestrictionsSettingsWrapper{}
+// checks if the IpRestrictionsSettingsWrapper type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IpRestrictionsSettingsWrapper{}
 
-// IPRestrictionsSettingsWrapper The successful API response containing the IPRestrictionsSettings object.
-type IPRestrictionsSettingsWrapper struct {
-	// The IPRestrictionsSettings object returned by the operation.
-	Response *IPRestrictionsSettings `json:"response,omitempty"`
+// IpRestrictionsSettingsWrapper The successful API response containing the IpRestrictionsSettingsDto object.
+type IpRestrictionsSettingsWrapper struct {
+	// The IpRestrictionsSettingsDto object returned by the operation.
+	Response *IpRestrictionsSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -35,27 +35,27 @@ type IPRestrictionsSettingsWrapper struct {
 	StatusCode *int32 `json:"statusCode,omitempty"`
 }
 
-// NewIPRestrictionsSettingsWrapper instantiates a new IPRestrictionsSettingsWrapper object
+// NewIpRestrictionsSettingsWrapper instantiates a new IpRestrictionsSettingsWrapper object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIPRestrictionsSettingsWrapper() *IPRestrictionsSettingsWrapper {
-	this := IPRestrictionsSettingsWrapper{}
+func NewIpRestrictionsSettingsWrapper() *IpRestrictionsSettingsWrapper {
+	this := IpRestrictionsSettingsWrapper{}
 	return &this
 }
 
-// NewIPRestrictionsSettingsWrapperWithDefaults instantiates a new IPRestrictionsSettingsWrapper object
+// NewIpRestrictionsSettingsWrapperWithDefaults instantiates a new IpRestrictionsSettingsWrapper object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewIPRestrictionsSettingsWrapperWithDefaults() *IPRestrictionsSettingsWrapper {
-	this := IPRestrictionsSettingsWrapper{}
+func NewIpRestrictionsSettingsWrapperWithDefaults() *IpRestrictionsSettingsWrapper {
+	this := IpRestrictionsSettingsWrapper{}
 	return &this
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *IPRestrictionsSettingsWrapper) GetResponse() IPRestrictionsSettings {
+func (o *IpRestrictionsSettingsWrapper) GetResponse() IpRestrictionsSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret IPRestrictionsSettings
+		var ret IpRestrictionsSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *IPRestrictionsSettingsWrapper) GetResponse() IPRestrictionsSettings {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPRestrictionsSettingsWrapper) GetResponseOk() (*IPRestrictionsSettings, bool) {
+func (o *IpRestrictionsSettingsWrapper) GetResponseOk() (*IpRestrictionsSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -71,7 +71,7 @@ func (o *IPRestrictionsSettingsWrapper) GetResponseOk() (*IPRestrictionsSettings
 }
 
 // HasResponse returns a boolean if a field has been set.
-func (o *IPRestrictionsSettingsWrapper) IsResponseSet() bool {
+func (o *IpRestrictionsSettingsWrapper) IsResponseSet() bool {
 	if o != nil && !IsNil(o.Response) {
 		return true
 	}
@@ -79,13 +79,13 @@ func (o *IPRestrictionsSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given IPRestrictionsSettings and assigns it to the Response field.
-func (o *IPRestrictionsSettingsWrapper) SetResponse(v IPRestrictionsSettings) {
+// SetResponse gets a reference to the given IpRestrictionsSettingsDto and assigns it to the Response field.
+func (o *IpRestrictionsSettingsWrapper) SetResponse(v IpRestrictionsSettingsDto) {
 	o.Response = &v
 }
 
 // GetCount returns the Count field value if set, zero value otherwise.
-func (o *IPRestrictionsSettingsWrapper) GetCount() int32 {
+func (o *IpRestrictionsSettingsWrapper) GetCount() int32 {
 	if o == nil || IsNil(o.Count) {
 		var ret int32
 		return ret
@@ -95,7 +95,7 @@ func (o *IPRestrictionsSettingsWrapper) GetCount() int32 {
 
 // GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPRestrictionsSettingsWrapper) GetCountOk() (*int32, bool) {
+func (o *IpRestrictionsSettingsWrapper) GetCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *IPRestrictionsSettingsWrapper) GetCountOk() (*int32, bool) {
 }
 
 // HasCount returns a boolean if a field has been set.
-func (o *IPRestrictionsSettingsWrapper) IsCountSet() bool {
+func (o *IpRestrictionsSettingsWrapper) IsCountSet() bool {
 	if o != nil && !IsNil(o.Count) {
 		return true
 	}
@@ -112,12 +112,12 @@ func (o *IPRestrictionsSettingsWrapper) IsCountSet() bool {
 }
 
 // SetCount gets a reference to the given int32 and assigns it to the Count field.
-func (o *IPRestrictionsSettingsWrapper) SetCount(v int32) {
+func (o *IpRestrictionsSettingsWrapper) SetCount(v int32) {
 	o.Count = &v
 }
 
 // GetLinks returns the Links field value if set, zero value otherwise.
-func (o *IPRestrictionsSettingsWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner {
+func (o *IpRestrictionsSettingsWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner {
 	if o == nil || IsNil(o.Links) {
 		var ret []GetPortalPrices200ResponseLinksInner
 		return ret
@@ -127,7 +127,7 @@ func (o *IPRestrictionsSettingsWrapper) GetLinks() []GetPortalPrices200ResponseL
 
 // GetLinksOk returns a tuple with the Links field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPRestrictionsSettingsWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinksInner, bool) {
+func (o *IpRestrictionsSettingsWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinksInner, bool) {
 	if o == nil || IsNil(o.Links) {
 		return nil, false
 	}
@@ -135,7 +135,7 @@ func (o *IPRestrictionsSettingsWrapper) GetLinksOk() ([]GetPortalPrices200Respon
 }
 
 // HasLinks returns a boolean if a field has been set.
-func (o *IPRestrictionsSettingsWrapper) IsLinksSet() bool {
+func (o *IpRestrictionsSettingsWrapper) IsLinksSet() bool {
 	if o != nil && !IsNil(o.Links) {
 		return true
 	}
@@ -144,12 +144,12 @@ func (o *IPRestrictionsSettingsWrapper) IsLinksSet() bool {
 }
 
 // SetLinks gets a reference to the given []GetPortalPrices200ResponseLinksInner and assigns it to the Links field.
-func (o *IPRestrictionsSettingsWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner) {
+func (o *IpRestrictionsSettingsWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner) {
 	o.Links = v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *IPRestrictionsSettingsWrapper) GetStatus() int32 {
+func (o *IpRestrictionsSettingsWrapper) GetStatus() int32 {
 	if o == nil || IsNil(o.Status) {
 		var ret int32
 		return ret
@@ -159,7 +159,7 @@ func (o *IPRestrictionsSettingsWrapper) GetStatus() int32 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPRestrictionsSettingsWrapper) GetStatusOk() (*int32, bool) {
+func (o *IpRestrictionsSettingsWrapper) GetStatusOk() (*int32, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -167,7 +167,7 @@ func (o *IPRestrictionsSettingsWrapper) GetStatusOk() (*int32, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *IPRestrictionsSettingsWrapper) IsStatusSet() bool {
+func (o *IpRestrictionsSettingsWrapper) IsStatusSet() bool {
 	if o != nil && !IsNil(o.Status) {
 		return true
 	}
@@ -176,12 +176,12 @@ func (o *IPRestrictionsSettingsWrapper) IsStatusSet() bool {
 }
 
 // SetStatus gets a reference to the given int32 and assigns it to the Status field.
-func (o *IPRestrictionsSettingsWrapper) SetStatus(v int32) {
+func (o *IpRestrictionsSettingsWrapper) SetStatus(v int32) {
 	o.Status = &v
 }
 
 // GetStatusCode returns the StatusCode field value if set, zero value otherwise.
-func (o *IPRestrictionsSettingsWrapper) GetStatusCode() int32 {
+func (o *IpRestrictionsSettingsWrapper) GetStatusCode() int32 {
 	if o == nil || IsNil(o.StatusCode) {
 		var ret int32
 		return ret
@@ -191,7 +191,7 @@ func (o *IPRestrictionsSettingsWrapper) GetStatusCode() int32 {
 
 // GetStatusCodeOk returns a tuple with the StatusCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPRestrictionsSettingsWrapper) GetStatusCodeOk() (*int32, bool) {
+func (o *IpRestrictionsSettingsWrapper) GetStatusCodeOk() (*int32, bool) {
 	if o == nil || IsNil(o.StatusCode) {
 		return nil, false
 	}
@@ -199,7 +199,7 @@ func (o *IPRestrictionsSettingsWrapper) GetStatusCodeOk() (*int32, bool) {
 }
 
 // HasStatusCode returns a boolean if a field has been set.
-func (o *IPRestrictionsSettingsWrapper) IsStatusCodeSet() bool {
+func (o *IpRestrictionsSettingsWrapper) IsStatusCodeSet() bool {
 	if o != nil && !IsNil(o.StatusCode) {
 		return true
 	}
@@ -208,11 +208,11 @@ func (o *IPRestrictionsSettingsWrapper) IsStatusCodeSet() bool {
 }
 
 // SetStatusCode gets a reference to the given int32 and assigns it to the StatusCode field.
-func (o *IPRestrictionsSettingsWrapper) SetStatusCode(v int32) {
+func (o *IpRestrictionsSettingsWrapper) SetStatusCode(v int32) {
 	o.StatusCode = &v
 }
 
-func (o IPRestrictionsSettingsWrapper) MarshalJSON() ([]byte, error) {
+func (o IpRestrictionsSettingsWrapper) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -220,7 +220,7 @@ func (o IPRestrictionsSettingsWrapper) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o IPRestrictionsSettingsWrapper) ToMap() (map[string]interface{}, error) {
+func (o IpRestrictionsSettingsWrapper) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Response) {
 		toSerialize["response"] = o.Response
@@ -240,38 +240,38 @@ func (o IPRestrictionsSettingsWrapper) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableIPRestrictionsSettingsWrapper struct {
-	value *IPRestrictionsSettingsWrapper
+type NullableIpRestrictionsSettingsWrapper struct {
+	value *IpRestrictionsSettingsWrapper
 	isSet bool
 }
 
-func (v NullableIPRestrictionsSettingsWrapper) Get() *IPRestrictionsSettingsWrapper {
+func (v NullableIpRestrictionsSettingsWrapper) Get() *IpRestrictionsSettingsWrapper {
 	return v.value
 }
 
-func (v *NullableIPRestrictionsSettingsWrapper) Set(val *IPRestrictionsSettingsWrapper) {
+func (v *NullableIpRestrictionsSettingsWrapper) Set(val *IpRestrictionsSettingsWrapper) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableIPRestrictionsSettingsWrapper) IsSet() bool {
+func (v NullableIpRestrictionsSettingsWrapper) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableIPRestrictionsSettingsWrapper) Unset() {
+func (v *NullableIpRestrictionsSettingsWrapper) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableIPRestrictionsSettingsWrapper(val *IPRestrictionsSettingsWrapper) *NullableIPRestrictionsSettingsWrapper {
-	return &NullableIPRestrictionsSettingsWrapper{value: val, isSet: true}
+func NewNullableIpRestrictionsSettingsWrapper(val *IpRestrictionsSettingsWrapper) *NullableIpRestrictionsSettingsWrapper {
+	return &NullableIpRestrictionsSettingsWrapper{value: val, isSet: true}
 }
 
-func (v NullableIPRestrictionsSettingsWrapper) MarshalJSON() ([]byte, error) {
+func (v NullableIpRestrictionsSettingsWrapper) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableIPRestrictionsSettingsWrapper) UnmarshalJSON(src []byte) error {
+func (v *NullableIpRestrictionsSettingsWrapper) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -21,10 +21,10 @@ import (
 // checks if the StorageSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StorageSettingsWrapper{}
 
-// StorageSettingsWrapper The successful API response containing the StorageSettings object.
+// StorageSettingsWrapper The successful API response containing the StorageSettingsDto object.
 type StorageSettingsWrapper struct {
-	// The StorageSettings object returned by the operation.
-	Response *StorageSettings `json:"response,omitempty"`
+	// The StorageSettingsDto object returned by the operation.
+	Response *StorageSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewStorageSettingsWrapperWithDefaults() *StorageSettingsWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *StorageSettingsWrapper) GetResponse() StorageSettings {
+func (o *StorageSettingsWrapper) GetResponse() StorageSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret StorageSettings
+		var ret StorageSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *StorageSettingsWrapper) GetResponse() StorageSettings {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StorageSettingsWrapper) GetResponseOk() (*StorageSettings, bool) {
+func (o *StorageSettingsWrapper) GetResponseOk() (*StorageSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *StorageSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given StorageSettings and assigns it to the Response field.
-func (o *StorageSettingsWrapper) SetResponse(v StorageSettings) {
+// SetResponse gets a reference to the given StorageSettingsDto and assigns it to the Response field.
+func (o *StorageSettingsWrapper) SetResponse(v StorageSettingsDto) {
 	o.Response = &v
 }
 

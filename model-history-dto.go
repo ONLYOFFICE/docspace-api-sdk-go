@@ -28,13 +28,13 @@ type HistoryDto struct {
 	// The identifier of the record, which tells two records of the same action apart and stays stable as long as the  portal keeps the log.
 	Id int32 `json:"id"`
 	// What happened - the kind of event the record stands for, such as a file being uploaded, renamed, moved or  shared - with the key a client can key its own wording off.
-	Action HistoryAction `json:"action"`
+	Action HistoryActionDto `json:"action"`
 	// Who caused the event. For an event caused by a visitor following an external link only the name they gave is  filled in, the account fields staying empty.
 	Initiator EmployeeDto `json:"initiator"`
 	// When the event happened, written with the offset of the portal's time zone.
 	Date ApiDateTime `json:"date"`
 	// The history data. Absent for actions that carry no payload of their own - changing a room's  logo, icon colour or cover, whose interpreter returns no data (see  `RoomLogoChangedInterpreter`). It used to be declared required, which put it in the  OpenAPI document's required list while the null-dropping serializer left it out of the  response, so a generated client threw on any history page holding one of those entries.
-	Data *HistoryData `json:"data,omitempty"`
+	Data *HistoryDataDto `json:"data,omitempty"`
 	// The records folded into this one because they belong to the same action, the separate files of one upload for  instance. It is empty when the record stands alone, and the records inside it carry no further nesting.
 	Related []HistoryDto `json:"related,omitempty"`
 }
@@ -45,7 +45,7 @@ type _HistoryDto HistoryDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHistoryDto(id int32, action HistoryAction, initiator EmployeeDto, date ApiDateTime) *HistoryDto {
+func NewHistoryDto(id int32, action HistoryActionDto, initiator EmployeeDto, date ApiDateTime) *HistoryDto {
 	this := HistoryDto{}
 	this.Id = id
 	this.Action = action
@@ -87,9 +87,9 @@ func (o *HistoryDto) SetId(v int32) {
 }
 
 // GetAction returns the Action field value
-func (o *HistoryDto) GetAction() HistoryAction {
+func (o *HistoryDto) GetAction() HistoryActionDto {
 	if o == nil {
-		var ret HistoryAction
+		var ret HistoryActionDto
 		return ret
 	}
 
@@ -98,7 +98,7 @@ func (o *HistoryDto) GetAction() HistoryAction {
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *HistoryDto) GetActionOk() (*HistoryAction, bool) {
+func (o *HistoryDto) GetActionOk() (*HistoryActionDto, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -106,7 +106,7 @@ func (o *HistoryDto) GetActionOk() (*HistoryAction, bool) {
 }
 
 // SetAction sets field value
-func (o *HistoryDto) SetAction(v HistoryAction) {
+func (o *HistoryDto) SetAction(v HistoryActionDto) {
 	o.Action = v
 }
 
@@ -159,9 +159,9 @@ func (o *HistoryDto) SetDate(v ApiDateTime) {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *HistoryDto) GetData() HistoryData {
+func (o *HistoryDto) GetData() HistoryDataDto {
 	if o == nil || IsNil(o.Data) {
-		var ret HistoryData
+		var ret HistoryDataDto
 		return ret
 	}
 	return *o.Data
@@ -169,7 +169,7 @@ func (o *HistoryDto) GetData() HistoryData {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HistoryDto) GetDataOk() (*HistoryData, bool) {
+func (o *HistoryDto) GetDataOk() (*HistoryDataDto, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -185,8 +185,8 @@ func (o *HistoryDto) IsDataSet() bool {
 	return false
 }
 
-// SetData gets a reference to the given HistoryData and assigns it to the Data field.
-func (o *HistoryDto) SetData(v HistoryData) {
+// SetData gets a reference to the given HistoryDataDto and assigns it to the Data field.
+func (o *HistoryDto) SetData(v HistoryDataDto) {
 	o.Data = &v
 }
 

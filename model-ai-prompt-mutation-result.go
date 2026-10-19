@@ -30,7 +30,7 @@ type AiPromptMutationResult struct {
 	// The persisted prompt. Present on success.
 	Prompt *AiPrompt `json:"prompt,omitempty"`
 	// Why the prompt was rejected. Present on failure.
-	Error *AiTErrorData `json:"error,omitempty"`
+	Error *AiErrorData `json:"error,omitempty"`
 }
 
 type _AiPromptMutationResult AiPromptMutationResult
@@ -110,9 +110,9 @@ func (o *AiPromptMutationResult) SetPrompt(v AiPrompt) {
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *AiPromptMutationResult) GetError() AiTErrorData {
+func (o *AiPromptMutationResult) GetError() AiErrorData {
 	if o == nil || IsNil(o.Error) {
-		var ret AiTErrorData
+		var ret AiErrorData
 		return ret
 	}
 	return *o.Error
@@ -120,7 +120,7 @@ func (o *AiPromptMutationResult) GetError() AiTErrorData {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiPromptMutationResult) GetErrorOk() (*AiTErrorData, bool) {
+func (o *AiPromptMutationResult) GetErrorOk() (*AiErrorData, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -136,8 +136,8 @@ func (o *AiPromptMutationResult) IsErrorSet() bool {
 	return false
 }
 
-// SetError gets a reference to the given AiTErrorData and assigns it to the Error field.
-func (o *AiPromptMutationResult) SetError(v AiTErrorData) {
+// SetError gets a reference to the given AiErrorData and assigns it to the Error field.
+func (o *AiPromptMutationResult) SetError(v AiErrorData) {
 	o.Error = &v
 }
 

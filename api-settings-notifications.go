@@ -308,17 +308,6 @@ func (a *SettingsNotificationsAPIService) GetNotificationSettingsExecute(r ApiGe
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -483,10 +472,10 @@ func (a *SettingsNotificationsAPIService) GetRoomsNotificationSettingsExecute(r 
 type ApiSetNotificationSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsNotificationsAPIService
-	notificationSettingsRequestsDto *NotificationSettingsRequestsDto
+	notificationSettingsRequestDto *NotificationSettingsRequestDto
 }
 
-func (r ApiSetNotificationSettingsRequest) NotificationSettingsRequestsDto(notificationSettingsRequestsDto NotificationSettingsRequestsDto) ApiSetNotificationSettingsRequest {	r.notificationSettingsRequestsDto = &notificationSettingsRequestsDto
+func (r ApiSetNotificationSettingsRequest) NotificationSettingsRequestDto(notificationSettingsRequestDto NotificationSettingsRequestDto) ApiSetNotificationSettingsRequest {	r.notificationSettingsRequestDto = &notificationSettingsRequestDto
 	return r
 }
 
@@ -548,7 +537,7 @@ func (a *SettingsNotificationsAPIService) SetNotificationSettingsExecute(r ApiSe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.notificationSettingsRequestsDto
+	localVarPostBody = r.notificationSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -608,17 +597,6 @@ func (a *SettingsNotificationsAPIService) SetNotificationSettingsExecute(r ApiSe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

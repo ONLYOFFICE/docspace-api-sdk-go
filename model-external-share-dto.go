@@ -26,7 +26,7 @@ var _ MappedNullable = &ExternalShareDto{}
 // ExternalShareDto The outcome of validating an external share link and the entry it points at.
 type ExternalShareDto struct {
 	// How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty.
-	Status Status `json:"status"`
+	Status ExternalShareStatus `json:"status"`
 	// The identifier of the room, folder or file the link points at, always rendered as a string even where the  portal stores it as a number. It is null when the link could not be resolved.
 	Id NullableString `json:"id,omitempty"`
 	// The title of the entry the link points at, suitable for showing to the visitor before they are let in. It is  null when the link could not be resolved.
@@ -59,7 +59,7 @@ type _ExternalShareDto ExternalShareDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExternalShareDto(status Status, tenantId int32, shared bool, linkId string, isAuthenticated bool) *ExternalShareDto {
+func NewExternalShareDto(status ExternalShareStatus, tenantId int32, shared bool, linkId string, isAuthenticated bool) *ExternalShareDto {
 	this := ExternalShareDto{}
 	this.Status = status
 	this.TenantId = tenantId
@@ -78,9 +78,9 @@ func NewExternalShareDtoWithDefaults() *ExternalShareDto {
 }
 
 // GetStatus returns the Status field value
-func (o *ExternalShareDto) GetStatus() Status {
+func (o *ExternalShareDto) GetStatus() ExternalShareStatus {
 	if o == nil {
-		var ret Status
+		var ret ExternalShareStatus
 		return ret
 	}
 
@@ -89,7 +89,7 @@ func (o *ExternalShareDto) GetStatus() Status {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ExternalShareDto) GetStatusOk() (*Status, bool) {
+func (o *ExternalShareDto) GetStatusOk() (*ExternalShareStatus, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *ExternalShareDto) GetStatusOk() (*Status, bool) {
 }
 
 // SetStatus sets field value
-func (o *ExternalShareDto) SetStatus(v Status) {
+func (o *ExternalShareDto) SetStatus(v ExternalShareStatus) {
 	o.Status = v
 }
 

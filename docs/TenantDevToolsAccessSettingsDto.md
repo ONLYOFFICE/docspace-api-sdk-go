@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LimitedAccessForUsers** | Pointer to **bool** | Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way. | [optional] 
+**LimitedAccessForUsers** | Pointer to **bool** | Specifies if the Developer Tools access are limited for users or not. | [optional] 
+**LastModified** | Pointer to **time.Time** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetLimitedAccessForUsers sets LimitedAccessForUsers field to given value.
 `func (o *TenantDevToolsAccessSettingsDto) HasLimitedAccessForUsers() bool`
 
 HasLimitedAccessForUsers returns a boolean if a field has been set.
+
+### GetLastModified
+
+`func (o *TenantDevToolsAccessSettingsDto) GetLastModified() time.Time`
+
+GetLastModified returns the LastModified field if non-nil, zero value otherwise.
+
+### GetLastModifiedOk
+
+`func (o *TenantDevToolsAccessSettingsDto) GetLastModifiedOk() (*time.Time, bool)`
+
+GetLastModifiedOk returns a tuple with the LastModified field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastModified
+
+`func (o *TenantDevToolsAccessSettingsDto) SetLastModified(v time.Time)`
+
+SetLastModified sets LastModified field to given value.
+
+### HasLastModified
+
+`func (o *TenantDevToolsAccessSettingsDto) HasLastModified() bool`
+
+HasLastModified returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

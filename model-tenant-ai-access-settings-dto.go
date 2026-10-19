@@ -16,15 +16,18 @@ package docspace_api_sdk
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // checks if the TenantAiAccessSettingsDto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantAiAccessSettingsDto{}
 
-// TenantAiAccessSettingsDto Whether AI functionality is available on the portal.
+// TenantAiAccessSettingsDto Whether AI functionality is switched on for the portal.
 type TenantAiAccessSettingsDto struct {
-	// Whether AI is available on the portal at all - chat, agents and vectorization together. Switching it off  hides the AI Agents folder and makes every AI endpoint unreachable for all members at once, not only for the  caller, and the change is pushed to connected clients rather than waiting for their next request.
+	// Specifies whether AI functionality is enabled for the tenant.  When set to `false`, all AI features (chat, agents, vectorization) are disabled tenant-wide.
 	Enabled *bool `json:"enabled,omitempty"`
+	// The timestamp indicating when the settings were last modified.
+	LastModified *time.Time `json:"lastModified,omitempty"`
 }
 
 // NewTenantAiAccessSettingsDto instantiates a new TenantAiAccessSettingsDto object
@@ -76,6 +79,38 @@ func (o *TenantAiAccessSettingsDto) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
+// GetLastModified returns the LastModified field value if set, zero value otherwise.
+func (o *TenantAiAccessSettingsDto) GetLastModified() time.Time {
+	if o == nil || IsNil(o.LastModified) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastModified
+}
+
+// GetLastModifiedOk returns a tuple with the LastModified field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantAiAccessSettingsDto) GetLastModifiedOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.LastModified) {
+		return nil, false
+	}
+	return o.LastModified, true
+}
+
+// HasLastModified returns a boolean if a field has been set.
+func (o *TenantAiAccessSettingsDto) IsLastModifiedSet() bool {
+	if o != nil && !IsNil(o.LastModified) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastModified gets a reference to the given time.Time and assigns it to the LastModified field.
+func (o *TenantAiAccessSettingsDto) SetLastModified(v time.Time) {
+	o.LastModified = &v
+}
+
 func (o TenantAiAccessSettingsDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -88,6 +123,9 @@ func (o TenantAiAccessSettingsDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
+	}
+	if !IsNil(o.LastModified) {
+		toSerialize["lastModified"] = o.LastModified
 	}
 	return toSerialize, nil
 }

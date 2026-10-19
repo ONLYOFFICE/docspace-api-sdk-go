@@ -30,7 +30,7 @@ type ReportDto struct {
 	// How many movements one page may hold, echoed from the request; it is 25 unless another value was asked  for. A full page is not proof that more exist - compare `currentPage` with `totalPage`.
 	Limit *int32 `json:"limit,omitempty"`
 	// How many movements match the filters in total, across every page.
-	TotalQuantity *int64 `json:"totalQuantity,omitempty"`
+	TotalQuantity *int32 `json:"totalQuantity,omitempty"`
 	// How many pages those movements come to at the current `limit`.
 	TotalPage *int32 `json:"totalPage,omitempty"`
 	// Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument.
@@ -152,9 +152,9 @@ func (o *ReportDto) SetLimit(v int32) {
 }
 
 // GetTotalQuantity returns the TotalQuantity field value if set, zero value otherwise.
-func (o *ReportDto) GetTotalQuantity() int64 {
+func (o *ReportDto) GetTotalQuantity() int32 {
 	if o == nil || IsNil(o.TotalQuantity) {
-		var ret int64
+		var ret int32
 		return ret
 	}
 	return *o.TotalQuantity
@@ -162,7 +162,7 @@ func (o *ReportDto) GetTotalQuantity() int64 {
 
 // GetTotalQuantityOk returns a tuple with the TotalQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReportDto) GetTotalQuantityOk() (*int64, bool) {
+func (o *ReportDto) GetTotalQuantityOk() (*int32, bool) {
 	if o == nil || IsNil(o.TotalQuantity) {
 		return nil, false
 	}
@@ -178,8 +178,8 @@ func (o *ReportDto) IsTotalQuantitySet() bool {
 	return false
 }
 
-// SetTotalQuantity gets a reference to the given int64 and assigns it to the TotalQuantity field.
-func (o *ReportDto) SetTotalQuantity(v int64) {
+// SetTotalQuantity gets a reference to the given int32 and assigns it to the TotalQuantity field.
+func (o *ReportDto) SetTotalQuantity(v int32) {
 	o.TotalQuantity = &v
 }
 

@@ -41,6 +41,8 @@ type OperationDto struct {
 	Credit *float64 `json:"credit,omitempty"`
 	// The amount that was taken out of the wallet, `0` on a movement that put money in.
 	Debit *float64 `json:"debit,omitempty"`
+	// What the AI provider charged for the whole `quantity` of an AI tools or AI search charge, as the billing  service recorded it - the provider's side of the same operation `debit` bills the portal for. It is `null`  on any other movement, and on an AI charge recorded without a provider cost.
+	Cost NullableFloat64 `json:"cost,omitempty"`
 	// Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead.
 	ParticipantName NullableString `json:"participantName,omitempty"`
 	// The same person as their portal display name. It falls back to `participantName` when the name belongs to  no portal account, so it is never empty while `participantName` is filled.
@@ -52,7 +54,7 @@ type OperationDto struct {
 	// The identifier of that thing, to look it up in the module it belongs to. Empty under the same conditions  as `sourceType`.
 	SourceId NullableString `json:"sourceId,omitempty"`
 	// The tokens an AI operation consumed, broken down by kind - prompt, completion, cache reads and writes,  reasoning, images. It is `null` on any movement that is not an AI charge, and on an AI charge the billing  service recorded without token counts.
-	TokenUsage *OperationTokenUsage `json:"tokenUsage,omitempty"`
+	TokenUsage *OperationTokenUsageDto `json:"tokenUsage,omitempty"`
 	// What kind of movement this is - a payment, a charge, a refund, a correction. It is what the `type` filter  matches on, and `Unknown` covers a movement the billing service reported under a kind this build does not  recognise.
 	Type *OperationType `json:"type,omitempty"`
 }
@@ -412,6 +414,48 @@ func (o *OperationDto) SetDebit(v float64) {
 	o.Debit = &v
 }
 
+// GetCost returns the Cost field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OperationDto) GetCost() float64 {
+	if o == nil || IsNil(o.Cost.Get()) {
+		var ret float64
+		return ret
+	}
+	return *o.Cost.Get()
+}
+
+// GetCostOk returns a tuple with the Cost field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OperationDto) GetCostOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Cost.Get(), o.Cost.IsSet()
+}
+
+// HasCost returns a boolean if a field has been set.
+func (o *OperationDto) IsCostSet() bool {
+	if o != nil && o.Cost.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCost gets a reference to the given NullableFloat64 and assigns it to the Cost field.
+func (o *OperationDto) SetCost(v float64) {
+	o.Cost.Set(&v)
+}
+// SetCostNil sets the value for Cost to be an explicit nil
+func (o *OperationDto) SetCostNil() {
+	o.Cost.Set(nil)
+}
+
+// UnsetCost ensures that no value is present for Cost, not even an explicit nil
+func (o *OperationDto) UnsetCost() {
+	o.Cost.Unset()
+}
+
 // GetParticipantName returns the ParticipantName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OperationDto) GetParticipantName() string {
 	if o == nil || IsNil(o.ParticipantName.Get()) {
@@ -623,9 +667,9 @@ func (o *OperationDto) UnsetSourceId() {
 }
 
 // GetTokenUsage returns the TokenUsage field value if set, zero value otherwise.
-func (o *OperationDto) GetTokenUsage() OperationTokenUsage {
+func (o *OperationDto) GetTokenUsage() OperationTokenUsageDto {
 	if o == nil || IsNil(o.TokenUsage) {
-		var ret OperationTokenUsage
+		var ret OperationTokenUsageDto
 		return ret
 	}
 	return *o.TokenUsage
@@ -633,7 +677,7 @@ func (o *OperationDto) GetTokenUsage() OperationTokenUsage {
 
 // GetTokenUsageOk returns a tuple with the TokenUsage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OperationDto) GetTokenUsageOk() (*OperationTokenUsage, bool) {
+func (o *OperationDto) GetTokenUsageOk() (*OperationTokenUsageDto, bool) {
 	if o == nil || IsNil(o.TokenUsage) {
 		return nil, false
 	}
@@ -649,8 +693,8 @@ func (o *OperationDto) IsTokenUsageSet() bool {
 	return false
 }
 
-// SetTokenUsage gets a reference to the given OperationTokenUsage and assigns it to the TokenUsage field.
-func (o *OperationDto) SetTokenUsage(v OperationTokenUsage) {
+// SetTokenUsage gets a reference to the given OperationTokenUsageDto and assigns it to the TokenUsage field.
+func (o *OperationDto) SetTokenUsage(v OperationTokenUsageDto) {
 	o.TokenUsage = &v
 }
 
@@ -722,6 +766,9 @@ func (o OperationDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Debit) {
 		toSerialize["debit"] = o.Debit
+	}
+	if o.Cost.IsSet() {
+		toSerialize["cost"] = o.Cost.Get()
 	}
 	if o.ParticipantName.IsSet() {
 		toSerialize["participantName"] = o.ParticipantName.Get()

@@ -212,7 +212,7 @@ Other parameters are passed through a pointer to a apiGetRoomsNotificationSettin
 
 ## SetNotificationSettings
 
-> NotificationSettingsWrapper SetNotificationSettings(ctx).NotificationSettingsRequestsDto(notificationSettingsRequestsDto).Execute()
+> NotificationSettingsWrapper SetNotificationSettings(ctx).NotificationSettingsRequestDto(notificationSettingsRequestDto).Execute()
 
 Set notification status
 
@@ -233,11 +233,11 @@ import (
 )
 
 func main() {
-	notificationSettingsRequestsDto := *openapiclient.NewNotificationSettingsRequestsDto(openapiclient.NotificationType(0)) // NotificationSettingsRequestsDto |  (optional)
+	notificationSettingsRequestDto := *openapiclient.NewNotificationSettingsRequestDto(openapiclient.NotificationType(0)) // NotificationSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsNotificationsAPI.SetNotificationSettings(context.Background()).NotificationSettingsRequestsDto(notificationSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsNotificationsAPI.SetNotificationSettings(context.Background()).NotificationSettingsRequestDto(notificationSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsNotificationsAPI.SetNotificationSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -258,7 +258,7 @@ Other parameters are passed through a pointer to a apiSetNotificationSettingsReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **notificationSettingsRequestsDto** | [**NotificationSettingsRequestsDto**](NotificationSettingsRequestsDto.md) |  | 
+ **notificationSettingsRequestDto** | [**NotificationSettingsRequestDto**](NotificationSettingsRequestDto.md) |  | 
 
 ### Return type
 

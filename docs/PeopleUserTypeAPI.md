@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetUserTypeUpdateProgress**](PeopleUserTypeAPI.md#GetUserTypeUpdateProgress) | **Get** /api/2.0/people/type/progress/{userid} | Get the user type change progress
+[**GetUserTypeUpdateProgress**](PeopleUserTypeAPI.md#GetUserTypeUpdateProgress) | **Get** /api/2.0/people/type/progress/{userId} | Get the user type change progress
 [**StartUserTypeUpdate**](PeopleUserTypeAPI.md#StartUserTypeUpdate) | **Post** /api/2.0/people/type | Start updating user type
 [**TerminateUserTypeUpdate**](PeopleUserTypeAPI.md#TerminateUserTypeUpdate) | **Put** /api/2.0/people/type/terminate | Terminate updating user type
 [**UpdateUserType**](PeopleUserTypeAPI.md#UpdateUserType) | **Put** /api/2.0/people/type/{type} | Change a user type
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## GetUserTypeUpdateProgress
 
-> TaskProgressResponseWrapper GetUserTypeUpdateProgress(ctx, userid).Execute()
+> TaskProgressResponseWrapper GetUserTypeUpdateProgress(ctx, userId).Execute()
 
 Get the user type change progress
 
@@ -34,11 +34,11 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeopleUserTypeAPI.GetUserTypeUpdateProgress(context.Background(), userid).Execute()
+	resp, r, err := apiClient.PeopleUserTypeAPI.GetUserTypeUpdateProgress(context.Background(), userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleUserTypeAPI.GetUserTypeUpdateProgress``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -54,7 +54,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
+**userId** | **string** | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
 
 ### Other Parameters
 

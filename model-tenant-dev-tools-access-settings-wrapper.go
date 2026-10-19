@@ -21,10 +21,10 @@ import (
 // checks if the TenantDevToolsAccessSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantDevToolsAccessSettingsWrapper{}
 
-// TenantDevToolsAccessSettingsWrapper The successful API response containing the TenantDevToolsAccessSettings object.
+// TenantDevToolsAccessSettingsWrapper The successful API response containing the TenantDevToolsAccessSettingsDto object.
 type TenantDevToolsAccessSettingsWrapper struct {
-	// The TenantDevToolsAccessSettings object returned by the operation.
-	Response *TenantDevToolsAccessSettings `json:"response,omitempty"`
+	// The TenantDevToolsAccessSettingsDto object returned by the operation.
+	Response *TenantDevToolsAccessSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewTenantDevToolsAccessSettingsWrapperWithDefaults() *TenantDevToolsAccessS
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *TenantDevToolsAccessSettingsWrapper) GetResponse() TenantDevToolsAccessSettings {
+func (o *TenantDevToolsAccessSettingsWrapper) GetResponse() TenantDevToolsAccessSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret TenantDevToolsAccessSettings
+		var ret TenantDevToolsAccessSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *TenantDevToolsAccessSettingsWrapper) GetResponse() TenantDevToolsAccess
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TenantDevToolsAccessSettingsWrapper) GetResponseOk() (*TenantDevToolsAccessSettings, bool) {
+func (o *TenantDevToolsAccessSettingsWrapper) GetResponseOk() (*TenantDevToolsAccessSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *TenantDevToolsAccessSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given TenantDevToolsAccessSettings and assigns it to the Response field.
-func (o *TenantDevToolsAccessSettingsWrapper) SetResponse(v TenantDevToolsAccessSettings) {
+// SetResponse gets a reference to the given TenantDevToolsAccessSettingsDto and assigns it to the Response field.
+func (o *TenantDevToolsAccessSettingsWrapper) SetResponse(v TenantDevToolsAccessSettingsDto) {
 	o.Response = &v
 }
 

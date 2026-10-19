@@ -26,7 +26,7 @@ var _ MappedNullable = &AiPreferencesSetReasoningLevelRequest{}
 // AiPreferencesSetReasoningLevelRequest struct for AiPreferencesSetReasoningLevelRequest
 type AiPreferencesSetReasoningLevelRequest struct {
 	// New extended-thinking depth; `off` turns deep mode off.
-	Value AiAiReasoningLevel `json:"value"`
+	Value AiReasoningLevel `json:"value"`
 	EntityId *string `json:"entityId,omitempty"`
 }
 
@@ -36,7 +36,7 @@ type _AiPreferencesSetReasoningLevelRequest AiPreferencesSetReasoningLevelReques
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiPreferencesSetReasoningLevelRequest(value AiAiReasoningLevel) *AiPreferencesSetReasoningLevelRequest {
+func NewAiPreferencesSetReasoningLevelRequest(value AiReasoningLevel) *AiPreferencesSetReasoningLevelRequest {
 	this := AiPreferencesSetReasoningLevelRequest{}
 	this.Value = value
 	return &this
@@ -51,9 +51,9 @@ func NewAiPreferencesSetReasoningLevelRequestWithDefaults() *AiPreferencesSetRea
 }
 
 // GetValue returns the Value field value
-func (o *AiPreferencesSetReasoningLevelRequest) GetValue() AiAiReasoningLevel {
+func (o *AiPreferencesSetReasoningLevelRequest) GetValue() AiReasoningLevel {
 	if o == nil {
-		var ret AiAiReasoningLevel
+		var ret AiReasoningLevel
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *AiPreferencesSetReasoningLevelRequest) GetValue() AiAiReasoningLevel {
 
 // GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *AiPreferencesSetReasoningLevelRequest) GetValueOk() (*AiAiReasoningLevel, bool) {
+func (o *AiPreferencesSetReasoningLevelRequest) GetValueOk() (*AiReasoningLevel, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *AiPreferencesSetReasoningLevelRequest) GetValueOk() (*AiAiReasoningLeve
 }
 
 // SetValue sets field value
-func (o *AiPreferencesSetReasoningLevelRequest) SetValue(v AiAiReasoningLevel) {
+func (o *AiPreferencesSetReasoningLevelRequest) SetValue(v AiReasoningLevel) {
 	o.Value = v
 }
 

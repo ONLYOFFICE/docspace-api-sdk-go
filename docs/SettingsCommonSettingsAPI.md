@@ -92,7 +92,7 @@ Other parameters are passed through a pointer to a apiCloseAdminHelperRequest st
 
 ## CompleteWizard
 
-> WizardSettingsWrapper CompleteWizard(ctx).WizardRequestsDto(wizardRequestsDto).Execute()
+> WizardSettingsWrapper CompleteWizard(ctx).WizardRequestDto(wizardRequestDto).Execute()
 
 Complete the Wizard settings
 
@@ -113,11 +113,11 @@ import (
 )
 
 func main() {
-	wizardRequestsDto := *openapiclient.NewWizardRequestsDto("user@example.com", "2DYmIoA/aYKEksFocEf6uw==") // WizardRequestsDto |  (optional)
+	wizardRequestDto := *openapiclient.NewWizardRequestDto("user@example.com", "2DYmIoA/aYKEksFocEf6uw==") // WizardRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsCommonSettingsAPI.CompleteWizard(context.Background()).WizardRequestsDto(wizardRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsCommonSettingsAPI.CompleteWizard(context.Background()).WizardRequestDto(wizardRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.CompleteWizard``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -138,7 +138,7 @@ Other parameters are passed through a pointer to a apiCompleteWizardRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **wizardRequestsDto** | [**WizardRequestsDto**](WizardRequestsDto.md) |  | 
+ **wizardRequestDto** | [**WizardRequestDto**](WizardRequestDto.md) |  | 
 
 ### Return type
 
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 ## ConfigureDeepLink
 
-> TenantDeepLinkSettingsWrapper ConfigureDeepLink(ctx).DeepLinkConfigurationRequestsDto(deepLinkConfigurationRequestsDto).Execute()
+> TenantDeepLinkSettingsWrapper ConfigureDeepLink(ctx).DeepLinkConfigurationRequestDto(deepLinkConfigurationRequestDto).Execute()
 
 Configure the deep link settings
 
@@ -181,11 +181,11 @@ import (
 )
 
 func main() {
-	deepLinkConfigurationRequestsDto := *openapiclient.NewDeepLinkConfigurationRequestsDto() // DeepLinkConfigurationRequestsDto |  (optional)
+	deepLinkConfigurationRequestDto := *openapiclient.NewDeepLinkConfigurationRequestDto() // DeepLinkConfigurationRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsCommonSettingsAPI.ConfigureDeepLink(context.Background()).DeepLinkConfigurationRequestsDto(deepLinkConfigurationRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsCommonSettingsAPI.ConfigureDeepLink(context.Background()).DeepLinkConfigurationRequestDto(deepLinkConfigurationRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.ConfigureDeepLink``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -206,7 +206,7 @@ Other parameters are passed through a pointer to a apiConfigureDeepLinkRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **deepLinkConfigurationRequestsDto** | [**DeepLinkConfigurationRequestsDto**](DeepLinkConfigurationRequestsDto.md) |  | 
+ **deepLinkConfigurationRequestDto** | [**DeepLinkConfigurationRequestDto**](DeepLinkConfigurationRequestDto.md) |  | 
 
 ### Return type
 
@@ -742,7 +742,7 @@ Other parameters are passed through a pointer to a apiGetSocketSettingsRequest s
 
 ## GetSupportedCultures
 
-> STRINGArrayWrapper GetSupportedCultures(ctx).Execute()
+> StringArrayWrapper GetSupportedCultures(ctx).Execute()
 
 Get supported languages
 
@@ -771,7 +771,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.GetSupportedCultures``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSupportedCultures`: STRINGArrayWrapper
+	// response from `GetSupportedCultures`: StringArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsCommonSettingsAPI.GetSupportedCultures`: %v\n", resp)
 }
 ```
@@ -787,7 +787,7 @@ Other parameters are passed through a pointer to a apiGetSupportedCulturesReques
 
 ### Return type
 
-[**STRINGArrayWrapper**](STRINGArrayWrapper.md)
+[**StringArrayWrapper**](StringArrayWrapper.md)
 
 ### Authorization
 
@@ -931,7 +931,7 @@ Other parameters are passed through a pointer to a apiGetTenantUserInvitationSet
 
 ## GetTimeZones
 
-> TimezonesRequestsArrayWrapper GetTimeZones(ctx).Execute()
+> TimezoneArrayWrapper GetTimeZones(ctx).Execute()
 
 Get time zones
 
@@ -960,7 +960,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.GetTimeZones``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTimeZones`: TimezonesRequestsArrayWrapper
+	// response from `GetTimeZones`: TimezoneArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsCommonSettingsAPI.GetTimeZones`: %v\n", resp)
 }
 ```
@@ -976,7 +976,7 @@ Other parameters are passed through a pointer to a apiGetTimeZonesRequest struct
 
 ### Return type
 
-[**TimezonesRequestsArrayWrapper**](TimezonesRequestsArrayWrapper.md)
+[**TimezoneArrayWrapper**](TimezoneArrayWrapper.md)
 
 ### Authorization
 
@@ -1062,7 +1062,7 @@ Name | Type | Description  | Notes
 
 ## SaveDnsSettings
 
-> StringWrapper SaveDnsSettings(ctx).DnsSettingsRequestsDto(dnsSettingsRequestsDto).Execute()
+> StringWrapper SaveDnsSettings(ctx).DnsSettingsRequestDto(dnsSettingsRequestDto).Execute()
 
 Save the DNS settings
 
@@ -1083,11 +1083,11 @@ import (
 )
 
 func main() {
-	dnsSettingsRequestsDto := *openapiclient.NewDnsSettingsRequestsDto() // DnsSettingsRequestsDto |  (optional)
+	dnsSettingsRequestDto := *openapiclient.NewDnsSettingsRequestDto() // DnsSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsCommonSettingsAPI.SaveDnsSettings(context.Background()).DnsSettingsRequestsDto(dnsSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsCommonSettingsAPI.SaveDnsSettings(context.Background()).DnsSettingsRequestDto(dnsSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.SaveDnsSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1108,7 +1108,7 @@ Other parameters are passed through a pointer to a apiSaveDnsSettingsRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dnsSettingsRequestsDto** | [**DnsSettingsRequestsDto**](DnsSettingsRequestsDto.md) |  | 
+ **dnsSettingsRequestDto** | [**DnsSettingsRequestDto**](DnsSettingsRequestDto.md) |  | 
 
 ### Return type
 
@@ -1130,7 +1130,7 @@ Name | Type | Description  | Notes
 
 ## SaveMailDomainSettings
 
-> StringWrapper SaveMailDomainSettings(ctx).MailDomainSettingsRequestsDto(mailDomainSettingsRequestsDto).Execute()
+> StringWrapper SaveMailDomainSettings(ctx).MailDomainSettingsRequestDto(mailDomainSettingsRequestDto).Execute()
 
 Save the mail domain settings
 
@@ -1151,11 +1151,11 @@ import (
 )
 
 func main() {
-	mailDomainSettingsRequestsDto := *openapiclient.NewMailDomainSettingsRequestsDto(openapiclient.TenantTrustedDomainsType(0), []string{"Domains_example"}, false) // MailDomainSettingsRequestsDto |  (optional)
+	mailDomainSettingsRequestDto := *openapiclient.NewMailDomainSettingsRequestDto(openapiclient.TenantTrustedDomainsType(0), []string{"Domains_example"}, false) // MailDomainSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsCommonSettingsAPI.SaveMailDomainSettings(context.Background()).MailDomainSettingsRequestsDto(mailDomainSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsCommonSettingsAPI.SaveMailDomainSettings(context.Background()).MailDomainSettingsRequestDto(mailDomainSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.SaveMailDomainSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1176,7 +1176,7 @@ Other parameters are passed through a pointer to a apiSaveMailDomainSettingsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **mailDomainSettingsRequestsDto** | [**MailDomainSettingsRequestsDto**](MailDomainSettingsRequestsDto.md) |  | 
+ **mailDomainSettingsRequestDto** | [**MailDomainSettingsRequestDto**](MailDomainSettingsRequestDto.md) |  | 
 
 ### Return type
 
@@ -1198,7 +1198,7 @@ Name | Type | Description  | Notes
 
 ## SavePortalColorTheme
 
-> CustomColorThemesSettingsWrapper SavePortalColorTheme(ctx).CustomColorThemesSettingsRequestsDto(customColorThemesSettingsRequestsDto).Execute()
+> CustomColorThemesSettingsWrapper SavePortalColorTheme(ctx).CustomColorThemesSettingsRequestDto(customColorThemesSettingsRequestDto).Execute()
 
 Save a color theme
 
@@ -1219,11 +1219,11 @@ import (
 )
 
 func main() {
-	customColorThemesSettingsRequestsDto := *openapiclient.NewCustomColorThemesSettingsRequestsDto() // CustomColorThemesSettingsRequestsDto |  (optional)
+	customColorThemesSettingsRequestDto := *openapiclient.NewCustomColorThemesSettingsRequestDto() // CustomColorThemesSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsCommonSettingsAPI.SavePortalColorTheme(context.Background()).CustomColorThemesSettingsRequestsDto(customColorThemesSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsCommonSettingsAPI.SavePortalColorTheme(context.Background()).CustomColorThemesSettingsRequestDto(customColorThemesSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.SavePortalColorTheme``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1244,7 +1244,7 @@ Other parameters are passed through a pointer to a apiSavePortalColorThemeReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **customColorThemesSettingsRequestsDto** | [**CustomColorThemesSettingsRequestsDto**](CustomColorThemesSettingsRequestsDto.md) |  | 
+ **customColorThemesSettingsRequestDto** | [**CustomColorThemesSettingsRequestDto**](CustomColorThemesSettingsRequestDto.md) |  | 
 
 ### Return type
 
@@ -1266,7 +1266,7 @@ Name | Type | Description  | Notes
 
 ## SetTenantAiAccessSettings
 
-> TenantAiAccessSettingsWrapper SetTenantAiAccessSettings(ctx).TenantAiAccessSettingsDto(tenantAiAccessSettingsDto).Execute()
+> TenantAiAccessSettingsWrapper SetTenantAiAccessSettings(ctx).TenantAiAccessSettingsRequestDto(tenantAiAccessSettingsRequestDto).Execute()
 
 Set the AI access settings
 
@@ -1287,11 +1287,11 @@ import (
 )
 
 func main() {
-	tenantAiAccessSettingsDto := *openapiclient.NewTenantAiAccessSettingsDto() // TenantAiAccessSettingsDto |  (optional)
+	tenantAiAccessSettingsRequestDto := *openapiclient.NewTenantAiAccessSettingsRequestDto() // TenantAiAccessSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsCommonSettingsAPI.SetTenantAiAccessSettings(context.Background()).TenantAiAccessSettingsDto(tenantAiAccessSettingsDto).Execute()
+	resp, r, err := apiClient.SettingsCommonSettingsAPI.SetTenantAiAccessSettings(context.Background()).TenantAiAccessSettingsRequestDto(tenantAiAccessSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.SetTenantAiAccessSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1312,7 +1312,7 @@ Other parameters are passed through a pointer to a apiSetTenantAiAccessSettingsR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenantAiAccessSettingsDto** | [**TenantAiAccessSettingsDto**](TenantAiAccessSettingsDto.md) |  | 
+ **tenantAiAccessSettingsRequestDto** | [**TenantAiAccessSettingsRequestDto**](TenantAiAccessSettingsRequestDto.md) |  | 
 
 ### Return type
 
@@ -1334,7 +1334,7 @@ Name | Type | Description  | Notes
 
 ## UpdateEmailActivationSettings
 
-> EmailActivationSettingsWrapper UpdateEmailActivationSettings(ctx).EmailActivationSettings(emailActivationSettings).Execute()
+> EmailActivationSettingsWrapper UpdateEmailActivationSettings(ctx).EmailActivationSettingsRequestDto(emailActivationSettingsRequestDto).Execute()
 
 Update the email activation settings
 
@@ -1355,11 +1355,11 @@ import (
 )
 
 func main() {
-	emailActivationSettings := *openapiclient.NewEmailActivationSettings() // EmailActivationSettings |  (optional)
+	emailActivationSettingsRequestDto := *openapiclient.NewEmailActivationSettingsRequestDto() // EmailActivationSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsCommonSettingsAPI.UpdateEmailActivationSettings(context.Background()).EmailActivationSettings(emailActivationSettings).Execute()
+	resp, r, err := apiClient.SettingsCommonSettingsAPI.UpdateEmailActivationSettings(context.Background()).EmailActivationSettingsRequestDto(emailActivationSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCommonSettingsAPI.UpdateEmailActivationSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1380,7 +1380,7 @@ Other parameters are passed through a pointer to a apiUpdateEmailActivationSetti
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **emailActivationSettings** | [**EmailActivationSettings**](EmailActivationSettings.md) |  | 
+ **emailActivationSettingsRequestDto** | [**EmailActivationSettingsRequestDto**](EmailActivationSettingsRequestDto.md) |  | 
 
 ### Return type
 

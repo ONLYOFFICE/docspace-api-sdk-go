@@ -30,7 +30,7 @@ type CustomerServiceUsageReportDto struct {
 	// How many entries one page may hold, echoed from the request; it is 25 unless another value was asked for.
 	Limit *int32 `json:"limit,omitempty"`
 	// How many services match the filters in total, across every page - services, not charges.
-	TotalQuantity *int64 `json:"totalQuantity,omitempty"`
+	TotalQuantity *int32 `json:"totalQuantity,omitempty"`
 	// How many pages those entries come to at the current `limit`.
 	TotalPage *int32 `json:"totalPage,omitempty"`
 	// Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument.
@@ -152,9 +152,9 @@ func (o *CustomerServiceUsageReportDto) SetLimit(v int32) {
 }
 
 // GetTotalQuantity returns the TotalQuantity field value if set, zero value otherwise.
-func (o *CustomerServiceUsageReportDto) GetTotalQuantity() int64 {
+func (o *CustomerServiceUsageReportDto) GetTotalQuantity() int32 {
 	if o == nil || IsNil(o.TotalQuantity) {
-		var ret int64
+		var ret int32
 		return ret
 	}
 	return *o.TotalQuantity
@@ -162,7 +162,7 @@ func (o *CustomerServiceUsageReportDto) GetTotalQuantity() int64 {
 
 // GetTotalQuantityOk returns a tuple with the TotalQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomerServiceUsageReportDto) GetTotalQuantityOk() (*int64, bool) {
+func (o *CustomerServiceUsageReportDto) GetTotalQuantityOk() (*int32, bool) {
 	if o == nil || IsNil(o.TotalQuantity) {
 		return nil, false
 	}
@@ -178,8 +178,8 @@ func (o *CustomerServiceUsageReportDto) IsTotalQuantitySet() bool {
 	return false
 }
 
-// SetTotalQuantity gets a reference to the given int64 and assigns it to the TotalQuantity field.
-func (o *CustomerServiceUsageReportDto) SetTotalQuantity(v int64) {
+// SetTotalQuantity gets a reference to the given int32 and assigns it to the TotalQuantity field.
+func (o *CustomerServiceUsageReportDto) SetTotalQuantity(v int32) {
 	o.TotalQuantity = &v
 }
 

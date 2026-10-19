@@ -21,10 +21,10 @@ import (
 // checks if the TenantQuotaSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantQuotaSettingsWrapper{}
 
-// TenantQuotaSettingsWrapper The successful API response containing the TenantQuotaSettings object.
+// TenantQuotaSettingsWrapper The successful API response containing the TenantQuotaSettingsDto object.
 type TenantQuotaSettingsWrapper struct {
-	// The TenantQuotaSettings object returned by the operation.
-	Response *TenantQuotaSettings `json:"response,omitempty"`
+	// The TenantQuotaSettingsDto object returned by the operation.
+	Response *TenantQuotaSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewTenantQuotaSettingsWrapperWithDefaults() *TenantQuotaSettingsWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *TenantQuotaSettingsWrapper) GetResponse() TenantQuotaSettings {
+func (o *TenantQuotaSettingsWrapper) GetResponse() TenantQuotaSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret TenantQuotaSettings
+		var ret TenantQuotaSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *TenantQuotaSettingsWrapper) GetResponse() TenantQuotaSettings {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TenantQuotaSettingsWrapper) GetResponseOk() (*TenantQuotaSettings, bool) {
+func (o *TenantQuotaSettingsWrapper) GetResponseOk() (*TenantQuotaSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *TenantQuotaSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given TenantQuotaSettings and assigns it to the Response field.
-func (o *TenantQuotaSettingsWrapper) SetResponse(v TenantQuotaSettings) {
+// SetResponse gets a reference to the given TenantQuotaSettingsDto and assigns it to the Response field.
+func (o *TenantQuotaSettingsWrapper) SetResponse(v TenantQuotaSettingsDto) {
 	o.Response = &v
 }
 

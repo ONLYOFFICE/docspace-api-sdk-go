@@ -92,6 +92,10 @@ type FileDto struct {
 	ExpirationDate *ApiDateTime `json:"expirationDate,omitempty"`
 	// Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved.
 	IsLinkExpired *bool `json:"isLinkExpired,omitempty"`
+	// The IDs of the metadata templates assigned to the file entry.
+	AssignedMetadataTemplates []int32 `json:"assignedMetadataTemplates,omitempty"`
+	// Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.
+	MetadataMatches []MetadataMatchDto `json:"metadataMatches,omitempty"`
 	// The folder the file is stored in. When the file was reached through a share and the caller cannot open its  real parent, the identifier of the Shared with me section is reported instead, so this is where the file is  visible rather than where it physically sits.
 	FolderId *int32 `json:"folderId,omitempty"`
 	// The revision this entry describes. It starts at 1 and moves to the next number each time new content is stored  over the file, except for an editing session opened against the file itself, which replaces the content and  keeps the number. `GET api/2.0/files/file/{fileId}/history` lists them all.
@@ -160,7 +164,7 @@ type FileDto struct {
 	// The table collecting the submitted values of this form in the external database configured for its room. The  field is left out of the answer entirely when the form has no such table.
 	ExternalDbTableName NullableString `json:"externalDbTableName,omitempty"`
 	// The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read.
-	Dimensions *Size `json:"dimensions,omitempty"`
+	Dimensions *ImageSizeDto `json:"dimensions,omitempty"`
 }
 
 // NewFileDto instantiates a new FileDto object
@@ -1360,6 +1364,70 @@ func (o *FileDto) IsIsLinkExpiredSet() bool {
 // SetIsLinkExpired gets a reference to the given bool and assigns it to the IsLinkExpired field.
 func (o *FileDto) SetIsLinkExpired(v bool) {
 	o.IsLinkExpired = &v
+}
+
+// GetAssignedMetadataTemplates returns the AssignedMetadataTemplates field value if set, zero value otherwise.
+func (o *FileDto) GetAssignedMetadataTemplates() []int32 {
+	if o == nil || IsNil(o.AssignedMetadataTemplates) {
+		var ret []int32
+		return ret
+	}
+	return o.AssignedMetadataTemplates
+}
+
+// GetAssignedMetadataTemplatesOk returns a tuple with the AssignedMetadataTemplates field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDto) GetAssignedMetadataTemplatesOk() ([]int32, bool) {
+	if o == nil || IsNil(o.AssignedMetadataTemplates) {
+		return nil, false
+	}
+	return o.AssignedMetadataTemplates, true
+}
+
+// HasAssignedMetadataTemplates returns a boolean if a field has been set.
+func (o *FileDto) IsAssignedMetadataTemplatesSet() bool {
+	if o != nil && !IsNil(o.AssignedMetadataTemplates) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedMetadataTemplates gets a reference to the given []int32 and assigns it to the AssignedMetadataTemplates field.
+func (o *FileDto) SetAssignedMetadataTemplates(v []int32) {
+	o.AssignedMetadataTemplates = v
+}
+
+// GetMetadataMatches returns the MetadataMatches field value if set, zero value otherwise.
+func (o *FileDto) GetMetadataMatches() []MetadataMatchDto {
+	if o == nil || IsNil(o.MetadataMatches) {
+		var ret []MetadataMatchDto
+		return ret
+	}
+	return o.MetadataMatches
+}
+
+// GetMetadataMatchesOk returns a tuple with the MetadataMatches field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileDto) GetMetadataMatchesOk() ([]MetadataMatchDto, bool) {
+	if o == nil || IsNil(o.MetadataMatches) {
+		return nil, false
+	}
+	return o.MetadataMatches, true
+}
+
+// HasMetadataMatches returns a boolean if a field has been set.
+func (o *FileDto) IsMetadataMatchesSet() bool {
+	if o != nil && !IsNil(o.MetadataMatches) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadataMatches gets a reference to the given []MetadataMatchDto and assigns it to the MetadataMatches field.
+func (o *FileDto) SetMetadataMatches(v []MetadataMatchDto) {
+	o.MetadataMatches = v
 }
 
 // GetFolderId returns the FolderId field value if set, zero value otherwise.
@@ -2661,9 +2729,9 @@ func (o *FileDto) UnsetExternalDbTableName() {
 }
 
 // GetDimensions returns the Dimensions field value if set, zero value otherwise.
-func (o *FileDto) GetDimensions() Size {
+func (o *FileDto) GetDimensions() ImageSizeDto {
 	if o == nil || IsNil(o.Dimensions) {
-		var ret Size
+		var ret ImageSizeDto
 		return ret
 	}
 	return *o.Dimensions
@@ -2671,7 +2739,7 @@ func (o *FileDto) GetDimensions() Size {
 
 // GetDimensionsOk returns a tuple with the Dimensions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileDto) GetDimensionsOk() (*Size, bool) {
+func (o *FileDto) GetDimensionsOk() (*ImageSizeDto, bool) {
 	if o == nil || IsNil(o.Dimensions) {
 		return nil, false
 	}
@@ -2687,8 +2755,8 @@ func (o *FileDto) IsDimensionsSet() bool {
 	return false
 }
 
-// SetDimensions gets a reference to the given Size and assigns it to the Dimensions field.
-func (o *FileDto) SetDimensions(v Size) {
+// SetDimensions gets a reference to the given ImageSizeDto and assigns it to the Dimensions field.
+func (o *FileDto) SetDimensions(v ImageSizeDto) {
 	o.Dimensions = &v
 }
 
@@ -2809,6 +2877,12 @@ func (o FileDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsLinkExpired) {
 		toSerialize["isLinkExpired"] = o.IsLinkExpired
+	}
+	if !IsNil(o.AssignedMetadataTemplates) {
+		toSerialize["assignedMetadataTemplates"] = o.AssignedMetadataTemplates
+	}
+	if !IsNil(o.MetadataMatches) {
+		toSerialize["metadataMatches"] = o.MetadataMatches
 	}
 	if !IsNil(o.FolderId) {
 		toSerialize["folderId"] = o.FolderId

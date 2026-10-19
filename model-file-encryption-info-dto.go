@@ -26,7 +26,7 @@ type FileEncryptionInfoDto struct {
 	// The key pairs of the calling account, never those of the other people in the room. The private half of each  pair is stored encrypted with that person's own password and has to be decrypted on the client. An empty list  means the account has generated no key pair yet, and until it does no file key can be issued to it.
 	UserKeys []EncryptionKeyDto `json:"userKeys,omitempty"`
 	// The keys of this file that were issued to the calling account, each naming the public key it was encrypted for  so that the client can pick the matching private half. An empty list means the file has not been shared with  this account rather than that the file is unencrypted.
-	FileKeys []FileKeys `json:"fileKeys,omitempty"`
+	FileKeys []FileKeysDto `json:"fileKeys,omitempty"`
 }
 
 // NewFileEncryptionInfoDto instantiates a new FileEncryptionInfoDto object
@@ -80,9 +80,9 @@ func (o *FileEncryptionInfoDto) SetUserKeys(v []EncryptionKeyDto) {
 }
 
 // GetFileKeys returns the FileKeys field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FileEncryptionInfoDto) GetFileKeys() []FileKeys {
+func (o *FileEncryptionInfoDto) GetFileKeys() []FileKeysDto {
 	if o == nil {
-		var ret []FileKeys
+		var ret []FileKeysDto
 		return ret
 	}
 	return o.FileKeys
@@ -91,7 +91,7 @@ func (o *FileEncryptionInfoDto) GetFileKeys() []FileKeys {
 // GetFileKeysOk returns a tuple with the FileKeys field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FileEncryptionInfoDto) GetFileKeysOk() ([]FileKeys, bool) {
+func (o *FileEncryptionInfoDto) GetFileKeysOk() ([]FileKeysDto, bool) {
 	if o == nil || IsNil(o.FileKeys) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *FileEncryptionInfoDto) IsFileKeysSet() bool {
 	return false
 }
 
-// SetFileKeys gets a reference to the given []FileKeys and assigns it to the FileKeys field.
-func (o *FileEncryptionInfoDto) SetFileKeys(v []FileKeys) {
+// SetFileKeys gets a reference to the given []FileKeysDto and assigns it to the FileKeys field.
+func (o *FileEncryptionInfoDto) SetFileKeys(v []FileKeysDto) {
 	o.FileKeys = v
 }
 

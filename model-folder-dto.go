@@ -92,11 +92,15 @@ type FolderDto struct {
 	ExpirationDate *ApiDateTime `json:"expirationDate,omitempty"`
 	// Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved.
 	IsLinkExpired *bool `json:"isLinkExpired,omitempty"`
+	// The IDs of the metadata templates assigned to the file entry.
+	AssignedMetadataTemplates []int32 `json:"assignedMetadataTemplates,omitempty"`
+	// Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.
+	MetadataMatches []MetadataMatchDto `json:"metadataMatches,omitempty"`
 	// The folder this one is listed in. For a room it is the root of the section the room lives in, and for an entry  opened through a sharing link whose real parent the caller may not read it is the root of the section with the  entries shared with them.
 	ParentId *int32 `json:"parentId,omitempty"`
-	// How many files lie directly in the folder, without counting the subfolders. The roots of the `Rooms`, room  templates and default templates sections always report 0, because the number is not collected for them.
+	// How many files lie directly in the folder, without counting the subfolders. The roots of the `Rooms`, room  templates, default templates and AI agents sections always report 0, because the number is not collected for  them.
 	FilesCount *int32 `json:"filesCount,omitempty"`
-	// How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the `Rooms` and templates  sections report 0.
+	// How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the `Rooms`, templates and AI  agents sections report 0.
 	FoldersCount *int32 `json:"foldersCount,omitempty"`
 	// Whether the caller may hand out access to the folder. It is filled in only for the folder a folder-contents  answer is about, and is null in every other answer, so null says nothing about the sharing rights.
 	IsShareable NullableBool `json:"isShareable,omitempty"`
@@ -107,7 +111,7 @@ type FolderDto struct {
 	// The names of the tags attached to the room. Empty for a folder that is not a room, since only rooms carry  tags, and the names are the ones from the portal tag catalogue.
 	Tags []string `json:"tags,omitempty"`
 	// The addresses of the room logo in four sizes, together with the colour and the built-in cover that are drawn  when no logo was uploaded. A room without a logo answers with four empty addresses rather than with null, and  the field is null for a folder that is not a room.
-	Logo *Logo `json:"logo,omitempty"`
+	Logo *LogoDto `json:"logo,omitempty"`
 	// Whether the caller pinned the room to the top of their own room list. Pinning is personal and is lost when the  room is archived.
 	Pinned *bool `json:"pinned,omitempty"`
 	// The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room.
@@ -126,7 +130,7 @@ type FolderDto struct {
 	Type *FolderType `json:"type,omitempty"`
 	// Whether the caller holds the room through an invitation of their own: true for the account that created it and  for a member invited personally, false when the access comes from a group they belong to, and null for a  folder that is not a room.
 	InRoom NullableBool `json:"inRoom,omitempty"`
-	// How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it.
+	// How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the role of the caller  in the room carries no editing rights - a viewer, a commenter, a reviewer and a form filler do not see the  figure, a room manager, a content creator and an editor do.
 	QuotaLimit NullableInt64 `json:"quotaLimit,omitempty"`
 	// Whether `quotaLimit` is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when `quotaLimit` is null.
 	IsCustomQuota NullableBool `json:"isCustomQuota,omitempty"`
@@ -1348,6 +1352,70 @@ func (o *FolderDto) SetIsLinkExpired(v bool) {
 	o.IsLinkExpired = &v
 }
 
+// GetAssignedMetadataTemplates returns the AssignedMetadataTemplates field value if set, zero value otherwise.
+func (o *FolderDto) GetAssignedMetadataTemplates() []int32 {
+	if o == nil || IsNil(o.AssignedMetadataTemplates) {
+		var ret []int32
+		return ret
+	}
+	return o.AssignedMetadataTemplates
+}
+
+// GetAssignedMetadataTemplatesOk returns a tuple with the AssignedMetadataTemplates field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FolderDto) GetAssignedMetadataTemplatesOk() ([]int32, bool) {
+	if o == nil || IsNil(o.AssignedMetadataTemplates) {
+		return nil, false
+	}
+	return o.AssignedMetadataTemplates, true
+}
+
+// HasAssignedMetadataTemplates returns a boolean if a field has been set.
+func (o *FolderDto) IsAssignedMetadataTemplatesSet() bool {
+	if o != nil && !IsNil(o.AssignedMetadataTemplates) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedMetadataTemplates gets a reference to the given []int32 and assigns it to the AssignedMetadataTemplates field.
+func (o *FolderDto) SetAssignedMetadataTemplates(v []int32) {
+	o.AssignedMetadataTemplates = v
+}
+
+// GetMetadataMatches returns the MetadataMatches field value if set, zero value otherwise.
+func (o *FolderDto) GetMetadataMatches() []MetadataMatchDto {
+	if o == nil || IsNil(o.MetadataMatches) {
+		var ret []MetadataMatchDto
+		return ret
+	}
+	return o.MetadataMatches
+}
+
+// GetMetadataMatchesOk returns a tuple with the MetadataMatches field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FolderDto) GetMetadataMatchesOk() ([]MetadataMatchDto, bool) {
+	if o == nil || IsNil(o.MetadataMatches) {
+		return nil, false
+	}
+	return o.MetadataMatches, true
+}
+
+// HasMetadataMatches returns a boolean if a field has been set.
+func (o *FolderDto) IsMetadataMatchesSet() bool {
+	if o != nil && !IsNil(o.MetadataMatches) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadataMatches gets a reference to the given []MetadataMatchDto and assigns it to the MetadataMatches field.
+func (o *FolderDto) SetMetadataMatches(v []MetadataMatchDto) {
+	o.MetadataMatches = v
+}
+
 // GetParentId returns the ParentId field value if set, zero value otherwise.
 func (o *FolderDto) GetParentId() int32 {
 	if o == nil || IsNil(o.ParentId) {
@@ -1584,9 +1652,9 @@ func (o *FolderDto) SetTags(v []string) {
 }
 
 // GetLogo returns the Logo field value if set, zero value otherwise.
-func (o *FolderDto) GetLogo() Logo {
+func (o *FolderDto) GetLogo() LogoDto {
 	if o == nil || IsNil(o.Logo) {
-		var ret Logo
+		var ret LogoDto
 		return ret
 	}
 	return *o.Logo
@@ -1594,7 +1662,7 @@ func (o *FolderDto) GetLogo() Logo {
 
 // GetLogoOk returns a tuple with the Logo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FolderDto) GetLogoOk() (*Logo, bool) {
+func (o *FolderDto) GetLogoOk() (*LogoDto, bool) {
 	if o == nil || IsNil(o.Logo) {
 		return nil, false
 	}
@@ -1610,8 +1678,8 @@ func (o *FolderDto) IsLogoSet() bool {
 	return false
 }
 
-// SetLogo gets a reference to the given Logo and assigns it to the Logo field.
-func (o *FolderDto) SetLogo(v Logo) {
+// SetLogo gets a reference to the given LogoDto and assigns it to the Logo field.
+func (o *FolderDto) SetLogo(v LogoDto) {
 	o.Logo = &v
 }
 
@@ -2433,6 +2501,12 @@ func (o FolderDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsLinkExpired) {
 		toSerialize["isLinkExpired"] = o.IsLinkExpired
+	}
+	if !IsNil(o.AssignedMetadataTemplates) {
+		toSerialize["assignedMetadataTemplates"] = o.AssignedMetadataTemplates
+	}
+	if !IsNil(o.MetadataMatches) {
+		toSerialize["metadataMatches"] = o.MetadataMatches
 	}
 	if !IsNil(o.ParentId) {
 		toSerialize["parentId"] = o.ParentId

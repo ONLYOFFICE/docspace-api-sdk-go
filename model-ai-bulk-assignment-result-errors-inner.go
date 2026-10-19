@@ -26,7 +26,7 @@ var _ MappedNullable = &AiBulkAssignmentResultErrorsInner{}
 // AiBulkAssignmentResultErrorsInner struct for AiBulkAssignmentResultErrorsInner
 type AiBulkAssignmentResultErrorsInner struct {
 	ActionType AiActionType `json:"actionType"`
-	Error AiTErrorData `json:"error"`
+	Error AiErrorData `json:"error"`
 }
 
 type _AiBulkAssignmentResultErrorsInner AiBulkAssignmentResultErrorsInner
@@ -35,7 +35,7 @@ type _AiBulkAssignmentResultErrorsInner AiBulkAssignmentResultErrorsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiBulkAssignmentResultErrorsInner(actionType AiActionType, error_ AiTErrorData) *AiBulkAssignmentResultErrorsInner {
+func NewAiBulkAssignmentResultErrorsInner(actionType AiActionType, error_ AiErrorData) *AiBulkAssignmentResultErrorsInner {
 	this := AiBulkAssignmentResultErrorsInner{}
 	this.ActionType = actionType
 	this.Error = error_
@@ -75,9 +75,9 @@ func (o *AiBulkAssignmentResultErrorsInner) SetActionType(v AiActionType) {
 }
 
 // GetError returns the Error field value
-func (o *AiBulkAssignmentResultErrorsInner) GetError() AiTErrorData {
+func (o *AiBulkAssignmentResultErrorsInner) GetError() AiErrorData {
 	if o == nil {
-		var ret AiTErrorData
+		var ret AiErrorData
 		return ret
 	}
 
@@ -86,7 +86,7 @@ func (o *AiBulkAssignmentResultErrorsInner) GetError() AiTErrorData {
 
 // GetErrorOk returns a tuple with the Error field value
 // and a boolean to check if the value has been set.
-func (o *AiBulkAssignmentResultErrorsInner) GetErrorOk() (*AiTErrorData, bool) {
+func (o *AiBulkAssignmentResultErrorsInner) GetErrorOk() (*AiErrorData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *AiBulkAssignmentResultErrorsInner) GetErrorOk() (*AiTErrorData, bool) {
 }
 
 // SetError sets field value
-func (o *AiBulkAssignmentResultErrorsInner) SetError(v AiTErrorData) {
+func (o *AiBulkAssignmentResultErrorsInner) SetError(v AiErrorData) {
 	o.Error = v
 }
 

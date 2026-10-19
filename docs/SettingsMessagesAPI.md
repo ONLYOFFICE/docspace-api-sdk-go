@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## SendAdminMail
 
-> StringWrapper SendAdminMail(ctx).AdminMessageSettingsRequestsDto(adminMessageSettingsRequestsDto).Execute()
+> StringWrapper SendAdminMail(ctx).AdminMessageSettingsRequestDto(adminMessageSettingsRequestDto).Execute()
 
 Send a message to the administrator
 
@@ -101,11 +101,11 @@ import (
 )
 
 func main() {
-	adminMessageSettingsRequestsDto := *openapiclient.NewAdminMessageSettingsRequestsDto("Hello, this is a test message from the administrator.", "user@example.com") // AdminMessageSettingsRequestsDto |  (optional)
+	adminMessageSettingsRequestDto := *openapiclient.NewAdminMessageSettingsRequestDto("Hello, this is a test message from the administrator.", "user@example.com") // AdminMessageSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsMessagesAPI.SendAdminMail(context.Background()).AdminMessageSettingsRequestsDto(adminMessageSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsMessagesAPI.SendAdminMail(context.Background()).AdminMessageSettingsRequestDto(adminMessageSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsMessagesAPI.SendAdminMail``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -126,7 +126,7 @@ Other parameters are passed through a pointer to a apiSendAdminMailRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **adminMessageSettingsRequestsDto** | [**AdminMessageSettingsRequestsDto**](AdminMessageSettingsRequestsDto.md) |  | 
+ **adminMessageSettingsRequestDto** | [**AdminMessageSettingsRequestDto**](AdminMessageSettingsRequestDto.md) |  | 
 
 ### Return type
 
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ## SendJoinInviteMail
 
-> StringWrapper SendJoinInviteMail(ctx).AdminMessageBaseSettingsRequestsDto(adminMessageBaseSettingsRequestsDto).Execute()
+> StringWrapper SendJoinInviteMail(ctx).AdminMessageBaseSettingsRequestDto(adminMessageBaseSettingsRequestDto).Execute()
 
 Send an invitation email
 
@@ -169,11 +169,11 @@ import (
 )
 
 func main() {
-	adminMessageBaseSettingsRequestsDto := *openapiclient.NewAdminMessageBaseSettingsRequestsDto("admin@example.com") // AdminMessageBaseSettingsRequestsDto |  (optional)
+	adminMessageBaseSettingsRequestDto := *openapiclient.NewAdminMessageBaseSettingsRequestDto("admin@example.com") // AdminMessageBaseSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsMessagesAPI.SendJoinInviteMail(context.Background()).AdminMessageBaseSettingsRequestsDto(adminMessageBaseSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsMessagesAPI.SendJoinInviteMail(context.Background()).AdminMessageBaseSettingsRequestDto(adminMessageBaseSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsMessagesAPI.SendJoinInviteMail``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -194,7 +194,7 @@ Other parameters are passed through a pointer to a apiSendJoinInviteMailRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **adminMessageBaseSettingsRequestsDto** | [**AdminMessageBaseSettingsRequestsDto**](AdminMessageBaseSettingsRequestsDto.md) |  | 
+ **adminMessageBaseSettingsRequestDto** | [**AdminMessageBaseSettingsRequestDto**](AdminMessageBaseSettingsRequestDto.md) |  | 
 
 ### Return type
 

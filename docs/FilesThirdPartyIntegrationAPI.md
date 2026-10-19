@@ -346,7 +346,7 @@ Other parameters are passed through a pointer to a apiGetCommonThirdPartyFolders
 
 ## GetThirdPartyAccounts
 
-> ThirdPartyParamsArrayWrapper GetThirdPartyAccounts(ctx).Execute()
+> ThirdPartyAccountArrayWrapper GetThirdPartyAccounts(ctx).Execute()
 
 Get the third-party accounts
 
@@ -375,7 +375,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesThirdPartyIntegrationAPI.GetThirdPartyAccounts``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetThirdPartyAccounts`: ThirdPartyParamsArrayWrapper
+	// response from `GetThirdPartyAccounts`: ThirdPartyAccountArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesThirdPartyIntegrationAPI.GetThirdPartyAccounts`: %v\n", resp)
 }
 ```
@@ -391,7 +391,7 @@ Other parameters are passed through a pointer to a apiGetThirdPartyAccountsReque
 
 ### Return type
 
-[**ThirdPartyParamsArrayWrapper**](ThirdPartyParamsArrayWrapper.md)
+[**ThirdPartyAccountArrayWrapper**](ThirdPartyAccountArrayWrapper.md)
 
 ### Authorization
 

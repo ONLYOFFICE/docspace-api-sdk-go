@@ -41,13 +41,13 @@ type QuotaDto struct {
 	// The features the quota switches on, each with the limit it grants and, on the quota the portal is  actually on, how much of that limit is already used. A feature that is absent is off, so the list is the  whole truth about what the quota includes.
 	Features []TenantQuotaFeatureDto `json:"features"`
 	// The per-member storage allowance an administrator has set on top of the quota, and whether it is applied  at all. It describes the live portal rather than this quota, so every entry of a catalogue listing repeats  the same values, and it is empty unless the portal is a server installation or its plan includes  statistics.
-	UsersQuota *TenantEntityQuotaSettings `json:"usersQuota,omitempty"`
+	UsersQuota *EntityQuotaDto `json:"usersQuota,omitempty"`
 	// The same kind of per-room storage override, filled in and read the same way as `usersQuota`.
-	RoomsQuota *TenantEntityQuotaSettings `json:"roomsQuota,omitempty"`
+	RoomsQuota *EntityQuotaDto `json:"roomsQuota,omitempty"`
 	// The same kind of per-agent storage override for AI agents, filled in and read the same way as  `usersQuota`.
-	AiAgentsQuota *TenantEntityQuotaSettings `json:"aiAgentsQuota,omitempty"`
+	AiAgentsQuota *EntityQuotaDto `json:"aiAgentsQuota,omitempty"`
 	// The storage allowance an administrator has set for the portal as a whole, which caps it below what the  quota grants. Filled in under the same conditions as `usersQuota`.
-	TenantCustomQuota *TenantQuotaSettings `json:"tenantCustomQuota,omitempty"`
+	TenantCustomQuota *TenantQuotaSettingsDto `json:"tenantCustomQuota,omitempty"`
 	// When the quota runs out, in UTC. It is empty on a quota from the catalogue, which has no date until it is  bought, and on a quota that never expires.
 	DueDate NullableTime `json:"dueDate,omitempty"`
 }
@@ -266,9 +266,9 @@ func (o *QuotaDto) SetFeatures(v []TenantQuotaFeatureDto) {
 }
 
 // GetUsersQuota returns the UsersQuota field value if set, zero value otherwise.
-func (o *QuotaDto) GetUsersQuota() TenantEntityQuotaSettings {
+func (o *QuotaDto) GetUsersQuota() EntityQuotaDto {
 	if o == nil || IsNil(o.UsersQuota) {
-		var ret TenantEntityQuotaSettings
+		var ret EntityQuotaDto
 		return ret
 	}
 	return *o.UsersQuota
@@ -276,7 +276,7 @@ func (o *QuotaDto) GetUsersQuota() TenantEntityQuotaSettings {
 
 // GetUsersQuotaOk returns a tuple with the UsersQuota field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuotaDto) GetUsersQuotaOk() (*TenantEntityQuotaSettings, bool) {
+func (o *QuotaDto) GetUsersQuotaOk() (*EntityQuotaDto, bool) {
 	if o == nil || IsNil(o.UsersQuota) {
 		return nil, false
 	}
@@ -292,15 +292,15 @@ func (o *QuotaDto) IsUsersQuotaSet() bool {
 	return false
 }
 
-// SetUsersQuota gets a reference to the given TenantEntityQuotaSettings and assigns it to the UsersQuota field.
-func (o *QuotaDto) SetUsersQuota(v TenantEntityQuotaSettings) {
+// SetUsersQuota gets a reference to the given EntityQuotaDto and assigns it to the UsersQuota field.
+func (o *QuotaDto) SetUsersQuota(v EntityQuotaDto) {
 	o.UsersQuota = &v
 }
 
 // GetRoomsQuota returns the RoomsQuota field value if set, zero value otherwise.
-func (o *QuotaDto) GetRoomsQuota() TenantEntityQuotaSettings {
+func (o *QuotaDto) GetRoomsQuota() EntityQuotaDto {
 	if o == nil || IsNil(o.RoomsQuota) {
-		var ret TenantEntityQuotaSettings
+		var ret EntityQuotaDto
 		return ret
 	}
 	return *o.RoomsQuota
@@ -308,7 +308,7 @@ func (o *QuotaDto) GetRoomsQuota() TenantEntityQuotaSettings {
 
 // GetRoomsQuotaOk returns a tuple with the RoomsQuota field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuotaDto) GetRoomsQuotaOk() (*TenantEntityQuotaSettings, bool) {
+func (o *QuotaDto) GetRoomsQuotaOk() (*EntityQuotaDto, bool) {
 	if o == nil || IsNil(o.RoomsQuota) {
 		return nil, false
 	}
@@ -324,15 +324,15 @@ func (o *QuotaDto) IsRoomsQuotaSet() bool {
 	return false
 }
 
-// SetRoomsQuota gets a reference to the given TenantEntityQuotaSettings and assigns it to the RoomsQuota field.
-func (o *QuotaDto) SetRoomsQuota(v TenantEntityQuotaSettings) {
+// SetRoomsQuota gets a reference to the given EntityQuotaDto and assigns it to the RoomsQuota field.
+func (o *QuotaDto) SetRoomsQuota(v EntityQuotaDto) {
 	o.RoomsQuota = &v
 }
 
 // GetAiAgentsQuota returns the AiAgentsQuota field value if set, zero value otherwise.
-func (o *QuotaDto) GetAiAgentsQuota() TenantEntityQuotaSettings {
+func (o *QuotaDto) GetAiAgentsQuota() EntityQuotaDto {
 	if o == nil || IsNil(o.AiAgentsQuota) {
-		var ret TenantEntityQuotaSettings
+		var ret EntityQuotaDto
 		return ret
 	}
 	return *o.AiAgentsQuota
@@ -340,7 +340,7 @@ func (o *QuotaDto) GetAiAgentsQuota() TenantEntityQuotaSettings {
 
 // GetAiAgentsQuotaOk returns a tuple with the AiAgentsQuota field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuotaDto) GetAiAgentsQuotaOk() (*TenantEntityQuotaSettings, bool) {
+func (o *QuotaDto) GetAiAgentsQuotaOk() (*EntityQuotaDto, bool) {
 	if o == nil || IsNil(o.AiAgentsQuota) {
 		return nil, false
 	}
@@ -356,15 +356,15 @@ func (o *QuotaDto) IsAiAgentsQuotaSet() bool {
 	return false
 }
 
-// SetAiAgentsQuota gets a reference to the given TenantEntityQuotaSettings and assigns it to the AiAgentsQuota field.
-func (o *QuotaDto) SetAiAgentsQuota(v TenantEntityQuotaSettings) {
+// SetAiAgentsQuota gets a reference to the given EntityQuotaDto and assigns it to the AiAgentsQuota field.
+func (o *QuotaDto) SetAiAgentsQuota(v EntityQuotaDto) {
 	o.AiAgentsQuota = &v
 }
 
 // GetTenantCustomQuota returns the TenantCustomQuota field value if set, zero value otherwise.
-func (o *QuotaDto) GetTenantCustomQuota() TenantQuotaSettings {
+func (o *QuotaDto) GetTenantCustomQuota() TenantQuotaSettingsDto {
 	if o == nil || IsNil(o.TenantCustomQuota) {
-		var ret TenantQuotaSettings
+		var ret TenantQuotaSettingsDto
 		return ret
 	}
 	return *o.TenantCustomQuota
@@ -372,7 +372,7 @@ func (o *QuotaDto) GetTenantCustomQuota() TenantQuotaSettings {
 
 // GetTenantCustomQuotaOk returns a tuple with the TenantCustomQuota field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuotaDto) GetTenantCustomQuotaOk() (*TenantQuotaSettings, bool) {
+func (o *QuotaDto) GetTenantCustomQuotaOk() (*TenantQuotaSettingsDto, bool) {
 	if o == nil || IsNil(o.TenantCustomQuota) {
 		return nil, false
 	}
@@ -388,8 +388,8 @@ func (o *QuotaDto) IsTenantCustomQuotaSet() bool {
 	return false
 }
 
-// SetTenantCustomQuota gets a reference to the given TenantQuotaSettings and assigns it to the TenantCustomQuota field.
-func (o *QuotaDto) SetTenantCustomQuota(v TenantQuotaSettings) {
+// SetTenantCustomQuota gets a reference to the given TenantQuotaSettingsDto and assigns it to the TenantCustomQuota field.
+func (o *QuotaDto) SetTenantCustomQuota(v TenantQuotaSettingsDto) {
 	o.TenantCustomQuota = &v
 }
 

@@ -358,11 +358,11 @@ func (a *FilesSettingsAPIService) ChangeAutomaticallyCleanUpExecute(r ApiChangeA
 type ApiChangeDefaultAccessRightsRequest struct {
 	ctx context.Context
 	ApiService *FilesSettingsAPIService
-	requestBody *[]int32
+	defaultAccessRightsRequestDto *[]int32
 }
 
 // The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
-func (r ApiChangeDefaultAccessRightsRequest) RequestBody(requestBody []int32) ApiChangeDefaultAccessRightsRequest {	r.requestBody = &requestBody
+func (r ApiChangeDefaultAccessRightsRequest) DefaultAccessRightsRequestDto(defaultAccessRightsRequestDto []int32) ApiChangeDefaultAccessRightsRequest {	r.defaultAccessRightsRequestDto = &defaultAccessRightsRequestDto
 	return r
 }
 
@@ -424,7 +424,7 @@ func (a *FilesSettingsAPIService) ChangeDefaultAccessRightsExecute(r ApiChangeDe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.defaultAccessRightsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -484,17 +484,6 @@ func (a *FilesSettingsAPIService) ChangeDefaultAccessRightsExecute(r ApiChangeDe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1129,17 +1118,6 @@ func (a *FilesSettingsAPIService) CheckDocServiceUrlExecute(r ApiCheckDocService
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3489,17 +3467,6 @@ func (a *FilesSettingsAPIService) ResetDefaultTemplateExecute(r ApiResetDefaultT
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -3632,17 +3599,6 @@ func (a *FilesSettingsAPIService) SetDefaultTemplateExecute(r ApiSetDefaultTempl
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -4697,7 +4653,7 @@ func (a *FilesSettingsAPIService) UploadDefaultTemplateExecute(r ApiUploadDefaul
 		return localVarReturnValue, nil, reportError("file is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "FileExtension", r.fileExtension, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "fileExtension", r.fileExtension, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
 
@@ -4719,7 +4675,7 @@ func (a *FilesSettingsAPIService) UploadDefaultTemplateExecute(r ApiUploadDefaul
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {

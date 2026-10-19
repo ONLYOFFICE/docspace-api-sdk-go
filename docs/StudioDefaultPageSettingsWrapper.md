@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Response** | Pointer to [**StudioDefaultPageSettings**](StudioDefaultPageSettings.md) | The StudioDefaultPageSettings object returned by the operation. | [optional] 
+**Response** | Pointer to [**StudioDefaultPageSettingsDto**](StudioDefaultPageSettingsDto.md) | The StudioDefaultPageSettingsDto object returned by the operation. | [optional] 
 **Count** | Pointer to **int32** | The total number of items in the response | [optional] 
 **Links** | Pointer to [**[]GetPortalPrices200ResponseLinksInner**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **Status** | Pointer to **int32** | HTTP status code of the response | [optional] 
@@ -31,20 +31,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetResponse
 
-`func (o *StudioDefaultPageSettingsWrapper) GetResponse() StudioDefaultPageSettings`
+`func (o *StudioDefaultPageSettingsWrapper) GetResponse() StudioDefaultPageSettingsDto`
 
 GetResponse returns the Response field if non-nil, zero value otherwise.
 
 ### GetResponseOk
 
-`func (o *StudioDefaultPageSettingsWrapper) GetResponseOk() (*StudioDefaultPageSettings, bool)`
+`func (o *StudioDefaultPageSettingsWrapper) GetResponseOk() (*StudioDefaultPageSettingsDto, bool)`
 
 GetResponseOk returns a tuple with the Response field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResponse
 
-`func (o *StudioDefaultPageSettingsWrapper) SetResponse(v StudioDefaultPageSettings)`
+`func (o *StudioDefaultPageSettingsWrapper) SetResponse(v StudioDefaultPageSettingsDto)`
 
 SetResponse sets Response field to given value.
 

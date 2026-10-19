@@ -42,7 +42,7 @@ func (r ApiCheckUploadRequest) CheckUploadRequest(checkUploadRequest CheckUpload
 	return r
 }
 
-func (r ApiCheckUploadRequest) Execute() (*STRINGArrayWrapper, *http.Response, error) {
+func (r ApiCheckUploadRequest) Execute() (*StringArrayWrapper, *http.Response, error) {
 	return r.ApiService.CheckUploadExecute(r)
 }
 
@@ -64,13 +64,13 @@ func (a *FilesFoldersAPIService) CheckUpload(ctx context.Context, folderId inter
 }
 
 // Execute executes the request
-//  @return STRINGArrayWrapper
-func (a *FilesFoldersAPIService) CheckUploadExecute(r ApiCheckUploadRequest) (*STRINGArrayWrapper, *http.Response, error) {
+//  @return StringArrayWrapper
+func (a *FilesFoldersAPIService) CheckUploadExecute(r ApiCheckUploadRequest) (*StringArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *STRINGArrayWrapper
+		localVarReturnValue  *StringArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesFoldersAPIService.CheckUpload")
@@ -176,17 +176,6 @@ func (a *FilesFoldersAPIService) CheckUploadExecute(r ApiCheckUploadRequest) (*S
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -206,11 +195,11 @@ type ApiCreateFolderRequest struct {
 	ctx context.Context
 	ApiService *FilesFoldersAPIService
 	folderId interface{}
-	createFolder *CreateFolder
+	createFolderRequest *CreateFolderRequest
 }
 
 // The title carried by the request body.
-func (r ApiCreateFolderRequest) CreateFolder(createFolder CreateFolder) ApiCreateFolderRequest {	r.createFolder = &createFolder
+func (r ApiCreateFolderRequest) CreateFolderRequest(createFolderRequest CreateFolderRequest) ApiCreateFolderRequest {	r.createFolderRequest = &createFolderRequest
 	return r
 }
 
@@ -262,8 +251,8 @@ func (a *FilesFoldersAPIService) CreateFolderExecute(r ApiCreateFolderRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createFolder == nil {
-		return localVarReturnValue, nil, reportError("createFolder is required and must be specified")
+	if r.createFolderRequest == nil {
+		return localVarReturnValue, nil, reportError("createFolderRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -284,7 +273,7 @@ func (a *FilesFoldersAPIService) CreateFolderExecute(r ApiCreateFolderRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createFolder
+	localVarPostBody = r.createFolderRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -354,17 +343,6 @@ func (a *FilesFoldersAPIService) CreateFolderExecute(r ApiCreateFolderRequest) (
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -401,8 +379,8 @@ func (a *FilesFoldersAPIService) CreateFolderExecuteThirdParty(r ApiCreateFolder
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createFolder == nil {
-		return localVarReturnValue, nil, reportError("createFolder is required and must be specified")
+	if r.createFolderRequest == nil {
+		return localVarReturnValue, nil, reportError("createFolderRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -423,7 +401,7 @@ func (a *FilesFoldersAPIService) CreateFolderExecuteThirdParty(r ApiCreateFolder
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createFolder
+	localVarPostBody = r.createFolderRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -469,17 +447,6 @@ func (a *FilesFoldersAPIService) CreateFolderExecuteThirdParty(r ApiCreateFolder
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -651,17 +618,6 @@ func (a *FilesFoldersAPIService) CreateFolderPrimaryExternalLinkExecute(r ApiCre
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -686,7 +642,7 @@ type ApiCreateReportFolderHistoryRequest struct {
 	to *time.Time
 }
 
-// The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier.
+// The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents.
 func (r ApiCreateReportFolderHistoryRequest) Format(format AuditReportFormat) ApiCreateReportFolderHistoryRequest {	r.format = &format
 	return r
 }
@@ -707,7 +663,7 @@ func (r ApiCreateReportFolderHistoryRequest) Execute() (*DocumentBuilderTaskWrap
 
 // CreateReportFolderHistory Start the folder history report generation
 //
-// Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`, of which a CSV report fills only the last two.  `from` and `to` limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
+// Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`; the URL of a CSV file too large for the editor  downloads it instead of opening it. An XLSX report keeps only the most recent events, at most 200,000 by default  and fewer when the events are long, and its header says how many were left out; `format=Csv` exports every event  of the period. `from` and `to` limit the exported period; leaving both out exports the whole history. While a  report for the same folder and caller is still running, this call joins it and answers with the running task  instead of starting a second one, so retrying is safe. The caller needs read access to the folder and may not be  a guest - otherwise the call is refused with 403, and a folder that does not exist with 404; the report is  available on every pricing plan, and 402 comes only when the login history and audit trail section is turned  off for the portal. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-report-folder-history/
 //
@@ -869,11 +825,11 @@ type ApiDeleteFolderRequest struct {
 	ctx context.Context
 	ApiService *FilesFoldersAPIService
 	folderId interface{}
-	deleteFolder *DeleteFolder
+	deleteFolderRequest *DeleteFolderRequest
 }
 
 // How the deletion is to be carried out.
-func (r ApiDeleteFolderRequest) DeleteFolder(deleteFolder DeleteFolder) ApiDeleteFolderRequest {	r.deleteFolder = &deleteFolder
+func (r ApiDeleteFolderRequest) DeleteFolderRequest(deleteFolderRequest DeleteFolderRequest) ApiDeleteFolderRequest {	r.deleteFolderRequest = &deleteFolderRequest
 	return r
 }
 
@@ -919,8 +875,8 @@ func (a *FilesFoldersAPIService) DeleteFolderExecute(r ApiDeleteFolderRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.deleteFolder == nil {
-		return localVarReturnValue, nil, reportError("deleteFolder is required and must be specified")
+	if r.deleteFolderRequest == nil {
+		return localVarReturnValue, nil, reportError("deleteFolderRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -941,7 +897,7 @@ func (a *FilesFoldersAPIService) DeleteFolderExecute(r ApiDeleteFolderRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.deleteFolder
+	localVarPostBody = r.deleteFolderRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1208,6 +1164,9 @@ type ApiGetFavoritesFolderRequest struct {
 	sortBy *string
 	sortOrder *SortOrder
 	filterValue *string
+	metadataTemplateId *int32
+	metadataFilters *string
+	includeHiddenMetadata *bool
 }
 
 // Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -1242,6 +1201,21 @@ func (r ApiGetFavoritesFolderRequest) SortOrder(sortOrder SortOrder) ApiGetFavor
 
 // The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
 func (r ApiGetFavoritesFolderRequest) FilterValue(filterValue string) ApiGetFavoritesFolderRequest {	r.filterValue = &filterValue
+	return r
+}
+
+// The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+func (r ApiGetFavoritesFolderRequest) MetadataTemplateId(metadataTemplateId int32) ApiGetFavoritesFolderRequest {	r.metadataTemplateId = &metadataTemplateId
+	return r
+}
+
+// The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+func (r ApiGetFavoritesFolderRequest) MetadataFilters(metadataFilters string) ApiGetFavoritesFolderRequest {	r.metadataFilters = &metadataFilters
+	return r
+}
+
+// Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+func (r ApiGetFavoritesFolderRequest) IncludeHiddenMetadata(includeHiddenMetadata bool) ApiGetFavoritesFolderRequest {	r.includeHiddenMetadata = &includeHiddenMetadata
 	return r
 }
 
@@ -1305,6 +1279,15 @@ func (a *FilesFoldersAPIService) GetFavoritesFolderExecute(r ApiGetFavoritesFold
 	}
 	if r.filterValue != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filterValue", r.filterValue, "form", "")
+	}
+	if r.metadataTemplateId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataTemplateId", r.metadataTemplateId, "form", "")
+	}
+	if r.metadataFilters != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataFilters", r.metadataFilters, "form", "")
+	}
+	if r.includeHiddenMetadata != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeHiddenMetadata", r.includeHiddenMetadata, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1382,17 +1365,6 @@ func (a *FilesFoldersAPIService) GetFavoritesFolderExecute(r ApiGetFavoritesFold
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1735,7 +1707,10 @@ type ApiGetFolderByFolderIdRequest struct {
 	sortBy *string
 	sortOrder *SortOrder
 	filterValue *string
-	location *Location
+	location *RequestLocation
+	metadataTemplateId *int32
+	metadataFilters *string
+	includeHiddenMetadata *bool
 }
 
 // Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -1829,7 +1804,22 @@ func (r ApiGetFolderByFolderIdRequest) FilterValue(filterValue string) ApiGetFol
 }
 
 // Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
-func (r ApiGetFolderByFolderIdRequest) Location(location Location) ApiGetFolderByFolderIdRequest {	r.location = &location
+func (r ApiGetFolderByFolderIdRequest) Location(location RequestLocation) ApiGetFolderByFolderIdRequest {	r.location = &location
+	return r
+}
+
+// The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.
+func (r ApiGetFolderByFolderIdRequest) MetadataTemplateId(metadataTemplateId int32) ApiGetFolderByFolderIdRequest {	r.metadataTemplateId = &metadataTemplateId
+	return r
+}
+
+// The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.
+func (r ApiGetFolderByFolderIdRequest) MetadataFilters(metadataFilters string) ApiGetFolderByFolderIdRequest {	r.metadataFilters = &metadataFilters
+	return r
+}
+
+// Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+func (r ApiGetFolderByFolderIdRequest) IncludeHiddenMetadata(includeHiddenMetadata bool) ApiGetFolderByFolderIdRequest {	r.includeHiddenMetadata = &includeHiddenMetadata
 	return r
 }
 
@@ -1942,7 +1932,16 @@ func (a *FilesFoldersAPIService) GetFolderByFolderIdExecute(r ApiGetFolderByFold
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filterValue", r.filterValue, "form", "")
 	}
 	if r.location != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Location", r.location, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "location", r.location, "form", "")
+	}
+	if r.metadataTemplateId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataTemplateId", r.metadataTemplateId, "form", "")
+	}
+	if r.metadataFilters != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataFilters", r.metadataFilters, "form", "")
+	}
+	if r.includeHiddenMetadata != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeHiddenMetadata", r.includeHiddenMetadata, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1998,28 +1997,6 @@ func (a *FilesFoldersAPIService) GetFolderByFolderIdExecute(r ApiGetFolderByFold
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2127,7 +2104,16 @@ func (a *FilesFoldersAPIService) GetFolderByFolderIdExecuteThirdParty(r ApiGetFo
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filterValue", r.filterValue, "form", "")
 	}
 	if r.location != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Location", r.location, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "location", r.location, "form", "")
+	}
+	if r.metadataTemplateId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataTemplateId", r.metadataTemplateId, "form", "")
+	}
+	if r.metadataFilters != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataFilters", r.metadataFilters, "form", "")
+	}
+	if r.includeHiddenMetadata != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeHiddenMetadata", r.includeHiddenMetadata, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2169,28 +2155,6 @@ func (a *FilesFoldersAPIService) GetFolderByFolderIdExecuteThirdParty(r ApiGetFo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2377,17 +2341,6 @@ func (a *FilesFoldersAPIService) GetFolderHistoryExecute(r ApiGetFolderHistoryRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3142,17 +3095,6 @@ func (a *FilesFoldersAPIService) GetFolderPrimaryExternalLinkExecute(r ApiGetFol
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -3339,6 +3281,9 @@ type ApiGetFormsFolderRequest struct {
 	sortBy *string
 	sortOrder *SortOrder
 	filterValue *string
+	metadataTemplateId *int32
+	metadataFilters *string
+	includeHiddenMetadata *bool
 }
 
 // Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -3376,13 +3321,28 @@ func (r ApiGetFormsFolderRequest) FilterValue(filterValue string) ApiGetFormsFol
 	return r
 }
 
+// The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+func (r ApiGetFormsFolderRequest) MetadataTemplateId(metadataTemplateId int32) ApiGetFormsFolderRequest {	r.metadataTemplateId = &metadataTemplateId
+	return r
+}
+
+// The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+func (r ApiGetFormsFolderRequest) MetadataFilters(metadataFilters string) ApiGetFormsFolderRequest {	r.metadataFilters = &metadataFilters
+	return r
+}
+
+// Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+func (r ApiGetFormsFolderRequest) IncludeHiddenMetadata(includeHiddenMetadata bool) ApiGetFormsFolderRequest {	r.includeHiddenMetadata = &includeHiddenMetadata
+	return r
+}
+
 func (r ApiGetFormsFolderRequest) Execute() (*FolderContentWrapper, *http.Response, error) {
 	return r.ApiService.GetFormsFolderExecute(r)
 }
 
 // GetFormsFolder Get the Forms section
 //
-// Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `count` and `startIndex` page  through it, `total` reports how many rooms match the request in full, and `current` describes the section  folder itself.
+// Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `metadataTemplateId` and  `metadataFilters` keep only the rooms carrying the template and matching the conditions (an unknown template  or field, or a malformed condition, is refused with 400), `count` and `startIndex` page through it, `total`  reports how many rooms match the request in full, and `current` describes the section folder itself.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-forms-folder/
 //
@@ -3436,6 +3396,15 @@ func (a *FilesFoldersAPIService) GetFormsFolderExecute(r ApiGetFormsFolderReques
 	}
 	if r.filterValue != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filterValue", r.filterValue, "form", "")
+	}
+	if r.metadataTemplateId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataTemplateId", r.metadataTemplateId, "form", "")
+	}
+	if r.metadataFilters != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataFilters", r.metadataFilters, "form", "")
+	}
+	if r.includeHiddenMetadata != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeHiddenMetadata", r.includeHiddenMetadata, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3523,17 +3492,6 @@ func (a *FilesFoldersAPIService) GetFormsFolderExecute(r ApiGetFormsFolderReques
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -3560,6 +3518,9 @@ type ApiGetMyFolderRequest struct {
 	sortBy *string
 	sortOrder *SortOrder
 	filterValue *string
+	metadataTemplateId *int32
+	metadataFilters *string
+	includeHiddenMetadata *bool
 }
 
 // Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -3602,13 +3563,28 @@ func (r ApiGetMyFolderRequest) FilterValue(filterValue string) ApiGetMyFolderReq
 	return r
 }
 
+// The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+func (r ApiGetMyFolderRequest) MetadataTemplateId(metadataTemplateId int32) ApiGetMyFolderRequest {	r.metadataTemplateId = &metadataTemplateId
+	return r
+}
+
+// The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+func (r ApiGetMyFolderRequest) MetadataFilters(metadataFilters string) ApiGetMyFolderRequest {	r.metadataFilters = &metadataFilters
+	return r
+}
+
+// Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+func (r ApiGetMyFolderRequest) IncludeHiddenMetadata(includeHiddenMetadata bool) ApiGetMyFolderRequest {	r.includeHiddenMetadata = &includeHiddenMetadata
+	return r
+}
+
 func (r ApiGetMyFolderRequest) Execute() (*FolderContentWrapper, *http.Response, error) {
 	return r.ApiService.GetMyFolderExecute(r)
 }
 
 // GetMyFolder Get the My documents section
 //
-// Returns the contents of the caller's My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId` or `filterValue` narrows the request, the search descends through the whole subtree.  `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while. `folders` and  `files` hold one page of the result, `total` counts everything that matches before `count` and `startIndex`  are applied, and `current` describes the section folder. To open a folder inside the section, call  `GET api/2.0/files/{folderId}` with its identifier.
+// Returns the contents of the caller's My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId`, `filterValue` or a metadata filter narrows the request, the search descends through the whole  subtree. `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while.  `metadataTemplateId` and `metadataFilters` keep only the entries carrying the template and matching the  conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or field, or a malformed  condition, is refused with 400. `folders` and `files` hold one page of the result, `total` counts everything  that matches before `count` and `startIndex` are applied, and `current` describes the section folder. To open  a folder inside the section, call `GET api/2.0/files/{folderId}` with its identifier.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-my-folder/
 //
@@ -3666,6 +3642,15 @@ func (a *FilesFoldersAPIService) GetMyFolderExecute(r ApiGetMyFolderRequest) (*F
 	if r.filterValue != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filterValue", r.filterValue, "form", "")
 	}
+	if r.metadataTemplateId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataTemplateId", r.metadataTemplateId, "form", "")
+	}
+	if r.metadataFilters != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataFilters", r.metadataFilters, "form", "")
+	}
+	if r.includeHiddenMetadata != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeHiddenMetadata", r.includeHiddenMetadata, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3742,17 +3727,6 @@ func (a *FilesFoldersAPIService) GetMyFolderExecute(r ApiGetMyFolderRequest) (*F
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3953,6 +3927,9 @@ type ApiGetRecentFolderRequest struct {
 	sortBy *string
 	sortOrder *SortOrder
 	filterValue *string
+	metadataTemplateId *int32
+	metadataFilters *string
+	includeHiddenMetadata *bool
 }
 
 // Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.
@@ -4007,6 +3984,21 @@ func (r ApiGetRecentFolderRequest) SortOrder(sortOrder SortOrder) ApiGetRecentFo
 
 // The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.
 func (r ApiGetRecentFolderRequest) FilterValue(filterValue string) ApiGetRecentFolderRequest {	r.filterValue = &filterValue
+	return r
+}
+
+// The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set.
+func (r ApiGetRecentFolderRequest) MetadataTemplateId(metadataTemplateId int32) ApiGetRecentFolderRequest {	r.metadataTemplateId = &metadataTemplateId
+	return r
+}
+
+// The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+func (r ApiGetRecentFolderRequest) MetadataFilters(metadataFilters string) ApiGetRecentFolderRequest {	r.metadataFilters = &metadataFilters
+	return r
+}
+
+// Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+func (r ApiGetRecentFolderRequest) IncludeHiddenMetadata(includeHiddenMetadata bool) ApiGetRecentFolderRequest {	r.includeHiddenMetadata = &includeHiddenMetadata
 	return r
 }
 
@@ -4090,6 +4082,15 @@ func (a *FilesFoldersAPIService) GetRecentFolderExecute(r ApiGetRecentFolderRequ
 	}
 	if r.filterValue != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filterValue", r.filterValue, "form", "")
+	}
+	if r.metadataTemplateId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataTemplateId", r.metadataTemplateId, "form", "")
+	}
+	if r.metadataFilters != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataFilters", r.metadataFilters, "form", "")
+	}
+	if r.includeHiddenMetadata != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeHiddenMetadata", r.includeHiddenMetadata, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4177,17 +4178,6 @@ func (a *FilesFoldersAPIService) GetRecentFolderExecute(r ApiGetRecentFolderRequ
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -4215,7 +4205,7 @@ func (r ApiGetReportFolderHistoryRequest) Execute() (*DocumentBuilderTaskWrapper
 
 // GetReportFolderHistory Get the folder history report generation status
 //
-// Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and  `resultFileId`, `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
+// Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and `resultFileId`,  `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My documents. An empty  answer means there is no report for this folder and caller, either because none was started or because a  finished one has already been picked up by an earlier poll. The caller needs read access to the folder and may  not be a guest; a caller who fails the access rule is answered with 403, a folder that does not exist with 404,  and a portal with the login history and audit trail section turned off with 402. The call is read-only, and each caller sees only  their own report.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-report-folder-history/
 //
@@ -4567,17 +4557,6 @@ func (a *FilesFoldersAPIService) GetRootFoldersExecute(r ApiGetRootFoldersReques
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -4604,6 +4583,9 @@ type ApiGetTrashFolderRequest struct {
 	sortBy *string
 	sortOrder *SortOrder
 	filterValue *string
+	metadataTemplateId *int32
+	metadataFilters *string
+	includeHiddenMetadata *bool
 }
 
 // Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -4646,13 +4628,28 @@ func (r ApiGetTrashFolderRequest) FilterValue(filterValue string) ApiGetTrashFol
 	return r
 }
 
+// The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+func (r ApiGetTrashFolderRequest) MetadataTemplateId(metadataTemplateId int32) ApiGetTrashFolderRequest {	r.metadataTemplateId = &metadataTemplateId
+	return r
+}
+
+// The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+func (r ApiGetTrashFolderRequest) MetadataFilters(metadataFilters string) ApiGetTrashFolderRequest {	r.metadataFilters = &metadataFilters
+	return r
+}
+
+// Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+func (r ApiGetTrashFolderRequest) IncludeHiddenMetadata(includeHiddenMetadata bool) ApiGetTrashFolderRequest {	r.includeHiddenMetadata = &includeHiddenMetadata
+	return r
+}
+
 func (r ApiGetTrashFolderRequest) Execute() (*FolderContentWrapper, *http.Response, error) {
 	return r.ApiService.GetTrashFolderExecute(r)
 }
 
 // GetTrashFolder Get the Trash section
 //
-// Returns the caller's Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `folders` and `files` hold one page of the result, `total` counts everything that  matches before `count` and `startIndex` are applied, and `current` describes the section folder. An account  that is given no Trash of its own, an outsider for instance, receives 404.
+// Returns the caller's Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `metadataTemplateId` and `metadataFilters` keep only the deleted entries carrying the  template and matching the conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or  field, or a malformed condition, is refused with 400. `folders` and `files` hold one page of the result,  `total` counts everything that matches before `count` and `startIndex` are applied, and `current` describes  the section folder. An account that is given no Trash of its own, an outsider for instance, receives 404.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-trash-folder/
 //
@@ -4709,6 +4706,15 @@ func (a *FilesFoldersAPIService) GetTrashFolderExecute(r ApiGetTrashFolderReques
 	}
 	if r.filterValue != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filterValue", r.filterValue, "form", "")
+	}
+	if r.metadataTemplateId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataTemplateId", r.metadataTemplateId, "form", "")
+	}
+	if r.metadataFilters != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadataFilters", r.metadataFilters, "form", "")
+	}
+	if r.includeHiddenMetadata != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeHiddenMetadata", r.includeHiddenMetadata, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4786,17 +4792,6 @@ func (a *FilesFoldersAPIService) GetTrashFolderExecute(r ApiGetTrashFolderReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -4962,7 +4957,7 @@ func (a *FilesFoldersAPIService) InsertFileExecute(r ApiInsertFileRequest) (*Fil
 	var insertFileFileLocalVarFileName     string
 	var insertFileFileLocalVarFileBytes    []byte
 
-	insertFileFileLocalVarFormFileName = "InsertFile.File"
+	insertFileFileLocalVarFormFileName = "insertFile.file"
 	insertFileFileLocalVarFile := r.insertFileFile
 
 	if insertFileFileLocalVarFile != nil {
@@ -4974,37 +4969,37 @@ func (a *FilesFoldersAPIService) InsertFileExecute(r ApiInsertFileRequest) (*Fil
 		formFiles = append(formFiles, formFile{fileBytes: insertFileFileLocalVarFileBytes, fileName: insertFileFileLocalVarFileName, formFileName: insertFileFileLocalVarFormFileName})
 	}
 	if r.insertFileTitle != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Title", r.insertFileTitle, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.title", r.insertFileTitle, "form", "")
 	}
 	if r.insertFileCreateNewIfExist != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.CreateNewIfExist", r.insertFileCreateNewIfExist, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.createNewIfExist", r.insertFileCreateNewIfExist, "form", "")
 	}
 	if r.insertFileKeepConvertStatus != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.KeepConvertStatus", r.insertFileKeepConvertStatus, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.keepConvertStatus", r.insertFileKeepConvertStatus, "form", "")
 	}
 	if r.insertFileStreamCanRead != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.CanRead", r.insertFileStreamCanRead, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.canRead", r.insertFileStreamCanRead, "form", "")
 	}
 	if r.insertFileStreamCanWrite != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.CanWrite", r.insertFileStreamCanWrite, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.canWrite", r.insertFileStreamCanWrite, "form", "")
 	}
 	if r.insertFileStreamCanSeek != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.CanSeek", r.insertFileStreamCanSeek, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.canSeek", r.insertFileStreamCanSeek, "form", "")
 	}
 	if r.insertFileStreamCanTimeout != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.CanTimeout", r.insertFileStreamCanTimeout, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.canTimeout", r.insertFileStreamCanTimeout, "form", "")
 	}
 	if r.insertFileStreamLength != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.Length", r.insertFileStreamLength, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.length", r.insertFileStreamLength, "form", "")
 	}
 	if r.insertFileStreamPosition != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.Position", r.insertFileStreamPosition, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.position", r.insertFileStreamPosition, "form", "")
 	}
 	if r.insertFileStreamReadTimeout != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.ReadTimeout", r.insertFileStreamReadTimeout, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.readTimeout", r.insertFileStreamReadTimeout, "form", "")
 	}
 	if r.insertFileStreamWriteTimeout != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.WriteTimeout", r.insertFileStreamWriteTimeout, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.writeTimeout", r.insertFileStreamWriteTimeout, "form", "")
 	}
 	if r.ctx != nil {
 		// API Key Authentication
@@ -5054,17 +5049,6 @@ func (a *FilesFoldersAPIService) InsertFileExecute(r ApiInsertFileRequest) (*Fil
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -5144,7 +5128,7 @@ func (a *FilesFoldersAPIService) InsertFileExecuteThirdParty(r ApiInsertFileRequ
 	var insertFileFileLocalVarFileName     string
 	var insertFileFileLocalVarFileBytes    []byte
 
-	insertFileFileLocalVarFormFileName = "InsertFile.File"
+	insertFileFileLocalVarFormFileName = "insertFile.file"
 	insertFileFileLocalVarFile := r.insertFileFile
 
 	if insertFileFileLocalVarFile != nil {
@@ -5156,37 +5140,37 @@ func (a *FilesFoldersAPIService) InsertFileExecuteThirdParty(r ApiInsertFileRequ
 		formFiles = append(formFiles, formFile{fileBytes: insertFileFileLocalVarFileBytes, fileName: insertFileFileLocalVarFileName, formFileName: insertFileFileLocalVarFormFileName})
 	}
 	if r.insertFileTitle != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Title", r.insertFileTitle, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.title", r.insertFileTitle, "form", "")
 	}
 	if r.insertFileCreateNewIfExist != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.CreateNewIfExist", r.insertFileCreateNewIfExist, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.createNewIfExist", r.insertFileCreateNewIfExist, "form", "")
 	}
 	if r.insertFileKeepConvertStatus != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.KeepConvertStatus", r.insertFileKeepConvertStatus, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.keepConvertStatus", r.insertFileKeepConvertStatus, "form", "")
 	}
 	if r.insertFileStreamCanRead != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.CanRead", r.insertFileStreamCanRead, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.canRead", r.insertFileStreamCanRead, "form", "")
 	}
 	if r.insertFileStreamCanWrite != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.CanWrite", r.insertFileStreamCanWrite, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.canWrite", r.insertFileStreamCanWrite, "form", "")
 	}
 	if r.insertFileStreamCanSeek != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.CanSeek", r.insertFileStreamCanSeek, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.canSeek", r.insertFileStreamCanSeek, "form", "")
 	}
 	if r.insertFileStreamCanTimeout != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.CanTimeout", r.insertFileStreamCanTimeout, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.canTimeout", r.insertFileStreamCanTimeout, "form", "")
 	}
 	if r.insertFileStreamLength != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.Length", r.insertFileStreamLength, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.length", r.insertFileStreamLength, "form", "")
 	}
 	if r.insertFileStreamPosition != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.Position", r.insertFileStreamPosition, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.position", r.insertFileStreamPosition, "form", "")
 	}
 	if r.insertFileStreamReadTimeout != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.ReadTimeout", r.insertFileStreamReadTimeout, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.readTimeout", r.insertFileStreamReadTimeout, "form", "")
 	}
 	if r.insertFileStreamWriteTimeout != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "InsertFile.Stream.WriteTimeout", r.insertFileStreamWriteTimeout, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "insertFile.stream.writeTimeout", r.insertFileStreamWriteTimeout, "form", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -5222,17 +5206,6 @@ func (a *FilesFoldersAPIService) InsertFileExecuteThirdParty(r ApiInsertFileRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -5399,7 +5372,7 @@ func (a *FilesFoldersAPIService) InsertFileToMyFromBodyExecute(r ApiInsertFileTo
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {
@@ -5411,37 +5384,37 @@ func (a *FilesFoldersAPIService) InsertFileToMyFromBodyExecute(r ApiInsertFileTo
 		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
 	}
 	if r.title != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Title", r.title, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "title", r.title, "form", "")
 	}
 	if r.createNewIfExist != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "CreateNewIfExist", r.createNewIfExist, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "createNewIfExist", r.createNewIfExist, "form", "")
 	}
 	if r.keepConvertStatus != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "KeepConvertStatus", r.keepConvertStatus, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "keepConvertStatus", r.keepConvertStatus, "form", "")
 	}
 	if r.streamCanRead != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Stream.CanRead", r.streamCanRead, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "stream.canRead", r.streamCanRead, "form", "")
 	}
 	if r.streamCanWrite != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Stream.CanWrite", r.streamCanWrite, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "stream.canWrite", r.streamCanWrite, "form", "")
 	}
 	if r.streamCanSeek != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Stream.CanSeek", r.streamCanSeek, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "stream.canSeek", r.streamCanSeek, "form", "")
 	}
 	if r.streamCanTimeout != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Stream.CanTimeout", r.streamCanTimeout, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "stream.canTimeout", r.streamCanTimeout, "form", "")
 	}
 	if r.streamLength != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Stream.Length", r.streamLength, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "stream.length", r.streamLength, "form", "")
 	}
 	if r.streamPosition != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Stream.Position", r.streamPosition, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "stream.position", r.streamPosition, "form", "")
 	}
 	if r.streamReadTimeout != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Stream.ReadTimeout", r.streamReadTimeout, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "stream.readTimeout", r.streamReadTimeout, "form", "")
 	}
 	if r.streamWriteTimeout != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Stream.WriteTimeout", r.streamWriteTimeout, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "stream.writeTimeout", r.streamWriteTimeout, "form", "")
 	}
 	if r.ctx != nil {
 		// API Key Authentication
@@ -5542,11 +5515,11 @@ type ApiRenameFolderRequest struct {
 	ctx context.Context
 	ApiService *FilesFoldersAPIService
 	folderId interface{}
-	createFolder *CreateFolder
+	createFolderRequest *CreateFolderRequest
 }
 
 // The title carried by the request body.
-func (r ApiRenameFolderRequest) CreateFolder(createFolder CreateFolder) ApiRenameFolderRequest {	r.createFolder = &createFolder
+func (r ApiRenameFolderRequest) CreateFolderRequest(createFolderRequest CreateFolderRequest) ApiRenameFolderRequest {	r.createFolderRequest = &createFolderRequest
 	return r
 }
 
@@ -5598,8 +5571,8 @@ func (a *FilesFoldersAPIService) RenameFolderExecute(r ApiRenameFolderRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createFolder == nil {
-		return localVarReturnValue, nil, reportError("createFolder is required and must be specified")
+	if r.createFolderRequest == nil {
+		return localVarReturnValue, nil, reportError("createFolderRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -5620,7 +5593,7 @@ func (a *FilesFoldersAPIService) RenameFolderExecute(r ApiRenameFolderRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createFolder
+	localVarPostBody = r.createFolderRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5690,17 +5663,6 @@ func (a *FilesFoldersAPIService) RenameFolderExecute(r ApiRenameFolderRequest) (
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -5737,8 +5699,8 @@ func (a *FilesFoldersAPIService) RenameFolderExecuteThirdParty(r ApiRenameFolder
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createFolder == nil {
-		return localVarReturnValue, nil, reportError("createFolder is required and must be specified")
+	if r.createFolderRequest == nil {
+		return localVarReturnValue, nil, reportError("createFolderRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -5759,7 +5721,7 @@ func (a *FilesFoldersAPIService) RenameFolderExecuteThirdParty(r ApiRenameFolder
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createFolder
+	localVarPostBody = r.createFolderRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -5815,7 +5777,277 @@ func (a *FilesFoldersAPIService) RenameFolderExecuteThirdParty(r ApiRenameFolder
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSearchFolderRequest struct {
+	ctx context.Context
+	ApiService *FilesFoldersAPIService
+	folderId interface{}
+	folderMetadataSearch *FolderMetadataSearch
+}
+
+// The search parameters.
+func (r ApiSearchFolderRequest) FolderMetadataSearch(folderMetadataSearch FolderMetadataSearch) ApiSearchFolderRequest {	r.folderMetadataSearch = &folderMetadataSearch
+	return r
+}
+
+func (r ApiSearchFolderRequest) Execute() (*FolderContentWrapper, *http.Response, error) {
+	return r.ApiService.SearchFolderExecute(r)
+}
+
+// ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
+// identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
+func (r ApiSearchFolderRequest) ExecuteThirdParty() (*ThirdPartyFolderContentWrapper, *http.Response, error) {
+	return r.ApiService.SearchFolderExecuteThirdParty(r)
+}
+
+// SearchFolder Search a folder by metadata
+//
+// Searches the folder by metadata. The same filter the folder listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+//
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/search-folder/
+//
+// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+// @param folderId The folder ID.
+// @return ApiSearchFolderRequest
+func (a *FilesFoldersAPIService) SearchFolder(ctx context.Context, folderId interface{}) ApiSearchFolderRequest {
+	return ApiSearchFolderRequest{
+		ApiService: a,
+		ctx: ctx,
+		folderId: folderId,
+	}
+}
+
+// Execute executes the request
+//  @return FolderContentWrapper
+func (a *FilesFoldersAPIService) SearchFolderExecute(r ApiSearchFolderRequest) (*FolderContentWrapper, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *FolderContentWrapper
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesFoldersAPIService.SearchFolder")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/2.0/files/{folderId}/search"
+	localVarPath = strings.Replace(localVarPath, "{"+"folderId"+"}", url.PathEscape(parameterValueToString(r.folderId, "folderId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.folderMetadataSearch == nil {
+		return localVarReturnValue, nil, reportError("folderMetadataSearch is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.folderMetadataSearch
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyBearer"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["ApiKeyBearer"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorApiResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v ErrorApiResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorApiResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// Execute executes the request
+//  @return ThirdPartyFolderContentWrapper
+func (a *FilesFoldersAPIService) SearchFolderExecuteThirdParty(r ApiSearchFolderRequest) (*ThirdPartyFolderContentWrapper, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ThirdPartyFolderContentWrapper
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesFoldersAPIService.SearchFolder")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/2.0/files/{folderId}/search"
+	localVarPath = strings.Replace(localVarPath, "{"+"folderId"+"}", url.PathEscape(parameterValueToString(r.folderId, "folderId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.folderMetadataSearch == nil {
+		return localVarReturnValue, nil, reportError("folderMetadataSearch is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.folderMetadataSearch
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorApiResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v ErrorApiResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -5990,17 +6222,6 @@ func (a *FilesFoldersAPIService) SetFolderOrderExecute(r ApiSetFolderOrderReques
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -6102,17 +6323,6 @@ func (a *FilesFoldersAPIService) SetFolderOrderExecuteThirdParty(r ApiSetFolderO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -6284,17 +6494,6 @@ func (a *FilesFoldersAPIService) SetFolderPrimaryExternalLinkExecute(r ApiSetFol
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -6322,7 +6521,7 @@ func (r ApiTerminateReportFolderHistoryRequest) Execute() (*http.Response, error
 
 // TerminateReportFolderHistory Terminate the folder history report generation
 //
-// Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
+// Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest; a caller who fails  the access rule is answered with 403, a folder that does not exist with 404, and a portal with the login history  and audit trail section turned off with 402. Each caller can only terminate their own report.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-report-folder-history/
 //
@@ -6569,7 +6768,7 @@ func (a *FilesFoldersAPIService) UploadFileExecute(r ApiUploadFileRequest) (*Fil
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {
@@ -6628,28 +6827,6 @@ func (a *FilesFoldersAPIService) UploadFileExecute(r ApiUploadFileRequest) (*Fil
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -6727,7 +6904,7 @@ func (a *FilesFoldersAPIService) UploadFileExecuteThirdParty(r ApiUploadFileRequ
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {
@@ -6772,28 +6949,6 @@ func (a *FilesFoldersAPIService) UploadFileExecuteThirdParty(r ApiUploadFileRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -6918,7 +7073,7 @@ func (a *FilesFoldersAPIService) UploadFileToMyExecute(r ApiUploadFileToMyReques
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {
@@ -6988,17 +7143,6 @@ func (a *FilesFoldersAPIService) UploadFileToMyExecute(r ApiUploadFileToMyReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

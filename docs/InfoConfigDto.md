@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Favorite** | Pointer to **NullableBool** | Whether the caller has this document among their favorites. It is empty when favorites do not apply - for an  anonymous caller, for a guest, and for an encrypted document. | [optional] 
 **Folder** | Pointer to **NullableString** | The place of the document as a readable path, its folders joined from the root downwards. It is empty in the  embedded layout, which shows no such panel. | [optional] 
 **Owner** | Pointer to **NullableString** | The display name of the owner of the document. It is empty for an anonymous session. | [optional] 
-**SharingSettings** | Pointer to [**[]AceShortWrapper**](AceShortWrapper.md) | Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner. | [optional] 
+**SharingSettings** | Pointer to [**[]AceShortDto**](AceShortDto.md) | Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner. | [optional] 
 **Type** | Pointer to [**EditorType**](EditorType.md) | The layout the information panel is rendered for. | [optional] 
 **Uploaded** | Pointer to **NullableString** | When the document was created on the portal, already formatted for reading in the culture of the caller rather  than as a machine timestamp. | [optional] 
 
@@ -137,20 +137,20 @@ HasOwner returns a boolean if a field has been set.
 UnsetOwner ensures that no value is present for Owner, not even an explicit nil
 ### GetSharingSettings
 
-`func (o *InfoConfigDto) GetSharingSettings() []AceShortWrapper`
+`func (o *InfoConfigDto) GetSharingSettings() []AceShortDto`
 
 GetSharingSettings returns the SharingSettings field if non-nil, zero value otherwise.
 
 ### GetSharingSettingsOk
 
-`func (o *InfoConfigDto) GetSharingSettingsOk() (*[]AceShortWrapper, bool)`
+`func (o *InfoConfigDto) GetSharingSettingsOk() (*[]AceShortDto, bool)`
 
 GetSharingSettingsOk returns a tuple with the SharingSettings field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSharingSettings
 
-`func (o *InfoConfigDto) SetSharingSettings(v []AceShortWrapper)`
+`func (o *InfoConfigDto) SetSharingSettings(v []AceShortDto)`
 
 SetSharingSettings sets SharingSettings field to given value.
 

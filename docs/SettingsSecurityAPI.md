@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**GetEnabledModules**](SettingsSecurityAPI.md#GetEnabledModules) | **Get** /api/2.0/settings/security/modules | Get enabled modules
 [**GetIsProductAdministrator**](SettingsSecurityAPI.md#GetIsProductAdministrator) | **Get** /api/2.0/settings/security/administrator | Check product administrator
 [**GetPasswordSettings**](SettingsSecurityAPI.md#GetPasswordSettings) | **Get** /api/2.0/settings/security/password | Get password settings
-[**GetProductAdministrators**](SettingsSecurityAPI.md#GetProductAdministrators) | **Get** /api/2.0/settings/security/administrator/{productid} | Get product administrators
+[**GetProductAdministrators**](SettingsSecurityAPI.md#GetProductAdministrators) | **Get** /api/2.0/settings/security/administrator/{productId} | Get product administrators
 [**GetWebItemSecurityInfo**](SettingsSecurityAPI.md#GetWebItemSecurityInfo) | **Get** /api/2.0/settings/security/{id} | Check module availability
 [**GetWebItemSettingsSecurityInfo**](SettingsSecurityAPI.md#GetWebItemSettingsSecurityInfo) | **Get** /api/2.0/settings/security | Get module access settings
 [**SetAccessToWebItems**](SettingsSecurityAPI.md#SetAccessToWebItems) | **Put** /api/2.0/settings/security/access | Set access to modules in bulk
@@ -82,7 +82,7 @@ Other parameters are passed through a pointer to a apiGetEnabledModulesRequest s
 
 ## GetIsProductAdministrator
 
-> ProductAdministratorWrapper GetIsProductAdministrator(ctx).Productid(productid).Userid(userid).Execute()
+> ProductAdministratorWrapper GetIsProductAdministrator(ctx).ProductId(productId).UserId(userId).Execute()
 
 Check product administrator
 
@@ -103,12 +103,12 @@ import (
 )
 
 func main() {
-	productid := "00000000-0000-0000-0000-000000000000" // string | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
-	userid := "00000000-0000-0000-0000-000000000000" // string | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
+	productId := "00000000-0000-0000-0000-000000000000" // string | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsSecurityAPI.GetIsProductAdministrator(context.Background()).Productid(productid).Userid(userid).Execute()
+	resp, r, err := apiClient.SettingsSecurityAPI.GetIsProductAdministrator(context.Background()).ProductId(productId).UserId(userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSecurityAPI.GetIsProductAdministrator``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,8 +129,8 @@ Other parameters are passed through a pointer to a apiGetIsProductAdministratorR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **productid** | **string** | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | 
- **userid** | **string** | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | 
+ **productId** | **string** | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | 
+ **userId** | **string** | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | 
 
 ### Return type
 
@@ -215,7 +215,7 @@ Other parameters are passed through a pointer to a apiGetPasswordSettingsRequest
 
 ## GetProductAdministrators
 
-> EmployeeArrayWrapper GetProductAdministrators(ctx, productid).Execute()
+> EmployeeArrayWrapper GetProductAdministrators(ctx, productId).Execute()
 
 Get product administrators
 
@@ -236,11 +236,11 @@ import (
 )
 
 func main() {
-	productid := "00000000-0000-0000-0000-000000000000" // string | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
+	productId := "00000000-0000-0000-0000-000000000000" // string | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsSecurityAPI.GetProductAdministrators(context.Background(), productid).Execute()
+	resp, r, err := apiClient.SettingsSecurityAPI.GetProductAdministrators(context.Background(), productId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSecurityAPI.GetProductAdministrators``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -256,7 +256,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**productid** | **string** | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | 
+**productId** | **string** | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | 
 
 ### Other Parameters
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ## SetAccessToWebItems
 
-> SecurityArrayWrapper SetAccessToWebItems(ctx).WebItemsSecurityRequestsDto(webItemsSecurityRequestsDto).Execute()
+> SecurityArrayWrapper SetAccessToWebItems(ctx).WebItemsSecurityRequestDto(webItemsSecurityRequestDto).Execute()
 
 Set access to modules in bulk
 
@@ -448,11 +448,11 @@ import (
 )
 
 func main() {
-	webItemsSecurityRequestsDto := *openapiclient.NewWebItemsSecurityRequestsDto() // WebItemsSecurityRequestsDto |  (optional)
+	webItemsSecurityRequestDto := *openapiclient.NewWebItemsSecurityRequestDto() // WebItemsSecurityRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsSecurityAPI.SetAccessToWebItems(context.Background()).WebItemsSecurityRequestsDto(webItemsSecurityRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsSecurityAPI.SetAccessToWebItems(context.Background()).WebItemsSecurityRequestDto(webItemsSecurityRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSecurityAPI.SetAccessToWebItems``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -473,7 +473,7 @@ Other parameters are passed through a pointer to a apiSetAccessToWebItemsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webItemsSecurityRequestsDto** | [**WebItemsSecurityRequestsDto**](WebItemsSecurityRequestsDto.md) |  | 
+ **webItemsSecurityRequestDto** | [**WebItemsSecurityRequestDto**](WebItemsSecurityRequestDto.md) |  | 
 
 ### Return type
 
@@ -495,7 +495,7 @@ Name | Type | Description  | Notes
 
 ## SetProductAdministrator
 
-> ProductAdministratorWrapper SetProductAdministrator(ctx).SecurityRequestsDto(securityRequestsDto).Execute()
+> ProductAdministratorWrapper SetProductAdministrator(ctx).SecurityRequestDto(securityRequestDto).Execute()
 
 Set product administrator
 
@@ -516,11 +516,11 @@ import (
 )
 
 func main() {
-	securityRequestsDto := *openapiclient.NewSecurityRequestsDto("00000000-0000-0000-0000-000000000000", "00000000-0000-0000-0000-000000000000") // SecurityRequestsDto |  (optional)
+	securityRequestDto := *openapiclient.NewSecurityRequestDto("00000000-0000-0000-0000-000000000000", "00000000-0000-0000-0000-000000000000") // SecurityRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsSecurityAPI.SetProductAdministrator(context.Background()).SecurityRequestsDto(securityRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsSecurityAPI.SetProductAdministrator(context.Background()).SecurityRequestDto(securityRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSecurityAPI.SetProductAdministrator``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -541,7 +541,7 @@ Other parameters are passed through a pointer to a apiSetProductAdministratorReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **securityRequestsDto** | [**SecurityRequestsDto**](SecurityRequestsDto.md) |  | 
+ **securityRequestDto** | [**SecurityRequestDto**](SecurityRequestDto.md) |  | 
 
 ### Return type
 
@@ -563,7 +563,7 @@ Name | Type | Description  | Notes
 
 ## SetWebItemSecurity
 
-> SecurityArrayWrapper SetWebItemSecurity(ctx).WebItemSecurityRequestsDto(webItemSecurityRequestsDto).Execute()
+> SecurityArrayWrapper SetWebItemSecurity(ctx).WebItemSecurityRequestDto(webItemSecurityRequestDto).Execute()
 
 Set module access
 
@@ -584,11 +584,11 @@ import (
 )
 
 func main() {
-	webItemSecurityRequestsDto := *openapiclient.NewWebItemSecurityRequestsDto("00000000-0000-0000-0000-000000000000") // WebItemSecurityRequestsDto |  (optional)
+	webItemSecurityRequestDto := *openapiclient.NewWebItemSecurityRequestDto("00000000-0000-0000-0000-000000000000") // WebItemSecurityRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsSecurityAPI.SetWebItemSecurity(context.Background()).WebItemSecurityRequestsDto(webItemSecurityRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsSecurityAPI.SetWebItemSecurity(context.Background()).WebItemSecurityRequestDto(webItemSecurityRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSecurityAPI.SetWebItemSecurity``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -609,7 +609,7 @@ Other parameters are passed through a pointer to a apiSetWebItemSecurityRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webItemSecurityRequestsDto** | [**WebItemSecurityRequestsDto**](WebItemSecurityRequestsDto.md) |  | 
+ **webItemSecurityRequestDto** | [**WebItemSecurityRequestDto**](WebItemSecurityRequestDto.md) |  | 
 
 ### Return type
 
@@ -631,7 +631,7 @@ Name | Type | Description  | Notes
 
 ## UpdatePasswordSettings
 
-> PasswordSettingsWrapper UpdatePasswordSettings(ctx).PasswordSettingsRequestsDto(passwordSettingsRequestsDto).Execute()
+> PasswordSettingsWrapper UpdatePasswordSettings(ctx).PasswordSettingsRequestDto(passwordSettingsRequestDto).Execute()
 
 Update password settings
 
@@ -652,11 +652,11 @@ import (
 )
 
 func main() {
-	passwordSettingsRequestsDto := *openapiclient.NewPasswordSettingsRequestsDto(int32(8)) // PasswordSettingsRequestsDto |  (optional)
+	passwordSettingsRequestDto := *openapiclient.NewPasswordSettingsRequestDto(int32(8)) // PasswordSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsSecurityAPI.UpdatePasswordSettings(context.Background()).PasswordSettingsRequestsDto(passwordSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsSecurityAPI.UpdatePasswordSettings(context.Background()).PasswordSettingsRequestDto(passwordSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsSecurityAPI.UpdatePasswordSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -677,7 +677,7 @@ Other parameters are passed through a pointer to a apiUpdatePasswordSettingsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **passwordSettingsRequestsDto** | [**PasswordSettingsRequestsDto**](PasswordSettingsRequestsDto.md) |  | 
+ **passwordSettingsRequestDto** | [**PasswordSettingsRequestDto**](PasswordSettingsRequestDto.md) |  | 
 
 ### Return type
 

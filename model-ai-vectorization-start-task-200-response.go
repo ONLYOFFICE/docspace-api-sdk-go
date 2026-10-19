@@ -174,8 +174,7 @@ func (o *AiVectorizationStartTask200Response) UnmarshalJSON(data []byte) (err er
 
 	varAiVectorizationStartTask200Response := _AiVectorizationStartTask200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varAiVectorizationStartTask200Response)
+	err = json.Unmarshal(data, &varAiVectorizationStartTask200Response)
 
 	if err != nil {
 		return err

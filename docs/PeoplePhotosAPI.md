@@ -4,17 +4,17 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateMemberPhotoThumbnails**](PeoplePhotosAPI.md#CreateMemberPhotoThumbnails) | **Post** /api/2.0/people/{userid}/photo/thumbnails | Create photo thumbnails
-[**DeleteMemberPhoto**](PeoplePhotosAPI.md#DeleteMemberPhoto) | **Delete** /api/2.0/people/{userid}/photo | Delete a user photo
-[**GetMemberPhoto**](PeoplePhotosAPI.md#GetMemberPhoto) | **Get** /api/2.0/people/{userid}/photo | Get a user photo
-[**UpdateMemberPhoto**](PeoplePhotosAPI.md#UpdateMemberPhoto) | **Put** /api/2.0/people/{userid}/photo | Update a user photo
-[**UploadMemberPhoto**](PeoplePhotosAPI.md#UploadMemberPhoto) | **Post** /api/2.0/people/{userid}/photo | Upload a user photo
+[**CreateMemberPhotoThumbnails**](PeoplePhotosAPI.md#CreateMemberPhotoThumbnails) | **Post** /api/2.0/people/{userId}/photo/thumbnails | Create photo thumbnails
+[**DeleteMemberPhoto**](PeoplePhotosAPI.md#DeleteMemberPhoto) | **Delete** /api/2.0/people/{userId}/photo | Delete a user photo
+[**GetMemberPhoto**](PeoplePhotosAPI.md#GetMemberPhoto) | **Get** /api/2.0/people/{userId}/photo | Get a user photo
+[**UpdateMemberPhoto**](PeoplePhotosAPI.md#UpdateMemberPhoto) | **Put** /api/2.0/people/{userId}/photo | Update a user photo
+[**UploadMemberPhoto**](PeoplePhotosAPI.md#UploadMemberPhoto) | **Post** /api/2.0/people/{userId}/photo | Upload a user photo
 
 
 
 ## CreateMemberPhotoThumbnails
 
-> ThumbnailsDataWrapper CreateMemberPhotoThumbnails(ctx, userid).ThumbnailsRequest(thumbnailsRequest).Execute()
+> ThumbnailsDataWrapper CreateMemberPhotoThumbnails(ctx, userId).ThumbnailsRequest(thumbnailsRequest).Execute()
 
 Create photo thumbnails
 
@@ -35,12 +35,12 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
 	thumbnailsRequest := *openapiclient.NewThumbnailsRequest() // ThumbnailsRequest | The crop rectangle, and optionally the temporary image to crop.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeoplePhotosAPI.CreateMemberPhotoThumbnails(context.Background(), userid).ThumbnailsRequest(thumbnailsRequest).Execute()
+	resp, r, err := apiClient.PeoplePhotosAPI.CreateMemberPhotoThumbnails(context.Background(), userId).ThumbnailsRequest(thumbnailsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeoplePhotosAPI.CreateMemberPhotoThumbnails``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -56,7 +56,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | 
+**userId** | **string** | The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | 
 
 ### Other Parameters
 
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 ## DeleteMemberPhoto
 
-> ThumbnailsDataWrapper DeleteMemberPhoto(ctx, userid).Execute()
+> ThumbnailsDataWrapper DeleteMemberPhoto(ctx, userId).Execute()
 
 Delete a user photo
 
@@ -109,11 +109,11 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeoplePhotosAPI.DeleteMemberPhoto(context.Background(), userid).Execute()
+	resp, r, err := apiClient.PeoplePhotosAPI.DeleteMemberPhoto(context.Background(), userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeoplePhotosAPI.DeleteMemberPhoto``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,7 +129,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. | 
+**userId** | **string** | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. | 
 
 ### Other Parameters
 
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 ## GetMemberPhoto
 
-> ThumbnailsDataWrapper GetMemberPhoto(ctx, userid).Execute()
+> ThumbnailsDataWrapper GetMemberPhoto(ctx, userId).Execute()
 
 Get a user photo
 
@@ -181,11 +181,11 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeoplePhotosAPI.GetMemberPhoto(context.Background(), userid).Execute()
+	resp, r, err := apiClient.PeoplePhotosAPI.GetMemberPhoto(context.Background(), userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeoplePhotosAPI.GetMemberPhoto``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -201,7 +201,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. | 
+**userId** | **string** | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. | 
 
 ### Other Parameters
 
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 ## UpdateMemberPhoto
 
-> ThumbnailsDataWrapper UpdateMemberPhoto(ctx, userid).UpdatePhotoMemberRequest(updatePhotoMemberRequest).Execute()
+> ThumbnailsDataWrapper UpdateMemberPhoto(ctx, userId).UpdatePhotoMemberRequest(updatePhotoMemberRequest).Execute()
 
 Update a user photo
 
@@ -253,12 +253,12 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
 	updatePhotoMemberRequest := *openapiclient.NewUpdatePhotoMemberRequest() // UpdatePhotoMemberRequest | The address of the image to use as the new avatar.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeoplePhotosAPI.UpdateMemberPhoto(context.Background(), userid).UpdatePhotoMemberRequest(updatePhotoMemberRequest).Execute()
+	resp, r, err := apiClient.PeoplePhotosAPI.UpdateMemberPhoto(context.Background(), userId).UpdatePhotoMemberRequest(updatePhotoMemberRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeoplePhotosAPI.UpdateMemberPhoto``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -274,7 +274,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | 
+**userId** | **string** | The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | 
 
 ### Other Parameters
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## UploadMemberPhoto
 
-> FileUploadResultWrapper UploadMemberPhoto(ctx, userid).File(file).Autosave(autosave).Execute()
+> FileUploadResultWrapper UploadMemberPhoto(ctx, userId).File(file).Autosave(autosave).Execute()
 
 Upload a user photo
 
@@ -327,13 +327,13 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
 	file := os.NewFile(1234, "some_file") // *os.File | The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status.
-	autosave := true // bool | Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userid}/photo/thumbnails` to take effect. (optional)
+	autosave := true // bool | Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeoplePhotosAPI.UploadMemberPhoto(context.Background(), userid).File(file).Autosave(autosave).Execute()
+	resp, r, err := apiClient.PeoplePhotosAPI.UploadMemberPhoto(context.Background(), userId).File(file).Autosave(autosave).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeoplePhotosAPI.UploadMemberPhoto``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -349,7 +349,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | 
+**userId** | **string** | The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | 
 
 ### Other Parameters
 
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **file** | ***os.File** | The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status. | 
- **autosave** | **bool** | Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userid}/photo/thumbnails` to take effect. | 
+ **autosave** | **bool** | Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect. | 
 
 ### Return type
 

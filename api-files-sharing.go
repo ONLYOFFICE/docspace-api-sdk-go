@@ -315,28 +315,6 @@ func (a *FilesSharingAPIService) ChangeFileOwnerExecute(r ApiChangeFileOwnerRequ
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -834,17 +812,6 @@ func (a *FilesSharingAPIService) GetFileSecurityInfoExecute(r ApiGetFileSecurity
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1013,17 +980,6 @@ func (a *FilesSharingAPIService) GetFolderSecurityInfoExecute(r ApiGetFolderSecu
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1064,7 +1020,7 @@ func (r ApiGetGroupsMembersWithFileSecurityRequest) FilterValue(filterValue stri
 	return r
 }
 
-func (r ApiGetGroupsMembersWithFileSecurityRequest) Execute() (*GroupMemberSecurityRequestArrayWrapper, *http.Response, error) {
+func (r ApiGetGroupsMembersWithFileSecurityRequest) Execute() (*GroupMemberSecurityArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetGroupsMembersWithFileSecurityExecute(r)
 }
 
@@ -1088,13 +1044,13 @@ func (a *FilesSharingAPIService) GetGroupsMembersWithFileSecurity(ctx context.Co
 }
 
 // Execute executes the request
-//  @return GroupMemberSecurityRequestArrayWrapper
-func (a *FilesSharingAPIService) GetGroupsMembersWithFileSecurityExecute(r ApiGetGroupsMembersWithFileSecurityRequest) (*GroupMemberSecurityRequestArrayWrapper, *http.Response, error) {
+//  @return GroupMemberSecurityArrayWrapper
+func (a *FilesSharingAPIService) GetGroupsMembersWithFileSecurityExecute(r ApiGetGroupsMembersWithFileSecurityRequest) (*GroupMemberSecurityArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GroupMemberSecurityRequestArrayWrapper
+		localVarReturnValue  *GroupMemberSecurityArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesSharingAPIService.GetGroupsMembersWithFileSecurity")
@@ -1205,17 +1161,6 @@ func (a *FilesSharingAPIService) GetGroupsMembersWithFileSecurityExecute(r ApiGe
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1256,7 +1201,7 @@ func (r ApiGetGroupsMembersWithFolderSecurityRequest) FilterValue(filterValue st
 	return r
 }
 
-func (r ApiGetGroupsMembersWithFolderSecurityRequest) Execute() (*GroupMemberSecurityRequestArrayWrapper, *http.Response, error) {
+func (r ApiGetGroupsMembersWithFolderSecurityRequest) Execute() (*GroupMemberSecurityArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetGroupsMembersWithFolderSecurityExecute(r)
 }
 
@@ -1280,13 +1225,13 @@ func (a *FilesSharingAPIService) GetGroupsMembersWithFolderSecurity(ctx context.
 }
 
 // Execute executes the request
-//  @return GroupMemberSecurityRequestArrayWrapper
-func (a *FilesSharingAPIService) GetGroupsMembersWithFolderSecurityExecute(r ApiGetGroupsMembersWithFolderSecurityRequest) (*GroupMemberSecurityRequestArrayWrapper, *http.Response, error) {
+//  @return GroupMemberSecurityArrayWrapper
+func (a *FilesSharingAPIService) GetGroupsMembersWithFolderSecurityExecute(r ApiGetGroupsMembersWithFolderSecurityRequest) (*GroupMemberSecurityArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GroupMemberSecurityRequestArrayWrapper
+		localVarReturnValue  *GroupMemberSecurityArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesSharingAPIService.GetGroupsMembersWithFolderSecurity")
@@ -1387,17 +1332,6 @@ func (a *FilesSharingAPIService) GetGroupsMembersWithFolderSecurityExecute(r Api
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1550,17 +1484,6 @@ func (a *FilesSharingAPIService) GetSecurityInfoExecute(r ApiGetSecurityInfoRequ
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1593,7 +1516,7 @@ type ApiGetSharedUsersRequest struct {
 	fileId interface{}
 }
 
-func (r ApiGetSharedUsersRequest) Execute() (*MentionWrapperArrayWrapper, *http.Response, error) {
+func (r ApiGetSharedUsersRequest) Execute() (*MentionArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetSharedUsersExecute(r)
 }
 
@@ -1615,13 +1538,13 @@ func (a *FilesSharingAPIService) GetSharedUsers(ctx context.Context, fileId inte
 }
 
 // Execute executes the request
-//  @return MentionWrapperArrayWrapper
-func (a *FilesSharingAPIService) GetSharedUsersExecute(r ApiGetSharedUsersRequest) (*MentionWrapperArrayWrapper, *http.Response, error) {
+//  @return MentionArrayWrapper
+func (a *FilesSharingAPIService) GetSharedUsersExecute(r ApiGetSharedUsersRequest) (*MentionArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MentionWrapperArrayWrapper
+		localVarReturnValue  *MentionArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesSharingAPIService.GetSharedUsers")
@@ -1875,17 +1798,6 @@ func (a *FilesSharingAPIService) RemoveSecurityInfoExecute(r ApiRemoveSecurityIn
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1916,15 +1828,15 @@ type ApiSendEditorNotifyRequest struct {
 	ctx context.Context
 	ApiService *FilesSharingAPIService
 	fileId interface{}
-	mentionMessageWrapper *MentionMessageWrapper
+	mentionMessageRequest *MentionMessageRequest
 }
 
 // The notification to send.
-func (r ApiSendEditorNotifyRequest) MentionMessageWrapper(mentionMessageWrapper MentionMessageWrapper) ApiSendEditorNotifyRequest {	r.mentionMessageWrapper = &mentionMessageWrapper
+func (r ApiSendEditorNotifyRequest) MentionMessageRequest(mentionMessageRequest MentionMessageRequest) ApiSendEditorNotifyRequest {	r.mentionMessageRequest = &mentionMessageRequest
 	return r
 }
 
-func (r ApiSendEditorNotifyRequest) Execute() (*AceShortWrapperArrayWrapper, *http.Response, error) {
+func (r ApiSendEditorNotifyRequest) Execute() (*AceShortArrayWrapper, *http.Response, error) {
 	return r.ApiService.SendEditorNotifyExecute(r)
 }
 
@@ -1946,13 +1858,13 @@ func (a *FilesSharingAPIService) SendEditorNotify(ctx context.Context, fileId in
 }
 
 // Execute executes the request
-//  @return AceShortWrapperArrayWrapper
-func (a *FilesSharingAPIService) SendEditorNotifyExecute(r ApiSendEditorNotifyRequest) (*AceShortWrapperArrayWrapper, *http.Response, error) {
+//  @return AceShortArrayWrapper
+func (a *FilesSharingAPIService) SendEditorNotifyExecute(r ApiSendEditorNotifyRequest) (*AceShortArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AceShortWrapperArrayWrapper
+		localVarReturnValue  *AceShortArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesSharingAPIService.SendEditorNotify")
@@ -1985,7 +1897,7 @@ func (a *FilesSharingAPIService) SendEditorNotifyExecute(r ApiSendEditorNotifyRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.mentionMessageWrapper
+	localVarPostBody = r.mentionMessageRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2216,17 +2128,6 @@ func (a *FilesSharingAPIService) SetFileSecurityInfoExecute(r ApiSetFileSecurity
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2388,17 +2289,6 @@ func (a *FilesSharingAPIService) SetFolderSecurityInfoExecute(r ApiSetFolderSecu
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2531,28 +2421,6 @@ func (a *FilesSharingAPIService) SetSecurityInfoExecute(r ApiSetSecurityInfoRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

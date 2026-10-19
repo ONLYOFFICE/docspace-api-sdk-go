@@ -499,11 +499,11 @@ type ApiSetEnabledRequest struct {
 	ctx context.Context
 	ApiService *AppsAPIService
 	id string
-	setAppEnabledBody *SetAppEnabledBody
+	setAppEnabledRequest *SetAppEnabledRequest
 }
 
 // The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
-func (r ApiSetEnabledRequest) SetAppEnabledBody(setAppEnabledBody SetAppEnabledBody) ApiSetEnabledRequest {	r.setAppEnabledBody = &setAppEnabledBody
+func (r ApiSetEnabledRequest) SetAppEnabledRequest(setAppEnabledRequest SetAppEnabledRequest) ApiSetEnabledRequest {	r.setAppEnabledRequest = &setAppEnabledRequest
 	return r
 }
 
@@ -513,7 +513,7 @@ func (r ApiSetEnabledRequest) Execute() (*AppWrapper, *http.Response, error) {
 
 // SetEnabled Enable or disable an app
 //
-// Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
+// Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.  The enabled field is mandatory, and a body without it is rejected with 400 rather than read as false.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-enabled/
 //
@@ -549,8 +549,8 @@ func (a *AppsAPIService) SetEnabledExecute(r ApiSetEnabledRequest) (*AppWrapper,
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.setAppEnabledBody == nil {
-		return localVarReturnValue, nil, reportError("setAppEnabledBody is required and must be specified")
+	if r.setAppEnabledRequest == nil {
+		return localVarReturnValue, nil, reportError("setAppEnabledRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -571,7 +571,7 @@ func (a *AppsAPIService) SetEnabledExecute(r ApiSetEnabledRequest) (*AppWrapper,
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.setAppEnabledBody
+	localVarPostBody = r.setAppEnabledRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -641,17 +641,6 @@ func (a *AppsAPIService) SetEnabledExecute(r ApiSetEnabledRequest) (*AppWrapper,
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -671,11 +660,11 @@ type ApiSetSettingsRequest struct {
 	ctx context.Context
 	ApiService *AppsAPIService
 	id string
-	setAppSettingsBody *SetAppSettingsBody
+	setAppSettingsRequest *SetAppSettingsRequest
 }
 
 // The configuration to store for this portal, replacing whatever was stored before.
-func (r ApiSetSettingsRequest) SetAppSettingsBody(setAppSettingsBody SetAppSettingsBody) ApiSetSettingsRequest {	r.setAppSettingsBody = &setAppSettingsBody
+func (r ApiSetSettingsRequest) SetAppSettingsRequest(setAppSettingsRequest SetAppSettingsRequest) ApiSetSettingsRequest {	r.setAppSettingsRequest = &setAppSettingsRequest
 	return r
 }
 
@@ -721,8 +710,8 @@ func (a *AppsAPIService) SetSettingsExecute(r ApiSetSettingsRequest) (*AppWrappe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.setAppSettingsBody == nil {
-		return localVarReturnValue, nil, reportError("setAppSettingsBody is required and must be specified")
+	if r.setAppSettingsRequest == nil {
+		return localVarReturnValue, nil, reportError("setAppSettingsRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -743,7 +732,7 @@ func (a *AppsAPIService) SetSettingsExecute(r ApiSetSettingsRequest) (*AppWrappe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.setAppSettingsBody
+	localVarPostBody = r.setAppSettingsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

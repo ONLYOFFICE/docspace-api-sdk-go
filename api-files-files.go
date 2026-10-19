@@ -159,28 +159,6 @@ func (a *FilesFilesAPIService) AddFileToRecentExecute(r ApiAddFileToRecentReques
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -269,28 +247,6 @@ func (a *FilesFilesAPIService) AddFileToRecentExecuteThirdParty(r ApiAddFileToRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -484,11 +440,11 @@ type ApiChangeVersionHistoryRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	fileId interface{}
-	changeHistory *ChangeHistory
+	changeHistoryRequest *ChangeHistoryRequest
 }
 
 // The change to make to the revision group.
-func (r ApiChangeVersionHistoryRequest) ChangeHistory(changeHistory ChangeHistory) ApiChangeVersionHistoryRequest {	r.changeHistory = &changeHistory
+func (r ApiChangeVersionHistoryRequest) ChangeHistoryRequest(changeHistoryRequest ChangeHistoryRequest) ApiChangeVersionHistoryRequest {	r.changeHistoryRequest = &changeHistoryRequest
 	return r
 }
 
@@ -540,8 +496,8 @@ func (a *FilesFilesAPIService) ChangeVersionHistoryExecute(r ApiChangeVersionHis
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.changeHistory == nil {
-		return localVarReturnValue, nil, reportError("changeHistory is required and must be specified")
+	if r.changeHistoryRequest == nil {
+		return localVarReturnValue, nil, reportError("changeHistoryRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -562,7 +518,7 @@ func (a *FilesFilesAPIService) ChangeVersionHistoryExecute(r ApiChangeVersionHis
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.changeHistory
+	localVarPostBody = r.changeHistoryRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -611,28 +567,6 @@ func (a *FilesFilesAPIService) ChangeVersionHistoryExecute(r ApiChangeVersionHis
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -679,8 +613,8 @@ func (a *FilesFilesAPIService) ChangeVersionHistoryExecuteThirdParty(r ApiChange
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.changeHistory == nil {
-		return localVarReturnValue, nil, reportError("changeHistory is required and must be specified")
+	if r.changeHistoryRequest == nil {
+		return localVarReturnValue, nil, reportError("changeHistoryRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -701,7 +635,7 @@ func (a *FilesFilesAPIService) ChangeVersionHistoryExecuteThirdParty(r ApiChange
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.changeHistory
+	localVarPostBody = r.changeHistoryRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -746,28 +680,6 @@ func (a *FilesFilesAPIService) ChangeVersionHistoryExecuteThirdParty(r ApiChange
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -787,11 +699,11 @@ type ApiCheckFillFormDraftRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	fileId interface{}
-	checkFillFormDraft *CheckFillFormDraft
+	checkFillFormDraftRequest *CheckFillFormDraftRequest
 }
 
 // The revision of the form to open and what the caller intends to do with it.
-func (r ApiCheckFillFormDraftRequest) CheckFillFormDraft(checkFillFormDraft CheckFillFormDraft) ApiCheckFillFormDraftRequest {	r.checkFillFormDraft = &checkFillFormDraft
+func (r ApiCheckFillFormDraftRequest) CheckFillFormDraftRequest(checkFillFormDraftRequest CheckFillFormDraftRequest) ApiCheckFillFormDraftRequest {	r.checkFillFormDraftRequest = &checkFillFormDraftRequest
 	return r
 }
 
@@ -837,8 +749,8 @@ func (a *FilesFilesAPIService) CheckFillFormDraftExecute(r ApiCheckFillFormDraft
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.checkFillFormDraft == nil {
-		return localVarReturnValue, nil, reportError("checkFillFormDraft is required and must be specified")
+	if r.checkFillFormDraftRequest == nil {
+		return localVarReturnValue, nil, reportError("checkFillFormDraftRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -859,7 +771,7 @@ func (a *FilesFilesAPIService) CheckFillFormDraftExecute(r ApiCheckFillFormDraft
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.checkFillFormDraft
+	localVarPostBody = r.checkFillFormDraftRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -907,28 +819,6 @@ func (a *FilesFilesAPIService) CheckFillFormDraftExecute(r ApiCheckFillFormDraft
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -948,11 +838,11 @@ type ApiCopyFileAsRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	fileId interface{}
-	copyAsJsonElement *CopyAsJsonElement
+	copyAsRequest *CopyAsRequest
 }
 
 // The title, the destination and the conversion options of the copy.
-func (r ApiCopyFileAsRequest) CopyAsJsonElement(copyAsJsonElement CopyAsJsonElement) ApiCopyFileAsRequest {	r.copyAsJsonElement = &copyAsJsonElement
+func (r ApiCopyFileAsRequest) CopyAsRequest(copyAsRequest CopyAsRequest) ApiCopyFileAsRequest {	r.copyAsRequest = &copyAsRequest
 	return r
 }
 
@@ -998,8 +888,8 @@ func (a *FilesFilesAPIService) CopyFileAsExecute(r ApiCopyFileAsRequest) (*FileE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.copyAsJsonElement == nil {
-		return localVarReturnValue, nil, reportError("copyAsJsonElement is required and must be specified")
+	if r.copyAsRequest == nil {
+		return localVarReturnValue, nil, reportError("copyAsRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1020,7 +910,7 @@ func (a *FilesFilesAPIService) CopyFileAsExecute(r ApiCopyFileAsRequest) (*FileE
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.copyAsJsonElement
+	localVarPostBody = r.copyAsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1079,17 +969,6 @@ func (a *FilesFilesAPIService) CopyFileAsExecute(r ApiCopyFileAsRequest) (*FileE
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1117,13 +996,13 @@ func (r ApiCreateEditSessionRequest) FileSize(fileSize int64) ApiCreateEditSessi
 	return r
 }
 
-func (r ApiCreateEditSessionRequest) Execute() (*ChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
+func (r ApiCreateEditSessionRequest) Execute() (*ChunkedUploadSessionResultWrapper, *http.Response, error) {
 	return r.ApiService.CreateEditSessionExecute(r)
 }
 
 // ExecuteThirdParty executes the request for an entry in a connected third-party storage, whose
 // identifier is a string such as "sbox-42", and decodes the answer into the third-party model.
-func (r ApiCreateEditSessionRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
+func (r ApiCreateEditSessionRequest) ExecuteThirdParty() (*ThirdPartyChunkedUploadSessionResultWrapper, *http.Response, error) {
 	return r.ApiService.CreateEditSessionExecuteThirdParty(r)
 }
 
@@ -1145,13 +1024,13 @@ func (a *FilesFilesAPIService) CreateEditSession(ctx context.Context, fileId int
 }
 
 // Execute executes the request
-//  @return ChunkedUploadSessionResponseWrapperWrapper
-func (a *FilesFilesAPIService) CreateEditSessionExecute(r ApiCreateEditSessionRequest) (*ChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
+//  @return ChunkedUploadSessionResultWrapper
+func (a *FilesFilesAPIService) CreateEditSessionExecute(r ApiCreateEditSessionRequest) (*ChunkedUploadSessionResultWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ChunkedUploadSessionResponseWrapperWrapper
+		localVarReturnValue  *ChunkedUploadSessionResultWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesFilesAPIService.CreateEditSession")
@@ -1282,13 +1161,13 @@ func (a *FilesFilesAPIService) CreateEditSessionExecute(r ApiCreateEditSessionRe
 }
 
 // Execute executes the request
-//  @return ThirdPartyChunkedUploadSessionResponseWrapperWrapper
-func (a *FilesFilesAPIService) CreateEditSessionExecuteThirdParty(r ApiCreateEditSessionRequest) (*ThirdPartyChunkedUploadSessionResponseWrapperWrapper, *http.Response, error) {
+//  @return ThirdPartyChunkedUploadSessionResultWrapper
+func (a *FilesFilesAPIService) CreateEditSessionExecuteThirdParty(r ApiCreateEditSessionRequest) (*ThirdPartyChunkedUploadSessionResultWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ThirdPartyChunkedUploadSessionResponseWrapperWrapper
+		localVarReturnValue  *ThirdPartyChunkedUploadSessionResultWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesFilesAPIService.CreateEditSession")
@@ -1408,11 +1287,11 @@ type ApiCreateFileRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	folderId interface{}
-	createFileJsonElement *CreateFileJsonElement
+	createFileRequest *CreateFileRequest
 }
 
 // The title of the new file and the source of its content.
-func (r ApiCreateFileRequest) CreateFileJsonElement(createFileJsonElement CreateFileJsonElement) ApiCreateFileRequest {	r.createFileJsonElement = &createFileJsonElement
+func (r ApiCreateFileRequest) CreateFileRequest(createFileRequest CreateFileRequest) ApiCreateFileRequest {	r.createFileRequest = &createFileRequest
 	return r
 }
 
@@ -1464,8 +1343,8 @@ func (a *FilesFilesAPIService) CreateFileExecute(r ApiCreateFileRequest) (*FileW
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createFileJsonElement == nil {
-		return localVarReturnValue, nil, reportError("createFileJsonElement is required and must be specified")
+	if r.createFileRequest == nil {
+		return localVarReturnValue, nil, reportError("createFileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1486,7 +1365,7 @@ func (a *FilesFilesAPIService) CreateFileExecute(r ApiCreateFileRequest) (*FileW
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createFileJsonElement
+	localVarPostBody = r.createFileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1545,28 +1424,6 @@ func (a *FilesFilesAPIService) CreateFileExecute(r ApiCreateFileRequest) (*FileW
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1603,8 +1460,8 @@ func (a *FilesFilesAPIService) CreateFileExecuteThirdParty(r ApiCreateFileReques
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createFileJsonElement == nil {
-		return localVarReturnValue, nil, reportError("createFileJsonElement is required and must be specified")
+	if r.createFileRequest == nil {
+		return localVarReturnValue, nil, reportError("createFileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1625,7 +1482,7 @@ func (a *FilesFilesAPIService) CreateFileExecuteThirdParty(r ApiCreateFileReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createFileJsonElement
+	localVarPostBody = r.createFileRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1670,28 +1527,6 @@ func (a *FilesFilesAPIService) CreateFileExecuteThirdParty(r ApiCreateFileReques
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1710,10 +1545,10 @@ func (a *FilesFilesAPIService) CreateFileExecuteThirdParty(r ApiCreateFileReques
 type ApiCreateFileInMyDocumentsRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
-	createFileJsonElement *CreateFileJsonElement
+	createFileRequest *CreateFileRequest
 }
 
-func (r ApiCreateFileInMyDocumentsRequest) CreateFileJsonElement(createFileJsonElement CreateFileJsonElement) ApiCreateFileInMyDocumentsRequest {	r.createFileJsonElement = &createFileJsonElement
+func (r ApiCreateFileInMyDocumentsRequest) CreateFileRequest(createFileRequest CreateFileRequest) ApiCreateFileInMyDocumentsRequest {	r.createFileRequest = &createFileRequest
 	return r
 }
 
@@ -1775,7 +1610,7 @@ func (a *FilesFilesAPIService) CreateFileInMyDocumentsExecute(r ApiCreateFileInM
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createFileJsonElement
+	localVarPostBody = r.createFileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1824,28 +1659,6 @@ func (a *FilesFilesAPIService) CreateFileInMyDocumentsExecute(r ApiCreateFileInM
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2017,17 +1830,6 @@ func (a *FilesFilesAPIService) CreateFilePrimaryExternalLinkExecute(r ApiCreateF
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2047,11 +1849,11 @@ type ApiCreateHtmlFileRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	folderId interface{}
-	createTextOrHtmlFile *CreateTextOrHtmlFile
+	createTextOrHtmlFileRequest *CreateTextOrHtmlFileRequest
 }
 
 // The title, the content and the collision behaviour of the new file.
-func (r ApiCreateHtmlFileRequest) CreateTextOrHtmlFile(createTextOrHtmlFile CreateTextOrHtmlFile) ApiCreateHtmlFileRequest {	r.createTextOrHtmlFile = &createTextOrHtmlFile
+func (r ApiCreateHtmlFileRequest) CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest CreateTextOrHtmlFileRequest) ApiCreateHtmlFileRequest {	r.createTextOrHtmlFileRequest = &createTextOrHtmlFileRequest
 	return r
 }
 
@@ -2103,8 +1905,8 @@ func (a *FilesFilesAPIService) CreateHtmlFileExecute(r ApiCreateHtmlFileRequest)
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createTextOrHtmlFile == nil {
-		return localVarReturnValue, nil, reportError("createTextOrHtmlFile is required and must be specified")
+	if r.createTextOrHtmlFileRequest == nil {
+		return localVarReturnValue, nil, reportError("createTextOrHtmlFileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2125,7 +1927,7 @@ func (a *FilesFilesAPIService) CreateHtmlFileExecute(r ApiCreateHtmlFileRequest)
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createTextOrHtmlFile
+	localVarPostBody = r.createTextOrHtmlFileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2195,17 +1997,6 @@ func (a *FilesFilesAPIService) CreateHtmlFileExecute(r ApiCreateHtmlFileRequest)
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2242,8 +2033,8 @@ func (a *FilesFilesAPIService) CreateHtmlFileExecuteThirdParty(r ApiCreateHtmlFi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createTextOrHtmlFile == nil {
-		return localVarReturnValue, nil, reportError("createTextOrHtmlFile is required and must be specified")
+	if r.createTextOrHtmlFileRequest == nil {
+		return localVarReturnValue, nil, reportError("createTextOrHtmlFileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2264,7 +2055,7 @@ func (a *FilesFilesAPIService) CreateHtmlFileExecuteThirdParty(r ApiCreateHtmlFi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createTextOrHtmlFile
+	localVarPostBody = r.createTextOrHtmlFileRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2320,17 +2111,6 @@ func (a *FilesFilesAPIService) CreateHtmlFileExecuteThirdParty(r ApiCreateHtmlFi
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2349,10 +2129,10 @@ func (a *FilesFilesAPIService) CreateHtmlFileExecuteThirdParty(r ApiCreateHtmlFi
 type ApiCreateHtmlFileInMyDocumentsRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
-	createTextOrHtmlFile *CreateTextOrHtmlFile
+	createTextOrHtmlFileRequest *CreateTextOrHtmlFileRequest
 }
 
-func (r ApiCreateHtmlFileInMyDocumentsRequest) CreateTextOrHtmlFile(createTextOrHtmlFile CreateTextOrHtmlFile) ApiCreateHtmlFileInMyDocumentsRequest {	r.createTextOrHtmlFile = &createTextOrHtmlFile
+func (r ApiCreateHtmlFileInMyDocumentsRequest) CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest CreateTextOrHtmlFileRequest) ApiCreateHtmlFileInMyDocumentsRequest {	r.createTextOrHtmlFileRequest = &createTextOrHtmlFileRequest
 	return r
 }
 
@@ -2414,7 +2194,7 @@ func (a *FilesFilesAPIService) CreateHtmlFileInMyDocumentsExecute(r ApiCreateHtm
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createTextOrHtmlFile
+	localVarPostBody = r.createTextOrHtmlFileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2484,17 +2264,6 @@ func (a *FilesFilesAPIService) CreateHtmlFileInMyDocumentsExecute(r ApiCreateHtm
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2514,11 +2283,11 @@ type ApiCreateTextFileRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	folderId interface{}
-	createTextOrHtmlFile *CreateTextOrHtmlFile
+	createTextOrHtmlFileRequest *CreateTextOrHtmlFileRequest
 }
 
 // The title, the content and the collision behaviour of the new file.
-func (r ApiCreateTextFileRequest) CreateTextOrHtmlFile(createTextOrHtmlFile CreateTextOrHtmlFile) ApiCreateTextFileRequest {	r.createTextOrHtmlFile = &createTextOrHtmlFile
+func (r ApiCreateTextFileRequest) CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest CreateTextOrHtmlFileRequest) ApiCreateTextFileRequest {	r.createTextOrHtmlFileRequest = &createTextOrHtmlFileRequest
 	return r
 }
 
@@ -2570,8 +2339,8 @@ func (a *FilesFilesAPIService) CreateTextFileExecute(r ApiCreateTextFileRequest)
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createTextOrHtmlFile == nil {
-		return localVarReturnValue, nil, reportError("createTextOrHtmlFile is required and must be specified")
+	if r.createTextOrHtmlFileRequest == nil {
+		return localVarReturnValue, nil, reportError("createTextOrHtmlFileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2592,7 +2361,7 @@ func (a *FilesFilesAPIService) CreateTextFileExecute(r ApiCreateTextFileRequest)
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createTextOrHtmlFile
+	localVarPostBody = r.createTextOrHtmlFileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2662,17 +2431,6 @@ func (a *FilesFilesAPIService) CreateTextFileExecute(r ApiCreateTextFileRequest)
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2709,8 +2467,8 @@ func (a *FilesFilesAPIService) CreateTextFileExecuteThirdParty(r ApiCreateTextFi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createTextOrHtmlFile == nil {
-		return localVarReturnValue, nil, reportError("createTextOrHtmlFile is required and must be specified")
+	if r.createTextOrHtmlFileRequest == nil {
+		return localVarReturnValue, nil, reportError("createTextOrHtmlFileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2731,7 +2489,7 @@ func (a *FilesFilesAPIService) CreateTextFileExecuteThirdParty(r ApiCreateTextFi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createTextOrHtmlFile
+	localVarPostBody = r.createTextOrHtmlFileRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2787,17 +2545,6 @@ func (a *FilesFilesAPIService) CreateTextFileExecuteThirdParty(r ApiCreateTextFi
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2816,10 +2563,10 @@ func (a *FilesFilesAPIService) CreateTextFileExecuteThirdParty(r ApiCreateTextFi
 type ApiCreateTextFileInMyDocumentsRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
-	createTextOrHtmlFile *CreateTextOrHtmlFile
+	createTextOrHtmlFileRequest *CreateTextOrHtmlFileRequest
 }
 
-func (r ApiCreateTextFileInMyDocumentsRequest) CreateTextOrHtmlFile(createTextOrHtmlFile CreateTextOrHtmlFile) ApiCreateTextFileInMyDocumentsRequest {	r.createTextOrHtmlFile = &createTextOrHtmlFile
+func (r ApiCreateTextFileInMyDocumentsRequest) CreateTextOrHtmlFileRequest(createTextOrHtmlFileRequest CreateTextOrHtmlFileRequest) ApiCreateTextFileInMyDocumentsRequest {	r.createTextOrHtmlFileRequest = &createTextOrHtmlFileRequest
 	return r
 }
 
@@ -2881,7 +2628,7 @@ func (a *FilesFilesAPIService) CreateTextFileInMyDocumentsExecute(r ApiCreateTex
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createTextOrHtmlFile
+	localVarPostBody = r.createTextOrHtmlFileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2941,17 +2688,6 @@ func (a *FilesFilesAPIService) CreateTextFileInMyDocumentsExecute(r ApiCreateTex
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3134,12 +2870,12 @@ type ApiDeleteFileRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	fileId interface{}
-	delete *Delete
+	deleteFileRequest *DeleteFileRequest
 	returnSingleOperation *bool
 }
 
 // When and how the file is deleted.
-func (r ApiDeleteFileRequest) Delete(delete Delete) ApiDeleteFileRequest {	r.delete = &delete
+func (r ApiDeleteFileRequest) DeleteFileRequest(deleteFileRequest DeleteFileRequest) ApiDeleteFileRequest {	r.deleteFileRequest = &deleteFileRequest
 	return r
 }
 
@@ -3190,12 +2926,12 @@ func (a *FilesFilesAPIService) DeleteFileExecute(r ApiDeleteFileRequest) (*FileO
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.delete == nil {
-		return localVarReturnValue, nil, reportError("delete is required and must be specified")
+	if r.deleteFileRequest == nil {
+		return localVarReturnValue, nil, reportError("deleteFileRequest is required and must be specified")
 	}
 
 	if r.returnSingleOperation != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ReturnSingleOperation", r.returnSingleOperation, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "returnSingleOperation", r.returnSingleOperation, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -3215,7 +2951,7 @@ func (a *FilesFilesAPIService) DeleteFileExecute(r ApiDeleteFileRequest) (*FileO
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.delete
+	localVarPostBody = r.deleteFileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3327,7 +3063,7 @@ func (r ApiDeleteRecentRequest) Execute() (*http.Response, error) {
 
 // DeleteRecent Delete recent files
 //
-// Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section  instead, call `PUT api/2.0/files/displayrecent`.
+// Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. A file on a connected third-party account is cleared by its string id too, but only while  the storage can still find it: the entry of a file removed from the storage stays in the history. Folder ids  are accepted but change nothing because the section lists files only. The answer carries no body and reports  nothing about how many entries were found: an empty request and an id that was never in the section are  accepted alike. Repeating the call is safe, but an entry returns the next time the file is opened or  `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section instead, call  `PUT api/2.0/files/displayrecent`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-recent/
 //
@@ -3436,28 +3172,6 @@ func (a *FilesFilesAPIService) DeleteRecentExecute(r ApiDeleteRecentRequest) (*h
 					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
 		return localVarHTTPResponse, newErr
 	}
 
@@ -3467,11 +3181,11 @@ func (a *FilesFilesAPIService) DeleteRecentExecute(r ApiDeleteRecentRequest) (*h
 type ApiDeleteTemplatesRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
-	requestBody *[]int32
+	deleteTemplateFilesRequestDto *[]int32
 }
 
 // The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
-func (r ApiDeleteTemplatesRequest) RequestBody(requestBody []int32) ApiDeleteTemplatesRequest {	r.requestBody = &requestBody
+func (r ApiDeleteTemplatesRequest) DeleteTemplateFilesRequestDto(deleteTemplateFilesRequestDto []int32) ApiDeleteTemplatesRequest {	r.deleteTemplateFilesRequestDto = &deleteTemplateFilesRequestDto
 	return r
 }
 
@@ -3533,7 +3247,7 @@ func (a *FilesFilesAPIService) DeleteTemplatesExecute(r ApiDeleteTemplatesReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.deleteTemplateFilesRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -4581,17 +4295,6 @@ func (a *FilesFilesAPIService) GetFileHistoryExecute(r ApiGetFileHistoryRequest)
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -5037,17 +4740,6 @@ func (a *FilesFilesAPIService) GetFileLinksExecute(r ApiGetFileLinksRequest) (*F
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -5195,17 +4887,6 @@ func (a *FilesFilesAPIService) GetFilePrimaryExternalLinkExecute(r ApiGetFilePri
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -5604,28 +5285,6 @@ func (a *FilesFilesAPIService) GetFillResultExecute(r ApiGetFillResultRequest) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -6108,17 +5767,6 @@ func (a *FilesFilesAPIService) GetPresignedUriExecute(r ApiGetPresignedUriReques
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -6140,7 +5788,7 @@ type ApiGetProtectedFileUsersRequest struct {
 	fileId interface{}
 }
 
-func (r ApiGetProtectedFileUsersRequest) Execute() (*MentionWrapperArrayWrapper, *http.Response, error) {
+func (r ApiGetProtectedFileUsersRequest) Execute() (*MentionArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetProtectedFileUsersExecute(r)
 }
 
@@ -6162,13 +5810,13 @@ func (a *FilesFilesAPIService) GetProtectedFileUsers(ctx context.Context, fileId
 }
 
 // Execute executes the request
-//  @return MentionWrapperArrayWrapper
-func (a *FilesFilesAPIService) GetProtectedFileUsersExecute(r ApiGetProtectedFileUsersRequest) (*MentionWrapperArrayWrapper, *http.Response, error) {
+//  @return MentionArrayWrapper
+func (a *FilesFilesAPIService) GetProtectedFileUsersExecute(r ApiGetProtectedFileUsersRequest) (*MentionArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MentionWrapperArrayWrapper
+		localVarReturnValue  *MentionArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesFilesAPIService.GetProtectedFileUsers")
@@ -6412,28 +6060,6 @@ func (a *FilesFilesAPIService) GetReferenceDataExecute(r ApiGetReferenceDataRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -6744,17 +6370,6 @@ func (a *FilesFilesAPIService) IsFormPDFExecute(r ApiIsFormPDFRequest) (*Boolean
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -6785,11 +6400,11 @@ type ApiLockFileRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	fileId interface{}
-	lockFileParameters *LockFileParameters
+	lockFileRequest *LockFileRequest
 }
 
 // The lock state to reach.
-func (r ApiLockFileRequest) LockFileParameters(lockFileParameters LockFileParameters) ApiLockFileRequest {	r.lockFileParameters = &lockFileParameters
+func (r ApiLockFileRequest) LockFileRequest(lockFileRequest LockFileRequest) ApiLockFileRequest {	r.lockFileRequest = &lockFileRequest
 	return r
 }
 
@@ -6841,8 +6456,8 @@ func (a *FilesFilesAPIService) LockFileExecute(r ApiLockFileRequest) (*FileWrapp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.lockFileParameters == nil {
-		return localVarReturnValue, nil, reportError("lockFileParameters is required and must be specified")
+	if r.lockFileRequest == nil {
+		return localVarReturnValue, nil, reportError("lockFileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -6863,7 +6478,7 @@ func (a *FilesFilesAPIService) LockFileExecute(r ApiLockFileRequest) (*FileWrapp
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.lockFileParameters
+	localVarPostBody = r.lockFileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -6980,8 +6595,8 @@ func (a *FilesFilesAPIService) LockFileExecuteThirdParty(r ApiLockFileRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.lockFileParameters == nil {
-		return localVarReturnValue, nil, reportError("lockFileParameters is required and must be specified")
+	if r.lockFileRequest == nil {
+		return localVarReturnValue, nil, reportError("lockFileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -7002,7 +6617,7 @@ func (a *FilesFilesAPIService) LockFileExecuteThirdParty(r ApiLockFileRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.lockFileParameters
+	localVarPostBody = r.lockFileRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -7213,28 +6828,6 @@ func (a *FilesFilesAPIService) ManageFormFillingExecute(r ApiManageFormFillingRe
 					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
 		return localVarHTTPResponse, newErr
 	}
 
@@ -7405,17 +6998,6 @@ func (a *FilesFilesAPIService) OpenEditFileExecute(r ApiOpenEditFileRequest) (*C
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -7519,17 +7101,6 @@ func (a *FilesFilesAPIService) OpenEditFileExecuteThirdParty(r ApiOpenEditFileRe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -7697,17 +7268,6 @@ func (a *FilesFilesAPIService) RestoreFileVersionExecute(r ApiRestoreFileVersion
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -7803,7 +7363,7 @@ func (a *FilesFilesAPIService) SaveEditingFileFromFormExecute(r ApiSaveEditingFi
 	localVarFormParams := url.Values{}
 
 	if r.downloadUri != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "DownloadUri", r.downloadUri, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "downloadUri", r.downloadUri, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -7823,13 +7383,13 @@ func (a *FilesFilesAPIService) SaveEditingFileFromFormExecute(r ApiSaveEditingFi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.fileExtension != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "FileExtension", r.fileExtension, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "fileExtension", r.fileExtension, "form", "")
 	}
 	var fileLocalVarFormFileName string
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {
@@ -7841,7 +7401,7 @@ func (a *FilesFilesAPIService) SaveEditingFileFromFormExecute(r ApiSaveEditingFi
 		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
 	}
 	if r.forcesave != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Forcesave", r.forcesave, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "forcesave", r.forcesave, "form", "")
 	}
 	if r.ctx != nil {
 		// API Key Authentication
@@ -7901,17 +7461,6 @@ func (a *FilesFilesAPIService) SaveEditingFileFromFormExecute(r ApiSaveEditingFi
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -7950,7 +7499,7 @@ func (a *FilesFilesAPIService) SaveEditingFileFromFormExecuteThirdParty(r ApiSav
 	localVarFormParams := url.Values{}
 
 	if r.downloadUri != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "DownloadUri", r.downloadUri, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "downloadUri", r.downloadUri, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -7970,13 +7519,13 @@ func (a *FilesFilesAPIService) SaveEditingFileFromFormExecuteThirdParty(r ApiSav
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.fileExtension != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "FileExtension", r.fileExtension, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "fileExtension", r.fileExtension, "form", "")
 	}
 	var fileLocalVarFormFileName string
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
 
-	fileLocalVarFormFileName = "File"
+	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
 
 	if fileLocalVarFile != nil {
@@ -7988,7 +7537,7 @@ func (a *FilesFilesAPIService) SaveEditingFileFromFormExecuteThirdParty(r ApiSav
 		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
 	}
 	if r.forcesave != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "Forcesave", r.forcesave, "form", "")
+		parameterAddToHeaderOrQuery(localVarFormParams, "forcesave", r.forcesave, "form", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -8034,17 +7583,6 @@ func (a *FilesFilesAPIService) SaveEditingFileFromFormExecuteThirdParty(r ApiSav
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -8064,16 +7602,16 @@ type ApiSaveFileAsPdfRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	id interface{}
-	saveAsPdf interface{}
+	saveAsPdfRequest interface{}
 }
 
 // The destination folder and the name of the PDF.
-func (r ApiSaveFileAsPdfRequest) SaveAsPdf(saveAsPdf SaveAsPdf) ApiSaveFileAsPdfRequest {	r.saveAsPdf = saveAsPdf
+func (r ApiSaveFileAsPdfRequest) SaveAsPdfRequest(saveAsPdfRequest SaveAsPdfRequest) ApiSaveFileAsPdfRequest {	r.saveAsPdfRequest = saveAsPdfRequest
 	return r
 }
 
 // The same parameter for an entry in a connected third-party storage.
-func (r ApiSaveFileAsPdfRequest) SaveAsPdfThirdParty(saveAsPdf ThirdPartySaveAsPdf) ApiSaveFileAsPdfRequest {	r.saveAsPdf = saveAsPdf
+func (r ApiSaveFileAsPdfRequest) SaveAsPdfRequestThirdParty(saveAsPdfRequest ThirdPartySaveAsPdfRequest) ApiSaveFileAsPdfRequest {	r.saveAsPdfRequest = saveAsPdfRequest
 	return r
 }
 
@@ -8125,8 +7663,8 @@ func (a *FilesFilesAPIService) SaveFileAsPdfExecute(r ApiSaveFileAsPdfRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.saveAsPdf == nil {
-		return localVarReturnValue, nil, reportError("saveAsPdf is required and must be specified")
+	if r.saveAsPdfRequest == nil {
+		return localVarReturnValue, nil, reportError("saveAsPdfRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8147,7 +7685,7 @@ func (a *FilesFilesAPIService) SaveFileAsPdfExecute(r ApiSaveFileAsPdfRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.saveAsPdf
+	localVarPostBody = r.saveAsPdfRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -8206,28 +7744,6 @@ func (a *FilesFilesAPIService) SaveFileAsPdfExecute(r ApiSaveFileAsPdfRequest) (
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -8264,8 +7780,8 @@ func (a *FilesFilesAPIService) SaveFileAsPdfExecuteThirdParty(r ApiSaveFileAsPdf
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.saveAsPdf == nil {
-		return localVarReturnValue, nil, reportError("saveAsPdf is required and must be specified")
+	if r.saveAsPdfRequest == nil {
+		return localVarReturnValue, nil, reportError("saveAsPdfRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8286,7 +7802,7 @@ func (a *FilesFilesAPIService) SaveFileAsPdfExecuteThirdParty(r ApiSaveFileAsPdf
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.saveAsPdf
+	localVarPostBody = r.saveAsPdfRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -8321,28 +7837,6 @@ func (a *FilesFilesAPIService) SaveFileAsPdfExecuteThirdParty(r ApiSaveFileAsPdf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -8497,28 +7991,6 @@ func (a *FilesFilesAPIService) SaveFormRoleMappingExecute(r ApiSaveFormRoleMappi
 					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
 		return localVarHTTPResponse, newErr
 	}
 
@@ -8529,11 +8001,11 @@ type ApiSetCustomFilterTagRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	fileId interface{}
-	customFilterParameters *CustomFilterParameters
+	customFilterRequest *CustomFilterRequest
 }
 
 // The Custom Filter state to reach.
-func (r ApiSetCustomFilterTagRequest) CustomFilterParameters(customFilterParameters CustomFilterParameters) ApiSetCustomFilterTagRequest {	r.customFilterParameters = &customFilterParameters
+func (r ApiSetCustomFilterTagRequest) CustomFilterRequest(customFilterRequest CustomFilterRequest) ApiSetCustomFilterTagRequest {	r.customFilterRequest = &customFilterRequest
 	return r
 }
 
@@ -8585,8 +8057,8 @@ func (a *FilesFilesAPIService) SetCustomFilterTagExecute(r ApiSetCustomFilterTag
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.customFilterParameters == nil {
-		return localVarReturnValue, nil, reportError("customFilterParameters is required and must be specified")
+	if r.customFilterRequest == nil {
+		return localVarReturnValue, nil, reportError("customFilterRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8607,7 +8079,7 @@ func (a *FilesFilesAPIService) SetCustomFilterTagExecute(r ApiSetCustomFilterTag
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.customFilterParameters
+	localVarPostBody = r.customFilterRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -8677,17 +8149,6 @@ func (a *FilesFilesAPIService) SetCustomFilterTagExecute(r ApiSetCustomFilterTag
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -8724,8 +8185,8 @@ func (a *FilesFilesAPIService) SetCustomFilterTagExecuteThirdParty(r ApiSetCusto
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.customFilterParameters == nil {
-		return localVarReturnValue, nil, reportError("customFilterParameters is required and must be specified")
+	if r.customFilterRequest == nil {
+		return localVarReturnValue, nil, reportError("customFilterRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8746,7 +8207,7 @@ func (a *FilesFilesAPIService) SetCustomFilterTagExecuteThirdParty(r ApiSetCusto
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.customFilterParameters
+	localVarPostBody = r.customFilterRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -8792,17 +8253,6 @@ func (a *FilesFilesAPIService) SetCustomFilterTagExecuteThirdParty(r ApiSetCusto
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -9132,17 +8582,6 @@ func (a *FilesFilesAPIService) SetFileExternalLinkExecute(r ApiSetFileExternalLi
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -9307,17 +8746,6 @@ func (a *FilesFilesAPIService) SetFileOrderExecute(r ApiSetFileOrderRequest) (*F
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -9419,17 +8847,6 @@ func (a *FilesFilesAPIService) SetFileOrderExecuteThirdParty(r ApiSetFileOrderRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -9593,17 +9010,6 @@ func (a *FilesFilesAPIService) SetFilesOrderExecute(r ApiSetFilesOrderRequest) (
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -9623,11 +9029,11 @@ type ApiStartEditFileRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	fileId interface{}
-	startEdit *StartEdit
+	startEditRequest *StartEditRequest
 }
 
 // The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
-func (r ApiStartEditFileRequest) StartEdit(startEdit StartEdit) ApiStartEditFileRequest {	r.startEdit = &startEdit
+func (r ApiStartEditFileRequest) StartEditRequest(startEditRequest StartEditRequest) ApiStartEditFileRequest {	r.startEditRequest = &startEditRequest
 	return r
 }
 
@@ -9673,8 +9079,8 @@ func (a *FilesFilesAPIService) StartEditFileExecute(r ApiStartEditFileRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.startEdit == nil {
-		return localVarReturnValue, nil, reportError("startEdit is required and must be specified")
+	if r.startEditRequest == nil {
+		return localVarReturnValue, nil, reportError("startEditRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9695,7 +9101,7 @@ func (a *FilesFilesAPIService) StartEditFileExecute(r ApiStartEditFileRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.startEdit
+	localVarPostBody = r.startEditRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -9733,17 +9139,6 @@ func (a *FilesFilesAPIService) StartEditFileExecute(r ApiStartEditFileRequest) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -10200,28 +9595,6 @@ func (a *FilesFilesAPIService) ToggleFileFavoriteExecute(r ApiToggleFileFavorite
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -10377,17 +9750,6 @@ func (a *FilesFilesAPIService) TrackEditFileExecute(r ApiTrackEditFileRequest) (
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -10418,11 +9780,11 @@ type ApiUpdateFileRequest struct {
 	ctx context.Context
 	ApiService *FilesFilesAPIService
 	fileId interface{}
-	updateFile *UpdateFile
+	updateFileRequest *UpdateFileRequest
 }
 
 // The new title and the version to restore.
-func (r ApiUpdateFileRequest) UpdateFile(updateFile UpdateFile) ApiUpdateFileRequest {	r.updateFile = &updateFile
+func (r ApiUpdateFileRequest) UpdateFileRequest(updateFileRequest UpdateFileRequest) ApiUpdateFileRequest {	r.updateFileRequest = &updateFileRequest
 	return r
 }
 
@@ -10474,8 +9836,8 @@ func (a *FilesFilesAPIService) UpdateFileExecute(r ApiUpdateFileRequest) (*FileW
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateFile == nil {
-		return localVarReturnValue, nil, reportError("updateFile is required and must be specified")
+	if r.updateFileRequest == nil {
+		return localVarReturnValue, nil, reportError("updateFileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10496,7 +9858,7 @@ func (a *FilesFilesAPIService) UpdateFileExecute(r ApiUpdateFileRequest) (*FileW
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateFile
+	localVarPostBody = r.updateFileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -10544,28 +9906,6 @@ func (a *FilesFilesAPIService) UpdateFileExecute(r ApiUpdateFileRequest) (*FileW
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -10602,8 +9942,8 @@ func (a *FilesFilesAPIService) UpdateFileExecuteThirdParty(r ApiUpdateFileReques
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateFile == nil {
-		return localVarReturnValue, nil, reportError("updateFile is required and must be specified")
+	if r.updateFileRequest == nil {
+		return localVarReturnValue, nil, reportError("updateFileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10624,7 +9964,7 @@ func (a *FilesFilesAPIService) UpdateFileExecuteThirdParty(r ApiUpdateFileReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateFile
+	localVarPostBody = r.updateFileRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -10648,28 +9988,6 @@ func (a *FilesFilesAPIService) UpdateFileExecuteThirdParty(r ApiUpdateFileReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

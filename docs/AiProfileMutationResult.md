@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Success** | **bool** | True when the profile was persisted. | 
 **Profile** | Pointer to [**AiProfile**](AiProfile.md) | The persisted profile. Present on success. | [optional] 
-**Error** | Pointer to [**AiTErrorData**](AiTErrorData.md) | Why the profile was rejected - the name check or the provider credential check. Present on failure. | [optional] 
+**Error** | Pointer to [**AiErrorData**](AiErrorData.md) | Why the profile was rejected - the name check or the provider credential check. Present on failure. | [optional] 
 
 ## Methods
 
@@ -74,20 +74,20 @@ HasProfile returns a boolean if a field has been set.
 
 ### GetError
 
-`func (o *AiProfileMutationResult) GetError() AiTErrorData`
+`func (o *AiProfileMutationResult) GetError() AiErrorData`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *AiProfileMutationResult) GetErrorOk() (*AiTErrorData, bool)`
+`func (o *AiProfileMutationResult) GetErrorOk() (*AiErrorData, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *AiProfileMutationResult) SetError(v AiTErrorData)`
+`func (o *AiProfileMutationResult) SetError(v AiErrorData)`
 
 SetError sets Error field to given value.
 

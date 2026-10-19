@@ -49,14 +49,14 @@ Name | Type | Description | Notes
 **HideConfirmConvertSave** | Pointer to **bool** | Whether the prompt that offers to keep a copy in the original format on conversion is hidden for the caller.  Once true it cannot be turned back through the API. | [optional] 
 **HideConfirmConvertOpen** | Pointer to **bool** | Whether the prompt that offers to open the conversion result is hidden for the caller. Once true it cannot be  turned back through the API. | [optional] 
 **HideConfirmRoomLifetime** | Pointer to **bool** | Whether the warning shown before the lifetime settings of a room are changed is hidden for the caller. | [optional] 
-**DefaultOrder** | Pointer to [**OrderBy**](OrderBy.md) | The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used. | [optional] 
+**DefaultOrder** | Pointer to [**OrderByDto**](OrderByDto.md) | The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used. | [optional] 
 **Forcesave** | Pointer to **bool** | Whether the editor writes a document back to storage while the session is still open. It is on for every  portal and cannot be switched off. | [optional] 
 **StoreForcesave** | Pointer to **bool** | Whether those intermediate saves are kept as separate versions. They are not, in any portal: they update the  current version instead. | [optional] 
 **RecentSection** | Pointer to **bool** | Whether the Recent section is offered to the caller among the section roots. | [optional] 
 **FavoritesSection** | Pointer to **bool** | Whether the Favorites section is offered to the caller among the section roots. | [optional] 
 **TemplatesSection** | Pointer to **bool** | Whether the Templates section is offered to the caller among the section roots. | [optional] 
 **DownloadTarGz** | Pointer to **bool** | The archive format the caller's multi-item downloads are packed into: true for `.tar.gz`, false for `.zip`. | [optional] 
-**AutomaticallyCleanUp** | Pointer to [**AutoCleanUpData**](AutoCleanUpData.md) | The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns. | [optional] 
+**AutomaticallyCleanUp** | Pointer to [**AutoCleanUpDataDto**](AutoCleanUpDataDto.md) | The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns. | [optional] 
 **CanSearchByContent** | Pointer to **bool** | Whether documents in this portal can be searched by what is inside them and not only by title. It depends on  the full-text search service being configured and having indexed the portal. | [optional] 
 **DefaultSharingAccessRights** | Pointer to **[]int32** | The access rights the sharing dialog offers the caller by default. The portal normalises the set it stores, so  this can be shorter than what was last sent. | [optional] 
 **MaxUploadThreadCount** | Pointer to **int32** | How many upload requests the portal accepts from one account at a time. Sending more than this in parallel  gets the extra ones refused rather than queued. | [optional] 
@@ -1526,20 +1526,20 @@ HasHideConfirmRoomLifetime returns a boolean if a field has been set.
 
 ### GetDefaultOrder
 
-`func (o *FilesSettingsDto) GetDefaultOrder() OrderBy`
+`func (o *FilesSettingsDto) GetDefaultOrder() OrderByDto`
 
 GetDefaultOrder returns the DefaultOrder field if non-nil, zero value otherwise.
 
 ### GetDefaultOrderOk
 
-`func (o *FilesSettingsDto) GetDefaultOrderOk() (*OrderBy, bool)`
+`func (o *FilesSettingsDto) GetDefaultOrderOk() (*OrderByDto, bool)`
 
 GetDefaultOrderOk returns a tuple with the DefaultOrder field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDefaultOrder
 
-`func (o *FilesSettingsDto) SetDefaultOrder(v OrderBy)`
+`func (o *FilesSettingsDto) SetDefaultOrder(v OrderByDto)`
 
 SetDefaultOrder sets DefaultOrder field to given value.
 
@@ -1701,20 +1701,20 @@ HasDownloadTarGz returns a boolean if a field has been set.
 
 ### GetAutomaticallyCleanUp
 
-`func (o *FilesSettingsDto) GetAutomaticallyCleanUp() AutoCleanUpData`
+`func (o *FilesSettingsDto) GetAutomaticallyCleanUp() AutoCleanUpDataDto`
 
 GetAutomaticallyCleanUp returns the AutomaticallyCleanUp field if non-nil, zero value otherwise.
 
 ### GetAutomaticallyCleanUpOk
 
-`func (o *FilesSettingsDto) GetAutomaticallyCleanUpOk() (*AutoCleanUpData, bool)`
+`func (o *FilesSettingsDto) GetAutomaticallyCleanUpOk() (*AutoCleanUpDataDto, bool)`
 
 GetAutomaticallyCleanUpOk returns a tuple with the AutomaticallyCleanUp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAutomaticallyCleanUp
 
-`func (o *FilesSettingsDto) SetAutomaticallyCleanUp(v AutoCleanUpData)`
+`func (o *FilesSettingsDto) SetAutomaticallyCleanUp(v AutoCleanUpDataDto)`
 
 SetAutomaticallyCleanUp sets AutomaticallyCleanUp field to given value.
 

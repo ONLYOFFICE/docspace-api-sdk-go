@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**GetInvitationLink**](PortalUsersAPI.md#GetInvitationLink) | **Get** /api/2.0/portal/users/invite/{employeeType} | Get a legacy invitation link
 [**GetInvitationLinkByEmployeeType**](PortalUsersAPI.md#GetInvitationLinkByEmployeeType) | **Get** /api/2.0/portal/users/invitationlink/{employeeType} | Get an invitation link by role
 [**GetPortalUsersCount**](PortalUsersAPI.md#GetPortalUsersCount) | **Get** /api/2.0/portal/userscount | Get a number of portal users
-[**GetUserById**](PortalUsersAPI.md#GetUserById) | **Get** /api/2.0/portal/users/{userID} | Get a portal user
+[**GetUserById**](PortalUsersAPI.md#GetUserById) | **Get** /api/2.0/portal/users/{userId} | Get a portal user
 [**MarkGiftMessageAsRead**](PortalUsersAPI.md#MarkGiftMessageAsRead) | **Post** /api/2.0/portal/present/mark | Mark a gift message as read
 [**SendCongratulations**](PortalUsersAPI.md#SendCongratulations) | **Post** /api/2.0/portal/sendcongratulations | Send congratulations
 [**UpdateInvitationLink**](PortalUsersAPI.md#UpdateInvitationLink) | **Put** /api/2.0/portal/users/invitationlink | Update an invitation link
@@ -361,7 +361,7 @@ Other parameters are passed through a pointer to a apiGetPortalUsersCountRequest
 
 ## GetUserById
 
-> UserInfoWrapper GetUserById(ctx, userID).Execute()
+> PortalUserWrapper GetUserById(ctx, userId).Execute()
 
 Get a portal user
 
@@ -382,16 +382,16 @@ import (
 )
 
 func main() {
-	userID := "00000000-0000-0000-0000-000000000000" // string | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PortalUsersAPI.GetUserById(context.Background(), userID).Execute()
+	resp, r, err := apiClient.PortalUsersAPI.GetUserById(context.Background(), userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalUsersAPI.GetUserById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserById`: UserInfoWrapper
+	// response from `GetUserById`: PortalUserWrapper
 	fmt.Fprintf(os.Stdout, "Response from `PortalUsersAPI.GetUserById`: %v\n", resp)
 }
 ```
@@ -402,7 +402,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userID** | **string** | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. | 
+**userId** | **string** | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. | 
 
 ### Other Parameters
 
@@ -415,7 +415,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserInfoWrapper**](UserInfoWrapper.md)
+[**PortalUserWrapper**](PortalUserWrapper.md)
 
 ### Authorization
 

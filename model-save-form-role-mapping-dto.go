@@ -28,7 +28,7 @@ type SaveFormRoleMappingDto struct {
 	// The PDF form the roles belong to. This is the value the operation reads, rather than the identifier in its  route, and the two are to be sent the same.
 	FormId int32 `json:"formId"`
 	// The roles with the account taking each of them and the sequence number that decides the turn: the same number  means the roles may be filled in parallel, different ones make a queue. The whole set is replaced on every  call, and an empty set resets the filling.
-	Roles []FormRole `json:"roles"`
+	Roles []FormRoleRequest `json:"roles"`
 }
 
 type _SaveFormRoleMappingDto SaveFormRoleMappingDto
@@ -37,7 +37,7 @@ type _SaveFormRoleMappingDto SaveFormRoleMappingDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSaveFormRoleMappingDto(formId int32, roles []FormRole) *SaveFormRoleMappingDto {
+func NewSaveFormRoleMappingDto(formId int32, roles []FormRoleRequest) *SaveFormRoleMappingDto {
 	this := SaveFormRoleMappingDto{}
 	this.FormId = formId
 	this.Roles = roles
@@ -77,10 +77,10 @@ func (o *SaveFormRoleMappingDto) SetFormId(v int32) {
 }
 
 // GetRoles returns the Roles field value
-// If the value is explicit nil, the zero value for []FormRole will be returned
-func (o *SaveFormRoleMappingDto) GetRoles() []FormRole {
+// If the value is explicit nil, the zero value for []FormRoleRequest will be returned
+func (o *SaveFormRoleMappingDto) GetRoles() []FormRoleRequest {
 	if o == nil {
-		var ret []FormRole
+		var ret []FormRoleRequest
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *SaveFormRoleMappingDto) GetRoles() []FormRole {
 // GetRolesOk returns a tuple with the Roles field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SaveFormRoleMappingDto) GetRolesOk() ([]FormRole, bool) {
+func (o *SaveFormRoleMappingDto) GetRolesOk() ([]FormRoleRequest, bool) {
 	if o == nil || IsNil(o.Roles) {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *SaveFormRoleMappingDto) GetRolesOk() ([]FormRole, bool) {
 }
 
 // SetRoles sets field value
-func (o *SaveFormRoleMappingDto) SetRoles(v []FormRole) {
+func (o *SaveFormRoleMappingDto) SetRoles(v []FormRoleRequest) {
 	o.Roles = v
 }
 

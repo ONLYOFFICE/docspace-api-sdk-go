@@ -34,7 +34,7 @@ type AiPricesDto struct {
 	// The web search providers on offer. Their `price` is a bare number - the cost of one search - rather than  an object, because there are no tokens to distinguish.
 	WebSearch []AiEntryPricingDtoDecimal `json:"webSearch"`
 	// The currency every price above is expressed in, with its ISO code and symbol. One answer never mixes  currencies, so this is the only place to read it.
-	Currency CurrencyInfo `json:"currency"`
+	Currency AiPriceCurrencyDto `json:"currency"`
 }
 
 type _AiPricesDto AiPricesDto
@@ -43,7 +43,7 @@ type _AiPricesDto AiPricesDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiPricesDto(chat []AiEntryPricingDtoAiChatPriceDto, embedding []AiEntryPricingDtoAiEmbeddingPriceDto, image []AiEntryPricingDtoAiImagePriceDto, webSearch []AiEntryPricingDtoDecimal, currency CurrencyInfo) *AiPricesDto {
+func NewAiPricesDto(chat []AiEntryPricingDtoAiChatPriceDto, embedding []AiEntryPricingDtoAiEmbeddingPriceDto, image []AiEntryPricingDtoAiImagePriceDto, webSearch []AiEntryPricingDtoDecimal, currency AiPriceCurrencyDto) *AiPricesDto {
 	this := AiPricesDto{}
 	this.Chat = chat
 	this.Embedding = embedding
@@ -166,9 +166,9 @@ func (o *AiPricesDto) SetWebSearch(v []AiEntryPricingDtoDecimal) {
 }
 
 // GetCurrency returns the Currency field value
-func (o *AiPricesDto) GetCurrency() CurrencyInfo {
+func (o *AiPricesDto) GetCurrency() AiPriceCurrencyDto {
 	if o == nil {
-		var ret CurrencyInfo
+		var ret AiPriceCurrencyDto
 		return ret
 	}
 
@@ -177,7 +177,7 @@ func (o *AiPricesDto) GetCurrency() CurrencyInfo {
 
 // GetCurrencyOk returns a tuple with the Currency field value
 // and a boolean to check if the value has been set.
-func (o *AiPricesDto) GetCurrencyOk() (*CurrencyInfo, bool) {
+func (o *AiPricesDto) GetCurrencyOk() (*AiPriceCurrencyDto, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -185,7 +185,7 @@ func (o *AiPricesDto) GetCurrencyOk() (*CurrencyInfo, bool) {
 }
 
 // SetCurrency sets field value
-func (o *AiPricesDto) SetCurrency(v CurrencyInfo) {
+func (o *AiPricesDto) SetCurrency(v AiPriceCurrencyDto) {
 	o.Currency = v
 }
 

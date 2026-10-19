@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **Embedding** | [**[]AiEntryPricingDtoAiEmbeddingPriceDto**](AiEntryPricingDtoAiEmbeddingPriceDto.md) | The embedding models on offer, priced per million tokens of input; an embedding model has no completion  side, so its price object carries `prompt` alone. | 
 **Image** | [**[]AiEntryPricingDtoAiImagePriceDto**](AiEntryPricingDtoAiImagePriceDto.md) | The image models on offer, priced per million prompt and completion tokens plus a price for each image  produced. | 
 **WebSearch** | [**[]AiEntryPricingDtoDecimal**](AiEntryPricingDtoDecimal.md) | The web search providers on offer. Their `price` is a bare number - the cost of one search - rather than  an object, because there are no tokens to distinguish. | 
-**Currency** | [**CurrencyInfo**](CurrencyInfo.md) | The currency every price above is expressed in, with its ISO code and symbol. One answer never mixes  currencies, so this is the only place to read it. | 
+**Currency** | [**AiPriceCurrencyDto**](AiPriceCurrencyDto.md) | The currency every price above is expressed in, with its ISO code and symbol. One answer never mixes  currencies, so this is the only place to read it. | 
 
 ## Methods
 
 ### NewAiPricesDto
 
-`func NewAiPricesDto(chat []AiEntryPricingDtoAiChatPriceDto, embedding []AiEntryPricingDtoAiEmbeddingPriceDto, image []AiEntryPricingDtoAiImagePriceDto, webSearch []AiEntryPricingDtoDecimal, currency CurrencyInfo, ) *AiPricesDto`
+`func NewAiPricesDto(chat []AiEntryPricingDtoAiChatPriceDto, embedding []AiEntryPricingDtoAiEmbeddingPriceDto, image []AiEntryPricingDtoAiImagePriceDto, webSearch []AiEntryPricingDtoDecimal, currency AiPriceCurrencyDto, ) *AiPricesDto`
 
 NewAiPricesDto instantiates a new AiPricesDto object
 This constructor will assign default values to properties that have it defined,
@@ -151,20 +151,20 @@ SetWebSearch sets WebSearch field to given value.
 UnsetWebSearch ensures that no value is present for WebSearch, not even an explicit nil
 ### GetCurrency
 
-`func (o *AiPricesDto) GetCurrency() CurrencyInfo`
+`func (o *AiPricesDto) GetCurrency() AiPriceCurrencyDto`
 
 GetCurrency returns the Currency field if non-nil, zero value otherwise.
 
 ### GetCurrencyOk
 
-`func (o *AiPricesDto) GetCurrencyOk() (*CurrencyInfo, bool)`
+`func (o *AiPricesDto) GetCurrencyOk() (*AiPriceCurrencyDto, bool)`
 
 GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrency
 
-`func (o *AiPricesDto) SetCurrency(v CurrencyInfo)`
+`func (o *AiPricesDto) SetCurrency(v AiPriceCurrencyDto)`
 
 SetCurrency sets Currency field to given value.
 

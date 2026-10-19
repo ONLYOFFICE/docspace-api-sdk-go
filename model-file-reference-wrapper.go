@@ -21,10 +21,10 @@ import (
 // checks if the FileReferenceWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FileReferenceWrapper{}
 
-// FileReferenceWrapper The successful API response containing the FileReference object.
+// FileReferenceWrapper The successful API response containing the FileReferenceDto object.
 type FileReferenceWrapper struct {
-	// The FileReference object returned by the operation.
-	Response *FileReference `json:"response,omitempty"`
+	// The FileReferenceDto object returned by the operation.
+	Response *FileReferenceDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewFileReferenceWrapperWithDefaults() *FileReferenceWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *FileReferenceWrapper) GetResponse() FileReference {
+func (o *FileReferenceWrapper) GetResponse() FileReferenceDto {
 	if o == nil || IsNil(o.Response) {
-		var ret FileReference
+		var ret FileReferenceDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *FileReferenceWrapper) GetResponse() FileReference {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileReferenceWrapper) GetResponseOk() (*FileReference, bool) {
+func (o *FileReferenceWrapper) GetResponseOk() (*FileReferenceDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *FileReferenceWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given FileReference and assigns it to the Response field.
-func (o *FileReferenceWrapper) SetResponse(v FileReference) {
+// SetResponse gets a reference to the given FileReferenceDto and assigns it to the Response field.
+func (o *FileReferenceWrapper) SetResponse(v FileReferenceDto) {
 	o.Response = &v
 }
 

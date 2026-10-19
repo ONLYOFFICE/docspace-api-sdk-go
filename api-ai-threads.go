@@ -42,7 +42,7 @@ func (r ApiAiThreadsAppendUserMessageRequest) Execute() (*AiThreadsAppendUserMes
 
 // AiThreadsAppendUserMessage Append user message
 //
-// Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
+// Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. `threadId` is required, the message has to carry `role: user` and a content that is a non-blank string or a part list with at least one real part - text, a file or image attachment - so an empty or role-less body is rejected rather than stored. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-append-user-message/
 //
@@ -192,11 +192,11 @@ func (a *AIThreadsAPIService) AiThreadsAppendUserMessageExecute(r ApiAiThreadsAp
 type ApiAiThreadsClearMessagesRequest struct {
 	ctx context.Context
 	ApiService *AIThreadsAPIService
-	body *string
+	aiThreadsClearMessagesRequest *string
 }
 
 // The ID of the thread to empty, as a bare JSON string.
-func (r ApiAiThreadsClearMessagesRequest) Body(body string) ApiAiThreadsClearMessagesRequest {	r.body = &body
+func (r ApiAiThreadsClearMessagesRequest) AiThreadsClearMessagesRequest(aiThreadsClearMessagesRequest string) ApiAiThreadsClearMessagesRequest {	r.aiThreadsClearMessagesRequest = &aiThreadsClearMessagesRequest
 	return r
 }
 
@@ -239,8 +239,8 @@ func (a *AIThreadsAPIService) AiThreadsClearMessagesExecute(r ApiAiThreadsClearM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.aiThreadsClearMessagesRequest == nil {
+		return localVarReturnValue, nil, reportError("aiThreadsClearMessagesRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -261,7 +261,7 @@ func (a *AIThreadsAPIService) AiThreadsClearMessagesExecute(r ApiAiThreadsClearM
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.aiThreadsClearMessagesRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -519,11 +519,11 @@ func (a *AIThreadsAPIService) AiThreadsCreateExecute(r ApiAiThreadsCreateRequest
 type ApiAiThreadsDeleteRequest struct {
 	ctx context.Context
 	ApiService *AIThreadsAPIService
-	body *string
+	aiThreadsDeleteRequest *string
 }
 
 // The ID of the thread to delete, as a bare JSON string.
-func (r ApiAiThreadsDeleteRequest) Body(body string) ApiAiThreadsDeleteRequest {	r.body = &body
+func (r ApiAiThreadsDeleteRequest) AiThreadsDeleteRequest(aiThreadsDeleteRequest string) ApiAiThreadsDeleteRequest {	r.aiThreadsDeleteRequest = &aiThreadsDeleteRequest
 	return r
 }
 
@@ -566,8 +566,8 @@ func (a *AIThreadsAPIService) AiThreadsDeleteExecute(r ApiAiThreadsDeleteRequest
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.aiThreadsDeleteRequest == nil {
+		return localVarReturnValue, nil, reportError("aiThreadsDeleteRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -588,7 +588,7 @@ func (a *AIThreadsAPIService) AiThreadsDeleteExecute(r ApiAiThreadsDeleteRequest
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.aiThreadsDeleteRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -694,11 +694,11 @@ func (a *AIThreadsAPIService) AiThreadsDeleteExecute(r ApiAiThreadsDeleteRequest
 type ApiAiThreadsDeleteMessageRequest struct {
 	ctx context.Context
 	ApiService *AIThreadsAPIService
-	body *string
+	aiThreadsDeleteMessageRequest *string
 }
 
 // The ID of the message to delete, as a bare JSON string.
-func (r ApiAiThreadsDeleteMessageRequest) Body(body string) ApiAiThreadsDeleteMessageRequest {	r.body = &body
+func (r ApiAiThreadsDeleteMessageRequest) AiThreadsDeleteMessageRequest(aiThreadsDeleteMessageRequest string) ApiAiThreadsDeleteMessageRequest {	r.aiThreadsDeleteMessageRequest = &aiThreadsDeleteMessageRequest
 	return r
 }
 
@@ -741,8 +741,8 @@ func (a *AIThreadsAPIService) AiThreadsDeleteMessageExecute(r ApiAiThreadsDelete
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.aiThreadsDeleteMessageRequest == nil {
+		return localVarReturnValue, nil, reportError("aiThreadsDeleteMessageRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -763,7 +763,7 @@ func (a *AIThreadsAPIService) AiThreadsDeleteMessageExecute(r ApiAiThreadsDelete
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.aiThreadsDeleteMessageRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1035,7 +1035,7 @@ func (r ApiAiThreadsGetMessageByIdRequest) Execute() (*AiThreadMessageLike, *htt
 
 // AiThreadsGetMessageById Get one chat message
 //
-// Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+// Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required and, as with `GET api/2.0/ai/threads/get-by-id`, an unknown or deleted ID answers 404, so the result is never an empty body. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-get-message-by-id/
 //
@@ -1135,6 +1135,17 @@ func (a *AIThreadsAPIService) AiThreadsGetMessageByIdExecute(r ApiAiThreadsGetMe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1535,7 +1546,7 @@ func (r ApiAiThreadsReadMessagesRequest) Execute() ([]AiThreadMessageLike, *http
 
 // AiThreadsReadMessages Read messages
 //
-// Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
+// Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. `threadId` is required and a missing one answers 400, so an empty list always means a thread with no messages. A malformed cursor is ignored and the read starts from the beginning.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-read-messages/
 //
@@ -1620,6 +1631,17 @@ func (a *AIThreadsAPIService) AiThreadsReadMessagesExecute(r ApiAiThreadsReadMes
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
@@ -2162,7 +2184,7 @@ func (r ApiAiThreadsUpdateMessageRequest) Execute() (*AiSuccessResponse, *http.R
 
 // AiThreadsUpdateMessage Update message
 //
-// Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
+// Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object with a known `role` and a content that is a non-blank string or a part list with at least one real part - a tool-call-only assistant message counts, an empty list does not. The role has to match the stored message's: a user message cannot be turned into an assistant one. An unknown `messageId` answers 404. The answer only confirms the write.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-update-message/
 //
@@ -2240,6 +2262,17 @@ func (a *AIThreadsAPIService) AiThreadsUpdateMessageExecute(r ApiAiThreadsUpdate
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -2252,6 +2285,17 @@ func (a *AIThreadsAPIService) AiThreadsUpdateMessageExecute(r ApiAiThreadsUpdate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

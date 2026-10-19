@@ -21,10 +21,10 @@ import (
 // checks if the TenantQuotaWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantQuotaWrapper{}
 
-// TenantQuotaWrapper The successful API response containing the TenantQuota object.
+// TenantQuotaWrapper The successful API response containing the TenantQuotaDto object.
 type TenantQuotaWrapper struct {
-	// The TenantQuota object returned by the operation.
-	Response *TenantQuota `json:"response,omitempty"`
+	// The TenantQuotaDto object returned by the operation.
+	Response *TenantQuotaDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewTenantQuotaWrapperWithDefaults() *TenantQuotaWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *TenantQuotaWrapper) GetResponse() TenantQuota {
+func (o *TenantQuotaWrapper) GetResponse() TenantQuotaDto {
 	if o == nil || IsNil(o.Response) {
-		var ret TenantQuota
+		var ret TenantQuotaDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *TenantQuotaWrapper) GetResponse() TenantQuota {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TenantQuotaWrapper) GetResponseOk() (*TenantQuota, bool) {
+func (o *TenantQuotaWrapper) GetResponseOk() (*TenantQuotaDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *TenantQuotaWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given TenantQuota and assigns it to the Response field.
-func (o *TenantQuotaWrapper) SetResponse(v TenantQuota) {
+// SetResponse gets a reference to the given TenantQuotaDto and assigns it to the Response field.
+func (o *TenantQuotaWrapper) SetResponse(v TenantQuotaDto) {
 	o.Response = &v
 }
 

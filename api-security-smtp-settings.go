@@ -31,7 +31,7 @@ type ApiGetSmtpOperationStatusRequest struct {
 	ApiService *SecuritySMTPSettingsAPIService
 }
 
-func (r ApiGetSmtpOperationStatusRequest) Execute() (*SmtpOperationStatusRequestsWrapper, *http.Response, error) {
+func (r ApiGetSmtpOperationStatusRequest) Execute() (*SmtpOperationStatusWrapper, *http.Response, error) {
 	return r.ApiService.GetSmtpOperationStatusExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *SecuritySMTPSettingsAPIService) GetSmtpOperationStatus(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return SmtpOperationStatusRequestsWrapper
-func (a *SecuritySMTPSettingsAPIService) GetSmtpOperationStatusExecute(r ApiGetSmtpOperationStatusRequest) (*SmtpOperationStatusRequestsWrapper, *http.Response, error) {
+//  @return SmtpOperationStatusWrapper
+func (a *SecuritySMTPSettingsAPIService) GetSmtpOperationStatusExecute(r ApiGetSmtpOperationStatusRequest) (*SmtpOperationStatusWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SmtpOperationStatusRequestsWrapper
+		localVarReturnValue  *SmtpOperationStatusWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecuritySMTPSettingsAPIService.GetSmtpOperationStatus")
@@ -602,17 +602,6 @@ func (a *SecuritySMTPSettingsAPIService) SaveSmtpSettingsExecute(r ApiSaveSmtpSe
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -633,7 +622,7 @@ type ApiTestSmtpSettingsRequest struct {
 	ApiService *SecuritySMTPSettingsAPIService
 }
 
-func (r ApiTestSmtpSettingsRequest) Execute() (*SmtpOperationStatusRequestsWrapper, *http.Response, error) {
+func (r ApiTestSmtpSettingsRequest) Execute() (*SmtpOperationStatusWrapper, *http.Response, error) {
 	return r.ApiService.TestSmtpSettingsExecute(r)
 }
 
@@ -653,13 +642,13 @@ func (a *SecuritySMTPSettingsAPIService) TestSmtpSettings(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return SmtpOperationStatusRequestsWrapper
-func (a *SecuritySMTPSettingsAPIService) TestSmtpSettingsExecute(r ApiTestSmtpSettingsRequest) (*SmtpOperationStatusRequestsWrapper, *http.Response, error) {
+//  @return SmtpOperationStatusWrapper
+func (a *SecuritySMTPSettingsAPIService) TestSmtpSettingsExecute(r ApiTestSmtpSettingsRequest) (*SmtpOperationStatusWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SmtpOperationStatusRequestsWrapper
+		localVarReturnValue  *SmtpOperationStatusWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecuritySMTPSettingsAPIService.TestSmtpSettings")

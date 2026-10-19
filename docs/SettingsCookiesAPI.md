@@ -74,7 +74,7 @@ Other parameters are passed through a pointer to a apiGetCookieSettingsRequest s
 
 ## UpdateCookieSettings
 
-> StringWrapper UpdateCookieSettings(ctx).CookieSettingsRequestsDto(cookieSettingsRequestsDto).Execute()
+> StringWrapper UpdateCookieSettings(ctx).CookieSettingsRequestDto(cookieSettingsRequestDto).Execute()
 
 Update the cookie lifetime settings
 
@@ -95,11 +95,11 @@ import (
 )
 
 func main() {
-	cookieSettingsRequestsDto := *openapiclient.NewCookieSettingsRequestsDto() // CookieSettingsRequestsDto |  (optional)
+	cookieSettingsRequestDto := *openapiclient.NewCookieSettingsRequestDto() // CookieSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsCookiesAPI.UpdateCookieSettings(context.Background()).CookieSettingsRequestsDto(cookieSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsCookiesAPI.UpdateCookieSettings(context.Background()).CookieSettingsRequestDto(cookieSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsCookiesAPI.UpdateCookieSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -120,7 +120,7 @@ Other parameters are passed through a pointer to a apiUpdateCookieSettingsReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cookieSettingsRequestsDto** | [**CookieSettingsRequestsDto**](CookieSettingsRequestsDto.md) |  | 
+ **cookieSettingsRequestDto** | [**CookieSettingsRequestDto**](CookieSettingsRequestDto.md) |  | 
 
 ### Return type
 

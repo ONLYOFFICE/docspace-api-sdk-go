@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ChangeUserEmail**](PeopleEmailAPI.md#ChangeUserEmail) | **Put** /api/2.0/people/{userid}/email | Change a user email
+[**ChangeUserEmail**](PeopleEmailAPI.md#ChangeUserEmail) | **Put** /api/2.0/people/{userId}/email | Change a user email
 [**SendEmailChangeInstructions**](PeopleEmailAPI.md#SendEmailChangeInstructions) | **Post** /api/2.0/people/email | Send instructions to change email
 
 
 
 ## ChangeUserEmail
 
-> EmployeeFullWrapper ChangeUserEmail(ctx, userid).ChangeEmailRequest(changeEmailRequest).Execute()
+> EmployeeFullWrapper ChangeUserEmail(ctx, userId).ChangeEmailRequest(changeEmailRequest).Execute()
 
 Change a user email
 
@@ -32,12 +32,12 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
 	changeEmailRequest := *openapiclient.NewChangeEmailRequest() // ChangeEmailRequest | The new address, in plain text or in the encrypted form the confirmation link carries.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeopleEmailAPI.ChangeUserEmail(context.Background(), userid).ChangeEmailRequest(changeEmailRequest).Execute()
+	resp, r, err := apiClient.PeopleEmailAPI.ChangeUserEmail(context.Background(), userId).ChangeEmailRequest(changeEmailRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeopleEmailAPI.ChangeUserEmail``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -53,7 +53,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | 
+**userId** | **string** | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | 
 
 ### Other Parameters
 

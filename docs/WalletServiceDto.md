@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **Free** | **bool** | Whether this is the free quota a portal falls back to when nothing is paid for. It has no end date and  the tightest limits of any quota. | 
 **Trial** | **bool** | Whether this is the trial quota, which grants the paid limits for a while and then expires. A trial is not  extended by paying - a plan has to be bought instead. | 
 **Features** | [**[]TenantQuotaFeatureDto**](TenantQuotaFeatureDto.md) | The features the quota switches on, each with the limit it grants and, on the quota the portal is  actually on, how much of that limit is already used. A feature that is absent is off, so the list is the  whole truth about what the quota includes. | 
-**UsersQuota** | Pointer to [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) | The per-member storage allowance an administrator has set on top of the quota, and whether it is applied  at all. It describes the live portal rather than this quota, so every entry of a catalogue listing repeats  the same values, and it is empty unless the portal is a server installation or its plan includes  statistics. | [optional] 
-**RoomsQuota** | Pointer to [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) | The same kind of per-room storage override, filled in and read the same way as `usersQuota`. | [optional] 
-**AiAgentsQuota** | Pointer to [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) | The same kind of per-agent storage override for AI agents, filled in and read the same way as  `usersQuota`. | [optional] 
-**TenantCustomQuota** | Pointer to [**TenantQuotaSettings**](TenantQuotaSettings.md) | The storage allowance an administrator has set for the portal as a whole, which caps it below what the  quota grants. Filled in under the same conditions as `usersQuota`. | [optional] 
+**UsersQuota** | Pointer to [**EntityQuotaDto**](EntityQuotaDto.md) | The per-member storage allowance an administrator has set on top of the quota, and whether it is applied  at all. It describes the live portal rather than this quota, so every entry of a catalogue listing repeats  the same values, and it is empty unless the portal is a server installation or its plan includes  statistics. | [optional] 
+**RoomsQuota** | Pointer to [**EntityQuotaDto**](EntityQuotaDto.md) | The same kind of per-room storage override, filled in and read the same way as `usersQuota`. | [optional] 
+**AiAgentsQuota** | Pointer to [**EntityQuotaDto**](EntityQuotaDto.md) | The same kind of per-agent storage override for AI agents, filled in and read the same way as  `usersQuota`. | [optional] 
+**TenantCustomQuota** | Pointer to [**TenantQuotaSettingsDto**](TenantQuotaSettingsDto.md) | The storage allowance an administrator has set for the portal as a whole, which caps it below what the  quota grants. Filled in under the same conditions as `usersQuota`. | [optional] 
 **DueDate** | Pointer to **time.Time** | When the quota runs out, in UTC. It is empty on a quota from the catalogue, which has no date until it is  bought, and on a quota that never expires. | [optional] 
 **InnerServices** | Pointer to [**[]WalletServiceDto**](WalletServiceDto.md) | The variants of this service that are folded into it, so a client renders one card per group instead of  one per variant. It is empty when the service has no variants, and always empty in the answer of  `GET api/2.0/portal/payment/walletservice`, which looks one service up on its own. | [optional] 
 **ServiceName** | Pointer to **NullableString** | The stable key of the service, which is what the wallet operations take as their `service` argument and  what the usage reports key their entries by. | [optional] 
@@ -185,20 +185,20 @@ SetFeatures sets Features field to given value.
 
 ### GetUsersQuota
 
-`func (o *WalletServiceDto) GetUsersQuota() TenantEntityQuotaSettings`
+`func (o *WalletServiceDto) GetUsersQuota() EntityQuotaDto`
 
 GetUsersQuota returns the UsersQuota field if non-nil, zero value otherwise.
 
 ### GetUsersQuotaOk
 
-`func (o *WalletServiceDto) GetUsersQuotaOk() (*TenantEntityQuotaSettings, bool)`
+`func (o *WalletServiceDto) GetUsersQuotaOk() (*EntityQuotaDto, bool)`
 
 GetUsersQuotaOk returns a tuple with the UsersQuota field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUsersQuota
 
-`func (o *WalletServiceDto) SetUsersQuota(v TenantEntityQuotaSettings)`
+`func (o *WalletServiceDto) SetUsersQuota(v EntityQuotaDto)`
 
 SetUsersQuota sets UsersQuota field to given value.
 
@@ -210,20 +210,20 @@ HasUsersQuota returns a boolean if a field has been set.
 
 ### GetRoomsQuota
 
-`func (o *WalletServiceDto) GetRoomsQuota() TenantEntityQuotaSettings`
+`func (o *WalletServiceDto) GetRoomsQuota() EntityQuotaDto`
 
 GetRoomsQuota returns the RoomsQuota field if non-nil, zero value otherwise.
 
 ### GetRoomsQuotaOk
 
-`func (o *WalletServiceDto) GetRoomsQuotaOk() (*TenantEntityQuotaSettings, bool)`
+`func (o *WalletServiceDto) GetRoomsQuotaOk() (*EntityQuotaDto, bool)`
 
 GetRoomsQuotaOk returns a tuple with the RoomsQuota field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRoomsQuota
 
-`func (o *WalletServiceDto) SetRoomsQuota(v TenantEntityQuotaSettings)`
+`func (o *WalletServiceDto) SetRoomsQuota(v EntityQuotaDto)`
 
 SetRoomsQuota sets RoomsQuota field to given value.
 
@@ -235,20 +235,20 @@ HasRoomsQuota returns a boolean if a field has been set.
 
 ### GetAiAgentsQuota
 
-`func (o *WalletServiceDto) GetAiAgentsQuota() TenantEntityQuotaSettings`
+`func (o *WalletServiceDto) GetAiAgentsQuota() EntityQuotaDto`
 
 GetAiAgentsQuota returns the AiAgentsQuota field if non-nil, zero value otherwise.
 
 ### GetAiAgentsQuotaOk
 
-`func (o *WalletServiceDto) GetAiAgentsQuotaOk() (*TenantEntityQuotaSettings, bool)`
+`func (o *WalletServiceDto) GetAiAgentsQuotaOk() (*EntityQuotaDto, bool)`
 
 GetAiAgentsQuotaOk returns a tuple with the AiAgentsQuota field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAiAgentsQuota
 
-`func (o *WalletServiceDto) SetAiAgentsQuota(v TenantEntityQuotaSettings)`
+`func (o *WalletServiceDto) SetAiAgentsQuota(v EntityQuotaDto)`
 
 SetAiAgentsQuota sets AiAgentsQuota field to given value.
 
@@ -260,20 +260,20 @@ HasAiAgentsQuota returns a boolean if a field has been set.
 
 ### GetTenantCustomQuota
 
-`func (o *WalletServiceDto) GetTenantCustomQuota() TenantQuotaSettings`
+`func (o *WalletServiceDto) GetTenantCustomQuota() TenantQuotaSettingsDto`
 
 GetTenantCustomQuota returns the TenantCustomQuota field if non-nil, zero value otherwise.
 
 ### GetTenantCustomQuotaOk
 
-`func (o *WalletServiceDto) GetTenantCustomQuotaOk() (*TenantQuotaSettings, bool)`
+`func (o *WalletServiceDto) GetTenantCustomQuotaOk() (*TenantQuotaSettingsDto, bool)`
 
 GetTenantCustomQuotaOk returns a tuple with the TenantCustomQuota field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTenantCustomQuota
 
-`func (o *WalletServiceDto) SetTenantCustomQuota(v TenantQuotaSettings)`
+`func (o *WalletServiceDto) SetTenantCustomQuota(v TenantQuotaSettingsDto)`
 
 SetTenantCustomQuota sets TenantCustomQuota field to given value.
 

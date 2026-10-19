@@ -26,30 +26,30 @@ import (
 // AIAIAPIService AIAIAPI service
 type AIAIAPIService service
 
-type ApiAiAiApproveToolCallRequest struct {
+type ApiAiApproveToolCallRequest struct {
 	ctx context.Context
 	ApiService *AIAIAPIService
-	aiAiApproveToolCallRequest *AiAiApproveToolCallRequest
+	aiApproveToolCallRequest *AiApproveToolCallRequest
 }
 
-func (r ApiAiAiApproveToolCallRequest) AiAiApproveToolCallRequest(aiAiApproveToolCallRequest AiAiApproveToolCallRequest) ApiAiAiApproveToolCallRequest {	r.aiAiApproveToolCallRequest = &aiAiApproveToolCallRequest
+func (r ApiAiApproveToolCallRequest) AiApproveToolCallRequest(aiApproveToolCallRequest AiApproveToolCallRequest) ApiAiApproveToolCallRequest {	r.aiApproveToolCallRequest = &aiApproveToolCallRequest
 	return r
 }
 
-func (r ApiAiAiApproveToolCallRequest) Execute() (*AiChatEvent, *http.Response, error) {
-	return r.ApiService.AiAiApproveToolCallExecute(r)
+func (r ApiAiApproveToolCallRequest) Execute() (*AiChatEvent, *http.Response, error) {
+	return r.ApiService.AiApproveToolCallExecute(r)
 }
 
-// AiAiApproveToolCall Approve tool call
+// AiApproveToolCall Approve tool call
 //
 // Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited `ChatEvent` objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call `POST api/2.0/ai/ai/deny-tool-call` instead to refuse the call and let the model answer without it.
 //
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-approve-tool-call/
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-approve-tool-call/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiAiAiApproveToolCallRequest
-func (a *AIAIAPIService) AiAiApproveToolCall(ctx context.Context) ApiAiAiApproveToolCallRequest {
-	return ApiAiAiApproveToolCallRequest{
+// @return ApiAiApproveToolCallRequest
+func (a *AIAIAPIService) AiApproveToolCall(ctx context.Context) ApiAiApproveToolCallRequest {
+	return ApiAiApproveToolCallRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -57,7 +57,7 @@ func (a *AIAIAPIService) AiAiApproveToolCall(ctx context.Context) ApiAiAiApprove
 
 // Execute executes the request
 //  @return AiChatEvent
-func (a *AIAIAPIService) AiAiApproveToolCallExecute(r ApiAiAiApproveToolCallRequest) (*AiChatEvent, *http.Response, error) {
+func (a *AIAIAPIService) AiApproveToolCallExecute(r ApiAiApproveToolCallRequest) (*AiChatEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -65,7 +65,7 @@ func (a *AIAIAPIService) AiAiApproveToolCallExecute(r ApiAiAiApproveToolCallRequ
 		localVarReturnValue  *AiChatEvent
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiAiApproveToolCall")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiApproveToolCall")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -75,8 +75,8 @@ func (a *AIAIAPIService) AiAiApproveToolCallExecute(r ApiAiAiApproveToolCallRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.aiAiApproveToolCallRequest == nil {
-		return localVarReturnValue, nil, reportError("aiAiApproveToolCallRequest is required and must be specified")
+	if r.aiApproveToolCallRequest == nil {
+		return localVarReturnValue, nil, reportError("aiApproveToolCallRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -97,7 +97,7 @@ func (a *AIAIAPIService) AiAiApproveToolCallExecute(r ApiAiAiApproveToolCallRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiAiApproveToolCallRequest
+	localVarPostBody = r.aiApproveToolCallRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -178,30 +178,30 @@ func (a *AIAIAPIService) AiAiApproveToolCallExecute(r ApiAiAiApproveToolCallRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAiAiDenyToolCallRequest struct {
+type ApiAiDenyToolCallRequest struct {
 	ctx context.Context
 	ApiService *AIAIAPIService
-	aiAiToolCallData *AiAiToolCallData
+	aiToolCallData *AiToolCallData
 }
 
-func (r ApiAiAiDenyToolCallRequest) AiAiToolCallData(aiAiToolCallData AiAiToolCallData) ApiAiAiDenyToolCallRequest {	r.aiAiToolCallData = &aiAiToolCallData
+func (r ApiAiDenyToolCallRequest) AiToolCallData(aiToolCallData AiToolCallData) ApiAiDenyToolCallRequest {	r.aiToolCallData = &aiToolCallData
 	return r
 }
 
-func (r ApiAiAiDenyToolCallRequest) Execute() (*AiChatEvent, *http.Response, error) {
-	return r.ApiService.AiAiDenyToolCallExecute(r)
+func (r ApiAiDenyToolCallRequest) Execute() (*AiChatEvent, *http.Response, error) {
+	return r.ApiService.AiDenyToolCallExecute(r)
 }
 
-// AiAiDenyToolCall Deny tool call
+// AiDenyToolCall Deny tool call
 //
 // Refuses the tool call a chat round is paused on and resumes it immediately, streaming the continuation as newline-delimited `ChatEvent` objects. The literal `User deny tool call` is persisted in place of the tool result, so the model sees an explicit refusal rather than a missing answer and may reply without the tool or ask for something else. Nothing is executed and no result is accepted from the caller. Use `POST api/2.0/ai/ai/approve-tool-call` to supply a result instead.
 //
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-deny-tool-call/
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-deny-tool-call/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiAiAiDenyToolCallRequest
-func (a *AIAIAPIService) AiAiDenyToolCall(ctx context.Context) ApiAiAiDenyToolCallRequest {
-	return ApiAiAiDenyToolCallRequest{
+// @return ApiAiDenyToolCallRequest
+func (a *AIAIAPIService) AiDenyToolCall(ctx context.Context) ApiAiDenyToolCallRequest {
+	return ApiAiDenyToolCallRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -209,7 +209,7 @@ func (a *AIAIAPIService) AiAiDenyToolCall(ctx context.Context) ApiAiAiDenyToolCa
 
 // Execute executes the request
 //  @return AiChatEvent
-func (a *AIAIAPIService) AiAiDenyToolCallExecute(r ApiAiAiDenyToolCallRequest) (*AiChatEvent, *http.Response, error) {
+func (a *AIAIAPIService) AiDenyToolCallExecute(r ApiAiDenyToolCallRequest) (*AiChatEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -217,7 +217,7 @@ func (a *AIAIAPIService) AiAiDenyToolCallExecute(r ApiAiAiDenyToolCallRequest) (
 		localVarReturnValue  *AiChatEvent
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiAiDenyToolCall")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiDenyToolCall")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -227,8 +227,8 @@ func (a *AIAIAPIService) AiAiDenyToolCallExecute(r ApiAiAiDenyToolCallRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.aiAiToolCallData == nil {
-		return localVarReturnValue, nil, reportError("aiAiToolCallData is required and must be specified")
+	if r.aiToolCallData == nil {
+		return localVarReturnValue, nil, reportError("aiToolCallData is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -249,7 +249,7 @@ func (a *AIAIAPIService) AiAiDenyToolCallExecute(r ApiAiAiDenyToolCallRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiAiToolCallData
+	localVarPostBody = r.aiToolCallData
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -330,30 +330,30 @@ func (a *AIAIAPIService) AiAiDenyToolCallExecute(r ApiAiAiDenyToolCallRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAiAiRegenerateStreamRequest struct {
+type ApiAiRegenerateStreamRequest struct {
 	ctx context.Context
 	ApiService *AIAIAPIService
-	aiAiRegenerateStreamRequest *AiAiRegenerateStreamRequest
+	aiRegenerateStreamRequest *AiRegenerateStreamRequest
 }
 
-func (r ApiAiAiRegenerateStreamRequest) AiAiRegenerateStreamRequest(aiAiRegenerateStreamRequest AiAiRegenerateStreamRequest) ApiAiAiRegenerateStreamRequest {	r.aiAiRegenerateStreamRequest = &aiAiRegenerateStreamRequest
+func (r ApiAiRegenerateStreamRequest) AiRegenerateStreamRequest(aiRegenerateStreamRequest AiRegenerateStreamRequest) ApiAiRegenerateStreamRequest {	r.aiRegenerateStreamRequest = &aiRegenerateStreamRequest
 	return r
 }
 
-func (r ApiAiAiRegenerateStreamRequest) Execute() (*AiChatEvent, *http.Response, error) {
-	return r.ApiService.AiAiRegenerateStreamExecute(r)
+func (r ApiAiRegenerateStreamRequest) Execute() (*AiChatEvent, *http.Response, error) {
+	return r.ApiService.AiRegenerateStreamExecute(r)
 }
 
-// AiAiRegenerateStream Regenerate stream
+// AiRegenerateStream Regenerate stream
 //
 // Re-rolls the last assistant reply of an existing thread: every message after the last user message - the previous reply and any tool-call hops - is dropped, and a fresh reply is streamed as newline-delimited `ChatEvent` objects against the unchanged prompt. The thread has to exist already, `threadId` is required, and no title is generated. The dropped messages are gone for good, so this is a destructive operation on the thread's tail rather than a retry that keeps both answers. Unlike `send-with-stream` the profile is not verified before the stream opens, so an unusable model surfaces as an error frame inside the 200 rather than as a 4xx.
 //
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-regenerate-stream/
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-regenerate-stream/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiAiAiRegenerateStreamRequest
-func (a *AIAIAPIService) AiAiRegenerateStream(ctx context.Context) ApiAiAiRegenerateStreamRequest {
-	return ApiAiAiRegenerateStreamRequest{
+// @return ApiAiRegenerateStreamRequest
+func (a *AIAIAPIService) AiRegenerateStream(ctx context.Context) ApiAiRegenerateStreamRequest {
+	return ApiAiRegenerateStreamRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -361,7 +361,7 @@ func (a *AIAIAPIService) AiAiRegenerateStream(ctx context.Context) ApiAiAiRegene
 
 // Execute executes the request
 //  @return AiChatEvent
-func (a *AIAIAPIService) AiAiRegenerateStreamExecute(r ApiAiAiRegenerateStreamRequest) (*AiChatEvent, *http.Response, error) {
+func (a *AIAIAPIService) AiRegenerateStreamExecute(r ApiAiRegenerateStreamRequest) (*AiChatEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -369,7 +369,7 @@ func (a *AIAIAPIService) AiAiRegenerateStreamExecute(r ApiAiAiRegenerateStreamRe
 		localVarReturnValue  *AiChatEvent
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiAiRegenerateStream")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiRegenerateStream")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -379,8 +379,8 @@ func (a *AIAIAPIService) AiAiRegenerateStreamExecute(r ApiAiAiRegenerateStreamRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.aiAiRegenerateStreamRequest == nil {
-		return localVarReturnValue, nil, reportError("aiAiRegenerateStreamRequest is required and must be specified")
+	if r.aiRegenerateStreamRequest == nil {
+		return localVarReturnValue, nil, reportError("aiRegenerateStreamRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -401,7 +401,7 @@ func (a *AIAIAPIService) AiAiRegenerateStreamExecute(r ApiAiAiRegenerateStreamRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiAiRegenerateStreamRequest
+	localVarPostBody = r.aiRegenerateStreamRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -482,30 +482,30 @@ func (a *AIAIAPIService) AiAiRegenerateStreamExecute(r ApiAiAiRegenerateStreamRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAiAiSendRequest struct {
+type ApiAiSendRequest struct {
 	ctx context.Context
 	ApiService *AIAIAPIService
-	aiAiSendRequest *AiAiSendRequest
+	aiSendRequest *AiSendRequest
 }
 
-func (r ApiAiAiSendRequest) AiAiSendRequest(aiAiSendRequest AiAiSendRequest) ApiAiAiSendRequest {	r.aiAiSendRequest = &aiAiSendRequest
+func (r ApiAiSendRequest) AiSendRequest(aiSendRequest AiSendRequest) ApiAiSendRequest {	r.aiSendRequest = &aiSendRequest
 	return r
 }
 
-func (r ApiAiAiSendRequest) Execute() (*AiThreadMessageLike, *http.Response, error) {
-	return r.ApiService.AiAiSendExecute(r)
+func (r ApiAiSendRequest) Execute() (*AiThreadMessageLike, *http.Response, error) {
+	return r.ApiService.AiSendExecute(r)
 }
 
-// AiAiSend Run an AI action
+// AiSend Run an AI action
 //
-// Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
+// Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. `actionType` has to be a known action and `userMessage` has to carry text or an attachment, or the call answers 400 before anything runs. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
 //
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send/
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiAiAiSendRequest
-func (a *AIAIAPIService) AiAiSend(ctx context.Context) ApiAiAiSendRequest {
-	return ApiAiAiSendRequest{
+// @return ApiAiSendRequest
+func (a *AIAIAPIService) AiSend(ctx context.Context) ApiAiSendRequest {
+	return ApiAiSendRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -513,7 +513,7 @@ func (a *AIAIAPIService) AiAiSend(ctx context.Context) ApiAiAiSendRequest {
 
 // Execute executes the request
 //  @return AiThreadMessageLike
-func (a *AIAIAPIService) AiAiSendExecute(r ApiAiAiSendRequest) (*AiThreadMessageLike, *http.Response, error) {
+func (a *AIAIAPIService) AiSendExecute(r ApiAiSendRequest) (*AiThreadMessageLike, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -521,7 +521,7 @@ func (a *AIAIAPIService) AiAiSendExecute(r ApiAiAiSendRequest) (*AiThreadMessage
 		localVarReturnValue  *AiThreadMessageLike
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiAiSend")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiSend")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -531,8 +531,8 @@ func (a *AIAIAPIService) AiAiSendExecute(r ApiAiAiSendRequest) (*AiThreadMessage
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.aiAiSendRequest == nil {
-		return localVarReturnValue, nil, reportError("aiAiSendRequest is required and must be specified")
+	if r.aiSendRequest == nil {
+		return localVarReturnValue, nil, reportError("aiSendRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -553,7 +553,7 @@ func (a *AIAIAPIService) AiAiSendExecute(r ApiAiAiSendRequest) (*AiThreadMessage
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiAiSendRequest
+	localVarPostBody = r.aiSendRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -575,6 +575,17 @@ func (a *AIAIAPIService) AiAiSendExecute(r ApiAiAiSendRequest) (*AiThreadMessage
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
@@ -634,30 +645,30 @@ func (a *AIAIAPIService) AiAiSendExecute(r ApiAiAiSendRequest) (*AiThreadMessage
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAiAiSendCustomRequest struct {
+type ApiAiSendCustomRequest struct {
 	ctx context.Context
 	ApiService *AIAIAPIService
-	aiAiSendCustomRequest *AiAiSendCustomRequest
+	aiSendCustomRequest *AiSendCustomRequest
 }
 
-func (r ApiAiAiSendCustomRequest) AiAiSendCustomRequest(aiAiSendCustomRequest AiAiSendCustomRequest) ApiAiAiSendCustomRequest {	r.aiAiSendCustomRequest = &aiAiSendCustomRequest
+func (r ApiAiSendCustomRequest) AiSendCustomRequest(aiSendCustomRequest AiSendCustomRequest) ApiAiSendCustomRequest {	r.aiSendCustomRequest = &aiSendCustomRequest
 	return r
 }
 
-func (r ApiAiAiSendCustomRequest) Execute() (*AiThreadMessageLike, *http.Response, error) {
-	return r.ApiService.AiAiSendCustomExecute(r)
+func (r ApiAiSendCustomRequest) Execute() (*AiThreadMessageLike, *http.Response, error) {
+	return r.ApiService.AiSendCustomExecute(r)
 }
 
-// AiAiSendCustom Send custom
+// AiSendCustom Send custom
 //
-// Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. The shape of the answer depends on the body rather than on the route: with `isStream` set it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal's own action configuration instead of from the caller.
+// Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. `systemPrompt` is required and `userMessage` has to carry text or an attachment, or the call answers 400 before anything runs. The shape of the answer depends on the body rather than on the route: with `isStream: true` it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both; `isStream` has to be a real boolean when sent, a string is refused. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal's own action configuration instead of from the caller.
 //
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-custom/
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-custom/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiAiAiSendCustomRequest
-func (a *AIAIAPIService) AiAiSendCustom(ctx context.Context) ApiAiAiSendCustomRequest {
-	return ApiAiAiSendCustomRequest{
+// @return ApiAiSendCustomRequest
+func (a *AIAIAPIService) AiSendCustom(ctx context.Context) ApiAiSendCustomRequest {
+	return ApiAiSendCustomRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -665,7 +676,7 @@ func (a *AIAIAPIService) AiAiSendCustom(ctx context.Context) ApiAiAiSendCustomRe
 
 // Execute executes the request
 //  @return AiThreadMessageLike
-func (a *AIAIAPIService) AiAiSendCustomExecute(r ApiAiAiSendCustomRequest) (*AiThreadMessageLike, *http.Response, error) {
+func (a *AIAIAPIService) AiSendCustomExecute(r ApiAiSendCustomRequest) (*AiThreadMessageLike, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -673,7 +684,7 @@ func (a *AIAIAPIService) AiAiSendCustomExecute(r ApiAiAiSendCustomRequest) (*AiT
 		localVarReturnValue  *AiThreadMessageLike
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiAiSendCustom")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiSendCustom")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -683,8 +694,8 @@ func (a *AIAIAPIService) AiAiSendCustomExecute(r ApiAiAiSendCustomRequest) (*AiT
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.aiAiSendCustomRequest == nil {
-		return localVarReturnValue, nil, reportError("aiAiSendCustomRequest is required and must be specified")
+	if r.aiSendCustomRequest == nil {
+		return localVarReturnValue, nil, reportError("aiSendCustomRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -705,7 +716,7 @@ func (a *AIAIAPIService) AiAiSendCustomExecute(r ApiAiAiSendCustomRequest) (*AiT
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiAiSendCustomRequest
+	localVarPostBody = r.aiSendCustomRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -727,6 +738,17 @@ func (a *AIAIAPIService) AiAiSendCustomExecute(r ApiAiAiSendCustomRequest) (*AiT
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
@@ -786,30 +808,30 @@ func (a *AIAIAPIService) AiAiSendCustomExecute(r ApiAiAiSendCustomRequest) (*AiT
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAiAiSendWithStreamRequest struct {
+type ApiAiSendWithStreamRequest struct {
 	ctx context.Context
 	ApiService *AIAIAPIService
-	aiAiSendStreamBody *AiAiSendStreamBody
+	aiSendStreamBody *AiSendStreamBody
 }
 
-func (r ApiAiAiSendWithStreamRequest) AiAiSendStreamBody(aiAiSendStreamBody AiAiSendStreamBody) ApiAiAiSendWithStreamRequest {	r.aiAiSendStreamBody = &aiAiSendStreamBody
+func (r ApiAiSendWithStreamRequest) AiSendStreamBody(aiSendStreamBody AiSendStreamBody) ApiAiSendWithStreamRequest {	r.aiSendStreamBody = &aiSendStreamBody
 	return r
 }
 
-func (r ApiAiAiSendWithStreamRequest) Execute() (*AiChatEvent, *http.Response, error) {
-	return r.ApiService.AiAiSendWithStreamExecute(r)
+func (r ApiAiSendWithStreamRequest) Execute() (*AiChatEvent, *http.Response, error) {
+	return r.ApiService.AiSendWithStreamExecute(r)
 }
 
-// AiAiSendWithStream Send with stream
+// AiSendWithStream Send with stream
 //
 // Runs one chat round and streams it back as newline-delimited `ChatEvent` objects. Omitting `threadId` opens a new thread, which requires that `entityId` names a room the caller can open and that a profile resolves for it; the user message and the reply are persisted either way, and a new thread also gets a generated title. The model is settled in a fixed order - an agent's assignment in scope overrides everything, then the explicit `profileId`, then the one stored on the thread, then the `Chat` assignment - and the effective profile is checked before the stream opens, so an unknown one fails with 400 rather than as an error buried in a 200. A tool call pauses the round and ends the stream; resume it with `POST api/2.0/ai/ai/approve-tool-call` or `POST api/2.0/ai/ai/deny-tool-call`.
 //
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-with-stream/
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-with-stream/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiAiAiSendWithStreamRequest
-func (a *AIAIAPIService) AiAiSendWithStream(ctx context.Context) ApiAiAiSendWithStreamRequest {
-	return ApiAiAiSendWithStreamRequest{
+// @return ApiAiSendWithStreamRequest
+func (a *AIAIAPIService) AiSendWithStream(ctx context.Context) ApiAiSendWithStreamRequest {
+	return ApiAiSendWithStreamRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -817,7 +839,7 @@ func (a *AIAIAPIService) AiAiSendWithStream(ctx context.Context) ApiAiAiSendWith
 
 // Execute executes the request
 //  @return AiChatEvent
-func (a *AIAIAPIService) AiAiSendWithStreamExecute(r ApiAiAiSendWithStreamRequest) (*AiChatEvent, *http.Response, error) {
+func (a *AIAIAPIService) AiSendWithStreamExecute(r ApiAiSendWithStreamRequest) (*AiChatEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -825,7 +847,7 @@ func (a *AIAIAPIService) AiAiSendWithStreamExecute(r ApiAiAiSendWithStreamReques
 		localVarReturnValue  *AiChatEvent
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiAiSendWithStream")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiSendWithStream")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -835,8 +857,8 @@ func (a *AIAIAPIService) AiAiSendWithStreamExecute(r ApiAiAiSendWithStreamReques
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.aiAiSendStreamBody == nil {
-		return localVarReturnValue, nil, reportError("aiAiSendStreamBody is required and must be specified")
+	if r.aiSendStreamBody == nil {
+		return localVarReturnValue, nil, reportError("aiSendStreamBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -857,7 +879,7 @@ func (a *AIAIAPIService) AiAiSendWithStreamExecute(r ApiAiAiSendWithStreamReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiAiSendStreamBody
+	localVarPostBody = r.aiSendStreamBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -971,30 +993,30 @@ func (a *AIAIAPIService) AiAiSendWithStreamExecute(r ApiAiAiSendWithStreamReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAiAiSendWithStreamOpenAIRequest struct {
+type ApiAiSendWithStreamOpenAIRequest struct {
 	ctx context.Context
 	ApiService *AIAIAPIService
-	aiAiSendStreamBody *AiAiSendStreamBody
+	aiSendStreamBody *AiSendStreamBody
 }
 
-func (r ApiAiAiSendWithStreamOpenAIRequest) AiAiSendStreamBody(aiAiSendStreamBody AiAiSendStreamBody) ApiAiAiSendWithStreamOpenAIRequest {	r.aiAiSendStreamBody = &aiAiSendStreamBody
+func (r ApiAiSendWithStreamOpenAIRequest) AiSendStreamBody(aiSendStreamBody AiSendStreamBody) ApiAiSendWithStreamOpenAIRequest {	r.aiSendStreamBody = &aiSendStreamBody
 	return r
 }
 
-func (r ApiAiAiSendWithStreamOpenAIRequest) Execute() (*AiOpenAIStreamChunk, *http.Response, error) {
-	return r.ApiService.AiAiSendWithStreamOpenAIExecute(r)
+func (r ApiAiSendWithStreamOpenAIRequest) Execute() (*AiOpenAIStreamChunk, *http.Response, error) {
+	return r.ApiService.AiSendWithStreamOpenAIExecute(r)
 }
 
-// AiAiSendWithStreamOpenAI Stream a chat in OpenAI format
+// AiSendWithStreamOpenAI Stream a chat in OpenAI format
 //
 // The same chat round as `send-with-stream`, re-encoded as a server-sent-events stream of OpenAI `chat.completion.chunk` objects terminated by a `[DONE]` sentinel. Thread handling, persistence, title generation and the profile pre-flight are identical, and a tool call ends the stream with `finish_reason: tool_calls` instead of a pause event - resume it through the same approve and deny operations. Unlike `send-with-stream` it does not reject an empty user message and does not enforce the per-kind attachment cap, so validate both before calling. Choose this route only for a client that already speaks the OpenAI wire format; `POST api/2.0/ai/ai/send-with-stream` is the native one.
 //
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-with-stream-open-ai/
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-with-stream-open-ai/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiAiAiSendWithStreamOpenAIRequest
-func (a *AIAIAPIService) AiAiSendWithStreamOpenAI(ctx context.Context) ApiAiAiSendWithStreamOpenAIRequest {
-	return ApiAiAiSendWithStreamOpenAIRequest{
+// @return ApiAiSendWithStreamOpenAIRequest
+func (a *AIAIAPIService) AiSendWithStreamOpenAI(ctx context.Context) ApiAiSendWithStreamOpenAIRequest {
+	return ApiAiSendWithStreamOpenAIRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1002,7 +1024,7 @@ func (a *AIAIAPIService) AiAiSendWithStreamOpenAI(ctx context.Context) ApiAiAiSe
 
 // Execute executes the request
 //  @return AiOpenAIStreamChunk
-func (a *AIAIAPIService) AiAiSendWithStreamOpenAIExecute(r ApiAiAiSendWithStreamOpenAIRequest) (*AiOpenAIStreamChunk, *http.Response, error) {
+func (a *AIAIAPIService) AiSendWithStreamOpenAIExecute(r ApiAiSendWithStreamOpenAIRequest) (*AiOpenAIStreamChunk, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1010,7 +1032,7 @@ func (a *AIAIAPIService) AiAiSendWithStreamOpenAIExecute(r ApiAiAiSendWithStream
 		localVarReturnValue  *AiOpenAIStreamChunk
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiAiSendWithStreamOpenAI")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAIAPIService.AiSendWithStreamOpenAI")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1020,8 +1042,8 @@ func (a *AIAIAPIService) AiAiSendWithStreamOpenAIExecute(r ApiAiAiSendWithStream
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.aiAiSendStreamBody == nil {
-		return localVarReturnValue, nil, reportError("aiAiSendStreamBody is required and must be specified")
+	if r.aiSendStreamBody == nil {
+		return localVarReturnValue, nil, reportError("aiSendStreamBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1042,7 +1064,7 @@ func (a *AIAIAPIService) AiAiSendWithStreamOpenAIExecute(r ApiAiAiSendWithStream
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiAiSendStreamBody
+	localVarPostBody = r.aiSendStreamBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

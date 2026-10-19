@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ChangeUserPassword**](PeoplePasswordAPI.md#ChangeUserPassword) | **Put** /api/2.0/people/{userid}/password | Change a user password
+[**ChangeUserPassword**](PeoplePasswordAPI.md#ChangeUserPassword) | **Put** /api/2.0/people/{userId}/password | Change a user password
 [**SendUserPassword**](PeoplePasswordAPI.md#SendUserPassword) | **Post** /api/2.0/people/password | Remind a user password
 
 
 
 ## ChangeUserPassword
 
-> EmployeeFullWrapper ChangeUserPassword(ctx, userid).ChangePasswordRequest(changePasswordRequest).Execute()
+> EmployeeFullWrapper ChangeUserPassword(ctx, userId).ChangePasswordRequest(changePasswordRequest).Execute()
 
 Change a user password
 
@@ -32,12 +32,12 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
 	changePasswordRequest := *openapiclient.NewChangePasswordRequest() // ChangePasswordRequest | The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PeoplePasswordAPI.ChangeUserPassword(context.Background(), userid).ChangePasswordRequest(changePasswordRequest).Execute()
+	resp, r, err := apiClient.PeoplePasswordAPI.ChangeUserPassword(context.Background(), userId).ChangePasswordRequest(changePasswordRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PeoplePasswordAPI.ChangeUserPassword``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -53,7 +53,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | 
+**userId** | **string** | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | 
 
 ### Other Parameters
 

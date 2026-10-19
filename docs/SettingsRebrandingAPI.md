@@ -26,7 +26,7 @@ Method | HTTP request | Description
 
 ## DeleteAdditionalWhiteLabelSettings
 
-> AdditionalWhiteLabelSettingsResponseWrapper DeleteAdditionalWhiteLabelSettings(ctx).Execute()
+> AdditionalResourcesWrapper DeleteAdditionalWhiteLabelSettings(ctx).Execute()
 
 Delete the additional white label settings
 
@@ -55,7 +55,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsRebrandingAPI.DeleteAdditionalWhiteLabelSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteAdditionalWhiteLabelSettings`: AdditionalWhiteLabelSettingsResponseWrapper
+	// response from `DeleteAdditionalWhiteLabelSettings`: AdditionalResourcesWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsRebrandingAPI.DeleteAdditionalWhiteLabelSettings`: %v\n", resp)
 }
 ```
@@ -71,7 +71,7 @@ Other parameters are passed through a pointer to a apiDeleteAdditionalWhiteLabel
 
 ### Return type
 
-[**AdditionalWhiteLabelSettingsResponseWrapper**](AdditionalWhiteLabelSettingsResponseWrapper.md)
+[**AdditionalResourcesWrapper**](AdditionalResourcesWrapper.md)
 
 ### Authorization
 
@@ -89,7 +89,7 @@ Other parameters are passed through a pointer to a apiDeleteAdditionalWhiteLabel
 
 ## DeleteCompanyWhiteLabelSettings
 
-> CompanyWhiteLabelSettingsResponseWrapper DeleteCompanyWhiteLabelSettings(ctx).Execute()
+> LicensorDetailsWrapper DeleteCompanyWhiteLabelSettings(ctx).Execute()
 
 Delete the company white label settings
 
@@ -118,7 +118,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsRebrandingAPI.DeleteCompanyWhiteLabelSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteCompanyWhiteLabelSettings`: CompanyWhiteLabelSettingsResponseWrapper
+	// response from `DeleteCompanyWhiteLabelSettings`: LicensorDetailsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsRebrandingAPI.DeleteCompanyWhiteLabelSettings`: %v\n", resp)
 }
 ```
@@ -134,7 +134,7 @@ Other parameters are passed through a pointer to a apiDeleteCompanyWhiteLabelSet
 
 ### Return type
 
-[**CompanyWhiteLabelSettingsResponseWrapper**](CompanyWhiteLabelSettingsResponseWrapper.md)
+[**LicensorDetailsWrapper**](LicensorDetailsWrapper.md)
 
 ### Authorization
 
@@ -152,7 +152,7 @@ Other parameters are passed through a pointer to a apiDeleteCompanyWhiteLabelSet
 
 ## GetAdditionalWhiteLabelSettings
 
-> AdditionalWhiteLabelSettingsDtoWrapper GetAdditionalWhiteLabelSettings(ctx).Execute()
+> AdditionalWhiteLabelSettingsWrapper GetAdditionalWhiteLabelSettings(ctx).Execute()
 
 Get the additional white label settings
 
@@ -181,7 +181,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsRebrandingAPI.GetAdditionalWhiteLabelSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAdditionalWhiteLabelSettings`: AdditionalWhiteLabelSettingsDtoWrapper
+	// response from `GetAdditionalWhiteLabelSettings`: AdditionalWhiteLabelSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsRebrandingAPI.GetAdditionalWhiteLabelSettings`: %v\n", resp)
 }
 ```
@@ -197,7 +197,7 @@ Other parameters are passed through a pointer to a apiGetAdditionalWhiteLabelSet
 
 ### Return type
 
-[**AdditionalWhiteLabelSettingsDtoWrapper**](AdditionalWhiteLabelSettingsDtoWrapper.md)
+[**AdditionalWhiteLabelSettingsWrapper**](AdditionalWhiteLabelSettingsWrapper.md)
 
 ### Authorization
 
@@ -215,7 +215,7 @@ Other parameters are passed through a pointer to a apiGetAdditionalWhiteLabelSet
 
 ## GetCompanyWhiteLabelSettings
 
-> CompanyWhiteLabelSettingsDtoWrapper GetCompanyWhiteLabelSettings(ctx).Execute()
+> CompanyWhiteLabelSettingsWrapper GetCompanyWhiteLabelSettings(ctx).Execute()
 
 Get the company white label settings
 
@@ -244,7 +244,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsRebrandingAPI.GetCompanyWhiteLabelSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetCompanyWhiteLabelSettings`: CompanyWhiteLabelSettingsDtoWrapper
+	// response from `GetCompanyWhiteLabelSettings`: CompanyWhiteLabelSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsRebrandingAPI.GetCompanyWhiteLabelSettings`: %v\n", resp)
 }
 ```
@@ -260,7 +260,7 @@ Other parameters are passed through a pointer to a apiGetCompanyWhiteLabelSettin
 
 ### Return type
 
-[**CompanyWhiteLabelSettingsDtoWrapper**](CompanyWhiteLabelSettingsDtoWrapper.md)
+[**CompanyWhiteLabelSettingsWrapper**](CompanyWhiteLabelSettingsWrapper.md)
 
 ### Authorization
 
@@ -481,7 +481,7 @@ Name | Type | Description  | Notes
 
 ## GetLicensorData
 
-> CompanyWhiteLabelSettingsArrayWrapper GetLicensorData(ctx).Execute()
+> LicensorDetailsArrayWrapper GetLicensorData(ctx).Execute()
 
 Get the licensor data
 
@@ -510,7 +510,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsRebrandingAPI.GetLicensorData``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLicensorData`: CompanyWhiteLabelSettingsArrayWrapper
+	// response from `GetLicensorData`: LicensorDetailsArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsRebrandingAPI.GetLicensorData`: %v\n", resp)
 }
 ```
@@ -526,7 +526,7 @@ Other parameters are passed through a pointer to a apiGetLicensorDataRequest str
 
 ### Return type
 
-[**CompanyWhiteLabelSettingsArrayWrapper**](CompanyWhiteLabelSettingsArrayWrapper.md)
+[**LicensorDetailsArrayWrapper**](LicensorDetailsArrayWrapper.md)
 
 ### Authorization
 
@@ -824,7 +824,7 @@ Name | Type | Description  | Notes
 
 ## SaveAdditionalWhiteLabelSettings
 
-> BooleanWrapper SaveAdditionalWhiteLabelSettings(ctx).AdditionalWhiteLabelSettingsWrapper(additionalWhiteLabelSettingsWrapper).Execute()
+> BooleanWrapper SaveAdditionalWhiteLabelSettings(ctx).AdditionalWhiteLabelSettingsRequestDto(additionalWhiteLabelSettingsRequestDto).Execute()
 
 Save the additional white label settings
 
@@ -845,11 +845,11 @@ import (
 )
 
 func main() {
-	additionalWhiteLabelSettingsWrapper := *openapiclient.NewAdditionalWhiteLabelSettingsWrapper() // AdditionalWhiteLabelSettingsWrapper |  (optional)
+	additionalWhiteLabelSettingsRequestDto := *openapiclient.NewAdditionalWhiteLabelSettingsRequestDto() // AdditionalWhiteLabelSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsRebrandingAPI.SaveAdditionalWhiteLabelSettings(context.Background()).AdditionalWhiteLabelSettingsWrapper(additionalWhiteLabelSettingsWrapper).Execute()
+	resp, r, err := apiClient.SettingsRebrandingAPI.SaveAdditionalWhiteLabelSettings(context.Background()).AdditionalWhiteLabelSettingsRequestDto(additionalWhiteLabelSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsRebrandingAPI.SaveAdditionalWhiteLabelSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -870,7 +870,7 @@ Other parameters are passed through a pointer to a apiSaveAdditionalWhiteLabelSe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **additionalWhiteLabelSettingsWrapper** | [**AdditionalWhiteLabelSettingsWrapper**](AdditionalWhiteLabelSettingsWrapper.md) |  | 
+ **additionalWhiteLabelSettingsRequestDto** | [**AdditionalWhiteLabelSettingsRequestDto**](AdditionalWhiteLabelSettingsRequestDto.md) |  | 
 
 ### Return type
 
@@ -892,7 +892,7 @@ Name | Type | Description  | Notes
 
 ## SaveCompanyWhiteLabelSettings
 
-> BooleanWrapper SaveCompanyWhiteLabelSettings(ctx).CompanyWhiteLabelSettingsWrapper(companyWhiteLabelSettingsWrapper).Execute()
+> BooleanWrapper SaveCompanyWhiteLabelSettings(ctx).CompanyWhiteLabelSettingsRequestDto(companyWhiteLabelSettingsRequestDto).Execute()
 
 Save the company white label settings
 
@@ -913,11 +913,11 @@ import (
 )
 
 func main() {
-	companyWhiteLabelSettingsWrapper := *openapiclient.NewCompanyWhiteLabelSettingsWrapper() // CompanyWhiteLabelSettingsWrapper |  (optional)
+	companyWhiteLabelSettingsRequestDto := *openapiclient.NewCompanyWhiteLabelSettingsRequestDto() // CompanyWhiteLabelSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsRebrandingAPI.SaveCompanyWhiteLabelSettings(context.Background()).CompanyWhiteLabelSettingsWrapper(companyWhiteLabelSettingsWrapper).Execute()
+	resp, r, err := apiClient.SettingsRebrandingAPI.SaveCompanyWhiteLabelSettings(context.Background()).CompanyWhiteLabelSettingsRequestDto(companyWhiteLabelSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsRebrandingAPI.SaveCompanyWhiteLabelSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -938,7 +938,7 @@ Other parameters are passed through a pointer to a apiSaveCompanyWhiteLabelSetti
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **companyWhiteLabelSettingsWrapper** | [**CompanyWhiteLabelSettingsWrapper**](CompanyWhiteLabelSettingsWrapper.md) |  | 
+ **companyWhiteLabelSettingsRequestDto** | [**CompanyWhiteLabelSettingsRequestDto**](CompanyWhiteLabelSettingsRequestDto.md) |  | 
 
 ### Return type
 
@@ -960,7 +960,7 @@ Name | Type | Description  | Notes
 
 ## SaveWhiteLabelLogoText
 
-> BooleanWrapper SaveWhiteLabelLogoText(ctx).IsDark(isDark).IsDefault(isDefault).WhiteLabelRequestsDto(whiteLabelRequestsDto).Execute()
+> BooleanWrapper SaveWhiteLabelLogoText(ctx).IsDark(isDark).IsDefault(isDefault).WhiteLabelRequestDto(whiteLabelRequestDto).Execute()
 
 Save the white label logo text
 
@@ -983,11 +983,11 @@ import (
 func main() {
 	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
 	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
-	whiteLabelRequestsDto := *openapiclient.NewWhiteLabelRequestsDto() // WhiteLabelRequestsDto |  (optional)
+	whiteLabelRequestDto := *openapiclient.NewWhiteLabelRequestDto() // WhiteLabelRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsRebrandingAPI.SaveWhiteLabelLogoText(context.Background()).IsDark(isDark).IsDefault(isDefault).WhiteLabelRequestsDto(whiteLabelRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsRebrandingAPI.SaveWhiteLabelLogoText(context.Background()).IsDark(isDark).IsDefault(isDefault).WhiteLabelRequestDto(whiteLabelRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsRebrandingAPI.SaveWhiteLabelLogoText``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1010,7 +1010,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
  **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
- **whiteLabelRequestsDto** | [**WhiteLabelRequestsDto**](WhiteLabelRequestsDto.md) |  | 
+ **whiteLabelRequestDto** | [**WhiteLabelRequestDto**](WhiteLabelRequestDto.md) |  | 
 
 ### Return type
 
@@ -1032,7 +1032,7 @@ Name | Type | Description  | Notes
 
 ## SaveWhiteLabelSettings
 
-> BooleanWrapper SaveWhiteLabelSettings(ctx).IsDark(isDark).IsDefault(isDefault).WhiteLabelRequestsDto(whiteLabelRequestsDto).Execute()
+> BooleanWrapper SaveWhiteLabelSettings(ctx).IsDark(isDark).IsDefault(isDefault).WhiteLabelRequestDto(whiteLabelRequestDto).Execute()
 
 Save the white label logos
 
@@ -1055,11 +1055,11 @@ import (
 func main() {
 	isDark := true // bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
 	isDefault := true // bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
-	whiteLabelRequestsDto := *openapiclient.NewWhiteLabelRequestsDto() // WhiteLabelRequestsDto |  (optional)
+	whiteLabelRequestDto := *openapiclient.NewWhiteLabelRequestDto() // WhiteLabelRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsRebrandingAPI.SaveWhiteLabelSettings(context.Background()).IsDark(isDark).IsDefault(isDefault).WhiteLabelRequestsDto(whiteLabelRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsRebrandingAPI.SaveWhiteLabelSettings(context.Background()).IsDark(isDark).IsDefault(isDefault).WhiteLabelRequestDto(whiteLabelRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsRebrandingAPI.SaveWhiteLabelSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1082,7 +1082,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **isDark** | **bool** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | 
  **isDefault** | **bool** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | 
- **whiteLabelRequestsDto** | [**WhiteLabelRequestsDto**](WhiteLabelRequestsDto.md) |  | 
+ **whiteLabelRequestDto** | [**WhiteLabelRequestDto**](WhiteLabelRequestDto.md) |  | 
 
 ### Return type
 

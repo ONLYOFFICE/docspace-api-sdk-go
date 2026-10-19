@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 
 ## ChangeDefaultAccessRights
 
-> FileShareResponseArrayWrapper ChangeDefaultAccessRights(ctx).RequestBody(requestBody).Execute()
+> FileShareResponseArrayWrapper ChangeDefaultAccessRights(ctx).DefaultAccessRightsRequestDto(defaultAccessRightsRequestDto).Execute()
 
 Change the default access rights
 
@@ -196,11 +196,11 @@ import (
 )
 
 func main() {
-	requestBody := []int32{int32(0)} // []int32 | The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request. (optional)
+	defaultAccessRightsRequestDto := []int32{int32(0)} // []int32 | The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesSettingsAPI.ChangeDefaultAccessRights(context.Background()).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.FilesSettingsAPI.ChangeDefaultAccessRights(context.Background()).DefaultAccessRightsRequestDto(defaultAccessRightsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesSettingsAPI.ChangeDefaultAccessRights``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -221,7 +221,7 @@ Other parameters are passed through a pointer to a apiChangeDefaultAccessRightsR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **[]int32** | The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request. | 
+ **defaultAccessRightsRequestDto** | **[]int32** | The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request. | 
 
 ### Return type
 

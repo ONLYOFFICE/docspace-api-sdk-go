@@ -40,6 +40,8 @@ Name | Type | Description | Notes
 **External** | Pointer to **bool** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] 
 **ExpirationDate** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] 
 **IsLinkExpired** | Pointer to **bool** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] 
+**AssignedMetadataTemplates** | Pointer to **[]int32** | The IDs of the metadata templates assigned to the file entry. | [optional] 
+**MetadataMatches** | Pointer to [**[]MetadataMatchDto**](MetadataMatchDto.md) | Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here. | [optional] 
 **FolderId** | Pointer to **int32** | The folder the file is stored in. When the file was reached through a share and the caller cannot open its  real parent, the identifier of the Shared with me section is reported instead, so this is where the file is  visible rather than where it physically sits. | [optional] 
 **Version** | Pointer to **int32** | The revision this entry describes. It starts at 1 and moves to the next number each time new content is stored  over the file, except for an editing session opened against the file itself, which replaces the content and  keeps the number. `GET api/2.0/files/file/{fileId}/history` lists them all. | [optional] 
 **VersionGroup** | Pointer to **int32** | Groups revisions that belong together, which is how a history can fold a long editing session into one entry:  versions saved inside one session share this number, and an upload over the file starts a new group. | [optional] 
@@ -74,7 +76,7 @@ Name | Type | Description | Notes
 **Expired** | Pointer to [**ApiDateTime**](ApiDateTime.md) | The moment the file falls under the lifetime rule of the room holding it and is removed. It is counted from  the first revision rather than the latest one, so editing a file does not postpone it, and it is null when the  room sets no lifetime. Written with the offset of the portal's time zone. | [optional] 
 **VectorizationStatus** | Pointer to [**VectorizationStatus**](VectorizationStatus.md) | How far the indexing of the file's content for AI search has got. It is null for a file that has never been  queued for indexing, which is every file while the feature is off for the portal. | [optional] 
 **ExternalDbTableName** | Pointer to **NullableString** | The table collecting the submitted values of this form in the external database configured for its room. The  field is left out of the answer entirely when the form has no such table. | [optional] 
-**Dimensions** | Pointer to [**Size**](Size.md) | The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read. | [optional] 
+**Dimensions** | Pointer to [**ImageSizeDto**](ImageSizeDto.md) | The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read. | [optional] 
 
 ## Methods
 
@@ -1024,6 +1026,56 @@ SetIsLinkExpired sets IsLinkExpired field to given value.
 `func (o *FileDto) HasIsLinkExpired() bool`
 
 HasIsLinkExpired returns a boolean if a field has been set.
+
+### GetAssignedMetadataTemplates
+
+`func (o *FileDto) GetAssignedMetadataTemplates() []int32`
+
+GetAssignedMetadataTemplates returns the AssignedMetadataTemplates field if non-nil, zero value otherwise.
+
+### GetAssignedMetadataTemplatesOk
+
+`func (o *FileDto) GetAssignedMetadataTemplatesOk() (*[]int32, bool)`
+
+GetAssignedMetadataTemplatesOk returns a tuple with the AssignedMetadataTemplates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedMetadataTemplates
+
+`func (o *FileDto) SetAssignedMetadataTemplates(v []int32)`
+
+SetAssignedMetadataTemplates sets AssignedMetadataTemplates field to given value.
+
+### HasAssignedMetadataTemplates
+
+`func (o *FileDto) HasAssignedMetadataTemplates() bool`
+
+HasAssignedMetadataTemplates returns a boolean if a field has been set.
+
+### GetMetadataMatches
+
+`func (o *FileDto) GetMetadataMatches() []MetadataMatchDto`
+
+GetMetadataMatches returns the MetadataMatches field if non-nil, zero value otherwise.
+
+### GetMetadataMatchesOk
+
+`func (o *FileDto) GetMetadataMatchesOk() (*[]MetadataMatchDto, bool)`
+
+GetMetadataMatchesOk returns a tuple with the MetadataMatches field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadataMatches
+
+`func (o *FileDto) SetMetadataMatches(v []MetadataMatchDto)`
+
+SetMetadataMatches sets MetadataMatches field to given value.
+
+### HasMetadataMatches
+
+`func (o *FileDto) HasMetadataMatches() bool`
+
+HasMetadataMatches returns a boolean if a field has been set.
 
 ### GetFolderId
 
@@ -2087,20 +2139,20 @@ HasExternalDbTableName returns a boolean if a field has been set.
 UnsetExternalDbTableName ensures that no value is present for ExternalDbTableName, not even an explicit nil
 ### GetDimensions
 
-`func (o *FileDto) GetDimensions() Size`
+`func (o *FileDto) GetDimensions() ImageSizeDto`
 
 GetDimensions returns the Dimensions field if non-nil, zero value otherwise.
 
 ### GetDimensionsOk
 
-`func (o *FileDto) GetDimensionsOk() (*Size, bool)`
+`func (o *FileDto) GetDimensionsOk() (*ImageSizeDto, bool)`
 
 GetDimensionsOk returns a tuple with the Dimensions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDimensions
 
-`func (o *FileDto) SetDimensions(v Size)`
+`func (o *FileDto) SetDimensions(v ImageSizeDto)`
 
 SetDimensions sets Dimensions field to given value.
 

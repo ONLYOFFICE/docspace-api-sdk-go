@@ -329,7 +329,7 @@ Other parameters are passed through a pointer to a apiGetMigrationStatusRequest 
 
 ## ListMigrations
 
-> STRINGArrayWrapper ListMigrations(ctx).Execute()
+> StringArrayWrapper ListMigrations(ctx).Execute()
 
 Get available migrators
 
@@ -358,7 +358,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `MigrationAPI.ListMigrations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListMigrations`: STRINGArrayWrapper
+	// response from `ListMigrations`: StringArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `MigrationAPI.ListMigrations`: %v\n", resp)
 }
 ```
@@ -374,7 +374,7 @@ Other parameters are passed through a pointer to a apiListMigrationsRequest stru
 
 ### Return type
 
-[**STRINGArrayWrapper**](STRINGArrayWrapper.md)
+[**StringArrayWrapper**](StringArrayWrapper.md)
 
 ### Authorization
 

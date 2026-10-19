@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ## AuthenticateMe
 
-> AuthenticationTokenWrapper AuthenticateMe(ctx).AuthRequestsDto(authRequestsDto).Execute()
+> AuthenticationTokenWrapper AuthenticateMe(ctx).AuthRequestDto(authRequestDto).Execute()
 
 Authenticate a user
 
@@ -37,11 +37,11 @@ import (
 )
 
 func main() {
-	authRequestsDto := *openapiclient.NewAuthRequestsDto() // AuthRequestsDto |  (optional)
+	authRequestDto := *openapiclient.NewAuthRequestDto() // AuthRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AuthenticationAPI.AuthenticateMe(context.Background()).AuthRequestsDto(authRequestsDto).Execute()
+	resp, r, err := apiClient.AuthenticationAPI.AuthenticateMe(context.Background()).AuthRequestDto(authRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationAPI.AuthenticateMe``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -62,7 +62,7 @@ Other parameters are passed through a pointer to a apiAuthenticateMeRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authRequestsDto** | [**AuthRequestsDto**](AuthRequestsDto.md) |  | 
+ **authRequestDto** | [**AuthRequestDto**](AuthRequestDto.md) |  | 
 
 ### Return type
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## AuthenticateMeFromBodyWithCode
 
-> AuthenticationTokenWrapper AuthenticateMeFromBodyWithCode(ctx, code).AuthWithCodeRequestsDto(authWithCodeRequestsDto).Execute()
+> AuthenticationTokenWrapper AuthenticateMeFromBodyWithCode(ctx, code).AuthWithCodeRequestDto(authWithCodeRequestDto).Execute()
 
 Authenticate a user by code
 
@@ -106,11 +106,11 @@ import (
 
 func main() {
 	code := "code_example" // string | The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.
-	authWithCodeRequestsDto := *openapiclient.NewAuthWithCodeRequestsDto() // AuthWithCodeRequestsDto |  (optional)
+	authWithCodeRequestDto := *openapiclient.NewAuthWithCodeRequestDto() // AuthWithCodeRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AuthenticationAPI.AuthenticateMeFromBodyWithCode(context.Background(), code).AuthWithCodeRequestsDto(authWithCodeRequestsDto).Execute()
+	resp, r, err := apiClient.AuthenticationAPI.AuthenticateMeFromBodyWithCode(context.Background(), code).AuthWithCodeRequestDto(authWithCodeRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationAPI.AuthenticateMeFromBodyWithCode``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -136,7 +136,7 @@ Other parameters are passed through a pointer to a apiAuthenticateMeFromBodyWith
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **authWithCodeRequestsDto** | [**AuthWithCodeRequestsDto**](AuthWithCodeRequestsDto.md) |  | 
+ **authWithCodeRequestDto** | [**AuthWithCodeRequestDto**](AuthWithCodeRequestDto.md) |  | 
 
 ### Return type
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 ## CheckConfirm
 
-> ConfirmWrapper CheckConfirm(ctx).EmailValidationKeyModel(emailValidationKeyModel).Execute()
+> ConfirmWrapper CheckConfirm(ctx).CheckConfirmRequestDto(checkConfirmRequestDto).Execute()
 
 Check a confirmation link
 
@@ -179,11 +179,11 @@ import (
 )
 
 func main() {
-	emailValidationKeyModel := *openapiclient.NewEmailValidationKeyModel() // EmailValidationKeyModel |  (optional)
+	checkConfirmRequestDto := *openapiclient.NewCheckConfirmRequestDto() // CheckConfirmRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AuthenticationAPI.CheckConfirm(context.Background()).EmailValidationKeyModel(emailValidationKeyModel).Execute()
+	resp, r, err := apiClient.AuthenticationAPI.CheckConfirm(context.Background()).CheckConfirmRequestDto(checkConfirmRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationAPI.CheckConfirm``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -204,7 +204,7 @@ Other parameters are passed through a pointer to a apiCheckConfirmRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **emailValidationKeyModel** | [**EmailValidationKeyModel**](EmailValidationKeyModel.md) |  | 
+ **checkConfirmRequestDto** | [**CheckConfirmRequestDto**](CheckConfirmRequestDto.md) |  | 
 
 ### Return type
 
@@ -352,7 +352,7 @@ Other parameters are passed through a pointer to a apiLogoutRequest struct via t
 
 ## SaveMobilePhone
 
-> AuthenticationTokenWrapper SaveMobilePhone(ctx).MobileRequestsDto(mobileRequestsDto).Execute()
+> AuthenticationTokenWrapper SaveMobilePhone(ctx).MobileRequestDto(mobileRequestDto).Execute()
 
 Set a mobile phone
 
@@ -373,11 +373,11 @@ import (
 )
 
 func main() {
-	mobileRequestsDto := *openapiclient.NewMobileRequestsDto() // MobileRequestsDto |  (optional)
+	mobileRequestDto := *openapiclient.NewMobileRequestDto() // MobileRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AuthenticationAPI.SaveMobilePhone(context.Background()).MobileRequestsDto(mobileRequestsDto).Execute()
+	resp, r, err := apiClient.AuthenticationAPI.SaveMobilePhone(context.Background()).MobileRequestDto(mobileRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationAPI.SaveMobilePhone``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -398,7 +398,7 @@ Other parameters are passed through a pointer to a apiSaveMobilePhoneRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **mobileRequestsDto** | [**MobileRequestsDto**](MobileRequestsDto.md) |  | 
+ **mobileRequestDto** | [**MobileRequestDto**](MobileRequestDto.md) |  | 
 
 ### Return type
 
@@ -420,7 +420,7 @@ Name | Type | Description  | Notes
 
 ## SendSmsCode
 
-> AuthenticationTokenWrapper SendSmsCode(ctx).AuthRequestsDto(authRequestsDto).Execute()
+> AuthenticationTokenWrapper SendSmsCode(ctx).AuthRequestDto(authRequestDto).Execute()
 
 Send SMS code
 
@@ -441,11 +441,11 @@ import (
 )
 
 func main() {
-	authRequestsDto := *openapiclient.NewAuthRequestsDto() // AuthRequestsDto |  (optional)
+	authRequestDto := *openapiclient.NewAuthRequestDto() // AuthRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AuthenticationAPI.SendSmsCode(context.Background()).AuthRequestsDto(authRequestsDto).Execute()
+	resp, r, err := apiClient.AuthenticationAPI.SendSmsCode(context.Background()).AuthRequestDto(authRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationAPI.SendSmsCode``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -466,7 +466,7 @@ Other parameters are passed through a pointer to a apiSendSmsCodeRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authRequestsDto** | [**AuthRequestsDto**](AuthRequestsDto.md) |  | 
+ **authRequestDto** | [**AuthRequestDto**](AuthRequestDto.md) |  | 
 
 ### Return type
 

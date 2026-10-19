@@ -30,7 +30,7 @@ type AiImportError struct {
 	// The offending entry - its name or its id.
 	Ref string `json:"ref"`
 	// Why the entry was rejected.
-	Error AiTErrorData `json:"error"`
+	Error AiErrorData `json:"error"`
 }
 
 type _AiImportError AiImportError
@@ -39,7 +39,7 @@ type _AiImportError AiImportError
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiImportError(kind string, ref string, error_ AiTErrorData) *AiImportError {
+func NewAiImportError(kind string, ref string, error_ AiErrorData) *AiImportError {
 	this := AiImportError{}
 	this.Kind = kind
 	this.Ref = ref
@@ -104,9 +104,9 @@ func (o *AiImportError) SetRef(v string) {
 }
 
 // GetError returns the Error field value
-func (o *AiImportError) GetError() AiTErrorData {
+func (o *AiImportError) GetError() AiErrorData {
 	if o == nil {
-		var ret AiTErrorData
+		var ret AiErrorData
 		return ret
 	}
 
@@ -115,7 +115,7 @@ func (o *AiImportError) GetError() AiTErrorData {
 
 // GetErrorOk returns a tuple with the Error field value
 // and a boolean to check if the value has been set.
-func (o *AiImportError) GetErrorOk() (*AiTErrorData, bool) {
+func (o *AiImportError) GetErrorOk() (*AiErrorData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -123,7 +123,7 @@ func (o *AiImportError) GetErrorOk() (*AiTErrorData, bool) {
 }
 
 // SetError sets field value
-func (o *AiImportError) SetError(v AiTErrorData) {
+func (o *AiImportError) SetError(v AiErrorData) {
 	o.Error = v
 }
 

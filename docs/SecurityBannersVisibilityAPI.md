@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## SetTenantBannerSettings
 
-> TenantBannerSettingsWrapper SetTenantBannerSettings(ctx).TenantBannerSettingsDto(tenantBannerSettingsDto).Execute()
+> TenantBannerSettingsWrapper SetTenantBannerSettings(ctx).TenantBannerSettingsRequestDto(tenantBannerSettingsRequestDto).Execute()
 
 Set the banners visibility
 
@@ -31,11 +31,11 @@ import (
 )
 
 func main() {
-	tenantBannerSettingsDto := *openapiclient.NewTenantBannerSettingsDto() // TenantBannerSettingsDto |  (optional)
+	tenantBannerSettingsRequestDto := *openapiclient.NewTenantBannerSettingsRequestDto() // TenantBannerSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecurityBannersVisibilityAPI.SetTenantBannerSettings(context.Background()).TenantBannerSettingsDto(tenantBannerSettingsDto).Execute()
+	resp, r, err := apiClient.SecurityBannersVisibilityAPI.SetTenantBannerSettings(context.Background()).TenantBannerSettingsRequestDto(tenantBannerSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityBannersVisibilityAPI.SetTenantBannerSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -56,7 +56,7 @@ Other parameters are passed through a pointer to a apiSetTenantBannerSettingsReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenantBannerSettingsDto** | [**TenantBannerSettingsDto**](TenantBannerSettingsDto.md) |  | 
+ **tenantBannerSettingsRequestDto** | [**TenantBannerSettingsRequestDto**](TenantBannerSettingsRequestDto.md) |  | 
 
 ### Return type
 

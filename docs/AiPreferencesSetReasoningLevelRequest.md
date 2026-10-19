@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | [**AiAiReasoningLevel**](AiAiReasoningLevel.md) | New extended-thinking depth; `off` turns deep mode off. | 
+**Value** | [**AiReasoningLevel**](AiReasoningLevel.md) | New extended-thinking depth; `off` turns deep mode off. | 
 **EntityId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewAiPreferencesSetReasoningLevelRequest
 
-`func NewAiPreferencesSetReasoningLevelRequest(value AiAiReasoningLevel, ) *AiPreferencesSetReasoningLevelRequest`
+`func NewAiPreferencesSetReasoningLevelRequest(value AiReasoningLevel, ) *AiPreferencesSetReasoningLevelRequest`
 
 NewAiPreferencesSetReasoningLevelRequest instantiates a new AiPreferencesSetReasoningLevelRequest object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetValue
 
-`func (o *AiPreferencesSetReasoningLevelRequest) GetValue() AiAiReasoningLevel`
+`func (o *AiPreferencesSetReasoningLevelRequest) GetValue() AiReasoningLevel`
 
 GetValue returns the Value field if non-nil, zero value otherwise.
 
 ### GetValueOk
 
-`func (o *AiPreferencesSetReasoningLevelRequest) GetValueOk() (*AiAiReasoningLevel, bool)`
+`func (o *AiPreferencesSetReasoningLevelRequest) GetValueOk() (*AiReasoningLevel, bool)`
 
 GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetValue
 
-`func (o *AiPreferencesSetReasoningLevelRequest) SetValue(v AiAiReasoningLevel)`
+`func (o *AiPreferencesSetReasoningLevelRequest) SetValue(v AiReasoningLevel)`
 
 SetValue sets Value field to given value.
 

@@ -26,7 +26,7 @@ var _ MappedNullable = &IpRestrictionsDto{}
 // IpRestrictionsDto The addresses allowed to reach the portal, and whether the restriction is enforced.
 type IpRestrictionsDto struct {
 	// The allowed addresses, each entry pairing a single IPv4 or IPv6 address with the flag that limits it to  administrators. This is the whole list that is to hold afterwards: entries not repeated here are deleted.  Ranges written as `from-to` and CIDR blocks are refused with 400, even though the portal matches such forms  when they are already stored. Enforcement spares only the portal owner and the installation own networks, so  a list without the caller address locks the remaining administrators out.
-	IpRestrictions []IpRestrictionBase `json:"ipRestrictions"`
+	IpRestrictions []IpRestrictionEntryDto `json:"ipRestrictions"`
 	// Whether the list is enforced. Leaving it out follows the list - on when addresses are sent, off when the list  is empty - and sending `true` with an empty list is refused with 400, since that would admit nobody.
 	Enable NullableBool `json:"enable,omitempty"`
 }
@@ -37,7 +37,7 @@ type _IpRestrictionsDto IpRestrictionsDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIpRestrictionsDto(ipRestrictions []IpRestrictionBase) *IpRestrictionsDto {
+func NewIpRestrictionsDto(ipRestrictions []IpRestrictionEntryDto) *IpRestrictionsDto {
 	this := IpRestrictionsDto{}
 	this.IpRestrictions = ipRestrictions
 	return &this
@@ -52,10 +52,10 @@ func NewIpRestrictionsDtoWithDefaults() *IpRestrictionsDto {
 }
 
 // GetIpRestrictions returns the IpRestrictions field value
-// If the value is explicit nil, the zero value for []IpRestrictionBase will be returned
-func (o *IpRestrictionsDto) GetIpRestrictions() []IpRestrictionBase {
+// If the value is explicit nil, the zero value for []IpRestrictionEntryDto will be returned
+func (o *IpRestrictionsDto) GetIpRestrictions() []IpRestrictionEntryDto {
 	if o == nil {
-		var ret []IpRestrictionBase
+		var ret []IpRestrictionEntryDto
 		return ret
 	}
 
@@ -65,7 +65,7 @@ func (o *IpRestrictionsDto) GetIpRestrictions() []IpRestrictionBase {
 // GetIpRestrictionsOk returns a tuple with the IpRestrictions field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IpRestrictionsDto) GetIpRestrictionsOk() ([]IpRestrictionBase, bool) {
+func (o *IpRestrictionsDto) GetIpRestrictionsOk() ([]IpRestrictionEntryDto, bool) {
 	if o == nil || IsNil(o.IpRestrictions) {
 		return nil, false
 	}
@@ -73,7 +73,7 @@ func (o *IpRestrictionsDto) GetIpRestrictionsOk() ([]IpRestrictionBase, bool) {
 }
 
 // SetIpRestrictions sets field value
-func (o *IpRestrictionsDto) SetIpRestrictions(v []IpRestrictionBase) {
+func (o *IpRestrictionsDto) SetIpRestrictions(v []IpRestrictionEntryDto) {
 	o.IpRestrictions = v
 }
 

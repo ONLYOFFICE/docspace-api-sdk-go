@@ -30,7 +30,7 @@ type PortalGuestsAPIService service
 type ApiGetGuestSharingLinkRequest struct {
 	ctx context.Context
 	ApiService *PortalGuestsAPIService
-	userid string
+	userId string
 }
 
 func (r ApiGetGuestSharingLinkRequest) Execute() (*StringWrapper, *http.Response, error) {
@@ -44,13 +44,13 @@ func (r ApiGetGuestSharingLinkRequest) Execute() (*StringWrapper, *http.Response
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-guest-sharing-link/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @param userid The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
+// @param userId The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
 // @return ApiGetGuestSharingLinkRequest
-func (a *PortalGuestsAPIService) GetGuestSharingLink(ctx context.Context, userid string) ApiGetGuestSharingLinkRequest {
+func (a *PortalGuestsAPIService) GetGuestSharingLink(ctx context.Context, userId string) ApiGetGuestSharingLinkRequest {
 	return ApiGetGuestSharingLinkRequest{
 		ApiService: a,
 		ctx: ctx,
-		userid: userid,
+		userId: userId,
 	}
 }
 
@@ -69,8 +69,8 @@ func (a *PortalGuestsAPIService) GetGuestSharingLinkExecute(r ApiGetGuestSharing
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/2.0/people/guests/{userid}/share"
-	localVarPath = strings.Replace(localVarPath, "{"+"userid"+"}", url.PathEscape(parameterValueToString(r.userid, "userid")), -1)
+	localVarPath := localBasePath + "/api/2.0/people/guests/{userId}/share"
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

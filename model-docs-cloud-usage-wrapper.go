@@ -21,10 +21,10 @@ import (
 // checks if the DocsCloudUsageWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudUsageWrapper{}
 
-// DocsCloudUsageWrapper The successful API response containing the DocsCloudUsage object.
+// DocsCloudUsageWrapper The successful API response containing the DocsCloudUsageDto object.
 type DocsCloudUsageWrapper struct {
-	// The DocsCloudUsage object returned by the operation.
-	Response *DocsCloudUsage `json:"response,omitempty"`
+	// The DocsCloudUsageDto object returned by the operation.
+	Response *DocsCloudUsageDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewDocsCloudUsageWrapperWithDefaults() *DocsCloudUsageWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *DocsCloudUsageWrapper) GetResponse() DocsCloudUsage {
+func (o *DocsCloudUsageWrapper) GetResponse() DocsCloudUsageDto {
 	if o == nil || IsNil(o.Response) {
-		var ret DocsCloudUsage
+		var ret DocsCloudUsageDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *DocsCloudUsageWrapper) GetResponse() DocsCloudUsage {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DocsCloudUsageWrapper) GetResponseOk() (*DocsCloudUsage, bool) {
+func (o *DocsCloudUsageWrapper) GetResponseOk() (*DocsCloudUsageDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *DocsCloudUsageWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given DocsCloudUsage and assigns it to the Response field.
-func (o *DocsCloudUsageWrapper) SetResponse(v DocsCloudUsage) {
+// SetResponse gets a reference to the given DocsCloudUsageDto and assigns it to the Response field.
+func (o *DocsCloudUsageWrapper) SetResponse(v DocsCloudUsageDto) {
 	o.Response = &v
 }
 

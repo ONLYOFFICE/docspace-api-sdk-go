@@ -31,7 +31,7 @@ type ScheduleDto struct {
 	// The settings of the storage, as an object keyed by parameter name - not as the array of key and value  pairs the schedule was created with, so it cannot be sent back unchanged. For every storage type  except `ThirdPartyConsumer` the `folderId` key is built from the stored base path.
 	StorageParams map[string]*string `json:"storageParams"`
 	// When the backup runs, read back from the stored cron expression. `day` is 0 for a daily schedule,  because a daily one has no day.
-	CronParams CronParams `json:"cronParams"`
+	CronParams CronParamsDto `json:"cronParams"`
 	// The number of scheduled copies kept. It is null, not 0, when the schedule keeps an unlimited number.
 	BackupsStored NullableInt32 `json:"backupsStored,omitempty"`
 	// The date and time the schedule last ran at. It is `0001-01-01T00:00:00` until the schedule has run  for the first time.
@@ -46,7 +46,7 @@ type _ScheduleDto ScheduleDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScheduleDto(storageType BackupStorageType, storageParams map[string]*string, cronParams CronParams, lastBackupTime time.Time, dump bool) *ScheduleDto {
+func NewScheduleDto(storageType BackupStorageType, storageParams map[string]*string, cronParams CronParamsDto, lastBackupTime time.Time, dump bool) *ScheduleDto {
 	this := ScheduleDto{}
 	this.StorageType = storageType
 	this.StorageParams = storageParams
@@ -113,9 +113,9 @@ func (o *ScheduleDto) SetStorageParams(v map[string]*string) {
 }
 
 // GetCronParams returns the CronParams field value
-func (o *ScheduleDto) GetCronParams() CronParams {
+func (o *ScheduleDto) GetCronParams() CronParamsDto {
 	if o == nil {
-		var ret CronParams
+		var ret CronParamsDto
 		return ret
 	}
 
@@ -124,7 +124,7 @@ func (o *ScheduleDto) GetCronParams() CronParams {
 
 // GetCronParamsOk returns a tuple with the CronParams field value
 // and a boolean to check if the value has been set.
-func (o *ScheduleDto) GetCronParamsOk() (*CronParams, bool) {
+func (o *ScheduleDto) GetCronParamsOk() (*CronParamsDto, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,7 +132,7 @@ func (o *ScheduleDto) GetCronParamsOk() (*CronParams, bool) {
 }
 
 // SetCronParams sets field value
-func (o *ScheduleDto) SetCronParams(v CronParams) {
+func (o *ScheduleDto) SetCronParams(v CronParamsDto) {
 	o.CronParams = v
 }
 

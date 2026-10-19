@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreateOn** | Pointer to **time.Time** | When the portal recorded this copy, in UTC: the moment the filled copy was completed and its data indexed, not  the moment the form itself was made. | [optional] 
-**FormsData** | Pointer to [**[]FormsItemData**](FormsItemData.md) | The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank. | [optional] 
+**FormsData** | Pointer to [**[]FormsItemDataDto**](FormsItemDataDto.md) | The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank. | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasCreateOn returns a boolean if a field has been set.
 
 ### GetFormsData
 
-`func (o *FormResultsDto) GetFormsData() []FormsItemData`
+`func (o *FormResultsDto) GetFormsData() []FormsItemDataDto`
 
 GetFormsData returns the FormsData field if non-nil, zero value otherwise.
 
 ### GetFormsDataOk
 
-`func (o *FormResultsDto) GetFormsDataOk() (*[]FormsItemData, bool)`
+`func (o *FormResultsDto) GetFormsDataOk() (*[]FormsItemDataDto, bool)`
 
 GetFormsDataOk returns a tuple with the FormsData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFormsData
 
-`func (o *FormResultsDto) SetFormsData(v []FormsItemData)`
+`func (o *FormResultsDto) SetFormsData(v []FormsItemDataDto)`
 
 SetFormsData sets FormsData field to given value.
 

@@ -113,7 +113,7 @@ type FilesSettingsDto struct {
 	// Whether the warning shown before the lifetime settings of a room are changed is hidden for the caller.
 	HideConfirmRoomLifetime *bool `json:"hideConfirmRoomLifetime,omitempty"`
 	// The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used.
-	DefaultOrder *OrderBy `json:"defaultOrder,omitempty"`
+	DefaultOrder *OrderByDto `json:"defaultOrder,omitempty"`
 	// Whether the editor writes a document back to storage while the session is still open. It is on for every  portal and cannot be switched off.
 	Forcesave *bool `json:"forcesave,omitempty"`
 	// Whether those intermediate saves are kept as separate versions. They are not, in any portal: they update the  current version instead.
@@ -127,7 +127,7 @@ type FilesSettingsDto struct {
 	// The archive format the caller's multi-item downloads are packed into: true for `.tar.gz`, false for `.zip`.
 	DownloadTarGz *bool `json:"downloadTarGz,omitempty"`
 	// The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns.
-	AutomaticallyCleanUp *AutoCleanUpData `json:"automaticallyCleanUp,omitempty"`
+	AutomaticallyCleanUp *AutoCleanUpDataDto `json:"automaticallyCleanUp,omitempty"`
 	// Whether documents in this portal can be searched by what is inside them and not only by title. It depends on  the full-text search service being configured and having indexed the portal.
 	CanSearchByContent *bool `json:"canSearchByContent,omitempty"`
 	// The access rights the sharing dialog offers the caller by default. The portal normalises the set it stores, so  this can be shorter than what was last sent.
@@ -1742,9 +1742,9 @@ func (o *FilesSettingsDto) SetHideConfirmRoomLifetime(v bool) {
 }
 
 // GetDefaultOrder returns the DefaultOrder field value if set, zero value otherwise.
-func (o *FilesSettingsDto) GetDefaultOrder() OrderBy {
+func (o *FilesSettingsDto) GetDefaultOrder() OrderByDto {
 	if o == nil || IsNil(o.DefaultOrder) {
-		var ret OrderBy
+		var ret OrderByDto
 		return ret
 	}
 	return *o.DefaultOrder
@@ -1752,7 +1752,7 @@ func (o *FilesSettingsDto) GetDefaultOrder() OrderBy {
 
 // GetDefaultOrderOk returns a tuple with the DefaultOrder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FilesSettingsDto) GetDefaultOrderOk() (*OrderBy, bool) {
+func (o *FilesSettingsDto) GetDefaultOrderOk() (*OrderByDto, bool) {
 	if o == nil || IsNil(o.DefaultOrder) {
 		return nil, false
 	}
@@ -1768,8 +1768,8 @@ func (o *FilesSettingsDto) IsDefaultOrderSet() bool {
 	return false
 }
 
-// SetDefaultOrder gets a reference to the given OrderBy and assigns it to the DefaultOrder field.
-func (o *FilesSettingsDto) SetDefaultOrder(v OrderBy) {
+// SetDefaultOrder gets a reference to the given OrderByDto and assigns it to the DefaultOrder field.
+func (o *FilesSettingsDto) SetDefaultOrder(v OrderByDto) {
 	o.DefaultOrder = &v
 }
 
@@ -1966,9 +1966,9 @@ func (o *FilesSettingsDto) SetDownloadTarGz(v bool) {
 }
 
 // GetAutomaticallyCleanUp returns the AutomaticallyCleanUp field value if set, zero value otherwise.
-func (o *FilesSettingsDto) GetAutomaticallyCleanUp() AutoCleanUpData {
+func (o *FilesSettingsDto) GetAutomaticallyCleanUp() AutoCleanUpDataDto {
 	if o == nil || IsNil(o.AutomaticallyCleanUp) {
-		var ret AutoCleanUpData
+		var ret AutoCleanUpDataDto
 		return ret
 	}
 	return *o.AutomaticallyCleanUp
@@ -1976,7 +1976,7 @@ func (o *FilesSettingsDto) GetAutomaticallyCleanUp() AutoCleanUpData {
 
 // GetAutomaticallyCleanUpOk returns a tuple with the AutomaticallyCleanUp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FilesSettingsDto) GetAutomaticallyCleanUpOk() (*AutoCleanUpData, bool) {
+func (o *FilesSettingsDto) GetAutomaticallyCleanUpOk() (*AutoCleanUpDataDto, bool) {
 	if o == nil || IsNil(o.AutomaticallyCleanUp) {
 		return nil, false
 	}
@@ -1992,8 +1992,8 @@ func (o *FilesSettingsDto) IsAutomaticallyCleanUpSet() bool {
 	return false
 }
 
-// SetAutomaticallyCleanUp gets a reference to the given AutoCleanUpData and assigns it to the AutomaticallyCleanUp field.
-func (o *FilesSettingsDto) SetAutomaticallyCleanUp(v AutoCleanUpData) {
+// SetAutomaticallyCleanUp gets a reference to the given AutoCleanUpDataDto and assigns it to the AutomaticallyCleanUp field.
+func (o *FilesSettingsDto) SetAutomaticallyCleanUp(v AutoCleanUpDataDto) {
 	o.AutomaticallyCleanUp = &v
 }
 

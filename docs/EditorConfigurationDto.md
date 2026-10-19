@@ -5,18 +5,18 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CallbackUrl** | Pointer to **NullableString** | Where the editors post the document back to when they save it. A client must not call it itself; it is the  address the document service uses. | [optional] 
-**CoEditing** | Pointer to [**CoEditingConfig**](CoEditingConfig.md) | How co-editing starts out for this session and whether the user may switch it in the interface. | [optional] 
+**CoEditing** | Pointer to [**CoEditingConfigDto**](CoEditingConfigDto.md) | How co-editing starts out for this session and whether the user may switch it in the interface. | [optional] 
 **CreateUrl** | Pointer to **NullableString** | Where the editor sends the user when they ask for a new document of the same type. It is empty when creating  one is not offered here. | [optional] 
 **Customization** | Pointer to [**CustomizationConfigDto**](CustomizationConfigDto.md) | How the editor interface is dressed for this portal, this document and this layout. | [optional] 
-**Embedded** | Pointer to [**EmbeddedConfig**](EmbeddedConfig.md) | The addresses the framed viewer needs. It is filled in only for the embedded layout. | [optional] 
+**Embedded** | Pointer to [**EmbeddedConfigDto**](EmbeddedConfigDto.md) | The addresses the framed viewer needs. It is filled in only for the embedded layout. | [optional] 
 **EncryptionKeys** | Pointer to [**[]EncryptionKeyDto**](EncryptionKeyDto.md) | The caller's end-to-end encryption keys, added only when the document lies in a private room, so that the  editors can decrypt it in the browser. It is empty everywhere else. | [optional] 
 **Lang** | **NullableString** | The culture the editor interface is shown in, taken from the profile of the caller. | 
 **Mode** | **NullableString** | `edit` when this session may write the document, `view` when it may only read it. | 
 **ModeWrite** | Pointer to **bool** | Whether this session may write; it is what the mode above says in one word. | [optional] 
-**Plugins** | Pointer to [**PluginsConfig**](PluginsConfig.md) | Which editor plugins are offered. The portal currently offers none, so the list inside comes back empty. | [optional] 
-**Recent** | Pointer to [**[]RecentConfig**](RecentConfig.md) | The documents offered in the editor's recent list. It is left out altogether when there is nothing to offer. | [optional] 
-**Templates** | Pointer to [**[]TemplatesConfig**](TemplatesConfig.md) | Always empty: the portal no longer passes creation templates through the editor configuration. | [optional] 
-**User** | Pointer to [**UserConfig**](UserConfig.md) | The account the editors attribute changes to. It is empty for an anonymous session opened through an external  link, and the editors then ask for a name themselves. | [optional] 
+**Plugins** | Pointer to [**PluginsConfigDto**](PluginsConfigDto.md) | Which editor plugins are offered. The portal currently offers none, so the list inside comes back empty. | [optional] 
+**Recent** | Pointer to [**[]RecentConfigDto**](RecentConfigDto.md) | The documents offered in the editor's recent list. It is left out altogether when there is nothing to offer. | [optional] 
+**Templates** | Pointer to [**[]TemplatesConfigDto**](TemplatesConfigDto.md) | Always empty: the portal no longer passes creation templates through the editor configuration. | [optional] 
+**User** | Pointer to [**UserConfigDto**](UserConfigDto.md) | The account the editors attribute changes to. It is empty for an anonymous session opened through an external  link, and the editors then ask for a name themselves. | [optional] 
 
 ## Methods
 
@@ -74,20 +74,20 @@ HasCallbackUrl returns a boolean if a field has been set.
 UnsetCallbackUrl ensures that no value is present for CallbackUrl, not even an explicit nil
 ### GetCoEditing
 
-`func (o *EditorConfigurationDto) GetCoEditing() CoEditingConfig`
+`func (o *EditorConfigurationDto) GetCoEditing() CoEditingConfigDto`
 
 GetCoEditing returns the CoEditing field if non-nil, zero value otherwise.
 
 ### GetCoEditingOk
 
-`func (o *EditorConfigurationDto) GetCoEditingOk() (*CoEditingConfig, bool)`
+`func (o *EditorConfigurationDto) GetCoEditingOk() (*CoEditingConfigDto, bool)`
 
 GetCoEditingOk returns a tuple with the CoEditing field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCoEditing
 
-`func (o *EditorConfigurationDto) SetCoEditing(v CoEditingConfig)`
+`func (o *EditorConfigurationDto) SetCoEditing(v CoEditingConfigDto)`
 
 SetCoEditing sets CoEditing field to given value.
 
@@ -159,20 +159,20 @@ HasCustomization returns a boolean if a field has been set.
 
 ### GetEmbedded
 
-`func (o *EditorConfigurationDto) GetEmbedded() EmbeddedConfig`
+`func (o *EditorConfigurationDto) GetEmbedded() EmbeddedConfigDto`
 
 GetEmbedded returns the Embedded field if non-nil, zero value otherwise.
 
 ### GetEmbeddedOk
 
-`func (o *EditorConfigurationDto) GetEmbeddedOk() (*EmbeddedConfig, bool)`
+`func (o *EditorConfigurationDto) GetEmbeddedOk() (*EmbeddedConfigDto, bool)`
 
 GetEmbeddedOk returns a tuple with the Embedded field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEmbedded
 
-`func (o *EditorConfigurationDto) SetEmbedded(v EmbeddedConfig)`
+`func (o *EditorConfigurationDto) SetEmbedded(v EmbeddedConfigDto)`
 
 SetEmbedded sets Embedded field to given value.
 
@@ -304,20 +304,20 @@ HasModeWrite returns a boolean if a field has been set.
 
 ### GetPlugins
 
-`func (o *EditorConfigurationDto) GetPlugins() PluginsConfig`
+`func (o *EditorConfigurationDto) GetPlugins() PluginsConfigDto`
 
 GetPlugins returns the Plugins field if non-nil, zero value otherwise.
 
 ### GetPluginsOk
 
-`func (o *EditorConfigurationDto) GetPluginsOk() (*PluginsConfig, bool)`
+`func (o *EditorConfigurationDto) GetPluginsOk() (*PluginsConfigDto, bool)`
 
 GetPluginsOk returns a tuple with the Plugins field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPlugins
 
-`func (o *EditorConfigurationDto) SetPlugins(v PluginsConfig)`
+`func (o *EditorConfigurationDto) SetPlugins(v PluginsConfigDto)`
 
 SetPlugins sets Plugins field to given value.
 
@@ -329,20 +329,20 @@ HasPlugins returns a boolean if a field has been set.
 
 ### GetRecent
 
-`func (o *EditorConfigurationDto) GetRecent() []RecentConfig`
+`func (o *EditorConfigurationDto) GetRecent() []RecentConfigDto`
 
 GetRecent returns the Recent field if non-nil, zero value otherwise.
 
 ### GetRecentOk
 
-`func (o *EditorConfigurationDto) GetRecentOk() (*[]RecentConfig, bool)`
+`func (o *EditorConfigurationDto) GetRecentOk() (*[]RecentConfigDto, bool)`
 
 GetRecentOk returns a tuple with the Recent field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRecent
 
-`func (o *EditorConfigurationDto) SetRecent(v []RecentConfig)`
+`func (o *EditorConfigurationDto) SetRecent(v []RecentConfigDto)`
 
 SetRecent sets Recent field to given value.
 
@@ -364,20 +364,20 @@ HasRecent returns a boolean if a field has been set.
 UnsetRecent ensures that no value is present for Recent, not even an explicit nil
 ### GetTemplates
 
-`func (o *EditorConfigurationDto) GetTemplates() []TemplatesConfig`
+`func (o *EditorConfigurationDto) GetTemplates() []TemplatesConfigDto`
 
 GetTemplates returns the Templates field if non-nil, zero value otherwise.
 
 ### GetTemplatesOk
 
-`func (o *EditorConfigurationDto) GetTemplatesOk() (*[]TemplatesConfig, bool)`
+`func (o *EditorConfigurationDto) GetTemplatesOk() (*[]TemplatesConfigDto, bool)`
 
 GetTemplatesOk returns a tuple with the Templates field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTemplates
 
-`func (o *EditorConfigurationDto) SetTemplates(v []TemplatesConfig)`
+`func (o *EditorConfigurationDto) SetTemplates(v []TemplatesConfigDto)`
 
 SetTemplates sets Templates field to given value.
 
@@ -399,20 +399,20 @@ HasTemplates returns a boolean if a field has been set.
 UnsetTemplates ensures that no value is present for Templates, not even an explicit nil
 ### GetUser
 
-`func (o *EditorConfigurationDto) GetUser() UserConfig`
+`func (o *EditorConfigurationDto) GetUser() UserConfigDto`
 
 GetUser returns the User field if non-nil, zero value otherwise.
 
 ### GetUserOk
 
-`func (o *EditorConfigurationDto) GetUserOk() (*UserConfig, bool)`
+`func (o *EditorConfigurationDto) GetUserOk() (*UserConfigDto, bool)`
 
 GetUserOk returns a tuple with the User field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUser
 
-`func (o *EditorConfigurationDto) SetUser(v UserConfig)`
+`func (o *EditorConfigurationDto) SetUser(v UserConfigDto)`
 
 SetUser sets User field to given value.
 

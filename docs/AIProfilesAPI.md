@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## AiProfilesDelete
 
-> AiSuccessResponse AiProfilesDelete(ctx).Body(body).Execute()
+> AiSuccessResponse AiProfilesDelete(ctx).AiProfilesDeleteRequest(aiProfilesDeleteRequest).Execute()
 
 Delete a provider profile
 
@@ -106,11 +106,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | The ID of the profile to delete, as a bare JSON string.
+	aiProfilesDeleteRequest := "aiProfilesDeleteRequest_example" // string | The ID of the profile to delete, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIProfilesAPI.AiProfilesDelete(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIProfilesAPI.AiProfilesDelete(context.Background()).AiProfilesDeleteRequest(aiProfilesDeleteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIProfilesAPI.AiProfilesDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -131,7 +131,7 @@ Other parameters are passed through a pointer to a apiAiProfilesDeleteRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | The ID of the profile to delete, as a bare JSON string. | 
+ **aiProfilesDeleteRequest** | **string** | The ID of the profile to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -420,7 +420,7 @@ Name | Type | Description  | Notes
 
 ## AiProfilesTestConnection
 
-> AiProfilesTestConnection200Response AiProfilesTestConnection(ctx).Body(body).Execute()
+> AiProfilesTestConnection200Response AiProfilesTestConnection(ctx).AiProfilesTestConnectionRequest(aiProfilesTestConnectionRequest).Execute()
 
 Test a profile's provider
 
@@ -441,11 +441,11 @@ import (
 )
 
 func main() {
-	body := "body_example" // string | The ID of the profile to probe, as a bare JSON string.
+	aiProfilesTestConnectionRequest := "aiProfilesTestConnectionRequest_example" // string | The ID of the profile to probe, as a bare JSON string.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIProfilesAPI.AiProfilesTestConnection(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.AIProfilesAPI.AiProfilesTestConnection(context.Background()).AiProfilesTestConnectionRequest(aiProfilesTestConnectionRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIProfilesAPI.AiProfilesTestConnection``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -466,7 +466,7 @@ Other parameters are passed through a pointer to a apiAiProfilesTestConnectionRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string** | The ID of the profile to probe, as a bare JSON string. | 
+ **aiProfilesTestConnectionRequest** | **string** | The ID of the profile to probe, as a bare JSON string. | 
 
 ### Return type
 

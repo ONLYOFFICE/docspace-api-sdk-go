@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | `folder` or `prompt`, plus the offending name or id. | 
 **Ref** | **string** | The offending entry - its name or its id. | 
-**Error** | [**AiTErrorData**](AiTErrorData.md) | Why the entry was rejected. | 
+**Error** | [**AiErrorData**](AiErrorData.md) | Why the entry was rejected. | 
 
 ## Methods
 
 ### NewAiImportError
 
-`func NewAiImportError(kind string, ref string, error_ AiTErrorData, ) *AiImportError`
+`func NewAiImportError(kind string, ref string, error_ AiErrorData, ) *AiImportError`
 
 NewAiImportError instantiates a new AiImportError object
 This constructor will assign default values to properties that have it defined,
@@ -69,20 +69,20 @@ SetRef sets Ref field to given value.
 
 ### GetError
 
-`func (o *AiImportError) GetError() AiTErrorData`
+`func (o *AiImportError) GetError() AiErrorData`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *AiImportError) GetErrorOk() (*AiTErrorData, bool)`
+`func (o *AiImportError) GetErrorOk() (*AiErrorData, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *AiImportError) SetError(v AiTErrorData)`
+`func (o *AiImportError) SetError(v AiErrorData)`
 
 SetError sets Error field to given value.
 

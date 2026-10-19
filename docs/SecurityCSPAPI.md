@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## ConfigureCsp
 
-> CspWrapper ConfigureCsp(ctx).CspRequestsDto(cspRequestsDto).Execute()
+> CspWrapper ConfigureCsp(ctx).CspRequestDto(cspRequestDto).Execute()
 
 Configure CSP settings
 
@@ -32,11 +32,11 @@ import (
 )
 
 func main() {
-	cspRequestsDto := *openapiclient.NewCspRequestsDto() // CspRequestsDto |  (optional)
+	cspRequestDto := *openapiclient.NewCspRequestDto() // CspRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecurityCSPAPI.ConfigureCsp(context.Background()).CspRequestsDto(cspRequestsDto).Execute()
+	resp, r, err := apiClient.SecurityCSPAPI.ConfigureCsp(context.Background()).CspRequestDto(cspRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SecurityCSPAPI.ConfigureCsp``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -57,7 +57,7 @@ Other parameters are passed through a pointer to a apiConfigureCspRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cspRequestsDto** | [**CspRequestsDto**](CspRequestsDto.md) |  | 
+ **cspRequestDto** | [**CspRequestDto**](CspRequestDto.md) |  | 
 
 ### Return type
 

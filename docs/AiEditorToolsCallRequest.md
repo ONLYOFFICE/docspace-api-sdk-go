@@ -49,20 +49,20 @@ SetName sets Name field to given value.
 
 ### GetArguments
 
-`func (o *AiEditorToolsCallRequest) GetArguments() map[string]*interface{}`
+`func (o *AiEditorToolsCallRequest) GetArguments() map[string]interface{}`
 
 GetArguments returns the Arguments field if non-nil, zero value otherwise.
 
 ### GetArgumentsOk
 
-`func (o *AiEditorToolsCallRequest) GetArgumentsOk() (*map[string]*interface{}, bool)`
+`func (o *AiEditorToolsCallRequest) GetArgumentsOk() (*map[string]interface{}, bool)`
 
 GetArgumentsOk returns a tuple with the Arguments field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetArguments
 
-`func (o *AiEditorToolsCallRequest) SetArguments(v map[string]*interface{})`
+`func (o *AiEditorToolsCallRequest) SetArguments(v map[string]interface{})`
 
 SetArguments sets Arguments field to given value.
 

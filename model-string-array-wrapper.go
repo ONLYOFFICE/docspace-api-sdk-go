@@ -18,11 +18,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the STRINGArrayWrapper type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &STRINGArrayWrapper{}
+// checks if the StringArrayWrapper type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StringArrayWrapper{}
 
-// STRINGArrayWrapper The successful API response.
-type STRINGArrayWrapper struct {
+// StringArrayWrapper The successful API response.
+type StringArrayWrapper struct {
 	// The response payload.
 	Response []string `json:"response,omitempty"`
 	// The total number of items in the response
@@ -35,25 +35,25 @@ type STRINGArrayWrapper struct {
 	StatusCode *int32 `json:"statusCode,omitempty"`
 }
 
-// NewSTRINGArrayWrapper instantiates a new STRINGArrayWrapper object
+// NewStringArrayWrapper instantiates a new StringArrayWrapper object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSTRINGArrayWrapper() *STRINGArrayWrapper {
-	this := STRINGArrayWrapper{}
+func NewStringArrayWrapper() *StringArrayWrapper {
+	this := StringArrayWrapper{}
 	return &this
 }
 
-// NewSTRINGArrayWrapperWithDefaults instantiates a new STRINGArrayWrapper object
+// NewStringArrayWrapperWithDefaults instantiates a new StringArrayWrapper object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSTRINGArrayWrapperWithDefaults() *STRINGArrayWrapper {
-	this := STRINGArrayWrapper{}
+func NewStringArrayWrapperWithDefaults() *StringArrayWrapper {
+	this := StringArrayWrapper{}
 	return &this
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *STRINGArrayWrapper) GetResponse() []string {
+func (o *StringArrayWrapper) GetResponse() []string {
 	if o == nil || IsNil(o.Response) {
 		var ret []string
 		return ret
@@ -63,7 +63,7 @@ func (o *STRINGArrayWrapper) GetResponse() []string {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *STRINGArrayWrapper) GetResponseOk() ([]string, bool) {
+func (o *StringArrayWrapper) GetResponseOk() ([]string, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -71,7 +71,7 @@ func (o *STRINGArrayWrapper) GetResponseOk() ([]string, bool) {
 }
 
 // HasResponse returns a boolean if a field has been set.
-func (o *STRINGArrayWrapper) IsResponseSet() bool {
+func (o *StringArrayWrapper) IsResponseSet() bool {
 	if o != nil && !IsNil(o.Response) {
 		return true
 	}
@@ -80,12 +80,12 @@ func (o *STRINGArrayWrapper) IsResponseSet() bool {
 }
 
 // SetResponse gets a reference to the given []string and assigns it to the Response field.
-func (o *STRINGArrayWrapper) SetResponse(v []string) {
+func (o *StringArrayWrapper) SetResponse(v []string) {
 	o.Response = v
 }
 
 // GetCount returns the Count field value if set, zero value otherwise.
-func (o *STRINGArrayWrapper) GetCount() int32 {
+func (o *StringArrayWrapper) GetCount() int32 {
 	if o == nil || IsNil(o.Count) {
 		var ret int32
 		return ret
@@ -95,7 +95,7 @@ func (o *STRINGArrayWrapper) GetCount() int32 {
 
 // GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *STRINGArrayWrapper) GetCountOk() (*int32, bool) {
+func (o *StringArrayWrapper) GetCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *STRINGArrayWrapper) GetCountOk() (*int32, bool) {
 }
 
 // HasCount returns a boolean if a field has been set.
-func (o *STRINGArrayWrapper) IsCountSet() bool {
+func (o *StringArrayWrapper) IsCountSet() bool {
 	if o != nil && !IsNil(o.Count) {
 		return true
 	}
@@ -112,12 +112,12 @@ func (o *STRINGArrayWrapper) IsCountSet() bool {
 }
 
 // SetCount gets a reference to the given int32 and assigns it to the Count field.
-func (o *STRINGArrayWrapper) SetCount(v int32) {
+func (o *StringArrayWrapper) SetCount(v int32) {
 	o.Count = &v
 }
 
 // GetLinks returns the Links field value if set, zero value otherwise.
-func (o *STRINGArrayWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner {
+func (o *StringArrayWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner {
 	if o == nil || IsNil(o.Links) {
 		var ret []GetPortalPrices200ResponseLinksInner
 		return ret
@@ -127,7 +127,7 @@ func (o *STRINGArrayWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner {
 
 // GetLinksOk returns a tuple with the Links field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *STRINGArrayWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinksInner, bool) {
+func (o *StringArrayWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinksInner, bool) {
 	if o == nil || IsNil(o.Links) {
 		return nil, false
 	}
@@ -135,7 +135,7 @@ func (o *STRINGArrayWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinksInne
 }
 
 // HasLinks returns a boolean if a field has been set.
-func (o *STRINGArrayWrapper) IsLinksSet() bool {
+func (o *StringArrayWrapper) IsLinksSet() bool {
 	if o != nil && !IsNil(o.Links) {
 		return true
 	}
@@ -144,12 +144,12 @@ func (o *STRINGArrayWrapper) IsLinksSet() bool {
 }
 
 // SetLinks gets a reference to the given []GetPortalPrices200ResponseLinksInner and assigns it to the Links field.
-func (o *STRINGArrayWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner) {
+func (o *StringArrayWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner) {
 	o.Links = v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *STRINGArrayWrapper) GetStatus() int32 {
+func (o *StringArrayWrapper) GetStatus() int32 {
 	if o == nil || IsNil(o.Status) {
 		var ret int32
 		return ret
@@ -159,7 +159,7 @@ func (o *STRINGArrayWrapper) GetStatus() int32 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *STRINGArrayWrapper) GetStatusOk() (*int32, bool) {
+func (o *StringArrayWrapper) GetStatusOk() (*int32, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -167,7 +167,7 @@ func (o *STRINGArrayWrapper) GetStatusOk() (*int32, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *STRINGArrayWrapper) IsStatusSet() bool {
+func (o *StringArrayWrapper) IsStatusSet() bool {
 	if o != nil && !IsNil(o.Status) {
 		return true
 	}
@@ -176,12 +176,12 @@ func (o *STRINGArrayWrapper) IsStatusSet() bool {
 }
 
 // SetStatus gets a reference to the given int32 and assigns it to the Status field.
-func (o *STRINGArrayWrapper) SetStatus(v int32) {
+func (o *StringArrayWrapper) SetStatus(v int32) {
 	o.Status = &v
 }
 
 // GetStatusCode returns the StatusCode field value if set, zero value otherwise.
-func (o *STRINGArrayWrapper) GetStatusCode() int32 {
+func (o *StringArrayWrapper) GetStatusCode() int32 {
 	if o == nil || IsNil(o.StatusCode) {
 		var ret int32
 		return ret
@@ -191,7 +191,7 @@ func (o *STRINGArrayWrapper) GetStatusCode() int32 {
 
 // GetStatusCodeOk returns a tuple with the StatusCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *STRINGArrayWrapper) GetStatusCodeOk() (*int32, bool) {
+func (o *StringArrayWrapper) GetStatusCodeOk() (*int32, bool) {
 	if o == nil || IsNil(o.StatusCode) {
 		return nil, false
 	}
@@ -199,7 +199,7 @@ func (o *STRINGArrayWrapper) GetStatusCodeOk() (*int32, bool) {
 }
 
 // HasStatusCode returns a boolean if a field has been set.
-func (o *STRINGArrayWrapper) IsStatusCodeSet() bool {
+func (o *StringArrayWrapper) IsStatusCodeSet() bool {
 	if o != nil && !IsNil(o.StatusCode) {
 		return true
 	}
@@ -208,11 +208,11 @@ func (o *STRINGArrayWrapper) IsStatusCodeSet() bool {
 }
 
 // SetStatusCode gets a reference to the given int32 and assigns it to the StatusCode field.
-func (o *STRINGArrayWrapper) SetStatusCode(v int32) {
+func (o *StringArrayWrapper) SetStatusCode(v int32) {
 	o.StatusCode = &v
 }
 
-func (o STRINGArrayWrapper) MarshalJSON() ([]byte, error) {
+func (o StringArrayWrapper) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -220,7 +220,7 @@ func (o STRINGArrayWrapper) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o STRINGArrayWrapper) ToMap() (map[string]interface{}, error) {
+func (o StringArrayWrapper) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Response) {
 		toSerialize["response"] = o.Response
@@ -240,38 +240,38 @@ func (o STRINGArrayWrapper) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableSTRINGArrayWrapper struct {
-	value *STRINGArrayWrapper
+type NullableStringArrayWrapper struct {
+	value *StringArrayWrapper
 	isSet bool
 }
 
-func (v NullableSTRINGArrayWrapper) Get() *STRINGArrayWrapper {
+func (v NullableStringArrayWrapper) Get() *StringArrayWrapper {
 	return v.value
 }
 
-func (v *NullableSTRINGArrayWrapper) Set(val *STRINGArrayWrapper) {
+func (v *NullableStringArrayWrapper) Set(val *StringArrayWrapper) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSTRINGArrayWrapper) IsSet() bool {
+func (v NullableStringArrayWrapper) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSTRINGArrayWrapper) Unset() {
+func (v *NullableStringArrayWrapper) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSTRINGArrayWrapper(val *STRINGArrayWrapper) *NullableSTRINGArrayWrapper {
-	return &NullableSTRINGArrayWrapper{value: val, isSet: true}
+func NewNullableStringArrayWrapper(val *StringArrayWrapper) *NullableStringArrayWrapper {
+	return &NullableStringArrayWrapper{value: val, isSet: true}
 }
 
-func (v NullableSTRINGArrayWrapper) MarshalJSON() ([]byte, error) {
+func (v NullableStringArrayWrapper) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSTRINGArrayWrapper) UnmarshalJSON(src []byte) error {
+func (v *NullableStringArrayWrapper) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

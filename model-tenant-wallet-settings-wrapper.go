@@ -21,10 +21,18 @@ import (
 // checks if the TenantWalletSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantWalletSettingsWrapper{}
 
-// TenantWalletSettingsWrapper The wrapper for the tenant wallet settings.
+// TenantWalletSettingsWrapper The successful API response containing the TenantWalletSettingsDto object.
 type TenantWalletSettingsWrapper struct {
-	// The tenant wallet settings.
-	Settings *TenantWalletSettings `json:"settings,omitempty"`
+	// The TenantWalletSettingsDto object returned by the operation.
+	Response *TenantWalletSettingsDto `json:"response,omitempty"`
+	// The total number of items in the response
+	Count *int32 `json:"count,omitempty"`
+	// List of links related to the response
+	Links []GetPortalPrices200ResponseLinksInner `json:"links,omitempty"`
+	// HTTP status code of the response
+	Status *int32 `json:"status,omitempty"`
+	// HTTP status code of the response (duplicate of status)
+	StatusCode *int32 `json:"statusCode,omitempty"`
 }
 
 // NewTenantWalletSettingsWrapper instantiates a new TenantWalletSettingsWrapper object
@@ -44,36 +52,164 @@ func NewTenantWalletSettingsWrapperWithDefaults() *TenantWalletSettingsWrapper {
 	return &this
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise.
-func (o *TenantWalletSettingsWrapper) GetSettings() TenantWalletSettings {
-	if o == nil || IsNil(o.Settings) {
-		var ret TenantWalletSettings
+// GetResponse returns the Response field value if set, zero value otherwise.
+func (o *TenantWalletSettingsWrapper) GetResponse() TenantWalletSettingsDto {
+	if o == nil || IsNil(o.Response) {
+		var ret TenantWalletSettingsDto
 		return ret
 	}
-	return *o.Settings
+	return *o.Response
 }
 
-// GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
+// GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TenantWalletSettingsWrapper) GetSettingsOk() (*TenantWalletSettings, bool) {
-	if o == nil || IsNil(o.Settings) {
+func (o *TenantWalletSettingsWrapper) GetResponseOk() (*TenantWalletSettingsDto, bool) {
+	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
-	return o.Settings, true
+	return o.Response, true
 }
 
-// HasSettings returns a boolean if a field has been set.
-func (o *TenantWalletSettingsWrapper) IsSettingsSet() bool {
-	if o != nil && !IsNil(o.Settings) {
+// HasResponse returns a boolean if a field has been set.
+func (o *TenantWalletSettingsWrapper) IsResponseSet() bool {
+	if o != nil && !IsNil(o.Response) {
 		return true
 	}
 
 	return false
 }
 
-// SetSettings gets a reference to the given TenantWalletSettings and assigns it to the Settings field.
-func (o *TenantWalletSettingsWrapper) SetSettings(v TenantWalletSettings) {
-	o.Settings = &v
+// SetResponse gets a reference to the given TenantWalletSettingsDto and assigns it to the Response field.
+func (o *TenantWalletSettingsWrapper) SetResponse(v TenantWalletSettingsDto) {
+	o.Response = &v
+}
+
+// GetCount returns the Count field value if set, zero value otherwise.
+func (o *TenantWalletSettingsWrapper) GetCount() int32 {
+	if o == nil || IsNil(o.Count) {
+		var ret int32
+		return ret
+	}
+	return *o.Count
+}
+
+// GetCountOk returns a tuple with the Count field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantWalletSettingsWrapper) GetCountOk() (*int32, bool) {
+	if o == nil || IsNil(o.Count) {
+		return nil, false
+	}
+	return o.Count, true
+}
+
+// HasCount returns a boolean if a field has been set.
+func (o *TenantWalletSettingsWrapper) IsCountSet() bool {
+	if o != nil && !IsNil(o.Count) {
+		return true
+	}
+
+	return false
+}
+
+// SetCount gets a reference to the given int32 and assigns it to the Count field.
+func (o *TenantWalletSettingsWrapper) SetCount(v int32) {
+	o.Count = &v
+}
+
+// GetLinks returns the Links field value if set, zero value otherwise.
+func (o *TenantWalletSettingsWrapper) GetLinks() []GetPortalPrices200ResponseLinksInner {
+	if o == nil || IsNil(o.Links) {
+		var ret []GetPortalPrices200ResponseLinksInner
+		return ret
+	}
+	return o.Links
+}
+
+// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantWalletSettingsWrapper) GetLinksOk() ([]GetPortalPrices200ResponseLinksInner, bool) {
+	if o == nil || IsNil(o.Links) {
+		return nil, false
+	}
+	return o.Links, true
+}
+
+// HasLinks returns a boolean if a field has been set.
+func (o *TenantWalletSettingsWrapper) IsLinksSet() bool {
+	if o != nil && !IsNil(o.Links) {
+		return true
+	}
+
+	return false
+}
+
+// SetLinks gets a reference to the given []GetPortalPrices200ResponseLinksInner and assigns it to the Links field.
+func (o *TenantWalletSettingsWrapper) SetLinks(v []GetPortalPrices200ResponseLinksInner) {
+	o.Links = v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *TenantWalletSettingsWrapper) GetStatus() int32 {
+	if o == nil || IsNil(o.Status) {
+		var ret int32
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantWalletSettingsWrapper) GetStatusOk() (*int32, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *TenantWalletSettingsWrapper) IsStatusSet() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given int32 and assigns it to the Status field.
+func (o *TenantWalletSettingsWrapper) SetStatus(v int32) {
+	o.Status = &v
+}
+
+// GetStatusCode returns the StatusCode field value if set, zero value otherwise.
+func (o *TenantWalletSettingsWrapper) GetStatusCode() int32 {
+	if o == nil || IsNil(o.StatusCode) {
+		var ret int32
+		return ret
+	}
+	return *o.StatusCode
+}
+
+// GetStatusCodeOk returns a tuple with the StatusCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantWalletSettingsWrapper) GetStatusCodeOk() (*int32, bool) {
+	if o == nil || IsNil(o.StatusCode) {
+		return nil, false
+	}
+	return o.StatusCode, true
+}
+
+// HasStatusCode returns a boolean if a field has been set.
+func (o *TenantWalletSettingsWrapper) IsStatusCodeSet() bool {
+	if o != nil && !IsNil(o.StatusCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatusCode gets a reference to the given int32 and assigns it to the StatusCode field.
+func (o *TenantWalletSettingsWrapper) SetStatusCode(v int32) {
+	o.StatusCode = &v
 }
 
 func (o TenantWalletSettingsWrapper) MarshalJSON() ([]byte, error) {
@@ -86,8 +222,20 @@ func (o TenantWalletSettingsWrapper) MarshalJSON() ([]byte, error) {
 
 func (o TenantWalletSettingsWrapper) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Settings) {
-		toSerialize["settings"] = o.Settings
+	if !IsNil(o.Response) {
+		toSerialize["response"] = o.Response
+	}
+	if !IsNil(o.Count) {
+		toSerialize["count"] = o.Count
+	}
+	if !IsNil(o.Links) {
+		toSerialize["links"] = o.Links
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.StatusCode) {
+		toSerialize["statusCode"] = o.StatusCode
 	}
 	return toSerialize, nil
 }

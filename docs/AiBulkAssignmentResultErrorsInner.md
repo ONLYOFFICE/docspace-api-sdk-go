@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActionType** | [**AiActionType**](AiActionType.md) |  | 
-**Error** | [**AiTErrorData**](AiTErrorData.md) |  | 
+**Error** | [**AiErrorData**](AiErrorData.md) |  | 
 
 ## Methods
 
 ### NewAiBulkAssignmentResultErrorsInner
 
-`func NewAiBulkAssignmentResultErrorsInner(actionType AiActionType, error_ AiTErrorData, ) *AiBulkAssignmentResultErrorsInner`
+`func NewAiBulkAssignmentResultErrorsInner(actionType AiActionType, error_ AiErrorData, ) *AiBulkAssignmentResultErrorsInner`
 
 NewAiBulkAssignmentResultErrorsInner instantiates a new AiBulkAssignmentResultErrorsInner object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetActionType sets ActionType field to given value.
 
 ### GetError
 
-`func (o *AiBulkAssignmentResultErrorsInner) GetError() AiTErrorData`
+`func (o *AiBulkAssignmentResultErrorsInner) GetError() AiErrorData`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *AiBulkAssignmentResultErrorsInner) GetErrorOk() (*AiTErrorData, bool)`
+`func (o *AiBulkAssignmentResultErrorsInner) GetErrorOk() (*AiErrorData, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *AiBulkAssignmentResultErrorsInner) SetError(v AiTErrorData)`
+`func (o *AiBulkAssignmentResultErrorsInner) SetError(v AiErrorData)`
 
 SetError sets Error field to given value.
 

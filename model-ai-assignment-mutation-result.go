@@ -28,7 +28,7 @@ type AiAssignmentMutationResult struct {
 	// True when the assignment was persisted.
 	Success bool `json:"success"`
 	// Why the assignment was rejected. Present on failure.
-	Error *AiTErrorData `json:"error,omitempty"`
+	Error *AiErrorData `json:"error,omitempty"`
 }
 
 type _AiAssignmentMutationResult AiAssignmentMutationResult
@@ -76,9 +76,9 @@ func (o *AiAssignmentMutationResult) SetSuccess(v bool) {
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *AiAssignmentMutationResult) GetError() AiTErrorData {
+func (o *AiAssignmentMutationResult) GetError() AiErrorData {
 	if o == nil || IsNil(o.Error) {
-		var ret AiTErrorData
+		var ret AiErrorData
 		return ret
 	}
 	return *o.Error
@@ -86,7 +86,7 @@ func (o *AiAssignmentMutationResult) GetError() AiTErrorData {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiAssignmentMutationResult) GetErrorOk() (*AiTErrorData, bool) {
+func (o *AiAssignmentMutationResult) GetErrorOk() (*AiErrorData, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -102,8 +102,8 @@ func (o *AiAssignmentMutationResult) IsErrorSet() bool {
 	return false
 }
 
-// SetError gets a reference to the given AiTErrorData and assigns it to the Error field.
-func (o *AiAssignmentMutationResult) SetError(v AiTErrorData) {
+// SetError gets a reference to the given AiErrorData and assigns it to the Error field.
+func (o *AiAssignmentMutationResult) SetError(v AiErrorData) {
 	o.Error = &v
 }
 

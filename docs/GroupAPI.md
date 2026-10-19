@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**AddMembersTo**](GroupAPI.md#AddMembersTo) | **Put** /api/2.0/group/{id}/members | Add group members
 [**DeleteGroup**](GroupAPI.md#DeleteGroup) | **Delete** /api/2.0/group/{id} | Delete a group
 [**GetGroup**](GroupAPI.md#GetGroup) | **Get** /api/2.0/group/{id} | Get a group
-[**GetGroupByUserId**](GroupAPI.md#GetGroupByUserId) | **Get** /api/2.0/group/user/{userid} | Get user groups
+[**GetGroupByUserId**](GroupAPI.md#GetGroupByUserId) | **Get** /api/2.0/group/user/{userId} | Get user groups
 [**GetGroups**](GroupAPI.md#GetGroups) | **Get** /api/2.0/group | Get groups
 [**MoveMembersTo**](GroupAPI.md#MoveMembersTo) | **Put** /api/2.0/group/{fromId}/members/{toId} | Move group members
 [**RemoveMembersFrom**](GroupAPI.md#RemoveMembersFrom) | **Delete** /api/2.0/group/{id}/members | Remove group members
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## GetGroupByUserId
 
-> GroupSummaryArrayWrapper GetGroupByUserId(ctx, userid).Execute()
+> GroupSummaryArrayWrapper GetGroupByUserId(ctx, userId).Execute()
 
 Get user groups
 
@@ -327,11 +327,11 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.GroupAPI.GetGroupByUserId(context.Background(), userid).Execute()
+	resp, r, err := apiClient.GroupAPI.GetGroupByUserId(context.Background(), userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupAPI.GetGroupByUserId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -347,7 +347,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. | 
+**userId** | **string** | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. | 
 
 ### Other Parameters
 

@@ -5,17 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int32** | The identifier of the record, which tells two records of the same action apart and stays stable as long as the  portal keeps the log. | 
-**Action** | [**HistoryAction**](HistoryAction.md) | What happened - the kind of event the record stands for, such as a file being uploaded, renamed, moved or  shared - with the key a client can key its own wording off. | 
+**Action** | [**HistoryActionDto**](HistoryActionDto.md) | What happened - the kind of event the record stands for, such as a file being uploaded, renamed, moved or  shared - with the key a client can key its own wording off. | 
 **Initiator** | [**EmployeeDto**](EmployeeDto.md) | Who caused the event. For an event caused by a visitor following an external link only the name they gave is  filled in, the account fields staying empty. | 
 **Date** | [**ApiDateTime**](ApiDateTime.md) | When the event happened, written with the offset of the portal's time zone. | 
-**Data** | Pointer to [**HistoryData**](HistoryData.md) | The history data. Absent for actions that carry no payload of their own - changing a room's  logo, icon colour or cover, whose interpreter returns no data (see  `RoomLogoChangedInterpreter`). It used to be declared required, which put it in the  OpenAPI document's required list while the null-dropping serializer left it out of the  response, so a generated client threw on any history page holding one of those entries. | [optional] 
+**Data** | Pointer to [**HistoryDataDto**](HistoryDataDto.md) | The history data. Absent for actions that carry no payload of their own - changing a room's  logo, icon colour or cover, whose interpreter returns no data (see  `RoomLogoChangedInterpreter`). It used to be declared required, which put it in the  OpenAPI document's required list while the null-dropping serializer left it out of the  response, so a generated client threw on any history page holding one of those entries. | [optional] 
 **Related** | Pointer to [**[]HistoryDto**](HistoryDto.md) | The records folded into this one because they belong to the same action, the separate files of one upload for  instance. It is empty when the record stands alone, and the records inside it carry no further nesting. | [optional] 
 
 ## Methods
 
 ### NewHistoryDto
 
-`func NewHistoryDto(id int32, action HistoryAction, initiator EmployeeDto, date ApiDateTime, ) *HistoryDto`
+`func NewHistoryDto(id int32, action HistoryActionDto, initiator EmployeeDto, date ApiDateTime, ) *HistoryDto`
 
 NewHistoryDto instantiates a new HistoryDto object
 This constructor will assign default values to properties that have it defined,
@@ -52,20 +52,20 @@ SetId sets Id field to given value.
 
 ### GetAction
 
-`func (o *HistoryDto) GetAction() HistoryAction`
+`func (o *HistoryDto) GetAction() HistoryActionDto`
 
 GetAction returns the Action field if non-nil, zero value otherwise.
 
 ### GetActionOk
 
-`func (o *HistoryDto) GetActionOk() (*HistoryAction, bool)`
+`func (o *HistoryDto) GetActionOk() (*HistoryActionDto, bool)`
 
 GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAction
 
-`func (o *HistoryDto) SetAction(v HistoryAction)`
+`func (o *HistoryDto) SetAction(v HistoryActionDto)`
 
 SetAction sets Action field to given value.
 
@@ -112,20 +112,20 @@ SetDate sets Date field to given value.
 
 ### GetData
 
-`func (o *HistoryDto) GetData() HistoryData`
+`func (o *HistoryDto) GetData() HistoryDataDto`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *HistoryDto) GetDataOk() (*HistoryData, bool)`
+`func (o *HistoryDto) GetDataOk() (*HistoryDataDto, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *HistoryDto) SetData(v HistoryData)`
+`func (o *HistoryDto) SetData(v HistoryDataDto)`
 
 SetData sets Data field to given value.
 

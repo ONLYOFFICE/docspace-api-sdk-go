@@ -31,7 +31,7 @@ type ApiGetIpRestrictionsRequest struct {
 	ApiService *SettingsIPRestrictionsAPIService
 }
 
-func (r ApiGetIpRestrictionsRequest) Execute() (*IPRestrictionArrayWrapper, *http.Response, error) {
+func (r ApiGetIpRestrictionsRequest) Execute() (*IpRestrictionArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetIpRestrictionsExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *SettingsIPRestrictionsAPIService) GetIpRestrictions(ctx context.Context
 }
 
 // Execute executes the request
-//  @return IPRestrictionArrayWrapper
-func (a *SettingsIPRestrictionsAPIService) GetIpRestrictionsExecute(r ApiGetIpRestrictionsRequest) (*IPRestrictionArrayWrapper, *http.Response, error) {
+//  @return IpRestrictionArrayWrapper
+func (a *SettingsIPRestrictionsAPIService) GetIpRestrictionsExecute(r ApiGetIpRestrictionsRequest) (*IpRestrictionArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *IPRestrictionArrayWrapper
+		localVarReturnValue  *IpRestrictionArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsIPRestrictionsAPIService.GetIpRestrictions")
@@ -177,7 +177,7 @@ type ApiReadIpRestrictionsSettingsRequest struct {
 	ApiService *SettingsIPRestrictionsAPIService
 }
 
-func (r ApiReadIpRestrictionsSettingsRequest) Execute() (*IPRestrictionsSettingsWrapper, *http.Response, error) {
+func (r ApiReadIpRestrictionsSettingsRequest) Execute() (*IpRestrictionsSettingsWrapper, *http.Response, error) {
 	return r.ApiService.ReadIpRestrictionsSettingsExecute(r)
 }
 
@@ -197,13 +197,13 @@ func (a *SettingsIPRestrictionsAPIService) ReadIpRestrictionsSettings(ctx contex
 }
 
 // Execute executes the request
-//  @return IPRestrictionsSettingsWrapper
-func (a *SettingsIPRestrictionsAPIService) ReadIpRestrictionsSettingsExecute(r ApiReadIpRestrictionsSettingsRequest) (*IPRestrictionsSettingsWrapper, *http.Response, error) {
+//  @return IpRestrictionsSettingsWrapper
+func (a *SettingsIPRestrictionsAPIService) ReadIpRestrictionsSettingsExecute(r ApiReadIpRestrictionsSettingsRequest) (*IpRestrictionsSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *IPRestrictionsSettingsWrapper
+		localVarReturnValue  *IpRestrictionsSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SettingsIPRestrictionsAPIService.ReadIpRestrictionsSettings")
@@ -456,17 +456,6 @@ func (a *SettingsIPRestrictionsAPIService) SaveIpRestrictionsExecute(r ApiSaveIp
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -610,17 +599,6 @@ func (a *SettingsIPRestrictionsAPIService) UpdateIpRestrictionsSettingsExecute(r
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

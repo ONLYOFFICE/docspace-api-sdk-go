@@ -21,10 +21,10 @@ import (
 // checks if the ConnectionTestResultWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConnectionTestResultWrapper{}
 
-// ConnectionTestResultWrapper The successful API response containing the ConnectionTestResult object.
+// ConnectionTestResultWrapper The successful API response containing the ConnectionTestResultDto object.
 type ConnectionTestResultWrapper struct {
-	// The ConnectionTestResult object returned by the operation.
-	Response *ConnectionTestResult `json:"response,omitempty"`
+	// The ConnectionTestResultDto object returned by the operation.
+	Response *ConnectionTestResultDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewConnectionTestResultWrapperWithDefaults() *ConnectionTestResultWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *ConnectionTestResultWrapper) GetResponse() ConnectionTestResult {
+func (o *ConnectionTestResultWrapper) GetResponse() ConnectionTestResultDto {
 	if o == nil || IsNil(o.Response) {
-		var ret ConnectionTestResult
+		var ret ConnectionTestResultDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *ConnectionTestResultWrapper) GetResponse() ConnectionTestResult {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectionTestResultWrapper) GetResponseOk() (*ConnectionTestResult, bool) {
+func (o *ConnectionTestResultWrapper) GetResponseOk() (*ConnectionTestResultDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *ConnectionTestResultWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given ConnectionTestResult and assigns it to the Response field.
-func (o *ConnectionTestResultWrapper) SetResponse(v ConnectionTestResult) {
+// SetResponse gets a reference to the given ConnectionTestResultDto and assigns it to the Response field.
+func (o *ConnectionTestResultWrapper) SetResponse(v ConnectionTestResultDto) {
 	o.Response = &v
 }
 

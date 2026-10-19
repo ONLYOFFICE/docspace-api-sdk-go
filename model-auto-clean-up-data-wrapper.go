@@ -21,10 +21,10 @@ import (
 // checks if the AutoCleanUpDataWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AutoCleanUpDataWrapper{}
 
-// AutoCleanUpDataWrapper The successful API response containing the AutoCleanUpData object.
+// AutoCleanUpDataWrapper The successful API response containing the AutoCleanUpDataDto object.
 type AutoCleanUpDataWrapper struct {
-	// The AutoCleanUpData object returned by the operation.
-	Response *AutoCleanUpData `json:"response,omitempty"`
+	// The AutoCleanUpDataDto object returned by the operation.
+	Response *AutoCleanUpDataDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewAutoCleanUpDataWrapperWithDefaults() *AutoCleanUpDataWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *AutoCleanUpDataWrapper) GetResponse() AutoCleanUpData {
+func (o *AutoCleanUpDataWrapper) GetResponse() AutoCleanUpDataDto {
 	if o == nil || IsNil(o.Response) {
-		var ret AutoCleanUpData
+		var ret AutoCleanUpDataDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *AutoCleanUpDataWrapper) GetResponse() AutoCleanUpData {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoCleanUpDataWrapper) GetResponseOk() (*AutoCleanUpData, bool) {
+func (o *AutoCleanUpDataWrapper) GetResponseOk() (*AutoCleanUpDataDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *AutoCleanUpDataWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given AutoCleanUpData and assigns it to the Response field.
-func (o *AutoCleanUpDataWrapper) SetResponse(v AutoCleanUpData) {
+// SetResponse gets a reference to the given AutoCleanUpDataDto and assigns it to the Response field.
+func (o *AutoCleanUpDataWrapper) SetResponse(v AutoCleanUpDataDto) {
 	o.Response = &v
 }
 

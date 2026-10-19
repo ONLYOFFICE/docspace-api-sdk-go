@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 
 ## CheckMoveOrCopyBatchItems
 
-> FileEntryBaseArrayWrapper CheckMoveOrCopyBatchItems(ctx).InDto(inDto).Execute()
+> FileEntryBaseArrayWrapper CheckMoveOrCopyBatchItems(ctx).ReturnSingleOperation(returnSingleOperation).FolderIds(folderIds).FileIds(fileIds).DestFolderId(destFolderId).ConflictResolveType(conflictResolveType).DeleteAfter(deleteAfter).Content(content).ToFillOut(toFillOut).Execute()
 
 Check move or copy conflicts
 
@@ -337,11 +337,18 @@ import (
 )
 
 func main() {
-	inDto := *openapiclient.NewBatchRequestDto() // BatchRequestDto | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. (optional)
+	returnSingleOperation := false // bool | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional)
+	folderIds := []openapiclient.CheckMoveOrCopyBatchItemsFolderIdsParameterInner{*openapiclient.NewCheckMoveOrCopyBatchItemsFolderIdsParameterInner()} // []CheckMoveOrCopyBatchItemsFolderIdsParameterInner | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. (optional)
+	fileIds := []openapiclient.CheckMoveOrCopyBatchItemsFolderIdsParameterInner{*openapiclient.NewCheckMoveOrCopyBatchItemsFolderIdsParameterInner()} // []CheckMoveOrCopyBatchItemsFolderIdsParameterInner | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. (optional)
+	destFolderId := openapiclient.checkMoveOrCopyBatchItems_destFolderId_parameter{Int32: new(int32)} // CheckMoveOrCopyBatchItemsDestFolderIdParameter | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. (optional)
+	conflictResolveType := openapiclient.FileConflictResolveType("Skip") // FileConflictResolveType | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. (optional)
+	deleteAfter := false // bool | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. (optional)
+	content := false // bool | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. (optional)
+	toFillOut := false // bool | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.CheckMoveOrCopyBatchItems(context.Background()).InDto(inDto).Execute()
+	resp, r, err := apiClient.FilesOperationsAPI.CheckMoveOrCopyBatchItems(context.Background()).ReturnSingleOperation(returnSingleOperation).FolderIds(folderIds).FileIds(fileIds).DestFolderId(destFolderId).ConflictResolveType(conflictResolveType).DeleteAfter(deleteAfter).Content(content).ToFillOut(toFillOut).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.CheckMoveOrCopyBatchItems``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -362,7 +369,14 @@ Other parameters are passed through a pointer to a apiCheckMoveOrCopyBatchItemsR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **inDto** | [**BatchRequestDto**](BatchRequestDto.md) | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. | 
+ **returnSingleOperation** | **bool** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | 
+ **folderIds** | [**[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md) | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. | 
+ **fileIds** | [**[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md) | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. | 
+ **destFolderId** | [**CheckMoveOrCopyBatchItemsDestFolderIdParameter**](CheckMoveOrCopyBatchItemsDestFolderIdParameter.md) | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. | 
+ **conflictResolveType** | [**FileConflictResolveType**](FileConflictResolveType.md) | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | 
+ **deleteAfter** | **bool** | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | 
+ **content** | **bool** | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | 
+ **toFillOut** | **bool** | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. | 
 
 ### Return type
 
@@ -384,7 +398,7 @@ Name | Type | Description  | Notes
 
 ## CheckMoveOrCopyDestFolder
 
-> CheckDestFolderWrapper CheckMoveOrCopyDestFolder(ctx).InDto(inDto).Execute()
+> CheckDestFolderWrapper CheckMoveOrCopyDestFolder(ctx).ReturnSingleOperation(returnSingleOperation).FolderIds(folderIds).FileIds(fileIds).DestFolderId(destFolderId).ConflictResolveType(conflictResolveType).DeleteAfter(deleteAfter).Content(content).ToFillOut(toFillOut).Execute()
 
 Check the destination folder
 
@@ -405,11 +419,18 @@ import (
 )
 
 func main() {
-	inDto := *openapiclient.NewBatchRequestDto() // BatchRequestDto | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. (optional)
+	returnSingleOperation := false // bool | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional)
+	folderIds := []openapiclient.CheckMoveOrCopyBatchItemsFolderIdsParameterInner{*openapiclient.NewCheckMoveOrCopyBatchItemsFolderIdsParameterInner()} // []CheckMoveOrCopyBatchItemsFolderIdsParameterInner | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. (optional)
+	fileIds := []openapiclient.CheckMoveOrCopyBatchItemsFolderIdsParameterInner{*openapiclient.NewCheckMoveOrCopyBatchItemsFolderIdsParameterInner()} // []CheckMoveOrCopyBatchItemsFolderIdsParameterInner | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. (optional)
+	destFolderId := openapiclient.checkMoveOrCopyBatchItems_destFolderId_parameter{Int32: new(int32)} // CheckMoveOrCopyBatchItemsDestFolderIdParameter | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. (optional)
+	conflictResolveType := openapiclient.FileConflictResolveType("Skip") // FileConflictResolveType | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. (optional)
+	deleteAfter := false // bool | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. (optional)
+	content := false // bool | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. (optional)
+	toFillOut := false // bool | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.CheckMoveOrCopyDestFolder(context.Background()).InDto(inDto).Execute()
+	resp, r, err := apiClient.FilesOperationsAPI.CheckMoveOrCopyDestFolder(context.Background()).ReturnSingleOperation(returnSingleOperation).FolderIds(folderIds).FileIds(fileIds).DestFolderId(destFolderId).ConflictResolveType(conflictResolveType).DeleteAfter(deleteAfter).Content(content).ToFillOut(toFillOut).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.CheckMoveOrCopyDestFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -430,7 +451,14 @@ Other parameters are passed through a pointer to a apiCheckMoveOrCopyDestFolderR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **inDto** | [**BatchRequestDto**](BatchRequestDto.md) | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. | 
+ **returnSingleOperation** | **bool** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | 
+ **folderIds** | [**[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md) | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. | 
+ **fileIds** | [**[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md) | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. | 
+ **destFolderId** | [**CheckMoveOrCopyBatchItemsDestFolderIdParameter**](CheckMoveOrCopyBatchItemsDestFolderIdParameter.md) | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. | 
+ **conflictResolveType** | [**FileConflictResolveType**](FileConflictResolveType.md) | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | 
+ **deleteAfter** | **bool** | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | 
+ **content** | **bool** | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | 
+ **toFillOut** | **bool** | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. | 
 
 ### Return type
 
@@ -520,7 +548,7 @@ Name | Type | Description  | Notes
 
 ## CreateUploadSession
 
-> ChunkedUploadSessionResponseWrapperWrapper CreateUploadSession(ctx, folderId).SessionRequest(sessionRequest).Execute()
+> ChunkedUploadSessionResultWrapper CreateUploadSession(ctx, folderId).SessionRequest(sessionRequest).Execute()
 
 Chunked upload
 
@@ -554,7 +582,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.CreateUploadSession``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateUploadSession`: ChunkedUploadSessionResponseWrapperWrapper
+	// response from `CreateUploadSession`: ChunkedUploadSessionResultWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.CreateUploadSession`: %v\n", resp)
 }
 ```
@@ -579,7 +607,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChunkedUploadSessionResponseWrapperWrapper**](ChunkedUploadSessionResponseWrapperWrapper.md)
+[**ChunkedUploadSessionResultWrapper**](ChunkedUploadSessionResultWrapper.md)
 
 ### Authorization
 
@@ -597,7 +625,7 @@ Name | Type | Description  | Notes
 
 ## CreateUploadSessionInFolder
 
-> ChunkedUploadSessionResponseResponseWrapper CreateUploadSessionInFolder(ctx, folderId).SessionRequest(sessionRequest).Execute()
+> ChunkedUploadSessionWrapper CreateUploadSessionInFolder(ctx, folderId).SessionRequest(sessionRequest).Execute()
 
 Create an upload session
 
@@ -631,7 +659,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.CreateUploadSessionInFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateUploadSessionInFolder`: ChunkedUploadSessionResponseResponseWrapper
+	// response from `CreateUploadSessionInFolder`: ChunkedUploadSessionWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.CreateUploadSessionInFolder`: %v\n", resp)
 }
 ```
@@ -656,7 +684,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
+[**ChunkedUploadSessionWrapper**](ChunkedUploadSessionWrapper.md)
 
 ### Authorization
 
@@ -1518,7 +1546,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFileComment
 
-> StringWrapper UpdateFileComment(ctx, fileId).UpdateComment(updateComment).Execute()
+> StringWrapper UpdateFileComment(ctx, fileId).UpdateCommentRequest(updateCommentRequest).Execute()
 
 Update a comment
 
@@ -1540,11 +1568,11 @@ import (
 
 func main() {
 	fileId := int32(1) // int32 | The file whose version comment is replaced.
-	updateComment := *openapiclient.NewUpdateComment(int32(1)) // UpdateComment | The version and the comment to store on it.
+	updateCommentRequest := *openapiclient.NewUpdateCommentRequest(int32(1)) // UpdateCommentRequest | The version and the comment to store on it.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesOperationsAPI.UpdateFileComment(context.Background(), fileId).UpdateComment(updateComment).Execute()
+	resp, r, err := apiClient.FilesOperationsAPI.UpdateFileComment(context.Background(), fileId).UpdateCommentRequest(updateCommentRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.UpdateFileComment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1570,7 +1598,7 @@ Other parameters are passed through a pointer to a apiUpdateFileCommentRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateComment** | [**UpdateComment**](UpdateComment.md) | The version and the comment to store on it. | 
+ **updateCommentRequest** | [**UpdateCommentRequest**](UpdateCommentRequest.md) | The version and the comment to store on it. | 
 
 ### Return type
 
@@ -1592,7 +1620,7 @@ Name | Type | Description  | Notes
 
 ## UploadAsyncSession
 
-> ChunkedUploadSessionResponseResponseWrapper UploadAsyncSession(ctx, folderId, sessionId).ChunkNumber(chunkNumber).File(file).Execute()
+> ChunkedUploadSessionWrapper UploadAsyncSession(ctx, folderId, sessionId).ChunkNumber(chunkNumber).File(file).Execute()
 
 Upload a numbered chunk
 
@@ -1628,7 +1656,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesOperationsAPI.UploadAsyncSession``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UploadAsyncSession`: ChunkedUploadSessionResponseResponseWrapper
+	// response from `UploadAsyncSession`: ChunkedUploadSessionWrapper
 	fmt.Fprintf(os.Stdout, "Response from `FilesOperationsAPI.UploadAsyncSession`: %v\n", resp)
 }
 ```
@@ -1656,7 +1684,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
+[**ChunkedUploadSessionWrapper**](ChunkedUploadSessionWrapper.md)
 
 ### Authorization
 

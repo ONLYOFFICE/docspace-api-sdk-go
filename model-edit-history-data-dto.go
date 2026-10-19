@@ -30,7 +30,7 @@ type EditHistoryDataDto struct {
 	// The document key of the revision being shown, which the editing service uses to identify it and to reuse the  copy it has cached.
 	Key NullableString `json:"key"`
 	// The revision this one is compared against. It arrives together with `changesUrl`, and when the revision shown  is the first one the file ever had, it points at the blank template the file was created from instead of at an  earlier revision.
-	Previous *EditHistoryUrl `json:"previous,omitempty"`
+	Previous *EditHistoryUrlDto `json:"previous,omitempty"`
 	// The signature over the whole answer, as a JSON Web Token that the editing service verifies before it accepts  the addresses in it. Empty when the portal runs without a document-service secret.
 	Token NullableString `json:"token,omitempty"`
 	// The address the content of this revision is served from. It is meant for the editing service and carries its  own key, which is valid for a limited time.
@@ -133,9 +133,9 @@ func (o *EditHistoryDataDto) SetKey(v string) {
 }
 
 // GetPrevious returns the Previous field value if set, zero value otherwise.
-func (o *EditHistoryDataDto) GetPrevious() EditHistoryUrl {
+func (o *EditHistoryDataDto) GetPrevious() EditHistoryUrlDto {
 	if o == nil || IsNil(o.Previous) {
-		var ret EditHistoryUrl
+		var ret EditHistoryUrlDto
 		return ret
 	}
 	return *o.Previous
@@ -143,7 +143,7 @@ func (o *EditHistoryDataDto) GetPrevious() EditHistoryUrl {
 
 // GetPreviousOk returns a tuple with the Previous field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EditHistoryDataDto) GetPreviousOk() (*EditHistoryUrl, bool) {
+func (o *EditHistoryDataDto) GetPreviousOk() (*EditHistoryUrlDto, bool) {
 	if o == nil || IsNil(o.Previous) {
 		return nil, false
 	}
@@ -159,8 +159,8 @@ func (o *EditHistoryDataDto) IsPreviousSet() bool {
 	return false
 }
 
-// SetPrevious gets a reference to the given EditHistoryUrl and assigns it to the Previous field.
-func (o *EditHistoryDataDto) SetPrevious(v EditHistoryUrl) {
+// SetPrevious gets a reference to the given EditHistoryUrlDto and assigns it to the Previous field.
+func (o *EditHistoryDataDto) SetPrevious(v EditHistoryUrlDto) {
 	o.Previous = &v
 }
 

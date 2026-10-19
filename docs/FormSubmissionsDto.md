@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Metadata** | Pointer to [**[]FormMetadata**](FormMetadata.md) | Describes the fields of the form version that is being filled - the key each value is stored under, the type  and format of the field and, where the field offers a fixed set of answers, those answers - in the order the  fields are laid out, which is the order to build a results table in. It comes back empty when the portal holds  no indexed description of that version. | [optional] 
+**Metadata** | Pointer to [**[]FormMetadataDto**](FormMetadataDto.md) | Describes the fields of the form version that is being filled - the key each value is stored under, the type  and format of the field and, where the field offers a fixed set of answers, those answers - in the order the  fields are laid out, which is the order to build a results table in. It comes back empty when the portal holds  no indexed description of that version. | [optional] 
 **Submissions** | Pointer to [**[]FormResultsDto**](FormResultsDto.md) | One entry per completed copy, ordered by the copy number that `formsData` carries. An empty list means nothing  has been completed for the version that is currently being filled; the copies of earlier versions of the form  are not reported here. | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMetadata
 
-`func (o *FormSubmissionsDto) GetMetadata() []FormMetadata`
+`func (o *FormSubmissionsDto) GetMetadata() []FormMetadataDto`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *FormSubmissionsDto) GetMetadataOk() (*[]FormMetadata, bool)`
+`func (o *FormSubmissionsDto) GetMetadataOk() (*[]FormMetadataDto, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *FormSubmissionsDto) SetMetadata(v []FormMetadata)`
+`func (o *FormSubmissionsDto) SetMetadata(v []FormMetadataDto)`
 
 SetMetadata sets Metadata field to given value.
 

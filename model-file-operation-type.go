@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// FileOperationType [0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate]
+// FileOperationType [0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate, 8 - Build]
 type FileOperationType int32
 
 // List of FileOperationType
@@ -32,6 +32,7 @@ const (
 	FILEOPERATIONTYPE_Import FileOperationType = 5
 	FILEOPERATIONTYPE_Convert FileOperationType = 6
 	FILEOPERATIONTYPE_Duplicate FileOperationType = 7
+	FILEOPERATIONTYPE_Build FileOperationType = 8
 )
 
 // All allowed values of FileOperationType enum
@@ -44,6 +45,7 @@ var AllowedFileOperationTypeEnumValues = []FileOperationType{
 	5,
 	6,
 	7,
+	8,
 }
 
 func (v *FileOperationType) UnmarshalJSON(src []byte) error {

@@ -42,7 +42,7 @@ func (r ApiAiPromptsCreateRequest) Execute() (*AiPromptMutationResult, *http.Res
 
 // AiPromptsCreate Save a prompt
 //
-// Saves a new prompt in the caller's own prompt library and returns it. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
+// Saves a new prompt in the caller's own prompt library and returns it. `name` and `text` have to be strings and `folderId`, when sent, a string or null, or the call answers 400 before the library is touched. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. A refusal keeps the `{ success: false, error }` body but answers 400 for an empty value, 404 for an unknown folder and 409 for a name already in use. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create/
 //
@@ -120,6 +120,17 @@ func (a *AIPromptsAPIService) AiPromptsCreateExecute(r ApiAiPromptsCreateRequest
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiPromptMutationResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -133,6 +144,28 @@ func (a *AIPromptsAPIService) AiPromptsCreateExecute(r ApiAiPromptsCreateRequest
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v AiPromptMutationResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AiPromptMutationResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -181,11 +214,11 @@ func (a *AIPromptsAPIService) AiPromptsCreateExecute(r ApiAiPromptsCreateRequest
 type ApiAiPromptsCreateFolderRequest struct {
 	ctx context.Context
 	ApiService *AIPromptsAPIService
-	body *string
+	aiPromptsCreateFolderRequest *string
 }
 
 // The name of the folder to create, as a bare JSON string.
-func (r ApiAiPromptsCreateFolderRequest) Body(body string) ApiAiPromptsCreateFolderRequest {	r.body = &body
+func (r ApiAiPromptsCreateFolderRequest) AiPromptsCreateFolderRequest(aiPromptsCreateFolderRequest string) ApiAiPromptsCreateFolderRequest {	r.aiPromptsCreateFolderRequest = &aiPromptsCreateFolderRequest
 	return r
 }
 
@@ -195,7 +228,7 @@ func (r ApiAiPromptsCreateFolderRequest) Execute() (*AiFolderMutationResult, *ht
 
 // AiPromptsCreateFolder Create folder
 //
-// Creates a folder in the caller's prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
+// Creates a folder in the caller's prompt library and returns it. The name has to be a non-empty string and unique across that library - a non-string or empty one answers 400, a name in use 409, both with the `{ success: false, error }` body. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create-folder/
 //
@@ -228,8 +261,8 @@ func (a *AIPromptsAPIService) AiPromptsCreateFolderExecute(r ApiAiPromptsCreateF
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.aiPromptsCreateFolderRequest == nil {
+		return localVarReturnValue, nil, reportError("aiPromptsCreateFolderRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -250,7 +283,7 @@ func (a *AIPromptsAPIService) AiPromptsCreateFolderExecute(r ApiAiPromptsCreateF
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.aiPromptsCreateFolderRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -273,6 +306,17 @@ func (a *AIPromptsAPIService) AiPromptsCreateFolderExecute(r ApiAiPromptsCreateF
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiFolderMutationResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -286,6 +330,17 @@ func (a *AIPromptsAPIService) AiPromptsCreateFolderExecute(r ApiAiPromptsCreateF
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AiFolderMutationResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -334,11 +389,11 @@ func (a *AIPromptsAPIService) AiPromptsCreateFolderExecute(r ApiAiPromptsCreateF
 type ApiAiPromptsDeleteRequest struct {
 	ctx context.Context
 	ApiService *AIPromptsAPIService
-	body *string
+	aiPromptsDeleteRequest *string
 }
 
 // The ID of the prompt to delete, as a bare JSON string.
-func (r ApiAiPromptsDeleteRequest) Body(body string) ApiAiPromptsDeleteRequest {	r.body = &body
+func (r ApiAiPromptsDeleteRequest) AiPromptsDeleteRequest(aiPromptsDeleteRequest string) ApiAiPromptsDeleteRequest {	r.aiPromptsDeleteRequest = &aiPromptsDeleteRequest
 	return r
 }
 
@@ -381,8 +436,8 @@ func (a *AIPromptsAPIService) AiPromptsDeleteExecute(r ApiAiPromptsDeleteRequest
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.aiPromptsDeleteRequest == nil {
+		return localVarReturnValue, nil, reportError("aiPromptsDeleteRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -403,7 +458,7 @@ func (a *AIPromptsAPIService) AiPromptsDeleteExecute(r ApiAiPromptsDeleteRequest
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.aiPromptsDeleteRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -498,11 +553,11 @@ func (a *AIPromptsAPIService) AiPromptsDeleteExecute(r ApiAiPromptsDeleteRequest
 type ApiAiPromptsDeleteFolderRequest struct {
 	ctx context.Context
 	ApiService *AIPromptsAPIService
-	body *string
+	aiPromptsDeleteFolderRequest *string
 }
 
 // The ID of the folder to delete, as a bare JSON string.
-func (r ApiAiPromptsDeleteFolderRequest) Body(body string) ApiAiPromptsDeleteFolderRequest {	r.body = &body
+func (r ApiAiPromptsDeleteFolderRequest) AiPromptsDeleteFolderRequest(aiPromptsDeleteFolderRequest string) ApiAiPromptsDeleteFolderRequest {	r.aiPromptsDeleteFolderRequest = &aiPromptsDeleteFolderRequest
 	return r
 }
 
@@ -545,8 +600,8 @@ func (a *AIPromptsAPIService) AiPromptsDeleteFolderExecute(r ApiAiPromptsDeleteF
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.aiPromptsDeleteFolderRequest == nil {
+		return localVarReturnValue, nil, reportError("aiPromptsDeleteFolderRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -567,7 +622,7 @@ func (a *AIPromptsAPIService) AiPromptsDeleteFolderExecute(r ApiAiPromptsDeleteF
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.aiPromptsDeleteFolderRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1121,7 +1176,7 @@ func (r ApiAiPromptsImportBundleRequest) Execute() (*AiImportResult, *http.Respo
 
 // AiPromptsImportBundle Import bundle
 //
-// Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The folder references inside the bundle are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway. `replace` is destructive and cannot be undone - export first if the current library matters.
+// Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The bundle's shape - version 1, `folders` and `prompts` arrays of objects with string ids, names and texts - and the folder references inside it are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway: 400 with the refusals in `errors`, or 409 when every refusal is a name that already exists in the library. `replace` is destructive and cannot be undone - export first if the current library matters.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-import-bundle/
 //
@@ -1199,6 +1254,17 @@ func (a *AIPromptsAPIService) AiPromptsImportBundleExecute(r ApiAiPromptsImportB
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiImportResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1212,6 +1278,17 @@ func (a *AIPromptsAPIService) AiPromptsImportBundleExecute(r ApiAiPromptsImportB
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AiImportResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1544,7 +1621,7 @@ func (r ApiAiPromptsMoveRequest) Execute() (*AiPromptMutationResult, *http.Respo
 
 // AiPromptsMove Move a prompt to a folder
 //
-// Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
+// Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails with 409 when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`; an unknown prompt or folder answers 404. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-move/
 //
@@ -1622,6 +1699,17 @@ func (a *AIPromptsAPIService) AiPromptsMoveExecute(r ApiAiPromptsMoveRequest) (*
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiPromptMutationResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1635,6 +1723,28 @@ func (a *AIPromptsAPIService) AiPromptsMoveExecute(r ApiAiPromptsMoveRequest) (*
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v AiPromptMutationResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AiPromptMutationResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1696,7 +1806,7 @@ func (r ApiAiPromptsRenameFolderRequest) Execute() (*AiFolderMutationResult, *ht
 
 // AiPromptsRenameFolder Rename folder
 //
-// Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected.
+// Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected with 409, an unknown folder with 404 and a non-string or empty name with 400, always with the `{ success: false, error }` body.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-rename-folder/
 //
@@ -1774,6 +1884,17 @@ func (a *AIPromptsAPIService) AiPromptsRenameFolderExecute(r ApiAiPromptsRenameF
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiFolderMutationResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1787,6 +1908,28 @@ func (a *AIPromptsAPIService) AiPromptsRenameFolderExecute(r ApiAiPromptsRenameF
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v AiFolderMutationResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AiFolderMutationResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1848,7 +1991,7 @@ func (r ApiAiPromptsUpdateRequest) Execute() (*AiPromptMutationResult, *http.Res
 
 // AiPromptsUpdate Update a saved prompt
 //
-// Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
+// Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses - that answers 409, an unknown prompt or folder 404, an empty or non-string value 400, always with the `{ success: false, error }` body. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-update/
 //
@@ -1926,6 +2069,17 @@ func (a *AIPromptsAPIService) AiPromptsUpdateExecute(r ApiAiPromptsUpdateRequest
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiPromptMutationResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1939,6 +2093,28 @@ func (a *AIPromptsAPIService) AiPromptsUpdateExecute(r ApiAiPromptsUpdateRequest
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v AiPromptMutationResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AiPromptMutationResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **UserKeys** | Pointer to [**[]EncryptionKeyDto**](EncryptionKeyDto.md) | The key pairs of the calling account, never those of the other people in the room. The private half of each  pair is stored encrypted with that person's own password and has to be decrypted on the client. An empty list  means the account has generated no key pair yet, and until it does no file key can be issued to it. | [optional] 
-**FileKeys** | Pointer to [**[]FileKeys**](FileKeys.md) | The keys of this file that were issued to the calling account, each naming the public key it was encrypted for  so that the client can pick the matching private half. An empty list means the file has not been shared with  this account rather than that the file is unencrypted. | [optional] 
+**FileKeys** | Pointer to [**[]FileKeysDto**](FileKeysDto.md) | The keys of this file that were issued to the calling account, each naming the public key it was encrypted for  so that the client can pick the matching private half. An empty list means the file has not been shared with  this account rather than that the file is unencrypted. | [optional] 
 
 ## Methods
 
@@ -63,20 +63,20 @@ HasUserKeys returns a boolean if a field has been set.
 UnsetUserKeys ensures that no value is present for UserKeys, not even an explicit nil
 ### GetFileKeys
 
-`func (o *FileEncryptionInfoDto) GetFileKeys() []FileKeys`
+`func (o *FileEncryptionInfoDto) GetFileKeys() []FileKeysDto`
 
 GetFileKeys returns the FileKeys field if non-nil, zero value otherwise.
 
 ### GetFileKeysOk
 
-`func (o *FileEncryptionInfoDto) GetFileKeysOk() (*[]FileKeys, bool)`
+`func (o *FileEncryptionInfoDto) GetFileKeysOk() (*[]FileKeysDto, bool)`
 
 GetFileKeysOk returns a tuple with the FileKeys field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFileKeys
 
-`func (o *FileEncryptionInfoDto) SetFileKeys(v []FileKeys)`
+`func (o *FileEncryptionInfoDto) SetFileKeys(v []FileKeysDto)`
 
 SetFileKeys sets FileKeys field to given value.
 

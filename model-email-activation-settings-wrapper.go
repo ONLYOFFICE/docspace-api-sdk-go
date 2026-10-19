@@ -21,10 +21,10 @@ import (
 // checks if the EmailActivationSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EmailActivationSettingsWrapper{}
 
-// EmailActivationSettingsWrapper The successful API response containing the EmailActivationSettings object.
+// EmailActivationSettingsWrapper The successful API response containing the EmailActivationSettingsDto object.
 type EmailActivationSettingsWrapper struct {
-	// The EmailActivationSettings object returned by the operation.
-	Response *EmailActivationSettings `json:"response,omitempty"`
+	// The EmailActivationSettingsDto object returned by the operation.
+	Response *EmailActivationSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewEmailActivationSettingsWrapperWithDefaults() *EmailActivationSettingsWra
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *EmailActivationSettingsWrapper) GetResponse() EmailActivationSettings {
+func (o *EmailActivationSettingsWrapper) GetResponse() EmailActivationSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret EmailActivationSettings
+		var ret EmailActivationSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *EmailActivationSettingsWrapper) GetResponse() EmailActivationSettings {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EmailActivationSettingsWrapper) GetResponseOk() (*EmailActivationSettings, bool) {
+func (o *EmailActivationSettingsWrapper) GetResponseOk() (*EmailActivationSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *EmailActivationSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given EmailActivationSettings and assigns it to the Response field.
-func (o *EmailActivationSettingsWrapper) SetResponse(v EmailActivationSettings) {
+// SetResponse gets a reference to the given EmailActivationSettingsDto and assigns it to the Response field.
+func (o *EmailActivationSettingsWrapper) SetResponse(v EmailActivationSettingsDto) {
 	o.Response = &v
 }
 

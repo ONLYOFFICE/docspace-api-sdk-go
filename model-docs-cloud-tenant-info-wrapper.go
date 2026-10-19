@@ -21,10 +21,10 @@ import (
 // checks if the DocsCloudTenantInfoWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocsCloudTenantInfoWrapper{}
 
-// DocsCloudTenantInfoWrapper The successful API response containing the DocsCloudTenantInfo object.
+// DocsCloudTenantInfoWrapper The successful API response containing the DocsCloudTenantInfoDto object.
 type DocsCloudTenantInfoWrapper struct {
-	// The DocsCloudTenantInfo object returned by the operation.
-	Response *DocsCloudTenantInfo `json:"response,omitempty"`
+	// The DocsCloudTenantInfoDto object returned by the operation.
+	Response *DocsCloudTenantInfoDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewDocsCloudTenantInfoWrapperWithDefaults() *DocsCloudTenantInfoWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *DocsCloudTenantInfoWrapper) GetResponse() DocsCloudTenantInfo {
+func (o *DocsCloudTenantInfoWrapper) GetResponse() DocsCloudTenantInfoDto {
 	if o == nil || IsNil(o.Response) {
-		var ret DocsCloudTenantInfo
+		var ret DocsCloudTenantInfoDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *DocsCloudTenantInfoWrapper) GetResponse() DocsCloudTenantInfo {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DocsCloudTenantInfoWrapper) GetResponseOk() (*DocsCloudTenantInfo, bool) {
+func (o *DocsCloudTenantInfoWrapper) GetResponseOk() (*DocsCloudTenantInfoDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *DocsCloudTenantInfoWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given DocsCloudTenantInfo and assigns it to the Response field.
-func (o *DocsCloudTenantInfoWrapper) SetResponse(v DocsCloudTenantInfo) {
+// SetResponse gets a reference to the given DocsCloudTenantInfoDto and assigns it to the Response field.
+func (o *DocsCloudTenantInfoWrapper) SetResponse(v DocsCloudTenantInfoDto) {
 	o.Response = &v
 }
 

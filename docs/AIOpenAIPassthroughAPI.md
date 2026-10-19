@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## AiOpenaiChatCompletions
 
-> map[string]*interface{} AiOpenaiChatCompletions(ctx, profileId).RequestBody(requestBody).Execute()
+> map[string]*interface{} AiOpenaiChatCompletions(ctx, profileId).AiOpenaiChatCompletionsRequest(aiOpenaiChatCompletionsRequest).Execute()
 
 OpenAI chat completions passthrough
 
@@ -33,11 +33,11 @@ import (
 
 func main() {
 	profileId := "00000000-0000-0000-0000-000000000000" // string | The AI provider profile identifier.
-	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here.
+	aiOpenaiChatCompletionsRequest := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | An OpenAI Chat Completions request, forwarded to the provider as sent. The shape is the provider's, not this API's, so consult the provider's own reference. The credentials come from the profile in the path and must not be sent here; the profile's model is used when the body names none, and a `model` in the body takes precedence.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIOpenAIPassthroughAPI.AiOpenaiChatCompletions(context.Background(), profileId).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AIOpenAIPassthroughAPI.AiOpenaiChatCompletions(context.Background(), profileId).AiOpenaiChatCompletionsRequest(aiOpenaiChatCompletionsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIOpenAIPassthroughAPI.AiOpenaiChatCompletions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiAiOpenaiChatCompletionsReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **requestBody** | **map[string]interface{}** | An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here. | 
+ **aiOpenaiChatCompletionsRequest** | **map[string]interface{}** | An OpenAI Chat Completions request, forwarded to the provider as sent. The shape is the provider's, not this API's, so consult the provider's own reference. The credentials come from the profile in the path and must not be sent here; the profile's model is used when the body names none, and a `model` in the body takes precedence. | 
 
 ### Return type
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## AiOpenaiImagesGenerations
 
-> map[string]*interface{} AiOpenaiImagesGenerations(ctx, profileId).RequestBody(requestBody).Execute()
+> map[string]interface{} AiOpenaiImagesGenerations(ctx, profileId).AiOpenaiImagesGenerationsRequest(aiOpenaiImagesGenerationsRequest).Execute()
 
 OpenAI image generation passthrough
 
@@ -107,16 +107,16 @@ import (
 
 func main() {
 	profileId := "00000000-0000-0000-0000-000000000000" // string | The AI provider profile identifier.
-	requestBody := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path.
+	aiOpenaiImagesGenerationsRequest := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | An OpenAI image-generation request, forwarded to the provider as sent once its documented fields pass a type check. The shape is the provider's, not this API's, and the credentials come from the profile in the path.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIOpenAIPassthroughAPI.AiOpenaiImagesGenerations(context.Background(), profileId).RequestBody(requestBody).Execute()
+	resp, r, err := apiClient.AIOpenAIPassthroughAPI.AiOpenaiImagesGenerations(context.Background(), profileId).AiOpenaiImagesGenerationsRequest(aiOpenaiImagesGenerationsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIOpenAIPassthroughAPI.AiOpenaiImagesGenerations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiOpenaiImagesGenerations`: map[string]*interface{}
+	// response from `AiOpenaiImagesGenerations`: map[string]interface{}
 	fmt.Fprintf(os.Stdout, "Response from `AIOpenAIPassthroughAPI.AiOpenaiImagesGenerations`: %v\n", resp)
 }
 ```
@@ -137,11 +137,11 @@ Other parameters are passed through a pointer to a apiAiOpenaiImagesGenerationsR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **requestBody** | **map[string]interface{}** | An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path. | 
+ **aiOpenaiImagesGenerationsRequest** | **map[string]interface{}** | An OpenAI image-generation request, forwarded to the provider as sent once its documented fields pass a type check. The shape is the provider's, not this API's, and the credentials come from the profile in the path. | 
 
 ### Return type
 
-**map[string]*interface{}**
+**map[string]interface{}**
 
 ### Authorization
 

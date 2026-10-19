@@ -320,17 +320,6 @@ func (a *PortalPaymentAPIService) ChangeTenantWalletServiceStateExecute(r ApiCha
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -850,7 +839,7 @@ func (r ApiGetAccountingServicePricesRequest) Active(active bool) ApiGetAccounti
 	return r
 }
 
-func (r ApiGetAccountingServicePricesRequest) Execute() (*ServicePriceInfoArrayWrapper, *http.Response, error) {
+func (r ApiGetAccountingServicePricesRequest) Execute() (*ServicePriceArrayWrapper, *http.Response, error) {
 	return r.ApiService.GetAccountingServicePricesExecute(r)
 }
 
@@ -872,13 +861,13 @@ func (a *PortalPaymentAPIService) GetAccountingServicePrices(ctx context.Context
 }
 
 // Execute executes the request
-//  @return ServicePriceInfoArrayWrapper
-func (a *PortalPaymentAPIService) GetAccountingServicePricesExecute(r ApiGetAccountingServicePricesRequest) (*ServicePriceInfoArrayWrapper, *http.Response, error) {
+//  @return ServicePriceArrayWrapper
+func (a *PortalPaymentAPIService) GetAccountingServicePricesExecute(r ApiGetAccountingServicePricesRequest) (*ServicePriceArrayWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ServicePriceInfoArrayWrapper
+		localVarReturnValue  *ServicePriceArrayWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortalPaymentAPIService.GetAccountingServicePrices")
@@ -967,28 +956,6 @@ func (a *PortalPaymentAPIService) GetAccountingServicePricesExecute(r ApiGetAcco
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1134,17 +1101,6 @@ func (a *PortalPaymentAPIService) GetActiveServicesExecute(r ApiGetActiveService
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1280,17 +1236,6 @@ func (a *PortalPaymentAPIService) GetAiPricesExecute(r ApiGetAiPricesRequest) (*
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1381,8 +1326,8 @@ func (a *PortalPaymentAPIService) GetCheckoutSetupUrlExecute(r ApiGetCheckoutSet
 		return localVarReturnValue, nil, reportError("successUrl must have less than 255 elements")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "BackUrl", r.backUrl, "form", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "SuccessUrl", r.successUrl, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "backUrl", r.backUrl, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "successUrl", r.successUrl, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1459,17 +1404,6 @@ func (a *PortalPaymentAPIService) GetCheckoutSetupUrlExecute(r ApiGetCheckoutSet
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2276,38 +2210,38 @@ func (a *PortalPaymentAPIService) GetCustomerOperationsExecute(r ApiGetCustomerO
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "ServiceName", s.Index(i).Interface(), "form", "multi")
+				parameterAddToHeaderOrQuery(localVarQueryParams, "serviceName", s.Index(i).Interface(), "form", "multi")
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "ServiceName", t, "form", "multi")
+			parameterAddToHeaderOrQuery(localVarQueryParams, "serviceName", t, "form", "multi")
 		}
 	}
 	if r.startDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "StartDate", r.startDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "startDate", r.startDate, "form", "")
 	}
 	if r.endDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "EndDate", r.endDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endDate", r.endDate, "form", "")
 	}
 	if r.participantName != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ParticipantName", r.participantName, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "participantName", r.participantName, "form", "")
 	}
 	if r.credit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Credit", r.credit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "credit", r.credit, "form", "")
 	}
 	if r.debit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Debit", r.debit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "debit", r.debit, "form", "")
 	}
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Type", r.type_, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Status", r.status, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
 	}
 	if r.orderBy != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "OrderBy", r.orderBy, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "form", "")
 	}
 	if r.orderType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "OrderType", r.orderType, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderType", r.orderType, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2677,26 +2611,26 @@ func (a *PortalPaymentAPIService) GetCustomerServiceUsageExecute(r ApiGetCustome
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "ServiceName", s.Index(i).Interface(), "form", "multi")
+				parameterAddToHeaderOrQuery(localVarQueryParams, "serviceName", s.Index(i).Interface(), "form", "multi")
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "ServiceName", t, "form", "multi")
+			parameterAddToHeaderOrQuery(localVarQueryParams, "serviceName", t, "form", "multi")
 		}
 	}
 	if r.participantName != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ParticipantName", r.participantName, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "participantName", r.participantName, "form", "")
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Status", r.status, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
 	}
 	if r.startDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "StartDate", r.startDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "startDate", r.startDate, "form", "")
 	}
 	if r.endDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "EndDate", r.endDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endDate", r.endDate, "form", "")
 	}
 	if r.metadata != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "Metadata", r.metadata, "deepObject", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "metadata", r.metadata, "deepObject", "")
 	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
@@ -2705,10 +2639,10 @@ func (a *PortalPaymentAPIService) GetCustomerServiceUsageExecute(r ApiGetCustome
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.orderBy != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "OrderBy", r.orderBy, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "form", "")
 	}
 	if r.orderType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "OrderType", r.orderType, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderType", r.orderType, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3098,17 +3032,6 @@ func (a *PortalPaymentAPIService) GetPaymentAccountExecute(r ApiGetPaymentAccoun
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3925,7 +3848,7 @@ type ApiGetRestrictedAiModelsRequest struct {
 	ApiService *PortalPaymentAPIService
 }
 
-func (r ApiGetRestrictedAiModelsRequest) Execute() (*RestrictedModelsResponseWrapper, *http.Response, error) {
+func (r ApiGetRestrictedAiModelsRequest) Execute() (*RestrictedAiModelsWrapper, *http.Response, error) {
 	return r.ApiService.GetRestrictedAiModelsExecute(r)
 }
 
@@ -3945,13 +3868,13 @@ func (a *PortalPaymentAPIService) GetRestrictedAiModels(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return RestrictedModelsResponseWrapper
-func (a *PortalPaymentAPIService) GetRestrictedAiModelsExecute(r ApiGetRestrictedAiModelsRequest) (*RestrictedModelsResponseWrapper, *http.Response, error) {
+//  @return RestrictedAiModelsWrapper
+func (a *PortalPaymentAPIService) GetRestrictedAiModelsExecute(r ApiGetRestrictedAiModelsRequest) (*RestrictedAiModelsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestrictedModelsResponseWrapper
+		localVarReturnValue  *RestrictedAiModelsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortalPaymentAPIService.GetRestrictedAiModels")
@@ -4040,17 +3963,6 @@ func (a *PortalPaymentAPIService) GetRestrictedAiModelsExecute(r ApiGetRestricte
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -4071,7 +3983,7 @@ type ApiGetSubscriptionBalanceInfoRequest struct {
 	ApiService *PortalPaymentAPIService
 }
 
-func (r ApiGetSubscriptionBalanceInfoRequest) Execute() (*SubscriptionBalanceInfoWrapper, *http.Response, error) {
+func (r ApiGetSubscriptionBalanceInfoRequest) Execute() (*SubscriptionBalanceWrapper, *http.Response, error) {
 	return r.ApiService.GetSubscriptionBalanceInfoExecute(r)
 }
 
@@ -4091,13 +4003,13 @@ func (a *PortalPaymentAPIService) GetSubscriptionBalanceInfo(ctx context.Context
 }
 
 // Execute executes the request
-//  @return SubscriptionBalanceInfoWrapper
-func (a *PortalPaymentAPIService) GetSubscriptionBalanceInfoExecute(r ApiGetSubscriptionBalanceInfoRequest) (*SubscriptionBalanceInfoWrapper, *http.Response, error) {
+//  @return SubscriptionBalanceWrapper
+func (a *PortalPaymentAPIService) GetSubscriptionBalanceInfoExecute(r ApiGetSubscriptionBalanceInfoRequest) (*SubscriptionBalanceWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SubscriptionBalanceInfoWrapper
+		localVarReturnValue  *SubscriptionBalanceWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortalPaymentAPIService.GetSubscriptionBalanceInfo")
@@ -4363,13 +4275,13 @@ type ApiGetTenantWalletSettingsRequest struct {
 	ApiService *PortalPaymentAPIService
 }
 
-func (r ApiGetTenantWalletSettingsRequest) Execute() (*TenantWalletSettingsResponseWrapper, *http.Response, error) {
+func (r ApiGetTenantWalletSettingsRequest) Execute() (*TenantWalletSettingsWrapper, *http.Response, error) {
 	return r.ApiService.GetTenantWalletSettingsExecute(r)
 }
 
 // GetTenantWalletSettings Get the auto top-up settings
 //
-// Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+// Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/
 //
@@ -4383,13 +4295,13 @@ func (a *PortalPaymentAPIService) GetTenantWalletSettings(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return TenantWalletSettingsResponseWrapper
-func (a *PortalPaymentAPIService) GetTenantWalletSettingsExecute(r ApiGetTenantWalletSettingsRequest) (*TenantWalletSettingsResponseWrapper, *http.Response, error) {
+//  @return TenantWalletSettingsWrapper
+func (a *PortalPaymentAPIService) GetTenantWalletSettingsExecute(r ApiGetTenantWalletSettingsRequest) (*TenantWalletSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TenantWalletSettingsResponseWrapper
+		localVarReturnValue  *TenantWalletSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortalPaymentAPIService.GetTenantWalletSettings")
@@ -4635,17 +4547,6 @@ func (a *PortalPaymentAPIService) GetWalletServiceExecute(r ApiGetWalletServiceR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -4973,10 +4874,10 @@ func (a *PortalPaymentAPIService) MoveSubscriptionToWalletExecute(r ApiMoveSubsc
 type ApiSendPaymentRequestRequest struct {
 	ctx context.Context
 	ApiService *PortalPaymentAPIService
-	salesRequestsDto *SalesRequestsDto
+	salesRequestDto *SalesRequestDto
 }
 
-func (r ApiSendPaymentRequestRequest) SalesRequestsDto(salesRequestsDto SalesRequestsDto) ApiSendPaymentRequestRequest {	r.salesRequestsDto = &salesRequestsDto
+func (r ApiSendPaymentRequestRequest) SalesRequestDto(salesRequestDto SalesRequestDto) ApiSendPaymentRequestRequest {	r.salesRequestDto = &salesRequestDto
 	return r
 }
 
@@ -5036,7 +4937,7 @@ func (a *PortalPaymentAPIService) SendPaymentRequestExecute(r ApiSendPaymentRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.salesRequestsDto
+	localVarPostBody = r.salesRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5122,13 +5023,13 @@ func (r ApiSetRestrictedAiModelsRequest) SetRestrictedAiModelsRequestDto(setRest
 	return r
 }
 
-func (r ApiSetRestrictedAiModelsRequest) Execute() (*RestrictedModelsResponseWrapper, *http.Response, error) {
+func (r ApiSetRestrictedAiModelsRequest) Execute() (*RestrictedAiModelsWrapper, *http.Response, error) {
 	return r.ApiService.SetRestrictedAiModelsExecute(r)
 }
 
 // SetRestrictedAiModels Set restricted AI models
 //
-// Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer, and the caller needs the permission to edit the  portal settings as well as DocSpace administrator rights. The call is mutating and idempotent - sending the  same set twice leaves the same state - and it is written to the portal audit trail. It takes effect on the  next AI request, so a conversation already open on a model that has just been barred cannot go on with it. The  stored set comes back in the answer.
+// Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer and the AI tools wallet service switched on with  `POST api/2.0/portal/payment/servicestate`, and the caller needs the permission to edit the portal settings as  well as DocSpace administrator rights. The call is mutating and idempotent - sending the same set twice leaves  the same state - and it is written to the portal audit trail. It takes effect on the next AI request, so a  conversation already open on a model that has just been barred cannot go on with it. The stored set comes  back in the answer. While AI tools is off the call is refused with 403 instead of being stored, because the  read reports an empty set then and nothing written could be read back.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-restricted-ai-models/
 //
@@ -5142,13 +5043,13 @@ func (a *PortalPaymentAPIService) SetRestrictedAiModels(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return RestrictedModelsResponseWrapper
-func (a *PortalPaymentAPIService) SetRestrictedAiModelsExecute(r ApiSetRestrictedAiModelsRequest) (*RestrictedModelsResponseWrapper, *http.Response, error) {
+//  @return RestrictedAiModelsWrapper
+func (a *PortalPaymentAPIService) SetRestrictedAiModelsExecute(r ApiSetRestrictedAiModelsRequest) (*RestrictedAiModelsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestrictedModelsResponseWrapper
+		localVarReturnValue  *RestrictedAiModelsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortalPaymentAPIService.SetRestrictedAiModels")
@@ -5239,28 +5140,6 @@ func (a *PortalPaymentAPIService) SetRestrictedAiModelsExecute(r ApiSetRestricte
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -5279,20 +5158,20 @@ func (a *PortalPaymentAPIService) SetRestrictedAiModelsExecute(r ApiSetRestricte
 type ApiSetTenantWalletSettingsRequest struct {
 	ctx context.Context
 	ApiService *PortalPaymentAPIService
-	tenantWalletSettingsWrapper *TenantWalletSettingsWrapper
+	tenantWalletSettingsRequestDto *TenantWalletSettingsRequestDto
 }
 
-func (r ApiSetTenantWalletSettingsRequest) TenantWalletSettingsWrapper(tenantWalletSettingsWrapper TenantWalletSettingsWrapper) ApiSetTenantWalletSettingsRequest {	r.tenantWalletSettingsWrapper = &tenantWalletSettingsWrapper
+func (r ApiSetTenantWalletSettingsRequest) TenantWalletSettingsRequestDto(tenantWalletSettingsRequestDto TenantWalletSettingsRequestDto) ApiSetTenantWalletSettingsRequest {	r.tenantWalletSettingsRequestDto = &tenantWalletSettingsRequestDto
 	return r
 }
 
-func (r ApiSetTenantWalletSettingsRequest) Execute() (*TenantWalletSettingsResponseWrapper, *http.Response, error) {
+func (r ApiSetTenantWalletSettingsRequest) Execute() (*TenantWalletSettingsWrapper, *http.Response, error) {
 	return r.ApiService.SetTenantWalletSettingsExecute(r)
 }
 
 // SetTenantWalletSettings Set the auto top-up settings
 //
-// Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+// Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, and `upToBalance` has to be greater than `minBalance`, so that a top-up lifts the wallet above the balance  that triggers it. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/
 //
@@ -5306,13 +5185,13 @@ func (a *PortalPaymentAPIService) SetTenantWalletSettings(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return TenantWalletSettingsResponseWrapper
-func (a *PortalPaymentAPIService) SetTenantWalletSettingsExecute(r ApiSetTenantWalletSettingsRequest) (*TenantWalletSettingsResponseWrapper, *http.Response, error) {
+//  @return TenantWalletSettingsWrapper
+func (a *PortalPaymentAPIService) SetTenantWalletSettingsExecute(r ApiSetTenantWalletSettingsRequest) (*TenantWalletSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TenantWalletSettingsResponseWrapper
+		localVarReturnValue  *TenantWalletSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortalPaymentAPIService.SetTenantWalletSettings")
@@ -5344,7 +5223,7 @@ func (a *PortalPaymentAPIService) SetTenantWalletSettingsExecute(r ApiSetTenantW
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tenantWalletSettingsWrapper
+	localVarPostBody = r.tenantWalletSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5404,17 +5283,6 @@ func (a *PortalPaymentAPIService) SetTenantWalletSettingsExecute(r ApiSetTenantW
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

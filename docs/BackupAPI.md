@@ -86,7 +86,7 @@ Other parameters are passed through a pointer to a apiCancelBackupRequest struct
 
 ## CreateBackupSchedule
 
-> BooleanWrapper CreateBackupSchedule(ctx).BackupScheduleDto(backupScheduleDto).Execute()
+> BooleanWrapper CreateBackupSchedule(ctx).CreateBackupScheduleRequestDto(createBackupScheduleRequestDto).Execute()
 
 Create the backup schedule
 
@@ -107,11 +107,11 @@ import (
 )
 
 func main() {
-	backupScheduleDto := *openapiclient.NewBackupScheduleDto() // BackupScheduleDto |  (optional)
+	createBackupScheduleRequestDto := *openapiclient.NewCreateBackupScheduleRequestDto() // CreateBackupScheduleRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BackupAPI.CreateBackupSchedule(context.Background()).BackupScheduleDto(backupScheduleDto).Execute()
+	resp, r, err := apiClient.BackupAPI.CreateBackupSchedule(context.Background()).CreateBackupScheduleRequestDto(createBackupScheduleRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BackupAPI.CreateBackupSchedule``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -132,7 +132,7 @@ Other parameters are passed through a pointer to a apiCreateBackupScheduleReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **backupScheduleDto** | [**BackupScheduleDto**](BackupScheduleDto.md) |  | 
+ **createBackupScheduleRequestDto** | [**CreateBackupScheduleRequestDto**](CreateBackupScheduleRequestDto.md) |  | 
 
 ### Return type
 
@@ -843,7 +843,7 @@ Name | Type | Description  | Notes
 
 ## StartBackup
 
-> BackupProgressWrapper StartBackup(ctx).BackupDto(backupDto).Execute()
+> BackupProgressWrapper StartBackup(ctx).StartBackupRequestDto(startBackupRequestDto).Execute()
 
 Start the backup
 
@@ -864,11 +864,11 @@ import (
 )
 
 func main() {
-	backupDto := *openapiclient.NewBackupDto() // BackupDto |  (optional)
+	startBackupRequestDto := *openapiclient.NewStartBackupRequestDto() // StartBackupRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BackupAPI.StartBackup(context.Background()).BackupDto(backupDto).Execute()
+	resp, r, err := apiClient.BackupAPI.StartBackup(context.Background()).StartBackupRequestDto(startBackupRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BackupAPI.StartBackup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -889,7 +889,7 @@ Other parameters are passed through a pointer to a apiStartBackupRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **backupDto** | [**BackupDto**](BackupDto.md) |  | 
+ **startBackupRequestDto** | [**StartBackupRequestDto**](StartBackupRequestDto.md) |  | 
 
 ### Return type
 
@@ -911,7 +911,7 @@ Name | Type | Description  | Notes
 
 ## StartBackupRestore
 
-> BackupProgressWrapper StartBackupRestore(ctx).BackupRestoreDto(backupRestoreDto).Execute()
+> BackupProgressWrapper StartBackupRestore(ctx).StartBackupRestoreRequestDto(startBackupRestoreRequestDto).Execute()
 
 Start the restoring process
 
@@ -932,11 +932,11 @@ import (
 )
 
 func main() {
-	backupRestoreDto := *openapiclient.NewBackupRestoreDto("11111111-1111-1111-1111-111111111111") // BackupRestoreDto |  (optional)
+	startBackupRestoreRequestDto := *openapiclient.NewStartBackupRestoreRequestDto("11111111-1111-1111-1111-111111111111") // StartBackupRestoreRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BackupAPI.StartBackupRestore(context.Background()).BackupRestoreDto(backupRestoreDto).Execute()
+	resp, r, err := apiClient.BackupAPI.StartBackupRestore(context.Background()).StartBackupRestoreRequestDto(startBackupRestoreRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BackupAPI.StartBackupRestore``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -957,7 +957,7 @@ Other parameters are passed through a pointer to a apiStartBackupRestoreRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **backupRestoreDto** | [**BackupRestoreDto**](BackupRestoreDto.md) |  | 
+ **startBackupRestoreRequestDto** | [**StartBackupRestoreRequestDto**](StartBackupRestoreRequestDto.md) |  | 
 
 ### Return type
 

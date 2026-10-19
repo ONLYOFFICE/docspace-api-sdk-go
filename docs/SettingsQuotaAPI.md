@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## GetUserQuotaSettings
 
-> TenantUserQuotaSettingsWrapper GetUserQuotaSettings(ctx).Execute()
+> EntityQuotaSettingsWrapper GetUserQuotaSettings(ctx).Execute()
 
 Get the user quota settings
 
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsQuotaAPI.GetUserQuotaSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserQuotaSettings`: TenantUserQuotaSettingsWrapper
+	// response from `GetUserQuotaSettings`: EntityQuotaSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsQuotaAPI.GetUserQuotaSettings`: %v\n", resp)
 }
 ```
@@ -58,7 +58,7 @@ Other parameters are passed through a pointer to a apiGetUserQuotaSettingsReques
 
 ### Return type
 
-[**TenantUserQuotaSettingsWrapper**](TenantUserQuotaSettingsWrapper.md)
+[**EntityQuotaSettingsWrapper**](EntityQuotaSettingsWrapper.md)
 
 ### Authorization
 
@@ -76,7 +76,7 @@ Other parameters are passed through a pointer to a apiGetUserQuotaSettingsReques
 
 ## SaveAiAgentQuotaSettings
 
-> TenantAiAgentQuotaSettingsWrapper SaveAiAgentQuotaSettings(ctx).QuotaSettingsRequestsDto(quotaSettingsRequestsDto).Execute()
+> EntityQuotaSettingsWrapper SaveAiAgentQuotaSettings(ctx).QuotaSettingsRequestDto(quotaSettingsRequestDto).Execute()
 
 Save the AI Agent quota settings
 
@@ -97,16 +97,16 @@ import (
 )
 
 func main() {
-	quotaSettingsRequestsDto := *openapiclient.NewQuotaSettingsRequestsDto(openapiclient.QuotaSettingsRequestsDto_defaultQuota{Int32: new(int32)}) // QuotaSettingsRequestsDto |  (optional)
+	quotaSettingsRequestDto := *openapiclient.NewQuotaSettingsRequestDto(openapiclient.QuotaSettingsRequestDto_defaultQuota{Int32: new(int32)}) // QuotaSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsQuotaAPI.SaveAiAgentQuotaSettings(context.Background()).QuotaSettingsRequestsDto(quotaSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsQuotaAPI.SaveAiAgentQuotaSettings(context.Background()).QuotaSettingsRequestDto(quotaSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsQuotaAPI.SaveAiAgentQuotaSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SaveAiAgentQuotaSettings`: TenantAiAgentQuotaSettingsWrapper
+	// response from `SaveAiAgentQuotaSettings`: EntityQuotaSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsQuotaAPI.SaveAiAgentQuotaSettings`: %v\n", resp)
 }
 ```
@@ -122,11 +122,11 @@ Other parameters are passed through a pointer to a apiSaveAiAgentQuotaSettingsRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quotaSettingsRequestsDto** | [**QuotaSettingsRequestsDto**](QuotaSettingsRequestsDto.md) |  | 
+ **quotaSettingsRequestDto** | [**QuotaSettingsRequestDto**](QuotaSettingsRequestDto.md) |  | 
 
 ### Return type
 
-[**TenantAiAgentQuotaSettingsWrapper**](TenantAiAgentQuotaSettingsWrapper.md)
+[**EntityQuotaSettingsWrapper**](EntityQuotaSettingsWrapper.md)
 
 ### Authorization
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 
 ## SaveRoomQuotaSettings
 
-> TenantRoomQuotaSettingsWrapper SaveRoomQuotaSettings(ctx).QuotaSettingsRequestsDto(quotaSettingsRequestsDto).Execute()
+> EntityQuotaSettingsWrapper SaveRoomQuotaSettings(ctx).QuotaSettingsRequestDto(quotaSettingsRequestDto).Execute()
 
 Save the room quota settings
 
@@ -165,16 +165,16 @@ import (
 )
 
 func main() {
-	quotaSettingsRequestsDto := *openapiclient.NewQuotaSettingsRequestsDto(openapiclient.QuotaSettingsRequestsDto_defaultQuota{Int32: new(int32)}) // QuotaSettingsRequestsDto |  (optional)
+	quotaSettingsRequestDto := *openapiclient.NewQuotaSettingsRequestDto(openapiclient.QuotaSettingsRequestDto_defaultQuota{Int32: new(int32)}) // QuotaSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsQuotaAPI.SaveRoomQuotaSettings(context.Background()).QuotaSettingsRequestsDto(quotaSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsQuotaAPI.SaveRoomQuotaSettings(context.Background()).QuotaSettingsRequestDto(quotaSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsQuotaAPI.SaveRoomQuotaSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SaveRoomQuotaSettings`: TenantRoomQuotaSettingsWrapper
+	// response from `SaveRoomQuotaSettings`: EntityQuotaSettingsWrapper
 	fmt.Fprintf(os.Stdout, "Response from `SettingsQuotaAPI.SaveRoomQuotaSettings`: %v\n", resp)
 }
 ```
@@ -190,11 +190,11 @@ Other parameters are passed through a pointer to a apiSaveRoomQuotaSettingsReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quotaSettingsRequestsDto** | [**QuotaSettingsRequestsDto**](QuotaSettingsRequestsDto.md) |  | 
+ **quotaSettingsRequestDto** | [**QuotaSettingsRequestDto**](QuotaSettingsRequestDto.md) |  | 
 
 ### Return type
 
-[**TenantRoomQuotaSettingsWrapper**](TenantRoomQuotaSettingsWrapper.md)
+[**EntityQuotaSettingsWrapper**](EntityQuotaSettingsWrapper.md)
 
 ### Authorization
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ## SetTenantQuotaSettings
 
-> TenantQuotaSettingsWrapper SetTenantQuotaSettings(ctx).TenantQuotaSettingsRequestsDto(tenantQuotaSettingsRequestsDto).Execute()
+> TenantQuotaSettingsWrapper SetTenantQuotaSettings(ctx).TenantQuotaSettingsRequestDto(tenantQuotaSettingsRequestDto).Execute()
 
 Save the tenant quota settings
 
@@ -233,11 +233,11 @@ import (
 )
 
 func main() {
-	tenantQuotaSettingsRequestsDto := *openapiclient.NewTenantQuotaSettingsRequestsDto(int32(1)) // TenantQuotaSettingsRequestsDto |  (optional)
+	tenantQuotaSettingsRequestDto := *openapiclient.NewTenantQuotaSettingsRequestDto(int32(1)) // TenantQuotaSettingsRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsQuotaAPI.SetTenantQuotaSettings(context.Background()).TenantQuotaSettingsRequestsDto(tenantQuotaSettingsRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsQuotaAPI.SetTenantQuotaSettings(context.Background()).TenantQuotaSettingsRequestDto(tenantQuotaSettingsRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsQuotaAPI.SetTenantQuotaSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -258,7 +258,7 @@ Other parameters are passed through a pointer to a apiSetTenantQuotaSettingsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenantQuotaSettingsRequestsDto** | [**TenantQuotaSettingsRequestsDto**](TenantQuotaSettingsRequestsDto.md) |  | 
+ **tenantQuotaSettingsRequestDto** | [**TenantQuotaSettingsRequestDto**](TenantQuotaSettingsRequestDto.md) |  | 
 
 ### Return type
 

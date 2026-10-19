@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**GetExternalDbSyncStatus**](RoomsAPI.md#GetExternalDbSyncStatus) | **Get** /api/2.0/files/rooms/{id}/externaldbsync | Get external DB sync status
 [**GetNewRoomItems**](RoomsAPI.md#GetNewRoomItems) | **Get** /api/2.0/files/rooms/{id}/news | Get new items in a room
 [**GetPublicSettings**](RoomsAPI.md#GetPublicSettings) | **Get** /api/2.0/files/roomtemplate/{id}/public | Get room template public access
+[**GetRoomAiFolder**](RoomsAPI.md#GetRoomAiFolder) | **Get** /api/2.0/files/rooms/{id}/ai | Get the .ai folder of a room
 [**GetRoomCovers**](RoomsAPI.md#GetRoomCovers) | **Get** /api/2.0/files/rooms/covers | Get room cover gallery
 [**GetRoomCreatingStatus**](RoomsAPI.md#GetRoomCreatingStatus) | **Get** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress
 [**GetRoomIndexExport**](RoomsAPI.md#GetRoomIndexExport) | **Get** /api/2.0/files/rooms/indexexport | Get the room index export
@@ -35,6 +36,7 @@ Method | HTTP request | Description
 [**PinRoom**](RoomsAPI.md#PinRoom) | **Put** /api/2.0/files/rooms/{id}/pin | Pin a room
 [**ReorderRoom**](RoomsAPI.md#ReorderRoom) | **Put** /api/2.0/files/rooms/{id}/reorder | Reorder room contents
 [**ResendEmailInvitations**](RoomsAPI.md#ResendEmailInvitations) | **Post** /api/2.0/files/rooms/{id}/resend | Resend the room invitations
+[**SearchRooms**](RoomsAPI.md#SearchRooms) | **Post** /api/2.0/files/rooms/search | Search the rooms by metadata
 [**SetPublicSettings**](RoomsAPI.md#SetPublicSettings) | **Put** /api/2.0/files/roomtemplate/public | Set room template public access
 [**SetRoomLink**](RoomsAPI.md#SetRoomLink) | **Put** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link
 [**SetRoomSecurity**](RoomsAPI.md#SetRoomSecurity) | **Put** /api/2.0/files/rooms/{id}/share | Set the room access rights
@@ -628,7 +630,7 @@ Name | Type | Description  | Notes
 
 ## CreateRoomThirdParty
 
-> ThirdPartyFolderWrapper CreateRoomThirdParty(ctx, id).CreateThirdPartyRoom(createThirdPartyRoom).Execute()
+> ThirdPartyFolderWrapper CreateRoomThirdParty(ctx, id).CreateThirdPartyRoomRequest(createThirdPartyRoomRequest).Execute()
 
 Create a third-party room
 
@@ -650,11 +652,11 @@ import (
 
 func main() {
 	id := "box-12-|280143035119" // string | The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.
-	createThirdPartyRoom := *openapiclient.NewCreateThirdPartyRoom("Third-party project room", openapiclient.RoomType(1)) // CreateThirdPartyRoom | The settings of the room to be created out of the folder.
+	createThirdPartyRoomRequest := *openapiclient.NewCreateThirdPartyRoomRequest("Third-party project room", openapiclient.RoomType(1)) // CreateThirdPartyRoomRequest | The settings of the room to be created out of the folder.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.CreateRoomThirdParty(context.Background(), id).CreateThirdPartyRoom(createThirdPartyRoom).Execute()
+	resp, r, err := apiClient.RoomsAPI.CreateRoomThirdParty(context.Background(), id).CreateThirdPartyRoomRequest(createThirdPartyRoomRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.CreateRoomThirdParty``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -680,7 +682,7 @@ Other parameters are passed through a pointer to a apiCreateRoomThirdPartyReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createThirdPartyRoom** | [**CreateThirdPartyRoom**](CreateThirdPartyRoom.md) | The settings of the room to be created out of the folder. | 
+ **createThirdPartyRoomRequest** | [**CreateThirdPartyRoomRequest**](CreateThirdPartyRoomRequest.md) | The settings of the room to be created out of the folder. | 
 
 ### Return type
 
@@ -1208,6 +1210,90 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetRoomAiFolder
+
+> FolderContentWrapper GetRoomAiFolder(ctx, id).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+
+Get the .ai folder of a room
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-ai-folder/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	id := int32(1) // int32 | The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+	filterType := openapiclient.FilterType(0) // FilterType | Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds. (optional)
+	count := int32(25) // int32 | The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. (optional)
+	startIndex := int32(0) // int32 | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. (optional)
+	sortBy := "DateAndTime" // string | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`. (optional)
+	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction in which the `sortBy` field is ordered. (optional)
+	filterValue := "skill" // string | The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RoomsAPI.GetRoomAiFolder(context.Background(), id).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.GetRoomAiFolder``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRoomAiFolder`: FolderContentWrapper
+	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.GetRoomAiFolder`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRoomAiFolderRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **filterType** | [**FilterType**](FilterType.md) | Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds. | 
+ **count** | **int32** | The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. | 
+ **startIndex** | **int32** | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | 
+ **sortBy** | **string** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`. | 
+ **sortOrder** | [**SortOrder**](SortOrder.md) | The direction in which the `sortBy` field is ordered. | 
+ **filterValue** | **string** | The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered. | 
+
+### Return type
+
+[**FolderContentWrapper**](FolderContentWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetRoomCovers
 
 > CoversResultArrayWrapper GetRoomCovers(ctx).Execute()
@@ -1628,7 +1714,7 @@ Name | Type | Description  | Notes
 
 ## GetRoomTagsInfo
 
-> STRINGArrayWrapper GetRoomTagsInfo(ctx).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
+> StringArrayWrapper GetRoomTagsInfo(ctx).Count(count).StartIndex(startIndex).FilterValue(filterValue).Execute()
 
 Get available room tags
 
@@ -1660,7 +1746,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.GetRoomTagsInfo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetRoomTagsInfo`: STRINGArrayWrapper
+	// response from `GetRoomTagsInfo`: StringArrayWrapper
 	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.GetRoomTagsInfo`: %v\n", resp)
 }
 ```
@@ -1682,7 +1768,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**STRINGArrayWrapper**](STRINGArrayWrapper.md)
+[**StringArrayWrapper**](StringArrayWrapper.md)
 
 ### Authorization
 
@@ -1763,7 +1849,7 @@ Other parameters are passed through a pointer to a apiGetRoomTemplateCreatingSta
 
 ## GetRoomsFolder
 
-> FolderContentWrapper GetRoomsFolder(ctx).Type_(type_).SubjectId(subjectId).SubjectOwnerId(subjectOwnerId).SearchArea(searchArea).WithoutTags(withoutTags).Tags(tags).ExcludeSubject(excludeSubject).Provider(provider).QuotaFilter(quotaFilter).StorageFilter(storageFilter).PrivacyFilter(privacyFilter).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).GroupId(groupId).Execute()
+> FolderContentWrapper GetRoomsFolder(ctx).Type_(type_).SubjectId(subjectId).SubjectOwnerId(subjectOwnerId).SearchArea(searchArea).WithoutTags(withoutTags).Tags(tags).ExcludeSubject(excludeSubject).Provider(provider).QuotaFilter(quotaFilter).StorageFilter(storageFilter).PrivacyFilter(privacyFilter).WithAiFolder(withAiFolder).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).GroupId(groupId).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 
 Get rooms
 
@@ -1795,16 +1881,20 @@ func main() {
 	quotaFilter := openapiclient.QuotaFilter(0) // QuotaFilter | Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. (optional)
 	storageFilter := openapiclient.StorageFilter(0) // StorageFilter | Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. (optional)
 	privacyFilter := openapiclient.RoomPrivacyFilter(0) // RoomPrivacyFilter | Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. (optional)
+	withAiFolder := true // bool | Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder. (optional)
 	count := int32(25) // int32 | How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. (optional)
 	startIndex := int32(0) // int32 | How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. (optional)
 	sortBy := "DateAndTime" // string | The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order. (optional)
 	sortOrder := openapiclient.SortOrder(0) // SortOrder | The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used. (optional)
 	filterValue := "Sales" // string | Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched. (optional)
 	groupId := int32(1) // int32 | Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here. (optional)
+	metadataTemplateId := int32(1) // int32 | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to. (optional)
+	metadataFilters := "[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]" // string | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search. (optional)
+	includeHiddenMetadata := false // bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RoomsAPI.GetRoomsFolder(context.Background()).Type_(type_).SubjectId(subjectId).SubjectOwnerId(subjectOwnerId).SearchArea(searchArea).WithoutTags(withoutTags).Tags(tags).ExcludeSubject(excludeSubject).Provider(provider).QuotaFilter(quotaFilter).StorageFilter(storageFilter).PrivacyFilter(privacyFilter).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).GroupId(groupId).Execute()
+	resp, r, err := apiClient.RoomsAPI.GetRoomsFolder(context.Background()).Type_(type_).SubjectId(subjectId).SubjectOwnerId(subjectOwnerId).SearchArea(searchArea).WithoutTags(withoutTags).Tags(tags).ExcludeSubject(excludeSubject).Provider(provider).QuotaFilter(quotaFilter).StorageFilter(storageFilter).PrivacyFilter(privacyFilter).WithAiFolder(withAiFolder).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).GroupId(groupId).MetadataTemplateId(metadataTemplateId).MetadataFilters(metadataFilters).IncludeHiddenMetadata(includeHiddenMetadata).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.GetRoomsFolder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1836,12 +1926,16 @@ Name | Type | Description  | Notes
  **quotaFilter** | [**QuotaFilter**](QuotaFilter.md) | Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. | 
  **storageFilter** | [**StorageFilter**](StorageFilter.md) | Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. | 
  **privacyFilter** | [**RoomPrivacyFilter**](RoomPrivacyFilter.md) | Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. | 
+ **withAiFolder** | **bool** | Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder. | 
  **count** | **int32** | How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. | 
  **startIndex** | **int32** | How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. | 
  **sortBy** | **string** | The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order. | 
  **sortOrder** | [**SortOrder**](SortOrder.md) | The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used. | 
  **filterValue** | **string** | Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched. | 
  **groupId** | **int32** | Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here. | 
+ **metadataTemplateId** | **int32** | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to. | 
+ **metadataFilters** | **string** | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search. | 
+ **includeHiddenMetadata** | **bool** | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | 
 
 ### Return type
 
@@ -2277,6 +2371,74 @@ Name | Type | Description  | Notes
 ### Return type
 
  (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SearchRooms
+
+> FolderContentWrapper SearchRooms(ctx).RoomsMetadataSearchRequestDto(roomsMetadataSearchRequestDto).Execute()
+
+Search the rooms by metadata
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/search-rooms/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	roomsMetadataSearchRequestDto := *openapiclient.NewRoomsMetadataSearchRequestDto() // RoomsMetadataSearchRequestDto |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RoomsAPI.SearchRooms(context.Background()).RoomsMetadataSearchRequestDto(roomsMetadataSearchRequestDto).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoomsAPI.SearchRooms``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SearchRooms`: FolderContentWrapper
+	fmt.Fprintf(os.Stdout, "Response from `RoomsAPI.SearchRooms`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSearchRoomsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **roomsMetadataSearchRequestDto** | [**RoomsMetadataSearchRequestDto**](RoomsMetadataSearchRequestDto.md) |  | 
+
+### Return type
+
+[**FolderContentWrapper**](FolderContentWrapper.md)
 
 ### Authorization
 

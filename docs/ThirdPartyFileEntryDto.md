@@ -40,6 +40,8 @@ Name | Type | Description | Notes
 **External** | Pointer to **NullableBool** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] 
 **ExpirationDate** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] 
 **IsLinkExpired** | Pointer to **NullableBool** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] 
+**AssignedMetadataTemplates** | Pointer to **[]int32** | The IDs of the metadata templates assigned to the file entry. | [optional] 
+**MetadataMatches** | Pointer to [**[]MetadataMatchDto**](MetadataMatchDto.md) | Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here. | [optional] 
 
 ## Methods
 
@@ -1080,6 +1082,76 @@ HasIsLinkExpired returns a boolean if a field has been set.
 `func (o *ThirdPartyFileEntryDto) UnsetIsLinkExpired()`
 
 UnsetIsLinkExpired ensures that no value is present for IsLinkExpired, not even an explicit nil
+### GetAssignedMetadataTemplates
+
+`func (o *ThirdPartyFileEntryDto) GetAssignedMetadataTemplates() []int32`
+
+GetAssignedMetadataTemplates returns the AssignedMetadataTemplates field if non-nil, zero value otherwise.
+
+### GetAssignedMetadataTemplatesOk
+
+`func (o *ThirdPartyFileEntryDto) GetAssignedMetadataTemplatesOk() (*[]int32, bool)`
+
+GetAssignedMetadataTemplatesOk returns a tuple with the AssignedMetadataTemplates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedMetadataTemplates
+
+`func (o *ThirdPartyFileEntryDto) SetAssignedMetadataTemplates(v []int32)`
+
+SetAssignedMetadataTemplates sets AssignedMetadataTemplates field to given value.
+
+### HasAssignedMetadataTemplates
+
+`func (o *ThirdPartyFileEntryDto) HasAssignedMetadataTemplates() bool`
+
+HasAssignedMetadataTemplates returns a boolean if a field has been set.
+
+### SetAssignedMetadataTemplatesNil
+
+`func (o *ThirdPartyFileEntryDto) SetAssignedMetadataTemplatesNil(b bool)`
+
+ SetAssignedMetadataTemplatesNil sets the value for AssignedMetadataTemplates to be an explicit nil
+
+### UnsetAssignedMetadataTemplates
+`func (o *ThirdPartyFileEntryDto) UnsetAssignedMetadataTemplates()`
+
+UnsetAssignedMetadataTemplates ensures that no value is present for AssignedMetadataTemplates, not even an explicit nil
+### GetMetadataMatches
+
+`func (o *ThirdPartyFileEntryDto) GetMetadataMatches() []MetadataMatchDto`
+
+GetMetadataMatches returns the MetadataMatches field if non-nil, zero value otherwise.
+
+### GetMetadataMatchesOk
+
+`func (o *ThirdPartyFileEntryDto) GetMetadataMatchesOk() (*[]MetadataMatchDto, bool)`
+
+GetMetadataMatchesOk returns a tuple with the MetadataMatches field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadataMatches
+
+`func (o *ThirdPartyFileEntryDto) SetMetadataMatches(v []MetadataMatchDto)`
+
+SetMetadataMatches sets MetadataMatches field to given value.
+
+### HasMetadataMatches
+
+`func (o *ThirdPartyFileEntryDto) HasMetadataMatches() bool`
+
+HasMetadataMatches returns a boolean if a field has been set.
+
+### SetMetadataMatchesNil
+
+`func (o *ThirdPartyFileEntryDto) SetMetadataMatchesNil(b bool)`
+
+ SetMetadataMatchesNil sets the value for MetadataMatches to be an explicit nil
+
+### UnsetMetadataMatches
+`func (o *ThirdPartyFileEntryDto) UnsetMetadataMatches()`
+
+UnsetMetadataMatches ensures that no value is present for MetadataMatches, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

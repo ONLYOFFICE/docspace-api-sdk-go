@@ -4,13 +4,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetGuestSharingLink**](PortalGuestsAPI.md#GetGuestSharingLink) | **Get** /api/2.0/people/guests/{userid}/share | Get a guest sharing link
+[**GetGuestSharingLink**](PortalGuestsAPI.md#GetGuestSharingLink) | **Get** /api/2.0/people/guests/{userId}/share | Get a guest sharing link
 
 
 
 ## GetGuestSharingLink
 
-> StringWrapper GetGuestSharingLink(ctx, userid).Execute()
+> StringWrapper GetGuestSharingLink(ctx, userId).Execute()
 
 Get a guest sharing link
 
@@ -31,11 +31,11 @@ import (
 )
 
 func main() {
-	userid := "00000000-0000-0000-0000-000000000000" // string | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
+	userId := "00000000-0000-0000-0000-000000000000" // string | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PortalGuestsAPI.GetGuestSharingLink(context.Background(), userid).Execute()
+	resp, r, err := apiClient.PortalGuestsAPI.GetGuestSharingLink(context.Background(), userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PortalGuestsAPI.GetGuestSharingLink``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -51,7 +51,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userid** | **string** | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. | 
+**userId** | **string** | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. | 
 
 ### Other Parameters
 

@@ -747,7 +747,7 @@ Other parameters are passed through a pointer to a apiTerminateTenantQuotaReport
 
 ## UpdateTenantConfig
 
-> DocsCloudConfigWrapper UpdateTenantConfig(ctx).DocsCloudConfig(docsCloudConfig).Execute()
+> DocsCloudConfigWrapper UpdateTenantConfig(ctx).DocsCloudConfigRequestDto(docsCloudConfigRequestDto).Execute()
 
 Update the Docs Connect tenant configuration
 
@@ -768,11 +768,11 @@ import (
 )
 
 func main() {
-	docsCloudConfig := *openapiclient.NewDocsCloudConfig() // DocsCloudConfig |  (optional)
+	docsCloudConfigRequestDto := *openapiclient.NewDocsCloudConfigRequestDto() // DocsCloudConfigRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsDocsCloudAPI.UpdateTenantConfig(context.Background()).DocsCloudConfig(docsCloudConfig).Execute()
+	resp, r, err := apiClient.SettingsDocsCloudAPI.UpdateTenantConfig(context.Background()).DocsCloudConfigRequestDto(docsCloudConfigRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsDocsCloudAPI.UpdateTenantConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -793,7 +793,7 @@ Other parameters are passed through a pointer to a apiUpdateTenantConfigRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **docsCloudConfig** | [**DocsCloudConfig**](DocsCloudConfig.md) |  | 
+ **docsCloudConfigRequestDto** | [**DocsCloudConfigRequestDto**](DocsCloudConfigRequestDto.md) |  | 
 
 ### Return type
 

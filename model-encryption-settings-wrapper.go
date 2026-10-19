@@ -21,10 +21,10 @@ import (
 // checks if the EncryptionSettingsWrapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EncryptionSettingsWrapper{}
 
-// EncryptionSettingsWrapper The successful API response containing the EncryptionSettings object.
+// EncryptionSettingsWrapper The successful API response containing the EncryptionSettingsDto object.
 type EncryptionSettingsWrapper struct {
-	// The EncryptionSettings object returned by the operation.
-	Response *EncryptionSettings `json:"response,omitempty"`
+	// The EncryptionSettingsDto object returned by the operation.
+	Response *EncryptionSettingsDto `json:"response,omitempty"`
 	// The total number of items in the response
 	Count *int32 `json:"count,omitempty"`
 	// List of links related to the response
@@ -53,9 +53,9 @@ func NewEncryptionSettingsWrapperWithDefaults() *EncryptionSettingsWrapper {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *EncryptionSettingsWrapper) GetResponse() EncryptionSettings {
+func (o *EncryptionSettingsWrapper) GetResponse() EncryptionSettingsDto {
 	if o == nil || IsNil(o.Response) {
-		var ret EncryptionSettings
+		var ret EncryptionSettingsDto
 		return ret
 	}
 	return *o.Response
@@ -63,7 +63,7 @@ func (o *EncryptionSettingsWrapper) GetResponse() EncryptionSettings {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EncryptionSettingsWrapper) GetResponseOk() (*EncryptionSettings, bool) {
+func (o *EncryptionSettingsWrapper) GetResponseOk() (*EncryptionSettingsDto, bool) {
 	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *EncryptionSettingsWrapper) IsResponseSet() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given EncryptionSettings and assigns it to the Response field.
-func (o *EncryptionSettingsWrapper) SetResponse(v EncryptionSettings) {
+// SetResponse gets a reference to the given EncryptionSettingsDto and assigns it to the Response field.
+func (o *EncryptionSettingsWrapper) SetResponse(v EncryptionSettingsDto) {
 	o.Response = &v
 }
 

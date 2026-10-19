@@ -29,14 +29,14 @@ type SecurityFirebaseAPIService service
 type ApiDocRegisterPusnNotificationDeviceRequest struct {
 	ctx context.Context
 	ApiService *SecurityFirebaseAPIService
-	firebaseRequestsDto *FirebaseRequestsDto
+	firebaseRequestDto *FirebaseRequestDto
 }
 
-func (r ApiDocRegisterPusnNotificationDeviceRequest) FirebaseRequestsDto(firebaseRequestsDto FirebaseRequestsDto) ApiDocRegisterPusnNotificationDeviceRequest {	r.firebaseRequestsDto = &firebaseRequestsDto
+func (r ApiDocRegisterPusnNotificationDeviceRequest) FirebaseRequestDto(firebaseRequestDto FirebaseRequestDto) ApiDocRegisterPusnNotificationDeviceRequest {	r.firebaseRequestDto = &firebaseRequestDto
 	return r
 }
 
-func (r ApiDocRegisterPusnNotificationDeviceRequest) Execute() (*FireBaseUserWrapper, *http.Response, error) {
+func (r ApiDocRegisterPusnNotificationDeviceRequest) Execute() (*FirebaseDeviceWrapper, *http.Response, error) {
 	return r.ApiService.DocRegisterPusnNotificationDeviceExecute(r)
 }
 
@@ -56,13 +56,13 @@ func (a *SecurityFirebaseAPIService) DocRegisterPusnNotificationDevice(ctx conte
 }
 
 // Execute executes the request
-//  @return FireBaseUserWrapper
-func (a *SecurityFirebaseAPIService) DocRegisterPusnNotificationDeviceExecute(r ApiDocRegisterPusnNotificationDeviceRequest) (*FireBaseUserWrapper, *http.Response, error) {
+//  @return FirebaseDeviceWrapper
+func (a *SecurityFirebaseAPIService) DocRegisterPusnNotificationDeviceExecute(r ApiDocRegisterPusnNotificationDeviceRequest) (*FirebaseDeviceWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *FireBaseUserWrapper
+		localVarReturnValue  *FirebaseDeviceWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecurityFirebaseAPIService.DocRegisterPusnNotificationDevice")
@@ -94,7 +94,7 @@ func (a *SecurityFirebaseAPIService) DocRegisterPusnNotificationDeviceExecute(r 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.firebaseRequestsDto
+	localVarPostBody = r.firebaseRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -153,17 +153,6 @@ func (a *SecurityFirebaseAPIService) DocRegisterPusnNotificationDeviceExecute(r 
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -193,14 +182,14 @@ func (a *SecurityFirebaseAPIService) DocRegisterPusnNotificationDeviceExecute(r 
 type ApiSubscribeDocumentsPushNotificationRequest struct {
 	ctx context.Context
 	ApiService *SecurityFirebaseAPIService
-	firebaseRequestsDto *FirebaseRequestsDto
+	firebaseRequestDto *FirebaseRequestDto
 }
 
-func (r ApiSubscribeDocumentsPushNotificationRequest) FirebaseRequestsDto(firebaseRequestsDto FirebaseRequestsDto) ApiSubscribeDocumentsPushNotificationRequest {	r.firebaseRequestsDto = &firebaseRequestsDto
+func (r ApiSubscribeDocumentsPushNotificationRequest) FirebaseRequestDto(firebaseRequestDto FirebaseRequestDto) ApiSubscribeDocumentsPushNotificationRequest {	r.firebaseRequestDto = &firebaseRequestDto
 	return r
 }
 
-func (r ApiSubscribeDocumentsPushNotificationRequest) Execute() (*FireBaseUserWrapper, *http.Response, error) {
+func (r ApiSubscribeDocumentsPushNotificationRequest) Execute() (*FirebaseDeviceWrapper, *http.Response, error) {
 	return r.ApiService.SubscribeDocumentsPushNotificationExecute(r)
 }
 
@@ -220,13 +209,13 @@ func (a *SecurityFirebaseAPIService) SubscribeDocumentsPushNotification(ctx cont
 }
 
 // Execute executes the request
-//  @return FireBaseUserWrapper
-func (a *SecurityFirebaseAPIService) SubscribeDocumentsPushNotificationExecute(r ApiSubscribeDocumentsPushNotificationRequest) (*FireBaseUserWrapper, *http.Response, error) {
+//  @return FirebaseDeviceWrapper
+func (a *SecurityFirebaseAPIService) SubscribeDocumentsPushNotificationExecute(r ApiSubscribeDocumentsPushNotificationRequest) (*FirebaseDeviceWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *FireBaseUserWrapper
+		localVarReturnValue  *FirebaseDeviceWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecurityFirebaseAPIService.SubscribeDocumentsPushNotification")
@@ -258,7 +247,7 @@ func (a *SecurityFirebaseAPIService) SubscribeDocumentsPushNotificationExecute(r
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.firebaseRequestsDto
+	localVarPostBody = r.firebaseRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

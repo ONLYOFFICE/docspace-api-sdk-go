@@ -138,7 +138,7 @@ Other parameters are passed through a pointer to a apiGetStorageEncryptionSettin
 
 ## StartStorageEncryption
 
-> BooleanWrapper StartStorageEncryption(ctx).StorageEncryptionRequestsDto(storageEncryptionRequestsDto).Execute()
+> BooleanWrapper StartStorageEncryption(ctx).StorageEncryptionRequestDto(storageEncryptionRequestDto).Execute()
 
 Start the storage encryption
 
@@ -159,11 +159,11 @@ import (
 )
 
 func main() {
-	storageEncryptionRequestsDto := *openapiclient.NewStorageEncryptionRequestsDto() // StorageEncryptionRequestsDto |  (optional)
+	storageEncryptionRequestDto := *openapiclient.NewStorageEncryptionRequestDto() // StorageEncryptionRequestDto |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SettingsEncryptionAPI.StartStorageEncryption(context.Background()).StorageEncryptionRequestsDto(storageEncryptionRequestsDto).Execute()
+	resp, r, err := apiClient.SettingsEncryptionAPI.StartStorageEncryption(context.Background()).StorageEncryptionRequestDto(storageEncryptionRequestDto).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SettingsEncryptionAPI.StartStorageEncryption``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -184,7 +184,7 @@ Other parameters are passed through a pointer to a apiStartStorageEncryptionRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storageEncryptionRequestsDto** | [**StorageEncryptionRequestsDto**](StorageEncryptionRequestsDto.md) |  | 
+ **storageEncryptionRequestDto** | [**StorageEncryptionRequestDto**](StorageEncryptionRequestDto.md) |  | 
 
 ### Return type
 

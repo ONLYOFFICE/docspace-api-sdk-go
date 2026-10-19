@@ -467,10 +467,10 @@ func (a *SettingsGreetingSettingsAPIService) RestoreGreetingSettingsExecute(r Ap
 type ApiSaveGreetingSettingsRequest struct {
 	ctx context.Context
 	ApiService *SettingsGreetingSettingsAPIService
-	greetingSettingsRequestsDto *GreetingSettingsRequestsDto
+	greetingSettingsRequestDto *GreetingSettingsRequestDto
 }
 
-func (r ApiSaveGreetingSettingsRequest) GreetingSettingsRequestsDto(greetingSettingsRequestsDto GreetingSettingsRequestsDto) ApiSaveGreetingSettingsRequest {	r.greetingSettingsRequestsDto = &greetingSettingsRequestsDto
+func (r ApiSaveGreetingSettingsRequest) GreetingSettingsRequestDto(greetingSettingsRequestDto GreetingSettingsRequestDto) ApiSaveGreetingSettingsRequest {	r.greetingSettingsRequestDto = &greetingSettingsRequestDto
 	return r
 }
 
@@ -532,7 +532,7 @@ func (a *SettingsGreetingSettingsAPIService) SaveGreetingSettingsExecute(r ApiSa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.greetingSettingsRequestsDto
+	localVarPostBody = r.greetingSettingsRequestDto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -592,17 +592,6 @@ func (a *SettingsGreetingSettingsAPIService) SaveGreetingSettingsExecute(r ApiSa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorApiResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorApiResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

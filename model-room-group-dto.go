@@ -28,7 +28,7 @@ type RoomGroupDto struct {
 	// The name its owner gave the group, stored trimmed of surrounding spaces. Names are not unique, so two groups  of the same account can be told apart only by their identifier.
 	Name NullableString `json:"name,omitempty"`
 	// The built-in cover chosen for the group, carrying the cover identifier and its rendering in each available  size. Null when the group has no icon, either because it was never given one or because the icon was cleared  by setting it to an empty value.
-	Icon *MultiSizeLogoCover `json:"icon,omitempty"`
+	Icon *MultiSizeLogoCoverDto `json:"icon,omitempty"`
 	// The account that created the group and the only one able to read, change or delete it; for any other member of  the portal the group does not exist.
 	UserId *string `json:"userId,omitempty"`
 	// The section the group belongs to, which categorizes it within the application's structure. This property determines  which area of the interface the group is associated with and affects how its rooms are filtered and displayed.  Common values include Active for standard rooms, Forms for form-based rooms, Archive for archived content, and  Templates for template rooms. The search area ensures that when retrieving a group, only rooms that belong to  the specified section are included in the results, maintaining proper organizational boundaries within the system.
@@ -131,9 +131,9 @@ func (o *RoomGroupDto) UnsetName() {
 }
 
 // GetIcon returns the Icon field value if set, zero value otherwise.
-func (o *RoomGroupDto) GetIcon() MultiSizeLogoCover {
+func (o *RoomGroupDto) GetIcon() MultiSizeLogoCoverDto {
 	if o == nil || IsNil(o.Icon) {
-		var ret MultiSizeLogoCover
+		var ret MultiSizeLogoCoverDto
 		return ret
 	}
 	return *o.Icon
@@ -141,7 +141,7 @@ func (o *RoomGroupDto) GetIcon() MultiSizeLogoCover {
 
 // GetIconOk returns a tuple with the Icon field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RoomGroupDto) GetIconOk() (*MultiSizeLogoCover, bool) {
+func (o *RoomGroupDto) GetIconOk() (*MultiSizeLogoCoverDto, bool) {
 	if o == nil || IsNil(o.Icon) {
 		return nil, false
 	}
@@ -157,8 +157,8 @@ func (o *RoomGroupDto) IsIconSet() bool {
 	return false
 }
 
-// SetIcon gets a reference to the given MultiSizeLogoCover and assigns it to the Icon field.
-func (o *RoomGroupDto) SetIcon(v MultiSizeLogoCover) {
+// SetIcon gets a reference to the given MultiSizeLogoCoverDto and assigns it to the Icon field.
+func (o *RoomGroupDto) SetIcon(v MultiSizeLogoCoverDto) {
 	o.Icon = &v
 }
 

@@ -31,7 +31,7 @@ type ApiAiSettingsGetRequest struct {
 	ApiService *AISettingsAPIService
 }
 
-func (r ApiAiSettingsGetRequest) Execute() (*AiAiSettingsWrapper, *http.Response, error) {
+func (r ApiAiSettingsGetRequest) Execute() (*AiSettingsWrapper, *http.Response, error) {
 	return r.ApiService.AiSettingsGetExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *AISettingsAPIService) AiSettingsGet(ctx context.Context) ApiAiSettingsG
 }
 
 // Execute executes the request
-//  @return AiAiSettingsWrapper
-func (a *AISettingsAPIService) AiSettingsGetExecute(r ApiAiSettingsGetRequest) (*AiAiSettingsWrapper, *http.Response, error) {
+//  @return AiSettingsWrapper
+func (a *AISettingsAPIService) AiSettingsGetExecute(r ApiAiSettingsGetRequest) (*AiSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiAiSettingsWrapper
+		localVarReturnValue  *AiSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AISettingsAPIService.AiSettingsGet")
@@ -157,12 +157,143 @@ func (a *AISettingsAPIService) AiSettingsGetExecute(r ApiAiSettingsGetRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiAiSettingsGetToolModeRequest struct {
+	ctx context.Context
+	ApiService *AISettingsAPIService
+}
+
+func (r ApiAiSettingsGetToolModeRequest) Execute() (*AiSuccessResponse, *http.Response, error) {
+	return r.ApiService.AiSettingsGetToolModeExecute(r)
+}
+
+// AiSettingsGetToolMode Get the tool permission mode
+//
+// Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+//
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
+//
+// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+// @return ApiAiSettingsGetToolModeRequest
+func (a *AISettingsAPIService) AiSettingsGetToolMode(ctx context.Context) ApiAiSettingsGetToolModeRequest {
+	return ApiAiSettingsGetToolModeRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return AiSuccessResponse
+func (a *AISettingsAPIService) AiSettingsGetToolModeExecute(r ApiAiSettingsGetToolModeRequest) (*AiSuccessResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AiSuccessResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AISettingsAPIService.AiSettingsGetToolMode")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/2.0/ai/config/tool-mode"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiAiSettingsGetUserRequest struct {
 	ctx context.Context
 	ApiService *AISettingsAPIService
 }
 
-func (r ApiAiSettingsGetUserRequest) Execute() (*AiAiUserSettingsWrapper, *http.Response, error) {
+func (r ApiAiSettingsGetUserRequest) Execute() (*AiUserSettingsWrapper, *http.Response, error) {
 	return r.ApiService.AiSettingsGetUserExecute(r)
 }
 
@@ -182,13 +313,13 @@ func (a *AISettingsAPIService) AiSettingsGetUser(ctx context.Context) ApiAiSetti
 }
 
 // Execute executes the request
-//  @return AiAiUserSettingsWrapper
-func (a *AISettingsAPIService) AiSettingsGetUserExecute(r ApiAiSettingsGetUserRequest) (*AiAiUserSettingsWrapper, *http.Response, error) {
+//  @return AiUserSettingsWrapper
+func (a *AISettingsAPIService) AiSettingsGetUserExecute(r ApiAiSettingsGetUserRequest) (*AiUserSettingsWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiAiUserSettingsWrapper
+		localVarReturnValue  *AiUserSettingsWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AISettingsAPIService.AiSettingsGetUser")
@@ -419,58 +550,58 @@ func (a *AISettingsAPIService) AiSettingsGetVectorizationExecute(r ApiAiSettings
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAiSettingsSetUserRequest struct {
+type ApiAiSettingsSetToolModeRequest struct {
 	ctx context.Context
 	ApiService *AISettingsAPIService
-	requestBody *map[string]*interface{}
+	aiSettingsSetToolModeRequest *map[string]*interface{}
 }
 
-// The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
-func (r ApiAiSettingsSetUserRequest) RequestBody(requestBody map[string]*interface{}) ApiAiSettingsSetUserRequest {	r.requestBody = &requestBody
+// `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
+func (r ApiAiSettingsSetToolModeRequest) AiSettingsSetToolModeRequest(aiSettingsSetToolModeRequest map[string]*interface{}) ApiAiSettingsSetToolModeRequest {	r.aiSettingsSetToolModeRequest = &aiSettingsSetToolModeRequest
 	return r
 }
 
-func (r ApiAiSettingsSetUserRequest) Execute() (*AiAiUserSettingsWrapper, *http.Response, error) {
-	return r.ApiService.AiSettingsSetUserExecute(r)
+func (r ApiAiSettingsSetToolModeRequest) Execute() (*AiSuccessResponse, *http.Response, error) {
+	return r.ApiService.AiSettingsSetToolModeExecute(r)
 }
 
-// AiSettingsSetUser Update user AI settings
+// AiSettingsSetToolMode Set the tool permission mode
 //
-// Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
+// Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
 //
-// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
 //
 // @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-// @return ApiAiSettingsSetUserRequest
-func (a *AISettingsAPIService) AiSettingsSetUser(ctx context.Context) ApiAiSettingsSetUserRequest {
-	return ApiAiSettingsSetUserRequest{
+// @return ApiAiSettingsSetToolModeRequest
+func (a *AISettingsAPIService) AiSettingsSetToolMode(ctx context.Context) ApiAiSettingsSetToolModeRequest {
+	return ApiAiSettingsSetToolModeRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AiAiUserSettingsWrapper
-func (a *AISettingsAPIService) AiSettingsSetUserExecute(r ApiAiSettingsSetUserRequest) (*AiAiUserSettingsWrapper, *http.Response, error) {
+//  @return AiSuccessResponse
+func (a *AISettingsAPIService) AiSettingsSetToolModeExecute(r ApiAiSettingsSetToolModeRequest) (*AiSuccessResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiAiUserSettingsWrapper
+		localVarReturnValue  *AiSuccessResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AISettingsAPIService.AiSettingsSetUser")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AISettingsAPIService.AiSettingsSetToolMode")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/2.0/ai/config/user"
+	localVarPath := localBasePath + "/api/2.0/ai/config/tool-mode"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.requestBody == nil {
-		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
+	if r.aiSettingsSetToolModeRequest == nil {
+		return localVarReturnValue, nil, reportError("aiSettingsSetToolModeRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -491,7 +622,7 @@ func (a *AISettingsAPIService) AiSettingsSetUserExecute(r ApiAiSettingsSetUserRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.aiSettingsSetToolModeRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -572,14 +703,178 @@ func (a *AISettingsAPIService) AiSettingsSetUserExecute(r ApiAiSettingsSetUserRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiAiSettingsSetUserRequest struct {
+	ctx context.Context
+	ApiService *AISettingsAPIService
+	aiSettingsSetUserRequest *map[string]*interface{}
+}
+
+// The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
+func (r ApiAiSettingsSetUserRequest) AiSettingsSetUserRequest(aiSettingsSetUserRequest map[string]*interface{}) ApiAiSettingsSetUserRequest {	r.aiSettingsSetUserRequest = &aiSettingsSetUserRequest
+	return r
+}
+
+func (r ApiAiSettingsSetUserRequest) Execute() (*AiUserSettingsWrapper, *http.Response, error) {
+	return r.ApiService.AiSettingsSetUserExecute(r)
+}
+
+// AiSettingsSetUser Update user AI settings
+//
+// Replaces the AI settings of the calling user and returns the stored result. `chatRecommendedModelVisible` is required and has to be a real boolean - a body the JSON parser cannot read, such as one sent as text/plain, used to arrive empty and answer 200 having stored nothing. The body is then proxied to the DocSpace AI service, which validates the rest, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
+//
+// See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/
+//
+// @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+// @return ApiAiSettingsSetUserRequest
+func (a *AISettingsAPIService) AiSettingsSetUser(ctx context.Context) ApiAiSettingsSetUserRequest {
+	return ApiAiSettingsSetUserRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return AiUserSettingsWrapper
+func (a *AISettingsAPIService) AiSettingsSetUserExecute(r ApiAiSettingsSetUserRequest) (*AiUserSettingsWrapper, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AiUserSettingsWrapper
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AISettingsAPIService.AiSettingsSetUser")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/2.0/ai/config/user"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.aiSettingsSetUserRequest == nil {
+		return localVarReturnValue, nil, reportError("aiSettingsSetUserRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.aiSettingsSetUserRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiAiSettingsSetVectorizationRequest struct {
 	ctx context.Context
 	ApiService *AISettingsAPIService
-	requestBody *map[string]*interface{}
+	aiSettingsSetVectorizationRequest *map[string]*interface{}
 }
 
 // The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
-func (r ApiAiSettingsSetVectorizationRequest) RequestBody(requestBody map[string]*interface{}) ApiAiSettingsSetVectorizationRequest {	r.requestBody = &requestBody
+func (r ApiAiSettingsSetVectorizationRequest) AiSettingsSetVectorizationRequest(aiSettingsSetVectorizationRequest map[string]*interface{}) ApiAiSettingsSetVectorizationRequest {	r.aiSettingsSetVectorizationRequest = &aiSettingsSetVectorizationRequest
 	return r
 }
 
@@ -622,8 +917,8 @@ func (a *AISettingsAPIService) AiSettingsSetVectorizationExecute(r ApiAiSettings
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.requestBody == nil {
-		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
+	if r.aiSettingsSetVectorizationRequest == nil {
+		return localVarReturnValue, nil, reportError("aiSettingsSetVectorizationRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -644,7 +939,7 @@ func (a *AISettingsAPIService) AiSettingsSetVectorizationExecute(r ApiAiSettings
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.aiSettingsSetVectorizationRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

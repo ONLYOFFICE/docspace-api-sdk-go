@@ -60,7 +60,7 @@ type SettingsDto struct {
 	// The token that authorizes the first-run setup wizard. It is handed out to anonymous callers only, and only  while the wizard has not been completed; once it has, the field stays empty for good.
 	WizardToken NullableString `json:"wizardToken,omitempty"`
 	// The parameters for hashing a password in the client before it is sent - the salt, the iteration count and  the hash size. It is filled in for an anonymous caller and, for a signed-in one, only when  `withPassword=true` is asked for. Hash with exactly these parameters and send the result as  `passwordHash`, since the portal cannot reproduce the hash from a different set.
-	PasswordHash *PasswordHasher `json:"passwordHash,omitempty"`
+	PasswordHash *PasswordHashSettingsDto `json:"passwordHash,omitempty"`
 	// The Firebase project a mobile or web client sends push registrations to. Filled in for a signed-in caller  only, and its own fields are empty strings on an installation that configures no Firebase project.
 	Firebase *FirebaseDto `json:"firebase,omitempty"`
 	// The product version of the portal, empty when the installation does not publish one. It is the version of  the server, not of this API, whose own version is fixed at 2.0.
@@ -73,14 +73,14 @@ type SettingsDto struct {
 	DebugInfo *bool `json:"debugInfo,omitempty"`
 	// The address of the socket service that pushes live updates to a client. It is filled in for a signed-in  caller and for an anonymous one who arrives with an external sharing link, and is empty when the  installation runs no socket service - a client then has to poll.
 	SocketUrl NullableString `json:"socketUrl,omitempty"`
-	// The lifecycle state of the portal. Anything other than active means most operations are refused for the  moment, because the portal is being transferred, restored, encrypted or removed.
+	// The lifecycle state of the portal. Anything other than active means most operations are refused: the  portal is being transferred, restored, encrypted or removed, its owner has deactivated it, or the  retention policy has blocked it after a long period without use.
 	TenantStatus *TenantStatus `json:"tenantStatus,omitempty"`
 	// The portal's own name within the installation, which together with `baseDomain` forms the address it is  reached at. `PUT api/2.0/portal/portalrename` changes it.
 	TenantAlias NullableString `json:"tenantAlias,omitempty"`
 	// Whether the interface may show the About page. A cloud portal always may; a server installation may unless  its plan includes branding and the vendor details hide the page.
 	DisplayAbout *bool `json:"displayAbout,omitempty"`
 	// The rules a portal name is checked against - its length limits and the pattern it has to match - so a  client can validate a rename before sending it. Filled in for a signed-in caller only.
-	DomainValidator *TenantDomainValidator `json:"domainValidator,omitempty"`
+	DomainValidator *DomainNameRulesDto `json:"domainValidator,omitempty"`
 	// The key that lets the client open the vendor's support chat, empty when the installation configures none.  Filled in for a signed-in caller only.
 	ZendeskKey NullableString `json:"zendeskKey,omitempty"`
 	// The Google Tag Manager container the client should load, empty when the installation configures none.  Filled in for a signed-in caller only.
@@ -112,7 +112,7 @@ type SettingsDto struct {
 	// The wordmark to print next to the portal logo. It falls back to the built-in one while the portal has  stored no text of its own, so it is never empty.
 	LogoText NullableString `json:"logoText,omitempty"`
 	// The addresses of the vendor's help, support, forum and video resources, already picked for the portal  language. An entry is missing when the installation configures no address for it or the resource is  switched off, which `GET api/2.0/settings/rebranding/additional` reports flag by flag.
-	ExternalResources *CultureSpecificExternalResources `json:"externalResources,omitempty"`
+	ExternalResources *ExternalResourcesDto `json:"externalResources,omitempty"`
 	// The section the client should open after sign-in, which is the caller's own preference rather than a  portal-wide one. Filled in for a signed-in caller only.
 	DefaultFolderType *FolderType `json:"defaultFolderType,omitempty"`
 	// Whether the installation has an external database wired up for form results, without which the operations  that write form results there are refused. Filled in for a signed-in caller only.
@@ -746,9 +746,9 @@ func (o *SettingsDto) UnsetWizardToken() {
 }
 
 // GetPasswordHash returns the PasswordHash field value if set, zero value otherwise.
-func (o *SettingsDto) GetPasswordHash() PasswordHasher {
+func (o *SettingsDto) GetPasswordHash() PasswordHashSettingsDto {
 	if o == nil || IsNil(o.PasswordHash) {
-		var ret PasswordHasher
+		var ret PasswordHashSettingsDto
 		return ret
 	}
 	return *o.PasswordHash
@@ -756,7 +756,7 @@ func (o *SettingsDto) GetPasswordHash() PasswordHasher {
 
 // GetPasswordHashOk returns a tuple with the PasswordHash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SettingsDto) GetPasswordHashOk() (*PasswordHasher, bool) {
+func (o *SettingsDto) GetPasswordHashOk() (*PasswordHashSettingsDto, bool) {
 	if o == nil || IsNil(o.PasswordHash) {
 		return nil, false
 	}
@@ -772,8 +772,8 @@ func (o *SettingsDto) IsPasswordHashSet() bool {
 	return false
 }
 
-// SetPasswordHash gets a reference to the given PasswordHasher and assigns it to the PasswordHash field.
-func (o *SettingsDto) SetPasswordHash(v PasswordHasher) {
+// SetPasswordHash gets a reference to the given PasswordHashSettingsDto and assigns it to the PasswordHash field.
+func (o *SettingsDto) SetPasswordHash(v PasswordHashSettingsDto) {
 	o.PasswordHash = &v
 }
 
@@ -1106,9 +1106,9 @@ func (o *SettingsDto) SetDisplayAbout(v bool) {
 }
 
 // GetDomainValidator returns the DomainValidator field value if set, zero value otherwise.
-func (o *SettingsDto) GetDomainValidator() TenantDomainValidator {
+func (o *SettingsDto) GetDomainValidator() DomainNameRulesDto {
 	if o == nil || IsNil(o.DomainValidator) {
-		var ret TenantDomainValidator
+		var ret DomainNameRulesDto
 		return ret
 	}
 	return *o.DomainValidator
@@ -1116,7 +1116,7 @@ func (o *SettingsDto) GetDomainValidator() TenantDomainValidator {
 
 // GetDomainValidatorOk returns a tuple with the DomainValidator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SettingsDto) GetDomainValidatorOk() (*TenantDomainValidator, bool) {
+func (o *SettingsDto) GetDomainValidatorOk() (*DomainNameRulesDto, bool) {
 	if o == nil || IsNil(o.DomainValidator) {
 		return nil, false
 	}
@@ -1132,8 +1132,8 @@ func (o *SettingsDto) IsDomainValidatorSet() bool {
 	return false
 }
 
-// SetDomainValidator gets a reference to the given TenantDomainValidator and assigns it to the DomainValidator field.
-func (o *SettingsDto) SetDomainValidator(v TenantDomainValidator) {
+// SetDomainValidator gets a reference to the given DomainNameRulesDto and assigns it to the DomainValidator field.
+func (o *SettingsDto) SetDomainValidator(v DomainNameRulesDto) {
 	o.DomainValidator = &v
 }
 
@@ -1662,9 +1662,9 @@ func (o *SettingsDto) UnsetLogoText() {
 }
 
 // GetExternalResources returns the ExternalResources field value if set, zero value otherwise.
-func (o *SettingsDto) GetExternalResources() CultureSpecificExternalResources {
+func (o *SettingsDto) GetExternalResources() ExternalResourcesDto {
 	if o == nil || IsNil(o.ExternalResources) {
-		var ret CultureSpecificExternalResources
+		var ret ExternalResourcesDto
 		return ret
 	}
 	return *o.ExternalResources
@@ -1672,7 +1672,7 @@ func (o *SettingsDto) GetExternalResources() CultureSpecificExternalResources {
 
 // GetExternalResourcesOk returns a tuple with the ExternalResources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SettingsDto) GetExternalResourcesOk() (*CultureSpecificExternalResources, bool) {
+func (o *SettingsDto) GetExternalResourcesOk() (*ExternalResourcesDto, bool) {
 	if o == nil || IsNil(o.ExternalResources) {
 		return nil, false
 	}
@@ -1688,8 +1688,8 @@ func (o *SettingsDto) IsExternalResourcesSet() bool {
 	return false
 }
 
-// SetExternalResources gets a reference to the given CultureSpecificExternalResources and assigns it to the ExternalResources field.
-func (o *SettingsDto) SetExternalResources(v CultureSpecificExternalResources) {
+// SetExternalResources gets a reference to the given ExternalResourcesDto and assigns it to the ExternalResources field.
+func (o *SettingsDto) SetExternalResources(v ExternalResourcesDto) {
 	o.ExternalResources = &v
 }
 

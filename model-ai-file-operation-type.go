@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// AiFileOperationType [0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate]
+// AiFileOperationType [0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate, 8 - Build]
 type AiFileOperationType int32
 
 // List of AiFileOperationType
@@ -32,6 +32,7 @@ const (
 	AIFILEOPERATIONTYPE_Import AiFileOperationType = 5
 	AIFILEOPERATIONTYPE_Convert AiFileOperationType = 6
 	AIFILEOPERATIONTYPE_Duplicate AiFileOperationType = 7
+	AIFILEOPERATIONTYPE_Build AiFileOperationType = 8
 )
 
 // All allowed values of AiFileOperationType enum
@@ -44,6 +45,7 @@ var AllowedAiFileOperationTypeEnumValues = []AiFileOperationType{
 	5,
 	6,
 	7,
+	8,
 }
 
 func (v *AiFileOperationType) UnmarshalJSON(src []byte) error {

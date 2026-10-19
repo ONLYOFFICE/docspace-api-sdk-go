@@ -26,7 +26,7 @@ var _ MappedNullable = &AiToolsListSystemTools200Response{}
 // AiToolsListSystemTools200Response struct for AiToolsListSystemTools200Response
 type AiToolsListSystemTools200Response struct {
 	// Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope.
-	Groups map[string][]AiTMCPItem `json:"groups"`
+	Groups map[string][]AiMCPItem `json:"groups"`
 	// Why a registered custom server could not be reached, keyed by server name. A server that answered is absent from this map.
 	Errors map[string]string `json:"errors"`
 	// Names of the host-configured system servers among the keys of `groups`; everything else there was registered as a custom server.
@@ -39,7 +39,7 @@ type _AiToolsListSystemTools200Response AiToolsListSystemTools200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiToolsListSystemTools200Response(groups map[string][]AiTMCPItem, errors map[string]string, system []string) *AiToolsListSystemTools200Response {
+func NewAiToolsListSystemTools200Response(groups map[string][]AiMCPItem, errors map[string]string, system []string) *AiToolsListSystemTools200Response {
 	this := AiToolsListSystemTools200Response{}
 	this.Groups = groups
 	this.Errors = errors
@@ -56,9 +56,9 @@ func NewAiToolsListSystemTools200ResponseWithDefaults() *AiToolsListSystemTools2
 }
 
 // GetGroups returns the Groups field value
-func (o *AiToolsListSystemTools200Response) GetGroups() map[string][]AiTMCPItem {
+func (o *AiToolsListSystemTools200Response) GetGroups() map[string][]AiMCPItem {
 	if o == nil {
-		var ret map[string][]AiTMCPItem
+		var ret map[string][]AiMCPItem
 		return ret
 	}
 
@@ -67,15 +67,15 @@ func (o *AiToolsListSystemTools200Response) GetGroups() map[string][]AiTMCPItem 
 
 // GetGroupsOk returns a tuple with the Groups field value
 // and a boolean to check if the value has been set.
-func (o *AiToolsListSystemTools200Response) GetGroupsOk() (map[string][]AiTMCPItem, bool) {
+func (o *AiToolsListSystemTools200Response) GetGroupsOk() (map[string][]AiMCPItem, bool) {
 	if o == nil {
-		return map[string][]AiTMCPItem{}, false
+		return map[string][]AiMCPItem{}, false
 	}
 	return o.Groups, true
 }
 
 // SetGroups sets field value
-func (o *AiToolsListSystemTools200Response) SetGroups(v map[string][]AiTMCPItem) {
+func (o *AiToolsListSystemTools200Response) SetGroups(v map[string][]AiMCPItem) {
 	o.Groups = v
 }
 

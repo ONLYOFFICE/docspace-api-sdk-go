@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Success** | **bool** | True when the folder was persisted. | 
 **Folder** | Pointer to [**AiPromptFolder**](AiPromptFolder.md) | The persisted folder. Present on success. | [optional] 
-**Error** | Pointer to [**AiTErrorData**](AiTErrorData.md) | Why the folder was rejected. Present on failure. | [optional] 
+**Error** | Pointer to [**AiErrorData**](AiErrorData.md) | Why the folder was rejected. Present on failure. | [optional] 
 
 ## Methods
 
@@ -74,20 +74,20 @@ HasFolder returns a boolean if a field has been set.
 
 ### GetError
 
-`func (o *AiFolderMutationResult) GetError() AiTErrorData`
+`func (o *AiFolderMutationResult) GetError() AiErrorData`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *AiFolderMutationResult) GetErrorOk() (*AiTErrorData, bool)`
+`func (o *AiFolderMutationResult) GetErrorOk() (*AiErrorData, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *AiFolderMutationResult) SetError(v AiTErrorData)`
+`func (o *AiFolderMutationResult) SetError(v AiErrorData)`
 
 SetError sets Error field to given value.
 

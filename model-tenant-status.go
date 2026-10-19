@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// TenantStatus [0 - Active, 1 - Suspended, 2 - Remove pending, 3 - Transfering, 4 - Restoring, 5 - Migrating, 6 - Encryption]
+// TenantStatus [0 - Active, 1 - Suspended, 2 - Remove pending, 3 - Transfering, 4 - Restoring, 5 - Migrating, 6 - Encryption, 7 - Blocked]
 type TenantStatus int32
 
 // List of TenantStatus
@@ -31,6 +31,7 @@ const (
 	TENANTSTATUS_Restoring TenantStatus = 4
 	TENANTSTATUS_Migrating TenantStatus = 5
 	TENANTSTATUS_Encryption TenantStatus = 6
+	TENANTSTATUS_Blocked TenantStatus = 7
 )
 
 // All allowed values of TenantStatus enum
@@ -42,6 +43,7 @@ var AllowedTenantStatusEnumValues = []TenantStatus{
 	4,
 	5,
 	6,
+	7,
 }
 
 func (v *TenantStatus) UnmarshalJSON(src []byte) error {
