@@ -36,8 +36,8 @@ func main() {
 	ctx := context.Background()
 
 	authRequest := docspace_api_sdk.NewAuthRequestDtoWithDefaults()
-	authRequest.SetUserName("adminadmin@mail.ru")
-	authRequest.SetPassword("adminadmin")
+	authRequest.SetUserName("example@onlyoffice.com")
+	authRequest.SetPassword("11111111")
 
 	authResponse, _, err := client.AuthenticationAPI.
 		AuthenticateMe(ctx).
