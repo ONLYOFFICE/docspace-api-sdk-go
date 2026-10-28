@@ -1,0 +1,241 @@
+// (c) Copyright Ascensio System SIA 2026
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package docspace_api_sdk
+
+import (
+	"encoding/json"
+	"bytes"
+	"fmt"
+)
+
+// checks if the FileLinkDto type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FileLinkDto{}
+
+// FileLinkDto The address the content of a file is fetched from, together with the signature that authorises the fetch, as  the document service is handed it.
+type FileLinkDto struct {
+	// The format the stored content is in, lower-cased and with the leading dot, which is how the document  service learns how to read the bytes behind the address. It stays empty when the file title carries no  extension at all.
+	Filetype NullableString `json:"filetype"`
+	// Signs the address and the format above so that the document service can trust them. It stays empty on a  portal that has no signature secret configured for the document service, and the address is then meant  to be fetched unsigned.
+	Token NullableString `json:"token,omitempty"`
+	// Where the content is fetched from: the portal download handler, pinned to the revision the file was at  when the address was issued and carrying an authorisation key of limited validity. It is addressed to  the host the document service can reach, which on a deployment with a private editor network is not the  address a browser should follow.
+	Url NullableString `json:"url"`
+}
+
+type _FileLinkDto FileLinkDto
+
+// NewFileLinkDto instantiates a new FileLinkDto object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewFileLinkDto(filetype NullableString, url NullableString) *FileLinkDto {
+	this := FileLinkDto{}
+	this.Filetype = filetype
+	this.Url = url
+	return &this
+}
+
+// NewFileLinkDtoWithDefaults instantiates a new FileLinkDto object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewFileLinkDtoWithDefaults() *FileLinkDto {
+	this := FileLinkDto{}
+	return &this
+}
+
+// GetFiletype returns the Filetype field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *FileLinkDto) GetFiletype() string {
+	if o == nil || o.Filetype.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.Filetype.Get()
+}
+
+// GetFiletypeOk returns a tuple with the Filetype field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileLinkDto) GetFiletypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Filetype.Get(), o.Filetype.IsSet()
+}
+
+// SetFiletype sets field value
+func (o *FileLinkDto) SetFiletype(v string) {
+	o.Filetype.Set(&v)
+}
+
+// GetToken returns the Token field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FileLinkDto) GetToken() string {
+	if o == nil || IsNil(o.Token.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Token.Get()
+}
+
+// GetTokenOk returns a tuple with the Token field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileLinkDto) GetTokenOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Token.Get(), o.Token.IsSet()
+}
+
+// HasToken returns a boolean if a field has been set.
+func (o *FileLinkDto) IsTokenSet() bool {
+	if o != nil && o.Token.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetToken gets a reference to the given NullableString and assigns it to the Token field.
+func (o *FileLinkDto) SetToken(v string) {
+	o.Token.Set(&v)
+}
+// SetTokenNil sets the value for Token to be an explicit nil
+func (o *FileLinkDto) SetTokenNil() {
+	o.Token.Set(nil)
+}
+
+// UnsetToken ensures that no value is present for Token, not even an explicit nil
+func (o *FileLinkDto) UnsetToken() {
+	o.Token.Unset()
+}
+
+// GetUrl returns the Url field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *FileLinkDto) GetUrl() string {
+	if o == nil || o.Url.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.Url.Get()
+}
+
+// GetUrlOk returns a tuple with the Url field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileLinkDto) GetUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Url.Get(), o.Url.IsSet()
+}
+
+// SetUrl sets field value
+func (o *FileLinkDto) SetUrl(v string) {
+	o.Url.Set(&v)
+}
+
+func (o FileLinkDto) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FileLinkDto) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["filetype"] = o.Filetype.Get()
+	if o.Token.IsSet() {
+		toSerialize["token"] = o.Token.Get()
+	}
+	toSerialize["url"] = o.Url.Get()
+	return toSerialize, nil
+}
+
+func (o *FileLinkDto) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"filetype",
+		"url",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFileLinkDto := _FileLinkDto{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFileLinkDto)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FileLinkDto(varFileLinkDto)
+
+	return err
+}
+
+type NullableFileLinkDto struct {
+	value *FileLinkDto
+	isSet bool
+}
+
+func (v NullableFileLinkDto) Get() *FileLinkDto {
+	return v.value
+}
+
+func (v *NullableFileLinkDto) Set(val *FileLinkDto) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableFileLinkDto) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableFileLinkDto) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableFileLinkDto(val *FileLinkDto) *NullableFileLinkDto {
+	return &NullableFileLinkDto{value: val, isSet: true}
+}
+
+func (v NullableFileLinkDto) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableFileLinkDto) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+

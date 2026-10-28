@@ -1,0 +1,25 @@
+# EntryType
+
+## Enum
+
+
+* `None` (value: `0`)
+
+* `File` (value: `1`)
+
+* `Folder` (value: `2`)
+
+* `User` (value: `23`)
+
+* `Group` (value: `24`)
+
+* `Room` (value: `25`)
+
+* `Tag` (value: `26`)
+
+* `Agent` (value: `27`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

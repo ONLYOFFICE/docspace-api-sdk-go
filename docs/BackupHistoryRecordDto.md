@@ -1,0 +1,145 @@
+# BackupHistoryRecordDto
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Id** | **string** | The ID of the backup, which is the same value as the `taskId` the backup was started with. Pass it to  `DELETE api/2.0/backup/deletebackup/{id}` or as the `backupId` of  `POST api/2.0/backup/startrestore`. | 
+**FileName** | **NullableString** | The name of the stored archive. It is built from the portal alias and the moment the backup started,  or from `workspace` instead of the alias for a backup of the whole server. | 
+**StorageType** | [**BackupStorageType**](BackupStorageType.md) | The storage the archive was written to, reported as a number rather than as a name. | 
+**CreatedOn** | **time.Time** | The date and time the backup was stored at, in UTC. | 
+**ExpiresOn** | **time.Time** | The date and time a background cleaner removes this backup at. Only a backup written to `DataStore`  expires, one day after it was stored; for every other storage type this is `0001-01-01T00:00:00`,  which means the backup is kept until it is deleted by hand or pushed out by the stored-copies limit  of a schedule. | 
+
+## Methods
+
+### NewBackupHistoryRecordDto
+
+`func NewBackupHistoryRecordDto(id string, fileName NullableString, storageType BackupStorageType, createdOn time.Time, expiresOn time.Time, ) *BackupHistoryRecordDto`
+
+NewBackupHistoryRecordDto instantiates a new BackupHistoryRecordDto object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewBackupHistoryRecordDtoWithDefaults
+
+`func NewBackupHistoryRecordDtoWithDefaults() *BackupHistoryRecordDto`
+
+NewBackupHistoryRecordDtoWithDefaults instantiates a new BackupHistoryRecordDto object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetId
+
+`func (o *BackupHistoryRecordDto) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *BackupHistoryRecordDto) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *BackupHistoryRecordDto) SetId(v string)`
+
+SetId sets Id field to given value.
+
+
+### GetFileName
+
+`func (o *BackupHistoryRecordDto) GetFileName() string`
+
+GetFileName returns the FileName field if non-nil, zero value otherwise.
+
+### GetFileNameOk
+
+`func (o *BackupHistoryRecordDto) GetFileNameOk() (*string, bool)`
+
+GetFileNameOk returns a tuple with the FileName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileName
+
+`func (o *BackupHistoryRecordDto) SetFileName(v string)`
+
+SetFileName sets FileName field to given value.
+
+
+### SetFileNameNil
+
+`func (o *BackupHistoryRecordDto) SetFileNameNil(b bool)`
+
+ SetFileNameNil sets the value for FileName to be an explicit nil
+
+### UnsetFileName
+`func (o *BackupHistoryRecordDto) UnsetFileName()`
+
+UnsetFileName ensures that no value is present for FileName, not even an explicit nil
+### GetStorageType
+
+`func (o *BackupHistoryRecordDto) GetStorageType() BackupStorageType`
+
+GetStorageType returns the StorageType field if non-nil, zero value otherwise.
+
+### GetStorageTypeOk
+
+`func (o *BackupHistoryRecordDto) GetStorageTypeOk() (*BackupStorageType, bool)`
+
+GetStorageTypeOk returns a tuple with the StorageType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageType
+
+`func (o *BackupHistoryRecordDto) SetStorageType(v BackupStorageType)`
+
+SetStorageType sets StorageType field to given value.
+
+
+### GetCreatedOn
+
+`func (o *BackupHistoryRecordDto) GetCreatedOn() time.Time`
+
+GetCreatedOn returns the CreatedOn field if non-nil, zero value otherwise.
+
+### GetCreatedOnOk
+
+`func (o *BackupHistoryRecordDto) GetCreatedOnOk() (*time.Time, bool)`
+
+GetCreatedOnOk returns a tuple with the CreatedOn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedOn
+
+`func (o *BackupHistoryRecordDto) SetCreatedOn(v time.Time)`
+
+SetCreatedOn sets CreatedOn field to given value.
+
+
+### GetExpiresOn
+
+`func (o *BackupHistoryRecordDto) GetExpiresOn() time.Time`
+
+GetExpiresOn returns the ExpiresOn field if non-nil, zero value otherwise.
+
+### GetExpiresOnOk
+
+`func (o *BackupHistoryRecordDto) GetExpiresOnOk() (*time.Time, bool)`
+
+GetExpiresOnOk returns a tuple with the ExpiresOn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiresOn
+
+`func (o *BackupHistoryRecordDto) SetExpiresOn(v time.Time)`
+
+SetExpiresOn sets ExpiresOn field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

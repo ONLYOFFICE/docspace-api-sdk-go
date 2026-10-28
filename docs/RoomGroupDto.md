@@ -1,0 +1,232 @@
+# RoomGroupDto
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Id** | Pointer to **int32** | The identifier of the group, which addresses it in every other group operation and is kept for as long as the  group exists. | [optional] 
+**Name** | Pointer to **NullableString** | The name its owner gave the group, stored trimmed of surrounding spaces. Names are not unique, so two groups  of the same account can be told apart only by their identifier. | [optional] 
+**Icon** | Pointer to [**MultiSizeLogoCoverDto**](MultiSizeLogoCoverDto.md) | The built-in cover chosen for the group, carrying the cover identifier and its rendering in each available  size. Null when the group has no icon, either because it was never given one or because the icon was cleared  by setting it to an empty value. | [optional] 
+**UserId** | Pointer to **string** | The account that created the group and the only one able to read, change or delete it; for any other member of  the portal the group does not exist. | [optional] 
+**SearchArea** | Pointer to [**SearchArea**](SearchArea.md) | The section the group belongs to, which categorizes it within the application's structure. This property determines  which area of the interface the group is associated with and affects how its rooms are filtered and displayed.  Common values include Active for standard rooms, Forms for form-based rooms, Archive for archived content, and  Templates for template rooms. The search area ensures that when retrieving a group, only rooms that belong to  the specified section are included in the results, maintaining proper organizational boundaries within the system. | [optional] 
+**Rooms** | Pointer to [**[]FileEntryBaseDto**](FileEntryBaseDto.md) | The rooms the group gathers, those stored in the portal first and those on connected third-party accounts  after them. Null when the group was asked for without its members, and an empty array when the group holds no  room the caller can still see. A room moved to the archive is left out until it is taken out of the archive. | [optional] 
+**TotalRooms** | Pointer to **int32** | How many rooms the group shows: the same rooms `rooms` lists, so archived ones are not counted either. It is  filled even when the rooms themselves were not asked for, which makes it the cheap way to tell an empty group  from a populated one. | [optional] 
+
+## Methods
+
+### NewRoomGroupDto
+
+`func NewRoomGroupDto() *RoomGroupDto`
+
+NewRoomGroupDto instantiates a new RoomGroupDto object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewRoomGroupDtoWithDefaults
+
+`func NewRoomGroupDtoWithDefaults() *RoomGroupDto`
+
+NewRoomGroupDtoWithDefaults instantiates a new RoomGroupDto object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetId
+
+`func (o *RoomGroupDto) GetId() int32`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *RoomGroupDto) GetIdOk() (*int32, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *RoomGroupDto) SetId(v int32)`
+
+SetId sets Id field to given value.
+
+### HasId
+
+`func (o *RoomGroupDto) HasId() bool`
+
+HasId returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *RoomGroupDto) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *RoomGroupDto) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *RoomGroupDto) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *RoomGroupDto) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### SetNameNil
+
+`func (o *RoomGroupDto) SetNameNil(b bool)`
+
+ SetNameNil sets the value for Name to be an explicit nil
+
+### UnsetName
+`func (o *RoomGroupDto) UnsetName()`
+
+UnsetName ensures that no value is present for Name, not even an explicit nil
+### GetIcon
+
+`func (o *RoomGroupDto) GetIcon() MultiSizeLogoCoverDto`
+
+GetIcon returns the Icon field if non-nil, zero value otherwise.
+
+### GetIconOk
+
+`func (o *RoomGroupDto) GetIconOk() (*MultiSizeLogoCoverDto, bool)`
+
+GetIconOk returns a tuple with the Icon field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIcon
+
+`func (o *RoomGroupDto) SetIcon(v MultiSizeLogoCoverDto)`
+
+SetIcon sets Icon field to given value.
+
+### HasIcon
+
+`func (o *RoomGroupDto) HasIcon() bool`
+
+HasIcon returns a boolean if a field has been set.
+
+### GetUserId
+
+`func (o *RoomGroupDto) GetUserId() string`
+
+GetUserId returns the UserId field if non-nil, zero value otherwise.
+
+### GetUserIdOk
+
+`func (o *RoomGroupDto) GetUserIdOk() (*string, bool)`
+
+GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserId
+
+`func (o *RoomGroupDto) SetUserId(v string)`
+
+SetUserId sets UserId field to given value.
+
+### HasUserId
+
+`func (o *RoomGroupDto) HasUserId() bool`
+
+HasUserId returns a boolean if a field has been set.
+
+### GetSearchArea
+
+`func (o *RoomGroupDto) GetSearchArea() SearchArea`
+
+GetSearchArea returns the SearchArea field if non-nil, zero value otherwise.
+
+### GetSearchAreaOk
+
+`func (o *RoomGroupDto) GetSearchAreaOk() (*SearchArea, bool)`
+
+GetSearchAreaOk returns a tuple with the SearchArea field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSearchArea
+
+`func (o *RoomGroupDto) SetSearchArea(v SearchArea)`
+
+SetSearchArea sets SearchArea field to given value.
+
+### HasSearchArea
+
+`func (o *RoomGroupDto) HasSearchArea() bool`
+
+HasSearchArea returns a boolean if a field has been set.
+
+### GetRooms
+
+`func (o *RoomGroupDto) GetRooms() []FileEntryBaseDto`
+
+GetRooms returns the Rooms field if non-nil, zero value otherwise.
+
+### GetRoomsOk
+
+`func (o *RoomGroupDto) GetRoomsOk() (*[]FileEntryBaseDto, bool)`
+
+GetRoomsOk returns a tuple with the Rooms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRooms
+
+`func (o *RoomGroupDto) SetRooms(v []FileEntryBaseDto)`
+
+SetRooms sets Rooms field to given value.
+
+### HasRooms
+
+`func (o *RoomGroupDto) HasRooms() bool`
+
+HasRooms returns a boolean if a field has been set.
+
+### SetRoomsNil
+
+`func (o *RoomGroupDto) SetRoomsNil(b bool)`
+
+ SetRoomsNil sets the value for Rooms to be an explicit nil
+
+### UnsetRooms
+`func (o *RoomGroupDto) UnsetRooms()`
+
+UnsetRooms ensures that no value is present for Rooms, not even an explicit nil
+### GetTotalRooms
+
+`func (o *RoomGroupDto) GetTotalRooms() int32`
+
+GetTotalRooms returns the TotalRooms field if non-nil, zero value otherwise.
+
+### GetTotalRoomsOk
+
+`func (o *RoomGroupDto) GetTotalRoomsOk() (*int32, bool)`
+
+GetTotalRoomsOk returns a tuple with the TotalRooms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalRooms
+
+`func (o *RoomGroupDto) SetTotalRooms(v int32)`
+
+SetTotalRooms sets TotalRooms field to given value.
+
+### HasTotalRooms
+
+`func (o *RoomGroupDto) HasTotalRooms() bool`
+
+HasTotalRooms returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

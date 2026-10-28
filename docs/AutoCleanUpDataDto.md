@@ -1,0 +1,82 @@
+# AutoCleanUpDataDto
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**IsAutoCleanUp** | Pointer to **bool** | Whether the trash of the account is cleared automatically. While it is false nothing is removed by the portal  and the interval below is kept but unused. | [optional] 
+**Gap** | Pointer to [**DateToAutoCleanUp**](DateToAutoCleanUp.md) | How long an item may stay in the trash before it is removed for good. It is reported even while clearing is  off, and it is what the moment in the `autoDelete` field of a trashed entry is computed from. | [optional] 
+
+## Methods
+
+### NewAutoCleanUpDataDto
+
+`func NewAutoCleanUpDataDto() *AutoCleanUpDataDto`
+
+NewAutoCleanUpDataDto instantiates a new AutoCleanUpDataDto object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewAutoCleanUpDataDtoWithDefaults
+
+`func NewAutoCleanUpDataDtoWithDefaults() *AutoCleanUpDataDto`
+
+NewAutoCleanUpDataDtoWithDefaults instantiates a new AutoCleanUpDataDto object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetIsAutoCleanUp
+
+`func (o *AutoCleanUpDataDto) GetIsAutoCleanUp() bool`
+
+GetIsAutoCleanUp returns the IsAutoCleanUp field if non-nil, zero value otherwise.
+
+### GetIsAutoCleanUpOk
+
+`func (o *AutoCleanUpDataDto) GetIsAutoCleanUpOk() (*bool, bool)`
+
+GetIsAutoCleanUpOk returns a tuple with the IsAutoCleanUp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAutoCleanUp
+
+`func (o *AutoCleanUpDataDto) SetIsAutoCleanUp(v bool)`
+
+SetIsAutoCleanUp sets IsAutoCleanUp field to given value.
+
+### HasIsAutoCleanUp
+
+`func (o *AutoCleanUpDataDto) HasIsAutoCleanUp() bool`
+
+HasIsAutoCleanUp returns a boolean if a field has been set.
+
+### GetGap
+
+`func (o *AutoCleanUpDataDto) GetGap() DateToAutoCleanUp`
+
+GetGap returns the Gap field if non-nil, zero value otherwise.
+
+### GetGapOk
+
+`func (o *AutoCleanUpDataDto) GetGapOk() (*DateToAutoCleanUp, bool)`
+
+GetGapOk returns a tuple with the Gap field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGap
+
+`func (o *AutoCleanUpDataDto) SetGap(v DateToAutoCleanUp)`
+
+SetGap sets Gap field to given value.
+
+### HasGap
+
+`func (o *AutoCleanUpDataDto) HasGap() bool`
+
+HasGap returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
