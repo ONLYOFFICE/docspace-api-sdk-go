@@ -33,11 +33,11 @@ type CreateWebhooksConfigRequestDto struct {
 	SecretKey NullableString `json:"secretKey,omitempty"`
 	// Whether the subscription delivers at all. While it is off the matching events are dropped rather than queued,  so nothing from that period arrives once it is switched on again.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Whether the target certificate is verified. Setting it demands an `https` target with a valid certificate;  leaving it off delivers without checking the certificate at all.
-	Ssl *bool `json:"ssl,omitempty"`
-	// The events the subscription listens for, as a bitmask combining the flags; 0 subscribes to all of them. Take  the flags the caller role is allowed to use from `GET api/2.0/settings/webhook/triggers`, since a flag beyond  that set is refused with 400. A subscription still only fires for events its creator may see.
+	// Whether the target certificate is verified. `true` demands an `https` address with a valid certificate; `false`  delivers without checking the certificate, and is what a plain `http` target needs.
+	Ssl NullableBool `json:"ssl,omitempty"`
+	// The events the subscription listens for, as a bitmask adding together the `id` values of the entries of `GET  api/2.0/settings/webhook/triggers`. 0 is the catch-all, not none: it stands for every event the  subscription creator's role may receive, not for every event of the portal.
 	Triggers *WebhookTrigger `json:"triggers,omitempty"`
-	// The single entity the subscription is narrowed to, by its identifier - a room or a file, for instance.  Leaving it out delivers events about every entity the subscribed triggers cover.
+	// The single entity the subscription is narrowed to, by its identifier in the API that owns it. For user events  it is the GUID of a user (`id` of `GET api/2.0/people`), for group events the GUID of a group (`id` of `GET  api/2.0/group`), and either must be one the subscription's creator may see; for file, folder, room and form  events it is the entry ID from the Files API (`id` of `GET api/2.0/files/rooms` or of a folder listing), a  number for the portal's own storage and a string for third-party storage. Leaving it out delivers events  about every entity the subscribed triggers cover.
 	TargetId NullableString `json:"targetId,omitempty"`
 }
 
@@ -184,36 +184,46 @@ func (o *CreateWebhooksConfigRequestDto) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetSsl returns the Ssl field value if set, zero value otherwise.
+// GetSsl returns the Ssl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWebhooksConfigRequestDto) GetSsl() bool {
-	if o == nil || IsNil(o.Ssl) {
+	if o == nil || IsNil(o.Ssl.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Ssl
+	return *o.Ssl.Get()
 }
 
 // GetSslOk returns a tuple with the Ssl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWebhooksConfigRequestDto) GetSslOk() (*bool, bool) {
-	if o == nil || IsNil(o.Ssl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ssl, true
+	return o.Ssl.Get(), o.Ssl.IsSet()
 }
 
 // HasSsl returns a boolean if a field has been set.
 func (o *CreateWebhooksConfigRequestDto) IsSslSet() bool {
-	if o != nil && !IsNil(o.Ssl) {
+	if o != nil && o.Ssl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSsl gets a reference to the given bool and assigns it to the Ssl field.
+// SetSsl gets a reference to the given NullableBool and assigns it to the Ssl field.
 func (o *CreateWebhooksConfigRequestDto) SetSsl(v bool) {
-	o.Ssl = &v
+	o.Ssl.Set(&v)
+}
+// SetSslNil sets the value for Ssl to be an explicit nil
+func (o *CreateWebhooksConfigRequestDto) SetSslNil() {
+	o.Ssl.Set(nil)
+}
+
+// UnsetSsl ensures that no value is present for Ssl, not even an explicit nil
+func (o *CreateWebhooksConfigRequestDto) UnsetSsl() {
+	o.Ssl.Unset()
 }
 
 // GetTriggers returns the Triggers field value if set, zero value otherwise.
@@ -308,8 +318,8 @@ func (o CreateWebhooksConfigRequestDto) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.Ssl) {
-		toSerialize["ssl"] = o.Ssl
+	if o.Ssl.IsSet() {
+		toSerialize["ssl"] = o.Ssl.Get()
 	}
 	if !IsNil(o.Triggers) {
 		toSerialize["triggers"] = o.Triggers

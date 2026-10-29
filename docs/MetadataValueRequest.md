@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FieldId** | **int32** | The field ID. | 
 **StringValue** | Pointer to **NullableString** | The string value. | [optional] 
-**NumberValue** | Pointer to **NullableInt64** | The number value. | [optional] 
+**NumberValue** | Pointer to **NullableInt64** | The number value: a whole number of at most 2^53-1 (9007199254740991) in magnitude, the largest integer a JSON  client reads exactly. A larger one is refused rather than stored and returned rounded. | [optional] 
 **DateValue** | Pointer to **NullableTime** | The date value. A value without a time zone offset is treated as UTC, the same way the metadata filters treat their date bounds. | [optional] 
 **OptionIds** | Pointer to **[]string** | The selected choice option IDs. | [optional] 
 

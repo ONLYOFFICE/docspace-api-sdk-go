@@ -9,11 +9,15 @@ Method | HTTP request | Description
 [**CreateCustomerMonthlyUsageReport**](PortalPaymentAPI.md#CreateCustomerMonthlyUsageReport) | **Post** /api/2.0/portal/payment/customer/usage/monthly/report | Start the monthly usage report
 [**CreateCustomerOperationsReport**](PortalPaymentAPI.md#CreateCustomerOperationsReport) | **Post** /api/2.0/portal/payment/customer/operationsreport | Start the operations report
 [**CreateCustomerServiceUsageReport**](PortalPaymentAPI.md#CreateCustomerServiceUsageReport) | **Post** /api/2.0/portal/payment/customer/usage/report | Start the service usage report
+[**CreateServiceLimit**](PortalPaymentAPI.md#CreateServiceLimit) | **Post** /api/2.0/portal/payment/servicelimit | Create a service limit
+[**DeleteServiceLimit**](PortalPaymentAPI.md#DeleteServiceLimit) | **Delete** /api/2.0/portal/payment/servicelimit/{id} | Delete a service limit
+[**DisableParticipantServiceLimits**](PortalPaymentAPI.md#DisableParticipantServiceLimits) | **Put** /api/2.0/portal/payment/servicelimit/participants/disable | Disable the user service limits
 [**GetAccountingServicePrices**](PortalPaymentAPI.md#GetAccountingServicePrices) | **Get** /api/2.0/portal/payment/accounting/prices/{serviceName} | Get the service prices from the accounting service
 [**GetActiveServices**](PortalPaymentAPI.md#GetActiveServices) | **Get** /api/2.0/portal/payment/activeservices | Get the active wallet services
 [**GetAiPrices**](PortalPaymentAPI.md#GetAiPrices) | **Get** /api/2.0/portal/payment/ai-prices | Get AI model prices
 [**GetCheckoutSetupUrl**](PortalPaymentAPI.md#GetCheckoutSetupUrl) | **Get** /api/2.0/portal/payment/checkoutsetupurl | Get the checkout setup page URL
 [**GetCustomerBalance**](PortalPaymentAPI.md#GetCustomerBalance) | **Get** /api/2.0/portal/payment/customer/balance | Get the customer balance
+[**GetCustomerDeposits**](PortalPaymentAPI.md#GetCustomerDeposits) | **Get** /api/2.0/portal/payment/customer/deposits | Get the wallet top-ups
 [**GetCustomerInfo**](PortalPaymentAPI.md#GetCustomerInfo) | **Get** /api/2.0/portal/payment/customerinfo | Get the customer information
 [**GetCustomerMonthlyUsage**](PortalPaymentAPI.md#GetCustomerMonthlyUsage) | **Get** /api/2.0/portal/payment/customer/usage/monthly | Get the customer monthly usage
 [**GetCustomerMonthlyUsageReport**](PortalPaymentAPI.md#GetCustomerMonthlyUsageReport) | **Get** /api/2.0/portal/payment/customer/usage/monthly/report | Get the monthly usage report status
@@ -21,6 +25,9 @@ Method | HTTP request | Description
 [**GetCustomerOperationsReport**](PortalPaymentAPI.md#GetCustomerOperationsReport) | **Get** /api/2.0/portal/payment/customer/operationsreport | Get the operations report status
 [**GetCustomerServiceUsage**](PortalPaymentAPI.md#GetCustomerServiceUsage) | **Get** /api/2.0/portal/payment/customer/usage | Get the customer service usage
 [**GetCustomerServiceUsageReport**](PortalPaymentAPI.md#GetCustomerServiceUsageReport) | **Get** /api/2.0/portal/payment/customer/usage/report | Get the service usage report status
+[**GetDepositInvoice**](PortalPaymentAPI.md#GetDepositInvoice) | **Get** /api/2.0/portal/payment/customer/deposits/{id}/invoice | Get the top-up invoice
+[**GetGlobalServiceLimit**](PortalPaymentAPI.md#GetGlobalServiceLimit) | **Get** /api/2.0/portal/payment/servicelimit/global | Get the global service limit
+[**GetParticipantServiceLimits**](PortalPaymentAPI.md#GetParticipantServiceLimits) | **Get** /api/2.0/portal/payment/servicelimit/participants | Get the user service limits
 [**GetPaymentAccount**](PortalPaymentAPI.md#GetPaymentAccount) | **Get** /api/2.0/portal/payment/account | Get the billing account page
 [**GetPaymentCurrencies**](PortalPaymentAPI.md#GetPaymentCurrencies) | **Get** /api/2.0/portal/payment/currencies | Get the billing currencies
 [**GetPaymentQuotas**](PortalPaymentAPI.md#GetPaymentQuotas) | **Get** /api/2.0/portal/payment/quotas | Get the purchasable quotas
@@ -28,13 +35,16 @@ Method | HTTP request | Description
 [**GetPortalPrices**](PortalPaymentAPI.md#GetPortalPrices) | **Get** /api/2.0/portal/payment/prices | Get the product prices
 [**GetQuotaPaymentInformation**](PortalPaymentAPI.md#GetQuotaPaymentInformation) | **Get** /api/2.0/portal/payment/quota | Get the current plan and limits
 [**GetRestrictedAiModels**](PortalPaymentAPI.md#GetRestrictedAiModels) | **Get** /api/2.0/portal/payment/ai-model/restrictions | Get restricted AI models
+[**GetServiceLimit**](PortalPaymentAPI.md#GetServiceLimit) | **Get** /api/2.0/portal/payment/servicelimit/{id} | Get a service limit
 [**GetSubscriptionBalanceInfo**](PortalPaymentAPI.md#GetSubscriptionBalanceInfo) | **Get** /api/2.0/portal/payment/subscription/balance | Get the subscription balance information
 [**GetTenantWalletServiceSettings**](PortalPaymentAPI.md#GetTenantWalletServiceSettings) | **Get** /api/2.0/portal/payment/servicessettings | Get the wallet service settings
 [**GetTenantWalletSettings**](PortalPaymentAPI.md#GetTenantWalletSettings) | **Get** /api/2.0/portal/payment/topupsettings | Get the auto top-up settings
+[**GetTotalServiceLimit**](PortalPaymentAPI.md#GetTotalServiceLimit) | **Get** /api/2.0/portal/payment/servicelimit/total | Get the portal service limit
 [**GetWalletService**](PortalPaymentAPI.md#GetWalletService) | **Get** /api/2.0/portal/payment/walletservice | Get a wallet service
 [**GetWalletServices**](PortalPaymentAPI.md#GetWalletServices) | **Get** /api/2.0/portal/payment/walletservices | Get wallet services
 [**MoveSubscriptionToWallet**](PortalPaymentAPI.md#MoveSubscriptionToWallet) | **Post** /api/2.0/portal/payment/subscription/movetowallet | Move the subscription to the wallet
 [**SendPaymentRequest**](PortalPaymentAPI.md#SendPaymentRequest) | **Post** /api/2.0/portal/payment/request | Contact the sales team
+[**SetParticipantServiceLimits**](PortalPaymentAPI.md#SetParticipantServiceLimits) | **Put** /api/2.0/portal/payment/servicelimit/participants | Set the user service limits
 [**SetRestrictedAiModels**](PortalPaymentAPI.md#SetRestrictedAiModels) | **Put** /api/2.0/portal/payment/ai-model/restrictions | Set restricted AI models
 [**SetTenantWalletSettings**](PortalPaymentAPI.md#SetTenantWalletSettings) | **Post** /api/2.0/portal/payment/topupsettings | Set the auto top-up settings
 [**TerminateCustomerMonthlyUsageReport**](PortalPaymentAPI.md#TerminateCustomerMonthlyUsageReport) | **Delete** /api/2.0/portal/payment/customer/usage/monthly/report | Terminate the monthly usage report
@@ -42,6 +52,7 @@ Method | HTTP request | Description
 [**TerminateCustomerServiceUsageReport**](PortalPaymentAPI.md#TerminateCustomerServiceUsageReport) | **Delete** /api/2.0/portal/payment/customer/usage/report | Terminate the service usage report
 [**TopUpDeposit**](PortalPaymentAPI.md#TopUpDeposit) | **Post** /api/2.0/portal/payment/deposit | Top up the wallet
 [**UpdatePayment**](PortalPaymentAPI.md#UpdatePayment) | **Put** /api/2.0/portal/payment/update | Change the subscription quantity
+[**UpdateServiceLimit**](PortalPaymentAPI.md#UpdateServiceLimit) | **Put** /api/2.0/portal/payment/servicelimit | Update a service limit
 [**UpdateWalletPayment**](PortalPaymentAPI.md#UpdateWalletPayment) | **Put** /api/2.0/portal/payment/updatewallet | Change a wallet service quantity
 
 
@@ -386,6 +397,207 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateServiceLimit
+
+> ServiceLimitWrapper CreateServiceLimit(ctx).CreateServiceLimitRequestDto(createServiceLimitRequestDto).Execute()
+
+Create a service limit
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-service-limit/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	createServiceLimitRequestDto := *openapiclient.NewCreateServiceLimitRequestDto() // CreateServiceLimitRequestDto |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.CreateServiceLimit(context.Background()).CreateServiceLimitRequestDto(createServiceLimitRequestDto).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.CreateServiceLimit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateServiceLimit`: ServiceLimitWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.CreateServiceLimit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateServiceLimitRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createServiceLimitRequestDto** | [**CreateServiceLimitRequestDto**](CreateServiceLimitRequestDto.md) |  | 
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteServiceLimit
+
+> DeleteServiceLimit(ctx, id).Execute()
+
+Delete a service limit
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-service-limit/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	id := int32(42) // int32 | The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PortalPaymentAPI.DeleteServiceLimit(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.DeleteServiceLimit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteServiceLimitRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DisableParticipantServiceLimits
+
+> Int32Wrapper DisableParticipantServiceLimits(ctx).Execute()
+
+Disable the user service limits
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/disable-participant-service-limits/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.DisableParticipantServiceLimits(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.DisableParticipantServiceLimits``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DisableParticipantServiceLimits`: Int32Wrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.DisableParticipantServiceLimits`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDisableParticipantServiceLimitsRequest struct via the builder pattern
+
+
+### Return type
+
+[**Int32Wrapper**](Int32Wrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetAccountingServicePrices
 
 > ServicePriceArrayWrapper GetAccountingServicePrices(ctx, serviceName).Active(active).Execute()
@@ -409,7 +621,7 @@ import (
 )
 
 func main() {
-	serviceName := "ai-tools" // string | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error.
+	serviceName := "ai-tools" // string | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`.
 	active := false // bool | Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -430,7 +642,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serviceName** | **string** | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error. | 
+**serviceName** | **string** | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`. | 
 
 ### Other Parameters
 
@@ -709,6 +921,83 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BalanceWrapper**](BalanceWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCustomerDeposits
+
+> DepositReportWrapper GetCustomerDeposits(ctx).StartDate(startDate).EndDate(endDate).Status(status).Offset(offset).Limit(limit).Execute()
+
+Get the wallet top-ups
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-deposits/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	startDate := time.Now() // time.Time | The beginning of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is  read in the portal time zone, not in the caller's; defaults to the portal creation date. (optional)
+	endDate := time.Now() // time.Time | The end of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is read in  the portal time zone, not in the caller's; defaults to the moment the call is made. (optional)
+	status := openapiclient.OperationStatus(0) // OperationStatus | The outcome to keep. A top-up that is still being settled is reported as pending and may change later, while  the other outcomes are final; every outcome is reported when this is omitted. (optional)
+	offset := int32(0) // int32 | The number of top-ups to skip before the first one returned, for walking through a long history page by page.  Counted after the filters are applied, and starts at 0 when omitted. (optional)
+	limit := int32(25) // int32 | The maximum number of top-ups returned in one page. Defaults to 25 when omitted; the answer echoes the window  back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed without  counting the items. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.GetCustomerDeposits(context.Background()).StartDate(startDate).EndDate(endDate).Status(status).Offset(offset).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetCustomerDeposits``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCustomerDeposits`: DepositReportWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetCustomerDeposits`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCustomerDepositsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startDate** | **time.Time** | The beginning of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is  read in the portal time zone, not in the caller's; defaults to the portal creation date. | 
+ **endDate** | **time.Time** | The end of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is read in  the portal time zone, not in the caller's; defaults to the moment the call is made. | 
+ **status** | [**OperationStatus**](OperationStatus.md) | The outcome to keep. A top-up that is still being settled is reported as pending and may change later, while  the other outcomes are final; every outcome is reported when this is omitted. | 
+ **offset** | **int32** | The number of top-ups to skip before the first one returned, for walking through a long history page by page.  Counted after the filters are applied, and starts at 0 when omitted. | 
+ **limit** | **int32** | The maximum number of top-ups returned in one page. Defaults to 25 when omitted; the answer echoes the window  back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed without  counting the items. | 
+
+### Return type
+
+[**DepositReportWrapper**](DepositReportWrapper.md)
 
 ### Authorization
 
@@ -1230,6 +1519,215 @@ Other parameters are passed through a pointer to a apiGetCustomerServiceUsageRep
 [[Back to README]](../README.md)
 
 
+## GetDepositInvoice
+
+> StringWrapper GetDepositInvoice(ctx, id).Execute()
+
+Get the top-up invoice
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-deposit-invoice/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	id := int64(15342) // int64 | The ID of the top-up, taken from the `id` field of `GET api/2.0/portal/payment/customer/deposits`.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.GetDepositInvoice(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetDepositInvoice``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDepositInvoice`: StringWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetDepositInvoice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int64** | The ID of the top-up, taken from the `id` field of `GET api/2.0/portal/payment/customer/deposits`. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDepositInvoiceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StringWrapper**](StringWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetGlobalServiceLimit
+
+> ServiceLimitWrapper GetGlobalServiceLimit(ctx).Execute()
+
+Get the global service limit
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-global-service-limit/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.GetGlobalServiceLimit(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetGlobalServiceLimit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGlobalServiceLimit`: ServiceLimitWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetGlobalServiceLimit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGlobalServiceLimitRequest struct via the builder pattern
+
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetParticipantServiceLimits
+
+> ServiceLimitReportWrapper GetParticipantServiceLimits(ctx).Offset(offset).Limit(limit).OrderBy(orderBy).OrderType(orderType).Execute()
+
+Get the user service limits
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-participant-service-limits/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	offset := int32(0) // int32 | The number of limits to skip before the first one returned, counted in the sort order of the list. (optional)
+	limit := int32(25) // int32 | The largest number of limits one page holds. (optional)
+	orderBy := openapiclient.ServiceLimitOrderBy(0) // ServiceLimitOrderBy | The field the list is sorted by: the user a limit applies to, or the moment it was created. (optional)
+	orderType := openapiclient.OperationOrderType(0) // OperationOrderType | The direction the field named in `orderBy` is sorted in. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.GetParticipantServiceLimits(context.Background()).Offset(offset).Limit(limit).OrderBy(orderBy).OrderType(orderType).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetParticipantServiceLimits``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetParticipantServiceLimits`: ServiceLimitReportWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetParticipantServiceLimits`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetParticipantServiceLimitsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int32** | The number of limits to skip before the first one returned, counted in the sort order of the list. | 
+ **limit** | **int32** | The largest number of limits one page holds. | 
+ **orderBy** | [**ServiceLimitOrderBy**](ServiceLimitOrderBy.md) | The field the list is sorted by: the user a limit applies to, or the moment it was created. | 
+ **orderType** | [**OperationOrderType**](OperationOrderType.md) | The direction the field named in `orderBy` is sorted in. | 
+
+### Return type
+
+[**ServiceLimitReportWrapper**](ServiceLimitReportWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetPaymentAccount
 
 > StringWrapper GetPaymentAccount(ctx).BackUrl(backUrl).Execute()
@@ -1693,6 +2191,78 @@ Other parameters are passed through a pointer to a apiGetRestrictedAiModelsReque
 [[Back to README]](../README.md)
 
 
+## GetServiceLimit
+
+> ServiceLimitWrapper GetServiceLimit(ctx, id).Execute()
+
+Get a service limit
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-service-limit/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	id := int32(42) // int32 | The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.GetServiceLimit(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetServiceLimit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetServiceLimit`: ServiceLimitWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetServiceLimit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetServiceLimitRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetSubscriptionBalanceInfo
 
 > SubscriptionBalanceWrapper GetSubscriptionBalanceInfo(ctx).Execute()
@@ -1867,6 +2437,69 @@ Other parameters are passed through a pointer to a apiGetTenantWalletSettingsReq
 ### Return type
 
 [**TenantWalletSettingsWrapper**](TenantWalletSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTotalServiceLimit
+
+> ServiceLimitWrapper GetTotalServiceLimit(ctx).Execute()
+
+Get the portal service limit
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-total-service-limit/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.GetTotalServiceLimit(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.GetTotalServiceLimit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTotalServiceLimit`: ServiceLimitWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.GetTotalServiceLimit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTotalServiceLimitRequest struct via the builder pattern
+
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
 
 ### Authorization
 
@@ -2132,6 +2765,74 @@ Name | Type | Description  | Notes
 ### Return type
 
  (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetParticipantServiceLimits
+
+> Int32Wrapper SetParticipantServiceLimits(ctx).SetParticipantServiceLimitsRequestDto(setParticipantServiceLimitsRequestDto).Execute()
+
+Set the user service limits
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-participant-service-limits/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	setParticipantServiceLimitsRequestDto := *openapiclient.NewSetParticipantServiceLimitsRequestDto([]string{"UserIds_example"}) // SetParticipantServiceLimitsRequestDto |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.SetParticipantServiceLimits(context.Background()).SetParticipantServiceLimitsRequestDto(setParticipantServiceLimitsRequestDto).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.SetParticipantServiceLimits``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetParticipantServiceLimits`: Int32Wrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.SetParticipantServiceLimits`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetParticipantServiceLimitsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **setParticipantServiceLimitsRequestDto** | [**SetParticipantServiceLimitsRequestDto**](SetParticipantServiceLimitsRequestDto.md) |  | 
+
+### Return type
+
+[**Int32Wrapper**](Int32Wrapper.md)
 
 ### Authorization
 
@@ -2587,6 +3288,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BooleanWrapper**](BooleanWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateServiceLimit
+
+> ServiceLimitWrapper UpdateServiceLimit(ctx).UpdateServiceLimitRequestDto(updateServiceLimitRequestDto).Execute()
+
+Update a service limit
+
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-service-limit/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	updateServiceLimitRequestDto := *openapiclient.NewUpdateServiceLimitRequestDto(int32(42)) // UpdateServiceLimitRequestDto |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PortalPaymentAPI.UpdateServiceLimit(context.Background()).UpdateServiceLimitRequestDto(updateServiceLimitRequestDto).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PortalPaymentAPI.UpdateServiceLimit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateServiceLimit`: ServiceLimitWrapper
+	fmt.Fprintf(os.Stdout, "Response from `PortalPaymentAPI.UpdateServiceLimit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateServiceLimitRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateServiceLimitRequestDto** | [**UpdateServiceLimitRequestDto**](UpdateServiceLimitRequestDto.md) |  | 
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
 
 ### Authorization
 

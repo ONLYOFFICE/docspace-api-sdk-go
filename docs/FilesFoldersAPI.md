@@ -2146,7 +2146,7 @@ import (
 )
 
 func main() {
-	folderId := int32(1) // int32 | The folder ID.
+	folderId := int32(1) // int32 | The folder or room to search in; take the id from a listing such as `GET api/2.0/files/@root`. A numeric id  addresses a folder of the portal, a string one a folder in a connected third-party storage.
 	folderMetadataSearch := *openapiclient.NewFolderMetadataSearch() // FolderMetadataSearch | The search parameters.
 
 	configuration := openapiclient.NewConfiguration()
@@ -2170,7 +2170,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **int32** | The folder ID. | 
+**folderId** | **int32** | The folder or room to search in; take the id from a listing such as `GET api/2.0/files/@root`. A numeric id  addresses a folder of the portal, a string one a folder in a connected third-party storage. | 
 
 ### Other Parameters
 

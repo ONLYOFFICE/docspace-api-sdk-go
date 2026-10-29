@@ -37,7 +37,7 @@ import (
 )
 
 func main() {
-	aiApproveToolCallRequest := *openapiclient.NewAiApproveToolCallRequest(interface{}(123), "ThreadId_example", "MessageId_example", float32(123), *openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiApproveToolCallRequest | 
+	aiApproveToolCallRequest := *openapiclient.NewAiApproveToolCallRequest(interface{}(123), "ThreadId_example", "MessageId_example", float32(123)) // AiApproveToolCallRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -105,7 +105,7 @@ import (
 )
 
 func main() {
-	aiToolCallData := *openapiclient.NewAiToolCallData("11111111-1111-1111-1111-111111111111", "22222222-2222-2222-2222-222222222222", float32(0), *openapiclient.NewAiThreadMessageLike("user", *openapiclient.NewAiThreadMessageLikeContent())) // AiToolCallData | 
+	aiToolCallData := *openapiclient.NewAiToolCallData("11111111-1111-1111-1111-111111111111", "22222222-2222-2222-2222-222222222222", float32(0)) // AiToolCallData | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

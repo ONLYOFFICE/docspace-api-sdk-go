@@ -42,6 +42,7 @@ Name | Type | Description | Notes
 **UsedSpace** | Pointer to **NullableFloat64** | The portal used space of the user. | [optional] 
 **Shared** | Pointer to **NullableBool** | Specifies if the user has access rights. | [optional] 
 **IsCustomQuota** | Pointer to **NullableBool** | Specifies if the user has a custom quota or not. | [optional] 
+**AiServicesLimit** | Pointer to [**UserServiceLimitDto**](UserServiceLimitDto.md) | The spending limit on the AI services in force for this user - the personal one, or else the limit for every  user - with what the user spent against it. Null when no such limit applies to the user, when the portal has no  billing service, or when the caller is neither a DocSpace administrator nor the user; the limit of the portal as  a whole is not reflected here. The value, and the spending in particular, can lag by a few minutes. | [optional] 
 **LoginEventId** | Pointer to **NullableInt32** | The current login event ID. | [optional] 
 **AuthCookieLifetime** | Pointer to **NullableFloat64** | The auth cookie lifetime in seconds. | [optional] 
 **CreatedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | The user who created the current user. | [optional] 
@@ -1178,6 +1179,31 @@ HasIsCustomQuota returns a boolean if a field has been set.
 `func (o *EmployeeFullDto) UnsetIsCustomQuota()`
 
 UnsetIsCustomQuota ensures that no value is present for IsCustomQuota, not even an explicit nil
+### GetAiServicesLimit
+
+`func (o *EmployeeFullDto) GetAiServicesLimit() UserServiceLimitDto`
+
+GetAiServicesLimit returns the AiServicesLimit field if non-nil, zero value otherwise.
+
+### GetAiServicesLimitOk
+
+`func (o *EmployeeFullDto) GetAiServicesLimitOk() (*UserServiceLimitDto, bool)`
+
+GetAiServicesLimitOk returns a tuple with the AiServicesLimit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAiServicesLimit
+
+`func (o *EmployeeFullDto) SetAiServicesLimit(v UserServiceLimitDto)`
+
+SetAiServicesLimit sets AiServicesLimit field to given value.
+
+### HasAiServicesLimit
+
+`func (o *EmployeeFullDto) HasAiServicesLimit() bool`
+
+HasAiServicesLimit returns a boolean if a field has been set.
+
 ### GetLoginEventId
 
 `func (o *EmployeeFullDto) GetLoginEventId() int32`

@@ -306,7 +306,7 @@ func main() {
 	deliveryTo := time.Now() // time.Time | The latest delivery moment a record may carry. All the filters combine with AND, so it narrows whatever the  other ones already kept. (optional)
 	hookUri := "https://example.com/webhook" // string | The subscription target address, matched in full rather than as a prefix. Filtering by `configId` is the  reliable way to pick one subscription, since several may share an address. (optional)
 	configId := int32(1) // int32 | The subscription whose deliveries are kept, by the `id` that `GET api/2.0/settings/webhook` reports. (optional)
-	eventId := int32(1) // int32 | A single delivery record, by its own identifier. It narrows the answer to that one record, which is how a  client follows up a retry it queued earlier. (optional)
+	eventId := int32(1) // int32 | One event, by the `eventId` of its delivery records, which is also the `event.id` the receiver got. (optional)
 	groupStatus := openapiclient.WebhookGroupStatus(0) // WebhookGroupStatus | The classes of answered status to keep, as a bitmask; 0 keeps every record whatever the target answered. (optional)
 	userId := "{}" // string | The member whose subscriptions the records belong to, by portal user ID - who created the subscription, not  who caused the event. For a caller who is not a DocSpace administrator it is overwritten with the caller own  ID, so such a caller never sees another member deliveries whatever is sent here. (optional)
 	trigger := openapiclient.WebhookTrigger(0) // WebhookTrigger | The single event kind to keep; 0 keeps every kind. It names one trigger rather than a mask of several, unlike  the `triggers` a subscription is created with. (optional)
@@ -340,7 +340,7 @@ Name | Type | Description  | Notes
  **deliveryTo** | **time.Time** | The latest delivery moment a record may carry. All the filters combine with AND, so it narrows whatever the  other ones already kept. | 
  **hookUri** | **string** | The subscription target address, matched in full rather than as a prefix. Filtering by `configId` is the  reliable way to pick one subscription, since several may share an address. | 
  **configId** | **int32** | The subscription whose deliveries are kept, by the `id` that `GET api/2.0/settings/webhook` reports. | 
- **eventId** | **int32** | A single delivery record, by its own identifier. It narrows the answer to that one record, which is how a  client follows up a retry it queued earlier. | 
+ **eventId** | **int32** | One event, by the `eventId` of its delivery records, which is also the `event.id` the receiver got. | 
  **groupStatus** | [**WebhookGroupStatus**](WebhookGroupStatus.md) | The classes of answered status to keep, as a bitmask; 0 keeps every record whatever the target answered. | 
  **userId** | **string** | The member whose subscriptions the records belong to, by portal user ID - who created the subscription, not  who caused the event. For a caller who is not a DocSpace administrator it is overwritten with the caller own  ID, so such a caller never sees another member deliveries whatever is sent here. | 
  **trigger** | [**WebhookTrigger**](WebhookTrigger.md) | The single event kind to keep; 0 keeps every kind. It names one trigger rather than a mask of several, unlike  the `triggers` a subscription is created with. | 

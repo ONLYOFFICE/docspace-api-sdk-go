@@ -1,0 +1,5 @@
+# Per-run logs the generate-webhook-sdk skill writes next to the generated files.
+.generate.log
+.verify.log
+vendor/
+# go.mod and go.sum ARE committed: go.sum is a checksum database, not a lockfile.

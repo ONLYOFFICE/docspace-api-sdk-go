@@ -99,6 +99,8 @@ type EmployeeFullDto struct {
 	Shared NullableBool `json:"shared,omitempty"`
 	// Specifies if the user has a custom quota or not.
 	IsCustomQuota NullableBool `json:"isCustomQuota,omitempty"`
+	// The spending limit on the AI services in force for this user - the personal one, or else the limit for every  user - with what the user spent against it. Null when no such limit applies to the user, when the portal has no  billing service, or when the caller is neither a DocSpace administrator nor the user; the limit of the portal as  a whole is not reflected here. The value, and the spending in particular, can lag by a few minutes.
+	AiServicesLimit *UserServiceLimitDto `json:"aiServicesLimit,omitempty"`
 	// The current login event ID.
 	LoginEventId NullableInt32 `json:"loginEventId,omitempty"`
 	// The auth cookie lifetime in seconds.
@@ -1479,6 +1481,38 @@ func (o *EmployeeFullDto) UnsetIsCustomQuota() {
 	o.IsCustomQuota.Unset()
 }
 
+// GetAiServicesLimit returns the AiServicesLimit field value if set, zero value otherwise.
+func (o *EmployeeFullDto) GetAiServicesLimit() UserServiceLimitDto {
+	if o == nil || IsNil(o.AiServicesLimit) {
+		var ret UserServiceLimitDto
+		return ret
+	}
+	return *o.AiServicesLimit
+}
+
+// GetAiServicesLimitOk returns a tuple with the AiServicesLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EmployeeFullDto) GetAiServicesLimitOk() (*UserServiceLimitDto, bool) {
+	if o == nil || IsNil(o.AiServicesLimit) {
+		return nil, false
+	}
+	return o.AiServicesLimit, true
+}
+
+// HasAiServicesLimit returns a boolean if a field has been set.
+func (o *EmployeeFullDto) IsAiServicesLimitSet() bool {
+	if o != nil && !IsNil(o.AiServicesLimit) {
+		return true
+	}
+
+	return false
+}
+
+// SetAiServicesLimit gets a reference to the given UserServiceLimitDto and assigns it to the AiServicesLimit field.
+func (o *EmployeeFullDto) SetAiServicesLimit(v UserServiceLimitDto) {
+	o.AiServicesLimit = &v
+}
+
 // GetLoginEventId returns the LoginEventId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EmployeeFullDto) GetLoginEventId() int32 {
 	if o == nil || IsNil(o.LoginEventId.Get()) {
@@ -1834,6 +1868,9 @@ func (o EmployeeFullDto) ToMap() (map[string]interface{}, error) {
 	}
 	if o.IsCustomQuota.IsSet() {
 		toSerialize["isCustomQuota"] = o.IsCustomQuota.Get()
+	}
+	if !IsNil(o.AiServicesLimit) {
+		toSerialize["aiServicesLimit"] = o.AiServicesLimit
 	}
 	if o.LoginEventId.IsSet() {
 		toSerialize["loginEventId"] = o.LoginEventId.Get()

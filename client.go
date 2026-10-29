@@ -68,6 +68,8 @@ type APIClient struct {
 
 	AIExportAPI *AIExportAPIService
 
+	AIMetadataAPI *AIMetadataAPIService
+
 	AIOpenAIPassthroughAPI *AIOpenAIPassthroughAPIService
 
 	AIPreferencesAPI *AIPreferencesAPIService
@@ -155,6 +157,8 @@ type APIClient struct {
 	PeopleUserTypeAPI *PeopleUserTypeAPIService
 
 	PortalGuestsAPI *PortalGuestsAPIService
+
+	PortalModuleEventsAPI *PortalModuleEventsAPIService
 
 	PortalPaymentAPI *PortalPaymentAPIService
 
@@ -262,6 +266,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AIContextAPI = (*AIContextAPIService)(&c.common)
 	c.AIEditorToolsAPI = (*AIEditorToolsAPIService)(&c.common)
 	c.AIExportAPI = (*AIExportAPIService)(&c.common)
+	c.AIMetadataAPI = (*AIMetadataAPIService)(&c.common)
 	c.AIOpenAIPassthroughAPI = (*AIOpenAIPassthroughAPIService)(&c.common)
 	c.AIPreferencesAPI = (*AIPreferencesAPIService)(&c.common)
 	c.AIProfilesAPI = (*AIProfilesAPIService)(&c.common)
@@ -306,6 +311,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.PeopleUserStatusAPI = (*PeopleUserStatusAPIService)(&c.common)
 	c.PeopleUserTypeAPI = (*PeopleUserTypeAPIService)(&c.common)
 	c.PortalGuestsAPI = (*PortalGuestsAPIService)(&c.common)
+	c.PortalModuleEventsAPI = (*PortalModuleEventsAPIService)(&c.common)
 	c.PortalPaymentAPI = (*PortalPaymentAPIService)(&c.common)
 	c.PortalQuotaAPI = (*PortalQuotaAPIService)(&c.common)
 	c.PortalSettingsAPI = (*PortalSettingsAPIService)(&c.common)

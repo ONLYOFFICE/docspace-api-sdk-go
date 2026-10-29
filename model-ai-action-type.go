@@ -34,6 +34,7 @@ const (
 	AIACTIONTYPE_OCR AiActionType = "OCR"
 	AIACTIONTYPE_VISION AiActionType = "Vision"
 	AIACTIONTYPE_FORM_ANALYSIS AiActionType = "FormAnalysis"
+	AIACTIONTYPE_GENERATE_META AiActionType = "GenerateMeta"
 )
 
 // All allowed values of AiActionType enum
@@ -48,6 +49,7 @@ var AllowedAiActionTypeEnumValues = []AiActionType{
 	"OCR",
 	"Vision",
 	"FormAnalysis",
+	"GenerateMeta",
 }
 
 func (v *AiActionType) UnmarshalJSON(src []byte) error {

@@ -30,7 +30,7 @@ type MetadataValueRequest struct {
 	FieldId int32 `json:"fieldId"`
 	// The string value.
 	StringValue NullableString `json:"stringValue,omitempty"`
-	// The number value.
+	// The number value: a whole number of at most 2^53-1 (9007199254740991) in magnitude, the largest integer a JSON  client reads exactly. A larger one is refused rather than stored and returned rounded.
 	NumberValue NullableInt64 `json:"numberValue,omitempty"`
 	// The date value. A value without a time zone offset is treated as UTC, the same way the metadata filters treat their date bounds.
 	DateValue NullableTime `json:"dateValue,omitempty"`

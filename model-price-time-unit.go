@@ -19,29 +19,31 @@ import (
 	"fmt"
 )
 
-// PriceTimeUnit [0 - None, 1 - Hour, 2 - Day, 3 - Week, 4 - Month, 5 - Year, 6 - ThreeYears]
+// PriceTimeUnit [1 - None, 2 - Hour, 3 - Day, 4 - Week, 5 - Month, 6 - Year, 7 - ThreeYears, 8 - Minute]
 type PriceTimeUnit int32
 
 // List of PriceTimeUnit
 const (
-	PRICETIMEUNIT_None PriceTimeUnit = 0
-	PRICETIMEUNIT_Hour PriceTimeUnit = 1
-	PRICETIMEUNIT_Day PriceTimeUnit = 2
-	PRICETIMEUNIT_Week PriceTimeUnit = 3
-	PRICETIMEUNIT_Month PriceTimeUnit = 4
-	PRICETIMEUNIT_Year PriceTimeUnit = 5
-	PRICETIMEUNIT_ThreeYears PriceTimeUnit = 6
+	PRICETIMEUNIT_None PriceTimeUnit = 1
+	PRICETIMEUNIT_Hour PriceTimeUnit = 2
+	PRICETIMEUNIT_Day PriceTimeUnit = 3
+	PRICETIMEUNIT_Week PriceTimeUnit = 4
+	PRICETIMEUNIT_Month PriceTimeUnit = 5
+	PRICETIMEUNIT_Year PriceTimeUnit = 6
+	PRICETIMEUNIT_ThreeYears PriceTimeUnit = 7
+	PRICETIMEUNIT_Minute PriceTimeUnit = 8
 )
 
 // All allowed values of PriceTimeUnit enum
 var AllowedPriceTimeUnitEnumValues = []PriceTimeUnit{
-	0,
 	1,
 	2,
 	3,
 	4,
 	5,
 	6,
+	7,
+	8,
 }
 
 func (v *PriceTimeUnit) UnmarshalJSON(src []byte) error {

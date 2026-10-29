@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ThreadId** | **string** | Thread the assistant message belongs to. | 
 **MessageId** | **string** | Storage id of the assistant message holding the tool call. | 
 **Idx** | **float32** | Index of the tool-call content part inside `message.content`. | 
-**Message** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | Snapshot of the assistant message at the time the tool call surfaced. | 
+**Message** | Pointer to [**AiThreadMessageLike**](AiThreadMessageLike.md) | Snapshot of the assistant message at the time the tool call surfaced. Optional and ignored: the engine resumes from the stored message, and the copy inflated the body past the parser limit (Bug 84608). | [optional] 
 **ActionArgs** | Pointer to [**AiActionArgs**](AiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] 
 **EntityId** | Pointer to **string** | Optional entity (room) scope for profile resolution. | [optional] 
 **ProfileId** | Pointer to **string** | Session-level profile override for this request only. | [optional] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewAiToolCallData
 
-`func NewAiToolCallData(threadId string, messageId string, idx float32, message AiThreadMessageLike, ) *AiToolCallData`
+`func NewAiToolCallData(threadId string, messageId string, idx float32, ) *AiToolCallData`
 
 NewAiToolCallData instantiates a new AiToolCallData object
 This constructor will assign default values to properties that have it defined,
@@ -110,6 +110,11 @@ and a boolean to check if the value has been set.
 
 SetMessage sets Message field to given value.
 
+### HasMessage
+
+`func (o *AiToolCallData) HasMessage() bool`
+
+HasMessage returns a boolean if a field has been set.
 
 ### GetActionArgs
 

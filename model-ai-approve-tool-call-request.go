@@ -34,8 +34,8 @@ type AiApproveToolCallRequest struct {
 	MessageId string `json:"messageId"`
 	// Index of the tool-call content part inside `message.content`.
 	Idx float32 `json:"idx"`
-	// Snapshot of the assistant message at the time the tool call surfaced.
-	Message AiThreadMessageLike `json:"message"`
+	// Snapshot of the assistant message at the time the tool call surfaced. Optional and ignored: the engine resumes from the stored message, and the copy inflated the body past the parser limit (Bug 84608).
+	Message *AiThreadMessageLike `json:"message,omitempty"`
 	// Per-request engine options: extra tools, reasoning, prompt override.
 	ActionArgs *AiActionArgs `json:"actionArgs,omitempty"`
 	// Optional entity (room) scope for profile resolution.
@@ -50,13 +50,12 @@ type _AiApproveToolCallRequest AiApproveToolCallRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiApproveToolCallRequest(result interface{}, threadId string, messageId string, idx float32, message AiThreadMessageLike) *AiApproveToolCallRequest {
+func NewAiApproveToolCallRequest(result interface{}, threadId string, messageId string, idx float32) *AiApproveToolCallRequest {
 	this := AiApproveToolCallRequest{}
 	this.Result = result
 	this.ThreadId = threadId
 	this.MessageId = messageId
 	this.Idx = idx
-	this.Message = message
 	return &this
 }
 
@@ -198,28 +197,36 @@ func (o *AiApproveToolCallRequest) SetIdx(v float32) {
 	o.Idx = v
 }
 
-// GetMessage returns the Message field value
+// GetMessage returns the Message field value if set, zero value otherwise.
 func (o *AiApproveToolCallRequest) GetMessage() AiThreadMessageLike {
-	if o == nil {
+	if o == nil || IsNil(o.Message) {
 		var ret AiThreadMessageLike
 		return ret
 	}
-
-	return o.Message
+	return *o.Message
 }
 
-// GetMessageOk returns a tuple with the Message field value
+// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AiApproveToolCallRequest) GetMessageOk() (*AiThreadMessageLike, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
-	return &o.Message, true
+	return o.Message, true
 }
 
-// SetMessage sets field value
+// HasMessage returns a boolean if a field has been set.
+func (o *AiApproveToolCallRequest) IsMessageSet() bool {
+	if o != nil && !IsNil(o.Message) {
+		return true
+	}
+
+	return false
+}
+
+// SetMessage gets a reference to the given AiThreadMessageLike and assigns it to the Message field.
 func (o *AiApproveToolCallRequest) SetMessage(v AiThreadMessageLike) {
-	o.Message = v
+	o.Message = &v
 }
 
 // GetActionArgs returns the ActionArgs field value if set, zero value otherwise.
@@ -337,7 +344,9 @@ func (o AiApproveToolCallRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["threadId"] = o.ThreadId
 	toSerialize["messageId"] = o.MessageId
 	toSerialize["idx"] = o.Idx
-	toSerialize["message"] = o.Message
+	if !IsNil(o.Message) {
+		toSerialize["message"] = o.Message
+	}
 	if !IsNil(o.ActionArgs) {
 		toSerialize["actionArgs"] = o.ActionArgs
 	}
@@ -359,7 +368,6 @@ func (o *AiApproveToolCallRequest) UnmarshalJSON(data []byte) (err error) {
 		"threadId",
 		"messageId",
 		"idx",
-		"message",
 	}
 
 	allProperties := make(map[string]interface{})
