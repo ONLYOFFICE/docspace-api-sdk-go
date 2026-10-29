@@ -1,6 +1,6 @@
 module docspace-webhooks-sdk-go-samples
 
-go 1.23
+go 1.26
 
 require github.com/ONLYOFFICE/docspace-api-sdk-go/webhooks v1.0.0
 
