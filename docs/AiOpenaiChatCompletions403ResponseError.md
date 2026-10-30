@@ -1,5 +1,7 @@
 # AiOpenaiChatCompletions403ResponseError
 
+Inherits from [map[string]interface{}](map[string]interface{}.md).
+
 ## Properties
 
 Name | Type | Description | Notes

@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **Order** | Pointer to **NullableString** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] 
 **IsFavorite** | Pointer to **NullableBool** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] 
 **FileEntryType** | Pointer to [**AiFileEntryType**](AiFileEntryType.md) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] 
+**EntryKind** | Pointer to **string** | Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out. | [optional] 
 
 ## Methods
 
@@ -665,6 +666,31 @@ SetFileEntryType sets FileEntryType field to given value.
 `func (o *AiFileEntryBaseDto) HasFileEntryType() bool`
 
 HasFileEntryType returns a boolean if a field has been set.
+
+### GetEntryKind
+
+`func (o *AiFileEntryBaseDto) GetEntryKind() string`
+
+GetEntryKind returns the EntryKind field if non-nil, zero value otherwise.
+
+### GetEntryKindOk
+
+`func (o *AiFileEntryBaseDto) GetEntryKindOk() (*string, bool)`
+
+GetEntryKindOk returns a tuple with the EntryKind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntryKind
+
+`func (o *AiFileEntryBaseDto) SetEntryKind(v string)`
+
+SetEntryKind sets EntryKind field to given value.
+
+### HasEntryKind
+
+`func (o *AiFileEntryBaseDto) HasEntryKind() bool`
+
+HasEntryKind returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

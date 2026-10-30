@@ -67,6 +67,8 @@ type FileEntryBaseDto struct {
 	IsFavorite NullableBool `json:"isFavorite,omitempty"`
 	// Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here.
 	FileEntryType *FileEntryType `json:"fileEntryType,omitempty"`
+	// Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out.
+	EntryKind *string `json:"entryKind,omitempty"`
 }
 
 // NewFileEntryBaseDto instantiates a new FileEntryBaseDto object
@@ -860,6 +862,38 @@ func (o *FileEntryBaseDto) SetFileEntryType(v FileEntryType) {
 	o.FileEntryType = &v
 }
 
+// GetEntryKind returns the EntryKind field value if set, zero value otherwise.
+func (o *FileEntryBaseDto) GetEntryKind() string {
+	if o == nil || IsNil(o.EntryKind) {
+		var ret string
+		return ret
+	}
+	return *o.EntryKind
+}
+
+// GetEntryKindOk returns a tuple with the EntryKind field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileEntryBaseDto) GetEntryKindOk() (*string, bool) {
+	if o == nil || IsNil(o.EntryKind) {
+		return nil, false
+	}
+	return o.EntryKind, true
+}
+
+// HasEntryKind returns a boolean if a field has been set.
+func (o *FileEntryBaseDto) IsEntryKindSet() bool {
+	if o != nil && !IsNil(o.EntryKind) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntryKind gets a reference to the given string and assigns it to the EntryKind field.
+func (o *FileEntryBaseDto) SetEntryKind(v string) {
+	o.EntryKind = &v
+}
+
 func (o FileEntryBaseDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -935,6 +969,9 @@ func (o FileEntryBaseDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FileEntryType) {
 		toSerialize["fileEntryType"] = o.FileEntryType
+	}
+	if !IsNil(o.EntryKind) {
+		toSerialize["entryKind"] = o.EntryKind
 	}
 	return toSerialize, nil
 }

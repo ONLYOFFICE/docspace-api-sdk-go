@@ -1,10 +1,12 @@
 # ThirdPartyFolderDto
 
+Inherits from [ThirdPartyFileEntryDto](ThirdPartyFileEntryDto.md).
+
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Title** | Pointer to **string** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] 
+**Title** | Pointer to **NullableString** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] 
 **Access** | Pointer to [**FileShare**](FileShare.md) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] 
 **SharedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] 
 **OwnedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 **SharedForUser** | Pointer to **bool** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] 
 **SharedExternal** | Pointer to **bool** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] 
 **ParentShared** | Pointer to **bool** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] 
-**ShortWebUrl** | Pointer to **string** | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] 
+**ShortWebUrl** | Pointer to **NullableString** | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] 
 **Created** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] 
 **CreatedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] 
 **Updated** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] 
@@ -20,26 +22,27 @@ Name | Type | Description | Notes
 **RootFolderType** | Pointer to [**FolderType**](FolderType.md) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] 
 **ParentRoomType** | Pointer to [**FolderType**](FolderType.md) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] 
 **UpdatedBy** | Pointer to [**EmployeeDto**](EmployeeDto.md) | Who changed the entry last. It is null for a caller without an account. | [optional] 
-**ProviderItem** | Pointer to **bool** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] 
-**ProviderKey** | Pointer to **string** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] 
-**ProviderId** | Pointer to **int32** | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] 
-**Order** | Pointer to **string** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] 
-**IsFavorite** | Pointer to **bool** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] 
+**ProviderItem** | Pointer to **NullableBool** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] 
+**ProviderKey** | Pointer to **NullableString** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] 
+**ProviderId** | Pointer to **NullableInt32** | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] 
+**Order** | Pointer to **NullableString** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] 
+**IsFavorite** | Pointer to **NullableBool** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] 
 **FileEntryType** | Pointer to [**FileEntryType**](FileEntryType.md) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] 
-**Id** | Pointer to **string** | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] 
-**RootFolderId** | Pointer to **string** | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] 
-**OriginId** | Pointer to **string** | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] 
-**OriginRoomId** | Pointer to **string** | The room the entry was deleted from, left out of the answer for anything that was not deleted out of a room. | [optional] 
-**OriginTitle** | Pointer to **string** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] 
-**OriginRoomTitle** | Pointer to **string** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] 
+**EntryKind** | Pointer to **string** | Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out. | [optional] 
+**Id** | Pointer to **NullableString** | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] 
+**RootFolderId** | Pointer to **NullableString** | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] 
+**OriginId** | Pointer to **NullableString** | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] 
+**OriginRoomId** | Pointer to **NullableString** | The room the entry was deleted from, left out of the answer for anything that was not deleted out of a room. | [optional] 
+**OriginTitle** | Pointer to **NullableString** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] 
+**OriginRoomTitle** | Pointer to **NullableString** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] 
 **CanShare** | Pointer to **bool** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] 
 **ShareSettings** | Pointer to [**NullableAiFileEntryDtoAllOfShareSettings**](AiFileEntryDtoAllOfShareSettings.md) |  | [optional] 
 **Security** | Pointer to [**NullableAiFileEntryDtoAllOfSecurity**](AiFileEntryDtoAllOfSecurity.md) |  | [optional] 
 **AvailableShareRights** | Pointer to [**NullableAiFileEntryDtoAllOfAvailableShareRights**](AiFileEntryDtoAllOfAvailableShareRights.md) |  | [optional] 
-**RequestToken** | Pointer to **string** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] 
-**External** | Pointer to **bool** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] 
+**RequestToken** | Pointer to **NullableString** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] 
+**External** | Pointer to **NullableBool** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] 
 **ExpirationDate** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] 
-**IsLinkExpired** | Pointer to **bool** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] 
+**IsLinkExpired** | Pointer to **NullableBool** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] 
 **AssignedMetadataTemplates** | Pointer to **[]int32** | The IDs of the metadata templates assigned to the file entry. | [optional] 
 **MetadataMatches** | Pointer to [**[]MetadataMatchDto**](MetadataMatchDto.md) | Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here. | [optional] 
 **ParentId** | Pointer to **NullableString** | The folder this one is listed in. For a room it is the root of the section the room lives in, and for an entry  opened through a sharing link whose real parent the caller may not read it is the root of the section with the  entries shared with them. | [optional] 
@@ -114,6 +117,16 @@ SetTitle sets Title field to given value.
 
 HasTitle returns a boolean if a field has been set.
 
+### SetTitleNil
+
+`func (o *ThirdPartyFolderDto) SetTitleNil(b bool)`
+
+ SetTitleNil sets the value for Title to be an explicit nil
+
+### UnsetTitle
+`func (o *ThirdPartyFolderDto) UnsetTitle()`
+
+UnsetTitle ensures that no value is present for Title, not even an explicit nil
 ### GetAccess
 
 `func (o *ThirdPartyFolderDto) GetAccess() FileShare`
@@ -314,6 +327,16 @@ SetShortWebUrl sets ShortWebUrl field to given value.
 
 HasShortWebUrl returns a boolean if a field has been set.
 
+### SetShortWebUrlNil
+
+`func (o *ThirdPartyFolderDto) SetShortWebUrlNil(b bool)`
+
+ SetShortWebUrlNil sets the value for ShortWebUrl to be an explicit nil
+
+### UnsetShortWebUrl
+`func (o *ThirdPartyFolderDto) UnsetShortWebUrl()`
+
+UnsetShortWebUrl ensures that no value is present for ShortWebUrl, not even an explicit nil
 ### GetCreated
 
 `func (o *ThirdPartyFolderDto) GetCreated() ApiDateTime`
@@ -514,6 +537,16 @@ SetProviderItem sets ProviderItem field to given value.
 
 HasProviderItem returns a boolean if a field has been set.
 
+### SetProviderItemNil
+
+`func (o *ThirdPartyFolderDto) SetProviderItemNil(b bool)`
+
+ SetProviderItemNil sets the value for ProviderItem to be an explicit nil
+
+### UnsetProviderItem
+`func (o *ThirdPartyFolderDto) UnsetProviderItem()`
+
+UnsetProviderItem ensures that no value is present for ProviderItem, not even an explicit nil
 ### GetProviderKey
 
 `func (o *ThirdPartyFolderDto) GetProviderKey() string`
@@ -539,6 +572,16 @@ SetProviderKey sets ProviderKey field to given value.
 
 HasProviderKey returns a boolean if a field has been set.
 
+### SetProviderKeyNil
+
+`func (o *ThirdPartyFolderDto) SetProviderKeyNil(b bool)`
+
+ SetProviderKeyNil sets the value for ProviderKey to be an explicit nil
+
+### UnsetProviderKey
+`func (o *ThirdPartyFolderDto) UnsetProviderKey()`
+
+UnsetProviderKey ensures that no value is present for ProviderKey, not even an explicit nil
 ### GetProviderId
 
 `func (o *ThirdPartyFolderDto) GetProviderId() int32`
@@ -564,6 +607,16 @@ SetProviderId sets ProviderId field to given value.
 
 HasProviderId returns a boolean if a field has been set.
 
+### SetProviderIdNil
+
+`func (o *ThirdPartyFolderDto) SetProviderIdNil(b bool)`
+
+ SetProviderIdNil sets the value for ProviderId to be an explicit nil
+
+### UnsetProviderId
+`func (o *ThirdPartyFolderDto) UnsetProviderId()`
+
+UnsetProviderId ensures that no value is present for ProviderId, not even an explicit nil
 ### GetOrder
 
 `func (o *ThirdPartyFolderDto) GetOrder() string`
@@ -589,6 +642,16 @@ SetOrder sets Order field to given value.
 
 HasOrder returns a boolean if a field has been set.
 
+### SetOrderNil
+
+`func (o *ThirdPartyFolderDto) SetOrderNil(b bool)`
+
+ SetOrderNil sets the value for Order to be an explicit nil
+
+### UnsetOrder
+`func (o *ThirdPartyFolderDto) UnsetOrder()`
+
+UnsetOrder ensures that no value is present for Order, not even an explicit nil
 ### GetIsFavorite
 
 `func (o *ThirdPartyFolderDto) GetIsFavorite() bool`
@@ -614,6 +677,16 @@ SetIsFavorite sets IsFavorite field to given value.
 
 HasIsFavorite returns a boolean if a field has been set.
 
+### SetIsFavoriteNil
+
+`func (o *ThirdPartyFolderDto) SetIsFavoriteNil(b bool)`
+
+ SetIsFavoriteNil sets the value for IsFavorite to be an explicit nil
+
+### UnsetIsFavorite
+`func (o *ThirdPartyFolderDto) UnsetIsFavorite()`
+
+UnsetIsFavorite ensures that no value is present for IsFavorite, not even an explicit nil
 ### GetFileEntryType
 
 `func (o *ThirdPartyFolderDto) GetFileEntryType() FileEntryType`
@@ -638,6 +711,31 @@ SetFileEntryType sets FileEntryType field to given value.
 `func (o *ThirdPartyFolderDto) HasFileEntryType() bool`
 
 HasFileEntryType returns a boolean if a field has been set.
+
+### GetEntryKind
+
+`func (o *ThirdPartyFolderDto) GetEntryKind() string`
+
+GetEntryKind returns the EntryKind field if non-nil, zero value otherwise.
+
+### GetEntryKindOk
+
+`func (o *ThirdPartyFolderDto) GetEntryKindOk() (*string, bool)`
+
+GetEntryKindOk returns a tuple with the EntryKind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntryKind
+
+`func (o *ThirdPartyFolderDto) SetEntryKind(v string)`
+
+SetEntryKind sets EntryKind field to given value.
+
+### HasEntryKind
+
+`func (o *ThirdPartyFolderDto) HasEntryKind() bool`
+
+HasEntryKind returns a boolean if a field has been set.
 
 ### GetId
 
@@ -664,6 +762,16 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
+### SetIdNil
+
+`func (o *ThirdPartyFolderDto) SetIdNil(b bool)`
+
+ SetIdNil sets the value for Id to be an explicit nil
+
+### UnsetId
+`func (o *ThirdPartyFolderDto) UnsetId()`
+
+UnsetId ensures that no value is present for Id, not even an explicit nil
 ### GetRootFolderId
 
 `func (o *ThirdPartyFolderDto) GetRootFolderId() string`
@@ -689,6 +797,16 @@ SetRootFolderId sets RootFolderId field to given value.
 
 HasRootFolderId returns a boolean if a field has been set.
 
+### SetRootFolderIdNil
+
+`func (o *ThirdPartyFolderDto) SetRootFolderIdNil(b bool)`
+
+ SetRootFolderIdNil sets the value for RootFolderId to be an explicit nil
+
+### UnsetRootFolderId
+`func (o *ThirdPartyFolderDto) UnsetRootFolderId()`
+
+UnsetRootFolderId ensures that no value is present for RootFolderId, not even an explicit nil
 ### GetOriginId
 
 `func (o *ThirdPartyFolderDto) GetOriginId() string`
@@ -714,6 +832,16 @@ SetOriginId sets OriginId field to given value.
 
 HasOriginId returns a boolean if a field has been set.
 
+### SetOriginIdNil
+
+`func (o *ThirdPartyFolderDto) SetOriginIdNil(b bool)`
+
+ SetOriginIdNil sets the value for OriginId to be an explicit nil
+
+### UnsetOriginId
+`func (o *ThirdPartyFolderDto) UnsetOriginId()`
+
+UnsetOriginId ensures that no value is present for OriginId, not even an explicit nil
 ### GetOriginRoomId
 
 `func (o *ThirdPartyFolderDto) GetOriginRoomId() string`
@@ -739,6 +867,16 @@ SetOriginRoomId sets OriginRoomId field to given value.
 
 HasOriginRoomId returns a boolean if a field has been set.
 
+### SetOriginRoomIdNil
+
+`func (o *ThirdPartyFolderDto) SetOriginRoomIdNil(b bool)`
+
+ SetOriginRoomIdNil sets the value for OriginRoomId to be an explicit nil
+
+### UnsetOriginRoomId
+`func (o *ThirdPartyFolderDto) UnsetOriginRoomId()`
+
+UnsetOriginRoomId ensures that no value is present for OriginRoomId, not even an explicit nil
 ### GetOriginTitle
 
 `func (o *ThirdPartyFolderDto) GetOriginTitle() string`
@@ -764,6 +902,16 @@ SetOriginTitle sets OriginTitle field to given value.
 
 HasOriginTitle returns a boolean if a field has been set.
 
+### SetOriginTitleNil
+
+`func (o *ThirdPartyFolderDto) SetOriginTitleNil(b bool)`
+
+ SetOriginTitleNil sets the value for OriginTitle to be an explicit nil
+
+### UnsetOriginTitle
+`func (o *ThirdPartyFolderDto) UnsetOriginTitle()`
+
+UnsetOriginTitle ensures that no value is present for OriginTitle, not even an explicit nil
 ### GetOriginRoomTitle
 
 `func (o *ThirdPartyFolderDto) GetOriginRoomTitle() string`
@@ -789,6 +937,16 @@ SetOriginRoomTitle sets OriginRoomTitle field to given value.
 
 HasOriginRoomTitle returns a boolean if a field has been set.
 
+### SetOriginRoomTitleNil
+
+`func (o *ThirdPartyFolderDto) SetOriginRoomTitleNil(b bool)`
+
+ SetOriginRoomTitleNil sets the value for OriginRoomTitle to be an explicit nil
+
+### UnsetOriginRoomTitle
+`func (o *ThirdPartyFolderDto) UnsetOriginRoomTitle()`
+
+UnsetOriginRoomTitle ensures that no value is present for OriginRoomTitle, not even an explicit nil
 ### GetCanShare
 
 `func (o *ThirdPartyFolderDto) GetCanShare() bool`
@@ -944,6 +1102,16 @@ SetRequestToken sets RequestToken field to given value.
 
 HasRequestToken returns a boolean if a field has been set.
 
+### SetRequestTokenNil
+
+`func (o *ThirdPartyFolderDto) SetRequestTokenNil(b bool)`
+
+ SetRequestTokenNil sets the value for RequestToken to be an explicit nil
+
+### UnsetRequestToken
+`func (o *ThirdPartyFolderDto) UnsetRequestToken()`
+
+UnsetRequestToken ensures that no value is present for RequestToken, not even an explicit nil
 ### GetExternal
 
 `func (o *ThirdPartyFolderDto) GetExternal() bool`
@@ -969,6 +1137,16 @@ SetExternal sets External field to given value.
 
 HasExternal returns a boolean if a field has been set.
 
+### SetExternalNil
+
+`func (o *ThirdPartyFolderDto) SetExternalNil(b bool)`
+
+ SetExternalNil sets the value for External to be an explicit nil
+
+### UnsetExternal
+`func (o *ThirdPartyFolderDto) UnsetExternal()`
+
+UnsetExternal ensures that no value is present for External, not even an explicit nil
 ### GetExpirationDate
 
 `func (o *ThirdPartyFolderDto) GetExpirationDate() ApiDateTime`
@@ -1019,6 +1197,16 @@ SetIsLinkExpired sets IsLinkExpired field to given value.
 
 HasIsLinkExpired returns a boolean if a field has been set.
 
+### SetIsLinkExpiredNil
+
+`func (o *ThirdPartyFolderDto) SetIsLinkExpiredNil(b bool)`
+
+ SetIsLinkExpiredNil sets the value for IsLinkExpired to be an explicit nil
+
+### UnsetIsLinkExpired
+`func (o *ThirdPartyFolderDto) UnsetIsLinkExpired()`
+
+UnsetIsLinkExpired ensures that no value is present for IsLinkExpired, not even an explicit nil
 ### GetAssignedMetadataTemplates
 
 `func (o *ThirdPartyFolderDto) GetAssignedMetadataTemplates() []int32`
@@ -1044,6 +1232,16 @@ SetAssignedMetadataTemplates sets AssignedMetadataTemplates field to given value
 
 HasAssignedMetadataTemplates returns a boolean if a field has been set.
 
+### SetAssignedMetadataTemplatesNil
+
+`func (o *ThirdPartyFolderDto) SetAssignedMetadataTemplatesNil(b bool)`
+
+ SetAssignedMetadataTemplatesNil sets the value for AssignedMetadataTemplates to be an explicit nil
+
+### UnsetAssignedMetadataTemplates
+`func (o *ThirdPartyFolderDto) UnsetAssignedMetadataTemplates()`
+
+UnsetAssignedMetadataTemplates ensures that no value is present for AssignedMetadataTemplates, not even an explicit nil
 ### GetMetadataMatches
 
 `func (o *ThirdPartyFolderDto) GetMetadataMatches() []MetadataMatchDto`
@@ -1069,6 +1267,16 @@ SetMetadataMatches sets MetadataMatches field to given value.
 
 HasMetadataMatches returns a boolean if a field has been set.
 
+### SetMetadataMatchesNil
+
+`func (o *ThirdPartyFolderDto) SetMetadataMatchesNil(b bool)`
+
+ SetMetadataMatchesNil sets the value for MetadataMatches to be an explicit nil
+
+### UnsetMetadataMatches
+`func (o *ThirdPartyFolderDto) UnsetMetadataMatches()`
+
+UnsetMetadataMatches ensures that no value is present for MetadataMatches, not even an explicit nil
 ### GetParentId
 
 `func (o *ThirdPartyFolderDto) GetParentId() string`

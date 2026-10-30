@@ -67,6 +67,8 @@ type AiFileEntryDto struct {
 	IsFavorite *bool `json:"isFavorite,omitempty"`
 	// Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here.
 	FileEntryType *AiFileEntryType `json:"fileEntryType,omitempty"`
+	// Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out.
+	EntryKind *string `json:"entryKind,omitempty"`
 	// The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value.
 	Id *int32 `json:"id,omitempty"`
 	// The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room.
@@ -819,6 +821,38 @@ func (o *AiFileEntryDto) SetFileEntryType(v AiFileEntryType) {
 	o.FileEntryType = &v
 }
 
+// GetEntryKind returns the EntryKind field value if set, zero value otherwise.
+func (o *AiFileEntryDto) GetEntryKind() string {
+	if o == nil || IsNil(o.EntryKind) {
+		var ret string
+		return ret
+	}
+	return *o.EntryKind
+}
+
+// GetEntryKindOk returns a tuple with the EntryKind field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiFileEntryDto) GetEntryKindOk() (*string, bool) {
+	if o == nil || IsNil(o.EntryKind) {
+		return nil, false
+	}
+	return o.EntryKind, true
+}
+
+// HasEntryKind returns a boolean if a field has been set.
+func (o *AiFileEntryDto) IsEntryKindSet() bool {
+	if o != nil && !IsNil(o.EntryKind) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntryKind gets a reference to the given string and assigns it to the EntryKind field.
+func (o *AiFileEntryDto) SetEntryKind(v string) {
+	o.EntryKind = &v
+}
+
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *AiFileEntryDto) GetId() int32 {
 	if o == nil || IsNil(o.Id) {
@@ -1488,6 +1522,9 @@ func (o AiFileEntryDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FileEntryType) {
 		toSerialize["fileEntryType"] = o.FileEntryType
+	}
+	if !IsNil(o.EntryKind) {
+		toSerialize["entryKind"] = o.EntryKind
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id

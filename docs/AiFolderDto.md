@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **Order** | Pointer to **string** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] 
 **IsFavorite** | Pointer to **bool** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] 
 **FileEntryType** | Pointer to [**AiFileEntryType**](AiFileEntryType.md) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] 
+**EntryKind** | Pointer to **string** | Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out. | [optional] 
 **Id** | Pointer to **int32** | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] 
 **RootFolderId** | Pointer to **int32** | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] 
 **OriginId** | Pointer to **int32** | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] 
@@ -638,6 +639,31 @@ SetFileEntryType sets FileEntryType field to given value.
 `func (o *AiFolderDto) HasFileEntryType() bool`
 
 HasFileEntryType returns a boolean if a field has been set.
+
+### GetEntryKind
+
+`func (o *AiFolderDto) GetEntryKind() string`
+
+GetEntryKind returns the EntryKind field if non-nil, zero value otherwise.
+
+### GetEntryKindOk
+
+`func (o *AiFolderDto) GetEntryKindOk() (*string, bool)`
+
+GetEntryKindOk returns a tuple with the EntryKind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntryKind
+
+`func (o *AiFolderDto) SetEntryKind(v string)`
+
+SetEntryKind sets EntryKind field to given value.
+
+### HasEntryKind
+
+`func (o *AiFolderDto) HasEntryKind() bool`
+
+HasEntryKind returns a boolean if a field has been set.
 
 ### GetId
 
