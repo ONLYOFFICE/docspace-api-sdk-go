@@ -630,9 +630,9 @@ type ApiCheckMoveOrCopyBatchItemsRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
 	returnSingleOperation *bool
-	folderIds *[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner
-	fileIds *[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner
-	destFolderId *CheckMoveOrCopyBatchItemsDestFolderIdParameter
+	folderIds *[]string
+	fileIds *[]string
+	destFolderId *string
 	conflictResolveType *FileConflictResolveType
 	deleteAfter *bool
 	content *bool
@@ -645,17 +645,17 @@ func (r ApiCheckMoveOrCopyBatchItemsRequest) ReturnSingleOperation(returnSingleO
 }
 
 // The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
-func (r ApiCheckMoveOrCopyBatchItemsRequest) FolderIds(folderIds []CheckMoveOrCopyBatchItemsFolderIdsParameterInner) ApiCheckMoveOrCopyBatchItemsRequest {	r.folderIds = &folderIds
+func (r ApiCheckMoveOrCopyBatchItemsRequest) FolderIds(folderIds []string) ApiCheckMoveOrCopyBatchItemsRequest {	r.folderIds = &folderIds
 	return r
 }
 
 // The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
-func (r ApiCheckMoveOrCopyBatchItemsRequest) FileIds(fileIds []CheckMoveOrCopyBatchItemsFolderIdsParameterInner) ApiCheckMoveOrCopyBatchItemsRequest {	r.fileIds = &fileIds
+func (r ApiCheckMoveOrCopyBatchItemsRequest) FileIds(fileIds []string) ApiCheckMoveOrCopyBatchItemsRequest {	r.fileIds = &fileIds
 	return r
 }
 
 // The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
-func (r ApiCheckMoveOrCopyBatchItemsRequest) DestFolderId(destFolderId CheckMoveOrCopyBatchItemsDestFolderIdParameter) ApiCheckMoveOrCopyBatchItemsRequest {	r.destFolderId = &destFolderId
+func (r ApiCheckMoveOrCopyBatchItemsRequest) DestFolderId(destFolderId string) ApiCheckMoveOrCopyBatchItemsRequest {	r.destFolderId = &destFolderId
 	return r
 }
 
@@ -864,9 +864,9 @@ type ApiCheckMoveOrCopyDestFolderRequest struct {
 	ctx context.Context
 	ApiService *FilesOperationsAPIService
 	returnSingleOperation *bool
-	folderIds *[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner
-	fileIds *[]CheckMoveOrCopyBatchItemsFolderIdsParameterInner
-	destFolderId *CheckMoveOrCopyBatchItemsDestFolderIdParameter
+	folderIds *[]string
+	fileIds *[]string
+	destFolderId *string
 	conflictResolveType *FileConflictResolveType
 	deleteAfter *bool
 	content *bool
@@ -879,17 +879,17 @@ func (r ApiCheckMoveOrCopyDestFolderRequest) ReturnSingleOperation(returnSingleO
 }
 
 // The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
-func (r ApiCheckMoveOrCopyDestFolderRequest) FolderIds(folderIds []CheckMoveOrCopyBatchItemsFolderIdsParameterInner) ApiCheckMoveOrCopyDestFolderRequest {	r.folderIds = &folderIds
+func (r ApiCheckMoveOrCopyDestFolderRequest) FolderIds(folderIds []string) ApiCheckMoveOrCopyDestFolderRequest {	r.folderIds = &folderIds
 	return r
 }
 
 // The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
-func (r ApiCheckMoveOrCopyDestFolderRequest) FileIds(fileIds []CheckMoveOrCopyBatchItemsFolderIdsParameterInner) ApiCheckMoveOrCopyDestFolderRequest {	r.fileIds = &fileIds
+func (r ApiCheckMoveOrCopyDestFolderRequest) FileIds(fileIds []string) ApiCheckMoveOrCopyDestFolderRequest {	r.fileIds = &fileIds
 	return r
 }
 
 // The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
-func (r ApiCheckMoveOrCopyDestFolderRequest) DestFolderId(destFolderId CheckMoveOrCopyBatchItemsDestFolderIdParameter) ApiCheckMoveOrCopyDestFolderRequest {	r.destFolderId = &destFolderId
+func (r ApiCheckMoveOrCopyDestFolderRequest) DestFolderId(destFolderId string) ApiCheckMoveOrCopyDestFolderRequest {	r.destFolderId = &destFolderId
 	return r
 }
 

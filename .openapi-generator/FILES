@@ -417,8 +417,6 @@ docs/CheckDestFolderResult.md
 docs/CheckDestFolderWrapper.md
 docs/CheckDocServiceUrlRequestDto.md
 docs/CheckFillFormDraftRequest.md
-docs/CheckMoveOrCopyBatchItemsDestFolderIdParameter.md
-docs/CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md
 docs/CheckUploadRequest.md
 docs/ChunkedUploadSessionDto.md
 docs/ChunkedUploadSessionResultDto.md
@@ -1544,8 +1542,6 @@ model-check-dest-folder-result.go
 model-check-dest-folder-wrapper.go
 model-check-doc-service-url-request-dto.go
 model-check-fill-form-draft-request.go
-model-check-move-or-copy-batch-items-dest-folder-id-parameter.go
-model-check-move-or-copy-batch-items-folder-ids-parameter-inner.go
 model-check-upload-request.go
 model-chunked-upload-session-dto.go
 model-chunked-upload-session-result-dto.go
