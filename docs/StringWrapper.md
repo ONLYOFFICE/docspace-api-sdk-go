@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Response** | Pointer to **string** | The string value returned by the operation. | [optional] 
-**Count** | Pointer to **int32** | The total number of items in the response | [optional] 
+**Count** | Pointer to **int32** | How many items this response carries: the length of the page for a list, 1 for a single object | [optional] 
+**Total** | Pointer to **int64** | How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response | [optional] 
 **Links** | Pointer to [**[]GetPortalPrices200ResponseLinksInner**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **Status** | Pointer to **int32** | HTTP status code of the response | [optional] 
 **StatusCode** | Pointer to **int32** | HTTP status code of the response (duplicate of status) | [optional] 
@@ -78,6 +79,31 @@ SetCount sets Count field to given value.
 `func (o *StringWrapper) HasCount() bool`
 
 HasCount returns a boolean if a field has been set.
+
+### GetTotal
+
+`func (o *StringWrapper) GetTotal() int64`
+
+GetTotal returns the Total field if non-nil, zero value otherwise.
+
+### GetTotalOk
+
+`func (o *StringWrapper) GetTotalOk() (*int64, bool)`
+
+GetTotalOk returns a tuple with the Total field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotal
+
+`func (o *StringWrapper) SetTotal(v int64)`
+
+SetTotal sets Total field to given value.
+
+### HasTotal
+
+`func (o *StringWrapper) HasTotal() bool`
+
+HasTotal returns a boolean if a field has been set.
 
 ### GetLinks
 

@@ -25,8 +25,10 @@ var _ MappedNullable = &AdditionalWhiteLabelSettingsWrapper{}
 type AdditionalWhiteLabelSettingsWrapper struct {
 	// The AdditionalWhiteLabelSettingsDto object returned by the operation.
 	Response *AdditionalWhiteLabelSettingsDto `json:"response,omitempty"`
-	// The total number of items in the response
+	// How many items this response carries: the length of the page for a list, 1 for a single object
 	Count *int32 `json:"count,omitempty"`
+	// How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+	Total *int64 `json:"total,omitempty"`
 	// List of links related to the response
 	Links []GetPortalPrices200ResponseLinksInner `json:"links,omitempty"`
 	// HTTP status code of the response
@@ -114,6 +116,38 @@ func (o *AdditionalWhiteLabelSettingsWrapper) IsCountSet() bool {
 // SetCount gets a reference to the given int32 and assigns it to the Count field.
 func (o *AdditionalWhiteLabelSettingsWrapper) SetCount(v int32) {
 	o.Count = &v
+}
+
+// GetTotal returns the Total field value if set, zero value otherwise.
+func (o *AdditionalWhiteLabelSettingsWrapper) GetTotal() int64 {
+	if o == nil || IsNil(o.Total) {
+		var ret int64
+		return ret
+	}
+	return *o.Total
+}
+
+// GetTotalOk returns a tuple with the Total field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalWhiteLabelSettingsWrapper) GetTotalOk() (*int64, bool) {
+	if o == nil || IsNil(o.Total) {
+		return nil, false
+	}
+	return o.Total, true
+}
+
+// HasTotal returns a boolean if a field has been set.
+func (o *AdditionalWhiteLabelSettingsWrapper) IsTotalSet() bool {
+	if o != nil && !IsNil(o.Total) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotal gets a reference to the given int64 and assigns it to the Total field.
+func (o *AdditionalWhiteLabelSettingsWrapper) SetTotal(v int64) {
+	o.Total = &v
 }
 
 // GetLinks returns the Links field value if set, zero value otherwise.
@@ -227,6 +261,9 @@ func (o AdditionalWhiteLabelSettingsWrapper) ToMap() (map[string]interface{}, er
 	}
 	if !IsNil(o.Count) {
 		toSerialize["count"] = o.Count
+	}
+	if !IsNil(o.Total) {
+		toSerialize["total"] = o.Total
 	}
 	if !IsNil(o.Links) {
 		toSerialize["links"] = o.Links
