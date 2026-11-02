@@ -29,7 +29,7 @@ type CreateMetadataTemplateRequestDto struct {
 	Name NullableString `json:"name"`
 	// Specifies if the template is visible in the UI pickers.
 	Visible *bool `json:"visible,omitempty"`
-	// The template metadata fields.
+	// The template metadata fields. At least one field is required: a template without fields is not created.
 	Fields []MetadataFieldRequest `json:"fields,omitempty"`
 }
 

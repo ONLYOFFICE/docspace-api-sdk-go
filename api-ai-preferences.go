@@ -196,7 +196,7 @@ type ApiAiPreferencesGetDeepModeRequest struct {
 	entityId *string
 }
 
-// The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+// The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
 func (r ApiAiPreferencesGetDeepModeRequest) EntityId(entityId string) ApiAiPreferencesGetDeepModeRequest {	r.entityId = &entityId
 	return r
 }
@@ -347,7 +347,7 @@ type ApiAiPreferencesGetReasoningLevelRequest struct {
 	entityId *string
 }
 
-// The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+// The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
 func (r ApiAiPreferencesGetReasoningLevelRequest) EntityId(entityId string) ApiAiPreferencesGetReasoningLevelRequest {	r.entityId = &entityId
 	return r
 }
@@ -498,7 +498,7 @@ type ApiAiPreferencesGetToolPermissionModeRequest struct {
 	entityId *string
 }
 
-// The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+// The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
 func (r ApiAiPreferencesGetToolPermissionModeRequest) EntityId(entityId string) ApiAiPreferencesGetToolPermissionModeRequest {	r.entityId = &entityId
 	return r
 }
@@ -649,7 +649,7 @@ type ApiAiPreferencesIsDeepModeSetRequest struct {
 	entityId *string
 }
 
-// The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+// The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
 func (r ApiAiPreferencesIsDeepModeSetRequest) EntityId(entityId string) ApiAiPreferencesIsDeepModeSetRequest {	r.entityId = &entityId
 	return r
 }

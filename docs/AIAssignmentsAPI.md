@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ## AiAssignmentsGetAllAssignments
 
-> map[string]string AiAssignmentsGetAllAssignments(ctx).EntityId(entityId).Execute()
+> map[string]string AiAssignmentsGetAllAssignments(ctx).EntityId(entityId).Expand(expand).Execute()
 
 Get all assignments
 
@@ -242,11 +242,12 @@ import (
 )
 
 func main() {
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
+	expand := "profile" // string | Set to profile to answer the assigned profiles themselves instead of their IDs: `{ assignments, profilesTotal, chatProfilesTotal }`. Omit for the plain ID map. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIAssignmentsAPI.AiAssignmentsGetAllAssignments(context.Background()).EntityId(entityId).Execute()
+	resp, r, err := apiClient.AIAssignmentsAPI.AiAssignmentsGetAllAssignments(context.Background()).EntityId(entityId).Expand(expand).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAssignmentsAPI.AiAssignmentsGetAllAssignments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -267,7 +268,8 @@ Other parameters are passed through a pointer to a apiAiAssignmentsGetAllAssignm
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
+ **expand** | **string** | Set to profile to answer the assigned profiles themselves instead of their IDs: `{ assignments, profilesTotal, chatProfilesTotal }`. Omit for the plain ID map. | 
 
 ### Return type
 
@@ -379,7 +381,7 @@ import (
 
 func main() {
 	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -405,7 +407,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsResolveForAct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | 
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
 
 ### Return type
 
@@ -449,7 +451,7 @@ import (
 
 func main() {
 	actionType := "Chat" // string | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -475,7 +477,7 @@ Other parameters are passed through a pointer to a apiAiAssignmentsTryResolveFor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **actionType** | **string** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | 
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
 
 ### Return type
 

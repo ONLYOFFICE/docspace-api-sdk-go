@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Disabled** | Pointer to **bool** | Indicates whether the AI feature is disabled. | [optional] 
+**Disabled** | Pointer to **bool** | Whether the editor hides its AI tools. It is set when AI is turned off for the portal, and always for an  anonymous visitor of an external link. | [optional] 
 
 ## Methods
 

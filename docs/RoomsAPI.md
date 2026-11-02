@@ -20,7 +20,7 @@ Method | HTTP request | Description
 [**GetExternalDbSyncStatus**](RoomsAPI.md#GetExternalDbSyncStatus) | **Get** /api/2.0/files/rooms/{id}/externaldbsync | Get external DB sync status
 [**GetNewRoomItems**](RoomsAPI.md#GetNewRoomItems) | **Get** /api/2.0/files/rooms/{id}/news | Get new items in a room
 [**GetPublicSettings**](RoomsAPI.md#GetPublicSettings) | **Get** /api/2.0/files/roomtemplate/{id}/public | Get room template public access
-[**GetRoomAiFolder**](RoomsAPI.md#GetRoomAiFolder) | **Get** /api/2.0/files/rooms/{id}/ai | Get the .ai folder of a room
+[**GetRoomAiFolder**](RoomsAPI.md#GetRoomAiFolder) | **Get** /api/2.0/files/rooms/{id}/ai | Get the skills folder of an Instructions room
 [**GetRoomCovers**](RoomsAPI.md#GetRoomCovers) | **Get** /api/2.0/files/rooms/covers | Get room cover gallery
 [**GetRoomCreatingStatus**](RoomsAPI.md#GetRoomCreatingStatus) | **Get** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress
 [**GetRoomIndexExport**](RoomsAPI.md#GetRoomIndexExport) | **Get** /api/2.0/files/rooms/indexexport | Get the room index export
@@ -1214,7 +1214,7 @@ Name | Type | Description  | Notes
 
 > FolderContentWrapper GetRoomAiFolder(ctx, id).FilterType(filterType).Count(count).StartIndex(startIndex).SortBy(sortBy).SortOrder(sortOrder).FilterValue(filterValue).Execute()
 
-Get the .ai folder of a room
+Get the skills folder of an Instructions room
 
 
 
@@ -1233,7 +1233,7 @@ import (
 )
 
 func main() {
-	id := int32(1) // int32 | The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+	id := int32(1) // int32 | The Instructions room whose skills are listed, named by the identifier that `GET api/2.0/files/rooms` reports  for it.
 	filterType := openapiclient.FilterType(0) // FilterType | Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds. (optional)
 	count := int32(25) // int32 | The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. (optional)
 	startIndex := int32(0) // int32 | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. (optional)
@@ -1259,7 +1259,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+**id** | **int32** | The Instructions room whose skills are listed, named by the identifier that `GET api/2.0/files/rooms` reports  for it. | 
 
 ### Other Parameters
 
@@ -1881,7 +1881,7 @@ func main() {
 	quotaFilter := openapiclient.QuotaFilter(0) // QuotaFilter | Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. (optional)
 	storageFilter := openapiclient.StorageFilter(0) // StorageFilter | Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. (optional)
 	privacyFilter := openapiclient.RoomPrivacyFilter(0) // RoomPrivacyFilter | Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. (optional)
-	withAiFolder := true // bool | Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder. (optional)
+	withAiFolder := true // bool | Keeps only the rooms that provide skills to the AI chat: Instructions rooms, whose Markdown files are read  with `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms of every type. (optional)
 	count := int32(25) // int32 | How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. (optional)
 	startIndex := int32(0) // int32 | How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. (optional)
 	sortBy := "DateAndTime" // string | The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order. (optional)
@@ -1926,7 +1926,7 @@ Name | Type | Description  | Notes
  **quotaFilter** | [**QuotaFilter**](QuotaFilter.md) | Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. | 
  **storageFilter** | [**StorageFilter**](StorageFilter.md) | Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. | 
  **privacyFilter** | [**RoomPrivacyFilter**](RoomPrivacyFilter.md) | Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. | 
- **withAiFolder** | **bool** | Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder. | 
+ **withAiFolder** | **bool** | Keeps only the rooms that provide skills to the AI chat: Instructions rooms, whose Markdown files are read  with `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms of every type. | 
  **count** | **int32** | How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. | 
  **startIndex** | **int32** | How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. | 
  **sortBy** | **string** | The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order. | 

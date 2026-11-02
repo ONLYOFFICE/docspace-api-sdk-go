@@ -38,9 +38,9 @@ type ThirdPartyFileEntryDto struct {
 	OriginRoomTitle NullableString `json:"originRoomTitle,omitempty"`
 	// Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager.
 	CanShare *bool `json:"canShare,omitempty"`
-	ShareSettings NullableAiFileEntryDtoAllOfShareSettings `json:"shareSettings,omitempty"`
-	Security NullableAiFileEntryDtoAllOfSecurity `json:"security,omitempty"`
-	AvailableShareRights NullableAiFileEntryDtoAllOfAvailableShareRights `json:"availableShareRights,omitempty"`
+	ShareSettings NullableFileEntryDtoAllOfShareSettings `json:"shareSettings,omitempty"`
+	Security NullableFileEntryDtoAllOfSecurity `json:"security,omitempty"`
+	AvailableShareRights NullableFileEntryDtoAllOfAvailableShareRights `json:"availableShareRights,omitempty"`
 	// The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link.
 	RequestToken NullableString `json:"requestToken,omitempty"`
 	// Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved.
@@ -51,6 +51,8 @@ type ThirdPartyFileEntryDto struct {
 	IsLinkExpired NullableBool `json:"isLinkExpired,omitempty"`
 	// The IDs of the metadata templates assigned to the file entry.
 	AssignedMetadataTemplates []int32 `json:"assignedMetadataTemplates,omitempty"`
+	// Whether the entry has a metadata field a user can see and fill, by hand or with the AI filling: a field of a  visible assigned template, or a custom field. False when the entry has no metadata, when its assigned templates  are all hidden, or when they have no fields. It says nothing about the values: it stays true once every field is  filled, and nothing about the caller's rights: writing the values still needs the right to edit the entry  (`security.Edit`). It cannot be derived from `assignedMetadataTemplates`, which lists hidden templates too and  never lists the custom fields. Present, with a value, in the folder listing and in the file and folder info  responses; absent in the other responses that carry an entry (the answer to a creation, an upload or a rename),  which do not compute it, and for an entry of a third-party storage, which has no metadata. The same flag is  answered by `GET api/2.0/files/metadata/file/{fileId}` and `GET api/2.0/files/metadata/folder/{folderId}`.
+	HasMetadataFields NullableBool `json:"hasMetadataFields,omitempty"`
 	// Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.
 	MetadataMatches []MetadataMatchDto `json:"metadataMatches,omitempty"`
 }
@@ -357,9 +359,9 @@ func (o *ThirdPartyFileEntryDto) SetCanShare(v bool) {
 }
 
 // GetShareSettings returns the ShareSettings field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ThirdPartyFileEntryDto) GetShareSettings() AiFileEntryDtoAllOfShareSettings {
+func (o *ThirdPartyFileEntryDto) GetShareSettings() FileEntryDtoAllOfShareSettings {
 	if o == nil || IsNil(o.ShareSettings.Get()) {
-		var ret AiFileEntryDtoAllOfShareSettings
+		var ret FileEntryDtoAllOfShareSettings
 		return ret
 	}
 	return *o.ShareSettings.Get()
@@ -368,7 +370,7 @@ func (o *ThirdPartyFileEntryDto) GetShareSettings() AiFileEntryDtoAllOfShareSett
 // GetShareSettingsOk returns a tuple with the ShareSettings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ThirdPartyFileEntryDto) GetShareSettingsOk() (*AiFileEntryDtoAllOfShareSettings, bool) {
+func (o *ThirdPartyFileEntryDto) GetShareSettingsOk() (*FileEntryDtoAllOfShareSettings, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -384,8 +386,8 @@ func (o *ThirdPartyFileEntryDto) IsShareSettingsSet() bool {
 	return false
 }
 
-// SetShareSettings gets a reference to the given NullableAiFileEntryDtoAllOfShareSettings and assigns it to the ShareSettings field.
-func (o *ThirdPartyFileEntryDto) SetShareSettings(v AiFileEntryDtoAllOfShareSettings) {
+// SetShareSettings gets a reference to the given NullableFileEntryDtoAllOfShareSettings and assigns it to the ShareSettings field.
+func (o *ThirdPartyFileEntryDto) SetShareSettings(v FileEntryDtoAllOfShareSettings) {
 	o.ShareSettings.Set(&v)
 }
 // SetShareSettingsNil sets the value for ShareSettings to be an explicit nil
@@ -399,9 +401,9 @@ func (o *ThirdPartyFileEntryDto) UnsetShareSettings() {
 }
 
 // GetSecurity returns the Security field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ThirdPartyFileEntryDto) GetSecurity() AiFileEntryDtoAllOfSecurity {
+func (o *ThirdPartyFileEntryDto) GetSecurity() FileEntryDtoAllOfSecurity {
 	if o == nil || IsNil(o.Security.Get()) {
-		var ret AiFileEntryDtoAllOfSecurity
+		var ret FileEntryDtoAllOfSecurity
 		return ret
 	}
 	return *o.Security.Get()
@@ -410,7 +412,7 @@ func (o *ThirdPartyFileEntryDto) GetSecurity() AiFileEntryDtoAllOfSecurity {
 // GetSecurityOk returns a tuple with the Security field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ThirdPartyFileEntryDto) GetSecurityOk() (*AiFileEntryDtoAllOfSecurity, bool) {
+func (o *ThirdPartyFileEntryDto) GetSecurityOk() (*FileEntryDtoAllOfSecurity, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -426,8 +428,8 @@ func (o *ThirdPartyFileEntryDto) IsSecuritySet() bool {
 	return false
 }
 
-// SetSecurity gets a reference to the given NullableAiFileEntryDtoAllOfSecurity and assigns it to the Security field.
-func (o *ThirdPartyFileEntryDto) SetSecurity(v AiFileEntryDtoAllOfSecurity) {
+// SetSecurity gets a reference to the given NullableFileEntryDtoAllOfSecurity and assigns it to the Security field.
+func (o *ThirdPartyFileEntryDto) SetSecurity(v FileEntryDtoAllOfSecurity) {
 	o.Security.Set(&v)
 }
 // SetSecurityNil sets the value for Security to be an explicit nil
@@ -441,9 +443,9 @@ func (o *ThirdPartyFileEntryDto) UnsetSecurity() {
 }
 
 // GetAvailableShareRights returns the AvailableShareRights field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ThirdPartyFileEntryDto) GetAvailableShareRights() AiFileEntryDtoAllOfAvailableShareRights {
+func (o *ThirdPartyFileEntryDto) GetAvailableShareRights() FileEntryDtoAllOfAvailableShareRights {
 	if o == nil || IsNil(o.AvailableShareRights.Get()) {
-		var ret AiFileEntryDtoAllOfAvailableShareRights
+		var ret FileEntryDtoAllOfAvailableShareRights
 		return ret
 	}
 	return *o.AvailableShareRights.Get()
@@ -452,7 +454,7 @@ func (o *ThirdPartyFileEntryDto) GetAvailableShareRights() AiFileEntryDtoAllOfAv
 // GetAvailableShareRightsOk returns a tuple with the AvailableShareRights field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ThirdPartyFileEntryDto) GetAvailableShareRightsOk() (*AiFileEntryDtoAllOfAvailableShareRights, bool) {
+func (o *ThirdPartyFileEntryDto) GetAvailableShareRightsOk() (*FileEntryDtoAllOfAvailableShareRights, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -468,8 +470,8 @@ func (o *ThirdPartyFileEntryDto) IsAvailableShareRightsSet() bool {
 	return false
 }
 
-// SetAvailableShareRights gets a reference to the given NullableAiFileEntryDtoAllOfAvailableShareRights and assigns it to the AvailableShareRights field.
-func (o *ThirdPartyFileEntryDto) SetAvailableShareRights(v AiFileEntryDtoAllOfAvailableShareRights) {
+// SetAvailableShareRights gets a reference to the given NullableFileEntryDtoAllOfAvailableShareRights and assigns it to the AvailableShareRights field.
+func (o *ThirdPartyFileEntryDto) SetAvailableShareRights(v FileEntryDtoAllOfAvailableShareRights) {
 	o.AvailableShareRights.Set(&v)
 }
 // SetAvailableShareRightsNil sets the value for AvailableShareRights to be an explicit nil
@@ -673,6 +675,48 @@ func (o *ThirdPartyFileEntryDto) SetAssignedMetadataTemplates(v []int32) {
 	o.AssignedMetadataTemplates = v
 }
 
+// GetHasMetadataFields returns the HasMetadataFields field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ThirdPartyFileEntryDto) GetHasMetadataFields() bool {
+	if o == nil || IsNil(o.HasMetadataFields.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.HasMetadataFields.Get()
+}
+
+// GetHasMetadataFieldsOk returns a tuple with the HasMetadataFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ThirdPartyFileEntryDto) GetHasMetadataFieldsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HasMetadataFields.Get(), o.HasMetadataFields.IsSet()
+}
+
+// HasHasMetadataFields returns a boolean if a field has been set.
+func (o *ThirdPartyFileEntryDto) IsHasMetadataFieldsSet() bool {
+	if o != nil && o.HasMetadataFields.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetHasMetadataFields gets a reference to the given NullableBool and assigns it to the HasMetadataFields field.
+func (o *ThirdPartyFileEntryDto) SetHasMetadataFields(v bool) {
+	o.HasMetadataFields.Set(&v)
+}
+// SetHasMetadataFieldsNil sets the value for HasMetadataFields to be an explicit nil
+func (o *ThirdPartyFileEntryDto) SetHasMetadataFieldsNil() {
+	o.HasMetadataFields.Set(nil)
+}
+
+// UnsetHasMetadataFields ensures that no value is present for HasMetadataFields, not even an explicit nil
+func (o *ThirdPartyFileEntryDto) UnsetHasMetadataFields() {
+	o.HasMetadataFields.Unset()
+}
+
 // GetMetadataMatches returns the MetadataMatches field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ThirdPartyFileEntryDto) GetMetadataMatches() []MetadataMatchDto {
 	if o == nil {
@@ -768,6 +812,9 @@ func (o ThirdPartyFileEntryDto) ToMap() (map[string]interface{}, error) {
 	}
 	if o.AssignedMetadataTemplates != nil {
 		toSerialize["assignedMetadataTemplates"] = o.AssignedMetadataTemplates
+	}
+	if o.HasMetadataFields.IsSet() {
+		toSerialize["hasMetadataFields"] = o.HasMetadataFields.Get()
 	}
 	if o.MetadataMatches != nil {
 		toSerialize["metadataMatches"] = o.MetadataMatches

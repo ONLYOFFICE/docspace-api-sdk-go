@@ -45,6 +45,12 @@
 
 * `AiRooms` (value: `26`)
 
+* `InstructionsRooms` (value: `27`)
+
+* `KnowledgeRooms` (value: `28`)
+
+* `AiProjectRooms` (value: `29`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

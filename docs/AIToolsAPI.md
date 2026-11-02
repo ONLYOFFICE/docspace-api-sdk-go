@@ -111,7 +111,7 @@ import (
 )
 
 func main() {
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -136,7 +136,7 @@ Other parameters are passed through a pointer to a apiAiToolsGetAllowAlwaysReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
 
 ### Return type
 
@@ -180,7 +180,7 @@ import (
 
 func main() {
 	name := "acme-mcp" // string | The custom MCP server name.
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -206,7 +206,7 @@ Other parameters are passed through a pointer to a apiAiToolsGetCustomServerRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **string** | The custom MCP server name. | 
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
 
 ### Return type
 
@@ -250,7 +250,7 @@ import (
 
 func main() {
 	scope := "scope_example" // string | 
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -276,7 +276,7 @@ Other parameters are passed through a pointer to a apiAiToolsGetDisabledRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **string** |  | 
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
 
 ### Return type
 
@@ -321,7 +321,7 @@ import (
 func main() {
 	serverType := "docspace" // string | The MCP server type the tool belongs to.
 	toolName := "docspace_get_folder" // string | The tool name.
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **serverType** | **string** | The MCP server type the tool belongs to. | 
  **toolName** | **string** | The tool name. | 
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
 
 ### Return type
 
@@ -393,7 +393,7 @@ import (
 func main() {
 	serverType := "docspace" // string | The MCP server type the tool belongs to.
 	toolName := "docspace_get_folder" // string | The tool name.
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -420,7 +420,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **serverType** | **string** | The MCP server type the tool belongs to. | 
  **toolName** | **string** | The tool name. | 
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
 
 ### Return type
 
@@ -463,7 +463,7 @@ import (
 )
 
 func main() {
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -488,7 +488,7 @@ Other parameters are passed through a pointer to a apiAiToolsListCustomServersRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
 
 ### Return type
 
@@ -531,7 +531,7 @@ import (
 )
 
 func main() {
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -556,7 +556,7 @@ Other parameters are passed through a pointer to a apiAiToolsListSystemToolsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
 
 ### Return type
 

@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// FolderType [0 - Default, 1 - Coomon, 2 - Bunch, 3 - Trash, 5 - User, 6 - Share, 8 - Projects, 10 - Favourites, 11 - Recent, 12 - Templates, 13 - Privacy, 14 - Virtual rooms, 15 - Filling forms room, 16 - Editing room, 19 - Custom room, 20 - Archive, 21 - Thirdparty backup, 22 - Public room, 25 - Ready form folder, 26 - In process form folder, 27 - Form filling folder done, 28 - Form filling folder in progress, 29 - Virtual Data Room, 30 - Room templates folder, 31 - AI Room, 32 - Knowledge, 33 - Chat outputs, 34 - AI Agents, 35 - Default Templates, 36 - Forms, 37 - Ai]
+// FolderType [0 - Default, 1 - Coomon, 2 - Bunch, 3 - Trash, 5 - User, 6 - Share, 8 - Projects, 10 - Favourites, 11 - Recent, 12 - Templates, 13 - Privacy, 14 - Virtual rooms, 15 - Filling forms room, 16 - Editing room, 19 - Custom room, 20 - Archive, 21 - Thirdparty backup, 22 - Public room, 25 - Ready form folder, 26 - In process form folder, 27 - Form filling folder done, 28 - Form filling folder in progress, 29 - Virtual Data Room, 30 - Room templates folder, 31 - AI Room, 32 - Knowledge, 33 - Chat outputs, 34 - AI Agents, 35 - Default Templates, 36 - Forms, 37 - Ai, 38 - Instructions room, 39 - Knowledge room, 40 - AI project room, 41 - AI rooms]
 type FolderType int32
 
 // List of FolderType
@@ -55,6 +55,10 @@ const (
 	FOLDERTYPE_DefaultTemplates FolderType = 35
 	FOLDERTYPE_Forms FolderType = 36
 	FOLDERTYPE_Ai FolderType = 37
+	FOLDERTYPE_InstructionsRoom FolderType = 38
+	FOLDERTYPE_KnowledgeRoom FolderType = 39
+	FOLDERTYPE_AiProjectRoom FolderType = 40
+	FOLDERTYPE_AiHub FolderType = 41
 )
 
 // All allowed values of FolderType enum
@@ -90,6 +94,10 @@ var AllowedFolderTypeEnumValues = []FolderType{
 	35,
 	36,
 	37,
+	38,
+	39,
+	40,
+	41,
 }
 
 func (v *FolderType) UnmarshalJSON(src []byte) error {

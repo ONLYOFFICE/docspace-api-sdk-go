@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// FilterType [0 - None, 1 - Files  only, 2 - Folders only, 3 - Documents only, 4 - Presentations only, 5 - Spreadsheets only, 7 - Images only, 8 - By user, 9 - By department, 10 - Archive only, 11 - By extension, 12 - Media only, 13 - Filling forms rooms, 14 - Editing rooms, 17 - Custom rooms, 20 - Public rooms, 22 - Pdf, 23 - Pdf form, 24 - Virtual data rooms, 25 - Diagrams only, 26 - Ai rooms]
+// FilterType [0 - None, 1 - Files  only, 2 - Folders only, 3 - Documents only, 4 - Presentations only, 5 - Spreadsheets only, 7 - Images only, 8 - By user, 9 - By department, 10 - Archive only, 11 - By extension, 12 - Media only, 13 - Filling forms rooms, 14 - Editing rooms, 17 - Custom rooms, 20 - Public rooms, 22 - Pdf, 23 - Pdf form, 24 - Virtual data rooms, 25 - Diagrams only, 26 - Ai rooms, 27 - Instructions rooms, 28 - Knowledge rooms, 29 - AI project rooms]
 type FilterType int32
 
 // List of FilterType
@@ -45,6 +45,9 @@ const (
 	FILTERTYPE_VirtualDataRooms FilterType = 24
 	FILTERTYPE_DiagramsOnly FilterType = 25
 	FILTERTYPE_AiRooms FilterType = 26
+	FILTERTYPE_InstructionsRooms FilterType = 27
+	FILTERTYPE_KnowledgeRooms FilterType = 28
+	FILTERTYPE_AiProjectRooms FilterType = 29
 )
 
 // All allowed values of FilterType enum
@@ -70,6 +73,9 @@ var AllowedFilterTypeEnumValues = []FilterType{
 	24,
 	25,
 	26,
+	27,
+	28,
+	29,
 }
 
 func (v *FilterType) UnmarshalJSON(src []byte) error {

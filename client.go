@@ -46,7 +46,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the ONLYOFFICE DocSpace API API v4.0.0
+// APIClient manages communication with the ONLYOFFICE DocSpace API API v4.1.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -55,8 +55,6 @@ type APIClient struct {
 	// API Services
 
 	AIAIAPI *AIAIAPIService
-
-	AIAgentsAPI *AIAgentsAPIService
 
 	AIAssignmentsAPI *AIAssignmentsAPIService
 
@@ -170,6 +168,8 @@ type APIClient struct {
 
 	RoomsAPI *RoomsAPIService
 
+	RoomsAIAPI *RoomsAIAPIService
+
 	RoomsGroupsAPI *RoomsGroupsAPIService
 
 	RoomsPrivacyRoomAPI *RoomsPrivacyRoomAPIService
@@ -260,7 +260,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AIAIAPI = (*AIAIAPIService)(&c.common)
-	c.AIAgentsAPI = (*AIAgentsAPIService)(&c.common)
 	c.AIAssignmentsAPI = (*AIAssignmentsAPIService)(&c.common)
 	c.AIAttachmentsAPI = (*AIAttachmentsAPIService)(&c.common)
 	c.AIContextAPI = (*AIContextAPIService)(&c.common)
@@ -317,6 +316,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.PortalSettingsAPI = (*PortalSettingsAPIService)(&c.common)
 	c.PortalUsersAPI = (*PortalUsersAPIService)(&c.common)
 	c.RoomsAPI = (*RoomsAPIService)(&c.common)
+	c.RoomsAIAPI = (*RoomsAIAPIService)(&c.common)
 	c.RoomsGroupsAPI = (*RoomsGroupsAPIService)(&c.common)
 	c.RoomsPrivacyRoomAPI = (*RoomsPrivacyRoomAPIService)(&c.common)
 	c.SecurityAccessToDevToolsAPI = (*SecurityAccessToDevToolsAPIService)(&c.common)

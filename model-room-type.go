@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// RoomType [1 - Form filling room, 2 - Collaboration room, 5 - Custom room, 6 - Public room, 8 - Virtual data room, 9 - AI Room]
+// RoomType [1 - Form filling room, 2 - Collaboration room, 5 - Custom room, 6 - Public room, 8 - Virtual data room, 9 - AI Room, 10 - Instructions room, 11 - Knowledge room, 12 - AI project room]
 type RoomType int32
 
 // List of RoomType
@@ -30,6 +30,9 @@ const (
 	ROOMTYPE_PublicRoom RoomType = 6
 	ROOMTYPE_VirtualDataRoom RoomType = 8
 	ROOMTYPE_AiRoom RoomType = 9
+	ROOMTYPE_InstructionsRoom RoomType = 10
+	ROOMTYPE_KnowledgeRoom RoomType = 11
+	ROOMTYPE_AiProjectRoom RoomType = 12
 )
 
 // All allowed values of RoomType enum
@@ -40,6 +43,9 @@ var AllowedRoomTypeEnumValues = []RoomType{
 	6,
 	8,
 	9,
+	10,
+	11,
+	12,
 }
 
 func (v *RoomType) UnmarshalJSON(src []byte) error {

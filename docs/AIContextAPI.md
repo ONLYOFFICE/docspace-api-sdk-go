@@ -5,6 +5,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AiContextGetContextFolders**](AIContextAPI.md#AiContextGetContextFolders) | **Get** /api/2.0/ai/context/get-context-folders | Get context folders
+[**AiContextGetKnowledgeFolders**](AIContextAPI.md#AiContextGetKnowledgeFolders) | **Get** /api/2.0/ai/context/get-knowledge-folders | Get knowledge folders
 [**AiContextGetRoomSkill**](AIContextAPI.md#AiContextGetRoomSkill) | **Get** /api/2.0/ai/context/get-room-skill | Get room skill
 [**AiContextGetRoomSkills**](AIContextAPI.md#AiContextGetRoomSkills) | **Get** /api/2.0/ai/context/get-room-skills | Get room skills
 
@@ -51,6 +52,67 @@ This endpoint does not need any parameter.
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAiContextGetContextFoldersRequest struct via the builder pattern
+
+
+### Return type
+
+[**AiSuccessResponse**](AiSuccessResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AiContextGetKnowledgeFolders
+
+> AiSuccessResponse AiContextGetKnowledgeFolders(ctx).Execute()
+
+Get knowledge folders
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-knowledge-folders/).
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AIContextAPI.AiContextGetKnowledgeFolders(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AIContextAPI.AiContextGetKnowledgeFolders``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AiContextGetKnowledgeFolders`: AiSuccessResponse
+	fmt.Fprintf(os.Stdout, "Response from `AIContextAPI.AiContextGetKnowledgeFolders`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAiContextGetKnowledgeFoldersRequest struct via the builder pattern
 
 
 ### Return type

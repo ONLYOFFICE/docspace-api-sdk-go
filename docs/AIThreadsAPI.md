@@ -520,7 +520,7 @@ import (
 )
 
 func main() {
-	entityId := "1234" // string | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
+	entityId := "1234" // string | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. (optional)
 	count := int32(20) // int32 | The maximum number of items to return in one page. (optional)
 	cursor := "{\"id\":\"11111111-1111-1111-1111-111111111111\",\"lastEditDate\":1767225600000}" // string | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. (optional)
 	query := "contract" // string | The full-text query the thread list is filtered by. (optional)
@@ -548,7 +548,7 @@ Other parameters are passed through a pointer to a apiAiThreadsListRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entityId** | **string** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | 
+ **entityId** | **string** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | 
  **count** | **int32** | The maximum number of items to return in one page. | 
  **cursor** | **string** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | 
  **query** | **string** | The full-text query the thread list is filtered by. | 

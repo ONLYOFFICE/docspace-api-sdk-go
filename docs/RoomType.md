@@ -15,6 +15,12 @@
 
 * `AiRoom` (value: `9`)
 
+* `InstructionsRoom` (value: `10`)
+
+* `KnowledgeRoom` (value: `11`)
+
+* `AiProjectRoom` (value: `12`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

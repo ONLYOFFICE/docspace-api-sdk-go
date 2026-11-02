@@ -36,14 +36,15 @@ Name | Type | Description | Notes
 **OriginTitle** | Pointer to **NullableString** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] 
 **OriginRoomTitle** | Pointer to **NullableString** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] 
 **CanShare** | Pointer to **bool** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] 
-**ShareSettings** | Pointer to [**NullableAiFileEntryDtoAllOfShareSettings**](AiFileEntryDtoAllOfShareSettings.md) |  | [optional] 
-**Security** | Pointer to [**NullableAiFileEntryDtoAllOfSecurity**](AiFileEntryDtoAllOfSecurity.md) |  | [optional] 
-**AvailableShareRights** | Pointer to [**NullableAiFileEntryDtoAllOfAvailableShareRights**](AiFileEntryDtoAllOfAvailableShareRights.md) |  | [optional] 
+**ShareSettings** | Pointer to [**NullableFileEntryDtoAllOfShareSettings**](FileEntryDtoAllOfShareSettings.md) |  | [optional] 
+**Security** | Pointer to [**NullableFileEntryDtoAllOfSecurity**](FileEntryDtoAllOfSecurity.md) |  | [optional] 
+**AvailableShareRights** | Pointer to [**NullableFileEntryDtoAllOfAvailableShareRights**](FileEntryDtoAllOfAvailableShareRights.md) |  | [optional] 
 **RequestToken** | Pointer to **NullableString** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] 
 **External** | Pointer to **NullableBool** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] 
 **ExpirationDate** | Pointer to [**ApiDateTime**](ApiDateTime.md) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] 
 **IsLinkExpired** | Pointer to **NullableBool** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] 
 **AssignedMetadataTemplates** | Pointer to **[]int32** | The IDs of the metadata templates assigned to the file entry. | [optional] 
+**HasMetadataFields** | Pointer to **NullableBool** | Whether the entry has a metadata field a user can see and fill, by hand or with the AI filling: a field of a  visible assigned template, or a custom field. False when the entry has no metadata, when its assigned templates  are all hidden, or when they have no fields. It says nothing about the values: it stays true once every field is  filled, and nothing about the caller's rights: writing the values still needs the right to edit the entry  (`security.Edit`). It cannot be derived from `assignedMetadataTemplates`, which lists hidden templates too and  never lists the custom fields. Present, with a value, in the folder listing and in the file and folder info  responses; absent in the other responses that carry an entry (the answer to a creation, an upload or a rename),  which do not compute it, and for an entry of a third-party storage, which has no metadata. The same flag is  answered by `GET api/2.0/files/metadata/file/{fileId}` and `GET api/2.0/files/metadata/folder/{folderId}`. | [optional] 
 **MetadataMatches** | Pointer to [**[]MetadataMatchDto**](MetadataMatchDto.md) | Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here. | [optional] 
 **FolderId** | Pointer to **NullableString** | The folder the file is stored in. When the file was reached through a share and the caller cannot open its  real parent, the identifier of the Shared with me section is reported instead, so this is where the file is  visible rather than where it physically sits. | [optional] 
 **Version** | Pointer to **int32** | The revision this entry describes. It starts at 1 and moves to the next number each time new content is stored  over the file, except for an editing session opened against the file itself, which replaces the content and  keeps the number. `GET api/2.0/files/file/{fileId}/history` lists them all. | [optional] 
@@ -982,20 +983,20 @@ HasCanShare returns a boolean if a field has been set.
 
 ### GetShareSettings
 
-`func (o *ThirdPartyFileDto) GetShareSettings() AiFileEntryDtoAllOfShareSettings`
+`func (o *ThirdPartyFileDto) GetShareSettings() FileEntryDtoAllOfShareSettings`
 
 GetShareSettings returns the ShareSettings field if non-nil, zero value otherwise.
 
 ### GetShareSettingsOk
 
-`func (o *ThirdPartyFileDto) GetShareSettingsOk() (*AiFileEntryDtoAllOfShareSettings, bool)`
+`func (o *ThirdPartyFileDto) GetShareSettingsOk() (*FileEntryDtoAllOfShareSettings, bool)`
 
 GetShareSettingsOk returns a tuple with the ShareSettings field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShareSettings
 
-`func (o *ThirdPartyFileDto) SetShareSettings(v AiFileEntryDtoAllOfShareSettings)`
+`func (o *ThirdPartyFileDto) SetShareSettings(v FileEntryDtoAllOfShareSettings)`
 
 SetShareSettings sets ShareSettings field to given value.
 
@@ -1017,20 +1018,20 @@ HasShareSettings returns a boolean if a field has been set.
 UnsetShareSettings ensures that no value is present for ShareSettings, not even an explicit nil
 ### GetSecurity
 
-`func (o *ThirdPartyFileDto) GetSecurity() AiFileEntryDtoAllOfSecurity`
+`func (o *ThirdPartyFileDto) GetSecurity() FileEntryDtoAllOfSecurity`
 
 GetSecurity returns the Security field if non-nil, zero value otherwise.
 
 ### GetSecurityOk
 
-`func (o *ThirdPartyFileDto) GetSecurityOk() (*AiFileEntryDtoAllOfSecurity, bool)`
+`func (o *ThirdPartyFileDto) GetSecurityOk() (*FileEntryDtoAllOfSecurity, bool)`
 
 GetSecurityOk returns a tuple with the Security field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSecurity
 
-`func (o *ThirdPartyFileDto) SetSecurity(v AiFileEntryDtoAllOfSecurity)`
+`func (o *ThirdPartyFileDto) SetSecurity(v FileEntryDtoAllOfSecurity)`
 
 SetSecurity sets Security field to given value.
 
@@ -1052,20 +1053,20 @@ HasSecurity returns a boolean if a field has been set.
 UnsetSecurity ensures that no value is present for Security, not even an explicit nil
 ### GetAvailableShareRights
 
-`func (o *ThirdPartyFileDto) GetAvailableShareRights() AiFileEntryDtoAllOfAvailableShareRights`
+`func (o *ThirdPartyFileDto) GetAvailableShareRights() FileEntryDtoAllOfAvailableShareRights`
 
 GetAvailableShareRights returns the AvailableShareRights field if non-nil, zero value otherwise.
 
 ### GetAvailableShareRightsOk
 
-`func (o *ThirdPartyFileDto) GetAvailableShareRightsOk() (*AiFileEntryDtoAllOfAvailableShareRights, bool)`
+`func (o *ThirdPartyFileDto) GetAvailableShareRightsOk() (*FileEntryDtoAllOfAvailableShareRights, bool)`
 
 GetAvailableShareRightsOk returns a tuple with the AvailableShareRights field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailableShareRights
 
-`func (o *ThirdPartyFileDto) SetAvailableShareRights(v AiFileEntryDtoAllOfAvailableShareRights)`
+`func (o *ThirdPartyFileDto) SetAvailableShareRights(v FileEntryDtoAllOfAvailableShareRights)`
 
 SetAvailableShareRights sets AvailableShareRights field to given value.
 
@@ -1250,6 +1251,41 @@ HasAssignedMetadataTemplates returns a boolean if a field has been set.
 `func (o *ThirdPartyFileDto) UnsetAssignedMetadataTemplates()`
 
 UnsetAssignedMetadataTemplates ensures that no value is present for AssignedMetadataTemplates, not even an explicit nil
+### GetHasMetadataFields
+
+`func (o *ThirdPartyFileDto) GetHasMetadataFields() bool`
+
+GetHasMetadataFields returns the HasMetadataFields field if non-nil, zero value otherwise.
+
+### GetHasMetadataFieldsOk
+
+`func (o *ThirdPartyFileDto) GetHasMetadataFieldsOk() (*bool, bool)`
+
+GetHasMetadataFieldsOk returns a tuple with the HasMetadataFields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasMetadataFields
+
+`func (o *ThirdPartyFileDto) SetHasMetadataFields(v bool)`
+
+SetHasMetadataFields sets HasMetadataFields field to given value.
+
+### HasHasMetadataFields
+
+`func (o *ThirdPartyFileDto) HasHasMetadataFields() bool`
+
+HasHasMetadataFields returns a boolean if a field has been set.
+
+### SetHasMetadataFieldsNil
+
+`func (o *ThirdPartyFileDto) SetHasMetadataFieldsNil(b bool)`
+
+ SetHasMetadataFieldsNil sets the value for HasMetadataFields to be an explicit nil
+
+### UnsetHasMetadataFields
+`func (o *ThirdPartyFileDto) UnsetHasMetadataFields()`
+
+UnsetHasMetadataFields ensures that no value is present for HasMetadataFields, not even an explicit nil
 ### GetMetadataMatches
 
 `func (o *ThirdPartyFileDto) GetMetadataMatches() []MetadataMatchDto`

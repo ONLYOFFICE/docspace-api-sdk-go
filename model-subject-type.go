@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// SubjectType [0 - User, 1 - External link, 2 - Group, 3 - Invitation link, 4 - Primary external link]
+// SubjectType [0 - User, 1 - External link, 2 - Group, 3 - Invitation link, 4 - Primary external link, 5 - Read access to a room linked to an AI project the user is a member of]
 type SubjectType int32
 
 // List of SubjectType
@@ -29,6 +29,7 @@ const (
 	SUBJECTTYPE_Group SubjectType = 2
 	SUBJECTTYPE_InvitationLink SubjectType = 3
 	SUBJECTTYPE_PrimaryExternalLink SubjectType = 4
+	SUBJECTTYPE_AiProject SubjectType = 5
 )
 
 // All allowed values of SubjectType enum
@@ -38,6 +39,7 @@ var AllowedSubjectTypeEnumValues = []SubjectType{
 	2,
 	3,
 	4,
+	5,
 }
 
 func (v *SubjectType) UnmarshalJSON(src []byte) error {

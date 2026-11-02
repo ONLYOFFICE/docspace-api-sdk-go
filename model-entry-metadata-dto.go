@@ -27,6 +27,8 @@ type EntryMetadataDto struct {
 	Templates []EntryTemplateDto `json:"templates,omitempty"`
 	// The custom fields with their values.
 	CustomFields []CustomFieldValueDto `json:"customFields,omitempty"`
+	// Whether the entry has a metadata field a user can see and fill, by hand or with the AI filling: a field of a  template in `templates` whose `visible` is true, or a custom field in `customFields`. False when both lists are  empty, when every template is hidden, or when none of the visible ones has a field. It says nothing about the  values: it stays true once every field is filled. The same flag is carried by the entry in a folder listing and  in the file and folder info responses as `hasMetadataFields`, so a client that has the listing needs no call here  to decide whether to offer the filling.
+	HasMetadataFields *bool `json:"hasMetadataFields,omitempty"`
 }
 
 // NewEntryMetadataDto instantiates a new EntryMetadataDto object
@@ -112,6 +114,38 @@ func (o *EntryMetadataDto) SetCustomFields(v []CustomFieldValueDto) {
 	o.CustomFields = v
 }
 
+// GetHasMetadataFields returns the HasMetadataFields field value if set, zero value otherwise.
+func (o *EntryMetadataDto) GetHasMetadataFields() bool {
+	if o == nil || IsNil(o.HasMetadataFields) {
+		var ret bool
+		return ret
+	}
+	return *o.HasMetadataFields
+}
+
+// GetHasMetadataFieldsOk returns a tuple with the HasMetadataFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EntryMetadataDto) GetHasMetadataFieldsOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasMetadataFields) {
+		return nil, false
+	}
+	return o.HasMetadataFields, true
+}
+
+// HasHasMetadataFields returns a boolean if a field has been set.
+func (o *EntryMetadataDto) IsHasMetadataFieldsSet() bool {
+	if o != nil && !IsNil(o.HasMetadataFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasMetadataFields gets a reference to the given bool and assigns it to the HasMetadataFields field.
+func (o *EntryMetadataDto) SetHasMetadataFields(v bool) {
+	o.HasMetadataFields = &v
+}
+
 func (o EntryMetadataDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -127,6 +161,9 @@ func (o EntryMetadataDto) ToMap() (map[string]interface{}, error) {
 	}
 	if o.CustomFields != nil {
 		toSerialize["customFields"] = o.CustomFields
+	}
+	if !IsNil(o.HasMetadataFields) {
+		toSerialize["hasMetadataFields"] = o.HasMetadataFields
 	}
 	return toSerialize, nil
 }

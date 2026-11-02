@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// SearchArea [Active - Active, Archive - Archive, Any - Any, RecentByLinks - Recent by links, Templates - Template, Knowledge - Knowledge, ResultStorage - Result storage, AiAgents - AiAgents, Forms - Forms, FormTemplates - Form templates]
+// SearchArea [Active - Active, Archive - Archive, Any - Any, RecentByLinks - Recent by links, Templates - Template, Knowledge - Knowledge, ResultStorage - Result storage, AiAgents - AiAgents, Forms - Forms, FormTemplates - Form templates, AiHub - AiHub]
 type SearchArea string
 
 // List of SearchArea
@@ -34,6 +34,7 @@ const (
 	SEARCHAREA_AI_AGENTS SearchArea = "AiAgents"
 	SEARCHAREA_FORMS SearchArea = "Forms"
 	SEARCHAREA_FORM_TEMPLATES SearchArea = "FormTemplates"
+	SEARCHAREA_AI_HUB SearchArea = "AiHub"
 )
 
 // All allowed values of SearchArea enum
@@ -48,6 +49,7 @@ var AllowedSearchAreaEnumValues = []SearchArea{
 	"AiAgents",
 	"Forms",
 	"FormTemplates",
+	"AiHub",
 }
 
 func (v *SearchArea) UnmarshalJSON(src []byte) error {
