@@ -23,7 +23,7 @@ import (
 // checks if the AiCreatePromptInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiCreatePromptInput{}
 
-// AiCreatePromptInput Input for creating a prompt — the engine generates `id`/`createdAt`/`updatedAt`.
+// AiCreatePromptInput Input for creating a prompt; the service fills in `id`, `createdAt` and `updatedAt`.
 type AiCreatePromptInput struct {
 	// The prompt name.
 	Name string `json:"name"`

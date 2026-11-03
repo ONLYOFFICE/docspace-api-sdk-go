@@ -534,7 +534,7 @@ func (r ApiAiAssignmentsGetAllAssignmentsRequest) Expand(expand string) ApiAiAss
 	return r
 }
 
-func (r ApiAiAssignmentsGetAllAssignmentsRequest) Execute() (map[string]string, *http.Response, error) {
+func (r ApiAiAssignmentsGetAllAssignmentsRequest) Execute() (*AiAssignmentsGetAllAssignments200Response, *http.Response, error) {
 	return r.ApiService.AiAssignmentsGetAllAssignmentsExecute(r)
 }
 
@@ -554,13 +554,13 @@ func (a *AIAssignmentsAPIService) AiAssignmentsGetAllAssignments(ctx context.Con
 }
 
 // Execute executes the request
-//  @return map[string]string
-func (a *AIAssignmentsAPIService) AiAssignmentsGetAllAssignmentsExecute(r ApiAiAssignmentsGetAllAssignmentsRequest) (map[string]string, *http.Response, error) {
+//  @return AiAssignmentsGetAllAssignments200Response
+func (a *AIAssignmentsAPIService) AiAssignmentsGetAllAssignmentsExecute(r ApiAiAssignmentsGetAllAssignmentsRequest) (*AiAssignmentsGetAllAssignments200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  map[string]string
+		localVarReturnValue  *AiAssignmentsGetAllAssignments200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIAssignmentsAPIService.AiAssignmentsGetAllAssignments")

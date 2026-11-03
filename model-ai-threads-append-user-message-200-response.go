@@ -25,8 +25,8 @@ var _ MappedNullable = &AiThreadsAppendUserMessage200Response{}
 
 // AiThreadsAppendUserMessage200Response struct for AiThreadsAppendUserMessage200Response
 type AiThreadsAppendUserMessage200Response struct {
-	// Identifier of the message that was appended to the thread.
-	MessageId string `json:"messageId"`
+	// The stored message itself - with its storage-assigned `id` and `createdAt` - despite the field name, which is kept for the clients that already read it. The message ID is `messageId.id`.
+	MessageId AiThreadMessageLike `json:"messageId"`
 }
 
 type _AiThreadsAppendUserMessage200Response AiThreadsAppendUserMessage200Response
@@ -35,7 +35,7 @@ type _AiThreadsAppendUserMessage200Response AiThreadsAppendUserMessage200Respons
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiThreadsAppendUserMessage200Response(messageId string) *AiThreadsAppendUserMessage200Response {
+func NewAiThreadsAppendUserMessage200Response(messageId AiThreadMessageLike) *AiThreadsAppendUserMessage200Response {
 	this := AiThreadsAppendUserMessage200Response{}
 	this.MessageId = messageId
 	return &this
@@ -50,9 +50,9 @@ func NewAiThreadsAppendUserMessage200ResponseWithDefaults() *AiThreadsAppendUser
 }
 
 // GetMessageId returns the MessageId field value
-func (o *AiThreadsAppendUserMessage200Response) GetMessageId() string {
+func (o *AiThreadsAppendUserMessage200Response) GetMessageId() AiThreadMessageLike {
 	if o == nil {
-		var ret string
+		var ret AiThreadMessageLike
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *AiThreadsAppendUserMessage200Response) GetMessageId() string {
 
 // GetMessageIdOk returns a tuple with the MessageId field value
 // and a boolean to check if the value has been set.
-func (o *AiThreadsAppendUserMessage200Response) GetMessageIdOk() (*string, bool) {
+func (o *AiThreadsAppendUserMessage200Response) GetMessageIdOk() (*AiThreadMessageLike, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *AiThreadsAppendUserMessage200Response) GetMessageIdOk() (*string, bool)
 }
 
 // SetMessageId sets field value
-func (o *AiThreadsAppendUserMessage200Response) SetMessageId(v string) {
+func (o *AiThreadsAppendUserMessage200Response) SetMessageId(v AiThreadMessageLike) {
 	o.MessageId = v
 }
 

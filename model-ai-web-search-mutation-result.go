@@ -23,7 +23,7 @@ import (
 // checks if the AiWebSearchMutationResult type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiWebSearchMutationResult{}
 
-// AiWebSearchMutationResult Outcome of `WebSearchEngine.configure` — either the persisted config or a field-scoped error suitable for the settings form.
+// AiWebSearchMutationResult The outcome of storing a web-search configuration: the stored configuration, or an error naming the field that was refused.
 type AiWebSearchMutationResult struct {
 	// True when the configuration was persisted.
 	Success bool `json:"success"`

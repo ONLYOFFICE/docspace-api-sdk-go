@@ -23,7 +23,7 @@ import (
 // checks if the AiImportError type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiImportError{}
 
-// AiImportError Per-entry error reported by `PromptsEngine.importBundle`.
+// AiImportError One refused entry of a prompt bundle import.
 type AiImportError struct {
 	// `folder` or `prompt`, plus the offending name or id.
 	Kind string `json:"kind"`

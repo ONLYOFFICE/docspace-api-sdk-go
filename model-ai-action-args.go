@@ -21,7 +21,7 @@ import (
 // checks if the AiActionArgs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiActionArgs{}
 
-// AiActionArgs struct for AiActionArgs
+// AiActionArgs Per-request options of an AI round: extra tools, the depth of reasoning, a system prompt override and the rooms and folder connected as context.
 type AiActionArgs struct {
 	// Extra tools offered to the model for this request.
 	Tools []AiMCPItem `json:"tools,omitempty"`
@@ -30,6 +30,19 @@ type AiActionArgs struct {
 	// Depth of extended thinking for the round; providers clamp it to what the model accepts.
 	ReasoningLevel *AiReasoningLevel `json:"reasoningLevel,omitempty"`
 	Prompt *AiActionArgsPrompt `json:"prompt,omitempty"`
+	// Usage notes of the MCP servers the caller holds the connection to, keyed by server type; folded into the system prompt as advisory text.
+	ToolInstructions map[string]string `json:"toolInstructions,omitempty"`
+	// Instructions rooms connected to the chat as context, each with the skills the round may use.
+	ContextRooms []AiContextRoomRef `json:"contextRooms,omitempty"`
+	// Knowledge rooms connected to the chat; the knowledge search tool of the round is limited to them. Each `id` has to be a DocSpace room id.
+	KnowledgeRooms []AiKnowledgeRoomRef `json:"knowledgeRooms,omitempty"`
+	// A single knowledge room, as an older client sends it. Read only when `knowledgeRooms` is absent; send `knowledgeRooms` instead.
+	// Deprecated
+	KnowledgeRoom *AiKnowledgeRoomRef `json:"knowledgeRoom,omitempty"`
+	// The folder connected to the chat as the round's context. It becomes the location the model is told the user works in, and the entry the round is attributed to.
+	FolderContext *AiFolderContextRef `json:"folderContext,omitempty"`
+	// The entry the round is attributed to. A hint, resolved against the caller's own access.
+	EntityId *string `json:"entityId,omitempty"`
 }
 
 // NewAiActionArgs instantiates a new AiActionArgs object
@@ -177,6 +190,201 @@ func (o *AiActionArgs) SetPrompt(v AiActionArgsPrompt) {
 	o.Prompt = &v
 }
 
+// GetToolInstructions returns the ToolInstructions field value if set, zero value otherwise.
+func (o *AiActionArgs) GetToolInstructions() map[string]string {
+	if o == nil || IsNil(o.ToolInstructions) {
+		var ret map[string]string
+		return ret
+	}
+	return o.ToolInstructions
+}
+
+// GetToolInstructionsOk returns a tuple with the ToolInstructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiActionArgs) GetToolInstructionsOk() (map[string]string, bool) {
+	if o == nil || IsNil(o.ToolInstructions) {
+		return map[string]string{}, false
+	}
+	return o.ToolInstructions, true
+}
+
+// HasToolInstructions returns a boolean if a field has been set.
+func (o *AiActionArgs) IsToolInstructionsSet() bool {
+	if o != nil && !IsNil(o.ToolInstructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetToolInstructions gets a reference to the given map[string]string and assigns it to the ToolInstructions field.
+func (o *AiActionArgs) SetToolInstructions(v map[string]string) {
+	o.ToolInstructions = v
+}
+
+// GetContextRooms returns the ContextRooms field value if set, zero value otherwise.
+func (o *AiActionArgs) GetContextRooms() []AiContextRoomRef {
+	if o == nil || IsNil(o.ContextRooms) {
+		var ret []AiContextRoomRef
+		return ret
+	}
+	return o.ContextRooms
+}
+
+// GetContextRoomsOk returns a tuple with the ContextRooms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiActionArgs) GetContextRoomsOk() ([]AiContextRoomRef, bool) {
+	if o == nil || IsNil(o.ContextRooms) {
+		return nil, false
+	}
+	return o.ContextRooms, true
+}
+
+// HasContextRooms returns a boolean if a field has been set.
+func (o *AiActionArgs) IsContextRoomsSet() bool {
+	if o != nil && !IsNil(o.ContextRooms) {
+		return true
+	}
+
+	return false
+}
+
+// SetContextRooms gets a reference to the given []AiContextRoomRef and assigns it to the ContextRooms field.
+func (o *AiActionArgs) SetContextRooms(v []AiContextRoomRef) {
+	o.ContextRooms = v
+}
+
+// GetKnowledgeRooms returns the KnowledgeRooms field value if set, zero value otherwise.
+func (o *AiActionArgs) GetKnowledgeRooms() []AiKnowledgeRoomRef {
+	if o == nil || IsNil(o.KnowledgeRooms) {
+		var ret []AiKnowledgeRoomRef
+		return ret
+	}
+	return o.KnowledgeRooms
+}
+
+// GetKnowledgeRoomsOk returns a tuple with the KnowledgeRooms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiActionArgs) GetKnowledgeRoomsOk() ([]AiKnowledgeRoomRef, bool) {
+	if o == nil || IsNil(o.KnowledgeRooms) {
+		return nil, false
+	}
+	return o.KnowledgeRooms, true
+}
+
+// HasKnowledgeRooms returns a boolean if a field has been set.
+func (o *AiActionArgs) IsKnowledgeRoomsSet() bool {
+	if o != nil && !IsNil(o.KnowledgeRooms) {
+		return true
+	}
+
+	return false
+}
+
+// SetKnowledgeRooms gets a reference to the given []AiKnowledgeRoomRef and assigns it to the KnowledgeRooms field.
+func (o *AiActionArgs) SetKnowledgeRooms(v []AiKnowledgeRoomRef) {
+	o.KnowledgeRooms = v
+}
+
+// GetKnowledgeRoom returns the KnowledgeRoom field value if set, zero value otherwise.
+// Deprecated
+func (o *AiActionArgs) GetKnowledgeRoom() AiKnowledgeRoomRef {
+	if o == nil || IsNil(o.KnowledgeRoom) {
+		var ret AiKnowledgeRoomRef
+		return ret
+	}
+	return *o.KnowledgeRoom
+}
+
+// GetKnowledgeRoomOk returns a tuple with the KnowledgeRoom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *AiActionArgs) GetKnowledgeRoomOk() (*AiKnowledgeRoomRef, bool) {
+	if o == nil || IsNil(o.KnowledgeRoom) {
+		return nil, false
+	}
+	return o.KnowledgeRoom, true
+}
+
+// HasKnowledgeRoom returns a boolean if a field has been set.
+func (o *AiActionArgs) IsKnowledgeRoomSet() bool {
+	if o != nil && !IsNil(o.KnowledgeRoom) {
+		return true
+	}
+
+	return false
+}
+
+// SetKnowledgeRoom gets a reference to the given AiKnowledgeRoomRef and assigns it to the KnowledgeRoom field.
+// Deprecated
+func (o *AiActionArgs) SetKnowledgeRoom(v AiKnowledgeRoomRef) {
+	o.KnowledgeRoom = &v
+}
+
+// GetFolderContext returns the FolderContext field value if set, zero value otherwise.
+func (o *AiActionArgs) GetFolderContext() AiFolderContextRef {
+	if o == nil || IsNil(o.FolderContext) {
+		var ret AiFolderContextRef
+		return ret
+	}
+	return *o.FolderContext
+}
+
+// GetFolderContextOk returns a tuple with the FolderContext field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiActionArgs) GetFolderContextOk() (*AiFolderContextRef, bool) {
+	if o == nil || IsNil(o.FolderContext) {
+		return nil, false
+	}
+	return o.FolderContext, true
+}
+
+// HasFolderContext returns a boolean if a field has been set.
+func (o *AiActionArgs) IsFolderContextSet() bool {
+	if o != nil && !IsNil(o.FolderContext) {
+		return true
+	}
+
+	return false
+}
+
+// SetFolderContext gets a reference to the given AiFolderContextRef and assigns it to the FolderContext field.
+func (o *AiActionArgs) SetFolderContext(v AiFolderContextRef) {
+	o.FolderContext = &v
+}
+
+// GetEntityId returns the EntityId field value if set, zero value otherwise.
+func (o *AiActionArgs) GetEntityId() string {
+	if o == nil || IsNil(o.EntityId) {
+		var ret string
+		return ret
+	}
+	return *o.EntityId
+}
+
+// GetEntityIdOk returns a tuple with the EntityId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiActionArgs) GetEntityIdOk() (*string, bool) {
+	if o == nil || IsNil(o.EntityId) {
+		return nil, false
+	}
+	return o.EntityId, true
+}
+
+// HasEntityId returns a boolean if a field has been set.
+func (o *AiActionArgs) IsEntityIdSet() bool {
+	if o != nil && !IsNil(o.EntityId) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntityId gets a reference to the given string and assigns it to the EntityId field.
+func (o *AiActionArgs) SetEntityId(v string) {
+	o.EntityId = &v
+}
+
 func (o AiActionArgs) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -198,6 +406,24 @@ func (o AiActionArgs) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Prompt) {
 		toSerialize["prompt"] = o.Prompt
+	}
+	if !IsNil(o.ToolInstructions) {
+		toSerialize["toolInstructions"] = o.ToolInstructions
+	}
+	if !IsNil(o.ContextRooms) {
+		toSerialize["contextRooms"] = o.ContextRooms
+	}
+	if !IsNil(o.KnowledgeRooms) {
+		toSerialize["knowledgeRooms"] = o.KnowledgeRooms
+	}
+	if !IsNil(o.KnowledgeRoom) {
+		toSerialize["knowledgeRoom"] = o.KnowledgeRoom
+	}
+	if !IsNil(o.FolderContext) {
+		toSerialize["folderContext"] = o.FolderContext
+	}
+	if !IsNil(o.EntityId) {
+		toSerialize["entityId"] = o.EntityId
 	}
 	return toSerialize, nil
 }

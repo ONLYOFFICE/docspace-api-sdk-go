@@ -514,7 +514,7 @@ import (
 )
 
 func main() {
-	aiPromptsImportBundleRequest := *openapiclient.NewAiPromptsImportBundleRequest(*openapiclient.NewAiPromptBundle(float32(1), []openapiclient.AiPromptFolder{*openapiclient.NewAiPromptFolder("44444444-4444-4444-4444-444444444444", "Contract review", float32(1767225600000), float32(1767225600000))}, []openapiclient.AiPrompt{*openapiclient.NewAiPrompt("33333333-3333-3333-3333-333333333333", "Contract summary", "Summarise the key obligations and dates in the attached contract.", float32(1767225600000), float32(1767225600000))})) // AiPromptsImportBundleRequest | 
+	aiPromptsImportBundleRequest := *openapiclient.NewAiPromptsImportBundleRequest(*openapiclient.NewAiPromptBundle(int32(1), []openapiclient.AiPromptFolder{*openapiclient.NewAiPromptFolder("44444444-4444-4444-4444-444444444444", "Contract review", float32(1767225600000), float32(1767225600000))}, []openapiclient.AiPrompt{*openapiclient.NewAiPrompt("33333333-3333-3333-3333-333333333333", "Contract summary", "Summarise the key obligations and dates in the attached contract.", float32(1767225600000), float32(1767225600000))})) // AiPromptsImportBundleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

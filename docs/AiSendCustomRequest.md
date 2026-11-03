@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **IsStream** | **bool** | Stream the reply (ndjson) when true, else return a single message. | 
 **SystemPrompt** | **string** | Caller-supplied system prompt for this one-turn call. | 
 **UserMessage** | [**AiThreadMessageLike**](AiThreadMessageLike.md) |  | 
-**ActionArgs** | Pointer to [**AiActionArgs**](AiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] 
+**ActionArgs** | Pointer to [**AiActionArgs**](AiActionArgs.md) | Per-request options of the round: extra tools, reasoning, a prompt override and the connected context. | [optional] 
+**ProfileId** | Pointer to **string** | Profile to run this call on. When omitted, or when no profile has this id, the `Default` assignment is used. | [optional] 
 
 ## Methods
 
@@ -112,6 +113,31 @@ SetActionArgs sets ActionArgs field to given value.
 `func (o *AiSendCustomRequest) HasActionArgs() bool`
 
 HasActionArgs returns a boolean if a field has been set.
+
+### GetProfileId
+
+`func (o *AiSendCustomRequest) GetProfileId() string`
+
+GetProfileId returns the ProfileId field if non-nil, zero value otherwise.
+
+### GetProfileIdOk
+
+`func (o *AiSendCustomRequest) GetProfileIdOk() (*string, bool)`
+
+GetProfileIdOk returns a tuple with the ProfileId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProfileId
+
+`func (o *AiSendCustomRequest) SetProfileId(v string)`
+
+SetProfileId sets ProfileId field to given value.
+
+### HasProfileId
+
+`func (o *AiSendCustomRequest) HasProfileId() bool`
+
+HasProfileId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

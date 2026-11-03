@@ -162,13 +162,13 @@ type ApiAiSettingsGetToolModeRequest struct {
 	ApiService *AISettingsAPIService
 }
 
-func (r ApiAiSettingsGetToolModeRequest) Execute() (*AiSuccessResponse, *http.Response, error) {
+func (r ApiAiSettingsGetToolModeRequest) Execute() (*AiToolPermissionModeWrapper, *http.Response, error) {
 	return r.ApiService.AiSettingsGetToolModeExecute(r)
 }
 
 // AiSettingsGetToolMode Get the tool permission mode
 //
-// Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+// Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service's `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
 //
@@ -182,13 +182,13 @@ func (a *AISettingsAPIService) AiSettingsGetToolMode(ctx context.Context) ApiAiS
 }
 
 // Execute executes the request
-//  @return AiSuccessResponse
-func (a *AISettingsAPIService) AiSettingsGetToolModeExecute(r ApiAiSettingsGetToolModeRequest) (*AiSuccessResponse, *http.Response, error) {
+//  @return AiToolPermissionModeWrapper
+func (a *AISettingsAPIService) AiSettingsGetToolModeExecute(r ApiAiSettingsGetToolModeRequest) (*AiToolPermissionModeWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiSuccessResponse
+		localVarReturnValue  *AiToolPermissionModeWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AISettingsAPIService.AiSettingsGetToolMode")
@@ -561,13 +561,13 @@ func (r ApiAiSettingsSetToolModeRequest) AiSettingsSetToolModeRequest(aiSettings
 	return r
 }
 
-func (r ApiAiSettingsSetToolModeRequest) Execute() (*AiSuccessResponse, *http.Response, error) {
+func (r ApiAiSettingsSetToolModeRequest) Execute() (*AiToolPermissionModeWrapper, *http.Response, error) {
 	return r.ApiService.AiSettingsSetToolModeExecute(r)
 }
 
 // AiSettingsSetToolMode Set the tool permission mode
 //
-// Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+// Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service's `response` envelope. The mode applies to every chat of the user in the portal.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
 //
@@ -581,13 +581,13 @@ func (a *AISettingsAPIService) AiSettingsSetToolMode(ctx context.Context) ApiAiS
 }
 
 // Execute executes the request
-//  @return AiSuccessResponse
-func (a *AISettingsAPIService) AiSettingsSetToolModeExecute(r ApiAiSettingsSetToolModeRequest) (*AiSuccessResponse, *http.Response, error) {
+//  @return AiToolPermissionModeWrapper
+func (a *AISettingsAPIService) AiSettingsSetToolModeExecute(r ApiAiSettingsSetToolModeRequest) (*AiToolPermissionModeWrapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiSuccessResponse
+		localVarReturnValue  *AiToolPermissionModeWrapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AISettingsAPIService.AiSettingsSetToolMode")
@@ -644,6 +644,17 @@ func (a *AISettingsAPIService) AiSettingsSetToolModeExecute(r ApiAiSettingsSetTo
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse

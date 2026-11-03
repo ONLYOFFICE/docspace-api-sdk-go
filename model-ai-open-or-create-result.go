@@ -23,11 +23,11 @@ import (
 // checks if the AiOpenOrCreateResult type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiOpenOrCreateResult{}
 
-// AiOpenOrCreateResult Resolved thread state returned by `ThreadsEngine.openOrCreate`.
+// AiOpenOrCreateResult The thread that was opened or created, with its stored messages.
 type AiOpenOrCreateResult struct {
 	// The thread that was opened, or the one just created.
 	ThreadId string `json:"threadId"`
-	// Empty string for existing threads — the engine doesn't re-fetch.
+	// The title generated for a thread this call created; an empty string when it opened an existing thread.
 	Title string `json:"title"`
 	// The messages already in the thread - empty for a thread that was just created.
 	PriorMessages []AiThreadMessageLike `json:"priorMessages"`

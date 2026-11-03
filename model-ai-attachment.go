@@ -29,7 +29,7 @@ type AiAttachment struct {
 	Id string `json:"id"`
 	// file | image.
 	Kind string `json:"kind"`
-	// Origin of the attachment. `user` — uploaded by the user in the composer (the default when unset, for backward compatibility). `tool` — produced by a tool call (e.g. `generate_image`). Lets the integrator's adapter route or apply policies (separate bucket, quotas, TTL, CDN) per source.
+	// Where the attachment came from: `user` - attached by the user (also when unset); `tool` - produced by a tool call (for example `generate_image`).
 	Source *string `json:"source,omitempty"`
 	// Display label (filename or user-visible title).
 	Title string `json:"title"`
@@ -45,7 +45,7 @@ type AiAttachment struct {
 	MessageId *string `json:"messageId,omitempty"`
 	// Owning thread id once linked. Unset while the attachment is a draft.
 	ThreadId *string `json:"threadId,omitempty"`
-	// Opaque scope token (entity / room) the attachment was created in. Drafts carry it so an entity switch keeps in-flight composer state isolated; once linked to a message the field is redundant with the thread's own entity binding.
+	// The room or folder the attachment was created in, as an opaque token; once the attachment is bound to a message it repeats the thread's own scope.
 	EntityId *string `json:"entityId,omitempty"`
 	// Storage-assigned creation timestamp.
 	CreatedAt float32 `json:"createdAt"`

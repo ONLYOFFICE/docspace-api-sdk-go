@@ -30,6 +30,8 @@ type AiExportTextToDocxRequest struct {
 	// Markdown content to convert.
 	Content string `json:"content"`
 	FolderId AiExportTextToDocxRequestFolderId `json:"folderId"`
+	// Output format: `Docx` (the default when omitted), `Pdf`, or `Md`, which stores the markdown verbatim instead of converting it.
+	Format *string `json:"format,omitempty"`
 }
 
 type _AiExportTextToDocxRequest AiExportTextToDocxRequest
@@ -126,6 +128,38 @@ func (o *AiExportTextToDocxRequest) SetFolderId(v AiExportTextToDocxRequestFolde
 	o.FolderId = v
 }
 
+// GetFormat returns the Format field value if set, zero value otherwise.
+func (o *AiExportTextToDocxRequest) GetFormat() string {
+	if o == nil || IsNil(o.Format) {
+		var ret string
+		return ret
+	}
+	return *o.Format
+}
+
+// GetFormatOk returns a tuple with the Format field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiExportTextToDocxRequest) GetFormatOk() (*string, bool) {
+	if o == nil || IsNil(o.Format) {
+		return nil, false
+	}
+	return o.Format, true
+}
+
+// HasFormat returns a boolean if a field has been set.
+func (o *AiExportTextToDocxRequest) IsFormatSet() bool {
+	if o != nil && !IsNil(o.Format) {
+		return true
+	}
+
+	return false
+}
+
+// SetFormat gets a reference to the given string and assigns it to the Format field.
+func (o *AiExportTextToDocxRequest) SetFormat(v string) {
+	o.Format = &v
+}
+
 func (o AiExportTextToDocxRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -139,6 +173,9 @@ func (o AiExportTextToDocxRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["title"] = o.Title
 	toSerialize["content"] = o.Content
 	toSerialize["folderId"] = o.FolderId
+	if !IsNil(o.Format) {
+		toSerialize["format"] = o.Format
+	}
 	return toSerialize, nil
 }
 

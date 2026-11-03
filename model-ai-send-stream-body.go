@@ -29,10 +29,12 @@ type AiSendStreamBody struct {
 	ThreadId *string `json:"threadId,omitempty"`
 	// The user turn to send.
 	UserMessage AiThreadMessageLike `json:"userMessage"`
-	// Per-request engine options: extra tools, reasoning, prompt override.
+	// Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
 	ActionArgs *AiActionArgs `json:"actionArgs,omitempty"`
 	// Optional entity (room) scope for profile resolution.
 	EntityId *string `json:"entityId,omitempty"`
+	// The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.
+	ContextEntityId *string `json:"contextEntityId,omitempty"`
 	// Session-level profile override for this request only.
 	ProfileId *string `json:"profileId,omitempty"`
 }
@@ -177,6 +179,38 @@ func (o *AiSendStreamBody) SetEntityId(v string) {
 	o.EntityId = &v
 }
 
+// GetContextEntityId returns the ContextEntityId field value if set, zero value otherwise.
+func (o *AiSendStreamBody) GetContextEntityId() string {
+	if o == nil || IsNil(o.ContextEntityId) {
+		var ret string
+		return ret
+	}
+	return *o.ContextEntityId
+}
+
+// GetContextEntityIdOk returns a tuple with the ContextEntityId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiSendStreamBody) GetContextEntityIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ContextEntityId) {
+		return nil, false
+	}
+	return o.ContextEntityId, true
+}
+
+// HasContextEntityId returns a boolean if a field has been set.
+func (o *AiSendStreamBody) IsContextEntityIdSet() bool {
+	if o != nil && !IsNil(o.ContextEntityId) {
+		return true
+	}
+
+	return false
+}
+
+// SetContextEntityId gets a reference to the given string and assigns it to the ContextEntityId field.
+func (o *AiSendStreamBody) SetContextEntityId(v string) {
+	o.ContextEntityId = &v
+}
+
 // GetProfileId returns the ProfileId field value if set, zero value otherwise.
 func (o *AiSendStreamBody) GetProfileId() string {
 	if o == nil || IsNil(o.ProfileId) {
@@ -228,6 +262,9 @@ func (o AiSendStreamBody) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EntityId) {
 		toSerialize["entityId"] = o.EntityId
+	}
+	if !IsNil(o.ContextEntityId) {
+		toSerialize["contextEntityId"] = o.ContextEntityId
 	}
 	if !IsNil(o.ProfileId) {
 		toSerialize["profileId"] = o.ProfileId

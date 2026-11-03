@@ -31,11 +31,13 @@ type ApiAiContextGetContextFoldersRequest struct {
 	ApiService *AIContextAPIService
 }
 
-func (r ApiAiContextGetContextFoldersRequest) Execute() (*AiSuccessResponse, *http.Response, error) {
+func (r ApiAiContextGetContextFoldersRequest) Execute() ([]AiContextFolder, *http.Response, error) {
 	return r.ApiService.AiContextGetContextFoldersExecute(r)
 }
 
 // AiContextGetContextFolders Get context folders
+//
+// Lists the Instructions rooms the caller can connect to a chat as context, grouped under the account they belong to (`docspace` for this portal). Only a room the caller can read that holds at least one skill is listed: one without skills would connect nothing. An empty list means there is nothing to connect. At most 1000 Instructions rooms are read; any beyond them are left out without a signal. Read the skills of one room with `GET api/2.0/ai/context/get-room-skills`. This is a read-only operation.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-context-folders/
 //
@@ -49,13 +51,13 @@ func (a *AIContextAPIService) AiContextGetContextFolders(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return AiSuccessResponse
-func (a *AIContextAPIService) AiContextGetContextFoldersExecute(r ApiAiContextGetContextFoldersRequest) (*AiSuccessResponse, *http.Response, error) {
+//  @return []AiContextFolder
+func (a *AIContextAPIService) AiContextGetContextFoldersExecute(r ApiAiContextGetContextFoldersRequest) ([]AiContextFolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiSuccessResponse
+		localVarReturnValue  []AiContextFolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIContextAPIService.AiContextGetContextFolders")
@@ -160,11 +162,13 @@ type ApiAiContextGetKnowledgeFoldersRequest struct {
 	ApiService *AIContextAPIService
 }
 
-func (r ApiAiContextGetKnowledgeFoldersRequest) Execute() (*AiSuccessResponse, *http.Response, error) {
+func (r ApiAiContextGetKnowledgeFoldersRequest) Execute() ([]AiContextFolder, *http.Response, error) {
 	return r.ApiService.AiContextGetKnowledgeFoldersExecute(r)
 }
 
 // AiContextGetKnowledgeFolders Get knowledge folders
+//
+// Lists the Knowledge rooms the caller can connect to a chat as its knowledge base, grouped under the account they belong to (`docspace` for this portal). A connected Knowledge room limits the knowledge search of a round to it (`actionArgs.knowledgeRooms`). An empty list means there is none the caller can read. At most 1000 Knowledge rooms are listed; any beyond them are left out without a signal. This is a read-only operation.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-knowledge-folders/
 //
@@ -178,13 +182,13 @@ func (a *AIContextAPIService) AiContextGetKnowledgeFolders(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return AiSuccessResponse
-func (a *AIContextAPIService) AiContextGetKnowledgeFoldersExecute(r ApiAiContextGetKnowledgeFoldersRequest) (*AiSuccessResponse, *http.Response, error) {
+//  @return []AiContextFolder
+func (a *AIContextAPIService) AiContextGetKnowledgeFoldersExecute(r ApiAiContextGetKnowledgeFoldersRequest) ([]AiContextFolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiSuccessResponse
+		localVarReturnValue  []AiContextFolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIContextAPIService.AiContextGetKnowledgeFolders")
@@ -287,28 +291,33 @@ func (a *AIContextAPIService) AiContextGetKnowledgeFoldersExecute(r ApiAiContext
 type ApiAiContextGetRoomSkillRequest struct {
 	ctx context.Context
 	ApiService *AIContextAPIService
-	cloud *string
 	roomId *string
 	skillId *string
+	cloud *string
 }
 
-func (r ApiAiContextGetRoomSkillRequest) Cloud(cloud string) ApiAiContextGetRoomSkillRequest {	r.cloud = &cloud
-	return r
-}
-
+// The Instructions room identifier.
 func (r ApiAiContextGetRoomSkillRequest) RoomId(roomId string) ApiAiContextGetRoomSkillRequest {	r.roomId = &roomId
 	return r
 }
 
+// The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it.
 func (r ApiAiContextGetRoomSkillRequest) SkillId(skillId string) ApiAiContextGetRoomSkillRequest {	r.skillId = &skillId
 	return r
 }
 
-func (r ApiAiContextGetRoomSkillRequest) Execute() (*AiSuccessResponse, *http.Response, error) {
+// The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
+func (r ApiAiContextGetRoomSkillRequest) Cloud(cloud string) ApiAiContextGetRoomSkillRequest {	r.cloud = &cloud
+	return r
+}
+
+func (r ApiAiContextGetRoomSkillRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.AiContextGetRoomSkillExecute(r)
 }
 
 // AiContextGetRoomSkill Get room skill
+//
+// Returns the Markdown file of one skill of an Instructions room as a JSON string. `roomId` and `skillId` are required, and the skill has to be one of that room's skills: the ID of any other file, readable or not, answers 404, as does a room that is not an Instructions room the caller can read. Only the first 256 KiB of the file are read, which covers the 64 K characters a chat passes to the model; a longer file comes back cut there without a signal. This is a read-only operation.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-room-skill/
 //
@@ -322,13 +331,13 @@ func (a *AIContextAPIService) AiContextGetRoomSkill(ctx context.Context) ApiAiCo
 }
 
 // Execute executes the request
-//  @return AiSuccessResponse
-func (a *AIContextAPIService) AiContextGetRoomSkillExecute(r ApiAiContextGetRoomSkillRequest) (*AiSuccessResponse, *http.Response, error) {
+//  @return string
+func (a *AIContextAPIService) AiContextGetRoomSkillExecute(r ApiAiContextGetRoomSkillRequest) (string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiSuccessResponse
+		localVarReturnValue  string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIContextAPIService.AiContextGetRoomSkill")
@@ -341,9 +350,6 @@ func (a *AIContextAPIService) AiContextGetRoomSkillExecute(r ApiAiContextGetRoom
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.cloud == nil {
-		return localVarReturnValue, nil, reportError("cloud is required and must be specified")
-	}
 	if r.roomId == nil {
 		return localVarReturnValue, nil, reportError("roomId is required and must be specified")
 	}
@@ -351,7 +357,9 @@ func (a *AIContextAPIService) AiContextGetRoomSkillExecute(r ApiAiContextGetRoom
 		return localVarReturnValue, nil, reportError("skillId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "cloud", r.cloud, "form", "")
+	if r.cloud != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cloud", r.cloud, "form", "")
+	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "roomId", r.roomId, "form", "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "skillId", r.skillId, "form", "")
 	// to determine the Content-Type header
@@ -393,6 +401,17 @@ func (a *AIContextAPIService) AiContextGetRoomSkillExecute(r ApiAiContextGetRoom
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -405,6 +424,17 @@ func (a *AIContextAPIService) AiContextGetRoomSkillExecute(r ApiAiContextGetRoom
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -443,23 +473,27 @@ func (a *AIContextAPIService) AiContextGetRoomSkillExecute(r ApiAiContextGetRoom
 type ApiAiContextGetRoomSkillsRequest struct {
 	ctx context.Context
 	ApiService *AIContextAPIService
-	cloud *string
 	roomId *string
+	cloud *string
 }
 
-func (r ApiAiContextGetRoomSkillsRequest) Cloud(cloud string) ApiAiContextGetRoomSkillsRequest {	r.cloud = &cloud
-	return r
-}
-
+// The Instructions room identifier.
 func (r ApiAiContextGetRoomSkillsRequest) RoomId(roomId string) ApiAiContextGetRoomSkillsRequest {	r.roomId = &roomId
 	return r
 }
 
-func (r ApiAiContextGetRoomSkillsRequest) Execute() (*AiSuccessResponse, *http.Response, error) {
+// The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
+func (r ApiAiContextGetRoomSkillsRequest) Cloud(cloud string) ApiAiContextGetRoomSkillsRequest {	r.cloud = &cloud
+	return r
+}
+
+func (r ApiAiContextGetRoomSkillsRequest) Execute() ([]AiRoomSkill, *http.Response, error) {
 	return r.ApiService.AiContextGetRoomSkillsExecute(r)
 }
 
 // AiContextGetRoomSkills Get room skills
+//
+// Lists the skills of one Instructions room: the ID, name and description from the frontmatter of each skill file, not its body. `roomId` is required; `cloud` is accepted and not read. A room that is not an Instructions room the caller can read answers 404. Read the body of one skill with `GET api/2.0/ai/context/get-room-skill`. This is a read-only operation.
 //
 // See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-room-skills/
 //
@@ -473,13 +507,13 @@ func (a *AIContextAPIService) AiContextGetRoomSkills(ctx context.Context) ApiAiC
 }
 
 // Execute executes the request
-//  @return AiSuccessResponse
-func (a *AIContextAPIService) AiContextGetRoomSkillsExecute(r ApiAiContextGetRoomSkillsRequest) (*AiSuccessResponse, *http.Response, error) {
+//  @return []AiRoomSkill
+func (a *AIContextAPIService) AiContextGetRoomSkillsExecute(r ApiAiContextGetRoomSkillsRequest) ([]AiRoomSkill, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AiSuccessResponse
+		localVarReturnValue  []AiRoomSkill
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIContextAPIService.AiContextGetRoomSkills")
@@ -492,14 +526,13 @@ func (a *AIContextAPIService) AiContextGetRoomSkillsExecute(r ApiAiContextGetRoo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.cloud == nil {
-		return localVarReturnValue, nil, reportError("cloud is required and must be specified")
-	}
 	if r.roomId == nil {
 		return localVarReturnValue, nil, reportError("roomId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "cloud", r.cloud, "form", "")
+	if r.cloud != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cloud", r.cloud, "form", "")
+	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "roomId", r.roomId, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -540,6 +573,17 @@ func (a *AIContextAPIService) AiContextGetRoomSkillsExecute(r ApiAiContextGetRoo
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -552,6 +596,17 @@ func (a *AIContextAPIService) AiContextGetRoomSkillsExecute(r ApiAiContextGetRoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v AiErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v AiErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

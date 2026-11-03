@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Version** | **float32** | The bundle format version, so an import can migrate an older export. | 
+**Version** | **int32** | The bundle format version, so an import can migrate an older export. | 
 **Folders** | [**[]AiPromptFolder**](AiPromptFolder.md) | Every exported prompt folder. | 
 **Prompts** | [**[]AiPrompt**](AiPrompt.md) | Every exported prompt. | 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewAiPromptBundle
 
-`func NewAiPromptBundle(version float32, folders []AiPromptFolder, prompts []AiPrompt, ) *AiPromptBundle`
+`func NewAiPromptBundle(version int32, folders []AiPromptFolder, prompts []AiPrompt, ) *AiPromptBundle`
 
 NewAiPromptBundle instantiates a new AiPromptBundle object
 This constructor will assign default values to properties that have it defined,
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetVersion
 
-`func (o *AiPromptBundle) GetVersion() float32`
+`func (o *AiPromptBundle) GetVersion() int32`
 
 GetVersion returns the Version field if non-nil, zero value otherwise.
 
 ### GetVersionOk
 
-`func (o *AiPromptBundle) GetVersionOk() (*float32, bool)`
+`func (o *AiPromptBundle) GetVersionOk() (*int32, bool)`
 
 GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVersion
 
-`func (o *AiPromptBundle) SetVersion(v float32)`
+`func (o *AiPromptBundle) SetVersion(v int32)`
 
 SetVersion sets Version field to given value.
 

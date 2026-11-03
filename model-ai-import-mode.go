@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// AiImportMode Mode passed to `PromptsEngine.importBundle`.
+// AiImportMode How an imported prompt bundle meets the library: `merge` adds to it, `replace` replaces it.
 type AiImportMode string
 
 // List of AiImportMode

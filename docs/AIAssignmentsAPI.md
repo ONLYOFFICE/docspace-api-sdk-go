@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ## AiAssignmentsGetAllAssignments
 
-> map[string]string AiAssignmentsGetAllAssignments(ctx).EntityId(entityId).Expand(expand).Execute()
+> AiAssignmentsGetAllAssignments200Response AiAssignmentsGetAllAssignments(ctx).EntityId(entityId).Expand(expand).Execute()
 
 Get all assignments
 
@@ -252,7 +252,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAssignmentsAPI.AiAssignmentsGetAllAssignments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiAssignmentsGetAllAssignments`: map[string]string
+	// response from `AiAssignmentsGetAllAssignments`: AiAssignmentsGetAllAssignments200Response
 	fmt.Fprintf(os.Stdout, "Response from `AIAssignmentsAPI.AiAssignmentsGetAllAssignments`: %v\n", resp)
 }
 ```
@@ -273,7 +273,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]string**
+[**AiAssignmentsGetAllAssignments200Response**](AiAssignmentsGetAllAssignments200Response.md)
 
 ### Authorization
 

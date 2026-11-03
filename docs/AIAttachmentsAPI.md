@@ -289,9 +289,11 @@ Name | Type | Description  | Notes
 
 ## AiAttachmentsGetSuggestedQuestions
 
-> AiSuccessResponse AiAttachmentsGetSuggestedQuestions(ctx).AiAttachmentsGetSuggestedQuestionsRequest(aiAttachmentsGetSuggestedQuestionsRequest).Execute()
+> AiSuggestedQuestionsResult AiAttachmentsGetSuggestedQuestions(ctx).AiAttachmentsGetSuggestedQuestionsRequest(aiAttachmentsGetSuggestedQuestionsRequest).Execute()
 
 Get suggested questions
+
+
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/).
 
@@ -308,7 +310,7 @@ import (
 )
 
 func main() {
-	aiAttachmentsGetSuggestedQuestionsRequest := map[string]*interface{}{"key": interface{}(123)} // map[string]*interface{} | 
+	aiAttachmentsGetSuggestedQuestionsRequest := "aiAttachmentsGetSuggestedQuestionsRequest_example" // string | The ID of the attachment the form was attached under, as a bare JSON string. `{ id: ... }` is accepted as well.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -317,7 +319,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIAttachmentsAPI.AiAttachmentsGetSuggestedQuestions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiAttachmentsGetSuggestedQuestions`: AiSuccessResponse
+	// response from `AiAttachmentsGetSuggestedQuestions`: AiSuggestedQuestionsResult
 	fmt.Fprintf(os.Stdout, "Response from `AIAttachmentsAPI.AiAttachmentsGetSuggestedQuestions`: %v\n", resp)
 }
 ```
@@ -333,11 +335,11 @@ Other parameters are passed through a pointer to a apiAiAttachmentsGetSuggestedQ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **aiAttachmentsGetSuggestedQuestionsRequest** | **map[string]interface{}** |  | 
+ **aiAttachmentsGetSuggestedQuestionsRequest** | **string** | The ID of the attachment the form was attached under, as a bare JSON string. `{ id: ... }` is accepted as well. | 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**AiSuggestedQuestionsResult**](AiSuggestedQuestionsResult.md)
 
 ### Authorization
 

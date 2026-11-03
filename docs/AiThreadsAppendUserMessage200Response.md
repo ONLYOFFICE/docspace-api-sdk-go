@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MessageId** | **string** | Identifier of the message that was appended to the thread. | 
+**MessageId** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | The stored message itself - with its storage-assigned `id` and `createdAt` - despite the field name, which is kept for the clients that already read it. The message ID is `messageId.id`. | 
 
 ## Methods
 
 ### NewAiThreadsAppendUserMessage200Response
 
-`func NewAiThreadsAppendUserMessage200Response(messageId string, ) *AiThreadsAppendUserMessage200Response`
+`func NewAiThreadsAppendUserMessage200Response(messageId AiThreadMessageLike, ) *AiThreadsAppendUserMessage200Response`
 
 NewAiThreadsAppendUserMessage200Response instantiates a new AiThreadsAppendUserMessage200Response object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMessageId
 
-`func (o *AiThreadsAppendUserMessage200Response) GetMessageId() string`
+`func (o *AiThreadsAppendUserMessage200Response) GetMessageId() AiThreadMessageLike`
 
 GetMessageId returns the MessageId field if non-nil, zero value otherwise.
 
 ### GetMessageIdOk
 
-`func (o *AiThreadsAppendUserMessage200Response) GetMessageIdOk() (*string, bool)`
+`func (o *AiThreadsAppendUserMessage200Response) GetMessageIdOk() (*AiThreadMessageLike, bool)`
 
 GetMessageIdOk returns a tuple with the MessageId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMessageId
 
-`func (o *AiThreadsAppendUserMessage200Response) SetMessageId(v string)`
+`func (o *AiThreadsAppendUserMessage200Response) SetMessageId(v AiThreadMessageLike)`
 
 SetMessageId sets MessageId field to given value.
 

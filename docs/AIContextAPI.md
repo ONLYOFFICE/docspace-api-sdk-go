@@ -13,9 +13,11 @@ Method | HTTP request | Description
 
 ## AiContextGetContextFolders
 
-> AiSuccessResponse AiContextGetContextFolders(ctx).Execute()
+> []AiContextFolder AiContextGetContextFolders(ctx).Execute()
 
 Get context folders
+
+
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-context-folders/).
 
@@ -40,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIContextAPI.AiContextGetContextFolders``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiContextGetContextFolders`: AiSuccessResponse
+	// response from `AiContextGetContextFolders`: []AiContextFolder
 	fmt.Fprintf(os.Stdout, "Response from `AIContextAPI.AiContextGetContextFolders`: %v\n", resp)
 }
 ```
@@ -56,7 +58,7 @@ Other parameters are passed through a pointer to a apiAiContextGetContextFolders
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**[]AiContextFolder**](AiContextFolder.md)
 
 ### Authorization
 
@@ -74,9 +76,11 @@ Other parameters are passed through a pointer to a apiAiContextGetContextFolders
 
 ## AiContextGetKnowledgeFolders
 
-> AiSuccessResponse AiContextGetKnowledgeFolders(ctx).Execute()
+> []AiContextFolder AiContextGetKnowledgeFolders(ctx).Execute()
 
 Get knowledge folders
+
+
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-knowledge-folders/).
 
@@ -101,7 +105,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIContextAPI.AiContextGetKnowledgeFolders``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiContextGetKnowledgeFolders`: AiSuccessResponse
+	// response from `AiContextGetKnowledgeFolders`: []AiContextFolder
 	fmt.Fprintf(os.Stdout, "Response from `AIContextAPI.AiContextGetKnowledgeFolders`: %v\n", resp)
 }
 ```
@@ -117,7 +121,7 @@ Other parameters are passed through a pointer to a apiAiContextGetKnowledgeFolde
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**[]AiContextFolder**](AiContextFolder.md)
 
 ### Authorization
 
@@ -135,9 +139,11 @@ Other parameters are passed through a pointer to a apiAiContextGetKnowledgeFolde
 
 ## AiContextGetRoomSkill
 
-> AiSuccessResponse AiContextGetRoomSkill(ctx).Cloud(cloud).RoomId(roomId).SkillId(skillId).Execute()
+> string AiContextGetRoomSkill(ctx).RoomId(roomId).SkillId(skillId).Cloud(cloud).Execute()
 
 Get room skill
+
+
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-room-skill/).
 
@@ -154,18 +160,18 @@ import (
 )
 
 func main() {
-	cloud := "cloud_example" // string | 
-	roomId := "roomId_example" // string | 
-	skillId := "skillId_example" // string | 
+	roomId := "roomId_example" // string | The Instructions room identifier.
+	skillId := "skillId_example" // string | The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it.
+	cloud := "cloud_example" // string | The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIContextAPI.AiContextGetRoomSkill(context.Background()).Cloud(cloud).RoomId(roomId).SkillId(skillId).Execute()
+	resp, r, err := apiClient.AIContextAPI.AiContextGetRoomSkill(context.Background()).RoomId(roomId).SkillId(skillId).Cloud(cloud).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIContextAPI.AiContextGetRoomSkill``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiContextGetRoomSkill`: AiSuccessResponse
+	// response from `AiContextGetRoomSkill`: string
 	fmt.Fprintf(os.Stdout, "Response from `AIContextAPI.AiContextGetRoomSkill`: %v\n", resp)
 }
 ```
@@ -181,13 +187,13 @@ Other parameters are passed through a pointer to a apiAiContextGetRoomSkillReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cloud** | **string** |  | 
- **roomId** | **string** |  | 
- **skillId** | **string** |  | 
+ **roomId** | **string** | The Instructions room identifier. | 
+ **skillId** | **string** | The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it. | 
+ **cloud** | **string** | The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it. | 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+**string**
 
 ### Authorization
 
@@ -205,9 +211,11 @@ Name | Type | Description  | Notes
 
 ## AiContextGetRoomSkills
 
-> AiSuccessResponse AiContextGetRoomSkills(ctx).Cloud(cloud).RoomId(roomId).Execute()
+> []AiRoomSkill AiContextGetRoomSkills(ctx).RoomId(roomId).Cloud(cloud).Execute()
 
 Get room skills
+
+
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-room-skills/).
 
@@ -224,17 +232,17 @@ import (
 )
 
 func main() {
-	cloud := "cloud_example" // string | 
-	roomId := "roomId_example" // string | 
+	roomId := "roomId_example" // string | The Instructions room identifier.
+	cloud := "cloud_example" // string | The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIContextAPI.AiContextGetRoomSkills(context.Background()).Cloud(cloud).RoomId(roomId).Execute()
+	resp, r, err := apiClient.AIContextAPI.AiContextGetRoomSkills(context.Background()).RoomId(roomId).Cloud(cloud).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIContextAPI.AiContextGetRoomSkills``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiContextGetRoomSkills`: AiSuccessResponse
+	// response from `AiContextGetRoomSkills`: []AiRoomSkill
 	fmt.Fprintf(os.Stdout, "Response from `AIContextAPI.AiContextGetRoomSkills`: %v\n", resp)
 }
 ```
@@ -250,12 +258,12 @@ Other parameters are passed through a pointer to a apiAiContextGetRoomSkillsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cloud** | **string** |  | 
- **roomId** | **string** |  | 
+ **roomId** | **string** | The Instructions room identifier. | 
+ **cloud** | **string** | The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it. | 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**[]AiRoomSkill**](AiRoomSkill.md)
 
 ### Authorization
 

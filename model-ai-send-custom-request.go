@@ -30,8 +30,10 @@ type AiSendCustomRequest struct {
 	// Caller-supplied system prompt for this one-turn call.
 	SystemPrompt string `json:"systemPrompt"`
 	UserMessage AiThreadMessageLike `json:"userMessage"`
-	// Per-request engine options: extra tools, reasoning, prompt override.
+	// Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
 	ActionArgs *AiActionArgs `json:"actionArgs,omitempty"`
+	// Profile to run this call on. When omitted, or when no profile has this id, the `Default` assignment is used.
+	ProfileId *string `json:"profileId,omitempty"`
 }
 
 type _AiSendCustomRequest AiSendCustomRequest
@@ -160,6 +162,38 @@ func (o *AiSendCustomRequest) SetActionArgs(v AiActionArgs) {
 	o.ActionArgs = &v
 }
 
+// GetProfileId returns the ProfileId field value if set, zero value otherwise.
+func (o *AiSendCustomRequest) GetProfileId() string {
+	if o == nil || IsNil(o.ProfileId) {
+		var ret string
+		return ret
+	}
+	return *o.ProfileId
+}
+
+// GetProfileIdOk returns a tuple with the ProfileId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiSendCustomRequest) GetProfileIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ProfileId) {
+		return nil, false
+	}
+	return o.ProfileId, true
+}
+
+// HasProfileId returns a boolean if a field has been set.
+func (o *AiSendCustomRequest) IsProfileIdSet() bool {
+	if o != nil && !IsNil(o.ProfileId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProfileId gets a reference to the given string and assigns it to the ProfileId field.
+func (o *AiSendCustomRequest) SetProfileId(v string) {
+	o.ProfileId = &v
+}
+
 func (o AiSendCustomRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -175,6 +209,9 @@ func (o AiSendCustomRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["userMessage"] = o.UserMessage
 	if !IsNil(o.ActionArgs) {
 		toSerialize["actionArgs"] = o.ActionArgs
+	}
+	if !IsNil(o.ProfileId) {
+		toSerialize["profileId"] = o.ProfileId
 	}
 	return toSerialize, nil
 }

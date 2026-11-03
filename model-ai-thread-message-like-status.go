@@ -25,7 +25,12 @@ var _ MappedNullable = &AiThreadMessageLikeStatus{}
 
 // AiThreadMessageLikeStatus Delivery/generation status of the message.
 type AiThreadMessageLikeStatus struct {
+	// `running`, `requires-action`, `complete` or `incomplete`.
 	Type string `json:"type"`
+	// Why the message is in that state: `tool-calls` or `interrupt` for `requires-action`; `stop` or `unknown` for `complete`; `cancelled`, `tool-calls`, `length`, `content-filter`, `other` or `error` for `incomplete`. An `incomplete` message the chat stored carries `cancelled` (the round was stopped) or `error`.
+	Reason *string `json:"reason,omitempty"`
+	// What failed, on an `incomplete` message whose `reason` is `error`.
+	Error *AiChatErrorPayload `json:"error,omitempty"`
 }
 
 type _AiThreadMessageLikeStatus AiThreadMessageLikeStatus
@@ -72,6 +77,70 @@ func (o *AiThreadMessageLikeStatus) SetType(v string) {
 	o.Type = v
 }
 
+// GetReason returns the Reason field value if set, zero value otherwise.
+func (o *AiThreadMessageLikeStatus) GetReason() string {
+	if o == nil || IsNil(o.Reason) {
+		var ret string
+		return ret
+	}
+	return *o.Reason
+}
+
+// GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiThreadMessageLikeStatus) GetReasonOk() (*string, bool) {
+	if o == nil || IsNil(o.Reason) {
+		return nil, false
+	}
+	return o.Reason, true
+}
+
+// HasReason returns a boolean if a field has been set.
+func (o *AiThreadMessageLikeStatus) IsReasonSet() bool {
+	if o != nil && !IsNil(o.Reason) {
+		return true
+	}
+
+	return false
+}
+
+// SetReason gets a reference to the given string and assigns it to the Reason field.
+func (o *AiThreadMessageLikeStatus) SetReason(v string) {
+	o.Reason = &v
+}
+
+// GetError returns the Error field value if set, zero value otherwise.
+func (o *AiThreadMessageLikeStatus) GetError() AiChatErrorPayload {
+	if o == nil || IsNil(o.Error) {
+		var ret AiChatErrorPayload
+		return ret
+	}
+	return *o.Error
+}
+
+// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiThreadMessageLikeStatus) GetErrorOk() (*AiChatErrorPayload, bool) {
+	if o == nil || IsNil(o.Error) {
+		return nil, false
+	}
+	return o.Error, true
+}
+
+// HasError returns a boolean if a field has been set.
+func (o *AiThreadMessageLikeStatus) IsErrorSet() bool {
+	if o != nil && !IsNil(o.Error) {
+		return true
+	}
+
+	return false
+}
+
+// SetError gets a reference to the given AiChatErrorPayload and assigns it to the Error field.
+func (o *AiThreadMessageLikeStatus) SetError(v AiChatErrorPayload) {
+	o.Error = &v
+}
+
 func (o AiThreadMessageLikeStatus) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -83,6 +152,12 @@ func (o AiThreadMessageLikeStatus) MarshalJSON() ([]byte, error) {
 func (o AiThreadMessageLikeStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
+	if !IsNil(o.Reason) {
+		toSerialize["reason"] = o.Reason
+	}
+	if !IsNil(o.Error) {
+		toSerialize["error"] = o.Error
+	}
 	return toSerialize, nil
 }
 

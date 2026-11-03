@@ -79,7 +79,7 @@ Other parameters are passed through a pointer to a apiAiSettingsGetRequest struc
 
 ## AiSettingsGetToolMode
 
-> AiSuccessResponse AiSettingsGetToolMode(ctx).Execute()
+> AiToolPermissionModeWrapper AiSettingsGetToolMode(ctx).Execute()
 
 Get the tool permission mode
 
@@ -108,7 +108,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AISettingsAPI.AiSettingsGetToolMode``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiSettingsGetToolMode`: AiSuccessResponse
+	// response from `AiSettingsGetToolMode`: AiToolPermissionModeWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AISettingsAPI.AiSettingsGetToolMode`: %v\n", resp)
 }
 ```
@@ -124,7 +124,7 @@ Other parameters are passed through a pointer to a apiAiSettingsGetToolModeReque
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**AiToolPermissionModeWrapper**](AiToolPermissionModeWrapper.md)
 
 ### Authorization
 
@@ -268,7 +268,7 @@ Other parameters are passed through a pointer to a apiAiSettingsGetVectorization
 
 ## AiSettingsSetToolMode
 
-> AiSuccessResponse AiSettingsSetToolMode(ctx).AiSettingsSetToolModeRequest(aiSettingsSetToolModeRequest).Execute()
+> AiToolPermissionModeWrapper AiSettingsSetToolMode(ctx).AiSettingsSetToolModeRequest(aiSettingsSetToolModeRequest).Execute()
 
 Set the tool permission mode
 
@@ -298,7 +298,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AISettingsAPI.AiSettingsSetToolMode``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AiSettingsSetToolMode`: AiSuccessResponse
+	// response from `AiSettingsSetToolMode`: AiToolPermissionModeWrapper
 	fmt.Fprintf(os.Stdout, "Response from `AISettingsAPI.AiSettingsSetToolMode`: %v\n", resp)
 }
 ```
@@ -318,7 +318,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**AiToolPermissionModeWrapper**](AiToolPermissionModeWrapper.md)
 
 ### Authorization
 

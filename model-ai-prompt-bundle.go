@@ -26,7 +26,7 @@ var _ MappedNullable = &AiPromptBundle{}
 // AiPromptBundle Versioned, self-contained bundle of every saved prompt and folder. Stable wire format — `version` lets the import path migrate older shapes if the schema ever changes.
 type AiPromptBundle struct {
 	// The bundle format version, so an import can migrate an older export.
-	Version float32 `json:"version"`
+	Version int32 `json:"version"`
 	// Every exported prompt folder.
 	Folders []AiPromptFolder `json:"folders"`
 	// Every exported prompt.
@@ -39,7 +39,7 @@ type _AiPromptBundle AiPromptBundle
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiPromptBundle(version float32, folders []AiPromptFolder, prompts []AiPrompt) *AiPromptBundle {
+func NewAiPromptBundle(version int32, folders []AiPromptFolder, prompts []AiPrompt) *AiPromptBundle {
 	this := AiPromptBundle{}
 	this.Version = version
 	this.Folders = folders
@@ -56,9 +56,9 @@ func NewAiPromptBundleWithDefaults() *AiPromptBundle {
 }
 
 // GetVersion returns the Version field value
-func (o *AiPromptBundle) GetVersion() float32 {
+func (o *AiPromptBundle) GetVersion() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -67,7 +67,7 @@ func (o *AiPromptBundle) GetVersion() float32 {
 
 // GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
-func (o *AiPromptBundle) GetVersionOk() (*float32, bool) {
+func (o *AiPromptBundle) GetVersionOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,7 +75,7 @@ func (o *AiPromptBundle) GetVersionOk() (*float32, bool) {
 }
 
 // SetVersion sets field value
-func (o *AiPromptBundle) SetVersion(v float32) {
+func (o *AiPromptBundle) SetVersion(v int32) {
 	o.Version = v
 }
 

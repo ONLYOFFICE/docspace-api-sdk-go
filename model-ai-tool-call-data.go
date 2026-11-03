@@ -31,12 +31,14 @@ type AiToolCallData struct {
 	MessageId string `json:"messageId"`
 	// Index of the tool-call content part inside `message.content`.
 	Idx float32 `json:"idx"`
-	// Snapshot of the assistant message at the time the tool call surfaced. Optional and ignored: the engine resumes from the stored message, and the copy inflated the body past the parser limit (Bug 84608).
+	// A copy of the assistant message as it was when the tool call surfaced. Optional and ignored: the round resumes from the stored message. Leave it out - a long conversation's copy can push the body past the size limit.
 	Message *AiThreadMessageLike `json:"message,omitempty"`
-	// Per-request engine options: extra tools, reasoning, prompt override.
+	// Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
 	ActionArgs *AiActionArgs `json:"actionArgs,omitempty"`
 	// Optional entity (room) scope for profile resolution.
 	EntityId *string `json:"entityId,omitempty"`
+	// The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.
+	ContextEntityId *string `json:"contextEntityId,omitempty"`
 	// Session-level profile override for this request only.
 	ProfileId *string `json:"profileId,omitempty"`
 }
@@ -231,6 +233,38 @@ func (o *AiToolCallData) SetEntityId(v string) {
 	o.EntityId = &v
 }
 
+// GetContextEntityId returns the ContextEntityId field value if set, zero value otherwise.
+func (o *AiToolCallData) GetContextEntityId() string {
+	if o == nil || IsNil(o.ContextEntityId) {
+		var ret string
+		return ret
+	}
+	return *o.ContextEntityId
+}
+
+// GetContextEntityIdOk returns a tuple with the ContextEntityId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiToolCallData) GetContextEntityIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ContextEntityId) {
+		return nil, false
+	}
+	return o.ContextEntityId, true
+}
+
+// HasContextEntityId returns a boolean if a field has been set.
+func (o *AiToolCallData) IsContextEntityIdSet() bool {
+	if o != nil && !IsNil(o.ContextEntityId) {
+		return true
+	}
+
+	return false
+}
+
+// SetContextEntityId gets a reference to the given string and assigns it to the ContextEntityId field.
+func (o *AiToolCallData) SetContextEntityId(v string) {
+	o.ContextEntityId = &v
+}
+
 // GetProfileId returns the ProfileId field value if set, zero value otherwise.
 func (o *AiToolCallData) GetProfileId() string {
 	if o == nil || IsNil(o.ProfileId) {
@@ -284,6 +318,9 @@ func (o AiToolCallData) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EntityId) {
 		toSerialize["entityId"] = o.EntityId
+	}
+	if !IsNil(o.ContextEntityId) {
+		toSerialize["contextEntityId"] = o.ContextEntityId
 	}
 	if !IsNil(o.ProfileId) {
 		toSerialize["profileId"] = o.ProfileId

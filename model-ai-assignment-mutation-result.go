@@ -23,7 +23,7 @@ import (
 // checks if the AiAssignmentMutationResult type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiAssignmentMutationResult{}
 
-// AiAssignmentMutationResult Outcome of `AssignmentsEngine.assign` / `AssignmentsEngine.unassign`. Either a success or a field-scoped error suitable for displaying in the profile editor.
+// AiAssignmentMutationResult The outcome of an assign or unassign: a success, or an error naming the field that was refused.
 type AiAssignmentMutationResult struct {
 	// True when the assignment was persisted.
 	Success bool `json:"success"`

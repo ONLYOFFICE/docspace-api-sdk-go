@@ -27,10 +27,18 @@ var _ MappedNullable = &AiRegenerateStreamRequest{}
 type AiRegenerateStreamRequest struct {
 	// Target thread (must already exist).
 	ThreadId string `json:"threadId"`
-	// Per-request engine options: extra tools, reasoning, prompt override.
+	// The user message to re-roll from: everything stored after it is deleted. When omitted, or no longer in the thread, the last user message is used.
+	MessageId *string `json:"messageId,omitempty"`
+	// How many messages from the start of the thread to keep, used when `messageId` does not resolve. The message at `keepCount - 1` has to be a user message; otherwise the value is ignored.
+	KeepCount *int32 `json:"keepCount,omitempty"`
+	// The thread length the caller saw when it computed `keepCount`. When it differs from the stored length, `keepCount` is discarded and the last user message is used instead.
+	ExpectedLength *int32 `json:"expectedLength,omitempty"`
+	// Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
 	ActionArgs *AiActionArgs `json:"actionArgs,omitempty"`
 	// Optional entity (room) scope for profile resolution.
 	EntityId *string `json:"entityId,omitempty"`
+	// The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.
+	ContextEntityId *string `json:"contextEntityId,omitempty"`
 	// Session-level profile override for this request only.
 	ProfileId *string `json:"profileId,omitempty"`
 }
@@ -77,6 +85,102 @@ func (o *AiRegenerateStreamRequest) GetThreadIdOk() (*string, bool) {
 // SetThreadId sets field value
 func (o *AiRegenerateStreamRequest) SetThreadId(v string) {
 	o.ThreadId = v
+}
+
+// GetMessageId returns the MessageId field value if set, zero value otherwise.
+func (o *AiRegenerateStreamRequest) GetMessageId() string {
+	if o == nil || IsNil(o.MessageId) {
+		var ret string
+		return ret
+	}
+	return *o.MessageId
+}
+
+// GetMessageIdOk returns a tuple with the MessageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiRegenerateStreamRequest) GetMessageIdOk() (*string, bool) {
+	if o == nil || IsNil(o.MessageId) {
+		return nil, false
+	}
+	return o.MessageId, true
+}
+
+// HasMessageId returns a boolean if a field has been set.
+func (o *AiRegenerateStreamRequest) IsMessageIdSet() bool {
+	if o != nil && !IsNil(o.MessageId) {
+		return true
+	}
+
+	return false
+}
+
+// SetMessageId gets a reference to the given string and assigns it to the MessageId field.
+func (o *AiRegenerateStreamRequest) SetMessageId(v string) {
+	o.MessageId = &v
+}
+
+// GetKeepCount returns the KeepCount field value if set, zero value otherwise.
+func (o *AiRegenerateStreamRequest) GetKeepCount() int32 {
+	if o == nil || IsNil(o.KeepCount) {
+		var ret int32
+		return ret
+	}
+	return *o.KeepCount
+}
+
+// GetKeepCountOk returns a tuple with the KeepCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiRegenerateStreamRequest) GetKeepCountOk() (*int32, bool) {
+	if o == nil || IsNil(o.KeepCount) {
+		return nil, false
+	}
+	return o.KeepCount, true
+}
+
+// HasKeepCount returns a boolean if a field has been set.
+func (o *AiRegenerateStreamRequest) IsKeepCountSet() bool {
+	if o != nil && !IsNil(o.KeepCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetKeepCount gets a reference to the given int32 and assigns it to the KeepCount field.
+func (o *AiRegenerateStreamRequest) SetKeepCount(v int32) {
+	o.KeepCount = &v
+}
+
+// GetExpectedLength returns the ExpectedLength field value if set, zero value otherwise.
+func (o *AiRegenerateStreamRequest) GetExpectedLength() int32 {
+	if o == nil || IsNil(o.ExpectedLength) {
+		var ret int32
+		return ret
+	}
+	return *o.ExpectedLength
+}
+
+// GetExpectedLengthOk returns a tuple with the ExpectedLength field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiRegenerateStreamRequest) GetExpectedLengthOk() (*int32, bool) {
+	if o == nil || IsNil(o.ExpectedLength) {
+		return nil, false
+	}
+	return o.ExpectedLength, true
+}
+
+// HasExpectedLength returns a boolean if a field has been set.
+func (o *AiRegenerateStreamRequest) IsExpectedLengthSet() bool {
+	if o != nil && !IsNil(o.ExpectedLength) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpectedLength gets a reference to the given int32 and assigns it to the ExpectedLength field.
+func (o *AiRegenerateStreamRequest) SetExpectedLength(v int32) {
+	o.ExpectedLength = &v
 }
 
 // GetActionArgs returns the ActionArgs field value if set, zero value otherwise.
@@ -143,6 +247,38 @@ func (o *AiRegenerateStreamRequest) SetEntityId(v string) {
 	o.EntityId = &v
 }
 
+// GetContextEntityId returns the ContextEntityId field value if set, zero value otherwise.
+func (o *AiRegenerateStreamRequest) GetContextEntityId() string {
+	if o == nil || IsNil(o.ContextEntityId) {
+		var ret string
+		return ret
+	}
+	return *o.ContextEntityId
+}
+
+// GetContextEntityIdOk returns a tuple with the ContextEntityId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiRegenerateStreamRequest) GetContextEntityIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ContextEntityId) {
+		return nil, false
+	}
+	return o.ContextEntityId, true
+}
+
+// HasContextEntityId returns a boolean if a field has been set.
+func (o *AiRegenerateStreamRequest) IsContextEntityIdSet() bool {
+	if o != nil && !IsNil(o.ContextEntityId) {
+		return true
+	}
+
+	return false
+}
+
+// SetContextEntityId gets a reference to the given string and assigns it to the ContextEntityId field.
+func (o *AiRegenerateStreamRequest) SetContextEntityId(v string) {
+	o.ContextEntityId = &v
+}
+
 // GetProfileId returns the ProfileId field value if set, zero value otherwise.
 func (o *AiRegenerateStreamRequest) GetProfileId() string {
 	if o == nil || IsNil(o.ProfileId) {
@@ -186,11 +322,23 @@ func (o AiRegenerateStreamRequest) MarshalJSON() ([]byte, error) {
 func (o AiRegenerateStreamRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["threadId"] = o.ThreadId
+	if !IsNil(o.MessageId) {
+		toSerialize["messageId"] = o.MessageId
+	}
+	if !IsNil(o.KeepCount) {
+		toSerialize["keepCount"] = o.KeepCount
+	}
+	if !IsNil(o.ExpectedLength) {
+		toSerialize["expectedLength"] = o.ExpectedLength
+	}
 	if !IsNil(o.ActionArgs) {
 		toSerialize["actionArgs"] = o.ActionArgs
 	}
 	if !IsNil(o.EntityId) {
 		toSerialize["entityId"] = o.EntityId
+	}
+	if !IsNil(o.ContextEntityId) {
+		toSerialize["contextEntityId"] = o.ContextEntityId
 	}
 	if !IsNil(o.ProfileId) {
 		toSerialize["profileId"] = o.ProfileId

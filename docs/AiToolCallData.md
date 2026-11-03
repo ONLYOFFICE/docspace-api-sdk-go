@@ -7,9 +7,10 @@ Name | Type | Description | Notes
 **ThreadId** | **string** | Thread the assistant message belongs to. | 
 **MessageId** | **string** | Storage id of the assistant message holding the tool call. | 
 **Idx** | **float32** | Index of the tool-call content part inside `message.content`. | 
-**Message** | Pointer to [**AiThreadMessageLike**](AiThreadMessageLike.md) | Snapshot of the assistant message at the time the tool call surfaced. Optional and ignored: the engine resumes from the stored message, and the copy inflated the body past the parser limit (Bug 84608). | [optional] 
-**ActionArgs** | Pointer to [**AiActionArgs**](AiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] 
+**Message** | Pointer to [**AiThreadMessageLike**](AiThreadMessageLike.md) | A copy of the assistant message as it was when the tool call surfaced. Optional and ignored: the round resumes from the stored message. Leave it out - a long conversation's copy can push the body past the size limit. | [optional] 
+**ActionArgs** | Pointer to [**AiActionArgs**](AiActionArgs.md) | Per-request options of the round: extra tools, reasoning, a prompt override and the connected context. | [optional] 
 **EntityId** | Pointer to **string** | Optional entity (room) scope for profile resolution. | [optional] 
+**ContextEntityId** | Pointer to **string** | The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted. | [optional] 
 **ProfileId** | Pointer to **string** | Session-level profile override for this request only. | [optional] 
 
 ## Methods
@@ -165,6 +166,31 @@ SetEntityId sets EntityId field to given value.
 `func (o *AiToolCallData) HasEntityId() bool`
 
 HasEntityId returns a boolean if a field has been set.
+
+### GetContextEntityId
+
+`func (o *AiToolCallData) GetContextEntityId() string`
+
+GetContextEntityId returns the ContextEntityId field if non-nil, zero value otherwise.
+
+### GetContextEntityIdOk
+
+`func (o *AiToolCallData) GetContextEntityIdOk() (*string, bool)`
+
+GetContextEntityIdOk returns a tuple with the ContextEntityId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContextEntityId
+
+`func (o *AiToolCallData) SetContextEntityId(v string)`
+
+SetContextEntityId sets ContextEntityId field to given value.
+
+### HasContextEntityId
+
+`func (o *AiToolCallData) HasContextEntityId() bool`
+
+HasContextEntityId returns a boolean if a field has been set.
 
 ### GetProfileId
 

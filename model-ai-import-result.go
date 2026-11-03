@@ -23,7 +23,7 @@ import (
 // checks if the AiImportResult type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AiImportResult{}
 
-// AiImportResult Outcome of `PromptsEngine.importBundle`. Either every entry persisted with counts, or no entries persisted plus a per-entry error report.
+// AiImportResult The outcome of a prompt bundle import: either every entry was stored, with counts, or none was and the errors are reported per entry.
 type AiImportResult struct {
 	// True when the whole bundle was imported.
 	Success bool `json:"success"`

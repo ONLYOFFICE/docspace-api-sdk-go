@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ThreadId** | **string** | The thread that was opened, or the one just created. | 
-**Title** | **string** | Empty string for existing threads — the engine doesn't re-fetch. | 
+**Title** | **string** | The title generated for a thread this call created; an empty string when it opened an existing thread. | 
 **PriorMessages** | [**[]AiThreadMessageLike**](AiThreadMessageLike.md) | The messages already in the thread - empty for a thread that was just created. | 
 
 ## Methods
