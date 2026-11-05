@@ -1,0 +1,91 @@
+name: Create Tag
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "CHANGELOG.md"
+  workflow_dispatch:
+
+concurrency:
+  group: create-tag
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  create-tag:
+    if: github.server_url != 'https://github.com'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Get version
+        id: info
+        run: |
+          version=$(grep -Eo '^## [0-9]+(\.[0-9]+)+' CHANGELOG.md | head -n 1 | cut -c4-)
+          if [ -z "$version" ]; then
+            echo "::error::No version found in CHANGELOG.md"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Check tag
+        id: check
+        env:
+          TAG: v${{ steps.info.outputs.version }}
+        run: |
+          if git rev-parse -q --verify "refs/tags/$TAG" > /dev/null; then
+            echo "$TAG already exists"
+            echo "create=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "create=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check module major version
+        if: steps.check.outputs.create == 'true'
+        env:
+          VERSION: ${{ steps.info.outputs.version }}
+        run: |
+          major="${VERSION%%.*}"
+          module_major=$(sed -nE 's#^module .*/v([0-9]+)[[:space:]]*$#\1#p' go.mod)
+          if [ -z "$module_major" ]; then
+            if [ "$major" -gt 1 ]; then
+              echo "::error::Version $VERSION needs a /v$major suffix in the go.mod module path"
+              exit 1
+            fi
+          elif [ "$module_major" != "$major" ]; then
+            echo "::error::Version $VERSION does not match the /v$module_major module path in go.mod"
+            exit 1
+          fi
+
+      - uses: actions/setup-go@v6
+        if: steps.check.outputs.create == 'true'
+        with:
+          go-version-file: go.mod
+
+      - name: Verify module
+        if: steps.check.outputs.create == 'true'
+        run: |
+          go mod tidy
+          git diff --exit-code go.mod go.sum
+          go build ./...
+          go vet ./...
+
+      - name: Build sample
+        if: steps.check.outputs.create == 'true'
+        working-directory: samples/docspace-api-sdk-go-sample
+        run: go build .
+
+      - name: Create tag
+        if: steps.check.outputs.create == 'true'
+        env:
+          TAG: v${{ steps.info.outputs.version }}
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git tag -a "$TAG" -m "Release/$TAG"
+          git push origin "$TAG"

@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: github.server_url == 'https://github.com'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Get info
+        id: info
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          if ! grep -q "^## $version\$" CHANGELOG.md; then
+            echo "::error::CHANGELOG.md has no section for $version"
+            exit 1
+          fi
+          module=$(sed -nE 's#^module[[:space:]]+([^[:space:]]+).*$#\1#p' go.mod)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "module=$module" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache: false
+
+      - name: Publish to Go module proxy
+        env:
+          MODULE: ${{ steps.info.outputs.module }}
+        run: |
+          cd "$(mktemp -d)"
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            if GOPROXY=https://proxy.golang.org go list -m "$MODULE@$GITHUB_REF_NAME"; then
+              echo "$MODULE@$GITHUB_REF_NAME is available on proxy.golang.org"
+              exit 0
+            fi
+            echo "Attempt $attempt failed, retrying in 30 seconds"
+            sleep 30
+          done
+          echo "::error::$MODULE@$GITHUB_REF_NAME is not available on proxy.golang.org"
+          exit 1
+
+      - name: Extract release notes
+        env:
+          VERSION: ${{ steps.info.outputs.version }}
+        run: |
+          awk -v head="## $VERSION" '
+            $0 == head { p = 1; next }
+            /^## / { p = 0 }
+            p
+          ' CHANGELOG.md > RELEASE.md
+
+      - uses: ncipollo/release-action@v1
+        with:
+          bodyFile: RELEASE.md
+          tag: ${{ github.ref_name }}
