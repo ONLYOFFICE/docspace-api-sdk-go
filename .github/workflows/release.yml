@@ -32,21 +32,29 @@ jobs:
           go-version-file: go.mod
           cache: false
 
-      - name: Publish to Go module proxy
+      - name: Request module from Go module proxy
         env:
           MODULE: ${{ steps.info.outputs.module }}
         run: |
+          # Asking proxy.golang.org for the version makes it fetch the tag from
+          # GitHub, which is what gets the release onto pkg.go.dev. The proxy
+          # caches a failed fetch for a while, so a long retry loop only replays
+          # the cached error: warn and carry on, the GitHub release does not
+          # depend on it. Any later `go get` of the version asks the proxy to
+          # fetch it again.
           cd "$(mktemp -d)"
-          for attempt in 1 2 3 4 5 6 7 8 9 10; do
-            if GOPROXY=https://proxy.golang.org go list -m "$MODULE@$GITHUB_REF_NAME"; then
-              echo "$MODULE@$GITHUB_REF_NAME is available on proxy.golang.org"
+          attempt=1
+          until GOPROXY=https://proxy.golang.org go list -m "$MODULE@$GITHUB_REF_NAME"; do
+            if [ "$attempt" -ge 3 ]; then
+              echo "::warning::$MODULE@$GITHUB_REF_NAME is not on proxy.golang.org yet, check https://pkg.go.dev/$MODULE@$GITHUB_REF_NAME later"
               exit 0
             fi
             echo "Attempt $attempt failed, retrying in 30 seconds"
+            attempt=$((attempt + 1))
             sleep 30
           done
-          echo "::error::$MODULE@$GITHUB_REF_NAME is not available on proxy.golang.org"
-          exit 1
+          echo "$MODULE@$GITHUB_REF_NAME is available on proxy.golang.org"
+          echo "https://pkg.go.dev/$MODULE@$GITHUB_REF_NAME"
 
       - name: Extract release notes
         env:
