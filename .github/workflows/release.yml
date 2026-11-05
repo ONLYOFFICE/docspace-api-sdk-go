@@ -19,7 +19,7 @@ jobs:
         id: info
         run: |
           version="${GITHUB_REF_NAME#v}"
-          if ! grep -q "^## $version\$" CHANGELOG.md; then
+          if ! grep -qxF "## $version" CHANGELOG.md; then
             echo "::error::CHANGELOG.md has no section for $version"
             exit 1
           fi
@@ -62,3 +62,4 @@ jobs:
         with:
           bodyFile: RELEASE.md
           tag: ${{ github.ref_name }}
+          prerelease: ${{ contains(steps.info.outputs.version, '-') }}
